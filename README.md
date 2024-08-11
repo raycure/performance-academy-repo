@@ -10,3 +10,4 @@ Currently, two official plugins are available:
 # commands for installed libraries
 
 -npm i -D react-router-dom
+-npm install react-icons --save
