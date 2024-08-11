@@ -13,7 +13,7 @@ function Navbar() {
 				</Link>
 				<ul className='nav-item-container'>
 					<li className='nav-item'>
-						<Link to='/main' className='nav-item'>
+						<Link to='/' className='nav-item'>
 							Ana Sayfa
 						</Link>
 					</li>
