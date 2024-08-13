@@ -7,7 +7,7 @@ function Card() {
   const handleClick = () => {
     setTimeout(() => {
         setFlipped(false);
-      }, 1000);
+      }, 30000);
     setFlipped(!flipped);
   };
 
