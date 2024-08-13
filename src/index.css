@@ -77,7 +77,7 @@ body {
 	line-height: 1.5;
 }
 
-/* A elements that don't have a class get default styles */
+/* A elements that don't have a get default styles */
 a:not([class]) {
 	text-decoration-skip-ink: auto;
 }
@@ -168,4 +168,8 @@ svg {
 }
 .fs-600 {
 	font-size: var(--fs-600);
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 41bf97390891c076303504a9f0f938d4ffb5fd3d
