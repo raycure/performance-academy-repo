@@ -1,51 +1,53 @@
 import React from 'react';
 import './Navbar.css';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'; //u cant style the links directly
 import { FaUser } from 'react-icons/fa6';
 import Button from '../Button/Button';
 import logo from '../../assets/LesmillsLogo.png';
 function Navbar() {
+	const logoStyle = {
+		width: '60%',
+		display: 'inline-block',
+	};
+	const listItem = {
+		textDecoration: 'none',
+	};
 	return (
 		<>
 			<nav className='nav-container'>
-				<Link aria-label='logo'>
+				<Link aria-label='logo' style={logoStyle}>
 					<img alt='beep' className='img' src={logo}></img>
 				</Link>
-				<ul className='nav-item-container'>
+				<ul className='nav-list-container'>
 					<li className='nav-item'>
-						<Link to='/' className='nav-item'>
+						<Link to='/' style={listItem}>
 							Ana Sayfa
 						</Link>
 					</li>
 					<li className='nav-item'>
-						<Link to='/classes' className='nav-item'>
+						<Link to='/classes' style={listItem}>
 							Kurslar
 						</Link>
 					</li>
 					<li className='nav-item'>
-						<Link to='/news' className='nav-item'>
+						<Link to='/news' style={listItem}>
 							Duyurular
 						</Link>
 					</li>
 					<li className='nav-item'>
-						<Link to='/myCourses' className='nav-item'>
+						<Link to='/myCourses' style={listItem}>
 							Benim Kurslarım
 						</Link>
 					</li>
 					<li className='nav-item'>
-						<Link to='/contact' className='nav-item'>
+						<Link to='/contact' style={listItem}>
 							İletişim
 						</Link>
 					</li>
 				</ul>
-				<div className=' nav-item-container'>
-					<Link
-						to='userInfo'
-						className='nav-item '
-						aria-label='user Info or login'
-					>
-						<FaUser className='nav-item-icon' />
-					</Link>
+				<div className='nav-btn-container'>
+					<FaUser className='nav-item-icon' />
+
 					<Button className='nav-button'>Kaydol</Button>
 				</div>
 			</nav>

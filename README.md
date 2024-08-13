@@ -11,3 +11,7 @@ Currently, two official plugins are available:
 
 -npm i -D react-router-dom
 -npm install react-icons --save
+npm install --save \
+ @fullcalendar/core \
+ @fullcalendar/react \
+ @fullcalendar/daygrid

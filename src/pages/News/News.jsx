@@ -1,4 +1,7 @@
 import React from 'react';
 import './News.css';
-function News() {}
+import CustomCalendar from '../../components/CustomCalendar/CustomCalendar';
+function News() {
+	return <CustomCalendar />;
+}
 export default News;
