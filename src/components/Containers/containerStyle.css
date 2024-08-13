@@ -1,12 +1,12 @@
 .container {
-    --max-width: 1110px;
-    --container-padding: 1rem;
-    border: 2px solid red;
-    width: min(var(--max-width), 100% - (var(--container-padding) * 2));
-    margin-inline: auto;
-  }
+  --max-width: 1110px;
+  --container-padding: 1rem;
+  width: min(var(--max-width), 100% - (var(--container-padding) * 2));
+  margin-inline: auto;
 
-.banner {
-  width: 100%;
-  justify-content: space-between;
+}
+ 
+.container {
+padding-top: var(--fs-900);
+  
 }

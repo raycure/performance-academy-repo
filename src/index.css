@@ -108,6 +108,23 @@ svg {
 
 /* Utility classes */
 
+.center-item {
+	margin-inline: auto;
+	width: fit-content;
+}
+
+.space-between{
+	display: flex;
+	justify-content: space-between;
+	gap: 2.5rem;
+  }
+
+  .banner {
+	width: 100%;
+	background-color: antiquewhite;
+	padding: 0 2.5em;
+  }
+
 .text-primary-400 {
 	color: var(--clr-primary-400);
 }
@@ -168,8 +185,4 @@ svg {
 }
 .fs-600 {
 	font-size: var(--fs-600);
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 41bf97390891c076303504a9f0f938d4ffb5fd3d
