@@ -7,7 +7,7 @@ import { lesMillsPrograms } from "../../assets/LesmillsPrograms";
 function Main() {
   
 const cards = lesMillsPrograms.map((category, index) => {
-  const fronny = (
+  const backContent = (
     <div key={index}>
       <h2>cat {category[0]}</h2>
       {category.slice(1).map((program, subIndex) => (
@@ -15,7 +15,7 @@ const cards = lesMillsPrograms.map((category, index) => {
       ))}
     </div>
   );
-  return <Card key={index} front={fronny} />;
+  return <Card key={index} backContent={backContent}/>;
 });
 
   return (
@@ -71,18 +71,110 @@ const cards = lesMillsPrograms.map((category, index) => {
         </div>
       </div>
 
-
-      <Container className="even-columns">
+      <Container className="even-columns cardContent">
         {cards}
       </Container>
 
-      <Container>
-        <video width="100%" controls>
+      {/* <Container>
+        <video width="100%" controls >
           <source src="path-to-your-video.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
-      </Container>
+      </Container> */}
+
+      <>
+      <div class="buttons">
+  <button class="btn">
+    Default
+  </button>
+  <button class="btn btn-primary">
+    Primary
+  </button>
+  <button class="btn btn-secondary">
+    Secondary
+  </button>
+  <button class="btn btn-success">
+    Success
+  </button>
+  <button class="btn btn-info">
+    Info
+  </button>
+  <button class="btn btn-warning">
+    Warning
+  </button>
+  <button class="btn btn-danger">
+    Danger
+  </button>
+  <button class="btn btn-primary btn-round">
+    Round
+  </button>
+  <button class="btn btn-primary btn-circle">
+    <i class="search-icon"></i>
+  </button>
+  <button class="btn btn-primary disabled">
+    Disabled
+  </button>
+  <button class="btn btn-primary loading">Loading</button>
+  <button class="btn btn-primary btn-ghost">Ghost</button>
+  <button class="btn btn-primary">
+    <div class="inline-flex items-center space-x-2">
+      <i class="plus-icon"></i>
+      <div>Icon</div>
+    </div>
+  </button>
+  <button class="btn btn-primary btn-dashed">Dashed</button>
+  <button class="btn btn-primary btn-link">Link</button>
+  <button class="btn btn-primary btn-jittery">
+    Click Me
+  </button>
+  <button class="btn btn-primary btn-jelly">
+    Jelly
+  </button>
+  <button class="btn btn-primary btn-ghost btn-fill">
+    Fill In
+  </button>
+  <button class="btn btn-primary btn-pulse">
+    Pulse
+  </button>
+  <button class="btn btn-primary btn-ghost btn-open">
+    Open
+  </button>
+  <button class="btn btn-primary btn-ghost btn-close">
+    Close
+  </button>
+  <button class="btn btn-primary btn-ghost btn-slash">
+    Slash
+  </button>
+  <button class="btn btn-primary btn-ghost btn-fill-up">
+    Fill Up
+  </button>
+  <button class="btn btn-primary btn-ghost btn-slide">
+    Slide
+  </button>
+  <button class="btn btn-primary btn-ghost btn-through">
+    Through
+  </button>
+  <button class="btn btn-primary btn-ghost btn-offset">
+    Offset
+  </button>
+  <button class="btn btn-primary btn-ghost btn-flip-down">
+    Flip Down
+    <div class="front">Flip Down</div>
+    <div class="back">Flip Down</div>
+  </button>
+  <button class="btn btn-primary btn-round btn-marquee">
+    <span data-text="Marquee">Marquee</span>
+  </button>
+  <button class="btn btn-primary btn-ghost btn-cross">
+    Cross Bar
+  </button>
+  <button class="btn btn-primary btn-ghost btn-open-line">
+    Line
+  </button>
+</div>
+      </>
     </>
+
   );
 }
 export default Main;
