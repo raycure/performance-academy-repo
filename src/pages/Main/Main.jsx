@@ -5,18 +5,17 @@ import isim from "../../assets/ornek.jpg";
 import Card from "../../components/Cards/Card";
 import { lesMillsPrograms } from "../../assets/LesmillsPrograms";
 function Main() {
-  
-const cards = lesMillsPrograms.map((category, index) => {
-  const backContent = (
-    <div key={index}>
-      <h2>cat {category[0]}</h2>
-      {category.slice(1).map((program, subIndex) => (
-        <p key={subIndex}>{program}</p>
-      ))}
-    </div>
-  );
-  return <Card key={index} backContent={backContent}/>;
-});
+  const cards = lesMillsPrograms.map((category, index) => {
+    const backContent = (
+      <div key={index}>
+        <h2>cat {category[0]}</h2>
+        {category.slice(1).map((program, subIndex) => (
+          <p key={subIndex}>{program}</p>
+        ))}
+      </div>
+    );
+    return <Card key={index} backContent={backContent} />;
+  });
 
   return (
     <>
@@ -47,7 +46,6 @@ const cards = lesMillsPrograms.map((category, index) => {
         <img src={isim} className="image"></img>
       </Container>
 
-
       <div className="banner">
         <div className="fs-secondary-heading center-item">
           DÜNYANIN EN İYİ ANTRENMANLARINI OLUŞTURUYORUZ.
@@ -71,7 +69,7 @@ const cards = lesMillsPrograms.map((category, index) => {
         </div>
       </div>
 
-      <Container className="even-columns cardContent">
+      <Container className="even-columns cardContent" style={{ gap: "0px" }}>
         {cards}
       </Container>
 
@@ -81,100 +79,13 @@ const cards = lesMillsPrograms.map((category, index) => {
           Your browser does not support the video tag.
         </video>
       </Container> */}
-
-      <>
-      <div class="buttons">
-  <button class="btn">
-    Default
-  </button>
-  <button class="btn btn-primary">
-    Primary
-  </button>
-  <button class="btn btn-secondary">
-    Secondary
-  </button>
-  <button class="btn btn-success">
-    Success
-  </button>
-  <button class="btn btn-info">
-    Info
-  </button>
-  <button class="btn btn-warning">
-    Warning
-  </button>
-  <button class="btn btn-danger">
-    Danger
-  </button>
-  <button class="btn btn-primary btn-round">
-    Round
-  </button>
-  <button class="btn btn-primary btn-circle">
-    <i class="search-icon"></i>
-  </button>
-  <button class="btn btn-primary disabled">
-    Disabled
-  </button>
-  <button class="btn btn-primary loading">Loading</button>
-  <button class="btn btn-primary btn-ghost">Ghost</button>
-  <button class="btn btn-primary">
-    <div class="inline-flex items-center space-x-2">
-      <i class="plus-icon"></i>
-      <div>Icon</div>
-    </div>
-  </button>
-  <button class="btn btn-primary btn-dashed">Dashed</button>
-  <button class="btn btn-primary btn-link">Link</button>
-  <button class="btn btn-primary btn-jittery">
-    Click Me
-  </button>
-  <button class="btn btn-primary btn-jelly">
-    Jelly
-  </button>
-  <button class="btn btn-primary btn-ghost btn-fill">
-    Fill In
-  </button>
-  <button class="btn btn-primary btn-pulse">
-    Pulse
-  </button>
-  <button class="btn btn-primary btn-ghost btn-open">
-    Open
-  </button>
-  <button class="btn btn-primary btn-ghost btn-close">
-    Close
-  </button>
-  <button class="btn btn-primary btn-ghost btn-slash">
-    Slash
-  </button>
-  <button class="btn btn-primary btn-ghost btn-fill-up">
-    Fill Up
-  </button>
-  <button class="btn btn-primary btn-ghost btn-slide">
-    Slide
-  </button>
-  <button class="btn btn-primary btn-ghost btn-through">
-    Through
-  </button>
-  <button class="btn btn-primary btn-ghost btn-offset">
-    Offset
-  </button>
-  <button class="btn btn-primary btn-ghost btn-flip-down">
-    Flip Down
-    <div class="front">Flip Down</div>
-    <div class="back">Flip Down</div>
-  </button>
-  <button class="btn btn-primary btn-round btn-marquee">
-    <span data-text="Marquee">Marquee</span>
-  </button>
-  <button class="btn btn-primary btn-ghost btn-cross">
-    Cross Bar
-  </button>
-  <button class="btn btn-primary btn-ghost btn-open-line">
-    Line
-  </button>
-</div>
-      </>
+        <div>
+          {" "}
+          <a href="#" class="btn-shine">
+            Get early access
+          </a>
+        </div>
     </>
-
   );
 }
 export default Main;
