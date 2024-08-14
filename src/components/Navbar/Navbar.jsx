@@ -6,7 +6,7 @@ import Button from '../Button/Button';
 import logo from '../../assets/LesmillsLogo.png';
 function Navbar() {
 	const logoStyle = {
-		width: '60%',
+		width: '40%',
 		display: 'inline-block',
 	};
 	const listItem = {
@@ -16,9 +16,9 @@ function Navbar() {
 		<>
 			<nav className='nav-container'>
 				<Link aria-label='logo' style={logoStyle}>
-					<img alt='beep' className='img' src={logo}></img>
+					<img alt='beep' className='logo' src={logo}></img>
 				</Link>
-				<ul className='nav-list-container'>
+				<ul className='nav-list-container nav-container'>
 					<li className='nav-item'>
 						<Link to='/' style={listItem}>
 							Ana Sayfa
@@ -45,7 +45,7 @@ function Navbar() {
 						</Link>
 					</li>
 				</ul>
-				<div className='nav-btn-container'>
+				<div className='nav-btn-container nav-container'>
 					<FaUser className='nav-item-icon' />
 
 					<Button className='nav-button'>Kaydol</Button>

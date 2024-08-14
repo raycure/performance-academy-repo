@@ -1,37 +1,24 @@
-.nav-container {
-	flex-direction: row;
-	display: flex;
+.outer-container {
 	width: 100%;
-	position: sticky;
-	justify-content: space-evenly;
-	align-items: center;
+}
+.nav-container {
+	display: flex;
+	flex-direction: row;
+}
+.nav-list-container {
+	gap: 2rem;
 }
 .nav-item {
-	width: fit-content;
 }
 .nav-item :hover {
-	font-size: large;
-}
-
-.nav-list-container {
-	justify-content: space-evenly;
-	display: flex;
-	flex-direction: row;
-	max-width: 600px;
 }
 .nav-btn-container {
-	flex-direction: row;
-	display: flex;
 }
 .nav-icon-container {
-	flex-direction: row;
-	display: flex;
-	justify-content: space-evenly;
 }
 .nav-item-icon {
-	display: block;
 }
-.img {
+.logo {
 	display: block; /* Ensure the image is not hidden */
 	max-width: 60%;
 }
