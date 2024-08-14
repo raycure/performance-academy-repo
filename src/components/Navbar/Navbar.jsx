@@ -5,50 +5,35 @@ import { FaUser } from 'react-icons/fa6';
 import Button from '../Button/Button';
 import logo from '../../assets/LesmillsLogo.png';
 function Navbar() {
-	const logoStyle = {
-		width: '40%',
-		display: 'inline-block',
-	};
-	const listItem = {
-		textDecoration: 'none',
-	};
 	return (
 		<>
-			<nav className='nav-container'>
-				<Link aria-label='logo' style={logoStyle}>
+			<nav className='nav-container outer-container'>
+				<Link aria-label='logo' style={{ display: 'contents' }}>
 					<img alt='beep' className='logo' src={logo}></img>
 				</Link>
 				<ul className='nav-list-container nav-container'>
-					<li className='nav-item'>
-						<Link to='/' style={listItem}>
-							Ana Sayfa
-						</Link>
+					<li>
+						<Link to='/'>Ana Sayfa</Link>
 					</li>
-					<li className='nav-item'>
-						<Link to='/classes' style={listItem}>
-							Kurslar
-						</Link>
+					<li>
+						<Link to='/classes'>Kurslar</Link>
 					</li>
-					<li className='nav-item'>
-						<Link to='/news' style={listItem}>
-							Duyurular
-						</Link>
+					<li>
+						<Link to='/news'>Duyurular</Link>
 					</li>
-					<li className='nav-item'>
-						<Link to='/myCourses' style={listItem}>
-							Benim Kurslarım
-						</Link>
+					<li>
+						<Link to='/myCourses'>Benim Kurslarım</Link>
 					</li>
-					<li className='nav-item'>
-						<Link to='/contact' style={listItem}>
-							İletişim
-						</Link>
+					<li>
+						<Link to='/contact'>İletişim</Link>
 					</li>
 				</ul>
 				<div className='nav-btn-container nav-container'>
-					<FaUser className='nav-item-icon' />
+					<Link aria-label='user' style={{ display: 'contents' }}>
+						<FaUser className='nav-item-icon' />
+					</Link>
 
-					<Button className='nav-button'>Kaydol</Button>
+					<Button>Kaydol</Button>
 				</div>
 			</nav>
 		</>

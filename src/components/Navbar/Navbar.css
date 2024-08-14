@@ -1,5 +1,7 @@
 .outer-container {
 	width: 100%;
+	justify-content: space-around;
+	align-items: center;
 }
 .nav-container {
 	display: flex;
@@ -8,17 +10,20 @@
 .nav-list-container {
 	gap: 2rem;
 }
-.nav-item {
-}
-.nav-item :hover {
-}
 .nav-btn-container {
+	justify-content: space-between;
+	gap: 1.5rem;
+	margin-left: 4rem;
+	align-items: center;
 }
-.nav-icon-container {
-}
+
 .nav-item-icon {
+	height: 3rem;
 }
 .logo {
 	display: block; /* Ensure the image is not hidden */
-	max-width: 60%;
+	width: clamp(4rem, 20vw, 20rem);
+}
+.nav-list-container li :hover {
+	color: red;
 }
