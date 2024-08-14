@@ -1,0 +1,27 @@
+export const lesMillsPrograms = [[
+    "GURUP FİTNES PROĞRAMLARI",
+    "LES MILLS SPRINT",
+    "LES MILLS GRIT STRENGTH",
+    "LES MILLS GRIT ATHLETIC",
+    "LES MILLS GRIT CARDIO"
+  ], [
+    "ÇOCUK VE GENÇ PROGRAMLARI",
+    "BORN TO MOVE 2-3 YAŞ",
+    "BORN TO MOVE 4-5 YAŞ",
+    "BORN TO MOVE 6-7 YAŞ",
+    "BORN TO MOVE 8-12 YAŞ",
+    "BORN TO MOVE 13-16 YAŞ"
+  ], ["gurup fitnes proğramları",
+  "bodypump",
+  "bodycombat",
+  "les mills bodybalance",
+  "les mills core",
+  "bodyattack",
+  "rpm",
+  "sh’bam",
+  "bodyjam",
+  "bodystep",
+  "les mills tone",
+  "the trip",
+  "les mills barre"
+]];

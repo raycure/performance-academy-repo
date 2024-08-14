@@ -108,6 +108,23 @@ svg {
 
 /* Utility classes */
 
+.center-item {
+	margin-inline: auto;
+	width: fit-content;
+}
+
+.space-between{
+	display: flex;
+	justify-content: space-between;
+	gap: 2.5rem;
+  }
+
+  .banner {
+	width: 100%;
+	background-color: antiquewhite;
+	padding: 0 2.5em;
+  }
+
 .text-primary-400 {
 	color: var(--clr-primary-400);
 }
