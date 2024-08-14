@@ -12,11 +12,11 @@ function CustomCalendar() {
 			date: '2024-08-20',
 			color: '#d4006a',
 		},
-	]; //we'll add the events throught here
+	]; //we'll add the events through here
 	function renderEvents(eventInfo) {
 		return (
 			<>
-				<p>{eventInfo.title}</p>
+				<b className='event-title'>{eventInfo.event.title}</b>
 			</>
 		);
 	}
@@ -34,6 +34,11 @@ function CustomCalendar() {
 				eventBackgroundColor={events.color}
 				eventTextColor='black'
 				editable={false}
+				headerToolbar={{
+					start: 'today',
+					center: 'title',
+					end: 'prev,next',
+				}}
 			/>
 		</div>
 	);
