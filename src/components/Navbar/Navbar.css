@@ -11,9 +11,10 @@
 	gap: 2rem;
 }
 .nav-btn-container {
-	justify-content: space-between;
+	justify-content: end;
 	gap: 1.5rem;
 	align-items: center;
+	width: clamp(4rem, 20vw, 20rem);
 }
 
 .nav-item-icon {

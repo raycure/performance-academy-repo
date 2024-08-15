@@ -85,6 +85,9 @@ body {
 body {
 	text-rendering: optimizeSpeed;
 	line-height: 1.5;
+	font-family: 'Trade Gothic W02 Bold Cn 20';
+	color: var(--clr-accent-100);
+	background-color: var(--clr-primary-400);
 }
 
 /* A elements that don't have a get default styles */
@@ -119,10 +122,10 @@ svg {
 /* Utility classes */
 
 /* might not use it */
-p[data-width="wide"] {
+p[data-width='wide'] {
 	max-width: 42ch;
 	width: fit-content;
-  }
+}
 
 /* 
 .wide{
@@ -213,13 +216,12 @@ p[data-width="wide"] {
 	border-top: solid black 2px;
 }
 
-.bannerContent{
+.bannerContent {
 	--max-width: 2000px;
 	--container-padding: 5rem;
 	width: min(var(--max-width), 100% - (var(--container-padding) * 2));
 	margin-inline: auto;
 }
-
 
 /* button */
 .btn-container {

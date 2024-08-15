@@ -1,11 +1,7 @@
 import React from 'react';
 import './Button.css';
 import { Link } from 'react-router-dom';
-function Button({ children, page }) {
-	return (
-		<Link to={page} className='btn-link'>
-			<button className='btn'>{children}</button>
-		</Link>
-	);
+function Button({ children }) {
+	return <button className='btn'>{children}</button>;
 }
 export default Button;

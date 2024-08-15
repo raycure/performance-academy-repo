@@ -14,3 +14,16 @@
 .class-nav-container {
 	width: 100%;
 }
+.class-item-container {
+	width: 100%;
+	align-items: center;
+	justify-content: center;
+	display: flex;
+	flex-direction: row;
+}
+.logo {
+	height: 2rem;
+}
+.info-container {
+	padding: 4rem;
+}
