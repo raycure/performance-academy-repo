@@ -1,32 +1,31 @@
-export const lesMillsPrograms = [
-	[
-		'GURUP FITNES PROGRAMLARI',
-		'LES MILLS SPRINT',
-		'LES MILLS GRIT STRENGTH',
-		'LES MILLS GRIT ATHLETIC',
-		'LES MILLS GRIT CARDIO',
-	],
-	[
-		'ÇOCUK VE GENÇ PROGRAMLARI',
-		'BORN TO MOVE 2-3 YAŞ',
-		'BORN TO MOVE 4-5 YAŞ',
-		'BORN TO MOVE 6-7 YAŞ',
-		'BORN TO MOVE 8-12 YAŞ',
-		'BORN TO MOVE 13-16 YAŞ',
-	],
-	[
-		'grup fitness programları',
-		'bodypump',
-		'bodycombat',
-		'les mills bodybalance',
-		'les mills core',
-		'bodyattack',
-		'rpm',
-		'sh’bam',
-		'bodyjam',
-		'bodystep',
-		'les mills tone',
-		'the trip',
-		'les mills barre',
-	],
-];
+export const lesMillsPrograms = {
+    'GURUP FITNES PROGRAMLARI': [
+      'LES MILLS SPRINT',
+      'LES MILLS GRIT STRENGTH',
+      'LES MILLS GRIT ATHLETIC',
+      'LES MILLS GRIT CARDIO',
+    ],
+    'ÇOCUK VE GENÇ PROGRAMLARI': [
+      'BORN TO MOVE 2-3 YAŞ',
+      'BORN TO MOVE 4-5 YAŞ',
+      'BORN TO MOVE 6-7 YAŞ',
+      'BORN TO MOVE 8-12 YAŞ',
+      'BORN TO MOVE 13-16 YAŞ',
+    ],
+    'GRUP FITNESS PROGRAMLARI': [
+      'BODYPUMP',
+      'BODYCOMBAT',
+      'LES MILLS BODYBALANCE',
+      'LES MILLS CORE',
+      'BODYATTACK',
+      'RPM',
+      'SH’BAM',
+      'BODYJAM',
+      'BODYSTEP',
+      'LES MILLS TONE',
+      'THE TRIP',
+      'LES MILLS BARRE',
+    ],
+  };
+
+  
