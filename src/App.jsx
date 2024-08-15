@@ -6,6 +6,7 @@ import News from './pages/News/News';
 import Contact from './pages/Contact/Contact';
 import NoPage from './pages/NoPage/NoPage';
 import Classes from './pages/Classes/Classes';
+import Login from './pages/Login/Login';
 
 function App() {
 	return (
@@ -17,6 +18,7 @@ function App() {
 						<Route path='duyurular' element={<News />} />
 						<Route path='programlar' element={<Classes />} />
 						<Route path='iletişim' element={<Contact />} />
+						<Route path='login' element={<Login />} />
 						<Route
 							path='*'
 							element={<NoPage />}

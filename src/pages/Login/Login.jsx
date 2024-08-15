@@ -2,7 +2,7 @@
 import React from "react";
 import { useEffect, useRef, useState } from "react";
 import { faCheck, faTimes } from "@fortawesome/free-solid-svg-icons";
-import axios from './api/axios';
+// import axios from './api/axios';
 
 const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
