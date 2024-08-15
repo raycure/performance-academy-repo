@@ -2,7 +2,8 @@
 	--clr-accent-400: #ef233c;
 	--clr-accent-100: #edf2f4;
 
-	--clr-primary-400: #2b2d42;
+	--clr-primary-400: #151b25;
+	--clr-primary-300: #273040;
 
 	--clr-neutral-100: #8d99ae;
 	--clr-neutral-900: hsl(0 0% 0%);
@@ -147,7 +148,9 @@ p[data-width='wide'] {
 	width: 100%;
 	background-color: antiquewhite;
 }
-
+.top-border-light {
+	border-top: 2px solid var(--clr-primary-300);
+}
 .text-primary-400 {
 	color: var(--clr-primary-400);
 }
@@ -292,5 +295,3 @@ p[data-width='wide'] {
 		background-position: 180px;
 	}
 }
-
-

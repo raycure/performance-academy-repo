@@ -11,21 +11,46 @@ function Navbar() {
 				<Link aria-label='logo' style={{ display: 'contents' }}>
 					<img alt='beep' className='logo' src={logo}></img>
 				</Link>
-				<ul className='nav-list-container nav-container'>
+				<ul className='nav-list-container nav-container text-accent-400'>
 					<li>
-						<Link to='/'>Ana Sayfa</Link>
+						<Link
+							style={{ color: '#273040', textDecoration: 'none' }}
+							to='/'
+						>
+							Ana Sayfa
+						</Link>
 					</li>
 					<li>
-						<Link to='/programlar'>Kurslar</Link>
+						<Link
+							style={{ color: '#273040', textDecoration: 'none' }}
+							to='/programlar'
+						>
+							Kurslar
+						</Link>
 					</li>
 					<li>
-						<Link to='/duyurular'>Duyurular</Link>
+						<Link
+							style={{ color: '#273040', textDecoration: 'none' }}
+							to='/duyurular'
+						>
+							Duyurular
+						</Link>
 					</li>
 					<li>
-						<Link to='/kurslarım'>Kurslarım</Link>
+						<Link
+							style={{ color: '#273040', textDecoration: 'none' }}
+							to='/kurslarım'
+						>
+							Kurslarım
+						</Link>
 					</li>
 					<li>
-						<Link to='/iletişim'>İletişim</Link>
+						<Link
+							style={{ color: '#273040', textDecoration: 'none' }}
+							to='/iletişim'
+						>
+							İletişim
+						</Link>
 					</li>
 				</ul>
 				<div className='nav-btn-container nav-container'>

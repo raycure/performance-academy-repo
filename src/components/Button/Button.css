@@ -1,7 +1,7 @@
 .btn {
-	width: 100;
-}
-.btn-link {
-	border-width: 2;
-	border-color: white;
+	width: fit-content;
+	background-color: #ef233c;
+	border-width: 0;
+	color: white;
+	padding: 0.4rem;
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import './Classes.css';
+import './ClassList.css';
 import Button from '../Button/Button';
 import { lesMillsPrograms } from '../../assets/LesmillsPrograms';
 import { MdOutlineDoubleArrow } from 'react-icons/md';
@@ -14,7 +14,7 @@ function ClassList({ classType }) {
 			<>
 				{lesMillsPrograms[category].map((program, subIndex) => (
 					<div
-						className='class-item-container'
+						className='class-item-container top-border-light row'
 						onClick={classClickHandler}
 					>
 						<img
@@ -28,15 +28,16 @@ function ClassList({ classType }) {
 								className='img logo'
 								src={name}
 							/>
-							<h2 className='slogan'>{program}</h2>
-							<div>
+							<h2 className='slogan'>{program.title}</h2>
+							<div className='row more-button-container top-border-light'>
 								<p>
 									Egzersiz tipi
 									<br />
+									{program.type}
 								</p>
 								<Button>
 									Daha Fazlası
-									<MdOutlineDoubleArrow color='red' />
+									<MdOutlineDoubleArrow color='white' />
 								</Button>
 							</div>
 						</div>

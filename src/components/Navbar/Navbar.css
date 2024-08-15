@@ -2,6 +2,7 @@
 	width: 100%;
 	justify-content: space-around;
 	align-items: center;
+	height: max-content;
 }
 .nav-container {
 	display: flex;
@@ -9,6 +10,7 @@
 }
 .nav-list-container {
 	gap: 2rem;
+	height: 100%;
 }
 .nav-btn-container {
 	justify-content: end;
@@ -24,6 +26,9 @@
 	display: block; /* Ensure the image is not hidden */
 	width: clamp(4rem, 20vw, 20rem);
 }
+.nav-list-container li {
+	height: 100%;
+}
 .nav-list-container li :hover {
-	color: red;
+	background-color: #3b485d;
 }
