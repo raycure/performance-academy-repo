@@ -5,6 +5,7 @@ import isim from '../../assets/ornek.jpg';
 import Card from '../../components/Cards/Card';
 import { lesMillsPrograms } from '../../assets/LesmillsPrograms';
 import Banner from '../../components/Banner/Banner';
+import Login from '../Login/Login';
 function Main() {
 	const cards = Object.keys(lesMillsPrograms).map((category, index) => {
 		const backContent = (
@@ -58,6 +59,8 @@ function Main() {
 			>
 				{cards}
 			</Container>
+
+			<Login></Login>
 
 			{/* <Container>
         <video width="100%" controls >
