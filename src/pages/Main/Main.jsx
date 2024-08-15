@@ -6,18 +6,17 @@ import Card from '../../components/Cards/Card';
 import { lesMillsPrograms } from '../../assets/LesmillsPrograms';
 import Banner from '../../components/Banner/Banner';
 function Main() {
-	const cards = Object.keys(lesMillsPrograms).map((category) => {
-		const backContent = (
-			<div>
-				<h2>cat {category}</h2>
-				{console.log({ category })}
-				{lesMillsPrograms[category].map((program, subIndex) => (
-					<p>{program}</p>
-				))}
-			</div>
-		);
-		return <Card backContent={backContent} />;
-	});
+  const cards = Object.keys(lesMillsPrograms).map((category, index) => {
+    const backContent = (
+      <div key={index}>
+        <h2>cat {category}</h2>
+        {lesMillsPrograms[category].map((program, subindex) => (
+          <p key={subindex}>{program}</p>
+        ))}
+      </div>
+    );
+    return <Card backContent={backContent} />;
+  });
 
 	return (
 		<>
@@ -60,13 +59,14 @@ function Main() {
         </video>
       </Container> */}
 
-			<div className='btn-container center-item'>
-				{' '}
-				<a href='#' class='btn-shine'>
-					azicik sakin kal
-				</a>
-			</div>
-		</>
-	);
+       <div className="btn-container center-item">
+        {" "}
+        <a href="#" class="btn-shine">
+          azicik sakin kal
+        </a>
+      </div>
+
+    </>
+  );
 }
 export default Main;
