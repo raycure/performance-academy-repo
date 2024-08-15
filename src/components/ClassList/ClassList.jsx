@@ -19,7 +19,7 @@ function ClassList({ classType }) {
 					>
 						<img
 							aria-label='program pic'
-							className='img'
+							className='img class-img'
 							src={name}
 						/>
 						<div className='info-container'>
