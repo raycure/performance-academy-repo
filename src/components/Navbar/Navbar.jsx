@@ -16,16 +16,16 @@ function Navbar() {
 						<Link to='/'>Ana Sayfa</Link>
 					</li>
 					<li>
-						<Link to='/classes'>Kurslar</Link>
+						<Link to='/programlar'>Kurslar</Link>
 					</li>
 					<li>
-						<Link to='/news'>Duyurular</Link>
+						<Link to='/duyurular'>Duyurular</Link>
 					</li>
 					<li>
-						<Link to='/myCourses'>Benim Kurslarım</Link>
+						<Link to='/kurslarım'>Kurslarım</Link>
 					</li>
 					<li>
-						<Link to='/contact'>İletişim</Link>
+						<Link to='/iletişim'>İletişim</Link>
 					</li>
 				</ul>
 				<div className='nav-btn-container nav-container'>

@@ -1,6 +1,5 @@
 .cal-container {
-	max-width: 600px;
-	max-height: 740px;
+	max-width: 700px;
 }
 .fc .fc-toolbar.fc-header-toolbar {
 	margin-bottom: 0.4rem;
@@ -9,7 +8,7 @@
 	margin: 0px, 50px;
 }
 .fc-day-today {
-	background: #82e1de8e !important; /* todays color we can make it transparent and stuff if u awnt */
+	background: #b6f5ed !important; /* todays color we can make it transparent and stuff if u awnt */
 }
 .fc .fc-bg-event {
 	background: #4a5ccf;

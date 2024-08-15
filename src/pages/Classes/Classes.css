@@ -1,0 +1,16 @@
+.class-nav-list {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	gap: 2rem;
+}
+.class-nav-list li {
+	max-width: 16rem;
+	width: fit-content;
+	text-align: center;
+}
+
+.class-nav-container {
+	width: 100%;
+}

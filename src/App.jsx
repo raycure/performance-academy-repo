@@ -5,6 +5,7 @@ import Main from './pages/Main/Main';
 import News from './pages/News/News';
 import Contact from './pages/Contact/Contact';
 import NoPage from './pages/NoPage/NoPage';
+import Classes from './pages/Classes/Classes';
 
 function App() {
 	return (
@@ -13,8 +14,9 @@ function App() {
 				<Routes>
 					<Route path='/' element={<Layout />}>
 						<Route index element={<Main />} />
-						<Route path='news' element={<News />} />
-						<Route path='contact' element={<Contact />} />
+						<Route path='duyurular' element={<News />} />
+						<Route path='programlar' element={<Classes />} />
+						<Route path='iletişim' element={<Contact />} />
 						<Route
 							path='*'
 							element={<NoPage />}
