@@ -7,7 +7,7 @@ const Banner = () => {
         <div className="fs-secondary-heading center-item">
           DÜNYANIN EN İYİ ANTRENMANLARINI OLUŞTURUYORUZ.
         </div>
-        <div className="even-columns">
+        <div className="even-columns center-item" >
           <div style={{ width: "fit-content" }}>
             <p className="test" data-width="wide">
               140.000 eğitmenden oluşan ekibimizi, kendi büyüklüklerini

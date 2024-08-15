@@ -66,13 +66,14 @@ function Main() {
         </video>
       </Container> */}
 
-			<div className='btn-container center-item'>
-				{' '}
-				<a href='#' class='btn-shine'>
-					azicik sakin kal
-				</a>
-			</div>
-		</>
-	);
+       <div className="btn-container center-item">
+        {" "}
+        <a href="#" className="btn-shine">
+          azicik sakin kal
+        </a>
+      </div>
+
+    </>
+  );
 }
 export default Main;
