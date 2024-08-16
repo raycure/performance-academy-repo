@@ -144,6 +144,10 @@ p[data-width='wide'] {
 	gap: 2.5rem;
 }
 
+.class-text-container {
+	white-space: pre-line; /* line break icin, \n varsa textte ayiriyor */
+}
+
 .banner {
 	width: 100%;
 	background-color: antiquewhite;
