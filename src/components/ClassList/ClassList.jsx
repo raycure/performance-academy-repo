@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import './ClassList.css';
 import Button from '../Button/Button';
 import { lesMillsPrograms } from '../../assets/LesmillsPrograms';
@@ -7,8 +7,10 @@ import name from '../../assets/ornek.jpg';
 import BODYPUMP from '../../assets/classLogo/BODYPUMP.png';
 
 function ClassList({ classType }) {
-	//useEffect(() => {}, []);
-	//function classClickHandler() {}
+	const [activeClass, setActiveClass] = useState(null);
+	function classClickHandler(index) {
+		setActiveClass(index);
+	}
 	const classes = Object.keys(lesMillsPrograms).map((category) => {
 		if (category !== classType && classType !== 'all') {
 			return;
@@ -16,10 +18,15 @@ function ClassList({ classType }) {
 		return (
 			<>
 				{lesMillsPrograms[category].map((program, subIndex) => {
+					const isActive = activeClass === subIndex;
+					//sum varsa return
 					return (
 						<div
-							className='class-item-container class-text-container top-border-light row'
-							//onClick={classClickHandler}
+							key={subIndex}
+							className={`class-item-container class-text-container top-border-light row ${
+								isActive ? 'grid-clicked' : 'grid-unclicked'
+							}`}
+							onClick={() => classClickHandler(subIndex)}
 						>
 							<img
 								aria-label='program pic'
@@ -34,19 +41,39 @@ function ClassList({ classType }) {
 										src={BODYPUMP}
 									/>
 									<p className='slogan'>{program.sum}</p>
+									{isActive && <p>{program.description}</p>}
 								</div>
-								<div className='row more-button-container top-border-light'>
-									<div>
-										<p>Egzersiz Tipi: {program.type}</p>
-										<p>Ekipman: {program.equipment}</p>
-										<p>Kime Yönelik: {program.for}</p>
+								{!isActive && (
+									<div className='row more-button-container top-border-light'>
+										<div>
+											<p>Egzersiz Tipi: {program.type}</p>
+											<p>Ekipman: {program.equipment}</p>
+											<p>Kime Yönelik: {program.for}</p>
+										</div>
+										<Button>
+											Daha Fazlası
+											<MdOutlineDoubleArrow color='white' />
+										</Button>
 									</div>
-									<Button>
-										Daha Fazlası
-										<MdOutlineDoubleArrow color='white' />
-									</Button>
-								</div>
+								)}
 							</div>
+							{isActive && (
+								<div className='class-reason-container'>
+									<p>{program.whyMember}</p>
+									<p>{program.whyYou}</p>
+									<div className='row more-button-container top-border-light'>
+										<div>
+											<p>Egzersiz Tipi: {program.type}</p>
+											<p>Ekipman: {program.equipment}</p>
+											<p>Kime Yönelik: {program.for}</p>
+										</div>
+										<Button>
+											Daha Fazlası
+											<MdOutlineDoubleArrow color='white' />
+										</Button>
+									</div>
+								</div>
+							)}
 						</div>
 					);
 				})}
