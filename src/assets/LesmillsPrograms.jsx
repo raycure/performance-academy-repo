@@ -246,6 +246,7 @@ export const lesMillsPrograms = {
 			title: 'LES MILLS GRIT',
 			logo: '',
 			picture: '',
+			subTitles: ['GRIT Strenght', 'GRIT Cardio', 'GRIT Athletic'],
 			sum: 'Üyeler sonuç istiyor.  Ve hiçbir şey, yoğun, atletik antrenman yoluyla inanılmaz sonuçlar vermek için bilimsel olarak tasarlanmış 30 dakikalık HIIT antrenman serimiz LES MILLS GRIT kadar sonuç veremez.  Bu Kardiyo, Kuvvet ve Atletik antrenmanlar, üyelerinizin daha hızlı ve daha fit olmalarını sağlayacaktır.',
 			description:
 				'LES MILLS GRIT™, hızlı bir şekilde inanılmaz fitness sonuçları sağlayan 30 dakikalık yüksek yoğunluklu interval  (HIIT) antrenmanları serisidir.\nLES MILLS GRIT antrenmanlarının her biri - Kardiyo, Kuvvet ve Atletik - vücudu farklı şekillerde çalıştırmak için tasarlanmıştır.  Üçü de, üyelerinizi fitness yolculuklarında daha ileriye taşımak ve  motive etmek için en iyi eğitim tekniklerini, müziği ve egzersiz koreografisini kullanır.',

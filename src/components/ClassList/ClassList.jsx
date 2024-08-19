@@ -19,7 +19,9 @@ function ClassList({ classType }) {
 			<>
 				{lesMillsPrograms[category].map((program, subIndex) => {
 					const isActive = activeClass === subIndex;
-					//sum varsa return
+					if (!program.sum) {
+						return;
+					}
 					return (
 						<div
 							key={subIndex}
