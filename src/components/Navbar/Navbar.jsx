@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Navbar.css';
-import { Link } from 'react-router-dom'; //u cant style the links directly
+import { Link, NavLink } from 'react-router-dom'; //u cant style the links directly
 import { FaUser } from 'react-icons/fa6';
 import Button from '../Button/Button';
 import logo from '../../assets/LesmillsLogo.png';
+import { HiOutlineMenuAlt3 } from 'react-icons/hi';
 function Navbar() {
+	const [menuOpen, setMenuOpen] = useState(false);
+
 	return (
 		<>
 			<nav className='nav-container outer-container'>
@@ -13,44 +16,19 @@ function Navbar() {
 				</Link>
 				<ul className='nav-list-container nav-container text-accent-400'>
 					<li>
-						<Link
-							style={{ color: '#273040', textDecoration: 'none' }}
-							to='/'
-						>
-							Ana Sayfa
-						</Link>
+						<NavLink to='/'>Ana Sayfa</NavLink>
 					</li>
 					<li>
-						<Link
-							style={{ color: '#273040', textDecoration: 'none' }}
-							to='/programlar'
-						>
-							Kurslar
-						</Link>
+						<NavLink to='/programlar'>Kurslar</NavLink>
 					</li>
 					<li>
-						<Link
-							style={{ color: '#273040', textDecoration: 'none' }}
-							to='/duyurular'
-						>
-							Duyurular
-						</Link>
+						<NavLink to='/duyurular'>Duyurular</NavLink>
 					</li>
 					<li>
-						<Link
-							style={{ color: '#273040', textDecoration: 'none' }}
-							to='/kurslarım'
-						>
-							Kurslarım
-						</Link>
+						<NavLink to='/kurslarım'>Kurslarım</NavLink>
 					</li>
 					<li>
-						<Link
-							style={{ color: '#273040', textDecoration: 'none' }}
-							to='/iletişim'
-						>
-							İletişim
-						</Link>
+						<NavLink to='/iletişim'>İletişim</NavLink>
 					</li>
 				</ul>
 				<div className='nav-btn-container nav-container'>
@@ -59,6 +37,36 @@ function Navbar() {
 					</Link>
 
 					<Button>Kaydol</Button>
+				</div>
+				<div className='menu'>
+					<HiOutlineMenuAlt3
+						className='menu-icon'
+						onClick={() => {
+							setMenuOpen(!menuOpen);
+							//console.log(menuOpen);
+						}}
+					/>
+					<ul
+						className={`text-accent-400 ${
+							menuOpen ? 'open' : 'close'
+						}`}
+					>
+						<li>
+							<Link to='/'>Ana Sayfa</Link>
+						</li>
+						<li>
+							<Link to='/programlar'>Kurslar</Link>
+						</li>
+						<li>
+							<Link to='/duyurular'>Duyurular</Link>
+						</li>
+						<li>
+							<Link to='/kurslarım'>Kurslarım</Link>
+						</li>
+						<li>
+							<Link to='/iletişim'>İletişim</Link>
+						</li>
+					</ul>
 				</div>
 			</nav>
 		</>
