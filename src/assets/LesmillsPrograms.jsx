@@ -198,6 +198,13 @@ export const lesMillsPrograms = {
 			title: 'BORN TO MOVE',
 			logo: '',
 			picture: '',
+			subTitles: [
+				'BORN TO MOVE 2-3 YAŞ',
+				'BORN TO MOVE 4-5 YAŞ',
+				'BORN TO MOVE 6-7 YAŞ',
+				'BORN TO MOVE 8-12 YAŞ',
+				'BORN TO MOVE 13-16 YAŞ',
+			],
 			sum: "Modern yaşam, çocukları aktif tutmayı zorlaştırıyor.  Ancak genç yaşta sağlıklı alışkanlıklar edinmenin ömür boyu sürecek faydaları vardır.  Bu nedenle, gençlerin hareket yoluyla daha mutlu ve sağlıklı olmalarına yardımcı olmak için tasarlanmış, her yaşa uygun programlanmış bir ders olan BORN TO MOVE'u yarattık.",
 			description:
 				"BORN TO MOVE™, farklı yaş grupları 2-3 yaş, 4-5, 6-7, 8-12 ve 13-16 için hareket serilerinden oluşan bir derstir.\nÇocuklarımız, yeni nesil fark yaratanlar, motive edenler, liderler ve karar vericilerdir.  Onları desteklemenin en iyi yolu, sağlıklı ve aktif bir yaşam sürmelerine yardımcı olmaktır.  Bu nedenle de BORN TO MOVE'u yarattık.  Harika müzik ve tamamen çocuklara yönelik eğlenceli hareketlerle yüksek enerji sınıfları.",
@@ -208,21 +215,6 @@ export const lesMillsPrograms = {
 			equipment: 'Yok',
 			for: '2-16 yaş arası çocuklar ve gençler',
 			result: 'Güven, enerji, sağlıklı bedenler ve zihinler',
-		},
-		{
-			title: 'BORN TO MOVE 2-3 YAŞ',
-		},
-		{
-			title: 'BORN TO MOVE 4-5 YAŞ',
-		},
-		{
-			title: 'BORN TO MOVE 6-7 YAŞ',
-		},
-		{
-			title: 'BORN TO MOVE 8-12 YAŞ',
-		},
-		{
-			title: 'BORN TO MOVE 13-16 YAŞ',
 		},
 	],
 	'YÜKSEK YOĞUNLUKLU INTERVAL PROGRAMLAR': [
