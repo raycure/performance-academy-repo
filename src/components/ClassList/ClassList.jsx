@@ -25,9 +25,7 @@ function ClassList({ classType }) {
 					return (
 						<div
 							key={subIndex}
-							className={`class-item-container class-text-container top-border-light row ${
-								isActive ? 'grid-clicked' : 'grid-unclicked'
-							}`}
+							className='class-item-container class-text-container top-border-light row'
 							onClick={() => classClickHandler(subIndex)}
 						>
 							<img
@@ -35,47 +33,33 @@ function ClassList({ classType }) {
 								className='img class-img'
 								src={name}
 							/>
-							<div className='info-container'>
-								<div>
-									<img
-										aria-label='logo'
-										className='img class-logo'
-										src={BODYPUMP}
-									/>
-									<p className='slogan'>{program.sum}</p>
-									{isActive && <p>{program.description}</p>}
-								</div>
-								{!isActive && (
-									<div className='row more-button-container top-border-light'>
-										<div>
-											<p>Egzersiz Tipi: {program.type}</p>
-											<p>Ekipman: {program.equipment}</p>
-											<p>Kime Yönelik: {program.for}</p>
-										</div>
-										<Button>
-											Daha Fazlası
-											<MdOutlineDoubleArrow color='white' />
-										</Button>
-									</div>
-								)}
+							<div>
+								<img
+									aria-label='logo'
+									className='img class-logo'
+									src={BODYPUMP}
+								/>
+								<p className='slogan'>{program.sum}</p>
 							</div>
+
 							{isActive && (
 								<div className='class-reason-container'>
+									<p>{program.description}</p>
 									<p>{program.whyMember}</p>
 									<p>{program.whyYou}</p>
-									<div className='row more-button-container top-border-light'>
-										<div>
-											<p>Egzersiz Tipi: {program.type}</p>
-											<p>Ekipman: {program.equipment}</p>
-											<p>Kime Yönelik: {program.for}</p>
-										</div>
-										<Button>
-											Daha Fazlası
-											<MdOutlineDoubleArrow color='white' />
-										</Button>
-									</div>
 								</div>
 							)}
+							<div className='row more-button-container top-border-light'>
+								<div>
+									<p>Egzersiz Tipi: {program.type}</p>
+									<p>Ekipman: {program.equipment}</p>
+									<p>Kime Yönelik: {program.for}</p>
+								</div>
+								<Button>
+									Daha Fazlası
+									<MdOutlineDoubleArrow color='white' />
+								</Button>
+							</div>
 						</div>
 					);
 				})}

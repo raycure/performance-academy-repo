@@ -1,32 +1,21 @@
 .class-item-container {
 	width: 65%;
 	align-items: stretch;
-	display: grid;
 	margin-inline: auto;
-	grid-template-columns: 1fr 2fr;
+	overflow: hidden;
 }
 .info-container {
 	justify-content: space-between;
 	display: flex;
 	flex-direction: column;
 	padding: 0.6rem;
-	grid-area: two;
 }
-.class-reason-container {
-	grid-area: 2/1/3 / span 2;
-}
+
 .more-button-container {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
 	padding-top: 0.5rem;
-}
-.grid-clicked {
-	grid-template-rows: auto auto;
-	grid-template-areas: 'one two' 'three three';
-}
-.grid-unclicked {
-	grid-template-areas: 'one two';
 }
 .class-logo {
 	height: 2rem;
@@ -37,5 +26,5 @@
 .class-img {
 	max-height: 400px;
 	height: 40vh;
-	grid-area: one;
+	float: left;
 }
