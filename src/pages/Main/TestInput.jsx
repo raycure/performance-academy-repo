@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { createProduct } from "../../../Api/Controllers/productController.js";
+import axios from "../api/axios.js";
 
 
 function TestInput() {
   const [name2, setName] = useState("");
+  const [password, setPassword] = useState("deneme");
 
   const handleChange = (e) => {
     setName(e.target.value);
@@ -13,12 +15,11 @@ function TestInput() {
     e.preventDefault();
 
     try { 
-      const response = await fetch('http://localhost:3001/api/products', {
-        method: 'POST',
+      const response = await axios.post('/api/products', {
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({name: name2
+        body: JSON.stringify({name: name2, password
         }),
     })
     } catch (error) {
