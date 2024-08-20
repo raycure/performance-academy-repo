@@ -1,5 +1,6 @@
 import React from 'react';
 import { LesMillsEvents } from '../../assets/LesmillsEvents';
+import { Link } from 'react-router-dom';
 function NewsItem() {
 	const events = LesMillsEvents.map((event) => {
 		const today = new Date();
@@ -29,18 +30,38 @@ function NewsItem() {
 		) {
 			return;
 		}
+		console.log(`/programlar#${event.program}`);
+
 		return (
 			<div className='event-item-container'>
-				<p className='event-title'>{event.title}</p>
-				<p className='event-text'>
-					{eventDate.toLocaleDateString()} tarihinde {event.title}{' '}
-					programından oluşan etkinliğimiz yakınlaşmakta!
-					Etkinliğimize son {daysLeft}
-				</p>
+				{daysLeft > 0 && (
+					<div className='event'>
+						<h3>Yaklaşan Etkinlik!</h3>
+						<p className='event-text'>
+							{eventDate.toLocaleDateString()} tarihinde{' '}
+							{event.title} programından oluşan etkinliğimiz
+							yakınlaşmakta! Etkinliğimize son {daysLeft} gün!
+						</p>
+						<Link to={`/programlar#${event.program}`}>
+							Programı incelemek için buraya tıklayın!
+						</Link>
+					</div>
+				)}
+				{daysLeft <= 0 && (
+					<div className='event'>
+						<h3>Geçmiş Etkinlik</h3>
+						<p className='event-text'>
+							{eventDate.toLocaleDateString()} tarihinde{' '}
+							{event.title} programından oluşan etkinliğimiz
+							maalesef bitmiştir. Yakınlaşan etkinliklerimize göz
+							atmayı unutmayın!
+						</p>
+					</div>
+				)}
 			</div>
 		);
 	});
-	return <>{events}</>;
+	return <>{events}</>; //eger farklı tur arrayler olurrsa baska tur haberler icin onları mergele, sortla ve oyle yazdır
 }
 
 export default NewsItem;

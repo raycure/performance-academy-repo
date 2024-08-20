@@ -6,7 +6,9 @@ function News() {
 	return (
 		<>
 			<CustomCalendar />
-			<NewsItem />
+			<div className='news-container'>
+				<NewsItem />
+			</div>
 		</>
 	);
 }

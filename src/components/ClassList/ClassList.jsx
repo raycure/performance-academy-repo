@@ -27,6 +27,7 @@ function ClassList({ classType }) {
 							key={subIndex}
 							className='class-item-container class-text-container top-border-light row'
 							onClick={() => classClickHandler(subIndex)}
+							id={program.id}
 						>
 							<img
 								aria-label='program pic'

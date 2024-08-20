@@ -3,16 +3,10 @@ import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 //import interactionPlugin from '@fullcalendar/interaction';
 import './CustomCalendar.css';
+import { LesMillsEvents } from '../../assets/LesmillsEvents';
 function CustomCalendar() {
 	function handleEventClick() {}
-	const events = [
-		{
-			id: 1,
-			title: 'meow',
-			date: '2024-08-20',
-			color: '#d4006a',
-		},
-	]; //we'll add the events through here
+	const events = LesMillsEvents;
 	function renderEvents(eventInfo) {
 		return (
 			<>
