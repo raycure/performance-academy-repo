@@ -8,8 +8,8 @@ import BODYPUMP from '../../assets/classLogo/BODYPUMP.png';
 
 function ClassList({ classType }) {
 	const [activeClass, setActiveClass] = useState(null);
-	function classClickHandler(index, id) {
-		setActiveClass(index);
+	function classClickHandler(id) {
+		setActiveClass(id);
 
 		// boyut degistikten sonra calisiyor cunku classclickhandler boyut degistiriyo
 		requestAnimationFrame(() => {
@@ -41,17 +41,12 @@ function ClassList({ classType }) {
 		return (
 			<>
 				{lesMillsPrograms[category].map((program, subIndex) => {
-					const isActive = activeClass === subIndex;
-					if (!program.sum) {
-						return;
-					}
+					const isActive = activeClass === program.id;
 					return (
 						<div
 							key={subIndex}
 							className='class-item-container class-text-container top-border-light row'
-							onClick={() =>
-								classClickHandler(subIndex, program.id)
-							}
+							onClick={() => classClickHandler(program.id)}
 							id={program.id}
 						>
 							<img
