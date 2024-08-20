@@ -2,7 +2,7 @@ export const lesMillsPrograms = {
 	'GRUP FITNESS PROGRAMLARI': [
 		{
 			title: 'BODYPUMP',
-			logo: '../../assets/classLogo/BODYPUMP.png',
+			logo: '',
 			picture: '',
 			id: 'BODYPUMP',
 			sum: 'Üyeleriniz Genel Vücut Antrenmanı ile güç oluşturmak, zayıflamak ve formda olmak ve tüm ana kasları çalıştırmak mı istiyor? LesMills BODYPUMP, kalori yakmak ve yağsız, atletik kaslar oluşturmak için bilimsel olarak kanıtlanmış, dünyanın en popüler halter egzersiz programıdır.',

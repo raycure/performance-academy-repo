@@ -3,15 +3,9 @@
 	align-items: stretch;
 	margin-inline: auto;
 	overflow: hidden;
-	padding: 1rem 0;
+	padding: 1rem;
+	position: relative;
 }
-.info-container {
-	justify-content: space-between;
-	display: flex;
-	flex-direction: column;
-	padding: 0.6rem;
-}
-
 .more-button-container {
 	display: flex;
 	flex-direction: row;
@@ -29,4 +23,17 @@
 	height: 40vh;
 	float: left;
 	margin: 0 1rem;
+}
+.class-background-shape {
+	position: absolute;
+	top: 0;
+	left: 5%;
+	width: 90%;
+	height: 100%;
+	background-color: var(--clr-primary-300);
+	-ms-transform: skewX(-45deg);
+	-webkit-transform: skewX(-45deg);
+	transform: skewX(-45deg);
+	z-index: -5;
+	display: block;
 }

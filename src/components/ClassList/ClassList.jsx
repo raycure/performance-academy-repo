@@ -8,13 +8,36 @@ import BODYPUMP from '../../assets/classLogo/BODYPUMP.png';
 
 function ClassList({ classType }) {
 	const [activeClass, setActiveClass] = useState(null);
-	function classClickHandler(index) {
+	function classClickHandler(index, id) {
 		setActiveClass(index);
+
+		// boyut degistikten sonra calisiyor
+		requestAnimationFrame(() => {
+			const element = document.getElementById(id);
+			if (element) {
+				//burda hesapliyor
+				const elementRect = element.getBoundingClientRect(); //uzaklık ve uzunluklari obje halinde donduruyor
+				const elementTop = elementRect.top + window.scrollY; //pageYOffset deprecated scrollY kullan
+				const elementHeight = elementRect.height;
+				const header = document.querySelector('.nav-container'); //i guess this has to be the way cunku oburleri olmadı
+				const headerHeight = header ? header.offsetHeight : 0; //0 default bulamazsa diye
+				const middle =
+					elementTop -
+					window.innerHeight / 2 +
+					elementHeight / 2 -
+					headerHeight / 2;
+				window.scrollTo({
+					top: middle,
+					behavior: 'smooth',
+				});
+			}
+		});
 	}
 	const classes = Object.keys(lesMillsPrograms).map((category) => {
 		if (category !== classType && classType !== 'all') {
 			return;
 		}
+
 		return (
 			<>
 				{lesMillsPrograms[category].map((program, subIndex) => {
@@ -26,7 +49,9 @@ function ClassList({ classType }) {
 						<div
 							key={subIndex}
 							className='class-item-container class-text-container top-border-light row'
-							onClick={() => classClickHandler(subIndex)}
+							onClick={() =>
+								classClickHandler(subIndex, program.id)
+							}
 							id={program.id}
 						>
 							<img
@@ -41,15 +66,15 @@ function ClassList({ classType }) {
 									src={BODYPUMP}
 								/>
 								<p className='slogan'>{program.sum}</p>
-							</div>
 
-							{isActive && (
-								<div className='class-reason-container'>
-									<p>{program.description}</p>
-									<p>{program.whyMember}</p>
-									<p>{program.whyYou}</p>
-								</div>
-							)}
+								{isActive && (
+									<>
+										<p>{program.description}</p>
+										<p>{program.whyMember}</p>
+										<p>{program.whyYou}</p>
+									</>
+								)}
+							</div>
 							<div className='row more-button-container top-border-light'>
 								<div>
 									<p>Egzersiz Tipi: {program.type}</p>
@@ -61,6 +86,10 @@ function ClassList({ classType }) {
 									<MdOutlineDoubleArrow color='white' />
 								</Button>
 							</div>
+							<div
+								className='class-background-shape'
+								style={{ backgroundColor: program.color }}
+							></div>
 						</div>
 					);
 				})}

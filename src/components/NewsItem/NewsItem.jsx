@@ -33,6 +33,12 @@ function NewsItem() {
 			return;
 		}
 
+		const scrollWithOffset = (el) => {
+			const yCoordinate = el.getBoundingClientRect().top;
+			const yOffset = -(screen.height * 0.2);
+			window.scrollTo({ top: yCoordinate + yOffset, behavior: 'smooth' });
+		};
+
 		return (
 			<div className='event-item-container'>
 				{daysLeft > 0 && (
@@ -43,7 +49,11 @@ function NewsItem() {
 							{event.title} programından oluşan etkinliğimiz
 							yakınlaşmakta! Etkinliğimize son {daysLeft} gün!
 						</p>
-						<HashLink smooth to={`/programlar#${event.program}`}>
+						<HashLink
+							smooth
+							to={`/programlar#${event.program}`}
+							scroll={(el) => scrollWithOffset(el)}
+						>
 							Programı incelemek için buraya tıklayın!
 						</HashLink>
 					</div>
