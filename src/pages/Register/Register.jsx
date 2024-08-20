@@ -7,13 +7,12 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./registerStyle.css";
-import axios from "../api/axios.js";
+import api from "../api/axios.js";
 
 const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 
-const BASE_URL = "http://localhost:3001/api/products";
-
+const REGISTER_URL = "/api/products";
 
 function Register() {
   const userRef = useRef();
@@ -55,19 +54,18 @@ function Register() {
     e.preventDefault();
     const v1 = USER_REGEX.test(user);
     const v2 = PWD_REGEX.test(pwd);
+
     if (!v1 || !v2) {
       setErrMsg("invalid entry");
       return;
     }
+
     try {
-      const response = await axios.post(
-        "/api/products",
+      const response = await api.post(
+        REGISTER_URL,
         JSON.stringify({ name: user, password: pwd }),
         {
-          headers: {
-            "Content-Type": "application/json",
-          },
-          withCredentials: true,
+          headers: { "Content-Type": "application/json" },
         }
       );
       console.log(JSON.stringify(response?.data));
@@ -79,14 +77,14 @@ function Register() {
       setMatchPwd("");
     } catch (err) {
       if (!err?.response) {
-          setErrMsg('No Server Response');
+        setErrMsg("No Server Response");
       } else if (err.response?.status === 409) {
-          setErrMsg('Username Taken');
+        setErrMsg("Username Taken");
       } else {
-          setErrMsg('Registration Failed')
+        setErrMsg("Registration Failed");
       }
       errRef.current.focus();
-  }
+    }
   }
   return (
     <section>
@@ -204,7 +202,8 @@ aria-live make it so screen reader reads the msg when its focused which we r alr
           Must match the first password input field.
         </p>
         <button
-          disabled={!validName || !validPwd || !validMatch ? true : false} type="submit"
+          disabled={!validName || !validPwd || !validMatch ? true : false}
+          type="submit"
         >
           Sign Up
         </button>
