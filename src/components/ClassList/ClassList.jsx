@@ -77,7 +77,9 @@ function ClassList({ classType }) {
 									<p>Kime Yönelik: {program.for}</p>
 								</div>
 								<Button>
-									Daha Fazlası
+									{!isActive
+										? 'Daha Fazlası'
+										: 'Programa Katılın'}
 									<MdOutlineDoubleArrow color='white' />
 								</Button>
 							</div>
