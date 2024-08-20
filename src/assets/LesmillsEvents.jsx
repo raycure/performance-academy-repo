@@ -16,19 +16,24 @@
 // THE-TRIP
 // LES-MILLS-BARRE
 
-export const LesMillsEvents = [
+function assignUniqueIds(events) {
+	return events.map((event, index) => ({
+		...event,
+		id: index + 1,
+	}));
+}
+
+export const LesMillsEvents = assignUniqueIds([
 	{
-		id: 1,
 		title: 'meow',
 		date: '2024-08-20',
 		color: '#d4006a',
 		program: 'BORN-TO-MOVE',
 	},
 	{
-		id: 2,
-		title: 'meow',
+		title: 'meowww',
 		date: '2024-08-24',
 		color: '#d4006a',
 		program: 'BODYSTEP',
 	},
-];
+]);

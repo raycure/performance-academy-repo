@@ -11,7 +11,7 @@ function ClassList({ classType }) {
 	function classClickHandler(index, id) {
 		setActiveClass(index);
 
-		// boyut degistikten sonra calisiyor
+		// boyut degistikten sonra calisiyor cunku classclickhandler boyut degistiriyo
 		requestAnimationFrame(() => {
 			const element = document.getElementById(id);
 			if (element) {

@@ -24,7 +24,6 @@ function NewsItem() {
 		const daysLeft = Math.floor(
 			(eventDate.getTime() - today.getTime()) / (1000 * 3600 * 24)
 		);
-		console.log(dateTwentyDaysAfter(), dateTwentyDaysAgo(), eventDate);
 
 		if (
 			eventDate > dateTwentyDaysAfter() ||
