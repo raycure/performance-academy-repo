@@ -5,6 +5,8 @@ import isim from '../../assets/ornek.jpg';
 import Card from '../../components/Cards/Card';
 import { lesMillsPrograms } from '../../assets/LesmillsPrograms';
 import Banner from '../../components/Banner/Banner';
+import TestInput from './testInput';
+
 function Main() {
 	const cards = Object.keys(lesMillsPrograms).map((category, index) => {
 		const backContent = (
@@ -20,6 +22,8 @@ function Main() {
 
 	return (
 		<>
+		<TestInput></TestInput>
+		{/* <Banner></Banner> */}
 			<Container className='even-columns'>
 				<div>
 					{/* <div className="fs-primary-heading">Lesmills Nedir?</div> */}
@@ -51,7 +55,7 @@ function Main() {
 				<img src={isim} className='image'></img>
 			</Container>
 
-			<Banner></Banner>
+			
 			<Container
 				className='even-columns cardContent'
 				style={{ gap: '0px' }}

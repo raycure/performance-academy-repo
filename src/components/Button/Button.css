@@ -5,3 +5,10 @@
 	color: white;
 	padding: 0.2rem;
 }
+
+.btn:active {
+	background-color: #3e8e41; /* Darker green when pressed */
+	transform: scale(0.98); /* Slightly shrink the button */
+	box-shadow: 0 5px #666; /* Pressed shadow effect */
+	outline: none;
+  }

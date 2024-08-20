@@ -7,9 +7,13 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./registerStyle.css";
+import axios from "../api/axios.js";
 
 const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
+
+const BASE_URL = "http://localhost:3001/api/products";
+
 
 function Register() {
   const userRef = useRef();
@@ -55,16 +59,41 @@ function Register() {
       setErrMsg("invalid entry");
       return;
     }
-    console.log(user, pwd);
-    setSuccess(true);
+    try {
+      const response = await axios.post(
+        "/api/products",
+        JSON.stringify({ name: user, password: pwd }),
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          withCredentials: true,
+        }
+      );
+      console.log(JSON.stringify(response?.data));
+      //console.log(JSON.stringify(response))
+      setSuccess(true);
+      //clear state and controlled inputs
+      setUser("");
+      setPwd("");
+      setMatchPwd("");
+    } catch (err) {
+      if (!err?.response) {
+          setErrMsg('No Server Response');
+      } else if (err.response?.status === 409) {
+          setErrMsg('Username Taken');
+      } else {
+          setErrMsg('Registration Failed')
+      }
+      errRef.current.focus();
   }
-
+  }
   return (
     <section>
-      {/* <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>  
+      {/* <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
 aria-live make it so screen reader reads the msg when its focused which we r already achiving with ref     */}
       <h1 ref={userRef}>Register</h1>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} action="/api/products">
         <label htmlFor="username">
           Username:
           <FontAwesomeIcon
@@ -175,7 +204,7 @@ aria-live make it so screen reader reads the msg when its focused which we r alr
           Must match the first password input field.
         </p>
         <button
-          disabled={!validName || !validPwd || !validMatch ? true : false}
+          disabled={!validName || !validPwd || !validMatch ? true : false} type="submit"
         >
           Sign Up
         </button>
