@@ -11,8 +11,12 @@ function Layout() {
 			<Navbar />
 			<Outlet />
 			<Footer />
-			<HashLink className='top-arrow' to='#top'>
-				<RiArrowUpSLine />
+			<HashLink
+				aria-label='return top arrow'
+				className='to-top-arrow'
+				to='#top'
+			>
+				<RiArrowUpSLine size='2rem' opacity={0.7} />
 			</HashLink>
 		</>
 	);

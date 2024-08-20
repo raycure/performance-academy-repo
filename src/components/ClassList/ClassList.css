@@ -3,6 +3,7 @@
 	align-items: stretch;
 	margin-inline: auto;
 	overflow: hidden;
+	padding: 1rem 0;
 }
 .info-container {
 	justify-content: space-between;
@@ -27,4 +28,5 @@
 	max-height: 400px;
 	height: 40vh;
 	float: left;
+	margin: 0 1rem;
 }

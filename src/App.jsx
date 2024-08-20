@@ -12,7 +12,6 @@ function App() {
 	return (
 		<>
 			<BrowserRouter>
-				{ScrollToElement}
 				<Routes>
 					<Route path='/' element={<Layout />}>
 						<Route index element={<Main />} />

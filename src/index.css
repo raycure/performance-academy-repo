@@ -158,7 +158,16 @@ p[data-width='wide'] {
 .class-text-container {
 	white-space: pre-line; /* line break icin, \n varsa textte ayiriyor */
 }
-
+.to-top-arrow {
+	z-index: 5;
+	position: fixed;
+	bottom: 1rem;
+	right: 1rem;
+	display: block;
+}
+.to-top-arrow:hover {
+	opacity: 0.4;
+}
 .banner {
 	width: 100%;
 	background-color: antiquewhite;

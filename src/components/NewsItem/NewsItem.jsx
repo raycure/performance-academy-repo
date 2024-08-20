@@ -1,6 +1,8 @@
 import React from 'react';
 import { LesMillsEvents } from '../../assets/LesmillsEvents';
 import { Link } from 'react-router-dom';
+import { HashLink } from 'react-router-hash-link';
+
 function NewsItem() {
 	const events = LesMillsEvents.map((event) => {
 		const today = new Date();
@@ -30,7 +32,6 @@ function NewsItem() {
 		) {
 			return;
 		}
-		console.log(`/programlar#${event.program}`);
 
 		return (
 			<div className='event-item-container'>
@@ -42,9 +43,9 @@ function NewsItem() {
 							{event.title} programından oluşan etkinliğimiz
 							yakınlaşmakta! Etkinliğimize son {daysLeft} gün!
 						</p>
-						<Link to={`/programlar#${event.program}`}>
+						<HashLink smooth to={`/programlar#${event.program}`}>
 							Programı incelemek için buraya tıklayın!
-						</Link>
+						</HashLink>
 					</div>
 				)}
 				{daysLeft <= 0 && (
