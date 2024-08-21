@@ -3,6 +3,8 @@ import * as authService from '../../src/auth/auth.service.js';
 // as!A1231
 import * as actionTypes from "../../src/redux/auth/types.js"
 
+
+
 const getProducts = async (req, res) => {
   try {
     const products = await TestProducts.find({});
@@ -65,15 +67,7 @@ const deleteProduct = async (req, res) => {
   }
 };
 
- const register =
-({ registerData }) =>
-async (dispatch) => {
-  dispatch({
-    type: actionTypes.REQUEST_LOADING,
-  });
-  const data = await authService.register({ registerData });
-
-};
+ 
 
   export { getProducts, getProduct, createProduct, updateProduct, deleteProduct, register};
   
