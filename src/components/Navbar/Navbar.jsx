@@ -36,7 +36,8 @@ function Navbar() {
 						<FaUser className='nav-item-icon' />
 					</Link>
 
-					<Button>Kaydol</Button>
+					<Button redirect={"/register"} >Kaydol</Button>
+					
 				</div>
 				<div className='menu'>
 					<HiOutlineMenuAlt3
