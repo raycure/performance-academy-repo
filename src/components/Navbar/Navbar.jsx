@@ -22,7 +22,7 @@ function Navbar() {
 						<NavLink to='/programlar'>Kurslar</NavLink>
 					</li>
 					<li>
-						<NavLink to='/duyurular'>Duyurular</NavLink>
+						<NavLink to='/etkinlikler'>Etkinlikler</NavLink>
 					</li>
 					<li>
 						<NavLink to='/kurslarım'>Kurslarım</NavLink>

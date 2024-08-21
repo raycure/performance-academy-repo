@@ -2,7 +2,7 @@ export const lesMillsPrograms = {
 	'GRUP FITNESS PROGRAMLARI': [
 		{
 			title: 'BODYPUMP',
-			logo: '',
+			logo: '/classLogo/BODYPUMP.png',
 			picture: '',
 			id: 'BODYPUMP',
 			sum: 'Üyeleriniz Genel Vücut Antrenmanı ile güç oluşturmak, zayıflamak ve formda olmak ve tüm ana kasları çalıştırmak mı istiyor? LesMills BODYPUMP, kalori yakmak ve yağsız, atletik kaslar oluşturmak için bilimsel olarak kanıtlanmış, dünyanın en popüler halter egzersiz programıdır.',
@@ -19,7 +19,7 @@ export const lesMillsPrograms = {
 		},
 		{
 			title: 'BODYCOMBAT',
-			logo: '',
+			logo: '/classLogo/BODYCOMBAT.png',
 			picture: '',
 			id: 'BODYCOMBAT',
 			sum: 'Üyeleriniz gerçek sonuçlar veren güçlendirici bir antrenman arıyorsa, işte budur.İnanılmaz derecede popüler olan Les Mills BODYCOMBAT antrenmanımız, kardiyovasküler kondisyonunu arttırmak ve tüm vücudu çalıştırmak için temassız dövüş sanatlarından ilham alan egzersizler kullanarak üyelerinizi formda, hızlı ve güçlü kılar.',
@@ -36,7 +36,7 @@ export const lesMillsPrograms = {
 		},
 		{
 			title: 'LES MILLS BODYBALANCE',
-			logo: '',
+			logo: '/classLogo/BODYBALANCE.png',
 			picture: '',
 			id: 'LES-MILLS-BODYBALANCE',
 			sum: 'Herkes için ideal olan LES MILLS BODYBALANCE, müzik eşliğinde Tai Chi ve Pilates unsurlarıyla modern bir yoga yorumudur.  Bir fitness kulübü ortamı için bilimsel olarak tasarlanmış olup zihninizi, bedeninizi ve yaşamınızı iyileştirecektir.',
@@ -53,7 +53,7 @@ export const lesMillsPrograms = {
 		},
 		{
 			title: 'LES MILLS CORE',
-			logo: '',
+			logo: '/classLogo/CORE.png',
 			picture: '',
 			id: 'LES-MILLS-CORE',
 			sum: 'Seçkin atletik antrenman ilkelerinden ilham alan LES MILLS CORE™, harika bir core gücü ve spor performansı oluşturmak için bilimsel  ve temel antrenmandır.  Üyeleriniz daha güçlü core gücü oluşturacak ve diğer antrenmanlardan daha iyi sonuçlar alacak.',
@@ -70,7 +70,7 @@ export const lesMillsPrograms = {
 		},
 		{
 			title: 'BODYATTACK',
-			logo: '',
+			logo: '/classLogo/BODYATTACK.png',
 			picture: '',
 			id: 'BODYATTACK',
 			sum: 'Kalori yakmak, kas kitlesini artırmak  ve zayıflamak gibi genel vücut antrenmanı arayan kulüp üyeleri için Les Mills BODYATTACK idealdir.  Tüm fitness seviyelerine uygun seçeneklerle BODYATTACK, son derece motive edici bir egzersiz için kardiyo, çeviklik ve kuvvet egzersizlerini birleştirir.',
@@ -87,7 +87,7 @@ export const lesMillsPrograms = {
 		},
 		{
 			title: 'RPM',
-			logo: '',
+			logo: '/classLogo/RPM.png',
 			picture: '',
 			id: 'RPM',
 			sum: 'Grup aktivitelerine yeni başlayanlar için mükemmel bir başlangıç olan LES MILLS RPM, üyelerinizin kalori yakmasına, kardiyo kondisyon seviyesinin  geliştirmesine ve kondisyon seviyelerine uyacak şekilde yoğunluğu artırmasına  olanak tanıyan oldukça motive edici ve genellikle bağımlılık yapan bir Bisiklet antrenmanıdır.',
@@ -104,7 +104,7 @@ export const lesMillsPrograms = {
 		},
 		{
 			title: 'SH’BAM',
-			logo: '',
+			logo: '/classLogo/SH’BAM.png',
 			picture: '',
 			id: 'SH’BAM',
 			sum: "Eğlenceyi seven, delicesine bağımlılık yapan bir dans çalışması olan Les Mills SH'BAM, egodan arınmış bir bölgedir - dans deneyimi gerektirmez.  Yüksek enerjili bir kardiyo egzersizi yaparken, eğitmenlerinizin partiyi getirmesine ve üyelerinizin sahip olduklarını hiç bilmedikleri hareketleri bulmalarına yardımcı olmasına izin verin.",
@@ -121,7 +121,7 @@ export const lesMillsPrograms = {
 		},
 		{
 			title: 'BODYJAM',
-			logo: '',
+			logo: '/classLogo/BODYJAM.png',
 			picture: '',
 			id: 'BODYJAM',
 			sum: "Üyeleriniz dans etmeyi seviyorsa, tamamen benzersiz dans programımız Les Mills BODYJAM'e aşık olacaklar.  Dünyanın her yerinden en taze hareketlerden ve en trend müziklerden ilham alan BODYJAM, fitness stüdyonuzu bir dans pistine dönüştüren yüksek enerjili kardiyo egzersizidir.",
@@ -138,7 +138,7 @@ export const lesMillsPrograms = {
 		},
 		{
 			title: 'BODYSTEP',
-			logo: '',
+			logo: '/classLogo/BODYSTEP.png',
 			picture: '',
 			id: 'BODYSTEP',
 			sum: 'Les Mills BODYSTEP ile üyelerinize bacakları ve kalçaları sıkılaştıran etkili  Tüm Vücud Kardiyo çalışması sunun.  Canlandırıcı, eğlenceli ve sonuçlara dayalı yüksek enerjili bir program oluşturmak için 25 yılı aşkın süredir orijinal Step Programı geliştiriyoruz.',
@@ -155,7 +155,7 @@ export const lesMillsPrograms = {
 		},
 		{
 			title: 'LES MILLS TONE',
-			logo: '',
+			logo: '/classLogo/TONE.png',
 			picture: '',
 			id: 'LES-MILLS-TONE',
 			sum: 'Etkili güç blokları, kardiyo ve core egzersizleri sunan eğlenceli ve işlevsel bir eğitim programı mı sunmak istiyorsunuz, LES MILLS TONE tam size göre.  Bu tüm vücut antrenmanı tüm üyeleri kapsar ve kondisyon seviyeleri ne olursa olsun kendi hızlarında antrenman yapmalarına olanak tanır.',
@@ -172,7 +172,7 @@ export const lesMillsPrograms = {
 		},
 		{
 			title: 'THE TRIP',
-			logo: '',
+			logo: '/classLogo/THE-TRIP.png',
 			picture: '',
 			id: 'THE-TRIP',
 			sum: 'THE TRIP gibi başka bir şey yok.  Bu, bizim efor-eğlence dediğimiz kondisyonun geleceğine bir yolculuktur.  Sinemadan, canlı konser deneyimlerinden ve etkileşimli oyunlardan ilham alan THE TRIP, amaca yönelik bir stüdyo, canlı eğitmenler ve sürükleyici videoyu birleştiren sürükleyici bir fitness deneyimidir.  Bu antrenmanın potansiyeli sınırsızdır.',
@@ -189,7 +189,7 @@ export const lesMillsPrograms = {
 		},
 		{
 			title: 'LES MILLS BARRE',
-			logo: '',
+			logo: '/classLogo/BARRE.png',
 			picture: '',
 			id: 'LES-MILLS-BARRE',
 			sum: "Bale için eğitim almış veya sadece yeni bir kendini ifade etme arayışında olan herkes LES MILLS BARRE'yi sevecektir.  Üyeleriniz için geleneksel bale barından kurtulmuş, benzersiz bir şekilde zarif bir kuvvet ve stabilite antrenmanı olan LES MILLS BARRE, harika yağ yakımı sağlar.",
@@ -208,7 +208,7 @@ export const lesMillsPrograms = {
 	'ÇOCUK VE GENÇ PROGRAMLARI': [
 		{
 			title: 'BORN TO MOVE',
-			logo: '',
+			logo: '/classLogo/BORNTOMOVE.png',
 			picture: '',
 			id: 'BORN-TO-MOVE',
 			subTitles: [
@@ -233,7 +233,7 @@ export const lesMillsPrograms = {
 	'YÜKSEK YOĞUNLUKLU INTERVAL PROGRAMLAR': [
 		{
 			title: 'LES MILLS SPRINT',
-			logo: '',
+			logo: '/classLogo/SPRINT.png',
 			picture: '',
 			id: 'LES-MILLS-SPRINT',
 			sum: "Bisiklet stüdyonuzda yeni bir challenge sunmak ister misiniz?  LES MILLS SPRINT, hızlı sonuçlar veren yüksek yoğunluklu bir antrenman olan bisiklet üzerinde HIIT'tir.  Heyecan ve motivasyonun fiziksel ve zihinsel sınırları zorlamaktan geldiği kısa, yoğun bir eğitim tarzıdır.",
@@ -250,7 +250,7 @@ export const lesMillsPrograms = {
 		},
 		{
 			title: 'LES MILLS GRIT',
-			logo: '',
+			logo: '/classLogo/GRIT.png',
 			picture: '',
 			id: 'LES-MILLS-GRIT',
 			subTitles: ['GRIT Strenght', 'GRIT Cardio', 'GRIT Athletic'],

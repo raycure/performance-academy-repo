@@ -1,0 +1,10 @@
+.event-item-center {
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+}
+.event-item-container {
+	background-color: blueviolet;
+	padding: 4rem 2rem;
+	border-radius: 15px;
+}

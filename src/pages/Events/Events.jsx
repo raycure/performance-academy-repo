@@ -1,0 +1,28 @@
+import React from 'react';
+import './Events.css';
+import CustomCalendar from '../../components/CustomCalendar/CustomCalendar';
+import EventItem from '../../components/EventItem/EventItem';
+import CardCarousel from '../../components/Carousels/CardCarousel';
+import EventExpandedItem from '../../components/EventItem/EventExpandedItem';
+function Events() {
+	return (
+		<div>
+			<div className='event-page-poster-container'>
+				{/* <img src='' alt='' className='background-image' /> */}
+				<p className='text-container'></p>
+			</div>
+			<div className='calender-carousel-container'>
+				<div className='calendar-container'>
+					<CustomCalendar />
+				</div>
+				<div className='carousel-container'>
+					<CardCarousel />
+				</div>
+			</div>
+			<div className='event-container'>
+				<EventExpandedItem />
+			</div>
+		</div>
+	);
+}
+export default Events;

@@ -1,0 +1,18 @@
+.card-carousel-event-container {
+	border-radius: 5px;
+	background-color: rgb(225, 13, 48);
+	padding: 7rem 2.4rem;
+	overflow: hidden;
+}
+.swiper-scrollbar {
+	display: none;
+}
+.swiper {
+	padding-bottom: 2rem;
+}
+.swiper-pagination-bullet-active {
+	background: var(--clr-accent-400);
+}
+.swiper-wrapper {
+	max-width: fit-content;
+}

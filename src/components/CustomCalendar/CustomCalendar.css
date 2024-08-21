@@ -1,11 +1,8 @@
-.cal-container {
-	max-width: 700px;
-}
 .fc .fc-toolbar.fc-header-toolbar {
 	margin-bottom: 0.4rem;
 }
 .fc-header-toolbar .fc-toolbar {
-	margin: 0px, 50px;
+	margin: 0px, 3rem;
 }
 .fc-day-today {
 	background: #b6f5ed !important; /* todays color we can make it transparent and stuff if u awnt */
@@ -20,4 +17,10 @@
 	width: 100%;
 	text-align: center;
 	color: #f1e0db;
+}
+.fc-header-left,
+.fc-header-center,
+.fc-header-right {
+	width: 100%;
+	display: block;
 }

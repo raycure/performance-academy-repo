@@ -4,7 +4,6 @@ import Button from '../Button/Button';
 import { lesMillsPrograms } from '../../assets/LesmillsPrograms';
 import { MdOutlineDoubleArrow } from 'react-icons/md';
 import name from '../../assets/ornek.jpg';
-import BODYPUMP from '../../assets/classLogo/BODYPUMP.png';
 
 function ClassList({ classType }) {
 	const [activeClass, setActiveClass] = useState(null);
@@ -45,7 +44,7 @@ function ClassList({ classType }) {
 					return (
 						<div
 							key={subIndex}
-							className='class-item-container class-text-container top-border-light row'
+							className='class-item-container text-container top-border-light row'
 							onClick={() => classClickHandler(program.id)}
 							id={program.id}
 						>
@@ -58,7 +57,7 @@ function ClassList({ classType }) {
 								<img
 									aria-label='logo'
 									className='img class-logo'
-									src={BODYPUMP}
+									src={program.logo}
 								/>
 								<p className='slogan'>{program.sum}</p>
 
@@ -84,7 +83,7 @@ function ClassList({ classType }) {
 								</Button>
 							</div>
 							<div
-								className='class-background-shape'
+								className='background-image class-background-shape'
 								style={{ backgroundColor: program.color }}
 							></div>
 						</div>

@@ -19,7 +19,7 @@
 function assignUniqueIds(events) {
 	return events.map((event, index) => ({
 		...event,
-		id: index + 1,
+		id: index,
 	}));
 }
 
@@ -33,6 +33,36 @@ export const LesMillsEvents = assignUniqueIds([
 	{
 		title: 'meowww',
 		date: '2024-08-24',
+		color: '#d4006a',
+		program: 'BODYSTEP',
+	},
+	{
+		title: 'meowww',
+		date: '2024-08-26',
+		color: '#d4006a',
+		program: 'BODYSTEP',
+	},
+	{
+		title: 'meowww',
+		date: '2024-08-30',
+		color: '#d4006a',
+		program: 'BODYSTEP',
+	},
+	{
+		title: 'meowww',
+		date: '2024-09-15',
+		color: '#d4006a',
+		program: 'BODYSTEP',
+	},
+	{
+		title: 'meowww',
+		date: '2024-10-26',
+		color: '#d4006a',
+		program: 'BODYSTEP',
+	},
+	{
+		title: 'meowww',
+		date: '2024-11-30',
 		color: '#d4006a',
 		program: 'BODYSTEP',
 	},

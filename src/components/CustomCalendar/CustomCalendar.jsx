@@ -3,6 +3,7 @@ import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 //import interactionPlugin from '@fullcalendar/interaction';
 import './CustomCalendar.css';
+
 import { LesMillsEvents } from '../../assets/LesmillsEvents';
 function CustomCalendar() {
 	function handleEventClick() {}
@@ -23,7 +24,7 @@ function CustomCalendar() {
 				locale='tr'
 				buttonText={{ today: 'Bugün' }}
 				editable={false}
-				aspectRatio={1.2}
+				aspectRatio={1.1}
 				headerToolbar={{
 					start: 'today',
 					center: 'title',
