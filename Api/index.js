@@ -7,20 +7,21 @@ import cors from "cors"
 const port = 3001
 
 const app = express();
-app.use(cors()); // Enable CORS for all routes
+// app.use(cors()); // Enable CORS for all routes
+
+const corsOptions = {
+  origin: 'http://localhost:5173',
+  credentials: true,
+};
+
+app.use(cors(corsOptions));
+
 
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 
-
 // routes
 app.use("/api/products", productRoute);
-
-app.post('/api/products', (req, res) => {
-  // Handle the POST request here
-  console.log(req.body); // Log the request body to see what is being sent
-  res.json({ message: 'Product created successfully!' });
-});
 
 mongoose
   .connect(
