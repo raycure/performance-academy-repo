@@ -1,9 +1,34 @@
 import TestProducts from "../Models/productModel.js";
-import * as authService from '../../src/auth/auth.service.js';
-// as!A1231
-import * as actionTypes from "../../src/redux/auth/types.js"
+import pkg from "bcryptjs";
+import mongoose from "mongoose";
+const { hash, compare } = pkg;
 
+const login = async (req, res) => {
+  try {
+    const { name, password } = req.body;
+    const userExist = await TestProducts.findOne({ name });
+    if (!userExist) {
+      return res.status(404).json({ message: "User not found" });
+    }
 
+    res.status(200).json(userExist);
+    console.log(req.body);
+    console.log(userExist);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const register = async (req, res) => {
+  try {
+    const hashedPassword = await hash(req.body.password, 10);
+    req.body.password = hashedPassword;
+    const product = await TestProducts.create(req.body);
+    res.status(200).json(product);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
 
 const getProducts = async (req, res) => {
   try {
@@ -23,16 +48,6 @@ const getProduct = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
-
-const createProduct = async (req, res) => {
-  try {
-    const product = await TestProducts.create(req.body);
-    res.status(200).json(product);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-};
-
 
 const updateProduct = async (req, res) => {
   try {
@@ -67,16 +82,11 @@ const deleteProduct = async (req, res) => {
   }
 };
 
- 
-
-  export { getProducts, getProduct, createProduct, updateProduct, deleteProduct, register};
-  
-
-// const register = async (req, res) => {
-//   try {
-//     const product = await TestProducts.create(req.body);
-//     res.status(200).json(product);
-//   } catch (error) {
-//     res.status(500).json({ message: error.message });
-//   }
-// };
+export {
+  getProducts,
+  getProduct,
+  updateProduct,
+  deleteProduct,
+  login,
+  register,
+};
