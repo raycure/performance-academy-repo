@@ -6,6 +6,7 @@ import 'swiper/css/pagination';
 import 'swiper/css/effect-coverflow';
 import EventItem from '../EventItem/EventItem';
 import './Carousel.css';
+import backgroundImage from '../../assets/ornek.jpg';
 export default () => {
 	const eventItems = EventItem();
 
@@ -17,7 +18,7 @@ export default () => {
 			scrollbar={{ draggable: true }}
 			onSlideChange={() => console.log('slide change')}
 			onSwiper={(swiper) => console.log(swiper)}
-			autoplay={{ delay: 5000, disableOnInteraction: false }}
+			//autoplay={{ delay: 5000,  disableOnInteraction: false }}
 			effect='coverflow'
 			centeredSlides={true}
 			grabCursor={true}
@@ -34,12 +35,12 @@ export default () => {
 				//const backgroundPhoto = '';
 				return (
 					<SwiperSlide key={index}>
-						{/* <img
-							src={backgroundPhoto}
-							alt='event photo'
-							className='background-image card-carousel-event-background'
-						/> */}
 						<div className='card-carousel-event-container'>
+							<img
+								src={backgroundImage}
+								alt='event photo'
+								className='background-image card-carousel-event-background'
+							/>
 							{event}
 						</div>
 					</SwiperSlide>

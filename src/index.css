@@ -188,6 +188,7 @@ p[data-width='wide'] {
 	height: 100%;
 	display: block;
 	z-index: -5;
+	object-fit: cover;
 }
 .top-border-light {
 	border-top: 2px solid var(--clr-neutral-100);

@@ -77,7 +77,7 @@ function Footer() {
 					</div>
 				</div>
 			</div>
-			<p className='licence-text'>licenced by my ass</p>
+			<p className='licence-text'>licenced by my ass 🍑</p>
 		</div>
 	);
 }
