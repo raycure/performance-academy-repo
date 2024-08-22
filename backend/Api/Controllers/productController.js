@@ -87,6 +87,5 @@ export {
   getProduct,
   updateProduct,
   deleteProduct,
-  login,
-  register,
+  login
 };
