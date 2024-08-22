@@ -16,3 +16,6 @@
 .swiper-wrapper {
 	max-width: fit-content;
 }
+.card-carousel-event-background {
+	z-index: 100;
+}

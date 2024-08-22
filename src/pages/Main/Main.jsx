@@ -1,7 +1,7 @@
 import React from 'react';
 import './Main.css';
 import Container from '../../components/Containers/Container';
-import isim from '../../assets/ornek.jpg';
+import isim from '/ornek.jpg';
 import Card from '../../components/Cards/Card';
 import { lesMillsPrograms } from '../../assets/LesmillsPrograms';
 import Banner from '../../components/Banner/Banner';
@@ -22,8 +22,8 @@ function Main() {
 
 	return (
 		<>
-		<TestInput></TestInput>
-		{/* <Banner></Banner> */}
+			<TestInput></TestInput>
+			{/* <Banner></Banner> */}
 			<Container className='even-columns'>
 				<div>
 					{/* <div className="fs-primary-heading">Lesmills Nedir?</div> */}
@@ -55,7 +55,6 @@ function Main() {
 				<img src={isim} className='image'></img>
 			</Container>
 
-			
 			<Container
 				className='even-columns cardContent'
 				style={{ gap: '0px' }}
@@ -70,14 +69,13 @@ function Main() {
         </video>
       </Container> */}
 
-       <div className="btn-container center-item">
-        {" "}
-        <a href="#" className="btn-shine">
-          azicik sakin kal
-        </a>
-      </div>
-
-    </>
-  );
+			<div className='btn-container center-item'>
+				{' '}
+				<a href='#' className='btn-shine'>
+					azicik sakin kal
+				</a>
+			</div>
+		</>
+	);
 }
 export default Main;

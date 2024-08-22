@@ -3,7 +3,7 @@ import './ClassList.css';
 import Button from '../Button/Button';
 import { lesMillsPrograms } from '../../assets/LesmillsPrograms';
 import { MdOutlineDoubleArrow } from 'react-icons/md';
-import name from '../../assets/ornek.jpg';
+import name from '/ornek.jpg';
 
 function ClassList({ classType }) {
 	const [activeClass, setActiveClass] = useState(null);
