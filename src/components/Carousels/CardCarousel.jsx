@@ -1,9 +1,8 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination, EffectCoverflow } from 'swiper/modules';
+import { Autoplay, Pagination, EffectCoverflow } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-
 import 'swiper/css/effect-coverflow';
 import EventItem from '../EventItem/EventItem';
 import './Carousel.css';
@@ -12,13 +11,13 @@ export default () => {
 
 	return (
 		<Swiper
-			modules={[Pagination, EffectCoverflow]}
+			modules={[Pagination, Autoplay, EffectCoverflow]}
 			spaceBetween={30}
 			pagination={{ clickable: true }}
 			scrollbar={{ draggable: true }}
 			onSlideChange={() => console.log('slide change')}
 			onSwiper={(swiper) => console.log(swiper)}
-			autoplay={{ delay: 100 }}
+			autoplay={{ delay: 5000, disableOnInteraction: false }}
 			effect='coverflow'
 			centeredSlides={true}
 			grabCursor={true}

@@ -5,6 +5,7 @@ import { FaUser } from 'react-icons/fa6';
 import Button from '../Button/Button';
 import logo from '../../assets/LesmillsLogo.png';
 import { HiOutlineMenuAlt3 } from 'react-icons/hi';
+import { GrLanguage } from 'react-icons/gr';
 function Navbar() {
 	const [menuOpen, setMenuOpen] = useState(false);
 
@@ -32,6 +33,9 @@ function Navbar() {
 					</li>
 				</ul>
 				<div className='nav-btn-container nav-container'>
+					<Link aria-label='language' style={{ display: 'contents' }}>
+						<GrLanguage className='nav-item-icon' />
+					</Link>
 					<Link aria-label='user' style={{ display: 'contents' }}>
 						<FaUser className='nav-item-icon' />
 					</Link>

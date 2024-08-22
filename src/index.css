@@ -211,6 +211,9 @@ p[data-width='wide'] {
 .bg-primary-400 {
 	background-color: var(--clr-primary-400);
 }
+.bg-primary-300 {
+	background-color: var(--clr-primary-300);
+}
 .bg-accent-400 {
 	background-color: var(--clr-accent-400);
 }

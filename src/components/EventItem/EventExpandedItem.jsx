@@ -6,7 +6,7 @@ function EventExpandedItem() {
 	const today = new Date();
 	const scrollWithOffset = (el) => {
 		const yCoordinate = el.getBoundingClientRect().top;
-		const yOffset = -(window.innerHeight * 0.2);
+		const yOffset = +window.innerHeight;
 		window.scrollTo({ top: yCoordinate + yOffset, behavior: 'smooth' });
 	};
 	const dateTwentyDaysAfter = new Date(

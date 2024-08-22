@@ -37,22 +37,22 @@ export const LesMillsEvents = assignUniqueIds([
 		program: 'BODYSTEP',
 	},
 	{
-		title: 'meowww',
+		title: 'LES-MILLS-GRIT',
 		date: '2024-08-26',
 		color: '#d4006a',
-		program: 'BODYSTEP',
+		program: 'LES-MILLS-GRIT',
 	},
 	{
-		title: 'meowww',
+		title: 'THE-TRIP',
 		date: '2024-08-30',
 		color: '#d4006a',
-		program: 'BODYSTEP',
+		program: 'THE-TRIP',
 	},
 	{
-		title: 'meowww',
+		title: 'BODYJAM',
 		date: '2024-09-15',
 		color: '#d4006a',
-		program: 'BODYSTEP',
+		program: 'BODYJAM',
 	},
 	{
 		title: 'meowww',
