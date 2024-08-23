@@ -1,11 +1,12 @@
 .fc .fc-toolbar.fc-header-toolbar {
-	margin-bottom: 0.4rem;
+	margin: 0.4rem;
 }
 .fc-header-toolbar .fc-toolbar {
 	margin: 0px, 3rem;
 }
 .fc-day-today {
-	background: #b6f5ed !important; /* todays color we can make it transparent and stuff if u awnt */
+	background: #e4ca0700 !important; /* todays color we can make it transparent and stuff if u awnt */
+	border: 3px solid var(--clr-accent-400) !important;
 }
 .fc .fc-bg-event {
 	background: #4a5ccf;
@@ -16,7 +17,7 @@
 	align-self: center;
 	width: 100%;
 	text-align: center;
-	color: #f1e0db;
+	color: #ffffff;
 }
 .fc-header-left,
 .fc-header-center,
@@ -24,3 +25,6 @@
 	width: 100%;
 	display: block;
 }
+/* .fc .fc-button {
+	margin: 4px;
+} */

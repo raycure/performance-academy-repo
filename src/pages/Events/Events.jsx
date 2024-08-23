@@ -8,11 +8,15 @@ function Events() {
 	return (
 		<div>
 			<div className='event-page-poster-container'>
-				{/* <img src='' alt='' className='background-image' /> */}
+				<img
+					src='/ornek.jpg'
+					alt='events page hero'
+					className='background-image'
+				/>
 				<p className='text-container'></p>
 			</div>
 			<div className='calender-carousel-container'>
-				<div className='calendar-container'>
+				<div className='calendar-container bg-primary-400'>
 					<CustomCalendar />
 				</div>
 				<div className='carousel-container'>

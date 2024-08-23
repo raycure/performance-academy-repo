@@ -24,8 +24,8 @@ function Footer() {
 					</p>
 				</div>
 				<div className='justify'>
-					<HashLink to=''>Hakkımızda</HashLink>
-					<Link to='/iletişim'>İletişim</Link>
+					<HashLink to='/'>Hakkımızda</HashLink>
+					<HashLink to='/iletişim#top'>İletişim</HashLink>
 					<HashLink to='/iletişim#'>Sık Sorulan Sorular</HashLink>
 					<Link to=''>Korsan İhbar</Link>
 				</div>
@@ -45,39 +45,55 @@ function Footer() {
 							/>
 						</Link>
 						<div className='icon-light-container bg-primary-300'>
-							<FaYoutube
-								className='icon'
-								aria-label='social icon'
-							/>
+							<Link to='https://www.youtube.com/user/lesmillsgroupfitness'>
+								<FaYoutube
+									className='icon'
+									aria-label='social icon'
+								/>
+							</Link>
 						</div>
 						<div className='icon-light-container bg-primary-300'>
-							<FaTiktok
-								className='icon'
-								aria-label='social icon'
-							/>
+							<Link to='https://www.tiktok.com/@lesmills'>
+								<FaTiktok
+									className='icon'
+									aria-label='social icon'
+								/>
+							</Link>
 						</div>
 						<div className='icon-light-container bg-primary-300'>
-							<FaLinkedinIn
-								className='icon'
-								aria-label='social icon'
-							/>
+							<Link to='https://www.linkedin.com/company/les-mills-international/'>
+								<FaLinkedinIn
+									className='icon'
+									aria-label='social icon'
+								/>
+							</Link>
 						</div>
 						<div className='icon-light-container bg-primary-300'>
-							<FaFacebookF
-								className='icon'
-								aria-label='social icon'
-							/>
+							<Link to='https://www.facebook.com/lesmills'>
+								<FaFacebookF
+									className='icon'
+									aria-label='social icon'
+								/>
+							</Link>
 						</div>
 						<div className='icon-light-container bg-primary-300'>
-							<FaPinterestP
-								className='icon'
-								aria-label='social icon'
-							/>
+							<Link to='https://tr.pinterest.com/lesmills/'>
+								<FaPinterestP
+									className='icon'
+									aria-label='social icon'
+								/>
+							</Link>
 						</div>
 					</div>
 				</div>
 			</div>
-			<p className='licence-text'>licenced by my ass 🍑</p>
+			<div className='text-legal footer-legal-container'>
+				<HashLink to='/çerezler#top'>Çerezler</HashLink>
+				<HashLink to='/kişisel-verilerin-korunması#top'>
+					Kişisel Verilerin Korunması
+				</HashLink>
+				<p className='licence-text '>©licenced by my ass 🍑</p>
+			</div>
 		</div>
 	);
 }

@@ -10,6 +10,8 @@ import Register from './pages/Register-Login/Register';
 import Login from './pages/Register-Login/Login';
 import { Provider } from 'react-redux';
 import store from './redux/store';
+import Cookies from './pages/Legal/Cookies';
+import PrivacyPolicy from './pages/Legal/PrivacyPolicy';
 
 function App() {
 	return (
@@ -24,6 +26,11 @@ function App() {
 							<Route path='iletişim' element={<Contact />} />
 							<Route path='register' element={<Register />} />
 							<Route path='login' element={<Login />} />
+							<Route path='çerezler' element={<Cookies />} />
+							<Route
+								path='kişisel-verilerin-korunması'
+								element={<PrivacyPolicy />}
+							/>
 							<Route
 								path='*'
 								element={<NoPage />}

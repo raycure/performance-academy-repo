@@ -20,3 +20,8 @@
 	width: 60vw;
 	margin-inline: auto;
 }
+.event-page-poster-container {
+	overflow: hidden;
+	height: 40vh;
+	position: relative;
+}

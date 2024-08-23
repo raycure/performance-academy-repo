@@ -25,7 +25,7 @@ function EventItem() {
 		);
 
 		return (
-			<div className='event-item-center' key={event.id}>
+			<div className='event-item-inner-container' key={event.id}>
 				<h3>Yaklaşan Etkinlik!</h3>
 				<p className='event-text'>
 					{eventDate.toLocaleDateString()} tarihinde {event.title}{' '}

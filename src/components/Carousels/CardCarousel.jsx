@@ -17,7 +17,7 @@ export default () => {
 			scrollbar={{ draggable: true }}
 			onSlideChange={() => console.log('slide change')}
 			onSwiper={(swiper) => console.log(swiper)}
-			autoplay={{ delay: 5000, disableOnInteraction: false }}
+			//autoplay={{ delay: 5000, disableOnInteraction: false }}
 			effect='coverflow'
 			centeredSlides={true}
 			grabCursor={true}

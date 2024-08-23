@@ -31,4 +31,5 @@
 	-ms-transform: skewX(-45deg);
 	-webkit-transform: skewX(-45deg);
 	transform: skewX(-45deg);
+	z-index: -5;
 }

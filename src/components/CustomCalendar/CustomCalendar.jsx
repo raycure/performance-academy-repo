@@ -17,28 +17,26 @@ function CustomCalendar() {
 	}
 	function eventHoverHandler() {}
 	return (
-		<div className='cal-container'>
-			<FullCalendar
-				plugins={[dayGridPlugin]}
-				initialView='dayGridMonth'
-				locale='tr'
-				buttonText={{ today: 'Bugün' }}
-				editable={false}
-				aspectRatio={1.1}
-				headerToolbar={{
-					start: 'today',
-					center: 'title',
-					end: 'prev,next',
-				}}
-				eventDisplay='background'
-				events={events}
-				eventClick={handleEventClick}
-				eventContent={renderEvents}
-				eventMouseEnter={eventHoverHandler}
-				eventBackgroundColor={events.color}
-				eventTextColor='black'
-			/>
-		</div>
+		<FullCalendar
+			plugins={[dayGridPlugin]}
+			initialView='dayGridMonth'
+			locale='tr'
+			buttonText={{ today: 'Bugün' }}
+			editable={false}
+			aspectRatio={1.1}
+			headerToolbar={{
+				start: 'today',
+				center: 'title',
+				end: 'prev,next',
+			}}
+			eventDisplay='background'
+			events={events}
+			eventClick={handleEventClick}
+			eventContent={renderEvents}
+			eventMouseEnter={eventHoverHandler}
+			eventBackgroundColor={events.color}
+			eventTextColor='black'
+		/>
 	);
 }
 export default CustomCalendar;

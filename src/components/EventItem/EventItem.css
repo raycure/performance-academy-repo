@@ -1,10 +1,11 @@
-.event-item-center {
-	justify-content: center;
-	align-items: center;
+.event-item-inner-container {
 	text-align: center;
+	z-index: 5;
+	position: relative;
 }
 .event-item-container {
 	background-color: blueviolet;
 	padding: 4rem 2rem;
 	border-radius: 15px;
+	height: 100%;
 }
