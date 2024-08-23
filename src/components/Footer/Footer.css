@@ -1,14 +1,17 @@
 .footer-grid {
 	display: grid;
-	grid-template-columns: 1fr 0.8fr 0.8fr;
+	grid-template-columns: 1fr 1fr 1fr;
 	justify-content: center;
-
 	text-align: center;
 	height: 100%;
 	padding: 0 10rem;
 }
 .footer-container {
 	height: 30vh;
+}
+.footer-link-container {
+	display: flex;
+	gap: 1rem;
 }
 
 .justify {
@@ -40,6 +43,6 @@
 .footer-legal-container {
 	display: flex;
 	flex-direction: row;
-	gap: 1rem;
+	gap: 0.5rem;
 	justify-content: center;
 }

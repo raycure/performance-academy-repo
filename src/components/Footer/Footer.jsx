@@ -88,10 +88,10 @@ function Footer() {
 				</div>
 			</div>
 			<div className='text-legal footer-legal-container'>
-				<HashLink to='/çerezler#top'>Çerezler</HashLink>
 				<HashLink to='/kişisel-verilerin-korunması#top'>
 					Kişisel Verilerin Korunması
 				</HashLink>
+				<HashLink to='/çerezler#top'>Çerezler</HashLink>
 				<p className='licence-text '>©licenced by my ass 🍑</p>
 			</div>
 		</div>
