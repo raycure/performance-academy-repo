@@ -1,22 +1,30 @@
 import mongoose from "mongoose";
 
-const ProductSchema = mongoose.Schema(
-    {    
-        name: {
-            type: String,
-            required: [true, 'please enter product name']
-        },
-        password:{
-            type: String,
-            required: [true, 'please enter a password']
-        }
+const UserSchema = mongoose.Schema(
+  {
+    username: {
+      type: String,
+      required: [true, "Please enter your name"],
     },
-    {
-        timestamps: true
-    }
-)
+    email: {
+      type: String,
+      required: [true, "Please enter your email"],
+      unique: true,
+    },
+    password: {
+      type: String,
+      required: [true, "Please enter a password"],
+    },
+    removed: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  {
+    timestamps: true,
+  }
+);
 
-const TestProducts = mongoose.model("TestProducts", ProductSchema);
+const Users = mongoose.model("Users", UserSchema);
 
-export default TestProducts;
-
+export default Users;

@@ -6,12 +6,9 @@ import {
   faInfoCircle,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import "./registerStyle.css";
+import { register } from "../../redux/auth/actions.js";
 import { useDispatch } from "react-redux";
-// import { register } from "../../redux/auth/actions";
-import { register } from "../../../Api/Controllers/productController";
-import TestInput from "../Main/testInput";
-
+import "./registerStyle.css"
 
 const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
@@ -25,6 +22,7 @@ function Register() {
 
   const [user, setUser] = useState("");
   const [validName, setValidName] = useState(false);
+  const [mail, setMail] = useState("");
   const [userFocus, setUserFocus] = useState(false);
 
   const [pwd, setPwd] = useState("");
@@ -64,47 +62,19 @@ function Register() {
       setErrMsg("invalid entry");
       return;
     }
-    const registerData = { name: user, password: pwd };
-    dispatch(register({registerData }));
-    // await apiService.register({ registerData});
-
-  
-
+    const registerData = { username: user, password: pwd, email: mail};
+    dispatch(register({ registerData }));
     setSuccess(true);
     setUser("");
     setPwd("");
     setMatchPwd("");
-
-    // try {
-    //   const response = await api.post(
-    //     REGISTER_URL,
-    //     JSON.stringify({ name: user, password: pwd }),
-    //     {
-    //       headers: { "Content-Type": "application/json" },
-    //     }
-    //   );
-    //   setSuccess(true);
-    //   setUser("");
-    //   setPwd("");
-    //   setMatchPwd("");
-    // } catch (err) {
-    //   if (!err?.response) {
-    //     setErrMsg("No Server Response");
-    //   } else if (err.response?.status === 409) {
-    //     setErrMsg("Username Taken");
-    //   } else {
-    //     setErrMsg("Registration Failed");
-    //   }
-    //   errRef.current.focus();
-    // }
   }
   return (
     <section>
-    <TestInput></TestInput>
       {/* <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
 aria-live make it so screen reader reads the msg when its focused which we r already achiving with ref     */}
       <h1 ref={userRef}>Register</h1>
-      <form onSubmit={handleSubmit} action="/api/products">
+      <form onSubmit={handleSubmit}>
         <label htmlFor="username">
           Username:
           <FontAwesomeIcon
@@ -144,6 +114,17 @@ aria-live make it so screen reader reads the msg when its focused which we r alr
           <br />
           Letters, numbers, underscores, hyphens allowed.
         </p>
+        <label htmlFor="email">
+          email:
+        </label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          onChange={(e) => setMail(e.target.value)}
+          value={mail}
+          required
+        />
 
         <label htmlFor="password">
           Password:
@@ -214,7 +195,8 @@ aria-live make it so screen reader reads the msg when its focused which we r alr
           <FontAwesomeIcon icon={faInfoCircle} />
           Must match the first password input field.
         </p>
-        <button className="btn"
+        <button
+          className="btn"
           disabled={!validName || !validPwd || !validMatch ? true : false}
           type="submit"
         >

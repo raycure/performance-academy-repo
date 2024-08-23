@@ -5,7 +5,7 @@ import isim from '/ornek.jpg';
 import Card from '../../components/Cards/Card';
 import { lesMillsPrograms } from '../../assets/LesmillsPrograms';
 import Banner from '../../components/Banner/Banner';
-import TestInput from './testInput';
+
 
 function Main() {
 	const cards = Object.keys(lesMillsPrograms).map((category, index) => {
@@ -22,8 +22,8 @@ function Main() {
 
 	return (
 		<>
-			<TestInput></TestInput>
-			{/* <Banner></Banner> */}
+
+		{/* <Banner></Banner> */}
 			<Container className='even-columns'>
 				<div>
 					{/* <div className="fs-primary-heading">Lesmills Nedir?</div> */}

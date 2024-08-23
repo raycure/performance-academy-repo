@@ -1,17 +1,5 @@
-// import { configureStore } from "@reduxjs/toolkit";
-
-
-
-
-// const store = configureStore({
-//     reducer: rootReducer,
-//     middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
-// });
-
-
 import { configureStore } from "@reduxjs/toolkit";
-import * as ApiService from "../../Api/Controllers/productController.js"
-
+import * as authService from "../auth/auth.service"
 import rootReducer from "./rootReducer";
 const AUTH_INITIAL_STATE = {
   current: {},
@@ -22,13 +10,12 @@ const AUTH_INITIAL_STATE = {
 
 const store = configureStore({
   reducer: rootReducer,
-  middleware: getDefaultMiddleware =>
+  middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       thunk: {
-        extraArgument: ApiService,
+        extraArgument: authService,
       },
     }),
 });
 
 export default store;
-
