@@ -23,12 +23,7 @@ function Events() {
 					<CardCarousel />
 				</div>
 			</div>
-			{/* <div className='event-container'>
-				<EventExpandedItem />
-			</div> */}
-			<div className='grid-event-pagination'>
-				<PaginationContainer />
-			</div>
+			<PaginationContainer />
 		</div>
 	);
 }
