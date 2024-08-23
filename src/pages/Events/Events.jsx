@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Events.css';
 import CustomCalendar from '../../components/CustomCalendar/CustomCalendar';
-import EventItem from '../../components/EventItem/EventItem';
 import CardCarousel from '../../components/Carousels/CardCarousel';
 import EventExpandedItem from '../../components/EventItem/EventExpandedItem';
+import PaginationContainer from '../../components/Containers/PaginationContainer';
 function Events() {
 	return (
 		<div>
@@ -23,8 +23,11 @@ function Events() {
 					<CardCarousel />
 				</div>
 			</div>
-			<div className='event-container'>
+			{/* <div className='event-container'>
 				<EventExpandedItem />
+			</div> */}
+			<div className='grid-event-pagination'>
+				<PaginationContainer />
 			</div>
 		</div>
 	);

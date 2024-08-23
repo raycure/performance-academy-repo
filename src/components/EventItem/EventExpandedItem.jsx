@@ -9,14 +9,14 @@ function EventExpandedItem() {
 		const yOffset = +window.innerHeight;
 		window.scrollTo({ top: yCoordinate + yOffset, behavior: 'smooth' });
 	};
-	const dateTwentyDaysAfter = new Date(
-		today.getFullYear(),
-		today.getMonth(),
-		today.getDate() + 100
-	);
+	// const dateTwentyDaysAfter = new Date(
+	// 	today.getFullYear(),
+	// 	today.getMonth(),
+	// 	today.getDate() + 100
+	// );
 	const events = LesMillsEvents.filter((event) => {
 		const eventDate = new Date(event.date);
-		return eventDate <= dateTwentyDaysAfter && eventDate >= today;
+		return eventDate >= today; //eventDate <= dateTwentyDaysAfter &&
 	}).map((event) => {
 		const eventDate = new Date(event.date);
 		const daysLeft = Math.floor(

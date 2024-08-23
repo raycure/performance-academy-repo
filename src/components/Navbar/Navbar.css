@@ -40,7 +40,7 @@
 .nav-list-container li a:not(.active):hover {
 	border-bottom: 0.2rem solid #ef233ba3;
 }
-.active {
+li .active {
 	border-bottom: 0.2rem solid var(--clr-accent-400);
 }
 .nav-list-container li a {

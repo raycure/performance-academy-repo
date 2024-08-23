@@ -1,8 +1,21 @@
 .container {
-  --max-width: 1110px;
-  --container-padding: 1rem;
-  width: min(var(--max-width), 100% - (var(--container-padding) * 2));
-  margin-inline: auto;
-  border: 2px solid red;
+	--max-width: 1110px;
+	--container-padding: 1rem;
+	width: min(var(--max-width), 100% - (var(--container-padding) * 2));
+	margin-inline: auto;
+	border: 2px solid red;
 }
- 
+.event-pagination-container {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+}
+.event-pagination-container .active {
+	color: var(--clr-accent-400);
+}
+.event-pagination-item {
+	margin-inline: 0.3rem;
+}
+.event-pagination-item:hover {
+	opacity: 0.6;
+}

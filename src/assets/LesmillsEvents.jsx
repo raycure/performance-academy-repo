@@ -66,4 +66,16 @@ export const LesMillsEvents = assignUniqueIds([
 		color: '#d4006a',
 		program: 'BODYSTEP',
 	},
+	{
+		title: 'meowww',
+		date: '2024-11-31',
+		color: '#d4006a',
+		program: 'BODYSTEP',
+	},
+	{
+		title: 'meowww',
+		date: '2024-12-05',
+		color: '#d4006a',
+		program: 'BODYSTEP',
+	},
 ]);
