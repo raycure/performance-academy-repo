@@ -1,12 +1,14 @@
-.outer-container {
+.nav-inner-container {
 	width: 100vw;
 	padding: 0rem 2rem;
 	justify-content: space-between;
 	align-items: center;
+}
+.navigation-outer-container {
+	background-color: var(--clr-primary-400);
 	height: fit-content;
 	position: sticky;
 	top: 0;
-	background-color: var(--clr-primary-400);
 	z-index: 10;
 }
 .nav-container {
@@ -54,24 +56,28 @@ li .active {
 .menu {
 	display: none;
 }
-@media (max-width: 480px) {
+@media (max-width: 770px) {
 	.menu {
 		display: flex;
-		flex-direction: column;
+		gap: 0.5rem;
 	}
 
 	.nav-list-container,
 	.nav-btn-container {
 		display: none;
 	}
-	.menu ul.close {
+
+	.menu-close {
 		display: none;
 	}
-	.menu ul.open {
-		display: flex;
+	.menu-open {
+		justify-content: center;
+		text-align: right;
+		align-items: end;
+		padding: 0rem 2rem;
 		flex-direction: column;
 	}
-	.menu-icon {
-		align-self: end;
+	.menu-open li {
+		width: max-content;
 	}
 }

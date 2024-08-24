@@ -3,18 +3,28 @@ import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 //import interactionPlugin from '@fullcalendar/interaction';
 import './CustomCalendar.css';
-
 import { LesMillsEvents } from '../../assets/LesmillsEvents';
+
 function CustomCalendar() {
-	function handleEventClick() {}
+	function handleEventClick(eventInfo) {
+		const element = document.getElementById(
+			eventInfo.event.extendedProps.program
+		);
+		element?.scrollIntoView({
+			behavior: 'smooth',
+		});
+	}
 	const events = LesMillsEvents;
 	function renderEvents(eventInfo) {
+		console.log(eventInfo.event);
+
 		return (
 			<>
 				<b className='event-title'>{eventInfo.event.title}</b>
 			</>
 		);
 	}
+
 	function eventHoverHandler() {}
 	return (
 		<FullCalendar

@@ -27,6 +27,7 @@ function EventExpandedItem() {
 			<div
 				className='event-item-center event-item-container'
 				key={event.id}
+				id={event.program}
 			>
 				<h3>{event.title}</h3>
 				<p className='event-text'>
