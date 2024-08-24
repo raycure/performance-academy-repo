@@ -8,10 +8,11 @@ import {
   deleteProduct,
   login,
 } from "../Controllers/productController.js";
+import verifyJWT from "../Middleware/verifyJWT.js";
+
 
 router.post("/register", register);
-router.post("/login", login);
-router.get("/", getProducts);
+router.get("/", verifyJWT ,getProducts);
 router.get("/:id", getProduct);
 // router.post("/", createProduct);
 
