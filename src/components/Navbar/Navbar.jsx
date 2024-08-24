@@ -39,13 +39,7 @@ function Navbar() {
 					<Link aria-label='user' style={{ display: 'contents' }}>
 						<FaUser className='nav-item-icon' />
 					</Link>
-<<<<<<< HEAD
 					<Button redirect={'/register'}>Kaydol</Button>
-=======
-
-					<Button redirect={"/register"}>Kaydol</Button>
-					
->>>>>>> 85b635ac81c5b903d067583bcc3b15acec117ab7
 				</div>
 				<div className='menu nav-container'>
 					<Link aria-label='language' style={{ display: 'contents' }}>
