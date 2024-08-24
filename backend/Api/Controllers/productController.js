@@ -1,38 +1,15 @@
-import TestProducts from "../Models/productModel.js";
+import Users from "../Models/productModel.js";
 import pkg from "bcryptjs";
 import mongoose from "mongoose";
+import Joi from 'joi';
+import jwt from 'jsonwebtoken';
+import * as dotenv from 'dotenv';
+dotenv.config()
 const { hash, compare } = pkg;
-
-const login = async (req, res) => {
-  try {
-    const { name, password } = req.body;
-    const userExist = await TestProducts.findOne({ name });
-    if (!userExist) {
-      return res.status(404).json({ message: "User not found" });
-    }
-
-    res.status(200).json(userExist);
-    console.log(req.body);
-    console.log(userExist);
-  } catch (error) {
-    console.log(error);
-  }
-};
-
-const register = async (req, res) => {
-  try {
-    const hashedPassword = await hash(req.body.password, 10);
-    req.body.password = hashedPassword;
-    const product = await TestProducts.create(req.body);
-    res.status(200).json(product);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-};
 
 const getProducts = async (req, res) => {
   try {
-    const products = await TestProducts.find({});
+    const products = await Users.find({});
     res.status(200).json(products);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -42,7 +19,7 @@ const getProducts = async (req, res) => {
 const getProduct = async (req, res) => {
   try {
     const { id } = req.params;
-    const product = await TestProducts.findById(id);
+    const product = await Users.findById(id);
     res.status(200).json(product);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -53,13 +30,13 @@ const updateProduct = async (req, res) => {
   try {
     const { id } = req.params;
 
-    const product = await TestProducts.findByIdAndUpdate(id, req.body);
+    const product = await Users.findByIdAndUpdate(id, req.body);
 
     if (!product) {
       return res.status(404).json({ message: "Product not found" });
     }
 
-    const updatedProduct = await TestProducts.findById(id);
+    const updatedProduct = await Users.findById(id);
     res.status(200).json(updatedProduct);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -70,7 +47,7 @@ const deleteProduct = async (req, res) => {
   try {
     const { id } = req.params;
 
-    const product = await TestProducts.findByIdAndDelete(id);
+    const product = await Users.delteMany({})
 
     if (!product) {
       return res.status(404).json({ message: "Product not found" });
@@ -87,5 +64,4 @@ export {
   getProduct,
   updateProduct,
   deleteProduct,
-  login
 };

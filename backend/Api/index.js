@@ -1,8 +1,11 @@
 import express from "express";
 import mongoose from "mongoose";
-import TestProduct from "./Models/productModel.js";
-import productRoute from "./Routes/productRoute.js"
 import cors from "cors"
+import registerRoute from "./Routes/registerRoute.js"
+import loginRoute from "./Routes/loginRoute.js"
+import jwtRefresRoute from "./Routes/jwtRefresRoute.js"
+import verifyJWT from "./Middleware/verifyJWT.js"
+import cookieParser from 'cookie-parser';
 
 const port = 3001
 
@@ -17,11 +20,16 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 
+app.use(cookieParser()); // middleware for cookieParser
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 
+
 // routes
-app.use("/api/p", productRoute);
+app.use('/register', registerRoute)
+app.use('/login', loginRoute)
+app.use(verifyJWT)
+app.use('/refresh', jwtRefresRoute);
 
 mongoose
   .connect(
