@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import FAQItem from './FAQItem';
-import { faqQuestions } from './FAQQuestions';
+import { faqQuestions } from '../../assets/FAQQuestions';
 import './FAQ.css';
 function FAQ() {
 	const [activeQuestionTitle, setActiveQuestionTitle] = useState(null);
