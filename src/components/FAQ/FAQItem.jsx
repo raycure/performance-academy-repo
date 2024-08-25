@@ -1,4 +1,5 @@
 import React from 'react';
+import './FAQ.css';
 import { MdArrowForwardIos } from 'react-icons/md';
 function FAQItem({ children }) {
 	return (
