@@ -1,28 +1,25 @@
 import Users from "../Models/productModel.js";
+import Sessions from "../Models/sessionModel.js";
 import pkg from "bcryptjs";
 import mongoose from "mongoose";
-import Joi from 'joi';
-import jwt from 'jsonwebtoken';
-import * as dotenv from 'dotenv';
-dotenv.config()
+import Joi from "joi";
+import jwt from "jsonwebtoken";
+import * as dotenv from "dotenv";
+import { SiPayloadcms } from "react-icons/si";
+dotenv.config();
 const { hash, compare } = pkg;
 
-const getProducts = async (req, res) => {
+const test = async (req, res) => {
   try {
-    const products = await Users.find({});
-    res.status(200).json(products);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-};
+    const authHeader = req.headers["authorization"];
+    if (!authHeader) return res.status(401).json({ message: "401 testte" });
+    const token = authHeader.split(" ")[1];
+    const decoded = jwt.decode(token);
+    const userIdFromToken = decoded.userId;
 
-const getProduct = async (req, res) => {
-  try {
-    const { id } = req.params;
-    const product = await Users.findById(id);
-    res.status(200).json(product);
+    res.json({ message: "Token payload", payload: userIdFromToken });
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    console.log(error);
   }
 };
 
@@ -47,7 +44,7 @@ const deleteProduct = async (req, res) => {
   try {
     const { id } = req.params;
 
-    const product = await Users.delteMany({})
+    const product = await Users.delteMany({});
 
     if (!product) {
       return res.status(404).json({ message: "Product not found" });
@@ -59,9 +56,4 @@ const deleteProduct = async (req, res) => {
   }
 };
 
-export {
-  getProducts,
-  getProduct,
-  updateProduct,
-  deleteProduct,
-};
+export { test, updateProduct, deleteProduct };

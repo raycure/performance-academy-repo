@@ -1,34 +1,37 @@
 import React from "react";
 
 const Banner = () => {
+  const bannerData = {
+    title: "MOVE THE WAY YOU WANT TO",
+    features: [
+      {
+        icon: "□",
+        description:
+          "Strength, cardio, yoga, martial arts, cycling, wellness + more. Enjoy 2500+ workouts at your fingertips.",
+      },
+      {
+        icon: "🕴",
+        description: "Choose workouts with or without equipment.",
+      },
+      {
+        icon: "○",
+        description:
+          "Workouts for all fitness levels that are scientifically designed to get results",
+      },
+    ],
+  };
+
   return (
-    <div className="banner text-primary-400">
+    <div className="banner bg-dark text-light">
       <div className="bannerContent">
-        <div className="fs-secondary-heading center-item">
-          DÜNYANIN EN İYİ ANTRENMANLARINI OLUŞTURUYORUZ.
-        </div>
-        <div className="even-columns" >
-          <div>
-            <p className="center-item" data-width="wide">
-              140.000 eğitmenden oluşan ekibimizi, kendi büyüklüklerini
-              keşfederken ve diğerlerine ellerinden gelenin en iyisi olmaları
-              için ilham verirken destekliyoruz.
-            </p>
-          </div>
-          <div>
-            <p className="center-item" data-width="wide" >
-              Dünya çapında 20.000 kulüple ortaklık yaparak, dünya lideri grup
-              fitness'ı sunmayı kolaylaştırıyoruz ve üyelerin fitness'a aşık
-              olmasına yardımcı oluyoruz.
-            </p>
-          </div>
-          <div>
-            <p className="center-item" data-width="wide" >
-              Dünyanın en iyi müziği, en iyi hareketleri ve en iyi eğitmenleri.
-              Bilim tarafından şekillendirilen, yaşamı değiştiren fitness
-              deneyimini oluşturmak için hepsini bir araya getiriyoruz.
-            </p>
-          </div>
+        <h2 className="fs-primary-heading text-center">{bannerData.title}</h2>
+        <div className="feature-grid">
+          {bannerData.features.map((feature, index) => (
+            <div key={index} className="feature-item text-center">
+              <div className="feature-icon">{feature.icon}</div>
+              <p>{feature.description}</p>
+            </div>
+          ))}
         </div>
       </div>
     </div>

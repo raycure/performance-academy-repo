@@ -1,15 +1,38 @@
 import jwt from "jsonwebtoken";
 import * as dotenv from "dotenv";
+import Sessions from "../Models/sessionModel.js";
+import { ObjectId } from "mongodb";
 dotenv.config();
 
-const handleLogout = (req, res) => {
-    // INOTE delete the accesstoken when the button clicked
-
+const handleLogout = async (req, res) => {
   const cookies = req.cookies;
-  if (!cookies?.jwt)
-    return res.sendStatus(204)
-  
-//   INOTE checked active session tokens find the current one with refresh token if the jwt token exist delete the token gotta give the same options 
-// delete refresh token in the db these arent the same things gotta delete both refresh token and active users token
+  if (!cookies?.jwt) return res.sendStatus(204);
+
+  const refreshToken = cookies.jwt;
+  const decoded = jwt.decode(refreshToken);
+  const userIdFromToken = decoded.userId;
+  const foundUser = await Sessions.findOne({
+    userId: new ObjectId(userIdFromToken).toHexString(),
+  });
+  if (!foundUser) {
+    res.clearCookie("jwt", {
+      httpOnly: true,
+      maxAge: 1000 * 60 * 60 * 24,
+      sameSite: "Lax",
+      path: "/",
+      secure: false, // add secure true for prod
+    });
+    return res.sendStatus(204);
+  }
+
+  res.clearCookie("jwt", {
+    httpOnly: true,
+    maxAge: 1000 * 60 * 60 * 24,
+    sameSite: "Lax",
+    path: "/",
+    secure: false, // add secure true for prod
+  });
+  const isDeleted = await Sessions.deleteOne(foundUser);
+  res.json({ message: "deleted", value: isDeleted });
 };
-export default handleRefreshToken;
+export default handleLogout;
