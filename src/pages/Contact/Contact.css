@@ -1,0 +1,7 @@
+#contact-form-grad {
+	background-image: linear-gradient(
+		var(--clr-primary-400),
+		transparent,
+		var(--clr-primary-400)
+	);
+}

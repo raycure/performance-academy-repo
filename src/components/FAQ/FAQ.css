@@ -15,6 +15,7 @@
 	padding: 1.5rem 1rem;
 	margin-bottom: 1rem;
 	border: 1px solid var(--clr-accent-100);
+	border-radius: 5px;
 }
 .faq-item-container:hover {
 	background-color: #f0f8ff37;

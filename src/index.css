@@ -7,6 +7,8 @@
 	--clr-primary-200: #384355;
 	--clr-primary-100: #607088;
 
+	--clr-primary-trnsp: #151b25e5;
+
 	--clr-neutral-100: #8d99ae;
 	--clr-neutral-900: hsl(0 0% 0%);
 
@@ -118,7 +120,92 @@ svg {
 	max-width: 100%;
 	display: block;
 }
-
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	vertical-align: baseline;
+}
 button {
 	-webkit-appearance: none;
 	border-radius: 0;
@@ -131,7 +218,74 @@ button {
 	color: inherit;
 	font: inherit;
 }
+input {
+	all: unset;
+	margin: 0;
+	padding: 0.5rem;
+	border: 0;
+	border-radius: 10px;
+}
+/* input::placeholder {
+	text-align: start;
+}
+ input:focus {
+}	
+ textarea:focus {
+	 background-color: #60708862;
+ } */
+input:-webkit-autofill {
+	-webkit-background-clip: text;
+} /* autofillde arkaplan olmasın diye */
+input:-webkit-autofill {
+	-webkit-text-fill-color: var(--clr-neutral-100) !important;
+}
+textarea {
+	all: unset;
+	margin: 0;
+	padding: 0.5rem;
+	border: 0;
+	width: 100%;
+	border-radius: 10px;
+}
 
+input::placeholder {
+	color: var(--clr-primary-200);
+}
+
+input::-webkit-input-placeholder {
+	color: var(--clr-primary-200);
+}
+
+input::-moz-placeholder {
+	color: var(--clr-primary-200);
+}
+
+input:-ms-input-placeholder {
+	color: var(--clr-primary-200);
+}
+
+input::-ms-input-placeholder {
+	color: var(--clr-primary-200);
+}
+textarea::placeholder {
+	color: var(--clr-primary-200);
+}
+
+textarea::-webkit-textarea-placeholder {
+	color: var(--clr-primary-200);
+}
+
+textarea::-moz-placeholder {
+	color: var(--clr-primary-200);
+}
+
+textarea:-ms-textarea-placeholder {
+	color: var(--clr-primary-200);
+}
+
+textarea::-ms-textarea-placeholder {
+	color: var(--clr-primary-200);
+}
 /* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
 @media (prefers-reduced-motion: reduce) {
 	html:focus-within {
@@ -176,7 +330,6 @@ a:hover {
 	justify-content: space-between;
 	gap: 2.5rem;
 }
-
 .text-container {
 	white-space: pre-line; /* line break icin, \n varsa textte ayiriyor */
 }
@@ -210,6 +363,9 @@ a:hover {
 	display: block;
 	object-fit: cover;
 }
+.relative-position {
+	position: relative;
+}
 .top-border-light {
 	border-top: 2px solid var(--clr-neutral-100);
 }
@@ -242,6 +398,9 @@ a:hover {
 }
 .bg-primary-300 {
 	background-color: var(--clr-primary-300);
+}
+.bg-primary-200 {
+	background-color: var(--clr-primary-200);
 }
 .bg-accent-400 {
 	background-color: var(--clr-accent-400);

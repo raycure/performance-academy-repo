@@ -4,12 +4,7 @@ import Navbar from '../../components/Navbar/Navbar';
 import Footer from '../../components/Footer/Footer';
 import { RiArrowUpSLine } from 'react-icons/ri';
 import { HashLink } from 'react-router-hash-link';
-import {
-	Routes,
-	Route,
-	BrowserRouter as Router,
-	useLocation,
-} from 'react-router-dom';
+import { BrowserRouter as Router, useLocation } from 'react-router-dom';
 import { useLayoutEffect } from 'react';
 function Layout() {
 	const Wrapper = ({ children }) => {

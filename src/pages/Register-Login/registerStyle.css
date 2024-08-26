@@ -22,8 +22,8 @@ a:visited {
 	color: #fff;
 }
 
-input[type='text'],
-input[type='password'],
+/* input[type='text'],
+input[type='password'], */
 button,
 textarea {
 	font-family: 'Nunito', sans-serif;

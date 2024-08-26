@@ -1,0 +1,30 @@
+.contact-form-outer-container {
+	margin-inline-end: 4rem;
+	margin-inline-start: 1rem;
+	align-items: center;
+	width: 40vw;
+	padding: 4rem 2.5rem;
+	border-radius: 20px;
+	position: relative;
+	background-color: var(--clr-primary-trnsp);
+}
+.contact-name-input-container {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	gap: 1.5rem;
+}
+.contact-form-header {
+	text-align: end;
+}
+.contact-form {
+	display: flex;
+	flex-direction: row;
+	justify-content: right;
+}
+.contact-form {
+	padding: 6rem 0;
+}
+.contact-form-background {
+	z-index: -1;
+}
