@@ -1,23 +1,28 @@
 import jwt from "jsonwebtoken";
 import * as dotenv from "dotenv";
+import Sessions from "../Models/sessionModel.js";
 dotenv.config();
+import { ObjectId } from "mongodb";
 
-const handleRefreshToken = (req, res) => {
+const handleRefreshToken = async (req, res) => {
   const cookies = req.cookies;
-  if (!cookies?.jwt)
-    return res.status(401).json({ message: "No refresh token found" });
-  console.log(cookies.jwt);
-  const refreshToken = cookies.jwt;
+  console.log(cookies);
 
-  // check if the users refresh token is in the database? if its not return 403
+  if (!cookies?.jwt)
+    return res.status(401).json({ message: "Refresh token not found" });
+  const refreshToken = cookies.jwt;
+  const decoded = jwt.decode(refreshToken);
+  const userIdFromToken = decoded.userId;
+  const foundUser = await Sessions.findOne({
+    userId: new ObjectId(userIdFromToken).toHexString(),
+  });
+
+  if (!foundUser) return res.status(403).json({ message: "fakeid" });
   jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err, decoded) => {
-    if (err) return res.status(403); // if(err  || aktif olan kullanicin usernamei ile === decoded.username yani tokenda yazan kullanici ismi ayni mi diye kontrol ediliyo)
     const accessToken = jwt.sign(
-      {
-        username: decoded.username,
-      },
+      { userId: decoded.userId },
       process.env.ACCESS_TOKEN_SECRET,
-      { expiresIn: "10s" }
+      { expiresIn: "3s" }
     );
     res.json({ accessToken });
   });

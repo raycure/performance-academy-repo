@@ -27,7 +27,8 @@ export const login =
     dispatch({
       type: actionTypes.REQUEST_LOADING,
     });
-    const data = await authService.login({ loginData });
+    const response = await authService.login({ loginData });
+    return response
 
     // if (data.success === true) {
     //   const auth_state = {

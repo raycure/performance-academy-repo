@@ -1,0 +1,3 @@
+add response handler for registeration if a email is already signed up it returns 500 so notify the user 
+ 
+ thatll be attach to a link which ill be handling in the controllers which gonna turn the varaible true which ill be checking in the login controller use async email

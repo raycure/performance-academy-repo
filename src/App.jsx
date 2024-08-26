@@ -12,6 +12,7 @@ import { Provider } from 'react-redux';
 import store from './redux/store';
 import Cookies from './pages/Legal/Cookies';
 import PrivacyPolicy from './pages/Legal/PrivacyPolicy';
+import Test from './pages/Test';
 
 function App() {
 	return (
@@ -27,6 +28,8 @@ function App() {
 							<Route path='register' element={<Register />} />
 							<Route path='login' element={<Login />} />
 							<Route path='çerezler' element={<Cookies />} />
+							<Route path='test' element={< Test/>} />
+
 							<Route
 								path='kişisel-verilerin-korunması'
 								element={<PrivacyPolicy />}

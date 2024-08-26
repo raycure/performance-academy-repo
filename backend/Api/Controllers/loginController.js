@@ -3,6 +3,7 @@ import pkg from "bcryptjs";
 import Joi from "joi";
 import jwt from "jsonwebtoken";
 import * as dotenv from "dotenv";
+import Sessions from "../Models/sessionModel.js";
 dotenv.config();
 const { hash, compare } = pkg;
 
@@ -46,27 +47,31 @@ const login = async (req, res) => {
 
   const accessToken = jwt.sign(
     {
-      username: user.username,
+      userId: user._id,
     },
     process.env.ACCESS_TOKEN_SECRET,
-    { expiresIn: "10s" }
+    { expiresIn: "3s" }
   );
   const refreshToken = jwt.sign(
     {
-      username: user.username,
+      userId: user._id,
     },
     process.env.REFRESH_TOKEN_SECRET,
     { expiresIn: "1d" }
   );
-  // res.cookie("jwt", refreshToken, { maxAge: 1000 * 10}); // httpOnly: true add later
   res.cookie("jwt", refreshToken, {
     httpOnly: true,
     maxAge: 1000 * 60 * 60 * 24,
+    sameSite: "Lax",
+    path: "/",
+    secure: false, // add secure true for prod
   });
-  res.json({ accessToken });
+  const addActiveUser = await Sessions.create({
+    token: refreshToken,
+    userId: user._id,
+  });
+
+  return res.json({ value: accessToken, foundUser: addActiveUser });
 };
 
 export default login;
-
-
-//  INOTE The client should store the access token temporarily and include it in the Authorization header for protected API requests.
