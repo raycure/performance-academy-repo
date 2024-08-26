@@ -14,17 +14,6 @@ const handleLogout = async (req, res) => {
   const foundUser = await Sessions.findOne({
     userId: new ObjectId(userIdFromToken).toHexString(),
   });
-  if (!foundUser) {
-    res.clearCookie("jwt", {
-      httpOnly: true,
-      maxAge: 1000 * 60 * 60 * 24,
-      sameSite: "Lax",
-      path: "/",
-      secure: false, // add secure true for prod
-    });
-    return res.sendStatus(204);
-  }
-
   res.clearCookie("jwt", {
     httpOnly: true,
     maxAge: 1000 * 60 * 60 * 24,

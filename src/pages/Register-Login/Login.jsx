@@ -76,7 +76,9 @@ function Login() {
     );
     console.log(response);
 
-    if (response.status(200)) localStorage.removeItem("accessToken");
+    if (response.status === 200) {
+      localStorage.removeItem("accessToken");
+    }
   }
 
   return (
