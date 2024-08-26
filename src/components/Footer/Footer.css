@@ -6,8 +6,9 @@
 	height: 100%;
 	padding: 0 10rem;
 }
-.footer-container {
-	height: 30vh;
+.footer-grid .footer-link-con a,
+.footer-grid .footer-link-container a {
+	color: var(--clr-neutral-100) !important;
 }
 .footer-link-container {
 	display: flex;
@@ -45,4 +46,9 @@
 	flex-direction: row;
 	gap: 0.5rem;
 	justify-content: center;
+}
+@media (max-width: 770px) {
+	.footer-grid {
+		grid-template-columns: 1fr;
+	}
 }

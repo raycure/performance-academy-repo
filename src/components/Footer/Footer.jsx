@@ -23,7 +23,7 @@ function Footer() {
 						work out.
 					</p>
 				</div>
-				<div className='justify'>
+				<div className='justify footer-link-con'>
 					<HashLink to='/'>Hakkımızda</HashLink>
 					<HashLink to='/iletişim#top'>İletişim</HashLink>
 					<HashLink to='/iletişim#'>Sık Sorulan Sorular</HashLink>

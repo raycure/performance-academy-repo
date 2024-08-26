@@ -1,4 +1,11 @@
 import React from 'react';
 import './Contact.css';
-function Contact() {}
+import FAQ from '../../components/FAQ/FAQ';
+function Contact() {
+	return (
+		<>
+			<FAQ />
+		</>
+	);
+}
 export default Contact;

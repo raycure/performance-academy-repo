@@ -31,16 +31,16 @@ export const LesMillsEvents = assignUniqueIds([
 		program: 'BORN-TO-MOVE',
 	},
 	{
-		title: 'meowww',
-		date: '2024-08-24',
-		color: '#d4006a',
-		program: 'BODYSTEP',
-	},
-	{
 		title: 'LES-MILLS-GRIT',
 		date: '2024-08-26',
 		color: '#d4006a',
 		program: 'LES-MILLS-GRIT',
+	},
+	{
+		title: 'meowww',
+		date: '2024-08-29',
+		color: '#d4006a',
+		program: 'BODYSTEP',
 	},
 	{
 		title: 'THE-TRIP',

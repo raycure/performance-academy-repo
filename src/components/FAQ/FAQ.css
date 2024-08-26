@@ -1,0 +1,25 @@
+.faq-outer-container {
+	margin-inline: auto;
+	width: 80vw;
+	display: grid;
+	grid-template-columns: 0.6fr 1fr;
+	gap: 2rem;
+	padding-top: 3.6rem;
+}
+.faq-item-container {
+	display: flex;
+	flex-direction: row;
+	text-align: center;
+	justify-content: space-between;
+	align-items: center;
+	padding: 1.5rem 1rem;
+	margin-bottom: 1rem;
+	border: 1px solid var(--clr-accent-100);
+}
+.faq-item-container:hover {
+	background-color: #f0f8ff37;
+	opacity: 0.8;
+}
+.faq-item-active {
+	background-color: #f0f8ff3a;
+}

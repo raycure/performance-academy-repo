@@ -11,7 +11,7 @@ function EventItem() {
 	);
 	const scrollWithOffset = (el) => {
 		const yCoordinate = el.getBoundingClientRect().top;
-		const yOffset = -(window.innerHeight * 0.3);
+		const yOffset = +(window.innerHeight * 0.3);
 		window.scrollTo({ top: yCoordinate + yOffset, behavior: 'smooth' });
 	};
 
