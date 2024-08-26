@@ -7,7 +7,7 @@
 	align-items: center;
 	justify-content: center;
 	overflow: hidden;
-	margin: 4rem 0;
+	margin: 2rem 0;
 	padding: 2rem 0;
 	max-width: 100%;
 }
@@ -19,7 +19,8 @@
 	gap: 2rem;
 	width: 60vw;
 	margin-inline: auto;
-	grid-template-rows: 1fr 1fr 1fr;
+	/* grid-template-rows: 1fr 1fr 1fr;
+} */
 }
 .event-page-poster-container {
 	overflow: hidden;

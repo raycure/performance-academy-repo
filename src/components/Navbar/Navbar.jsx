@@ -8,26 +8,9 @@ import { HiOutlineMenuAlt3 } from 'react-icons/hi';
 import { GrLanguage } from 'react-icons/gr';
 function Navbar() {
 	const [menuOpen, setMenuOpen] = useState(false);
-   const [show, setShow] = useState(true);
-   const [lastScrollY, setLastScrollY] = useState(0)
-   const controlNavbar = () => {
-     if (window.scrollY > lastScrollY) { // if scroll down hide the navbar
-       setShow(false);
-     } else { // if scroll up show the navbar
-       setShow(true);
-     
-     setLastScrollY(window.scrollY);
-   }
-   useEffect(() => {
-     window.addEventListener('scroll', controlNavbar)
-     return () => {
-        window.removeEventListener('scroll', controlNavbar);
-     };
-   }, [lastScrollY]);
+
 	return (
-		<div
-			className={`active ${show && 'hidden'} navigation-outer-container`}
-		>
+		<div className='navigation-outer-container'>
 			<nav className='nav-container nav-inner-container'>
 				<Link aria-label='logo' style={{ display: 'contents' }}>
 					<img alt='beep' className='logo' src={logo}></img>
@@ -98,4 +81,29 @@ function Navbar() {
 		</div>
 	);
 }
+export default Navbar;
+// import React, { useState, useEffect } from 'react';
 
+// const Navbar = () => {
+//   const [show, setShow] = useState(true);
+//   const [lastScrollY, setLastScrollY] = useState(0);
+
+//   const controlNavbar = () => {
+//     if (window.scrollY > lastScrollY) { // if scroll down hide the navbar
+//       setShow(false);
+//     } else { // if scroll up show the navbar
+//       setShow(true);
+//     }
+
+//     // remember current page location to use in the next move
+//     setLastScrollY(window.scrollY);
+//   };
+
+//   useEffect(() => {
+//     window.addEventListener('scroll', controlNavbar);
+
+//     // cleanup function
+//     return () => {
+//        window.removeEventListener('scroll', controlNavbar);
+//     };
+//   }, [lastScrollY]);
