@@ -8,13 +8,15 @@ import CalendarEventItem from './CalendarEventItem';
 
 function CalendarContainer() {
 	const [eventClicked, setEventClicked] = useState(false);
-	const [activeEvent, setActiveEvent] = useState(null);
+	const [activeEventId, setActiveEventId] = useState(null);
 	const events = LesMillsEvents;
+
 	function handleEventClick(eventInfo) {
 		setEventClicked(true);
-		setActiveEvent(eventInfo.event._def);
-		console.log(eventInfo.event.id);
-
+		const clickedEventId = eventInfo.event._def.publicId;
+		setActiveEventId(clickedEventId);
+		// console.log(activeEvent);
+		// console.log(typeof clickedEventId);
 		// const element = document.getElementById(
 		// 	eventInfo.event.extendedProps.program
 		// );
@@ -29,7 +31,7 @@ function CalendarContainer() {
 		<div className='calendar-container bg-primary-400'>
 			<CalendarEventItem
 				eventClicked={eventClicked}
-				event={activeEvent}
+				eventId={activeEventId}
 			/>
 			<FullCalendar
 				plugins={[dayGridPlugin]}

@@ -1,0 +1,9 @@
+.upcoming-events-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+.upcoming-events-container a {
+	color: var(--clr-primary-100) !important;
+}

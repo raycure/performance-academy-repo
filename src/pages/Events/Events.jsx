@@ -16,9 +16,7 @@ function Events() {
 				/>
 				<p className='text-container'></p>
 			</div>
-
 			<CalendarContainer />
-
 			<PaginationContainer />
 		</div>
 	);

@@ -37,60 +37,54 @@ function ClassList({ classType }) {
 			return;
 		}
 
-		return (
-			<>
-				{lesMillsPrograms[category].map((program, subIndex) => {
-					const isActive = activeClass === program.id;
-					return (
-						<div
-							key={subIndex}
-							className='class-item-container text-container top-border-light row'
-							onClick={() => classClickHandler(program.id)}
-							id={program.id}
-						>
-							<img
-								aria-label='program pic'
-								className='img class-img'
-								src={name}
-							/>
-							<div>
-								<img
-									aria-label='logo'
-									className='img class-logo'
-									src={program.logo}
-								/>
-								<p className='slogan'>{program.sum}</p>
+		return lesMillsPrograms[category].map((program, subIndex) => {
+			const isActive = activeClass === program.id;
+			return (
+				<div
+					key={subIndex}
+					className='class-item-container text-container top-border-light row'
+					onClick={() => classClickHandler(program.id)}
+					id={program.id}
+				>
+					<img
+						aria-label='program pic'
+						className='img class-img'
+						src={name}
+					/>
+					<div>
+						<img
+							aria-label='logo'
+							className='img class-logo'
+							src={program.logo}
+						/>
+						<p className='slogan'>{program.sum}</p>
 
-								{isActive && (
-									<>
-										<p>{program.description}</p>
-										<p>{program.whyMember}</p>
-										<p>{program.whyYou}</p>
-									</>
-								)}
-							</div>
-							<div className='row more-button-container top-border-light'>
-								<div>
-									<p>Egzersiz Tipi: {program.type}</p>
-									<p>Ekipman: {program.equipment}</p>
-									<p>Kime Yönelik: {program.for}</p>
-								</div>
-								<Button>
-									{!isActive
-										? 'Daha Fazlası'
-										: 'Programa Katılın'}
-									<MdOutlineDoubleArrow color='white' />
-								</Button>
-							</div>
-							<div
-								className='background-image class-background-shape'
-								style={{ backgroundColor: program.color }}
-							></div>
+						{isActive && (
+							<>
+								<p>{program.description}</p>
+								<p>{program.whyMember}</p>
+								<p>{program.whyYou}</p>
+							</>
+						)}
+					</div>
+					<div className='row more-button-container top-border-light'>
+						<div>
+							<p>Egzersiz Tipi: {program.type}</p>
+							<p>Ekipman: {program.equipment}</p>
+							<p>Kime Yönelik: {program.for}</p>
 						</div>
-					);
-				})}
-			</>
-		);
+						<Button>
+							{!isActive ? 'Daha Fazlası' : 'Programa Katılın'}
+							<MdOutlineDoubleArrow color='white' />
+						</Button>
+					</div>
+					<div
+						className='background-image class-background-shape'
+						style={{ backgroundColor: program.color }}
+					></div>
+				</div>
+			);
+		});
 	});
 	return <>{classes}</>;
 }

@@ -20,6 +20,7 @@ function assignUniqueIds(events) {
 	return events.map((event, index) => ({
 		...event,
 		id: index,
+		fullDate: new Date(event.date),
 	}));
 }
 
