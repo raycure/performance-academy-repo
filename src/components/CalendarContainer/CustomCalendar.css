@@ -1,0 +1,55 @@
+.fc .fc-toolbar.fc-header-toolbar {
+	margin: 0.4rem;
+}
+.fc-header-toolbar .fc-toolbar {
+	margin: 0px, 3rem;
+}
+.fc .fc-bg-event {
+	background: #4a5ccf;
+	opacity: 100;
+	display: flex;
+	margin: 0.7rem;
+	border-radius: 8px;
+}
+
+.fc-theme-standard .fc-day:has(.fc-event-start):hover {
+	opacity: 0.7 !important;
+} /* event ustunde hoverlayınca opacity azaltma */
+.fc .fc-daygrid-day-number {
+	padding: 0;
+}
+.fc-header-left,
+.fc-header-center,
+.fc-header-right {
+	width: 100%;
+	display: block;
+}
+
+/* calendarın kendi borderını kapamak icin */
+.fc-theme-standard td,
+.fc-theme-standard th {
+	border: none !important;
+}
+.fc .fc-scrollgrid {
+	border-width: 0px !important;
+}
+
+.fc-day-today {
+	background: #e4ca0700 !important; /* todays color we can make it transparent and stuff if u awnt */
+	border: 3px solid var(--clr-accent-400) !important;
+}
+.fc .fc-daygrid-day-top {
+	display: flex;
+	justify-content: center;
+	align-self: center;
+} /* gunleri ortalıyor */
+.fc .fc-daygrid-body-unbalanced .fc-daygrid-day-events {
+	min-height: 0;
+} /* var olmayan eventlerin bos alan kaplamaması icin */
+.fc .fc-daygrid-day-frame {
+	display: flex;
+	justify-content: center;
+}
+.fc a:hover {
+	opacity: 1 !important;
+} /*abi ben linkleri genel otomatik hoverlama vermistim burda onu kapadım aslında onu da animation yapıncakapıycam*/
