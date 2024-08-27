@@ -28,21 +28,23 @@ const register = async (req, res) => {
       port: 587,
       secure: false,
       auth: {
-        user: "murray.damore47@ethereal.email",
-        pass: "nZD2kd79HKKgbjbfJd",
+        user: "evangeline.littel96@ethereal.email",
+        pass: "8UN25hkSTYyHZKxSVM",
       },
     });
 
     const info = await transporter.sendMail({
-      from: '"Maddison " <13garbomail@gmail.com>', // sender address
+      from: '"admin" <13garbomail@gmail.com>', // sender address
       to: "dev.emresr@gmail.com", // list of receivers
-      subject: "Hello", // Subject line
+      subject: "reg mail", // Subject line
       text: `${verifyLink}`, // plain text body
       html: `${verifyLink}`, // html body
     });
     console.log("Message sent: %s", info.messageId);
 
-    res.status(200).json(product);
+    res.sendStatus(200);
+
+    // todo response with the users id nothing else ig. refactor product and other dum var names
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
