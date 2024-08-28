@@ -115,6 +115,7 @@ aria-live make it so screen reader reads the msg when its focused which we r alr
 						: 'offscreen'
 				}
 			>
+				<FontAwesomeIcon icon={faInfoCircle} />
 				4 to 24 characters.
 				<br />
 				Must begin with a letter.
