@@ -9,7 +9,7 @@
 	background-color: var(--clr-primary-trnsp);
 	display: flex;
 	flex-direction: column;
-	gap: 2rem;
+	gap: 1.5rem;
 }
 .contact-name-input-container {
 	display: flex;
@@ -68,7 +68,7 @@ textarea {
 }
 input {
 	padding: 0.8rem 0.5rem 0.3rem;
-	border-bottom: 3px solid var(--clr-neutral-100);
+	border-bottom: 2px solid var(--clr-neutral-100);
 }
 input::placeholder {
 	color: #adadad;
@@ -111,9 +111,10 @@ textarea::-ms-textarea-placeholder {
 .authentication-form {
 	display: flex;
 	flex-direction: column;
-	justify-content: space-evenly;
 	flex-grow: 1;
 	padding: 3rem 5rem;
+	gap: 1rem;
+	background-color: var(--clr-primary-trnsp);
 }
 .form-icon {
 	position: absolute;
@@ -121,4 +122,10 @@ textarea::-ms-textarea-placeholder {
 }
 .form-icon-active {
 	padding-left: 1.5rem;
+}
+.authentication-button-container {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	margin-top: auto;
 }

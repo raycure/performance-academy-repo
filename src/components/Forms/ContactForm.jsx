@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import './Form.css';
 import Button from '../Button/Button';
+
 function ContactForm() {
 	const contactForm = useRef();
 	return (

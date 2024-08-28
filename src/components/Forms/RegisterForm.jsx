@@ -72,10 +72,7 @@ function RegisterForm() {
 		setMatchPwd('');
 	}
 	return (
-		<form
-			onSubmit={handleSubmit}
-			className='bg-primary-200 authentication-form'
-		>
+		<form onSubmit={handleSubmit} className='authentication-form'>
 			{/* <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
 aria-live make it so screen reader reads the msg when its focused which we r already achiving with ref     */}
 			<img alt='logo' className='logo' src={logo}></img>
@@ -209,7 +206,7 @@ aria-live make it so screen reader reads the msg when its focused which we r alr
 				<FontAwesomeIcon icon={faInfoCircle} />
 				Must match the first password input field.
 			</p>
-			<div className='more-button-container'>
+			<div className='authentication-button-container'>
 				<Button
 					disabled={
 						!validName || !validPwd || !validMatch ? true : false
@@ -218,7 +215,7 @@ aria-live make it so screen reader reads the msg when its focused which we r alr
 				>
 					Kaydol
 				</Button>
-				<Link to='/login'>
+				<Link to='/login' className='fs-400'>
 					Zaten bir hesabınız var mı? Giriş Yapın!
 				</Link>
 			</div>

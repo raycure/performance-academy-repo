@@ -7,7 +7,7 @@
 	--clr-primary-200: #384355;
 	--clr-primary-100: #607088;
 
-	--clr-primary-trnsp: #151b25e5;
+	--clr-primary-trnsp: #151b25f3;
 
 	--clr-neutral-100: #8d99ae;
 	--clr-neutral-900: hsl(0 0% 0%);
@@ -317,9 +317,12 @@ a:hover {
 	font-weight: 100;
 	font-size: small;
 	font-style: italic;
-	color: var(--clr-primary-200);
+	color: var(--clr-primary-100);
 }
 
+.text-white {
+	color: white;
+}
 .text-primary-400 {
 	color: var(--clr-primary-400);
 }

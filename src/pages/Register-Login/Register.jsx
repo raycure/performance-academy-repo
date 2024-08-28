@@ -230,7 +230,7 @@ aria-live make it so screen reader reads the msg when its focused which we r alr
 					</span>
 				</p>
 			</section>
-			<div className='register-form-container'>
+			<div className='register-form-container box-shadow'>
 				<RegisterForm />
 				<AuthenticationGreet />
 			</div>
