@@ -8,12 +8,6 @@ import name from "/ornek.jpg";
 function ClassList({ classType }) {
   const [activeClass, setActiveClass] = useState(null);
 
-  useEffect(() => {
-    requestAnimationFrame(() => {
-      const element = document.querySelector("");
-    });
-  });
-
   function classClickHandler(id) {
     setActiveClass(id);
 
@@ -49,7 +43,9 @@ function ClassList({ classType }) {
       return (
         <div
           key={subIndex}
-          className="class-item-container text-container top-border-light row"
+          className={`class-item-container text-container top-border-light ${
+            isActive ? "active" : ""
+          }`}
           onClick={() => classClickHandler(program.id)}
           id={program.id}
         >
@@ -63,14 +59,14 @@ function ClassList({ classType }) {
             <p className="slogan">{program.sum}</p>
 
             {isActive && (
-              <>
+              <div>
                 <p>{program.description}</p>
                 <p>{program.whyMember}</p>
                 <p>{program.whyYou}</p>
-              </>
+              </div>
             )}
           </div>
-          <div className="row more-button-container top-border-light">
+          <div className="more-button-container top-border-light">
             <div>
               <p>Egzersiz Tipi: {program.type}</p>
               <p>Ekipman: {program.equipment}</p>
