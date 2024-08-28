@@ -11,6 +11,10 @@ const SessionSchema = mongoose.Schema(
       ref: "Users",
       required: true,
     },
+    // expiresAt: {
+    //   type: Date,
+    //   required: true,
+    // },
   },
   {
     timestamps: true,
