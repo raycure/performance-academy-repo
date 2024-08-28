@@ -80,22 +80,25 @@ function Footer() {
 				<p className='text-legal licence-text '>
 					©licenced by my ass 🍑
 				</p>
-				<div className='footer-link-con'>
+				<div className='footer-link-container'>
 					<HashLink
 						to='/iletişim#contact-form-grad'
 						className='addLineAnimation'
 					>
 						Bize Ulaşın
 					</HashLink>
+					<hr />
 					<HashLink className='addLineAnimation' to='/iletişim#top'>
 						Sık Sorulan Sorular
 					</HashLink>
+					<hr />
 					<HashLink
 						className='addLineAnimation'
 						to='/kişisel-verilerin-korunması#top'
 					>
 						Kişisel Verilerin Korunması
 					</HashLink>
+					<hr />
 					<HashLink className='addLineAnimation' to='/çerezler#top'>
 						Çerezler
 					</HashLink>
