@@ -97,7 +97,7 @@ body {
 	overflow-x: hidden;
 }
 body::-webkit-scrollbar {
-	width: 8px;
+	width: 6px;
 }
 
 body::-webkit-scrollbar-track {
@@ -107,12 +107,16 @@ body::-webkit-scrollbar-track {
 body::-webkit-scrollbar-thumb {
 	background-color: var(--clr-accent-400);
 	outline: 1px solid var(--clr-accent-400);
+	border-radius: 5px;
 }
 /* A elements that don't have a get default styles */
 a:not([class]) {
 	text-decoration-skip-ink: auto;
 }
-
+a,
+a:visited {
+	color: #fff;
+}
 /* Make images easier to work with */
 img,
 picture,
@@ -218,74 +222,6 @@ button {
 	color: inherit;
 	font: inherit;
 }
-input {
-	all: unset;
-	margin: 0;
-	padding: 0.5rem;
-	border: 0;
-	border-radius: 10px;
-}
-/* input::placeholder {
-	text-align: start;
-}
- input:focus {
-}	
- textarea:focus {
-	 background-color: #60708862;
- } */
-input:-webkit-autofill {
-	-webkit-background-clip: text;
-} /* autofillde arkaplan olmasın diye */
-input:-webkit-autofill {
-	-webkit-text-fill-color: var(--clr-neutral-100) !important;
-}
-textarea {
-	all: unset;
-	margin: 0;
-	padding: 0.5rem;
-	border: 0;
-	width: 100%;
-	border-radius: 10px;
-}
-
-input::placeholder {
-	color: var(--clr-primary-200);
-}
-
-input::-webkit-input-placeholder {
-	color: var(--clr-primary-200);
-}
-
-input::-moz-placeholder {
-	color: var(--clr-primary-200);
-}
-
-input:-ms-input-placeholder {
-	color: var(--clr-primary-200);
-}
-
-input::-ms-input-placeholder {
-	color: var(--clr-primary-200);
-}
-textarea::placeholder {
-	color: var(--clr-primary-200);
-}
-
-textarea::-webkit-textarea-placeholder {
-	color: var(--clr-primary-200);
-}
-
-textarea::-moz-placeholder {
-	color: var(--clr-primary-200);
-}
-
-textarea:-ms-textarea-placeholder {
-	color: var(--clr-primary-200);
-}
-
-textarea::-ms-textarea-placeholder {
-	color: var(--clr-primary-200);
-}
 /* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
 @media (prefers-reduced-motion: reduce) {
 	html:focus-within {
@@ -324,7 +260,13 @@ a:hover {
 	margin-inline: auto;
 	width: fit-content;
 }
-
+.fully-center-item {
+	margin: auto;
+	width: fit-content;
+}
+.box-shadow {
+	box-shadow: 0px 0px 33px -3px rgba(0, 0, 0, 0.69);
+}
 .space-between {
 	display: flex;
 	justify-content: space-between;
@@ -445,6 +387,12 @@ a:hover {
 }
 .fs-600 {
 	font-size: var(--fs-600);
+}
+.fs-700 {
+	font-size: var(--fs-700);
+}
+.fs-800 {
+	font-size: var(--fs-800);
 }
 
 .cardContent > div > p:where(:not(:first-child)) {

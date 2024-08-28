@@ -16,6 +16,7 @@
 } /* event ustunde hoverlayınca opacity azaltma */
 .fc .fc-daygrid-day-number {
 	padding: 0;
+	z-index: 0;
 }
 .fc-header-left,
 .fc-header-center,

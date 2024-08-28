@@ -1,22 +1,22 @@
 import React from 'react';
 import { useEffect, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
+import Button from '../Button/Button';
+import './Form.css';
+import { register } from '../../redux/auth/actions.js';
+import { useDispatch } from 'react-redux';
 import {
 	faCheck,
 	faTimes,
 	faInfoCircle,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { register } from '../../redux/auth/actions.js';
-import { useDispatch } from 'react-redux';
-import './registerStyle.css';
-import RegisterForm from '../../components/Forms/RegisterForm.jsx';
 
 const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
-
 const REGISTER_URL = '/api/products';
 
-function Register() {
+function RegisterForm() {
 	const userRef = useRef();
 	const errRef = useRef();
 	const dispatch = useDispatch();
@@ -71,25 +71,20 @@ function Register() {
 		setMatchPwd('');
 	}
 	return (
-		<section>
+		<form
+			onSubmit={handleSubmit}
+			className='bg-primary-200 authentication-form'
+		>
 			{/* <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
 aria-live make it so screen reader reads the msg when its focused which we r already achiving with ref     */}
-			<h1 ref={userRef}>Register</h1>
-			<form onSubmit={handleSubmit}>
-				<label htmlFor='username'>
-					Username:
-					<FontAwesomeIcon
-						icon={faCheck}
-						className={validName ? 'valid' : 'hide'}
-					/>
-					<FontAwesomeIcon
-						icon={faTimes}
-						className={validName || !user ? 'hide' : 'invalid'}
-					/>
-				</label>
+			<p ref={userRef}>Kaydolun!</p>
+			<div className='relative-position'>
 				<input
 					type='text'
+					placeholder='Kullanıcı Adı'
 					id='username'
+					className={validName || user ? 'form-icon-active' : ''}
+					//htmlFor='username'
 					ref={userRef}
 					autoComplete='off'
 					onChange={(e) => setUser(e.target.value)}
@@ -102,45 +97,44 @@ aria-live make it so screen reader reads the msg when its focused which we r alr
 					onFocus={() => setUserFocus(true)}
 					onBlur={() => setUserFocus(false)}
 				/>
-
-				<p
-					id='uidnote'
-					className={
-						userFocus && user && !validName
-							? 'instructions'
-							: 'offscreen'
-					}
-				>
-					4 to 24 characters.
-					<br />
-					Must begin with a letter.
-					<br />
-					Letters, numbers, underscores, hyphens allowed.
-				</p>
-				<label htmlFor='email'>email:</label>
-				<input
-					type='email'
-					id='email'
-					name='email'
-					onChange={(e) => setMail(e.target.value)}
-					value={mail}
-					required
-				/>
-
-				<label htmlFor='password'>
-					Password:
+				<div className='form-icon'>
 					<FontAwesomeIcon
 						icon={faCheck}
-						className={validPwd ? 'valid' : 'hide'}
+						className={validName ? 'valid' : 'hide'}
 					/>
 					<FontAwesomeIcon
 						icon={faTimes}
-						className={validPwd || !pwd ? 'hide' : 'invalid'}
+						className={validName || !user ? 'hide' : 'invalid'}
 					/>
-				</label>
+				</div>
+			</div>
+			<p
+				id='uidnote'
+				className={
+					userFocus && user && !validName
+						? 'instructions'
+						: 'offscreen'
+				}
+			>
+				4 to 24 characters.
+				<br />
+				Must begin with a letter.
+				<br />
+				Letters, numbers, underscores, hyphens allowed.
+			</p>
+			<input
+				type='email'
+				id='email'
+				name='email'
+				onChange={(e) => setMail(e.target.value)}
+				value={mail}
+				required
+			/>
+			<div className='relative-position'>
 				<input
 					type='password'
 					id='password'
+					className={validPwd || pwd ? 'form-icon-active' : ''}
 					onChange={(e) => setPwd(e.target.value)}
 					value={pwd}
 					required
@@ -149,40 +143,39 @@ aria-live make it so screen reader reads the msg when its focused which we r alr
 					onFocus={() => setPwdFocus(true)}
 					onBlur={() => setPwdFocus(false)}
 				/>
-				<p
-					id='pwdnote'
-					className={
-						pwdFocus && !validPwd ? 'instructions' : 'offscreen'
-					}
-				>
-					<FontAwesomeIcon icon={faInfoCircle} />
-					8 to 24 characters.
-					<br />
-					Must include uppercase and lowercase letters, a number and a
-					special character.
-					<br />
-					Allowed special characters:{' '}
-					<span aria-label='exclamation mark'>!</span>{' '}
-					<span aria-label='at symbol'>@</span>{' '}
-					<span aria-label='hashtag'>#</span>{' '}
-					<span aria-label='dollar sign'>$</span>{' '}
-					<span aria-label='percent'>%</span>
-				</p>
-
-				<label htmlFor='confirm_pwd'>
-					Confirm Password:
+				<div className='form-icon'>
 					<FontAwesomeIcon
 						icon={faCheck}
-						className={validMatch && matchPwd ? 'valid' : 'hide'}
+						className={validPwd ? 'valid' : 'hide'}
 					/>
 					<FontAwesomeIcon
 						icon={faTimes}
-						className={validMatch || !matchPwd ? 'hide' : 'invalid'}
+						className={validPwd || !pwd ? 'hide' : 'invalid'}
 					/>
-				</label>
+				</div>
+			</div>
+			<p
+				id='pwdnote'
+				className={pwdFocus && !validPwd ? 'instructions' : 'offscreen'}
+			>
+				<FontAwesomeIcon icon={faInfoCircle} />
+				8 to 24 characters.
+				<br />
+				Must include uppercase and lowercase letters, a number and a
+				special character.
+				<br />
+				Allowed special characters:{' '}
+				<span aria-label='exclamation mark'>!</span>{' '}
+				<span aria-label='at symbol'>@</span>{' '}
+				<span aria-label='hashtag'>#</span>{' '}
+				<span aria-label='dollar sign'>$</span>{' '}
+				<span aria-label='percent'>%</span>
+			</p>
+			<div className='relative-position'>
 				<input
 					type='password'
 					id='confirm_pwd'
+					className={matchPwd ? 'form-icon-active' : ''}
 					onChange={(e) => setMatchPwd(e.target.value)}
 					value={matchPwd}
 					required
@@ -191,37 +184,34 @@ aria-live make it so screen reader reads the msg when its focused which we r alr
 					onFocus={() => setMatchFocus(true)}
 					onBlur={() => setMatchFocus(false)}
 				/>
-				<p
-					id='confirmnote'
-					className={
-						matchFocus && !validMatch ? 'instructions' : 'offscreen'
-					}
-				>
-					<FontAwesomeIcon icon={faInfoCircle} />
-					Must match the first password input field.
-				</p>
-				<button
-					className='btn'
-					disabled={
-						!validName || !validPwd || !validMatch ? true : false
-					}
-					type='submit'
-				>
-					Sign Up
-				</button>
-			</form>
-
-			<p>
-				Already registered?
-				<br />
-				<span className='line'>
-					{/*put router link here*/}
-					<a href='#'>Sign In</a>
-				</span>
+				<div className='form-icon'>
+					<FontAwesomeIcon
+						icon={faCheck}
+						className={validMatch && matchPwd ? 'valid' : 'hide'}
+					/>
+					<FontAwesomeIcon
+						icon={faTimes}
+						className={validMatch || !matchPwd ? 'hide' : 'invalid'}
+					/>
+				</div>
+			</div>
+			<p
+				id='confirmnote'
+				className={
+					matchFocus && !validMatch ? 'instructions' : 'offscreen'
+				}
+			>
+				<FontAwesomeIcon icon={faInfoCircle} />
+				Must match the first password input field.
 			</p>
-			<RegisterForm />
-		</section>
+			<Button
+				disabled={!validName || !validPwd || !validMatch ? true : false}
+				type='submit'
+			>
+				Kaydol
+			</Button>
+			<Link to='/login'>Çoktan bir hesabınız mı var? Giriş Yapın!</Link>
+		</form>
 	);
 }
-
-export default Register;
+export default RegisterForm;

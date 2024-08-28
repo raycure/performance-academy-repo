@@ -4,13 +4,17 @@ import Navbar from '../../components/Navbar/Navbar';
 import Footer from '../../components/Footer/Footer';
 import { RiArrowUpSLine } from 'react-icons/ri';
 import { HashLink } from 'react-router-hash-link';
-import { BrowserRouter as Router, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { useLayoutEffect } from 'react';
 function Layout() {
 	const Wrapper = ({ children }) => {
 		const location = useLocation();
 		useLayoutEffect(() => {
-			document.documentElement.scrollTo(0, 0);
+			document.documentElement.scrollTo({
+				top: 0,
+				left: 0,
+				behavior: 'instant',
+			});
 		}, [location.pathname]);
 		return children;
 	};

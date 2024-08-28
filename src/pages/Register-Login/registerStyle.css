@@ -5,26 +5,21 @@ section {
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-start;
-	padding: 1rem;
+	padding: 1rem !important;
 	background-color: rgba(0, 0, 0, 0.4);
 }
 
-form {
+/* form {
 	display: flex;
 	flex-direction: column;
 	justify-content: space-evenly;
 	flex-grow: 1;
 	padding-bottom: 1rem;
-}
-
-a,
-a:visited {
-	color: #fff;
-}
+} */
 
 /* input[type='text'],
 input[type='password'], */
-button,
+/* button,
 textarea {
 	font-family: 'Nunito', sans-serif;
 	font-size: 22px;
@@ -39,7 +34,7 @@ form button {
 
 button {
 	padding: 0.5rem;
-}
+} */
 
 .instructions {
 	font-size: 0.75rem;

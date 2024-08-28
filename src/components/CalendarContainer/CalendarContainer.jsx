@@ -25,8 +25,12 @@ function CalendarContainer() {
 		// });
 	}
 	function renderEvents(eventInfo) {
-		return <></>;
+		const eventDate = new Date(
+			eventInfo.event._instance.range.start
+		).getDate();
+		return <div className='fully-center-item'>{eventDate}</div>;
 	}
+
 	return (
 		<div className='calendar-container bg-primary-400'>
 			<CalendarEventItem

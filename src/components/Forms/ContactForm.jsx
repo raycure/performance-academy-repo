@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import './ContactForm.css';
+import './Form.css';
 import InputContainer from '../Containers/InputContainer';
 import Button from '../Button/Button';
 function ContactForm() {

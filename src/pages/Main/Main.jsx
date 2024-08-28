@@ -6,6 +6,7 @@ import Card from '../../components/Cards/Card';
 import { lesMillsPrograms } from '../../assets/LesmillsPrograms';
 import Banner from '../../components/Banner/Banner';
 import CardCarousel from '../../components/Carousels/CardCarousel';
+import RegisterForm from '../../components/Forms/RegisterForm';
 
 function Main() {
 	const cards = Object.keys(lesMillsPrograms).map((category, index) => {
@@ -76,6 +77,7 @@ function Main() {
 					azicik sakin kal
 				</a>
 			</div>
+			<RegisterForm />
 		</>
 	);
 }

@@ -25,7 +25,7 @@ function EventExpandedItem() {
 
 		return (
 			<div
-				className='event-item-center event-item-container'
+				className='event-item-center event-item-container box-shadow'
 				key={event.id}
 				id={event.program}
 			>

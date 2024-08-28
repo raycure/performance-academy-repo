@@ -1,4 +1,3 @@
-import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Layout from './pages/Layout/Layout';
 import Main from './pages/Main/Main';
@@ -28,7 +27,7 @@ function App() {
 							<Route path='register' element={<Register />} />
 							<Route path='login' element={<Login />} />
 							<Route path='çerezler' element={<Cookies />} />
-							<Route path='test' element={< Test/>} />
+							<Route path='test' element={<Test />} />
 
 							<Route
 								path='kişisel-verilerin-korunması'

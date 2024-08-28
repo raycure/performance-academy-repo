@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Button.css';
 
-function Button({ children, redirect }) {
+function Button({ children, redirect, type, disabled }) {
 	const navigate = useNavigate();
 
 	const handleClick = () => {
@@ -12,7 +12,12 @@ function Button({ children, redirect }) {
 	};
 
 	return (
-		<button onClick={handleClick} className='btn'>
+		<button
+			onClick={handleClick}
+			disabled={disabled}
+			type={type}
+			className='btn'
+		>
 			{children}
 		</button>
 	);

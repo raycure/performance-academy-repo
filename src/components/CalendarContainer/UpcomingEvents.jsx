@@ -1,17 +1,19 @@
 import React from 'react';
 import { LesMillsEvents } from '../../assets/LesmillsEvents';
 import { HashLink } from 'react-router-hash-link';
+import Button from '../Button/Button';
 function UpcomingEvents() {
 	const allEvents = LesMillsEvents;
 	const today = new Date();
 	return (
 		<div className='upcoming-events-container	'>
-			<p className='fs-secondary-heading'>'Yaklaşan Etkinlikler'</p>
+			<p className='fs-700'>Yaklaşan Etkinlikler</p>
 			{allEvents //eger event tıklanmadıysa yaklasan etkinlikleri gostereck
 				.filter((event) => {
 					const eventDate = new Date(event.date);
 					return eventDate >= today;
 				})
+				.slice(0, 3)
 				.map((event) => {
 					const eventDate = new Date(event.date);
 					const daysLeft = Math.floor(
@@ -27,7 +29,7 @@ function UpcomingEvents() {
 								etkinliğimiz yaklaşmakta, bu etkinliğe katılmak
 								için {daysLeft} gününüz kaldı!
 							</p>
-							<button>Etkinliğe Katılın</button>
+							<Button>Etkinliğe Katılın</Button>
 						</div>
 					);
 				})}
