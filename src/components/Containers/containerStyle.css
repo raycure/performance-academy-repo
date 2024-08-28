@@ -1,43 +1,42 @@
 .container {
-	--max-width: 1110px;
-	--container-padding: 1rem;
-	width: min(var(--max-width), 100% - (var(--container-padding) * 2));
-	margin-inline: auto;
-	border: 2px solid red;
+  --max-width: 1110px;
+  --container-padding: 1rem;
+  width: min(var(--max-width), 100% - (var(--container-padding) * 2));
+  margin-inline: auto;
 }
 .border-container {
-	border: 2px solid var(--clr-neutral-100);
-	border-radius: 8px;
-	padding: 2rem 1.3rem;
+  border: 2px solid var(--clr-neutral-100);
+  border-radius: 8px;
+  padding: 2rem 1.3rem;
 }
 .event-pagination-container {
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
 .event-pagination-container .active {
-	color: var(--clr-accent-400);
+  color: var(--clr-accent-400);
 }
 .event-pagination-item {
-	margin-inline: 0.3rem;
+  margin-inline: 0.3rem;
 }
 .event-pagination-item:hover {
-	opacity: 0.6;
+  opacity: 0.6;
 }
 .input-outer-container {
-	width: 100%;
-	display: flex;
-	text-align: start;
-	border: 1px solid rgb(255, 255, 255);
-	resize: none;
-	margin: 0.8rem 0;
-	border-radius: 10px;
-	padding: 0.2rem;
+  width: 100%;
+  display: flex;
+  text-align: start;
+  border: 1px solid rgb(255, 255, 255);
+  resize: none;
+  margin: 0.8rem 0;
+  border-radius: 10px;
+  padding: 0.2rem;
 }
 .input-outer-container input {
-	width: 100%;
-	height: fit-content;
+  width: 100%;
+  height: fit-content;
 }
 .input-outer-container-large {
-	height: 10rem;
+  height: 10rem;
 }

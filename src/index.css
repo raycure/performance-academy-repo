@@ -559,16 +559,23 @@ img {
   animation: fadeIn 1s 0.6s ease-in-out backwards;
 }
 
-/* test */
-
-/* .acordion .content {
-  max-height: 0;
+.cardddd {
+  font-size: 164px;
+  width: 300px;
+  height: 430px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  border-radius: 20px;
 }
 
-.acordion {
+.cardddd-container {
   overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding-top: 20px;
+  margin-bottom: 120px;
 }
-
-.acordion input[type="radio"]:checked + label + .content {
-  max-height: fit-content;
-} */
