@@ -1,3 +1,16 @@
 add response handler for registeration if a email is already signed up it returns 500 so notify the user 
  
  thatll be attach to a link which ill be handling in the controllers which gonna turn the varaible true which ill be checking in the login controller use async email
+
+- [ ]  look up for how the source code project handled  session statuses (later 1)
+- [ ]  add nice animations for the info field below the password requirements
+- [ ]  add auto deleting when refresh token expires
+- [ ]  add lazy loading (low optional 1 later )
+- [ ]  add encryption middleware for the accessToken stored at local storage (high optioanal later 3)
+- [ ]  add constant key values for the env and fix that secure tag
+- [ ]  divide the fucking emailer
+- [ ]  make a helper function for to sending request and (high optional later 2)
+- [ ]  look up for path control (now) add activation mail (todo 1)
+- [ ]  add forgot password (todo 2)
+- [ ]  add permanent cookies that doesnt get deleted after a refresh (todo 3) cookies just might be that way??
+- [ ]  payment (look how hard it is first) add languages (FUCCCCKKKKKKK its not hard i just dont wanna do it but ill)

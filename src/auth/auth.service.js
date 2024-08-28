@@ -1,15 +1,11 @@
 import axios from "../pages/api/axios.js";
 import { API_BASE_URL } from "../config/serverApiConfig.js";
 
-
-
 export const register = async ({ registerData }) => {
   try {
     const response = await axios.post("/register", registerData);
     const { status, data } = response;
-    console.log(response);
-    console.log(data);
-    return response;
+    return data;
   } catch (error) {
     console.log(error);
   }
