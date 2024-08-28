@@ -1,12 +1,11 @@
 .nav-inner-container {
 	width: 100vw;
-	padding: 0rem 2rem;
+	padding: 1rem 2rem;
 	justify-content: space-between;
 	align-items: center;
 }
 .navigation-outer-container {
 	background-color: var(--clr-primary-400);
-	height: fit-content;
 	position: sticky;
 	top: 0;
 	z-index: 10;
@@ -24,7 +23,7 @@
 	justify-content: end;
 	gap: 1.5rem;
 	align-items: center;
-	width: clamp(4rem, 20vw, 20rem);
+	width: clamp(4rem, 10vw, 20rem);
 }
 
 .nav-item-icon {
@@ -32,7 +31,7 @@
 }
 .logo {
 	display: block;
-	width: clamp(4rem, 20vw, 20rem);
+	width: clamp(4rem, 10vw, 20rem);
 	padding: 0.8rem 0rem;
 }
 .nav-list-container li {
@@ -40,10 +39,10 @@
 	justify-content: center;
 }
 .nav-list-container li a:not(.active):hover {
-	border-bottom: 0.2rem solid #ef233ba3;
+	border-bottom: 3px solid #ef233ba3;
 }
 li .active {
-	border-bottom: 0.2rem solid var(--clr-accent-400);
+	border-bottom: 3px solid var(--clr-accent-400);
 }
 .nav-list-container li a {
 	height: 100%;

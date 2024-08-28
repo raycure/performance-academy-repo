@@ -27,98 +27,79 @@ function Footer() {
 	});
 
 	return (
-		<div className='footer-container'>
-			<div className='footer-grid'>
-				<div className='justify'>
-					<img src={logo} alt='lesmills logo' className='logo' />
-					<p className='fs-300 footer-motivation'>
-						We’re on a mission to create a fitter planet. This
-						doesn’t mean making people work out. It means helping
-						people fall in love with fitness so that they want to
-						work out.
-					</p>
+		<div className='footer-outer-container'>
+			<div className='footer-social-container'>
+				<div className='footer-horizontal-line'>
+					<hr />
 				</div>
-				<div className='justify footer-link-con'>
-					<HashLink to='/' className='addLineAnimation'>
-						Hakkımızda
-					</HashLink>
-					<HashLink to='/iletişim#top' className='addLineAnimation'>
-						İletişim
-					</HashLink>
-					<HashLink className='addLineAnimation' to='/iletişim#'>
-						Sık Sorulan Sorular
-					</HashLink>
-					<Link className='addLineAnimation' to=''>
-						Korsan İhbar
+				<div className=''>
+					<Link to='https://www.instagram.com/lesmills/'>
+						<FaInstagram className='icon' aria-label='social' />
 					</Link>
 				</div>
-				<div className='justify'>
-					<div className='footer-link-container'>
-						<Link className='addLineAnimation' to='/etkinlikler'>
-							Etkinlik Bul
-						</Link>
-						<Link className='addLineAnimation' to=''>
-							Giriş Yap
-						</Link>
-					</div>
-					<div className='footer-social-container'>
-						<div className='icon-light-container bg-primary-300'>
-							<Link to='https://www.instagram.com/lesmills/'>
-								<FaInstagram
-									className='icon'
-									aria-label='social'
-								/>
-							</Link>
-						</div>
-						<div className='icon-light-container bg-primary-300'>
-							<Link to='https://www.youtube.com/user/lesmillsgroupfitness'>
-								<FaYoutube
-									className='icon'
-									aria-label='social icon'
-								/>
-							</Link>
-						</div>
-						<div className='icon-light-container bg-primary-300'>
-							<Link to='https://www.tiktok.com/@lesmills'>
-								<FaTiktok
-									className='icon'
-									aria-label='social icon'
-								/>
-							</Link>
-						</div>
-						<div className='icon-light-container bg-primary-300'>
-							<Link to='https://www.linkedin.com/company/les-mills-international/'>
-								<FaLinkedinIn
-									className='icon'
-									aria-label='social icon'
-								/>
-							</Link>
-						</div>
-						<div className='icon-light-container bg-primary-300'>
-							<Link to='https://www.facebook.com/lesmills'>
-								<FaFacebookF
-									className='icon'
-									aria-label='social icon'
-								/>
-							</Link>
-						</div>
-						<div className='icon-light-container bg-primary-300'>
-							<Link to='https://tr.pinterest.com/lesmills/'>
-								<FaPinterestP
-									className='icon'
-									aria-label='social icon'
-								/>
-							</Link>
-						</div>
-					</div>
+				<div className=''>
+					<Link to='https://www.youtube.com/user/lesmillsgroupfitness'>
+						<FaYoutube className='icon' aria-label='social icon' />
+					</Link>
+				</div>
+				<div className=''>
+					<Link to='https://www.tiktok.com/@lesmills'>
+						<FaTiktok className='icon' aria-label='social icon' />
+					</Link>
+				</div>
+				<div className=''>
+					<Link to='https://www.linkedin.com/company/les-mills-international/'>
+						<FaLinkedinIn
+							className='icon'
+							aria-label='social icon'
+						/>
+					</Link>
+				</div>
+				<div className=''>
+					<Link to='https://www.facebook.com/lesmills'>
+						<FaFacebookF
+							className='icon'
+							aria-label='social icon'
+						/>
+					</Link>
+				</div>
+				<div className=''>
+					<Link to='https://tr.pinterest.com/lesmills/'>
+						<FaPinterestP
+							className='icon'
+							aria-label='social icon'
+						/>
+					</Link>
+				</div>
+				<div className='footer-horizontal-line'>
+					<hr />
 				</div>
 			</div>
-			<div className='text-legal footer-legal-container'>
-				<HashLink to='/kişisel-verilerin-korunması#top'>
-					Kişisel Verilerin Korunması
-				</HashLink>
-				<HashLink to='/çerezler#top'>Çerezler</HashLink>
-				<p className='licence-text '>©licenced by my ass 🍑</p>
+			<div className='footer-container'>
+				<img src={logo} alt='lesmills logo' className='logo' />
+				<p className='text-legal licence-text '>
+					©licenced by my ass 🍑
+				</p>
+				<div className='footer-link-con'>
+					<HashLink
+						to='/iletişim#contact-form-grad'
+						className='addLineAnimation'
+					>
+						Bize Ulaşın
+					</HashLink>
+					<HashLink className='addLineAnimation' to='/iletişim#top'>
+						Sık Sorulan Sorular
+					</HashLink>
+					<HashLink
+						className='addLineAnimation'
+						to='/kişisel-verilerin-korunması#top'
+					>
+						Kişisel Verilerin Korunması
+					</HashLink>
+					<HashLink className='addLineAnimation' to='/çerezler#top'>
+						Çerezler
+					</HashLink>
+				</div>
 			</div>
 		</div>
 	);

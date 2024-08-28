@@ -5,7 +5,7 @@ import Button from '../Button/Button';
 function ContactForm() {
 	const contactForm = useRef();
 	return (
-		<div className='contact-form relative-position box-shadow'>
+		<div className='contact-form relative-position '>
 			<img
 				src='/ornek.jpg'
 				alt='background'
@@ -19,7 +19,10 @@ function ContactForm() {
 					Bize Erişin!
 				</p>
 			</div>
-			<div ref={contactForm} className='contact-form-outer-container'>
+			<div
+				ref={contactForm}
+				className='contact-form-outer-container box-shadow'
+			>
 				<div className='contact-name-input-container'>
 					<input placeholder='Adınız' type='text' />
 					<input placeholder='Soyadınız' type='text' />

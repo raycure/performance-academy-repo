@@ -256,7 +256,10 @@ a:hover {
 .wide{
 	max-width: 42ch;
   } */
-
+figure,
+img {
+	pointer-events: none;
+} /* for truning off visual search menu */
 .center-item {
 	margin-inline: auto;
 	width: fit-content;
