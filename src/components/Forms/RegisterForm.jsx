@@ -97,7 +97,7 @@ aria-live make it so screen reader reads the msg when its focused which we r alr
 					onFocus={() => setUserFocus(true)}
 					onBlur={() => setUserFocus(false)}
 				/>
-				<div className='form-icon'>
+				<div htmlFor='username' className='form-icon'>
 					<FontAwesomeIcon
 						icon={faCheck}
 						className={validName ? 'valid' : 'hide'}
@@ -143,7 +143,7 @@ aria-live make it so screen reader reads the msg when its focused which we r alr
 					onFocus={() => setPwdFocus(true)}
 					onBlur={() => setPwdFocus(false)}
 				/>
-				<div className='form-icon'>
+				<div htmlFor='password' className='form-icon'>
 					<FontAwesomeIcon
 						icon={faCheck}
 						className={validPwd ? 'valid' : 'hide'}
@@ -184,7 +184,7 @@ aria-live make it so screen reader reads the msg when its focused which we r alr
 					onFocus={() => setMatchFocus(true)}
 					onBlur={() => setMatchFocus(false)}
 				/>
-				<div className='form-icon'>
+				<div htmlFor='confirm_pwd' className='form-icon'>
 					<FontAwesomeIcon
 						icon={faCheck}
 						className={validMatch && matchPwd ? 'valid' : 'hide'}
