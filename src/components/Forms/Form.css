@@ -55,42 +55,42 @@ input {
 	border-bottom: 3px solid var(--clr-neutral-100);
 }
 input::placeholder {
-	color: var(--clr-primary-200);
+	color: #adadad;
 }
 
 input::-webkit-input-placeholder {
-	color: var(--clr-primary-200);
+	color: #adadad;
 }
 
 input::-moz-placeholder {
-	color: var(--clr-primary-200);
+	color: #adadad;
 }
 
 input:-ms-input-placeholder {
-	color: var(--clr-primary-200);
+	color: #adadad;
 }
 
 input::-ms-input-placeholder {
-	color: var(--clr-primary-200);
+	color: #adadad;
 }
 textarea::placeholder {
-	color: var(--clr-primary-200);
+	color: #adadad;
 }
 
 textarea::-webkit-textarea-placeholder {
-	color: var(--clr-primary-200);
+	color: #adadad;
 }
 
 textarea::-moz-placeholder {
-	color: var(--clr-primary-200);
+	color: #adadad;
 }
 
 textarea:-ms-textarea-placeholder {
-	color: var(--clr-primary-200);
+	color: #adadad;
 }
 
 textarea::-ms-textarea-placeholder {
-	color: var(--clr-primary-200);
+	color: #adadad;
 }
 .authentication-form {
 	display: flex;

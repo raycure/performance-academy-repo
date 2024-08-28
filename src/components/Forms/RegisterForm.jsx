@@ -125,6 +125,7 @@ aria-live make it so screen reader reads the msg when its focused which we r alr
 			<input
 				type='email'
 				id='email'
+				placeholder='Email'
 				name='email'
 				onChange={(e) => setMail(e.target.value)}
 				value={mail}
@@ -134,6 +135,7 @@ aria-live make it so screen reader reads the msg when its focused which we r alr
 				<input
 					type='password'
 					id='password'
+					placeholder='Şifre'
 					className={validPwd || pwd ? 'form-icon-active' : ''}
 					onChange={(e) => setPwd(e.target.value)}
 					value={pwd}
@@ -175,6 +177,7 @@ aria-live make it so screen reader reads the msg when its focused which we r alr
 				<input
 					type='password'
 					id='confirm_pwd'
+					placeholder='Tekrar Şifre'
 					className={matchPwd ? 'form-icon-active' : ''}
 					onChange={(e) => setMatchPwd(e.target.value)}
 					value={matchPwd}
