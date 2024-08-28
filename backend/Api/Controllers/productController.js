@@ -1,4 +1,4 @@
-import Users from "../Models/productModel.js";
+import Users from "../Models/userModel.js";
 import Sessions from "../Models/sessionModel.js";
 import pkg from "bcryptjs";
 import mongoose from "mongoose";

@@ -1,4 +1,4 @@
-import Users from "../Models/productModel.js";
+import Users from "../Models/userModel.js";
 import pkg from "bcryptjs";
 import Joi from "joi";
 import jwt from "jsonwebtoken";
@@ -57,7 +57,7 @@ const login = async (req, res) => {
       userId: user._id,
     },
     process.env.REFRESH_TOKEN_SECRET,
-    { expiresIn: "1d" }
+    { expiresIn: "10s" }
   );
   res.cookie("jwt", refreshToken, {
     httpOnly: true,
@@ -69,6 +69,7 @@ const login = async (req, res) => {
   const addActiveUser = await Sessions.create({
     token: refreshToken,
     userId: user._id,
+    // expiresAt: new Date(Date.now() + 30 * 1000), // 7 days from now
   });
 
   return res.json({ value: accessToken, foundUser: addActiveUser });
