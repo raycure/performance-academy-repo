@@ -33,6 +33,7 @@ function ClassList({ classType }) {
       }
     });
   }
+
   const classes = Object.keys(lesMillsPrograms).map((category) => {
     if (category !== classType && classType !== "all") {
       return;

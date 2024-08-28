@@ -6,7 +6,7 @@
   padding: 1rem;
   position: relative;
   max-height: 20rem;
-  transition: max-height 0.3s ease;
+  transition: max-height 1s ease-in-out;
 }
 .more-button-container {
   display: flex;
