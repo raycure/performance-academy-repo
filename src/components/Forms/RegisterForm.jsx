@@ -11,6 +11,7 @@ import {
 	faInfoCircle,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import logo from '../../assets/LesmillsLogo.png';
 
 const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
@@ -77,6 +78,7 @@ function RegisterForm() {
 		>
 			{/* <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
 aria-live make it so screen reader reads the msg when its focused which we r already achiving with ref     */}
+			<img alt='logo' className='logo' src={logo}></img>
 			<p ref={userRef}>Kaydolun!</p>
 			<div className='relative-position'>
 				<input
@@ -207,13 +209,19 @@ aria-live make it so screen reader reads the msg when its focused which we r alr
 				<FontAwesomeIcon icon={faInfoCircle} />
 				Must match the first password input field.
 			</p>
-			<Button
-				disabled={!validName || !validPwd || !validMatch ? true : false}
-				type='submit'
-			>
-				Kaydol
-			</Button>
-			<Link to='/login'>Çoktan bir hesabınız mı var? Giriş Yapın!</Link>
+			<div className='more-button-container'>
+				<Button
+					disabled={
+						!validName || !validPwd || !validMatch ? true : false
+					}
+					type='submit'
+				>
+					Kaydol
+				</Button>
+				<Link to='/login'>
+					Zaten bir hesabınız var mı? Giriş Yapın!
+				</Link>
+			</div>
 		</form>
 	);
 }

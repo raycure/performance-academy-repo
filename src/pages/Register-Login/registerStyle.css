@@ -60,18 +60,18 @@ button {
 }
 
 .valid {
-	color: limegreen;
+	color: rgb(93, 255, 93);
 	margin-left: 0.25rem;
 }
 
 .invalid {
-	color: red;
+	color: rgb(255, 63, 63);
 	margin-left: 0.25rem;
 }
 
 .errmsg {
 	background-color: lightpink;
-	color: firebrick;
+	color: rgb(255, 63, 63);
 	font-weight: bold;
 	padding: 0.5rem;
 	margin-bottom: 0.5rem;
@@ -79,4 +79,10 @@ button {
 
 .line {
 	display: inline-block;
+}
+.register-form-container {
+	display: grid;
+	grid-template-columns: 0.6fr 0.4fr;
+	width: 60%;
+	margin-inline: auto;
 }

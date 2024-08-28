@@ -1,6 +1,5 @@
 import React, { useRef } from 'react';
 import './Form.css';
-import InputContainer from '../Containers/InputContainer';
 import Button from '../Button/Button';
 function ContactForm() {
 	const contactForm = useRef();
@@ -11,20 +10,25 @@ function ContactForm() {
 				alt='background'
 				className='background-image contact-form-background'
 			/>
-			<p className='contact-form-header fs-primary-heading text-container'>
-				{`Aradığınızı Bulamadınız Mı? \nBize Erişin!`}
-			</p>
+			<div>
+				<p className='contact-form-header fs-secondary-heading text-container'>
+					Aradığınızı Bulamadınız Mı?
+				</p>
+				<p className='contact-form-header fs-900 text-container'>
+					Bize Erişin!
+				</p>
+			</div>
 			<div ref={contactForm} className='contact-form-outer-container'>
 				<div className='contact-name-input-container'>
-					<InputContainer placeholder='Adınız' type='text' />
-					<InputContainer placeholder='Soyadınız' type='text' />
+					<input placeholder='Adınız' type='text' />
+					<input placeholder='Soyadınız' type='text' />
 				</div>
-				<InputContainer placeholder='Mailiniz' type='email' />
-				<InputContainer placeholder='Konu' type='text' />
-				<InputContainer
-					type='textarea'
+				<input placeholder='Mailiniz' type='email' />
+				<input placeholder='Konu' type='text' />
+				<textarea
 					placeholder='Mesajınız...'
-					size='large'
+					rows='5'
+					data-role='none'
 				/>
 				<Button>Gönder</Button>
 			</div>

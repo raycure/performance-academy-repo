@@ -97,7 +97,7 @@ body {
 	overflow-x: hidden;
 }
 body::-webkit-scrollbar {
-	width: 8px;
+	width: 6px;
 }
 
 body::-webkit-scrollbar-track {
@@ -107,6 +107,7 @@ body::-webkit-scrollbar-track {
 body::-webkit-scrollbar-thumb {
 	background-color: var(--clr-accent-400);
 	outline: 1px solid var(--clr-accent-400);
+	border-radius: 5px;
 }
 /* A elements that don't have a get default styles */
 a:not([class]) {
@@ -393,6 +394,9 @@ a:hover {
 }
 .fs-800 {
 	font-size: var(--fs-800);
+}
+.fs-900 {
+	font-size: var(--fs-900);
 }
 
 .cardContent > div > p:where(:not(:first-child)) {
