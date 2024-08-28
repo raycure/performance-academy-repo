@@ -1,4 +1,4 @@
-section {
+/* section {
 	width: 100%;
 	max-width: 420px;
 	min-height: 400px;
@@ -7,7 +7,7 @@ section {
 	justify-content: flex-start;
 	padding: 1rem !important;
 	background-color: rgba(0, 0, 0, 0.4);
-}
+} */
 
 /* form {
 	display: flex;
@@ -76,7 +76,7 @@ button {
 .line {
 	display: inline-block;
 }
-.register-form-container {
+.authentication-form-container {
 	display: grid;
 	grid-template-columns: 0.6fr 0.4fr;
 	width: 60%;

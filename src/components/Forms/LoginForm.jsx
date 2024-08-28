@@ -1,11 +1,8 @@
 import { useRef, useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import axios from '../api/axios.js';
+//import axios from '../api/axios.js';
 import { login } from '../../redux/auth/actions.js';
-import AuthenticationGreet from './AuthenticationGreet.jsx';
-import './registerStyle.css';
-import LoginForm from '../../components/Forms/LoginForm.jsx';
-function Login() {
+function LoginForm() {
 	const userRef = useRef();
 	const errRef = useRef();
 	const dispatch = useDispatch();
@@ -143,12 +140,8 @@ function Login() {
 					Sign out
 				</button>
 			</section>
-			<div className='authentication-form-container box-shadow'>
-				<LoginForm />
-				<AuthenticationGreet />
-			</div>
 		</>
 	);
 }
 
-export default Login;
+export default LoginForm;
