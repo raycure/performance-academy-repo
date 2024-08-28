@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./ClassList.css";
 import Button from "../Button/Button";
 import { lesMillsPrograms } from "../../assets/LesmillsPrograms";
@@ -7,6 +7,13 @@ import name from "/ornek.jpg";
 
 function ClassList({ classType }) {
   const [activeClass, setActiveClass] = useState(null);
+
+  useEffect(() => {
+    requestAnimationFrame(() => {
+      const element = document.querySelector("");
+    });
+  });
+
   function classClickHandler(id) {
     setActiveClass(id);
 
@@ -14,10 +21,10 @@ function ClassList({ classType }) {
     requestAnimationFrame(() => {
       const element = document.getElementById(id);
       if (element) {
-        //burda hesapliyor
         const elementRect = element.getBoundingClientRect(); //uzaklık ve uzunluklari obje halinde donduruyor
         const elementTop = elementRect.top + window.scrollY; //pageYOffset deprecated scrollY kullan
-        const elementHeight = elementRect.height;
+        const elementHeight = element.scrollHeight;
+        element.style.height = elementHeight;
         const header = document.querySelector(".nav-container"); //i guess this has to be the way cunku oburleri olmadı
         const headerHeight = header ? header.offsetHeight : 0; //0 default bulamazsa diye
         const middle =

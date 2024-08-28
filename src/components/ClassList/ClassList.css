@@ -5,6 +5,7 @@
   overflow: hidden;
   padding: 1rem;
   position: relative;
+  transition: height 0.3s ease;
 }
 .more-button-container {
   display: flex;
@@ -21,7 +22,7 @@
 .class-img {
   max-height: 400px;
   height: 40vh;
-  float: left;
+  float: left !important;
   margin-right: 1rem;
 }
 .class-background-shape {
