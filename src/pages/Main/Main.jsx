@@ -8,6 +8,8 @@ import Banner from "../../components/Banner/Banner";
 import CardCarousel from "../../components/Carousels/CardCarousel";
 import RegisterForm from "../../components/Forms/RegisterForm";
 import TestInput from "./TestInput.jsx";
+import { motion } from "framer-motion";
+import { downToUp } from "../../components/animations/LeftToRight.jsx";
 
 function Main() {
   const cards = Object.keys(lesMillsPrograms).map((category, index) => {
@@ -19,7 +21,18 @@ function Main() {
         ))}
       </div>
     );
-    return <Card backContent={backContent} />;
+    return (
+      <motion.div
+        key={index}
+        variants={downToUp}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true }}
+        custom={index}
+      >
+        <Card backContent={backContent} />
+      </motion.div>
+    );
   });
 
   return (

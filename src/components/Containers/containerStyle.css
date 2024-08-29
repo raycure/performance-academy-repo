@@ -3,6 +3,7 @@
   --container-padding: 1rem;
   width: min(var(--max-width), 100% - (var(--container-padding) * 2));
   margin-inline: auto;
+  margin-block: 5rem;
 }
 .border-container {
   border: 2px solid var(--clr-neutral-100);
