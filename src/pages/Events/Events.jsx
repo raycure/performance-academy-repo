@@ -5,8 +5,16 @@ import CardCarousel from '../../components/Carousels/CardCarousel';
 import EventExpandedItem from '../../components/EventItem/EventExpandedItem';
 import PaginationContainer from '../../components/Containers/PaginationContainer';
 import CalendarEventItem from '../../components/CalendarContainer/CalendarEventItem';
+import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import backgroundText from '../../assets/CHOOSE-HAPPY.png';
 function Events() {
+	const { pathname } = useLocation();
+
+	useEffect(() => {
+		window.scrollTo(0, 0);
+	}, [pathname]);
+
 	return (
 		<>
 			<div className='event-page-poster-container bottom-space'>

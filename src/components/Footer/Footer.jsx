@@ -12,7 +12,7 @@ import { FaPinterestP } from "react-icons/fa6";
 import { FaXTwitter } from "react-icons/fa6";
 import { useEffect } from "react";
 import { motion } from "framer-motion";
-import { upToDown } from "../animations/AnimationValues";
+import { appear } from "../animations/AnimationValues";
 
 function Footer() {
   const icons = [
@@ -70,7 +70,7 @@ function Footer() {
         {icons.map((icon, index) => (
           <motion.div
             key={index}
-            variants={upToDown}
+            variants={appear}
             initial="hidden"
             whileInView="show"
             whileHover={{

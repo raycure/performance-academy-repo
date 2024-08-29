@@ -29,8 +29,6 @@ function Main() {
       <motion.div
         key={index}
         variants={downToUp}
-        initial="hidden"
-        whileInView="show"
         viewport={{ once: true }}
         custom={index}
       >
@@ -87,26 +85,6 @@ function Main() {
         <a href="#" className="btn-shine">
           LESMILLS
         </a>
-      </div>
-
-      <div>
-        <motion.div
-          className="btn-2"
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.8 }}
-          transition={{ type: "spring", stiffness: 200, damping: 30 }}
-          style={{ marginLeft: 500 }}
-        >
-          Login
-        </motion.div>
-        <motion.button
-          class="btn-2"
-          whileTap="tap"
-          whileHover="hover"
-          variants={button}
-        >
-          Login
-        </motion.button>
       </div>
 
       {/* <RegisterForm /> */}

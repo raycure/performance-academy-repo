@@ -3,6 +3,8 @@ import EventExpandedItem from '../../components/EventItem/EventExpandedItem';
 import { useState } from 'react';
 import { MdArrowBackIosNew } from 'react-icons/md';
 import { MdArrowForwardIos } from 'react-icons/md';
+import { motion } from 'framer-motion';
+import { appearSlower } from '../animations/AnimationValues';
 function PaginationContainer() {
 	const eventItems = EventExpandedItem();
 	const [paginationPageNumber, setPaginationPageNumber] = useState(1);
@@ -26,19 +28,28 @@ function PaginationContainer() {
 	function changePageNumber(id) {
 		setPaginationPageNumber(id);
 	}
+
 	return (
 		<>
 			<div className='event-container'>
 				{paginatedEvents.map((event, index) => {
 					return (
-						<div key={index} className='grid-event-item-container'>
+						<motion.div
+							variants={appearSlower}
+							initial='hidden'
+							whileInView='show'
+							viewport={{ once: true, amount: 0.1 }}
+							custom={index}
+							key={index}
+							className='grid-event-item-container'
+						>
 							{/* <img
 							src='/ornek.jpg'
 							alt='event photo'
 							className='background-image'
 						/> */}
 							{event}
-						</div>
+						</motion.div>
 					);
 				})}
 			</div>

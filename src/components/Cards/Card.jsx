@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import "./cardStyle.css";
-import { motion } from "framer-motion";
 
 function Card({ backContent }) {
   const [flipped, setFlipped] = useState(false);

@@ -156,6 +156,7 @@ function ClassList({ classType }) {
 										<p>Kime Yönelik: {program.for}</p>
 									</div>
 									<Button
+										classProp={'classes-btn'}
 										onClick={() =>
 											classClickHandler(program.id)
 										}
@@ -163,7 +164,10 @@ function ClassList({ classType }) {
 										{!isActive
 											? 'Daha Fazlası'
 											: 'Programa Katılın'}
-										<MdOutlineDoubleArrow color='white' />
+										<MdOutlineDoubleArrow
+											style={{ marginTop: 2 }}
+											color='white'
+										/>
 									</Button>
 								</div>
 							)}
