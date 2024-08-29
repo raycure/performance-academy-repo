@@ -1,35 +1,50 @@
 .class-item-container {
-  width: 65%;
-  align-items: stretch;
-  margin-inline: auto;
-  overflow: hidden;
-  padding: 1rem;
-  position: relative;
+	width: 65%;
+	margin-inline: auto;
+	overflow: hidden;
+	padding: 1rem;
+	position: relative;
 }
 .more-button-container {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  padding-top: 0.5rem;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	padding-top: 0.5rem;
 }
 .class-logo {
-  height: 2.5rem;
-  margin-bottom: 0.6rem;
-  object-fit: contain;
-  width: max-content;
+	height: 2.5rem;
+	margin-bottom: 0.6rem;
+	object-fit: contain;
+	width: max-content;
 }
 .class-img {
-  max-height: 400px;
-  height: 40vh;
-  float: left !important;
-  margin-right: 1rem;
+	max-height: 400px;
+	height: 40vh;
+	float: left !important;
+	margin-right: 1rem;
 }
 .class-background-shape {
-  left: 5%;
-  width: 90%;
-  background-color: var(--clr-primary-300);
-  -ms-transform: skewX(-45deg);
-  -webkit-transform: skewX(-45deg);
-  transform: skewX(-45deg);
-  z-index: -5;
+	left: 5%;
+	width: 90%;
+	background-color: var(--clr-primary-300);
+	-ms-transform: skewX(-45deg);
+	-webkit-transform: skewX(-45deg);
+	transform: skewX(-45deg);
+	z-index: -5;
+}
+@media (max-width: 1330px) {
+	.class-item-container {
+		width: 80%;
+	}
+}
+@media (max-width: 1200px) {
+	.class-img {
+		height: 30vh;
+	}
+	.more-button-container {
+		font-size: var(--fs-400);
+	}
+	.class-item-container {
+		width: 85%;
+	}
 }
