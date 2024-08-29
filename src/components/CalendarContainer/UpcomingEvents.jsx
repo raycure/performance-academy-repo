@@ -5,15 +5,19 @@ import Button from '../Button/Button';
 function UpcomingEvents() {
 	const allEvents = LesMillsEvents;
 	const today = new Date();
+	const windowWidth = window.innerWidth;
+	const eventAmount = windowWidth > 1380 ? 3 : windowWidth > 1170 ? 2 : 1;
 	return (
 		<div className='upcoming-events-container	'>
-			<p className='fs-700'>Yaklaşan Etkinlikler</p>
+			<p className={windowWidth > 1160 ? 'fs-700' : 'fs-650'}>
+				Yaklaşan Etkinlikler
+			</p>
 			{allEvents //eger event tıklanmadıysa yaklasan etkinlikleri gostereck
 				.filter((event) => {
 					const eventDate = new Date(event.date);
 					return eventDate >= today;
 				})
-				.slice(0, 3)
+				.slice(0, eventAmount)
 				.map((event) => {
 					const eventDate = new Date(event.date);
 					const daysLeft = Math.floor(

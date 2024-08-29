@@ -32,3 +32,27 @@
 	height: 40vh;
 	position: relative;
 }
+@media (max-width: 950px) {
+	.calendar-container {
+		width: 80%;
+	}
+}
+@media (max-width: 850px) {
+	.event-container {
+		width: 80vw;
+	}
+	.calendar-container {
+		grid-template-columns: 1fr;
+		width: 65%;
+		gap: 3rem;
+	}
+}
+@media (max-width: 640px) {
+	.event-container {
+		width: 65vw;
+		grid-template-columns: 1fr;
+	}
+	.calendar-container {
+		width: 80%;
+	}
+}

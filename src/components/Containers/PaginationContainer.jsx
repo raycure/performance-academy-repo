@@ -6,7 +6,8 @@ import { MdArrowForwardIos } from 'react-icons/md';
 function PaginationContainer() {
 	const eventItems = EventExpandedItem();
 	const [paginationPageNumber, setPaginationPageNumber] = useState(1);
-	const eventsPerPage = 6;
+	const windowWidth = window.innerWidth;
+	const eventsPerPage = windowWidth > 640 ? 6 : 4;
 	const lastIndex = paginationPageNumber * eventsPerPage;
 	const firstIndex = lastIndex - eventsPerPage;
 	const paginatedEvents = eventItems.slice(firstIndex, lastIndex);
@@ -25,7 +26,6 @@ function PaginationContainer() {
 	function changePageNumber(id) {
 		setPaginationPageNumber(id);
 	}
-
 	return (
 		<>
 			<div className='event-container'>

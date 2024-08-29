@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Navbar.css';
 import { Link, NavLink } from 'react-router-dom'; //u cant style the links directly
 import { FaUser } from 'react-icons/fa6';
@@ -17,7 +17,9 @@ function Navbar() {
 	const [menuOpen, setMenuOpen] = useState(false);
 	const toggleNavMenu = () => {
 		setMenuOpen(false);
-	};
+		document.body.style.overflowY = 'unset';
+	}; // menu kapanınca scrollu aktiflestiriyor ama xde tasma oldugu icin y actı sadece
+
 	const icons = [
 		{
 			href: 'https://www.instagram.com/lesmills/',
@@ -97,7 +99,13 @@ function Navbar() {
 						className='nav-item-icon'
 						onClick={() => {
 							setMenuOpen(!menuOpen);
-						}}
+							if (
+								typeof window != 'undefined' &&
+								window.document
+							) {
+								document.body.style.overflow = 'hidden';
+							}
+						}} //menu acıp scroll kapatıyor
 					/>
 				</div>
 			</nav>
