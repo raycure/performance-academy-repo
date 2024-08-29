@@ -13,7 +13,7 @@ const downToUp = {
   }),
 };
 
-const upToDown = {
+const appearSlower = {
   hidden: {
     opacity: 0,
   },
@@ -21,7 +21,32 @@ const upToDown = {
     opacity: 1,
     transition: {
       duration: 1,
-      delay: 0.1 * index,
+      delay: 0.3 * index,
+      // delay: 0.2,
+    },
+  }),
+};
+
+const test = {
+  hidden: {
+    opacity: 0,
+  },
+  show: (index) => ({
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.3,
+    },
+  }),
+};
+
+const appear = {
+  hidden: {
+    opacity: 0,
+  },
+  show: (index) => ({
+    opacity: 1,
+    transition: {
+      duration: 1,
     },
   }),
 };
@@ -108,8 +133,10 @@ export {
   downToUp,
   leftToRight,
   ScalingAnimations,
-  upToDown,
+  appear,
   accordion,
+  appearSlower,
   button,
   leftToRightForClasses,
+  test,
 };

@@ -125,9 +125,15 @@ function ClassList({ classType }) {
                   <p>Ekipman: {program.equipment}</p>
                   <p>Kime Yönelik: {program.for}</p>
                 </div>
-                <Button onClick={() => classClickHandler(program.id)}>
+                <Button
+                  classProp={"classes-btn"}
+                  onClick={() => classClickHandler(program.id)}
+                >
                   {!isActive ? "Daha Fazlası" : "Programa Katılın"}
-                  <MdOutlineDoubleArrow color="white" />
+                  <MdOutlineDoubleArrow
+                    style={{ marginTop: 2 }}
+                    color="white"
+                  />
                 </Button>
               </div>
               <div className="background-image class-background-shape"></div>
