@@ -108,8 +108,8 @@ body::-webkit-scrollbar-track {
 }
 
 body::-webkit-scrollbar-thumb {
-	background-color: var(--clr-accent-400);
-	outline: 1px solid var(--clr-accent-400);
+	background-color: var(--clr-accent-100);
+	outline: 1px solid var(--clr-accent-100);
 	border-radius: 3px;
 }
 /* A elements that don't have a get default styles */
