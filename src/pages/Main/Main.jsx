@@ -8,27 +8,8 @@ import Banner from "../../components/Banner/Banner";
 import CardCarousel from "../../components/Carousels/CardCarousel";
 import RegisterForm from "../../components/Forms/RegisterForm";
 import TestInput from "./TestInput.jsx";
-import { motion } from "framer-motion";
 
 function Main() {
-  const emoji = "🎉";
-
-  const cardVariants = {
-    offscreen: {
-      y: 100,
-      opacity: 0,
-    },
-    onscreen: {
-      y: 50,
-      opacity: 1,
-      transition: {
-        type: "spring",
-        bounce: 0.4,
-        duration: 2,
-      },
-    },
-  };
-
   const cards = Object.keys(lesMillsPrograms).map((category, index) => {
     const backContent = (
       <div key={index}>
@@ -91,38 +72,6 @@ function Main() {
         </a>
       </div>
 
-      <div className="containerr">
-        <motion.div
-          className="containerr"
-          initial="offscreen"
-          whileInView="onscreen"
-          viewport={{ once: true, amount: 0.8 }}
-        >
-          <motion.div className="divv" variants={cardVariants}>
-            {emoji}
-          </motion.div>
-        </motion.div>
-        <motion.div
-          className="containerr"
-          initial="offscreen"
-          whileInView="onscreen"
-          viewport={{ once: true, amount: 0.8 }}
-        >
-          <motion.div className="divv" variants={cardVariants}>
-            {emoji}
-          </motion.div>
-        </motion.div>
-        <motion.div
-          className="containerr"
-          initial="offscreen"
-          whileInView="onscreen"
-          viewport={{ once: true, amount: 0.8 }}
-        >
-          <motion.div className="divv" variants={cardVariants}>
-            {emoji}
-          </motion.div>
-        </motion.div>
-      </div>
       {/* <RegisterForm /> */}
 
       <TestInput></TestInput>

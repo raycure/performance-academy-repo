@@ -257,7 +257,7 @@ a:hover {
   } */
 figure,
 img {
-	pointer-events: none;
+  pointer-events: none;
 } /* for truning off visual search menu */
 .center-item {
   margin-inline: auto;
@@ -494,11 +494,15 @@ img {
     transform: translateX(0);
   }
   100% {
-    transform: translateX(200%);
+    transform: translateX(100%);
   }
 }
 
-.lineAnimation {
+.footer-link-con > {
+  overflow: hidden;
+}
+
+.addLineAnimation {
   position: relative;
   overflow: hidden;
 }
@@ -523,7 +527,6 @@ img {
 
 @keyframes fadeIn {
   0% {
-    /* transform: translateY(30px); */
     scale: 70%;
     opacity: 0;
   }
@@ -578,4 +581,16 @@ img {
   position: relative;
   padding-top: 20px;
   margin-bottom: 120px;
+}
+
+/* test */
+.flex {
+  display: flex;
+  justify-content: space-around;
+}
+
+.mycard {
+  width: 400px;
+  height: 200px;
+  background-color: wheat;
 }
