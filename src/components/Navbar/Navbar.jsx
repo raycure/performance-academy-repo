@@ -142,7 +142,11 @@ function Navbar() {
 				</div>
 				<div className='footer-social-container nav-menu-social-container'>
 					{icons.map((icon, index) => (
-						<Link key={index} to={icon.href}>
+						<Link
+							key={index}
+							className='icon-light-container'
+							to={icon.href}
+						>
 							<icon.Icon
 								className='icon'
 								aria-label={icon.label}

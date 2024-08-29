@@ -61,11 +61,12 @@ li .active {
 .menu-open {
 	display: none;
 }
-.nav-menu-social-container {
-	align-self: center;
-	padding: 1rem 0;
-}
 @media (max-width: 770px) {
+	.nav-menu-social-container {
+		align-self: center;
+		padding: 1rem 0;
+		gap: 0.3rem;
+	}
 	.menu {
 		display: flex;
 		gap: 0.5rem;
@@ -113,6 +114,10 @@ li .active {
 	}
 	.menu-open button {
 		align-self: center;
+	}
+	.menu-open .icon-light-container {
+		border-radius: 15px;
+		border: 1px solid white;
 	}
 }
 @media (max-width: 540px) {

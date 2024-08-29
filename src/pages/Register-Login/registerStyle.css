@@ -112,13 +112,11 @@ button {
 	opacity: 0.4;
 }
 .icon-light-container {
-	border-radius: 2rem;
 	padding: 0.7rem;
 	justify-content: center;
 	align-items: center;
 	text-align: center;
 	margin: 0.2rem;
-	background-color: var(--clr-primary-300);
 }
 .icon-light-container:hover {
 	opacity: 0.9;
