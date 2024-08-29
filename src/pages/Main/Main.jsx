@@ -9,6 +9,7 @@ import CardCarousel from "../../components/Carousels/CardCarousel";
 import RegisterForm from "../../components/Forms/RegisterForm";
 import { motion } from "framer-motion";
 import { downToUp } from "../../components/animations/AnimationValues.jsx";
+import { button } from "../../components/animations/AnimationValues.jsx";
 
 import { useState } from "react";
 
@@ -84,8 +85,28 @@ function Main() {
       <div className="btn-container center-item">
         {" "}
         <a href="#" className="btn-shine">
-          azicik sakin kal
+          LESMILLS
         </a>
+      </div>
+
+      <div>
+        <motion.div
+          className="btn-2"
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.8 }}
+          transition={{ type: "spring", stiffness: 200, damping: 30 }}
+          style={{ marginLeft: 500 }}
+        >
+          Login
+        </motion.div>
+        <motion.button
+          class="btn-2"
+          whileTap="tap"
+          whileHover="hover"
+          variants={button}
+        >
+          Login
+        </motion.button>
       </div>
 
       {/* <RegisterForm /> */}
