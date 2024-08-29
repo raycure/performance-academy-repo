@@ -11,25 +11,19 @@ function Events() {
   const testArray = ["afsad", "deneme ", "deneme3"];
   const myvar = {
     hidden: {
-      y: 100,
+      //   y: 100,
       opacity: 0,
+      x: -100,
     },
     show: (index) => ({
       opacity: 1,
-      y: 0,
+      //   y: 0,
+      x: 0,
       transition: {
+        duration: 1,
         delay: 0.5 * index,
       },
     }),
-  };
-
-  const container = {
-    hidden: { opacity: 0 },
-  };
-
-  const item = {
-    hidden: { opacity: 0 },
-    show: { opacity: 1 },
   };
   return (
     <>
