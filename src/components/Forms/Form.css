@@ -1,42 +1,42 @@
 .contact-form-outer-container {
-	margin-inline-end: 4rem;
-	margin-inline-start: 1rem;
-	align-items: center;
-	width: 40vw;
-	padding: 4rem 6rem;
-	border-radius: 20px;
-	position: relative;
-	background-color: var(--clr-primary-trnsp);
-	display: flex;
-	flex-direction: column;
-	gap: 1.5rem;
+  margin-inline-end: 4rem;
+  margin-inline-start: 1rem;
+  align-items: center;
+  width: 40vw;
+  padding: 4rem 6rem;
+  border-radius: 20px;
+  position: relative;
+  background-color: var(--clr-primary-trnsp);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
 }
 .contact-name-input-container {
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	gap: 1.5rem;
-	width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 1.5rem;
+  width: 100%;
 }
 .contact-form-header {
-	text-align: end;
+  text-align: end;
 }
 .contact-form {
-	display: flex;
-	flex-direction: row;
-	justify-content: right;
-	padding: 6rem 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: right;
+  padding: 6rem 0;
 }
 
 .contact-form-background {
-	z-index: -1;
+  z-index: -1;
 }
 #contact-form-grad {
-	background-image: linear-gradient(
-		var(--clr-primary-400),
-		transparent,
-		transparent
-	);
+  background-image: linear-gradient(
+    var(--clr-primary-400),
+    transparent,
+    transparent
+  );
 }
 /* input::placeholder {
 	text-align: start;
@@ -47,89 +47,114 @@
 	 background-color: #60708862;
  } */
 input:-webkit-autofill {
-	-webkit-background-clip: text;
-	-webkit-text-fill-color: var(--clr-neutral-100) !important;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: var(--clr-neutral-100) !important;
 } /* autofillde arkaplan olmasın diye */
 
 textarea,
 input {
-	all: unset;
-	margin: 0;
-	padding: 0.8rem;
-	border: 0;
-	width: 100%;
-	box-sizing: border-box;
+  all: unset;
+  margin: 0;
+  padding: 0.8rem;
+  border: 0;
+  width: 100%;
+  box-sizing: border-box;
 }
 textarea {
-	resize: none;
-	overflow-y: auto;
-	overflow-x: hidden;
-	border: 2px solid var(--clr-neutral-100);
+  resize: none;
+  overflow-y: auto;
+  overflow-x: hidden;
+  border: 2px solid var(--clr-neutral-100);
 }
+
 input {
-	padding: 0.8rem 0.5rem 0.3rem;
-	border-bottom: 2px solid var(--clr-neutral-100);
+  padding: 0.8rem 0.5rem 0.3rem;
+  border-bottom: 2px solid var(--clr-neutral-100);
+}
+
+.centerLineAnimation {
+  position: relative;
+}
+
+.centerLineAnimation::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background-color: red;
+  transition: width 0.2s ease, left 0.2s ease;
+}
+
+.centerLineAnimation:hover::after {
+  width: 100%;
+  left: 0;
+}
+
+.centerLineAnimation:focus-within:after {
+  width: 100%;
+  left: 0;
 }
 input::placeholder {
-	color: #adadad;
+  color: #adadad;
 }
 
 input::-webkit-input-placeholder {
-	color: #adadad;
+  color: #adadad;
 }
 
 input::-moz-placeholder {
-	color: #adadad;
+  color: #adadad;
 }
 
 input:-ms-input-placeholder {
-	color: #adadad;
+  color: #adadad;
 }
 
 input::-ms-input-placeholder {
-	color: #adadad;
+  color: #adadad;
 }
 textarea::placeholder {
-	color: #adadad;
+  color: #adadad;
 }
 
 textarea::-webkit-textarea-placeholder {
-	color: #adadad;
+  color: #adadad;
 }
 
 textarea::-moz-placeholder {
-	color: #adadad;
+  color: #adadad;
 }
 
 textarea:-ms-textarea-placeholder {
-	color: #adadad;
+  color: #adadad;
 }
 
 textarea::-ms-textarea-placeholder {
-	color: #adadad;
+  color: #adadad;
 }
 .authentication-form {
-	display: flex;
-	flex-direction: column;
-	width: 100%;
-	flex-grow: 1;
-	padding: 3rem 5rem;
-	gap: 0.9rem;
-	background-color: var(--clr-primary-trnsp);
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  padding: 3rem 5rem;
+  gap: 0.9rem;
+  background-color: var(--clr-primary-trnsp);
 }
 .form-icon {
-	position: absolute;
-	top: 0.85rem;
+  position: absolute;
+  top: 0.85rem;
 }
 .form-icon-active {
-	padding-left: 1.5rem;
+  padding-left: 1.5rem;
 }
 .authentication-button-container {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-	margin-top: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: auto;
 }
 .text-align-right {
-	text-align: end;
+  text-align: end;
 }

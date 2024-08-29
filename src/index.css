@@ -325,18 +325,7 @@ img {
 .top-border-light {
 	border-top: 2px solid var(--clr-neutral-100);
 }
-hr {
-	display: block;
-	height: 1px;
-	border: 0;
-	border-top: 1px solid #ccc;
-	margin: 1em 0;
-	padding: 0;
-}
-.light-line {
-	border-color: var(--clr-primary-300);
-	background-color: var(--clr-primary-300);
-}
+
 .text-legal {
 	font-weight: 100;
 	font-size: small;
@@ -350,9 +339,6 @@ hr {
 
 .text-primary-400 {
 	color: var(--clr-primary-400);
-}
-.text-primary-300 {
-	color: var(--clr-primary-300);
 }
 .text-accent-400 {
 	color: var(--clr-accent-400);
@@ -560,4 +546,46 @@ hr {
 
 .notHoveredLineAnimation.lineAnimation::before {
 	animation: slideOut 1s forwards;
+}
+/* DELETE  */
+
+/* btn-2 */
+
+.btn-2 {
+	padding: 0 50px;
+	width: 160px;
+	height: 64px;
+	background: red;
+	color: white;
+	border-radius: 4px;
+	border: none;
+	font-size: 20px;
+	font-weight: bold;
+	cursor: pointer;
+	position: absolute;
+	z-index: 12;
+	overflow: hidden;
+}
+
+.btn-2:hover {
+	color: black;
+}
+
+.btn-2:after {
+	content: '';
+	background: white;
+	position: absolute;
+	z-index: -1;
+	left: -20%;
+	right: -20%;
+	top: 0;
+	bottom: 0;
+	transform: skewX(-45deg) scale(0, 1);
+	transition: all 0.7s;
+}
+
+.btn-2:hover:after {
+	transform: skewX(-45deg) scale(1, 1);
+	-webkit-transition: all 0.5s;
+	transition: all 0.5s;
 }
