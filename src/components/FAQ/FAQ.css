@@ -24,3 +24,14 @@
 .faq-item-active {
 	background-color: #f0f8ff3a;
 }
+@media (max-width: 1100px) {
+	.faq-outer-container {
+		width: 70vw;
+		grid-template-columns: 1fr;
+		gap: 2rem;
+	}
+	.faq-item-active {
+		background-color: #00000000;
+		padding-bottom: 1rem;
+	}
+}

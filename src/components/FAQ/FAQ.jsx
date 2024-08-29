@@ -9,6 +9,7 @@ import {
 } from '../animations/AnimationValues.jsx';
 
 function FAQ() {
+	const windowWidth = window.innerWidth;
 	const [activeQuestionTitle, setActiveQuestionTitle] = useState(null);
 	const activeResponse = faqQuestions
 		.filter((item) => {
@@ -30,6 +31,17 @@ function FAQ() {
 	return (
 		<div className='faq-outer-container text-container bottom-space'>
 			<div>
+				{windowWidth <= 1100 && (
+					<motion.p
+						variants={leftToRight}
+						initial='hidden'
+						whileInView='show'
+						viewport={{ once: true }}
+						className='fs-primary-heading'
+					>
+						Merak ettiğiniz bir şey mi var?
+					</motion.p>
+				)}
 				{faqQuestions.map((item, index) => {
 					return (
 						<motion.div
@@ -51,13 +63,16 @@ function FAQ() {
 								}
 							>
 								<FAQItem>{item.title}</FAQItem>
+								{windowWidth <= 1100 &&
+									activeQuestionTitle === item.title &&
+									activeResponse}
 							</div>
 						</motion.div>
 					);
 				})}
 			</div>
 			<div>
-				{activeQuestionTitle === null && (
+				{windowWidth > 1100 && activeQuestionTitle === null && (
 					<motion.p
 						variants={leftToRight}
 						initial='hidden'
@@ -68,7 +83,7 @@ function FAQ() {
 						Merak ettiğiniz bir şey mi var?
 					</motion.p>
 				)}
-				{activeResponse}
+				{windowWidth > 1100 && activeResponse}
 			</div>
 		</div>
 	);
