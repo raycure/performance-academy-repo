@@ -26,10 +26,6 @@ function ClassList({ classType }) {
   function classClickHandler(id) {
     setActiveClass(id);
 
-    window.scrollTo({
-      top: offsetPosition,
-      behavior: "smooth",
-    });
     // boyut degistikten sonra calisiyor cunku classclickhandler boyut degistiriyo
     requestAnimationFrame(() => {
       const element = document.getElementById(id);
@@ -37,6 +33,7 @@ function ClassList({ classType }) {
         const elementRect = element.getBoundingClientRect(); //uzaklık ve uzunluklari obje halinde donduruyor
         const elementTop = elementRect.top + window.scrollY; //pageYOffset deprecated scrollY kullan
         const elementHeight = element.scrollHeight;
+        element.style.height = elementHeight;
         const header = document.querySelector(".nav-container"); //i guess this has to be the way cunku oburleri olmadı
         const headerHeight = header ? header.offsetHeight : 0; //0 default bulamazsa diye
         console.log("container height");
@@ -55,9 +52,9 @@ function ClassList({ classType }) {
   }
 
   const classes = Object.keys(lesMillsPrograms).map((category) => {
-    if (category !== classType && classType !== "all") {
-      return;
-    }
+    // if (category !== classType && classType !== "all") {
+    //   return;
+    // }
 
     return lesMillsPrograms[category].map((program, subIndex) => {
       lineRefs.current = lesMillsPrograms[category].map(
@@ -100,7 +97,13 @@ function ClassList({ classType }) {
                       variants={accordion}
                       initial="hidden"
                       animate="animate"
-                      exit={{ opacity: 0, height: 0 }}
+                      exit={{
+                        opacity: 0,
+                        height: 0,
+                        transition: {
+                          duration: 0.8,
+                        },
+                      }}
                     >
                       <p>{program.description}</p>
                       <p>{program.whyMember}</p>
