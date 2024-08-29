@@ -1,15 +1,17 @@
 :root {
-	--clr-accent-400: #ef233c;
-	--clr-accent-100: #edf2f4;
+	--clr-accent-500: #b8b800;
+	--clr-accent-400: #e1e202;
+	--clr-accent-100: #b3b2ae;
 
-	--clr-primary-400: #151b25;
-	--clr-primary-300: #273040;
-	--clr-primary-200: #384355;
-	--clr-primary-100: #607088;
+	--clr-primary-500: #0b0b0b;
+	--clr-primary-400: #121212;
+	--clr-primary-300: #292c31;
+	--clr-primary-200: #444854;
+	--clr-primary-100: #d6d4c2;
 
-	--clr-primary-trnsp: #151b25e5;
+	--clr-primary-trnsp: #0a0a0ae3;
 
-	--clr-neutral-100: #8d99ae;
+	--clr-neutral-100: #c1c1bd;
 	--clr-neutral-900: hsl(0 0% 0%);
 
 	--ff-primary: 'Libre Franklin', sans-serif;
@@ -97,7 +99,7 @@ body {
 	overflow-x: hidden;
 }
 body::-webkit-scrollbar {
-	width: 8px;
+	width: 5px;
 }
 
 body::-webkit-scrollbar-track {
@@ -107,6 +109,7 @@ body::-webkit-scrollbar-track {
 body::-webkit-scrollbar-thumb {
 	background-color: var(--clr-accent-400);
 	outline: 1px solid var(--clr-accent-400);
+	border-radius: 3px;
 }
 /* A elements that don't have a get default styles */
 a:not([class]) {
@@ -259,6 +262,9 @@ figure,
 img {
 	pointer-events: none;
 } /* for truning off visual search menu */
+.display-hidden {
+	display: none;
+}
 .center-item {
 	margin-inline: auto;
 	width: fit-content;
@@ -428,6 +434,7 @@ hr {
 	position: relative;
 	height: 20px;
 }
+
 .btn-shine {
 	position: absolute;
 	top: 50%;

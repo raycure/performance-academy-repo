@@ -43,7 +43,12 @@ function PaginationContainer() {
 				})}
 			</div>
 			<div className='event-pagination-container'>
-				<button className='event-pagination-item' onClick={prePage}>
+				<button
+					className={`event-pagination-item ${
+						paginationPageNumber === 1 && 'display-hidden'
+					}`}
+					onClick={prePage}
+				>
 					<MdArrowBackIosNew />
 				</button>
 				<div className=''>
@@ -61,7 +66,12 @@ function PaginationContainer() {
 						</button>
 					))}
 				</div>
-				<button className='event-pagination-item' onClick={nextPage}>
+				<button
+					className={`event-pagination-item ${
+						paginationPageNumber === pageAmount && 'display-hidden'
+					}`}
+					onClick={nextPage}
+				>
 					<MdArrowForwardIos />
 				</button>
 			</div>

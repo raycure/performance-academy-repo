@@ -5,7 +5,7 @@
 	align-items: center;
 }
 .navigation-outer-container {
-	background-color: var(--clr-primary-400);
+	background-color: var(--clr-primary-500);
 	position: sticky;
 	top: 0;
 	z-index: 10;
@@ -17,17 +17,17 @@
 .nav-list-container {
 	gap: 2rem;
 	height: 100%;
-	margin-inline: auto;
+	justify-self: center;
 }
 .nav-btn-container {
-	justify-content: end;
-	gap: 1.5rem;
+	justify-content: space-around;
 	align-items: center;
 	width: clamp(4rem, 10vw, 20rem);
 }
 
 .nav-item-icon {
-	height: 3rem;
+	height: 100%;
+	width: 1.4rem;
 }
 .logo {
 	display: block;
@@ -39,7 +39,7 @@
 	justify-content: center;
 }
 .nav-list-container li a:not(.active):hover {
-	border-bottom: 3px solid #ef233ba3;
+	border-bottom: 3px solid #e2e202d2;
 }
 li .active {
 	border-bottom: 3px solid var(--clr-accent-400);
@@ -49,13 +49,10 @@ li .active {
 	display: block;
 	align-items: center;
 	justify-content: center;
-	color: #273040;
+	color: var(--clr-neutral-100);
 	text-decoration: none;
 }
 .menu {
-	display: none;
-}
-.menu-close {
 	display: none;
 }
 .menu-open {

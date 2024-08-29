@@ -1,6 +1,6 @@
 .btn {
 	width: fit-content;
-	background-color: #ef233c;
+	background-color: var(--clr-accent-500);
 	border-width: 0;
 	color: white;
 	padding: 0.2rem;
@@ -11,4 +11,4 @@
 	transform: scale(0.98); /* Slightly shrink the button */
 	box-shadow: 0 5px #666; /* Pressed shadow effect */
 	outline: none;
-  }
+}

@@ -54,7 +54,7 @@ function Navbar() {
 		<div className='navigation-outer-container'>
 			<nav
 				className={`nav-container nav-inner-container ${
-					menuOpen ? 'menu-close' : ''
+					menuOpen ? 'display-hidden' : ''
 				}`}
 			>
 				<Link to='/' aria-label='logo' style={{ display: 'contents' }}>
@@ -103,7 +103,7 @@ function Navbar() {
 			</nav>
 			<ul
 				className={`text-accent-400 bg-primary-400 box-shadow ${
-					menuOpen ? 'menu-open' : 'menu-close'
+					menuOpen ? 'menu-open' : 'display-hidden'
 				}`}
 			>
 				<FiX className='navbar-xmark' onClick={toggleNavMenu} />
