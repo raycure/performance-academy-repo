@@ -72,7 +72,7 @@ function Footer() {
             key={index}
             variants={upToDown}
             initial="hidden"
-            animate="show"
+            whileInView="show"
             custom={index}
             className=""
           >
