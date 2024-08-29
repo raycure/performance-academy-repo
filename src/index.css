@@ -497,12 +497,21 @@ img {
 }
 
 @keyframes slideOut {
+<<<<<<< HEAD
 	0% {
 		transform: translateX(0);
 	}
 	100% {
 		transform: translateX(100%);
 	}
+=======
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(105%);
+  }
+>>>>>>> 583fd23a8cbcb9a082d1e89642d5761e5f37cf20
 }
 
 .footer-link-con > {

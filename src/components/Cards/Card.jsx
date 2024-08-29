@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./cardStyle.css";
+import { motion } from "framer-motion";
 
 function Card({ backContent }) {
   const [flipped, setFlipped] = useState(false);
@@ -12,12 +13,17 @@ function Card({ backContent }) {
   };
 
   return (
-    <div className="card-container">
-      <div onClick={handleClick} className={`card ${flipped ? "flipped" : ""}`}>
-        <div className="back">Back</div>
-        <div className="front cardContent">{backContent}</div>
+    <>
+      <div className="card-container">
+        <div
+          onClick={handleClick}
+          className={`card ${flipped ? "flipped" : ""}`}
+        >
+          <div className="back">Back</div>
+          <div className="front cardContent">{backContent}</div>
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 
