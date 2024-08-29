@@ -1,7 +1,11 @@
 import { useRef, useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-//import axios from '../api/axios.js';
+import axios from '../../pages/api/axios.js';
 import { login } from '../../redux/auth/actions.js';
+import { Link } from 'react-router-dom';
+import Button from '../Button/Button.jsx';
+import logo from '../../assets/LesmillsLogo.png';
+import './Form.css';
 function LoginForm() {
 	const userRef = useRef();
 	const errRef = useRef();
@@ -92,7 +96,8 @@ function LoginForm() {
           </p>
         </section>
       ) : ( */}
-			<section>
+			<form onSubmit={handleSubmit} className='authentication-form'>
+				<img alt='logo' className='logo' src={logo}></img>
 				<p
 					ref={errRef}
 					className={errMsg ? 'errmsg' : 'offscreen'}
@@ -100,9 +105,8 @@ function LoginForm() {
 				>
 					{errMsg}
 				</p>
-				<h1>Sign In</h1>
-				<form onSubmit={handleSubmit}>
-					<label htmlFor='email'>email:</label>
+				<h1>Giriş Yapın</h1>
+				<div className=''>
 					<input
 						type='email'
 						id='email'
@@ -111,35 +115,32 @@ function LoginForm() {
 						onChange={(e) => setMail(e.target.value)}
 						value={mail}
 						required
+						placeholder='Email'
 					/>
-
-					<label htmlFor='password'>Password:</label>
+				</div>
+				<div className=''>
 					<input
 						type='password'
 						id='password'
 						onChange={(e) => setPwd(e.target.value)}
 						value={pwd}
 						required
+						placeholder='Şifre'
 					/>
-					<button className='btn'>Sign In</button>
-				</form>
-				<p>
-					Need an Account?
-					<br />
-					<span className='line'>
-						{/*put router link here*/}
-						<a href='#'>Sign Up</a>
-					</span>
-				</p>
+				</div>
+				<div className='authentication-button-container'>
+					<Button>Giriş Yapın</Button>
+					<Link to='/register' className='fs-400 text-align-right'>
+						Bir hesabınız yok mu? <br />
+						Buradan kaydolun!
+					</Link>
+				</div>
 				<label onClick={handleSub}>
-					User Name: Test{' '}
+					<br /> User Name: Test{' '}
 					{localStorage.getItem('accessToken') != '' ? '1' : '0'}
 				</label>
-				<button className='btn' onClick={handleLogout}>
-					{' '}
-					Sign out
-				</button>
-			</section>
+				<Button onClick={handleLogout}>Çıkış Yapın</Button>
+			</form>
 		</>
 	);
 }
