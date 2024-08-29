@@ -106,7 +106,7 @@ function LoginForm() {
 					{errMsg}
 				</p>
 				<h1>Giriş Yapın</h1>
-				<div className=''>
+				<div className='centerLineAnimation'>
 					<input
 						type='email'
 						id='email'
@@ -118,7 +118,7 @@ function LoginForm() {
 						placeholder='Email'
 					/>
 				</div>
-				<div className=''>
+				<div className='centerLineAnimation'>
 					<input
 						type='password'
 						id='password'

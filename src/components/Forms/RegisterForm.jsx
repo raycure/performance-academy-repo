@@ -75,7 +75,7 @@ function RegisterForm() {
 		<form onSubmit={handleSubmit} className='authentication-form'>
 			<img alt='logo' className='logo' src={logo}></img>
 			<p ref={userRef}>Kaydolun!</p>
-			<div className='relative-position'>
+			<div className='relative-position centerLineAnimation'>
 				<input
 					type='text'
 					placeholder='Kullanıcı Adı'
@@ -119,16 +119,18 @@ function RegisterForm() {
 				<br />
 				Letters, numbers, underscores, hyphens allowed.
 			</p>
-			<input
-				type='email'
-				id='email'
-				placeholder='Email'
-				name='email'
-				onChange={(e) => setMail(e.target.value)}
-				value={mail}
-				required
-			/>
-			<div className='relative-position'>
+			<div className='centerLineAnimation'>
+				<input
+					type='email'
+					id='email'
+					placeholder='Email'
+					name='email'
+					onChange={(e) => setMail(e.target.value)}
+					value={mail}
+					required
+				/>
+			</div>
+			<div className='relative-position centerLineAnimation'>
 				<input
 					type='password'
 					id='password'
@@ -170,7 +172,7 @@ function RegisterForm() {
 				<span aria-label='dollar sign'>$</span>{' '}
 				<span aria-label='percent'>%</span>
 			</p>
-			<div className='relative-position'>
+			<div className='relative-position centerLineAnimation'>
 				<input
 					type='password'
 					id='confirm_pwd'
