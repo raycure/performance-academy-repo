@@ -23,7 +23,7 @@ function FAQ() {
           key={activeQuestionTitle}
         >
           {" "}
-          <div className="fw-regular fs-500">{item.response}</div>;
+          <div className="fw-regular fs-500">{item.response}</div>
         </motion.div>
       );
     });
@@ -54,7 +54,15 @@ function FAQ() {
       </div>
       <div>
         {activeQuestionTitle === null && (
-          <p className="fs-primary-heading">Merak ettiğiniz bir şey mi var?</p>
+          <motion.p
+            variants={leftToRight}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
+            className="fs-primary-heading"
+          >
+            Merak ettiğiniz bir şey mi var?
+          </motion.p>
         )}
         {activeResponse}
       </div>

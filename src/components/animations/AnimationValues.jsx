@@ -14,6 +14,21 @@ const downToUp = {
   }),
 };
 
+const upToDown = {
+  hidden: {
+    y: -20,
+    opacity: 0,
+  },
+  show: (index) => ({
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 1,
+      delay: 0.25 * index,
+    },
+  }),
+};
+
 const leftToRight = {
   hidden: {
     opacity: 0,
@@ -47,7 +62,7 @@ const ScalingAnimations = {
     opacity: 1,
     scale: 1,
     transition: {
-      duration: 0.8,
+      duration: 0.5,
     },
   },
   hidden: {
@@ -56,4 +71,4 @@ const ScalingAnimations = {
   },
 };
 
-export { downToUp, leftToRight, ScalingAnimations };
+export { downToUp, leftToRight, ScalingAnimations, upToDown };
