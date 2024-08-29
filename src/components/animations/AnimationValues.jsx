@@ -6,9 +6,8 @@ const downToUp = {
   show: (index) => ({
     opacity: 1,
     y: 0,
-    // x: 0,
     transition: {
-      duration: 1,
+      duration: 0.5,
       delay: 0.5 * index,
     },
   }),
@@ -16,12 +15,10 @@ const downToUp = {
 
 const upToDown = {
   hidden: {
-    y: -10,
     opacity: 0,
   },
   show: (index) => ({
     opacity: 1,
-    y: 0,
     transition: {
       duration: 1,
       delay: 0.1 * index,
@@ -32,23 +29,18 @@ const upToDown = {
 const leftToRight = {
   hidden: {
     opacity: 0,
-    x: -50,
+    x: -70,
   },
-  show: (index) => ({
-    opacity: 1,
-    x: 0,
-    transition: {
-      duration: 1,
-
-      delay: 0.35 * index,
-    },
-  }),
-  showWithoutIndex: {
-    opacity: 1,
-    x: 0,
-    transition: {
-      duration: 1,
-    },
+  show: (index) => {
+    console.log(`Animating element ${index}`);
+    return {
+      opacity: 1,
+      x: 0,
+      transition: {
+        duration: 0.35,
+        delay: index * 0.1,
+      },
+    };
   },
 
   hiddenSubtle: {
