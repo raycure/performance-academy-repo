@@ -32,7 +32,35 @@ const leftToRight = {
       delay: 0.5 * index,
     },
   }),
+  showWithoutIndex: {
+    opacity: 1,
+    //   y: 0,
+    x: 0,
+    transition: {
+      duration: 1,
+    },
+  },
+
+  hiddenSubtle: {
+    opacity: 0,
+    x: -20,
+  },
 };
-function LeftToRight() {}
-export default LeftToRight;
-export { downToUp, leftToRight };
+
+const zIndexAnimations = {
+  zIndexAnimation: {
+    opacity: 1,
+    scale: 1,
+    transition: {
+      duration: 1,
+    },
+  },
+  hidden: {
+    opacity: 0,
+    scale: 0.98,
+  },
+};
+
+function AnimationValues() {}
+export default AnimationValues;
+export { downToUp, leftToRight, zIndexAnimations };

@@ -3,7 +3,10 @@ import FAQItem from "./FAQItem";
 import { faqQuestions } from "../../assets/FAQQuestions";
 import "./FAQ.css";
 import { motion } from "framer-motion";
-import { leftToRight } from "../../components/animations/LeftToRight.jsx";
+import {
+  leftToRight,
+  zIndexAnimations,
+} from "../animations/AnimationValues.jsx";
 
 function FAQ() {
   const [activeQuestionTitle, setActiveQuestionTitle] = useState(null);
@@ -12,7 +15,17 @@ function FAQ() {
       return item.title === activeQuestionTitle;
     })
     .map((item) => {
-      return <div className="fw-regular fs-500">{item.response}</div>;
+      return (
+        <motion.div
+          variants={zIndexAnimations}
+          initial="hidden"
+          animate="zIndexAnimation"
+          key={activeQuestionTitle}
+        >
+          {" "}
+          <div className="fw-regular fs-500">{item.response}</div>;
+        </motion.div>
+      );
     });
   return (
     <div className="faq-outer-container text-container">

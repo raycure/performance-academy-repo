@@ -9,7 +9,7 @@ import CardCarousel from "../../components/Carousels/CardCarousel";
 import RegisterForm from "../../components/Forms/RegisterForm";
 import TestInput from "./TestInput.jsx";
 import { motion } from "framer-motion";
-import { downToUp } from "../../components/animations/LeftToRight.jsx";
+import { downToUp } from "../../components/animations/AnimationValues.jsx";
 
 function Main() {
   const cards = Object.keys(lesMillsPrograms).map((category, index) => {
