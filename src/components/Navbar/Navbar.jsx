@@ -6,12 +6,57 @@ import Button from '../Button/Button';
 import logo from '../../assets/LesmillsLogo.png';
 import { HiOutlineMenuAlt3 } from 'react-icons/hi';
 import { GrLanguage } from 'react-icons/gr';
+import { FiX } from 'react-icons/fi';
+import { FaInstagram } from 'react-icons/fa6';
+import { FaYoutube } from 'react-icons/fa6';
+import { FaTiktok } from 'react-icons/fa6';
+import { FaLinkedinIn } from 'react-icons/fa6';
+import { FaFacebookF } from 'react-icons/fa6';
+import { FaPinterestP } from 'react-icons/fa6';
 function Navbar() {
 	const [menuOpen, setMenuOpen] = useState(false);
-
+	const toggleNavMenu = () => {
+		setMenuOpen(false);
+	};
+	const icons = [
+		{
+			href: 'https://www.instagram.com/lesmills/',
+			Icon: FaInstagram,
+			label: 'Instagram',
+		},
+		{
+			href: 'https://www.youtube.com/user/lesmillsgroupfitness',
+			Icon: FaYoutube,
+			label: 'YouTube',
+		},
+		{
+			href: 'https://www.tiktok.com/@lesmills',
+			Icon: FaTiktok,
+			label: 'TikTok',
+		},
+		{
+			href: 'https://www.linkedin.com/company/les-mills-international/',
+			Icon: FaLinkedinIn,
+			label: 'LinkedIn',
+		},
+		{
+			href: 'https://www.facebook.com/lesmills',
+			Icon: FaFacebookF,
+			label: 'Facebook',
+		},
+		{
+			href: 'https://tr.pinterest.com/lesmills/',
+			Icon: FaPinterestP,
+			label: 'Pinterest',
+		},
+	];
 	return (
 		<div className='navigation-outer-container'>
-			<nav className='nav-container nav-inner-container'>
+			<nav
+				className={`nav-container nav-inner-container ${
+					menuOpen ? 'menu-close' : ''
+				}`}
+			>
 				<Link to='/' aria-label='logo' style={{ display: 'contents' }}>
 					<img alt='beep' className='logo' src={logo}></img>
 				</Link>
@@ -57,26 +102,57 @@ function Navbar() {
 				</div>
 			</nav>
 			<ul
-				className={`text-accent-400 menu ${
+				className={`text-accent-400 bg-primary-400 ${
 					menuOpen ? 'menu-open' : 'menu-close'
 				}`}
 			>
-				<li>
-					<NavLink to='/'>Ana Sayfa</NavLink>
-				</li>
-				<li>
-					<NavLink to='/programlar'>Kurslar</NavLink>
-				</li>
-				<li>
-					<NavLink to='/duyurular'>Duyurular</NavLink>
-				</li>
-				<li>
-					<NavLink to='/kurslarım'>Kurslarım</NavLink>
-				</li>
-				<li>
-					<NavLink to='/iletişim'>İletişim</NavLink>
-				</li>
-				<Button redirect={'/register'}>Kaydol</Button>
+				<FiX className='navbar-xmark' onClick={toggleNavMenu} />
+				<div className='menu-inner-container'>
+					<hr />
+					<li>
+						<NavLink onClick={toggleNavMenu} to='/'>
+							Ana Sayfa
+						</NavLink>
+					</li>
+					<hr className='light-line' />
+					<li>
+						<NavLink onClick={toggleNavMenu} to='/programlar'>
+							Kurslar
+						</NavLink>
+					</li>
+					<hr className='light-line' />
+					<li>
+						<NavLink onClick={toggleNavMenu} to='/etkinlikler'>
+							Etkinlikler
+						</NavLink>
+					</li>
+					<hr className='light-line' />
+					<li>
+						<NavLink onClick={toggleNavMenu} to='/kurslarım'>
+							Kurslarım
+						</NavLink>
+					</li>
+					<hr className='light-line' />
+					<li>
+						<NavLink onClick={toggleNavMenu} to='/iletişim'>
+							İletişim
+						</NavLink>
+					</li>
+					<hr />
+				</div>
+				<div className='footer-social-container nav-menu-social-container'>
+					{icons.map((icon, index) => (
+						<Link key={index} to={icon.href}>
+							<icon.Icon
+								className='icon'
+								aria-label={icon.label}
+							/>
+						</Link>
+					))}
+				</div>
+				<Button onClick={toggleNavMenu} redirect={'/register'}>
+					Kaydol
+				</Button>
 			</ul>
 		</div>
 	);
