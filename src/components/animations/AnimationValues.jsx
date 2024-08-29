@@ -1,5 +1,3 @@
-import React from "react";
-import { motion } from "framer-motion";
 const downToUp = {
   hidden: {
     y: 100,
@@ -18,13 +16,11 @@ const downToUp = {
 
 const leftToRight = {
   hidden: {
-    //   y: 100,
     opacity: 0,
     x: -100,
   },
   show: (index) => ({
     opacity: 1,
-    //   y: 0,
     x: 0,
     transition: {
       duration: 1,
@@ -34,7 +30,6 @@ const leftToRight = {
   }),
   showWithoutIndex: {
     opacity: 1,
-    //   y: 0,
     x: 0,
     transition: {
       duration: 1,
@@ -56,11 +51,9 @@ const zIndexAnimations = {
     },
   },
   hidden: {
-    opacity: 0,
+    opacity: 0.1,
     scale: 0.98,
   },
 };
 
-function AnimationValues() {}
-export default AnimationValues;
 export { downToUp, leftToRight, zIndexAnimations };
