@@ -95,6 +95,6 @@ function ClassList({ classType }) {
 			);
 		});
 	});
-	return <>{classes}</>;
+	return <div className='bottom-space'>{classes}</div>;
 }
 export default ClassList;

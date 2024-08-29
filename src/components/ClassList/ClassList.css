@@ -1,40 +1,40 @@
 .class-item-container {
-  width: 65%;
-  align-items: stretch;
-  margin-inline: auto;
-  overflow: hidden;
-  padding: 1rem;
-  position: relative;
-  max-height: 20rem;
-  transition: max-height 1s ease-in-out;
+	width: 65%;
+	align-items: stretch;
+	margin-inline: auto;
+	overflow: hidden;
+	padding: 1rem;
+	position: relative;
+	max-height: 20rem;
+	transition: max-height 1s ease-in-out;
 }
 .more-button-container {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  padding-top: 0.5rem;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	padding-top: 0.5rem;
 }
 .class-logo {
-  height: 2.5rem;
-  margin-bottom: 0.6rem;
-  object-fit: contain;
-  width: max-content;
+	height: 2.5rem;
+	margin-bottom: 0.6rem;
+	object-fit: contain;
+	width: max-content;
 }
 .class-img {
-  max-height: 400px;
-  height: 40vh;
-  float: left !important;
-  margin-right: 1rem;
+	max-height: 400px;
+	height: 40vh;
+	float: left !important;
+	margin-right: 1rem;
 }
 .class-background-shape {
-  left: 5%;
-  width: 90%;
-  background-color: var(--clr-primary-300);
-  -ms-transform: skewX(-45deg);
-  -webkit-transform: skewX(-45deg);
-  transform: skewX(-45deg);
-  z-index: -5;
+	left: 5%;
+	width: 90%;
+	background-color: var(--clr-primary-300);
+	-ms-transform: skewX(-45deg);
+	-webkit-transform: skewX(-45deg);
+	transform: skewX(-45deg);
+	z-index: -5;
 }
 .active {
-  max-height: 60rem;
+	max-height: 60rem;
 }

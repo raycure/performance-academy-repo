@@ -32,7 +32,7 @@ function CalendarContainer() {
 	}
 
 	return (
-		<div className='calendar-container bg-primary-400'>
+		<div className='calendar-container bg-primary-400 bottom-space'>
 			<CalendarEventItem
 				eventClicked={eventClicked}
 				eventId={activeEventId}

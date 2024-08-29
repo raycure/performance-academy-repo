@@ -28,7 +28,7 @@ function FAQ() {
 			);
 		});
 	return (
-		<div className='faq-outer-container text-container'>
+		<div className='faq-outer-container text-container bottom-space'>
 			<div>
 				{faqQuestions.map((item, index) => {
 					return (

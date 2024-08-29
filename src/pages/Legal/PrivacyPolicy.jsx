@@ -1,7 +1,7 @@
 import React from 'react';
 function PrivacyPolicy() {
 	return (
-		<div>
+		<div className='bottom-space'>
 			<p>
 				Kişisel Verilerin Korunması Aydınlatma Metni Penta Teknoloji
 				Ürünleri Dağıtım Ticaret A.Ş. kişisel verilerinizin hukuka uygun

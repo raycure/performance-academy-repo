@@ -42,7 +42,7 @@ function PaginationContainer() {
 					);
 				})}
 			</div>
-			<div className='event-pagination-container'>
+			<div className='event-pagination-container bottom-space'>
 				<button
 					className={`event-pagination-item ${
 						paginationPageNumber === 1 && 'display-hidden'

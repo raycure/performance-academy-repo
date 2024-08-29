@@ -1,7 +1,7 @@
 import React from 'react';
 function Cookies() {
 	return (
-		<div>
+		<div className='bottom-space'>
 			<p>
 				Genel Kullanılmakta olan Internet tarayıcısı aracılığı ile
 				Internet ağ sunucusu tarafından kullanıcıların cihazlarına

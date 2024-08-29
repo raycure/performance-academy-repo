@@ -20,9 +20,9 @@
 	justify-self: center;
 }
 .nav-btn-container {
-	justify-content: space-around;
+	justify-content: space-between;
 	align-items: center;
-	width: clamp(4rem, 10vw, 20rem);
+	width: clamp(6rem, 10vw, 20rem);
 }
 
 .nav-item-icon {
@@ -31,7 +31,7 @@
 }
 .logo {
 	display: block;
-	width: clamp(4rem, 10vw, 20rem);
+	width: clamp(5rem, 10vw, 20rem);
 	padding: 0.8rem 0rem;
 }
 .nav-list-container li {
@@ -39,7 +39,7 @@
 	justify-content: center;
 }
 .nav-list-container li a:not(.active):hover {
-	border-bottom: 3px solid #e2e202d2;
+	border-bottom: 3px solid #ef233ba3;
 }
 li .active {
 	border-bottom: 3px solid var(--clr-accent-400);

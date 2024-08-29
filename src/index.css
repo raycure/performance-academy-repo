@@ -1,11 +1,12 @@
 :root {
-	--clr-accent-500: #b8b800;
-	--clr-accent-400: #e1e202;
+	--clr-accent-600: #1bcf3c;
+	--clr-accent-500: #fecc02;
+	--clr-accent-400: #ef233c;
 	--clr-accent-100: #b3b2ae;
 
 	--clr-primary-500: #0b0b0b;
-	--clr-primary-400: #121212;
-	--clr-primary-300: #292c31;
+	--clr-primary-400: #151515;
+	--clr-primary-300: #292d35;
 	--clr-primary-200: #444854;
 	--clr-primary-100: #d6d4c2;
 
@@ -94,7 +95,7 @@ body {
 	line-height: 1.5;
 	font-family: var(--ff-primary);
 	font-weight: var(--fw-semi-bold);
-	color: var(--clr-accent-100);
+	color: white;
 	background-color: var(--clr-primary-400);
 	overflow-x: hidden;
 }
@@ -264,6 +265,9 @@ img {
 } /* for truning off visual search menu */
 .display-hidden {
 	display: none;
+}
+.bottom-space {
+	margin-bottom: 10vw;
 }
 .center-item {
 	margin-inline: auto;

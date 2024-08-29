@@ -52,13 +52,13 @@ export const LesMillsEvents = assignUniqueIds([
 	{
 		title: 'BODYJAM',
 		date: '2024-09-15',
-		color: '#d4006a',
+
 		program: 'BODYJAM',
 	},
 	{
 		title: 'meowww',
 		date: '2024-10-26',
-		color: '#d4006a',
+
 		program: 'BODYSTEP',
 	},
 	{

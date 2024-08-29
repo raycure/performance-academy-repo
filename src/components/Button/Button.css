@@ -1,14 +1,16 @@
 .btn {
 	width: fit-content;
 	background-color: var(--clr-accent-500);
-	border-width: 0;
 	color: white;
-	padding: 0.2rem;
+	padding: 0.4rem;
+	display: flex;
+	flex-direction: row;
+	border-radius: 3px;
 }
 
 .btn:active {
-	background-color: #3e8e41; /* Darker green when pressed */
+	background-color: #b3aa06; /* Darker green when pressed */
 	transform: scale(0.98); /* Slightly shrink the button */
-	box-shadow: 0 5px #666; /* Pressed shadow effect */
+	box-shadow: 0 4px #625921; /* Pressed shadow effect */
 	outline: none;
 }
