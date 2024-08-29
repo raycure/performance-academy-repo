@@ -58,9 +58,15 @@ function FAQ() {
 			</div>
 			<div>
 				{activeQuestionTitle === null && (
-					<p className='fs-primary-heading'>
+					<motion.p
+						variants={leftToRight}
+						initial='hidden'
+						whileInView='show'
+						viewport={{ once: true }}
+						className='fs-primary-heading'
+					>
 						Merak ettiğiniz bir şey mi var?
-					</p>
+					</motion.p>
 				)}
 				{activeResponse}
 			</div>
