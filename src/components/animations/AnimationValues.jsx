@@ -42,8 +42,8 @@ const leftToRight = {
   },
 };
 
-const zIndexAnimations = {
-  zIndexAnimation: {
+const ScalingAnimations = {
+  getBigger: {
     opacity: 1,
     scale: 1,
     transition: {
@@ -51,9 +51,9 @@ const zIndexAnimations = {
     },
   },
   hidden: {
-    opacity: 0.1,
+    opacity: 1,
     scale: 0.98,
   },
 };
 
-export { downToUp, leftToRight, zIndexAnimations };
+export { downToUp, leftToRight, ScalingAnimations };

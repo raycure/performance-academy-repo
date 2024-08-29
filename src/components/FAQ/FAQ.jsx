@@ -5,7 +5,7 @@ import "./FAQ.css";
 import { motion } from "framer-motion";
 import {
   leftToRight,
-  zIndexAnimations,
+  ScalingAnimations,
 } from "../animations/AnimationValues.jsx";
 
 function FAQ() {
@@ -17,9 +17,9 @@ function FAQ() {
     .map((item) => {
       return (
         <motion.div
-          variants={zIndexAnimations}
+          variants={ScalingAnimations}
           initial="hidden"
-          animate="zIndexAnimation"
+          animate="getBigger"
           key={activeQuestionTitle}
         >
           {" "}
