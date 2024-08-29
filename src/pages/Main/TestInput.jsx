@@ -1,6 +1,5 @@
-import React from "react";
 function TestInput() {
-  return <div>react</div>;
+  return <input> dasfasfas</input>;
 }
 
 export default TestInput;

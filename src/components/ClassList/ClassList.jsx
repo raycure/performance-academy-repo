@@ -4,11 +4,23 @@ import Button from "../Button/Button";
 import { lesMillsPrograms } from "../../assets/LesmillsPrograms";
 import { MdOutlineDoubleArrow } from "react-icons/md";
 import name from "/ornek.jpg";
-import { Link } from "react-router-dom";
-import { motion, useScroll } from "framer-motion";
-import { leftToRight } from "../animations/AnimationValues.jsx";
+import { Link, redirect } from "react-router-dom";
+import { AnimatePresence, motion, useAnimation } from "framer-motion";
+import { leftToRightForClasses } from "../animations/AnimationValues.jsx";
+import { accordion } from "../animations/AnimationValues.jsx";
 
 function ClassList({ classType }) {
+  const elementRef = useRef(null);
+  const controls = useAnimation();
+
+  const handleScroll = () => {
+    if (elementRef.current) {
+      window.scrollTo({
+        top: elementRef.current.offsetTop,
+        behavior: "smooth",
+      });
+    }
+  };
   const [activeClass, setActiveClass] = useState(null);
 
   function classClickHandler(id) {
@@ -24,15 +36,13 @@ function ClassList({ classType }) {
         element.style.height = elementHeight;
         const header = document.querySelector(".nav-container"); //i guess this has to be the way cunku oburleri olmadı
         const headerHeight = header ? header.offsetHeight : 0; //0 default bulamazsa diye
-        const scrollPosition = elementTop - headerHeight;
-
         const middle =
           elementTop -
           window.innerHeight / 2 +
           elementHeight / 2 -
           headerHeight / 2;
         window.scrollTo({
-          top: scrollPosition,
+          top: elementTop - headerHeight, // Subtract the header height if there is one
           behavior: "smooth",
         });
       }
@@ -40,15 +50,15 @@ function ClassList({ classType }) {
   }
 
   const classes = Object.keys(lesMillsPrograms).map((category) => {
-    if (category !== classType && classType !== "all") {
-      return;
-    }
+    // if (category !== classType && classType !== "all") {
+    //   return;
+    // }
 
     return lesMillsPrograms[category].map((program, subIndex) => {
       const isActive = activeClass === program.id;
       return (
         <motion.div
-          variants={leftToRight}
+          variants={leftToRightForClasses}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, amount: 0.1 }}
@@ -56,9 +66,7 @@ function ClassList({ classType }) {
         >
           <div
             key={subIndex}
-            className={`class-item-container text-container top-border-light ${
-              isActive ? "active" : ""
-            }`}
+            className="class-item-container text-container top-border-light"
             id={program.id}
           >
             <img
@@ -74,20 +82,27 @@ function ClassList({ classType }) {
               />
               <p className="slogan">{program.sum}</p>
 
-              {isActive && (
-                <div>
-                  <p>{program.description}</p>
-                  <p>{program.whyMember}</p>
-                  <p>{program.whyYou}</p>
-                  <Link
-                    onClick={() => {
-                      setActiveClass(null);
-                    }}
+              <AnimatePresence>
+                {isActive && (
+                  <motion.div
+                    variants={accordion}
+                    initial="hidden"
+                    animate="animate"
+                    exit={{ opacity: 0, height: 0 }}
                   >
-                    Daha az göster
-                  </Link>
-                </div>
-              )}
+                    <p>{program.description}</p>
+                    <p>{program.whyMember}</p>
+                    <p>{program.whyYou}</p>
+                    <Link
+                      onClick={() => {
+                        setActiveClass(null);
+                      }}
+                    >
+                      Daha az göster
+                    </Link>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
             <div className="more-button-container top-border-light">
               <div>
@@ -106,11 +121,22 @@ function ClassList({ classType }) {
       );
     });
   });
-  return <>{classes}</>;
+  return (
+    <>
+      {classes}
+
+      <div style={{ backgroundColor: "red", width: 300, height: 300 }}>
+        <motion.div
+          ref={elementRef}
+          initial={{ opacity: 0 }}
+          animate={controls}
+          transition={{ duration: 0.5 }}
+        >
+          <h1>Scroll to me!</h1>
+        </motion.div>
+        <button onClick={handleScroll}>Scroll to Top</button>
+      </div>
+    </>
+  );
 }
 export default ClassList;
-
-const DATA = [
-  { id: 0, name: "John" },
-  { id: 1, name: "Doe" },
-];

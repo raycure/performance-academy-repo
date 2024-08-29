@@ -7,11 +7,14 @@ import { lesMillsPrograms } from "../../assets/LesmillsPrograms";
 import Banner from "../../components/Banner/Banner";
 import CardCarousel from "../../components/Carousels/CardCarousel";
 import RegisterForm from "../../components/Forms/RegisterForm";
-import TestInput from "./TestInput.jsx";
 import { motion } from "framer-motion";
 import { downToUp } from "../../components/animations/AnimationValues.jsx";
 
+import { useState } from "react";
+
 function Main() {
+  const [classType, setClassType] = useState("all");
+
   const cards = Object.keys(lesMillsPrograms).map((category, index) => {
     const backContent = (
       <div key={index}>
@@ -86,8 +89,6 @@ function Main() {
       </div>
 
       {/* <RegisterForm /> */}
-
-      <TestInput></TestInput>
     </>
   );
 }
