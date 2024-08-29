@@ -70,7 +70,7 @@ const leftToRightForClasses = {
       x: 0,
       transition: {
         duration: 0.7,
-        delay: index * 0.2,
+        delayChildren: 0.5,
       },
     };
   },

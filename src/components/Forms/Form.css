@@ -92,6 +92,10 @@ input {
   left: 0;
 }
 
+.centerLineAnimation:focus-within:after {
+  width: 100%;
+  left: 0;
+}
 input::placeholder {
   color: #adadad;
 }
