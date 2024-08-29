@@ -16,10 +16,10 @@
 }
 .icon {
 	margin-inline: auto;
-	height: 100%;
 }
 .footer-outer-container .icon {
-	width: 1.4rem;
+	height: 1.2rem;
+	width: 1.2rem;
 }
 @media (max-width: 770px) {
 	.footer-grid {

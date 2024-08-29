@@ -102,7 +102,7 @@ function Navbar() {
 				</div>
 			</nav>
 			<ul
-				className={`text-accent-400 bg-primary-400 ${
+				className={`text-accent-400 bg-primary-400 box-shadow ${
 					menuOpen ? 'menu-open' : 'menu-close'
 				}`}
 			>
