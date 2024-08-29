@@ -16,7 +16,7 @@ const downToUp = {
 
 const upToDown = {
   hidden: {
-    y: -20,
+    y: -10,
     opacity: 0,
   },
   show: (index) => ({
@@ -24,7 +24,7 @@ const upToDown = {
     y: 0,
     transition: {
       duration: 1,
-      delay: 0.25 * index,
+      delay: 0.1 * index,
     },
   }),
 };
@@ -32,7 +32,7 @@ const upToDown = {
 const leftToRight = {
   hidden: {
     opacity: 0,
-    x: -100,
+    x: -50,
   },
   show: (index) => ({
     opacity: 1,
@@ -40,7 +40,7 @@ const leftToRight = {
     transition: {
       duration: 1,
 
-      delay: 0.5 * index,
+      delay: 0.35 * index,
     },
   }),
   showWithoutIndex: {
@@ -62,7 +62,7 @@ const ScalingAnimations = {
     opacity: 1,
     scale: 1,
     transition: {
-      duration: 0.5,
+      duration: 0.35,
     },
   },
   hidden: {
