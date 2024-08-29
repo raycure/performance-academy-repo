@@ -12,7 +12,8 @@
 	border-radius: 8px;
 }
 .fc-theme-standard .fc-day:has(.fc-event-start):hover {
-	opacity: 0.7 !important;
+	opacity: 0.9 !important;
+	animation: pulse 0.3s linear 1;
 } /* event ustunde hoverlayınca opacity azaltma */
 .fc .fc-daygrid-day-number {
 	padding: 0;
@@ -53,6 +54,3 @@
 .fc a:hover {
 	opacity: 1 !important;
 } /*abi ben linkleri genel otomatik hoverlama vermistim burda onu kapadım aslında onu da animation yapıncakapıycam*/
-
-.calendar-container {
-}
