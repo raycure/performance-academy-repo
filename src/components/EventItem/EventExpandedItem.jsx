@@ -20,7 +20,7 @@ function EventExpandedItem() {
 	}).map((event) => {
 		const eventDate = new Date(event.date);
 		const daysLeft = Math.floor(
-			(eventDate.getTime() - today.getTime()) / (1000 * 3600 * 24)
+			(eventDate.getTime() - today.getTime()) / (1000 * 3600 * 24) + 1
 		);
 
 		return (

@@ -58,7 +58,7 @@
 		height: 35vh;
 		object-fit: cover;
 	}
-	.class-logo {
+	.class-item-container .class-logo {
 		height: 2rem;
 	}
 }

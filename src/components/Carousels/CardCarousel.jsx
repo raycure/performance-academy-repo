@@ -8,7 +8,8 @@ import EventItem from '../EventItem/EventItem';
 import './Carousel.css';
 export default () => {
 	const eventItems = EventItem();
-
+	const windowWidth = window.innerWidth;
+	const slideAmount = windowWidth > 720 ? 3 : 2;
 	return (
 		<Swiper
 			modules={[Pagination, Autoplay, EffectCoverflow]}
@@ -28,7 +29,7 @@ export default () => {
 				depth: 70,
 				modifier: 3,
 			}}
-			slidesPerView={2.7}
+			slidesPerView={slideAmount}
 		>
 			{eventItems.map((event, index) => {
 				return (

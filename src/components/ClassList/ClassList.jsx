@@ -44,7 +44,6 @@ function ClassList({ classType }) {
 				element.style.height = elementHeight;
 				const header = document.querySelector('.nav-container'); //i guess this has to be the way cunku oburleri olmadı
 				const headerHeight = header ? header.offsetHeight : 0; //0 default bulamazsa diye
-				console.log('container height');
 
 				const middle =
 					elementTop -

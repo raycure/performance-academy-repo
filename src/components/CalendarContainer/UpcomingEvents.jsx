@@ -2,13 +2,14 @@ import React from 'react';
 import { LesMillsEvents } from '../../assets/LesmillsEvents';
 import { HashLink } from 'react-router-hash-link';
 import Button from '../Button/Button';
+import { lesMillsPrograms } from '../../assets/LesmillsPrograms';
 function UpcomingEvents() {
 	const allEvents = LesMillsEvents;
 	const today = new Date();
 	const windowWidth = window.innerWidth;
-	const eventAmount = windowWidth > 1380 ? 3 : windowWidth > 1170 ? 2 : 1;
+	const eventAmount = windowWidth > 1200 ? 2 : 1;
 	return (
-		<div className='upcoming-events-container	'>
+		<div className='upcoming-events-container	upcoming-events'>
 			<p className={windowWidth > 1160 ? 'fs-700' : 'fs-650'}>
 				Yaklaşan Etkinlikler
 			</p>
@@ -22,16 +23,33 @@ function UpcomingEvents() {
 					const eventDate = new Date(event.date);
 					const daysLeft = Math.floor(
 						(eventDate.getTime() - today.getTime()) /
-							(1000 * 3600 * 24)
+							(1000 * 3600 * 24) +
+							1
 					);
+					const eventProgram = Object.keys(lesMillsPrograms)
+						.map((category) => {
+							return lesMillsPrograms[category].find(
+								(program) => {
+									return program.id === event.program;
+								}
+							);
+						})
+						.filter(Boolean);
 					return (
 						<div className='border-container' key={event.id}>
-							<HashLink to={`/programlar#${event.program}`}>
-								{event.program}
+							<HashLink
+								smooth={true}
+								to={`/programlar#${event.program}`}
+							>
+								<img
+									className='img class-logo'
+									src={eventProgram[0]?.logo}
+									alt=''
+								/>
 							</HashLink>
 							<p>
-								etkinliğimiz yaklaşmakta, bu etkinliğe katılmak
-								için {daysLeft} gününüz kaldı!
+								Etkinliğimize katılmak için son {daysLeft}{' '}
+								gününüz kaldı!
 							</p>
 							<Button>Etkinliğe Katılın</Button>
 						</div>

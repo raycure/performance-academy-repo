@@ -10,19 +10,24 @@ function CalendarContainer() {
 	const [eventClicked, setEventClicked] = useState(false);
 	const [activeEventId, setActiveEventId] = useState(null);
 	const events = LesMillsEvents;
-
+	const windowWidth = window.innerWidth;
 	function handleEventClick(eventInfo) {
 		setEventClicked(true);
 		const clickedEventId = eventInfo.event._def.publicId;
 		setActiveEventId(clickedEventId);
-		// console.log(activeEvent);
-		// console.log(typeof clickedEventId);
-		// const element = document.getElementById(
-		// 	eventInfo.event.extendedProps.program
-		// );
-		// element?.scrollIntoView({
-		// 	behavior: 'smooth',
-		// });
+		if (windowWidth <= 970) {
+			const element = document.getElementById('calendar-container');
+			const elementRect = element.getBoundingClientRect();
+			const elementTop = elementRect.top + window.scrollY;
+			const elementHeight = element.scrollHeight;
+			element.style.height = elementHeight;
+			const header = document.querySelector('.nav-container');
+			const headerHeight = header ? header.offsetHeight : 0;
+			window.scrollTo({
+				top: elementTop - headerHeight,
+				behavior: 'smooth',
+			});
+		}
 	}
 	function renderEvents(eventInfo) {
 		const eventDate = new Date(
@@ -32,7 +37,10 @@ function CalendarContainer() {
 	}
 
 	return (
-		<div className='calendar-container bg-primary-400 bottom-space'>
+		<div
+			id='calendar-container'
+			className='calendar-container bg-primary-400 bottom-space'
+		>
 			<CalendarEventItem
 				eventClicked={eventClicked}
 				eventId={activeEventId}

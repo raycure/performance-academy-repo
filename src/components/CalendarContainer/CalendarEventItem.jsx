@@ -25,17 +25,22 @@ function CalendarEventItem({ eventId }) {
 		.filter(Boolean);
 
 	return (
-		<div className='upcoming-events-container'>
+		<div className='upcoming-events-container selected-events'>
 			{Math.floor(
 				(activeEvent.fullDate.getTime() - today.getTime()) /
 					(1000 * 3600 * 24)
-			) < 0 ? ( //tarihi geçen etkinliği göstermemek için
+			) < -1 ? ( //tarihi geçen etkinliği göstermemek için
 				<div className='border-container'>
-					<img
-						src={eventProgram[0]?.logo}
-						alt='logo'
-						className='img class-logo'
-					/>
+					<HashLink
+						className=''
+						to={`/programlar#${eventProgram[0]?.id}`}
+					>
+						<img
+							src={eventProgram[0]?.logo}
+							alt='logo'
+							className='img class-logo'
+						/>
+					</HashLink>
 					<p>
 						Bu etkinliğimizin maalesef tarihi geçmiştir. Başka
 						etkinliklerimize göz atmaya devam edebilirsiniz!
@@ -43,20 +48,25 @@ function CalendarEventItem({ eventId }) {
 				</div>
 			) : (
 				<div className='border-container'>
-					<img
-						src={eventProgram[0]?.logo}
-						alt='logo'
-						className='img class-logo'
-					/>
-					<p>{eventProgram[0]?.sum}</p>
-					<HashLink to={`/programlar#${activeEvent.program}`}>
-						{activeEvent.program}
+					<HashLink
+						className=''
+						to={`/programlar#${eventProgram[0]?.id}`}
+					>
+						<img
+							src={eventProgram[0]?.logo}
+							alt='logo'
+							className='img class-logo'
+						/>
 					</HashLink>
+					<p>{eventProgram[0]?.sum}</p>
+
 					<p>
-						programını kapsayan bu etkinliğimize{' '}
+						{activeEvent.program} programını kapsayan bu
+						etkinliğimize{' '}
 						{Math.floor(
 							(activeEvent.fullDate.getTime() - today.getTime()) /
-								(1000 * 3600 * 24)
+								(1000 * 3600 * 24) +
+								1
 						)}{' '}
 						gün kalmıştır.
 					</p>

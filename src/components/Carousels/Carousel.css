@@ -8,11 +8,7 @@
 .swiper-scrollbar {
 	display: none;
 }
-.swiper-grid-column > .swiper-wrapper {
-	display: grid;
-	grid-template-rows: 1fr 1fr 1fr;
-	grid-auto-flow: column;
-}
+
 .grid-event-carousel {
 	& .swiper {
 		width: 100%;
@@ -24,7 +20,7 @@
 	& .swiper-slide {
 		text-align: center;
 		font-size: 18px;
-		background: #6c3838;
+		background: #000000;
 		height: calc((100% - 30px) / 2) !important;
 
 		/* Center slide text vertically */
@@ -56,4 +52,14 @@
 .swiper-3d .swiper-slide-shadow-top,
 .swiper-3d .swiper-slide-shadow-bottom {
 	border-radius: 20px;
+}
+@media (max-width: 910px) {
+	.card-carousel-event-container {
+		padding: 6rem 1.5rem;
+	}
+}
+@media (max-width: 720px) {
+	.card-carousel-event-container {
+		padding: 5rem 1.5rem;
+	}
 }
