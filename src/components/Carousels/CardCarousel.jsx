@@ -9,7 +9,7 @@ import './Carousel.css';
 export default () => {
 	const eventItems = EventItem();
 	const windowWidth = window.innerWidth;
-	const slideAmount = windowWidth > 720 ? 3 : 2;
+	const slideAmount = windowWidth > 770 ? 3 : windowWidth > 500 ? 2 : 1.5;
 	return (
 		<Swiper
 			modules={[Pagination, Autoplay, EffectCoverflow]}
