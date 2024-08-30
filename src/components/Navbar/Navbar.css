@@ -22,7 +22,8 @@
 .nav-btn-container {
 	justify-content: space-between;
 	align-items: center;
-	width: clamp(6rem, 10vw, 20rem);
+	width: fit-content;
+	gap: 0.2rem;
 }
 
 .nav-item-icon {
@@ -58,7 +59,7 @@ li .active {
 .menu-open {
 	display: none;
 }
-@media (max-width: 770px) {
+@media (max-width: 800px) {
 	.nav-menu-social-container {
 		align-self: center;
 		padding: 1rem 0;
