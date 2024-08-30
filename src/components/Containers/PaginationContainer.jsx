@@ -78,7 +78,7 @@ function PaginationContainer() {
 							}}
 							transition={{ delay: 0.5 }}
 							viewport={{ amount: 0.1 }}
-							className='grid-event-item-container'
+							className='grid-event-item-container box-shadow'
 						>
 							{/* <img
 							src='/ornek.jpg'

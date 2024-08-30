@@ -16,8 +16,8 @@ export default () => {
 			spaceBetween={30}
 			pagination={{ clickable: true }}
 			scrollbar={{ draggable: true }}
-			onSlideChange={() => console.log('slide change')}
-			onSwiper={(swiper) => console.log(swiper)}
+			// onSlideChange={() => console.log('slide change')}
+			// onSwiper={(swiper) => console.log(swiper)}
 			//autoplay={{ delay: 5000, disableOnInteraction: false }}
 			effect='coverflow'
 			centeredSlides={true}

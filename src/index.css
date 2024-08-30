@@ -267,6 +267,14 @@ img {
 .display-hidden {
 	display: none;
 }
+hr {
+	display: block;
+	height: 1px;
+	border: 0;
+	border-top: 1px solid #ccc;
+	margin: 0;
+	padding: 0;
+}
 .bottom-space {
 	margin-bottom: 10vw;
 }
@@ -284,8 +292,13 @@ img {
 	margin: auto;
 	width: fit-content;
 }
+.opacity-low {
+	opacity: 0.5;
+}
 .box-shadow {
-	box-shadow: 0px 0px 33px -3px rgba(0, 0, 0, 0.69);
+	-webkit-box-shadow: 0px 0px 20px 0px rgba(43, 43, 43, 0.69);
+	-moz-box-shadow: 0px 0px 20px 0px rgba(43, 43, 43, 0.69);
+	box-shadow: 0px 0px 20px 0px rgba(43, 43, 43, 0.69);
 }
 .space-between {
 	display: flex;
@@ -423,10 +436,6 @@ img {
 }
 .fs-900 {
 	font-size: var(--fs-900);
-}
-
-.cardContent > div > p:where(:not(:first-child)) {
-	border-top: solid black 2px;
 }
 
 /* button */
