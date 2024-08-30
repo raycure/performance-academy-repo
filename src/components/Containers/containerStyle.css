@@ -42,3 +42,7 @@
 .input-outer-container-large {
 	height: 10rem;
 }
+.grid-event-item-container {
+	display: flex;
+	justify-content: center;
+}

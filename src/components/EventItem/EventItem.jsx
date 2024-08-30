@@ -17,31 +17,33 @@ function EventItem() {
 
 	const events = LesMillsEvents.filter((event) => {
 		const eventDate = new Date(event.date);
-		return eventDate <= dateTwentyDaysAfter && eventDate >= today;
-	}).map((event) => {
-		const eventDate = new Date(event.date);
-		const daysLeft = Math.floor(
-			(eventDate.getTime() - today.getTime()) / (1000 * 3600 * 24)
-		);
+		return eventDate >= today; //eventDate <= dateTwentyDaysAfter &&
+	})
+		.splice(0, 5)
+		.map((event) => {
+			const eventDate = new Date(event.date);
+			const daysLeft = Math.floor(
+				(eventDate.getTime() - today.getTime()) / (1000 * 3600 * 24)
+			);
 
-		return (
-			<div className='event-item-inner-container' key={event.id}>
-				<h3>Yaklaşan Etkinlik!</h3>
-				<p className='event-text'>
-					{eventDate.toLocaleDateString()} tarihinde {event.title}{' '}
-					programından oluşan etkinliğimiz yakınlaşmakta!
-					Etkinliğimize son {daysLeft} gün!
-				</p>
-				<HashLink
-					smooth
-					to={`/programlar#${event.program}`}
-					scroll={scrollWithOffset}
-				>
-					Programı incelemek için buraya tıklayın!
-				</HashLink>
-			</div>
-		);
-	});
+			return (
+				<div className='event-item-inner-container' key={event.id}>
+					<h3>Yaklaşan Etkinlik!</h3>
+					<p className='event-text'>
+						{eventDate.toLocaleDateString()} tarihinde {event.title}{' '}
+						programından oluşan etkinliğimiz yakınlaşmakta!
+						Etkinliğimize son {daysLeft} gün!
+					</p>
+					<HashLink
+						smooth
+						to={`/programlar#${event.program}`}
+						scroll={scrollWithOffset}
+					>
+						Programı incelemek için buraya tıklayın!
+					</HashLink>
+				</div>
+			);
+		});
 
 	return events.length ? events : null;
 }
