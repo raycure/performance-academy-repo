@@ -19,9 +19,9 @@ import { createRef } from 'react';
 
 function ClassList({ classType }) {
 	const [activeClass, setActiveClass] = useState(null);
-
 	const lineRefs = React.useRef([]);
 	const elementRef = useRef(null);
+	const windowWidth = window.innerWidth;
 
 	function classClickHandler(id) {
 		setActiveClass(id);
@@ -75,14 +75,18 @@ function ClassList({ classType }) {
 					>
 						<div
 							key={subIndex}
-							className='class-item-container text-container top-border-light'
+							className={`class-item-container text-container top-border-light ${
+								windowWidth < 1130 && 'fs-400'
+							}`}
 							id={program.id}
 						>
-							<img
-								aria-label='program pic'
-								className='img class-img'
-								src={name}
-							/>
+							{windowWidth > 930 && (
+								<img
+									aria-label='program pic'
+									className='img class-img'
+									src={name}
+								/>
+							)}
 							<div>
 								<img
 									aria-label='logo'
@@ -105,7 +109,22 @@ function ClassList({ classType }) {
 												},
 											}}
 										>
+											{windowWidth <= 930 &&
+												windowWidth > 650 && (
+													<img
+														aria-label='program pic'
+														className='img class-img'
+														src={name}
+													/>
+												)}
 											<p>{program.description}</p>
+											{windowWidth <= 650 && (
+												<img
+													aria-label='program pic'
+													className='img class-img'
+													src={name}
+												/>
+											)}
 											<p>{program.whyMember}</p>
 											<p>{program.whyYou}</p>
 											<p>{program.result}</p>
@@ -132,6 +151,7 @@ function ClassList({ classType }) {
 													</p>
 												</div>
 												<Button
+													className='center-vertical'
 													onClick={() =>
 														classClickHandler(
 															program.id
@@ -149,7 +169,11 @@ function ClassList({ classType }) {
 								</AnimatePresence>
 							</div>
 							{!isActive && (
-								<div className='more-button-container top-border-light'>
+								<div
+									className={`more-button-container top-border-light fs-400 ${
+										windowWidth < 1130 && 'fs-300'
+									}`}
+								>
 									<div>
 										<p>Egzersiz Tipi: {program.type}</p>
 										<p>Ekipman: {program.equipment}</p>
@@ -160,6 +184,7 @@ function ClassList({ classType }) {
 										onClick={() =>
 											classClickHandler(program.id)
 										}
+										className='center-vertical'
 									>
 										{!isActive
 											? 'Daha Fazlası'
