@@ -86,7 +86,9 @@ function Navbar() {
           <Link aria-label="user" style={{ display: "contents" }}>
             <FaUser className="nav-item-icon" />
           </Link>
-          <Button redirect={"/register"}>Kaydol</Button>
+          <Button redirect={"/register"} classProp={"navbar-btn"}>
+            Kaydol
+          </Button>
         </div>
         <div className="menu nav-container">
           <Link aria-label="language" style={{ display: "contents" }}>
