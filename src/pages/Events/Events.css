@@ -26,6 +26,7 @@
 	width: 60vw;
 	margin-inline: auto;
 	padding: 1rem;
+	overflow: hidden !important;
 	/* grid-template-rows: 1fr 1fr 1fr; */
 }
 .event-page-poster-container {
