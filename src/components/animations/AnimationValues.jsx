@@ -20,21 +20,9 @@ const appearSlower = {
   show: (index) => ({
     opacity: 1,
     transition: {
-      duration: 1,
+      duration: 0.5,
       delay: 0.3 * index,
       // delay: 0.2,
-    },
-  }),
-};
-
-const test = {
-  hidden: {
-    opacity: 0,
-  },
-  show: (index) => ({
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.3,
     },
   }),
 };
@@ -88,16 +76,13 @@ const leftToRightForClasses = {
     opacity: 0,
     x: -70,
   },
-  show: (index) => {
-    console.log(`Animating element ${index}`);
-    return {
-      opacity: 1,
-      x: 0,
-      transition: {
-        duration: 0.7,
-        delayChildren: 0.5,
-      },
-    };
+  show: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      duration: 0.7,
+      delayChildren: 0.5,
+    },
   },
 };
 
@@ -138,5 +123,4 @@ export {
   appearSlower,
   button,
   leftToRightForClasses,
-  test,
 };

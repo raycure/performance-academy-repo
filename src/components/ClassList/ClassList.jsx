@@ -19,8 +19,16 @@ import { createRef } from 'react';
 
 function ClassList({ classType }) {
 	const [activeClass, setActiveClass] = useState(null);
+
+	useEffect(() => {
+		lineRefs.current = Object.keys(lesMillsPrograms).flatMap((category) =>
+			lesMillsPrograms[category].map((_, subIndex) => {
+				lineRefs.current[subIndex] ?? createRef();
+				console.log(subIndex);
+			})
+		);
+	});
 	const lineRefs = React.useRef([]);
-	const elementRef = useRef(null);
 	const windowWidth = window.innerWidth;
 
 	function classClickHandler(id) {
@@ -57,10 +65,6 @@ function ClassList({ classType }) {
 		// }
 
 		return lesMillsPrograms[category].map((program, subIndex) => {
-			lineRefs.current = lesMillsPrograms[category].map(
-				(_, subIndex) => lineRefs.current[subIndex] ?? createRef()
-			);
-
 			const isActive = activeClass === program.id;
 
 			return (
