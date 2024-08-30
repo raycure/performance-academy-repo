@@ -15,6 +15,10 @@ export const login = async ({ loginData }) => {
   try {
     const response = await axios.post("/login", loginData);
     const { status, data } = response;
+    console.log("currently looking for:", response);
+
+    console.log("data", data);
+
     return data;
   } catch (error) {
     console.log(error);

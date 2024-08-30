@@ -48,6 +48,7 @@ const login = async (req, res) => {
   const accessToken = jwt.sign(
     {
       userId: user._id,
+      email: user.email,
     },
     process.env.ACCESS_TOKEN_SECRET,
     { expiresIn: "3s" }
@@ -72,7 +73,11 @@ const login = async (req, res) => {
     // expiresAt: new Date(Date.now() + 30 * 1000), // 7 days from now
   });
 
-  return res.json({ value: accessToken, foundUser: addActiveUser });
+  return res.json({
+    accessToken: accessToken,
+    foundUser: addActiveUser,
+    message: "Successfully login user",
+  });
 };
 
 export default login;
