@@ -8,9 +8,7 @@
 	-ms-transform: skewX(-4deg);
 	transform: skewX(-4deg); */
 }
-.card-container:hover {
-	animation: pulse 0.3s linear 1;
-}
+
 .card-container .background-image {
 	border-radius: 30px;
 	z-index: -1;
@@ -56,10 +54,6 @@
 .back {
 	transform: rotateY(180deg);
 }
-
-/* .card-inner-container p:where(:not(:first-child)) {
-	border-top: solid #ffffff 0.5px !important;
-} */
 .card-inner-container hr:where(:last-child) {
 	display: none;
 }
