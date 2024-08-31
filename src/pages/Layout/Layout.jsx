@@ -18,6 +18,23 @@ function Layout() {
 		}, [location.pathname]);
 		return children;
 	};
+	// document.addEventListener('wheel', function (event) {
+	// 	if (event.deltaY > 0) {
+	// 		event.preventDefault();
+	// 		smoothScroll(document.documentElement, 100, 100);
+	// 	}
+	// });
+	// function smoothScroll(domElement, pixel, delay) {
+	// 	const intervalToRepeat = 25;
+	// 	const step = (intervalToRepeat * pixel) / delay;
+	// 	if (step < pixel) {
+	// 		domElement.scrollTop += step;
+	// 		setTimeout(function () {
+	// 			smoothScroll(domElement, pixel - step, delay);
+	// 		}, intervalToRepeat);
+	// 	}
+	// }
+
 	return (
 		<Wrapper>
 			<Navbar />
