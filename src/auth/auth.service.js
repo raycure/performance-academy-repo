@@ -29,7 +29,6 @@ export const login =
       );
       return response.payload;
     } catch (error) {
-      console.log(error);
       throw error;
     }
   };

@@ -75,7 +75,7 @@ const login = async (req, res) => {
 
   return res.json({
     accessToken: accessToken,
-    foundUser: addActiveUser,
+    user,
     message: "Successfully login user",
   });
 };

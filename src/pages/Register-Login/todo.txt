@@ -1,5 +1,4 @@
 Login and registeration
-    add spinning animation while waiting for a server response
     Add Error and Success Handlers for every kind of server response
 add constant key values for the env and fix that secure tag add conditional secure attribute
 add lazy loading

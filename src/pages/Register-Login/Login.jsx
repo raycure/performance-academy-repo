@@ -7,10 +7,12 @@ import { Link } from "react-router-dom";
 import "./formStyle.css";
 import Button from "../../components/Button/Button.jsx";
 import logo from "../../assets/LesmillsLogo.png";
+import { selectIsLoading } from "../../redux/auth/authStateSlice.js";
 
 function Login() {
   const userRef = useRef();
   const errRef = useRef();
+  const isLoading = useSelector(selectIsLoading);
   const dispatch = useDispatch();
 
   const [mail, setMail] = useState("");
@@ -21,10 +23,6 @@ function Login() {
   useEffect(() => {
     userRef.current.focus();
   }, []);
-
-  useEffect(() => {
-    setErrMsg("");
-  }, [mail, pwd]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -38,7 +36,18 @@ function Login() {
       setPwd("");
       setSuccess(true);
     } catch (err) {
-      console.log(err);
+      if (err.response) {
+        if (err.response.status === 404) {
+          setErrMsg("No account with this email has been registered.");
+        } else if (err.response.status === 409) {
+          setErrMsg("Invalid or missing credentials.");
+        } else {
+          setErrMsg("An error occurred during login. Please try again.");
+        }
+      } else {
+        setErrMsg("An error occurred. Please check your connection.");
+      }
+      console.log("loginde", err);
     }
   };
 
@@ -97,6 +106,13 @@ function Login() {
           </p>
         </section>
       ) : ( */}
+        <p
+          ref={errRef}
+          className={errMsg ? "errmsg" : "offscreen"}
+          aria-live="assertive"
+        >
+          {errMsg}
+        </p>
         <form onSubmit={handleSubmit} className="authentication-form">
           <img alt="logo" className="logo" src={logo}></img>
           <p
@@ -130,7 +146,8 @@ function Login() {
             />
           </div>
           <div className="authentication-button-container">
-            <Button>Giriş Yapın</Button>
+            <Button isLoading={isLoading}> Giriş Yapın</Button>
+            {errMsg != "" ? <p>{errMsg}</p> : ""}
             <Link to="/register" className="fs-400 text-align-right">
               Bir hesabınız yok mu? <br />
               Buradan kaydolun!
