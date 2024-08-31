@@ -1,14 +1,9 @@
 Login and registeration
-    look up for how the source code project handled session statuses
     add spinning animation while waiting for a server response
     Add Error and Success Handlers for every kind of server response
-add appearing animation for req in forms
-add auto deleting when refresh token expires
-add lazy loading
 add constant key values for the env and fix that secure tag add conditional secure attribute
+add lazy loading
 divide the fucking emailer
-make a helper function for to sending request high optional
-add activation mail
 add forgot password
 payment
 add languages
@@ -17,6 +12,8 @@ make a banner
     maybe increasing number animation?
 style cards
 style forgot password and reg mail
-
 add scrolling for classes use useRef
 add animations for every form
+add not allowing users open up login page if they are logged in or some other way of ensuring i can track if they logged in or not
+add appearing animation for req in forms
+add auto deleting when refresh token expires

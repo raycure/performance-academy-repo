@@ -1,5 +1,4 @@
-import * as actionTypes from './types.js';
-
+import * as actionTypes from "../tpyes.js";
 
 const INITIAL_STATE = {
   current: {},
