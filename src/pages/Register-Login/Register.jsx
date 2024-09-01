@@ -18,6 +18,7 @@ const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 
 function RegisterForm() {
+  const maxAttempts = 3;
   const userRef = useRef();
   const errRef = useRef();
   const dispatch = useDispatch();
@@ -59,22 +60,34 @@ function RegisterForm() {
     e.preventDefault();
     const v1 = USER_REGEX.test(user);
     const v2 = PWD_REGEX.test(pwd);
-
+    const userAttempts = 0;
     if (!v1 || !v2) {
       setErrMsg("invalid entry");
       return;
     }
-    const registerData = { username: user, password: pwd, email: mail };
-    dispatch(register({ registerData }));
-    setSuccess(true);
-    setUser("");
-    setPwd("");
-    setMatchPwd("");
+
+    try {
+      const registerData = { username: user, password: pwd, email: mail };
+      const response = await dispatch(register({ registerData }));
+      setSuccess(true);
+      setUser("");
+      setPwd("");
+      setMatchPwd("");
+    } catch (err) {
+      setErrMsg(err.data.message);
+    }
   }
   return (
     <div className="authentication-form-container box-shadow bottom-space">
       <form onSubmit={handleSubmit} className="authentication-form">
         <img alt="logo" className="logo" src={logo}></img>
+        <p
+          ref={errRef}
+          className={errMsg ? "errmsg" : "offscreen"}
+          aria-live="assertive"
+        >
+          {errMsg}
+        </p>
         <p ref={userRef}>Kaydolun!</p>
         <div className="relative-position centerLineAnimation">
           <input

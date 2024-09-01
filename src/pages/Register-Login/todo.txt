@@ -1,18 +1,15 @@
-Login and registeration
-    Add Error and Success Handlers for every kind of server response
-add constant key values for the env and fix that secure tag add conditional secure attribute
+what should i return after a 200 reg
 add lazy loading
-divide the fucking emailer
 add forgot password
 payment
 add languages
-make a banner
-    add icons
-    maybe increasing number animation?
-style cards
 style forgot password and reg mail
 add scrolling for classes use useRef
 add animations for every form
 add not allowing users open up login page if they are logged in or some other way of ensuring i can track if they logged in or not
 add appearing animation for req in forms
 add auto deleting when refresh token expires
+
+
+no connection error doesnt appear in login
+too many request error notify system 

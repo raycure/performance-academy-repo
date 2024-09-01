@@ -23,7 +23,6 @@ const login = async (req, res) => {
       result: null,
       error: error,
       message: "Invalid/Missing credentials.",
-      errorMessage: error.message,
     });
   }
 
@@ -58,14 +57,14 @@ const login = async (req, res) => {
       userId: user._id,
     },
     process.env.REFRESH_TOKEN_SECRET,
-    { expiresIn: "10s" }
+    { expiresIn: "5m" }
   );
   res.cookie("jwt", refreshToken, {
     httpOnly: true,
-    maxAge: 1000 * 60 * 60 * 24,
+    maxAge: 1000 * 60 * 60 * 24 * 30,
     sameSite: "Lax",
     path: "/",
-    secure: false, // add secure true for prod
+    secure: process.env.ENVIROMENT === "development" ? "false" : "true",
   });
   const addActiveUser = await Sessions.create({
     token: refreshToken,
@@ -73,7 +72,7 @@ const login = async (req, res) => {
     // expiresAt: new Date(Date.now() + 30 * 1000), // 7 days from now
   });
 
-  return res.json({
+  return res.status(200).json({
     accessToken: accessToken,
     user,
     message: "Successfully login user",

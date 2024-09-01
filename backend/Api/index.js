@@ -11,6 +11,7 @@ import verifyJWT from "./Middleware/verifyJWT.js";
 import cookieParser from "cookie-parser";
 import credentials from "./Middleware/credentials.js";
 import corsOptions from "../config/corsOptions.js";
+import rateLimit from "express-rate-limit";
 
 const port = 3001;
 
@@ -21,17 +22,22 @@ app.use(credentials);
 
 // app.set("trust proxy",1) for production dont know what it does though
 app.use(cors(corsOptions));
-
 app.use(cookieParser()); // middleware for cookieParser]]]
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-// routes
+const limiter = rateLimit({
+  windowMs: 1000 * 60 * 60,
+  max: 1,
+  message: "Too many requests, please try again later.",
+});
+
+app.use("/", limiter);
+app.use("/logout", logoutRoute);
 app.use("/register", registerRoute);
 app.use("/", verifyMailRoute);
 app.use("/login", loginRoute);
 app.use("/refresh", jwtRefresRoute);
-app.use("/logout", logoutRoute);
 app.use(verifyJWT);
 app.use("/test", testRoute);
 

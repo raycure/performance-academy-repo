@@ -6,13 +6,23 @@ import { fetchData } from "../redux/auth/authStateSlice.js";
 export const register =
   ({ registerData }) =>
   async (dispatch) => {
+    console.log("service calisti");
+
     try {
       const response = await dispatch(
-        fetchData({ method: "POST", url: "/register", data: registerData })
+        fetchData({
+          method: "POST",
+          url: "/register",
+          data: registerData,
+        })
       );
-      return response.payload;
-    } catch (err) {
-      console.log(err);
+      if (fetchData.rejected.match(response)) {
+        console.log("authta promise rejectlendi");
+        return Promise.reject(response.payload);
+      }
+      return response;
+    } catch (error) {
+      return Promise.reject(error);
     }
   };
 
@@ -27,8 +37,11 @@ export const login =
           data: loginData,
         })
       );
-      return response.payload;
+      if (fetchData.rejected.match(response)) {
+        return Promise.reject(response.payload);
+      }
+      return response;
     } catch (error) {
-      throw error;
+      return Promise.reject(error);
     }
   };

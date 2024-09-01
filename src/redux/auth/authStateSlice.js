@@ -14,10 +14,16 @@ export const fetchData = createAsyncThunk(
   "auth/fetchStatus",
   async ({ method, url, data = null }, { rejectWithValue }) => {
     try {
+      console.log("fetchdata calisti");
       const response = await axios({ method, url, data });
       return response.data;
     } catch (error) {
-      return rejectWithValue(error.message);
+      console.log("sliceta error alindi");
+      const responseData = {
+        data: error.response?.data,
+        status: error.response?.status,
+      };
+      return rejectWithValue(responseData);
     }
   }
 );
@@ -47,7 +53,7 @@ const authSlice = createSlice({
         state.status = "failed";
         state.isLoading = false;
         state.isSuccess = false;
-        state.error = action.payload;
+        state.error = action.payload || "An unknown error occurred";
       });
   },
 });

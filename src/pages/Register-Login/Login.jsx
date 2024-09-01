@@ -23,31 +23,25 @@ function Login() {
   useEffect(() => {
     userRef.current.focus();
   }, []);
+  useEffect(() => {
+    console.log("errMsg degisti", errMsg);
+
+    errRef.current.focus();
+  }, [errMsg]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const loginData = { email: mail, password: pwd };
       const response = await dispatch(login({ loginData }));
-      console.log(response.accessToken);
+      console.log("response.accessToken");
       const accessToken = response.accessToken;
       localStorage.setItem("accessToken", accessToken);
       setMail("");
       setPwd("");
       setSuccess(true);
     } catch (err) {
-      if (err.response) {
-        if (err.response.status === 404) {
-          setErrMsg("No account with this email has been registered.");
-        } else if (err.response.status === 409) {
-          setErrMsg("Invalid or missing credentials.");
-        } else {
-          setErrMsg("An error occurred during login. Please try again.");
-        }
-      } else {
-        setErrMsg("An error occurred. Please check your connection.");
-      }
-      console.log("loginde", err);
+      setErrMsg(err.data.message);
     }
   };
 
@@ -106,13 +100,6 @@ function Login() {
           </p>
         </section>
       ) : ( */}
-        <p
-          ref={errRef}
-          className={errMsg ? "errmsg" : "offscreen"}
-          aria-live="assertive"
-        >
-          {errMsg}
-        </p>
         <form onSubmit={handleSubmit} className="authentication-form">
           <img alt="logo" className="logo" src={logo}></img>
           <p
@@ -147,7 +134,13 @@ function Login() {
           </div>
           <div className="authentication-button-container">
             <Button isLoading={isLoading}> Giriş Yapın</Button>
-            {errMsg != "" ? <p>{errMsg}</p> : ""}
+            <p
+              ref={errRef}
+              className={errMsg ? "errmsg" : "errmsg"}
+              aria-live="assertive"
+            >
+              {errMsg}
+            </p>
             <Link to="/register" className="fs-400 text-align-right">
               Bir hesabınız yok mu? <br />
               Buradan kaydolun!
