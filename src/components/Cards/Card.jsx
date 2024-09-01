@@ -7,6 +7,7 @@ function Card({ backContent, frontContent }) {
 	const handleClick = () => {
 		setFlipped(!flipped);
 	};
+
 	return (
 		<div
 			className='card-container'

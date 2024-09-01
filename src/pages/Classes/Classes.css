@@ -14,3 +14,43 @@
 .class-nav-container {
 	width: 100%;
 }
+
+.class-selector-bar {
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	padding: 1.5rem 0;
+}
+.class-selector-item {
+	padding-inline: 1rem;
+	text-align: center;
+}
+.class-selector-item:where(:not(:last-child)) {
+	border-right: 1.5px solid white;
+}
+@media (max-width: 770px) {
+	.class-selector-item {
+		padding-inline: 0.5rem;
+	}
+}
+@media (max-width: 500px) {
+	.class-selector-bar {
+		width: 100%;
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		grid-template-rows: 1fr 1fr;
+		padding: 1rem;
+		gap: 1rem;
+	}
+	.class-selector-item {
+		display: flex;
+		border: 1px solid white;
+		height: 100%;
+		justify-content: center;
+		text-align: center;
+		align-items: center;
+		padding: 0.5rem;
+	}
+}

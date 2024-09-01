@@ -16,7 +16,7 @@
 	overflow: hidden !important; /*needed dont delete dont ask questions*/
 	/* grid-template-rows: 1fr 1fr 1fr; */
 }
-.event-page-poster-container {
+.page-poster-container {
 	overflow: hidden;
 	height: 40vh;
 	position: relative;

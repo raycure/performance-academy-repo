@@ -175,7 +175,7 @@ export const lesMillsPrograms = {
 			logo: '/classLogo/THE-TRIP.png',
 			picture: '',
 			id: 'THE-TRIP',
-			sum: 'THE TRIP gibi başka bir şey yok.  Bu, bizim efor-eğlence dediğimiz kondisyonun geleceğine bir yolculuktur.  Sinemadan, canlı konser deneyimlerinden ve etkileşimli oyunlardan ilham alan THE TRIP, amaca yönelik bir stüdyo, canlı eğitmenler ve sürükleyici videoyu birleştiren sürükleyici bir fitness deneyimidir.  Bu antrenmanın potansiyeli sınırsızdır.',
+			sum: 'THE TRIP gibisini bulamazsınız!  Bu, bizim efor-eğlence dediğimiz kondisyonun geleceğine bir yolculuktur.  Sinemadan, canlı konser deneyimlerinden ve etkileşimli oyunlardan ilham alan THE TRIP, amaca yönelik bir stüdyo, canlı eğitmenler ve sürükleyici videoyu birleştiren sürükleyici bir fitness deneyimidir.  Bu antrenmanın potansiyeli sınırsızdır.',
 			description:
 				'THE TRIP™, 40 dakikalık Çoklu zirve bisiklet antrenmanını dijital olarak yaratılmış dünyalarda bir yolculukla birleştiren, tamamen sürükleyici bir antrenman deneyimidir.  THE TRIP, sinema bilgisayarındaki ekran ve ses sistemi ile motivasyonu ve enerji çıkışını bir üst seviyeye taşıyarak ciddi kalori yakıyor.',
 			whyMember:

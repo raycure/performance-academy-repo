@@ -39,6 +39,7 @@ function EventExpandedItem() {
 					smooth
 					to={`/programlar#${event.program}`}
 					scroll={scrollWithOffset}
+					className='button-shine'
 				>
 					Programı incelemek için buraya tıklayın!
 				</HashLink>

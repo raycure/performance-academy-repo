@@ -15,7 +15,7 @@
 	--clr-neutral-100: #c1c1bd;
 	--clr-neutral-900: hsl(0 0% 0%);
 
-	--ff-primary: 'Libre Franklin', sans-serif;
+	--ff-primary: 'Libre Franklin', 'Untitled Sans Regular', sans-serif;
 
 	--ff-body: var(--ff-primary);
 	--ff-heading: var(--ff-primary);

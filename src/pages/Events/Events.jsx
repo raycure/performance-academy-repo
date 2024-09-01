@@ -17,7 +17,7 @@ function Events() {
 
 	return (
 		<>
-			<div className='event-page-poster-container bottom-space'>
+			<div className='page-poster-container bottom-space'>
 				<img
 					src='/ornek.jpg'
 					alt='events page hero'
