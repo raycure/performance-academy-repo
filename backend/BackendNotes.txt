@@ -1,0 +1,13 @@
+to auto delete sessions look up for TTL indexing
+to add remember me maxAge: req.body.remember ? 365 * 24 * 60 * 60 * 1000 : null,
+
+ 
+success true ya da false oluyor login alip almamasina gore 
+result butun datayi aliyo auth servicete localstg a at
+
+
+redux does everything synchronously and thunks allow us to use asynchronous logic
+extraReducers allow us to listen other reducers actions and other Slices actions
+
+
+redux doesnt store any data after a refresh you gotta store persist it for it to work its faster than localStorage btw
