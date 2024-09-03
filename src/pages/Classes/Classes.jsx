@@ -3,6 +3,9 @@ import './Classes.css';
 import ClassList from '../../components/ClassList/ClassList';
 import { useLocation } from 'react-router-dom';
 import backgroundText from '../../assets/CHOOSE-HAPPY.png';
+import { motion } from 'framer-motion';
+import { squeeze } from '../animations/AnimationValues';
+
 function Classes() {
 	const location = useLocation();
 	const [classType, setClassType] = useState(
@@ -27,43 +30,45 @@ function Classes() {
 				/>
 			</div>
 
-			<ul
-				className={`class-selector-bar ${
-					windowWidth <= 770 && 'fs-300'
-				}`}
-			>
-				<li
+			<ul className={`class-selector-bar ${windowWidth <= 770 && 'fs-300'}`}>
+				<motion.li
+					varients={squeeze}
+					initial='initial'
+					whileHover='animate'
 					className='class-selector-item'
 					onClick={() => classSelectHandler('all')}
 				>
 					Tüm Programlar
-				</li>
-				<li
+				</motion.li>
+				<motion.li
+					varients={squeeze}
+					initial='initial'
+					whileHover='animate'
 					className='class-selector-item'
-					onClick={() =>
-						classSelectHandler('GRUP FITNESS PROGRAMLARI')
-					}
+					onClick={() => classSelectHandler('GRUP FITNESS PROGRAMLARI')}
 				>
 					Grup Fitness Programları
-				</li>
-				<li
+				</motion.li>
+				<motion.li
+					varients={squeeze}
+					initial='initial'
+					whileHover='animate'
 					className='class-selector-item'
-					onClick={() =>
-						classSelectHandler('ÇOCUK VE GENÇ PROGRAMLARI')
-					}
+					onClick={() => classSelectHandler('ÇOCUK VE GENÇ PROGRAMLARI')}
 				>
 					Çocuk ve Genç Programları
-				</li>
-				<li
+				</motion.li>
+				<motion.li
+					varients={squeeze}
+					initial='initial'
+					whileHover='animate'
 					className='class-selector-item'
 					onClick={() =>
-						classSelectHandler(
-							'YÜKSEK YOĞUNLUKLU INTERVAL PROGRAMLAR'
-						)
+						classSelectHandler('YÜKSEK YOĞUNLUKLU INTERVAL PROGRAMLAR')
 					}
 				>
 					Yüksek Yoğunluklu Interval Programlar
-				</li>
+				</motion.li>
 			</ul>
 			<ClassList classType={classType} />
 		</div>

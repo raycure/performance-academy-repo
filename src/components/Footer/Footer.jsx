@@ -12,39 +12,49 @@ import { FaPinterestP } from 'react-icons/fa6';
 import { FaXTwitter } from 'react-icons/fa6';
 import { useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { appear } from '../animations/AnimationValues';
-
+import {
+	socialSlide,
+	socialSlideBackground,
+} from '../animations/AnimationValues';
+import instagramBackground from '../../assets/instagram-background.jpg';
 function Footer() {
 	const icons = [
 		{
 			href: 'https://www.instagram.com/lesmills/',
 			Icon: FaInstagram,
 			label: 'Instagram',
+			backgroundImage: instagramBackground,
 		},
 		{
 			href: 'https://www.youtube.com/user/lesmillsgroupfitness',
 			Icon: FaYoutube,
 			label: 'YouTube',
+			backgroundColor: '#ff0808',
+		},
+
+		{
+			href: 'https://www.linkedin.com/company/les-mills-international/',
+			Icon: FaLinkedinIn,
+			label: 'LinkedIn',
+			backgroundColor: '#0a78b5',
 		},
 		{
 			href: 'https://www.tiktok.com/@lesmills',
 			Icon: FaTiktok,
 			label: 'TikTok',
-		},
-		{
-			href: 'https://www.linkedin.com/company/les-mills-international/',
-			Icon: FaLinkedinIn,
-			label: 'LinkedIn',
+			backgroundColor: '#fc3359',
 		},
 		{
 			href: 'https://www.facebook.com/lesmills',
 			Icon: FaFacebookF,
 			label: 'Facebook',
+			backgroundColor: '#106bff',
 		},
 		{
 			href: 'https://tr.pinterest.com/lesmills/',
 			Icon: FaPinterestP,
 			label: 'Pinterest',
+			backgroundColor: '#e60023',
 		},
 	];
 	useEffect(() => {
@@ -70,21 +80,41 @@ function Footer() {
 				{icons.map((icon, index) => (
 					<motion.div
 						key={index}
-						variants={appear}
-						initial='hidden'
-						whileInView='show'
-						whileHover={{
-							scale: 1.5,
-						}}
-						custom={index}
-						className=''
+						//variants={socialSlide}
+						// initial='hidden'
+						// whileInView='show'
+						//whileHover='coloredSlide'
+						//animate='initial'
+						initial='initial'
+						whileHover='animate'
+						//custom={index}
+						className='relative-position icon-light-container'
 					>
-						<Link to={icon.href}>
-							<icon.Icon
-								className='icon'
-								aria-label={icon.label}
-							/>
-						</Link>
+						<motion.div
+							variants={socialSlideBackground}
+							className='social-icon-background'
+							style={
+								icon.backgroundColor && {
+									backgroundColor: icon.backgroundColor,
+								}
+							}
+						>
+							{icon.backgroundImage && (
+								<img
+									src={icon.backgroundImage}
+									style={{ borderRadius: '30px' }}
+								/>
+							)}
+						</motion.div>
+						<motion.div variants={socialSlide}>
+							<Link to={icon.href}>
+								<icon.Icon
+									className='icon footer-social-side'
+									aria-label={icon.label}
+								/>
+								<icon.Icon className='icon' aria-label={icon.label} />
+							</Link>
+						</motion.div>
 					</motion.div>
 				))}
 				<div className='footer-horizontal-line'>
@@ -93,9 +123,7 @@ function Footer() {
 			</div>
 			<div className='footer-container'>
 				<img src={logo} alt='lesmills logo' className='logo' />
-				<p className='text-legal licence-text '>
-					©licenced by my ass 🍑
-				</p>
+				<p className='text-legal licence-text '>©licenced by my ass 🍑</p>
 				<div className='footer-link-container'>
 					<HashLink
 						to='/iletişim#contact-form-grad'

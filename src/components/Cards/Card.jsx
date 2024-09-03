@@ -16,7 +16,7 @@ function Card({ backContent, frontContent }) {
 		>
 			<div className={`card ${flipped ? 'flipped' : ''}`}>
 				<div className='front cardContent'>{frontContent}</div>
-				<div className='back'>{backContent}</div>
+				<div className='back'>{backContent} </div>
 			</div>
 		</div>
 	);

@@ -5,7 +5,7 @@
 	padding: 1rem;
 	position: relative;
 }
-.more-button-container {
+.classes-more-info-container {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
@@ -42,7 +42,7 @@
 	.class-img {
 		height: 30vh;
 	}
-	.more-button-container {
+	.classes-more-info-container {
 		font-size: var(--fs-400);
 	}
 	.class-item-container {
@@ -84,7 +84,7 @@
 	}
 }
 @media (max-width: 600px) {
-	.more-button-container {
+	.classes-more-info-container {
 		flex-direction: column;
 		justify-content: center;
 	}

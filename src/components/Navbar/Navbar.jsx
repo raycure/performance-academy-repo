@@ -13,52 +13,62 @@ import { FaTiktok } from 'react-icons/fa6';
 import { FaLinkedinIn } from 'react-icons/fa6';
 import { FaFacebookF } from 'react-icons/fa6';
 import { FaPinterestP } from 'react-icons/fa6';
+import { motion } from 'framer-motion';
+import {
+	rightToLeft,
+	socialSlide,
+	socialSlideBackground,
+} from '../animations/AnimationValues';
+import instagramBackground from '../../assets/instagram-background.jpg';
 function Navbar() {
 	const [menuOpen, setMenuOpen] = useState(false);
 	const toggleNavMenu = () => {
 		setMenuOpen(false);
 		document.body.style.overflowY = 'unset';
 	}; // menu kapanınca scrollu aktiflestiriyor ama xde tasma oldugu icin y actı sadece
-
 	const icons = [
 		{
 			href: 'https://www.instagram.com/lesmills/',
 			Icon: FaInstagram,
 			label: 'Instagram',
+			backgroundImage: instagramBackground,
 		},
 		{
 			href: 'https://www.youtube.com/user/lesmillsgroupfitness',
 			Icon: FaYoutube,
 			label: 'YouTube',
+			backgroundColor: '#ff0808',
+		},
+
+		{
+			href: 'https://www.linkedin.com/company/les-mills-international/',
+			Icon: FaLinkedinIn,
+			label: 'LinkedIn',
+			backgroundColor: '#0a78b5',
 		},
 		{
 			href: 'https://www.tiktok.com/@lesmills',
 			Icon: FaTiktok,
 			label: 'TikTok',
-		},
-		{
-			href: 'https://www.linkedin.com/company/les-mills-international/',
-			Icon: FaLinkedinIn,
-			label: 'LinkedIn',
+			backgroundColor: '#fc3359',
 		},
 		{
 			href: 'https://www.facebook.com/lesmills',
 			Icon: FaFacebookF,
 			label: 'Facebook',
+			backgroundColor: '#106bff',
 		},
 		{
 			href: 'https://tr.pinterest.com/lesmills/',
 			Icon: FaPinterestP,
 			label: 'Pinterest',
+			backgroundColor: '#e60023',
 		},
 	];
+
 	return (
 		<div className='navigation-outer-container'>
-			<nav
-				className={`nav-container nav-inner-container ${
-					menuOpen ? 'display-hidden' : ''
-				}`}
-			>
+			<nav className='nav-container nav-inner-container'>
 				<Link to='/' aria-label='logo' style={{ display: 'contents' }}>
 					<img alt='beep' className='logo' src={logo}></img>
 				</Link>
@@ -99,20 +109,25 @@ function Navbar() {
 						className='nav-item-icon'
 						onClick={() => {
 							setMenuOpen(!menuOpen);
-							if (
-								typeof window != 'undefined' &&
-								window.document
-							) {
+							if (typeof window != 'undefined' && window.document) {
 								document.body.style.overflow = 'hidden';
 							}
+							requestAnimationFrame(() => {
+								const menuElement = document.getElementById('menu-navigation');
+								const menuWidth = menuElement?.offsetWidth;
+							});
 						}} //menu acıp scroll kapatıyor
 					/>
 				</div>
 			</nav>
-			<ul
+			<motion.ul
+				variants={rightToLeft}
+				initial='initial'
+				whileInView='animate'
 				className={`text-accent-400 bg-primary-400 box-shadow ${
 					menuOpen ? 'menu-open' : 'display-hidden'
 				}`}
+				id='menu-navigation'
 			>
 				<FiX className='navbar-xmark' onClick={toggleNavMenu} />
 				<div className='menu-inner-container'>
@@ -150,22 +165,44 @@ function Navbar() {
 				</div>
 				<div className='footer-social-container nav-menu-social-container'>
 					{icons.map((icon, index) => (
-						<Link
+						<motion.div
 							key={index}
-							className='icon-light-container'
-							to={icon.href}
+							initial='initial'
+							whileHover='animate'
+							className='relative-position icon-light-container'
 						>
-							<icon.Icon
-								className='icon'
-								aria-label={icon.label}
-							/>
-						</Link>
+							<motion.div
+								variants={socialSlideBackground}
+								className='social-icon-background'
+								style={
+									icon.backgroundColor && {
+										backgroundColor: icon.backgroundColor,
+									}
+								}
+							>
+								{icon.backgroundImage && (
+									<img
+										src={icon.backgroundImage}
+										style={{ borderRadius: '30px' }}
+									/>
+								)}
+							</motion.div>
+							<motion.div variants={socialSlide}>
+								<Link to={icon.href}>
+									<icon.Icon
+										className='icon footer-social-side'
+										aria-label={icon.label}
+									/>
+									<icon.Icon className='icon' aria-label={icon.label} />
+								</Link>
+							</motion.div>
+						</motion.div>
 					))}
 				</div>
 				<Button onClick={toggleNavMenu} redirect={'/register'}>
 					Kaydol
 				</Button>
-			</ul>
+			</motion.ul>
 		</div>
 	);
 }

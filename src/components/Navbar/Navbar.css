@@ -79,7 +79,7 @@ li .active {
 		display: flex;
 		padding: 1rem 2rem;
 		flex-direction: column;
-		align-items: end;
+		align-items: center;
 		height: 100%;
 		width: 70%;
 		position: fixed;
@@ -100,9 +100,9 @@ li .active {
 		display: flex;
 		justify-content: space-between;
 		flex-direction: column;
-		align-items: end;
 		height: 100%;
 		width: 100%;
+		margin-top: 0.5rem;
 	}
 	.navbar-xmark {
 		align-self: flex-start;
@@ -113,9 +113,9 @@ li .active {
 	.menu-open button {
 		align-self: center;
 	}
-	.menu-open .icon-light-container {
-		border-radius: 15px;
-		border: 1px solid white;
+	.menu-open .icon-light-container:hover {
+		opacity: 0.9;
+		animation: pulse 0.3s linear 1;
 	}
 }
 @media (max-width: 540px) {

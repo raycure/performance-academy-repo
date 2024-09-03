@@ -65,9 +65,9 @@
 	padding: 2rem 0 9rem;
 	gap: 0.5rem;
 }
-.greeting-social-icons .icon-light-container {
-	border-radius: 15px;
-	border: 1px solid white;
+.greeting-social-icons .icon-light-container:hover {
+	opacity: 0.9;
+	animation: pulse 0.3s linear 1;
 }
 .authentication-background {
 	z-index: -1;
@@ -79,10 +79,8 @@
 	align-items: center;
 	text-align: center;
 	margin: 0.2rem;
-}
-.icon-light-container:hover {
-	opacity: 0.9;
-	animation: pulse 0.3s linear 1;
+	border-radius: 15px;
+	border: 1px solid white;
 }
 @media (max-width: 1306px) {
 	.authentication-form-container {
