@@ -64,6 +64,7 @@ function ClassList({ classType }) {
 		}
 		return lesMillsPrograms[category].map((program, subIndex) => {
 			const isActive = activeClass === program.id;
+			console.log('sublarr', subIndex);
 
 			return (
 				<>
@@ -118,6 +119,13 @@ function ClassList({ classType }) {
 													src={name}
 												/>
 											)}
+											{windowWidth <= 930 && windowWidth > 650 && (
+												<img
+													aria-label='program pic'
+													className='img class-img'
+													src={name}
+												/>
+											)}
 											<p>{program.description}</p>
 											{windowWidth <= 650 && (
 												<img
@@ -141,11 +149,16 @@ function ClassList({ classType }) {
 													<p>Egzersiz Tipi: {program.type}</p>
 													<p>Ekipman: {program.equipment}</p>
 													<p>Kime Yönelik: {program.for}</p>
+													<p>Egzersiz Tipi: {program.type}</p>
+													<p>Ekipman: {program.equipment}</p>
+													<p>Kime Yönelik: {program.for}</p>
 												</div>
 												<Button
 													className='center-vertical'
 													onClick={() => classClickHandler(program.id)}
+													onClick={() => classClickHandler(program.id)}
 												>
+													{!isActive ? 'Daha Fazlası' : 'Programa Katılın'}
 													{!isActive ? 'Daha Fazlası' : 'Programa Katılın'}
 													<MdOutlineDoubleArrow color='white' />
 												</Button>
@@ -156,7 +169,7 @@ function ClassList({ classType }) {
 							</div>
 							{!isActive && (
 								<div
-									className={`classes-more-info-container top-border-light fs-400 ${
+									className={`more-button-container  top-border-light fs-400 ${
 										windowWidth < 1130 && 'fs-300'
 									}`}
 								>
@@ -168,8 +181,10 @@ function ClassList({ classType }) {
 									<Button
 										classProp={'classes-btn'}
 										onClick={() => classClickHandler(program.id)}
+										onClick={() => classClickHandler(program.id)}
 										className='center-vertical'
 									>
+										{!isActive ? 'Daha Fazlası' : 'Programa Katılın'}
 										{!isActive ? 'Daha Fazlası' : 'Programa Katılın'}
 										<MdOutlineDoubleArrow
 											style={{ marginTop: 2 }}

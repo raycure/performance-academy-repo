@@ -245,7 +245,6 @@ button {
 
 /* Utility classes */
 
-/* might not use it */
 p[data-width='wide'] {
 	max-width: 42ch;
 	width: fit-content;
@@ -255,11 +254,7 @@ a {
 }
 /* a:hover {
 	opacity: 0.5 !important;
-} */
-/* 
-.wide{
-	max-width: 42ch;
-  } */
+}
 figure,
 img {
 	pointer-events: none;
