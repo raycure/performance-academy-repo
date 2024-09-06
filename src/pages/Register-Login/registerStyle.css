@@ -8,10 +8,10 @@
 	margin-right: 0.25rem;
 }
 
-.offscreen {
-	position: absolute;
-	left: -9999px;
-}
+/* .offscreen {
+  position: absolute;
+  left: -9999px;
+} */
 
 .hide {
 	display: none;
@@ -28,7 +28,6 @@
 }
 
 .errmsg {
-	background-color: lightpink;
 	color: rgb(255, 63, 63);
 	font-weight: bold;
 	padding: 0.5rem;
@@ -73,7 +72,6 @@
 	z-index: -1;
 	opacity: 0.4;
 }
-
 @media (max-width: 1306px) {
 	.authentication-form-container {
 		margin-inline: 16rem;

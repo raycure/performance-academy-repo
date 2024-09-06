@@ -19,7 +19,7 @@ const handleLogout = async (req, res) => {
     maxAge: 1000 * 60 * 60 * 24,
     sameSite: "Lax",
     path: "/",
-    secure: false, // add secure true for prod
+    secure: process.env.ENVIROMENT === "development" ? false : true,
   });
   const isDeleted = await Sessions.deleteOne(foundUser);
   res.json({ message: "deleted", value: isDeleted });
