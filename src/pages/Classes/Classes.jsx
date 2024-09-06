@@ -75,44 +75,6 @@ function Classes() {
 						</motion.li>
 					);
 				})}
-				{/* <motion.li
-					varients={squeeze}
-					initial='initial'
-					whileHover='animate'
-					className='class-selector-item'
-					onClick={() => classSelectHandler('all')}
-				>
-					Tüm Programlar
-				</motion.li>
-				<motion.li
-					varients={squeeze}
-					initial='initial'
-					whileHover='animate'
-					className='class-selector-item'
-					onClick={() => classSelectHandler('GRUP FITNESS PROGRAMLARI')}
-				>
-					Grup Fitness Programları
-				</motion.li>
-				<motion.li
-					varients={squeeze}
-					initial='initial'
-					whileHover='animate'
-					className='class-selector-item'
-					onClick={() => classSelectHandler('ÇOCUK VE GENÇ PROGRAMLARI')}
-				>
-					Çocuk ve Genç Programları
-				</motion.li>
-				<motion.li
-					varients={squeeze}
-					initial='initial'
-					whileHover='animate'
-					className='class-selector-item'
-					onClick={() =>
-						classSelectHandler('YÜKSEK YOĞUNLUKLU INTERVAL PROGRAMLAR')
-					}
-				>
-					Yüksek Yoğunluklu Interval Programlar
-				</motion.li> */}
 			</ul>
 			<ClassList classType={classType} />
 		</div>
