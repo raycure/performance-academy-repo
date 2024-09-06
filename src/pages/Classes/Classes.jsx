@@ -50,7 +50,6 @@ function Classes() {
 
 			<ul className={`class-selector-bar ${windowWidth <= 770 && 'fs-300'}`}>
 				{programNames.map((program, index) => {
-					console.log(program.label);
 					return (
 						<motion.li
 							initial='initial'
@@ -58,6 +57,12 @@ function Classes() {
 							className='class-selector-item relative-position'
 							onClick={() => classSelectHandler(program.selector)}
 							key={index}
+							style={
+								classType === program.selector && {
+									backgroundColor: 'white',
+									color: 'black',
+								}
+							}
 						>
 							<motion.div
 								variants={backgroundFill}
