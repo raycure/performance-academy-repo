@@ -54,13 +54,9 @@ function FAQ() {
 						>
 							<div
 								className={`${
-									activeQuestionTitle === item.title
-										? 'faq-item-active'
-										: ''
+									activeQuestionTitle === item.title ? 'faq-item-active' : ''
 								}`}
-								onClick={() =>
-									setActiveQuestionTitle(item.title)
-								}
+								onClick={() => setActiveQuestionTitle(item.title)}
 							>
 								<FAQItem>{item.title}</FAQItem>
 								{windowWidth <= 1100 &&

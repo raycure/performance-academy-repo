@@ -9,3 +9,17 @@
 		grid-auto-columns: 1fr;
 	}
 }
+
+.even-columns2 {
+	display: grid;
+	gap: 2.5rem;
+	padding-top: 10rem;
+	padding-bottom: 10rem;
+}
+
+@media (min-width: 50em) {
+	.even-columns2 {
+		grid-auto-flow: column;
+		grid-auto-columns: 1fr;
+	}
+}
