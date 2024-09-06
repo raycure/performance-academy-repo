@@ -128,10 +128,12 @@ const socialSlide = {
 		};
 	},
 };
-const socialSlideBackground = {
+const backgroundFill = {
 	initial: {
 		width: 0,
 		height: 0,
+		top: '50%',
+		left: '50%',
 	},
 	animate: {
 		width: '100%',
@@ -153,10 +155,7 @@ const rightToLeft = {
 		},
 	},
 };
-const squeeze = {
-	initial: {},
-	animate: {},
-};
+
 export {
 	downToUp,
 	leftToRight,
@@ -167,7 +166,6 @@ export {
 	button,
 	leftToRightForClasses,
 	socialSlide,
-	socialSlideBackground,
+	backgroundFill,
 	rightToLeft,
-	squeeze,
 };

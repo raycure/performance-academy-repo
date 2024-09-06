@@ -21,14 +21,56 @@
 	flex-direction: row;
 	justify-content: center;
 	align-items: center;
-	padding: 1.5rem 0;
+	padding: 0.5rem 0;
+}
+.class-selector-background {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	z-index: -1;
+}
+.class-selector-item:hover {
+	color: black;
 }
 .class-selector-item {
-	padding-inline: 1rem;
+	padding: 0.6rem 1rem;
 	text-align: center;
+	transition: 0.7s;
 }
 .class-selector-item:where(:not(:last-child)) {
 	border-right: 1.5px solid white;
+}
+.class-selector-item::before {
+	content: '';
+	width: 100%;
+	background-color: white;
+	height: 1px;
+	position: absolute;
+	left: 0;
+	top: 0;
+	transform: translateY(-15px);
+	opacity: 0;
+	transition: 0.6s;
+}
+.class-selector-item::after {
+	content: '';
+	width: 100%;
+	background-color: white;
+	height: 1px;
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	transform: translateY(15px);
+	opacity: 0;
+	transition: 0.6s;
+}
+.class-selector-item:hover::before {
+	opacity: 1;
+	transform: translateY(0px);
+}
+.class-selector-item:hover::after {
+	opacity: 1;
+	transform: translateY(0px);
 }
 @media (max-width: 770px) {
 	.class-selector-item {

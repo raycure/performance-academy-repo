@@ -12,10 +12,7 @@ import { FaPinterestP } from 'react-icons/fa6';
 import { FaXTwitter } from 'react-icons/fa6';
 import { useEffect } from 'react';
 import { motion } from 'framer-motion';
-import {
-	socialSlide,
-	socialSlideBackground,
-} from '../animations/AnimationValues';
+import { socialSlide, backgroundFill } from '../animations/AnimationValues';
 import instagramBackground from '../../assets/instagram-background.jpg';
 function Footer() {
 	const icons = [
@@ -91,7 +88,7 @@ function Footer() {
 						className='relative-position icon-light-container'
 					>
 						<motion.div
-							variants={socialSlideBackground}
+							variants={backgroundFill}
 							className='social-icon-background'
 							style={
 								icon.backgroundColor && {

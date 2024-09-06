@@ -10,7 +10,7 @@ import background from '../../assets/BODYBALANCE-WALLPAPER.png';
 import { motion } from 'framer-motion';
 import {
 	socialSlide,
-	socialSlideBackground,
+	backgroundFill,
 } from '../../components/animations/AnimationValues';
 import instagramBackground from '../../assets/instagram-background.jpg';
 function AuthenticationGreet() {
@@ -64,7 +64,7 @@ function AuthenticationGreet() {
 							className='relative-position icon-light-container'
 						>
 							<motion.div
-								variants={socialSlideBackground}
+								variants={backgroundFill}
 								className='social-icon-background'
 								style={
 									icon.backgroundColor && {

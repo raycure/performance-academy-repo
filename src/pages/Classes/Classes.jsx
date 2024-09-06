@@ -4,7 +4,7 @@ import ClassList from '../../components/ClassList/ClassList';
 import { useLocation } from 'react-router-dom';
 import backgroundText from '../../assets/CHOOSE-HAPPY.png';
 import { motion } from 'framer-motion';
-//import { squeeze } from '../animations/AnimationValues';
+import { backgroundFill } from '../../components/animations/AnimationValues';
 
 function Classes() {
 	const location = useLocation();
@@ -15,6 +15,24 @@ function Classes() {
 		setClassType(newClassType);
 	}
 	const windowWidth = window.innerWidth;
+	const programNames = [
+		{
+			label: 'Tüm Programlar',
+			selector: 'all',
+		},
+		{
+			label: 'Grup Fitness Programları',
+			selector: 'GRUP FITNESS PROGRAMLARI',
+		},
+		{
+			label: 'Çocuk ve Genç Programları',
+			selector: 'ÇOCUK VE GENÇ PROGRAMLARI',
+		},
+		{
+			label: 'Yüksek Yoğunluklu Interval Programlar',
+			selector: 'YÜKSEK YOĞUNLUKLU INTERVAL PROGRAMLAR',
+		},
+	];
 	return (
 		<div>
 			<div className='page-poster-container'>
@@ -31,8 +49,29 @@ function Classes() {
 			</div>
 
 			<ul className={`class-selector-bar ${windowWidth <= 770 && 'fs-300'}`}>
-				<motion.li
-					//varients={squeeze}
+				{programNames.map((program, index) => {
+					console.log(program.label);
+					return (
+						<motion.li
+							initial='initial'
+							whileHover='animate'
+							className='class-selector-item relative-position'
+							onClick={() => classSelectHandler(program.selector)}
+							key={index}
+						>
+							<motion.div
+								variants={backgroundFill}
+								className='class-selector-background'
+								style={{
+									backgroundColor: 'white',
+								}}
+							/>
+							{program.label}
+						</motion.li>
+					);
+				})}
+				{/* <motion.li
+					varients={squeeze}
 					initial='initial'
 					whileHover='animate'
 					className='class-selector-item'
@@ -41,7 +80,7 @@ function Classes() {
 					Tüm Programlar
 				</motion.li>
 				<motion.li
-					//varients={squeeze}
+					varients={squeeze}
 					initial='initial'
 					whileHover='animate'
 					className='class-selector-item'
@@ -50,7 +89,7 @@ function Classes() {
 					Grup Fitness Programları
 				</motion.li>
 				<motion.li
-					//varients={squeeze}
+					varients={squeeze}
 					initial='initial'
 					whileHover='animate'
 					className='class-selector-item'
@@ -59,7 +98,7 @@ function Classes() {
 					Çocuk ve Genç Programları
 				</motion.li>
 				<motion.li
-					//varients={squeeze}
+					varients={squeeze}
 					initial='initial'
 					whileHover='animate'
 					className='class-selector-item'
@@ -68,7 +107,7 @@ function Classes() {
 					}
 				>
 					Yüksek Yoğunluklu Interval Programlar
-				</motion.li>
+				</motion.li> */}
 			</ul>
 			<ClassList classType={classType} />
 		</div>

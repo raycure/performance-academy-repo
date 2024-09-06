@@ -17,7 +17,7 @@ import { motion } from 'framer-motion';
 import {
 	rightToLeft,
 	socialSlide,
-	socialSlideBackground,
+	backgroundFill,
 } from '../animations/AnimationValues';
 import instagramBackground from '../../assets/instagram-background.jpg';
 function Navbar() {
@@ -172,7 +172,7 @@ function Navbar() {
 							className='relative-position icon-light-container'
 						>
 							<motion.div
-								variants={socialSlideBackground}
+								variants={backgroundFill}
 								className='social-icon-background'
 								style={
 									icon.backgroundColor && {

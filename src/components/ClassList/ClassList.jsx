@@ -29,7 +29,6 @@ function ClassList({ classType }) {
 	});
 	const lineRefs = React.useRef([]);
 	const windowWidth = window.innerWidth;
-	console.log(classType);
 
 	function classClickHandler(id) {
 		setActiveClass(id);

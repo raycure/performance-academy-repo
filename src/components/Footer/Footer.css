@@ -70,8 +70,6 @@
 }
 .social-icon-background {
 	position: absolute;
-	top: 50%;
-	left: 50%;
 	border-radius: 30px;
 }
 @media (max-width: 950px) {
