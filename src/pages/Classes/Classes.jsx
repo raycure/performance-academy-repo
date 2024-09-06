@@ -4,7 +4,7 @@ import ClassList from '../../components/ClassList/ClassList';
 import { useLocation } from 'react-router-dom';
 import backgroundText from '../../assets/CHOOSE-HAPPY.png';
 import { motion } from 'framer-motion';
-import { squeeze } from '../animations/AnimationValues';
+//import { squeeze } from '../animations/AnimationValues';
 
 function Classes() {
 	const location = useLocation();
@@ -32,7 +32,7 @@ function Classes() {
 
 			<ul className={`class-selector-bar ${windowWidth <= 770 && 'fs-300'}`}>
 				<motion.li
-					varients={squeeze}
+					//varients={squeeze}
 					initial='initial'
 					whileHover='animate'
 					className='class-selector-item'
@@ -41,7 +41,7 @@ function Classes() {
 					Tüm Programlar
 				</motion.li>
 				<motion.li
-					varients={squeeze}
+					//varients={squeeze}
 					initial='initial'
 					whileHover='animate'
 					className='class-selector-item'
@@ -50,7 +50,7 @@ function Classes() {
 					Grup Fitness Programları
 				</motion.li>
 				<motion.li
-					varients={squeeze}
+					//varients={squeeze}
 					initial='initial'
 					whileHover='animate'
 					className='class-selector-item'
@@ -59,7 +59,7 @@ function Classes() {
 					Çocuk ve Genç Programları
 				</motion.li>
 				<motion.li
-					varients={squeeze}
+					//varients={squeeze}
 					initial='initial'
 					whileHover='animate'
 					className='class-selector-item'

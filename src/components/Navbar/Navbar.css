@@ -113,12 +113,8 @@ li .active {
 	.menu-open button {
 		align-self: center;
 	}
-	.menu-open .icon-light-container:hover {
-		opacity: 0.9;
-		animation: pulse 0.3s linear 1;
-	}
 }
-@media (max-width: 540px) {
+@media (max-width: 570px) {
 	.menu-open {
 		width: 100%;
 		border-bottom-left-radius: 0px;
