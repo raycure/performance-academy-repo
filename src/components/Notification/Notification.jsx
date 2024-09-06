@@ -38,8 +38,3 @@ const Notification = ({ message, type, duration = 3000000, onClose }) => {
 };
 
 export default Notification;
-
-{
-	/* <GoInfo style={{ width: 20, height: 20 }} />
-<FiCheckCircle style={{ width: 20, height: 20 }} /> */
-}
