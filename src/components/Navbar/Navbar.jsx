@@ -65,7 +65,28 @@ function Navbar() {
 			backgroundColor: '#e60023',
 		},
 	];
-
+	const paths = [
+		{
+			path: '/',
+			label: 'Ana Sayfa',
+		},
+		{
+			path: '/programlar',
+			label: 'Programlar',
+		},
+		{
+			path: '/etkinlikler',
+			label: 'Etkinlikler',
+		},
+		{
+			path: '/kurslarım',
+			label: 'Kurslarım',
+		},
+		{
+			path: '/iletişim',
+			label: 'İletişim',
+		},
+	];
 	return (
 		<div className='navigation-outer-container'>
 			<nav className='nav-container nav-inner-container'>
@@ -73,21 +94,13 @@ function Navbar() {
 					<img alt='beep' className='logo' src={logo}></img>
 				</Link>
 				<ul className='nav-list-container nav-container text-accent-400'>
-					<li>
-						<NavLink to='/'>Ana Sayfa</NavLink>
-					</li>
-					<li>
-						<NavLink to='/programlar'>Kurslar</NavLink>
-					</li>
-					<li>
-						<NavLink to='/etkinlikler'>Etkinlikler</NavLink>
-					</li>
-					<li>
-						<NavLink to='/kurslarım'>Kurslarım</NavLink>
-					</li>
-					<li>
-						<NavLink to='/iletişim'>İletişim</NavLink>
-					</li>
+					{paths.map((path) => {
+						return (
+							<li className='nav-list-item relative-position'>
+								<NavLink to={path.path}>{path.label}</NavLink>
+							</li>
+						);
+					})}
 				</ul>
 				<div className='nav-btn-container nav-container'>
 					<Link aria-label='language' style={{ display: 'contents' }}>
@@ -132,36 +145,18 @@ function Navbar() {
 				<FiX className='navbar-xmark' onClick={toggleNavMenu} />
 				<div className='menu-inner-container'>
 					<hr />
-					<li>
-						<NavLink onClick={toggleNavMenu} to='/'>
-							Ana Sayfa
-						</NavLink>
-					</li>
-					<hr className='light-line' />
-					<li>
-						<NavLink onClick={toggleNavMenu} to='/programlar'>
-							Kurslar
-						</NavLink>
-					</li>
-					<hr className='light-line' />
-					<li>
-						<NavLink onClick={toggleNavMenu} to='/etkinlikler'>
-							Etkinlikler
-						</NavLink>
-					</li>
-					<hr className='light-line' />
-					<li>
-						<NavLink onClick={toggleNavMenu} to='/kurslarım'>
-							Kurslarım
-						</NavLink>
-					</li>
-					<hr className='light-line' />
-					<li>
-						<NavLink onClick={toggleNavMenu} to='/iletişim'>
-							İletişim
-						</NavLink>
-					</li>
-					<hr />
+					{paths.map((path) => {
+						return (
+							<>
+								<li>
+									<NavLink onClick={toggleNavMenu} to={path.path}>
+										{path.label}
+									</NavLink>
+								</li>
+								<hr />
+							</>
+						);
+					})}
 				</div>
 				<div className='footer-social-container nav-menu-social-container'>
 					{icons.map((icon, index) => (
@@ -207,28 +202,3 @@ function Navbar() {
 	);
 }
 export default Navbar;
-// import React, { useState, useEffect } from 'react';
-
-// const Navbar = () => {
-//   const [show, setShow] = useState(true);
-//   const [lastScrollY, setLastScrollY] = useState(0);
-
-//   const controlNavbar = () => {
-//     if (window.scrollY > lastScrollY) { // if scroll down hide the navbar
-//       setShow(false);
-//     } else { // if scroll up show the navbar
-//       setShow(true);
-//     }
-
-//     // remember current page location to use in the next move
-//     setLastScrollY(window.scrollY);
-//   };
-
-//   useEffect(() => {
-//     window.addEventListener('scroll', controlNavbar);
-
-//     // cleanup function
-//     return () => {
-//        window.removeEventListener('scroll', controlNavbar);
-//     };
-//   }, [lastScrollY]);
