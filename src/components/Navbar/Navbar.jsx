@@ -20,6 +20,7 @@ import {
 	backgroundFill,
 } from '../animations/AnimationValues';
 import instagramBackground from '../../assets/instagram-background.jpg';
+import { useTranslation } from 'react-i18next';
 function Navbar() {
 	const [menuOpen, setMenuOpen] = useState(false);
 	const toggleNavMenu = () => {
@@ -87,8 +88,14 @@ function Navbar() {
 			label: 'İletişim',
 		},
 	];
+	const { t, i18n, ready } = useTranslation();
+
+	const changeLanguage = (lng) => {
+		i18n.changeLanguage(lng);
+	};
+
 	return (
-		<div className='navigation-outer-container'>
+		<div className='navigation-outer-container user-select-none'>
 			<nav className='nav-container nav-inner-container'>
 				<Link to='/' aria-label='logo' style={{ display: 'contents' }}>
 					<img alt='beep' className='logo' src={logo}></img>
@@ -104,18 +111,38 @@ function Navbar() {
 				</ul>
 				<div className='nav-btn-container nav-container'>
 					<Link aria-label='language' style={{ display: 'contents' }}>
-						<GrLanguage className='nav-item-icon' />
+						<GrLanguage
+							onClick={() => {
+								if (i18n.language === 'en') {
+									changeLanguage('tr');
+									return;
+								}
+								changeLanguage('en');
+							}}
+							className='nav-item-icon'
+						/>
+						{i18n.language === 'en' ? 'EN' : 'TR'}
 					</Link>
-					<Link aria-label='user' style={{ display: 'contents' }}>
+					<Link aria-label='user' to='/login' style={{ display: 'contents' }}>
 						<FaUser className='nav-item-icon' />
 					</Link>
 					<Button redirect={'/register'}>Kaydol</Button>
 				</div>
 				<div className='menu nav-container'>
 					<Link aria-label='language' style={{ display: 'contents' }}>
-						<GrLanguage className='nav-item-icon' />
+						<GrLanguage
+							onClick={() => {
+								if (i18n.language === 'en') {
+									changeLanguage('tr');
+									return;
+								}
+								changeLanguage('en');
+							}}
+							className='nav-item-icon'
+						/>
+						{i18n.language === 'en' ? 'EN' : 'TR'}
 					</Link>
-					<Link aria-label='user' style={{ display: 'contents' }}>
+					<Link aria-label='user' to='/login' style={{ display: 'contents' }}>
 						<FaUser className='nav-item-icon' />
 					</Link>
 					<HiOutlineMenuAlt3
@@ -125,10 +152,10 @@ function Navbar() {
 							if (typeof window != 'undefined' && window.document) {
 								document.body.style.overflow = 'hidden';
 							}
-							requestAnimationFrame(() => {
-								const menuElement = document.getElementById('menu-navigation');
-								const menuWidth = menuElement?.offsetWidth;
-							});
+							// requestAnimationFrame(() => {
+							// 	const menuElement = document.getElementById('menu-navigation');
+							// 	const menuWidth = menuElement?.offsetWidth;
+							// });
 						}} //menu acıp scroll kapatıyor
 					/>
 				</div>

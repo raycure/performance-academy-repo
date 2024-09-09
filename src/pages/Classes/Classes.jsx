@@ -48,7 +48,11 @@ function Classes() {
 				/>
 			</div>
 
-			<ul className={`class-selector-bar ${windowWidth <= 770 && 'fs-300'}`}>
+			<ul
+				className={`class-selector-bar user-select-none ${
+					windowWidth <= 770 && 'fs-300'
+				}`}
+			>
 				{programNames.map((program, index) => {
 					return (
 						<motion.li

@@ -6,6 +6,7 @@ import { RiArrowUpSLine } from 'react-icons/ri';
 import { HashLink } from 'react-router-hash-link';
 import { useLocation } from 'react-router-dom';
 import { useLayoutEffect } from 'react';
+
 function Layout() {
 	const Wrapper = ({ children }) => {
 		const location = useLocation();

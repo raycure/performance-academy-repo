@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import '../../pages/Register-Login/formStyle.css';
 import Button from '../Button/Button';
 import '../../components/Containers/containerStyle.css';
-import { draw } from '../animations/AnimationValues';
+//import { draw } from '../animations/AnimationValues';
 import { motion } from 'framer-motion';
 
 function ContactForm() {

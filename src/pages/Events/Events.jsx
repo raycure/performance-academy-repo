@@ -8,13 +8,14 @@ import CalendarEventItem from '../../components/CalendarContainer/CalendarEventI
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import backgroundText from '../../assets/CHOOSE-HAPPY.png';
+import { useTranslation } from 'react-i18next';
 function Events() {
 	const { pathname } = useLocation();
 
 	useEffect(() => {
 		window.scrollTo(0, 0);
 	}, [pathname]);
-
+	const { t, i18n } = useTranslation('translation');
 	return (
 		<>
 			<div className='page-poster-container bottom-space'>
@@ -31,6 +32,7 @@ function Events() {
 
 				<p className='text-container'></p>
 			</div>
+			<p>{t('localizationTesting')}</p>
 			<CalendarContainer />
 			<PaginationContainer />
 		</>

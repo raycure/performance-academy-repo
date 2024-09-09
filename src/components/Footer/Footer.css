@@ -76,14 +76,15 @@
 	.footer-outer-container {
 		padding: 2rem 1rem;
 	}
-	.footer-grid {
-		grid-template-columns: 1fr;
-	}
 	.footer-link-container {
 		flex-direction: column;
 	}
 	.footer-container hr {
 		display: none;
+	}
+	.footer-horizontal-line {
+		width: 20%;
+		padding-inline: 0.5rem;
 	}
 }
 @media (max-width: 650px) {

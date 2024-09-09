@@ -290,6 +290,11 @@ hr {
 .opacity-low {
 	opacity: 0.4;
 }
+.user-select-none {
+	user-select: none;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+}
 .box-shadow {
 	-webkit-box-shadow: 0px 0px 20px 0px rgba(43, 43, 43, 0.69);
 	-moz-box-shadow: 0px 0px 20px 0px rgba(43, 43, 43, 0.69);
@@ -345,6 +350,9 @@ hr {
 	font-size: small;
 	font-style: italic;
 	color: var(--clr-primary-200);
+	user-select: none;
+	-webkit-user-select: none;
+	-moz-user-select: none;
 }
 
 .text-white {
@@ -405,10 +413,16 @@ hr {
 .fs-primary-heading {
 	font-size: var(--fs-primary-heading);
 	line-height: 1.1;
+	user-select: none;
+	-webkit-user-select: none;
+	-moz-user-select: none;
 }
 .fs-secondary-heading {
 	line-height: 1.1;
 	font-size: var(--fs-secondary-heading);
+	user-select: none;
+	-webkit-user-select: none;
+	-moz-user-select: none;
 }
 
 .fs-300 {
@@ -541,6 +555,7 @@ hr {
 .addLineAnimation {
 	position: relative;
 	overflow: hidden;
+	width: fit-content;
 }
 
 .lineAnimation::before {

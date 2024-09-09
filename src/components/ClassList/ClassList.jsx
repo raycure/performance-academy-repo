@@ -132,6 +132,7 @@ function ClassList({ classType }) {
 												onClick={() => {
 													setActiveClass(null);
 												}}
+												className='user-select-none'
 											>
 												Daha az göster
 											</Link>

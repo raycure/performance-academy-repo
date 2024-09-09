@@ -10,7 +10,7 @@ function Card({ backContent, frontContent }) {
 
 	return (
 		<div
-			className='card-container'
+			className='card-container user-select-none'
 			onMouseEnter={handleClick}
 			onMouseLeave={handleClick}
 		>

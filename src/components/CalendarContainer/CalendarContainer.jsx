@@ -30,21 +30,16 @@ function CalendarContainer() {
 		}
 	}
 	function renderEvents(eventInfo) {
-		const eventDate = new Date(
-			eventInfo.event._instance.range.start
-		).getDate();
+		const eventDate = new Date(eventInfo.event._instance.range.start).getDate();
 		return <div className='fully-center-item'>{eventDate}</div>;
 	}
 
 	return (
 		<div
 			id='calendar-container'
-			className='calendar-container bg-primary-400 bottom-space'
+			className='calendar-container user-select-none bg-primary-400 bottom-space'
 		>
-			<CalendarEventItem
-				eventClicked={eventClicked}
-				eventId={activeEventId}
-			/>
+			<CalendarEventItem eventClicked={eventClicked} eventId={activeEventId} />
 			<FullCalendar
 				plugins={[dayGridPlugin]}
 				initialView='dayGridMonth'

@@ -77,14 +77,8 @@ function Footer() {
 				{icons.map((icon, index) => (
 					<motion.div
 						key={index}
-						//variants={socialSlide}
-						// initial='hidden'
-						// whileInView='show'
-						//whileHover='coloredSlide'
-						//animate='initial'
 						initial='initial'
 						whileHover='animate'
-						//custom={index}
 						className='relative-position icon-light-container'
 					>
 						<motion.div
@@ -128,18 +122,15 @@ function Footer() {
 					>
 						Bize Ulaşın
 					</HashLink>
-					<hr />
 					<HashLink className='addLineAnimation' to='/iletişim#top'>
 						Sık Sorulan Sorular
 					</HashLink>
-					<hr />
 					<HashLink
 						className='addLineAnimation'
 						to='/kişisel-verilerin-korunması#top'
 					>
 						Kişisel Verilerin Korunması
 					</HashLink>
-					<hr />
 					<HashLink className='addLineAnimation' to='/çerezler#top'>
 						Çerezler
 					</HashLink>
