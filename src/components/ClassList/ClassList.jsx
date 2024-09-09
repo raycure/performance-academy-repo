@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import './ClassList.css';
 import Button from '../Button/Button';
-import { lesMillsPrograms } from '../../assets/LesmillsPrograms';
+import LesMillsPrograms from '../../assets/LesmillsPrograms';
 import { MdOutlineDoubleArrow } from 'react-icons/md';
 import name from '/ornek.jpg';
 import { Link, redirect } from 'react-router-dom';
@@ -18,6 +18,7 @@ import { createRef } from 'react';
 // todo to useRef make a component
 
 function ClassList({ classType }) {
+	const lesMillsPrograms = LesMillsPrograms();
 	const [activeClass, setActiveClass] = useState(null);
 
 	useEffect(() => {

@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
 import FAQItem from './FAQItem';
-import { faqQuestions } from '../../assets/FAQQuestions';
+import FaqQuestions from '../../assets/FAQQuestions';
 import './FAQ.css';
 import { motion } from 'framer-motion';
 import {
 	leftToRight,
 	ScalingAnimations,
 } from '../animations/AnimationValues.jsx';
+import { useTranslation } from 'react-i18next';
 
 function FAQ() {
+	const { t, i18n } = useTranslation('faqQuestions');
+	const faqQuestions = FaqQuestions();
 	const windowWidth = window.innerWidth;
 	const [activeQuestionTitle, setActiveQuestionTitle] = useState(null);
 	const activeResponse = faqQuestions
@@ -39,7 +42,7 @@ function FAQ() {
 						viewport={{ once: true }}
 						className='fs-primary-heading'
 					>
-						Merak ettiğiniz bir şey mi var?
+						{t('title')}
 					</motion.p>
 				)}
 				{faqQuestions.map((item, index) => {
@@ -76,7 +79,7 @@ function FAQ() {
 						viewport={{ once: true }}
 						className='fs-primary-heading'
 					>
-						Merak ettiğiniz bir şey mi var?
+						{t('title')}
 					</motion.p>
 				)}
 				{windowWidth > 1100 && activeResponse}

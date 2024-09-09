@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import Navbar from '../../components/Navbar/Navbar';
 import Footer from '../../components/Footer/Footer';
@@ -6,7 +6,8 @@ import { RiArrowUpSLine } from 'react-icons/ri';
 import { HashLink } from 'react-router-hash-link';
 import { useLocation } from 'react-router-dom';
 import { useLayoutEffect } from 'react';
-
+// import ResizeObserver from 'resize-observer-polyfill';
+// import { useScroll } from 'framer-motion';
 function Layout() {
 	const Wrapper = ({ children }) => {
 		const location = useLocation();

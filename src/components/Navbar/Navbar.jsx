@@ -22,6 +22,7 @@ import {
 import instagramBackground from '../../assets/instagram-background.jpg';
 import { useTranslation } from 'react-i18next';
 import { set } from 'mongoose';
+
 function Navbar() {
 	const [menuOpen, setMenuOpen] = useState(false);
 	const toggleNavMenu = () => {
@@ -95,6 +96,34 @@ function Navbar() {
 		i18n.changeLanguage(lng);
 	};
 	const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+	const handleWindowSizeChange = () => {
+		setWindowWidth(window.innerWidth);
+	};
+	useEffect(() => {
+		window.addEventListener('resize', handleWindowSizeChange);
+		return () => {
+			window.removeEventListener('resize', handleWindowSizeChange);
+		};
+	}, []);
+	const handleClickOutside = (event) => {
+		const path = event.composedPath ? event.composedPath() : [];
+		if (
+			!path.some((el) => el.id === 'menu-navigation' || el.id === 'menu-button')
+		) {
+			setMenuOpen(false);
+			document.body.style.overflowY = 'unset';
+		}
+	};
+	useEffect(() => {
+		if (menuOpen) {
+			document.addEventListener('mousedown', handleClickOutside);
+		} else {
+			document.removeEventListener('mousedown', handleClickOutside);
+		}
+		return () => {
+			document.removeEventListener('mousedown', handleClickOutside);
+		};
+	}, [menuOpen]);
 	return (
 		<div className='navigation-outer-container user-select-none'>
 			<nav className='nav-container nav-inner-container'>
@@ -111,17 +140,18 @@ function Navbar() {
 					})}
 				</ul>
 				<div className='nav-btn-container nav-container'>
-					<Link aria-label='language' style={{ display: 'contents' }}>
-						<GrLanguage
-							onClick={() => {
-								if (i18n.language === 'en') {
-									changeLanguage('tr');
-									return;
-								}
-								changeLanguage('en');
-							}}
-							className='nav-item-icon'
-						/>
+					<Link
+						onClick={() => {
+							if (i18n.language === 'en') {
+								changeLanguage('tr');
+								return;
+							}
+							changeLanguage('en');
+						}}
+						aria-label='language'
+						style={{ display: 'contents' }}
+					>
+						<GrLanguage className='nav-item-icon' />
 						{i18n.language === 'en' ? 'EN' : 'TR'}
 					</Link>
 					<Link aria-label='user' to='/login' style={{ display: 'contents' }}>
@@ -130,17 +160,18 @@ function Navbar() {
 					<Button redirect={'/register'}>Kaydol</Button>
 				</div>
 				<div className='menu nav-container'>
-					<Link aria-label='language' style={{ display: 'contents' }}>
-						<GrLanguage
-							onClick={() => {
-								if (i18n.language === 'en') {
-									changeLanguage('tr');
-									return;
-								}
-								changeLanguage('en');
-							}}
-							className='nav-item-icon'
-						/>
+					<Link
+						onClick={() => {
+							if (i18n.language === 'en') {
+								changeLanguage('tr');
+								return;
+							}
+							changeLanguage('en');
+						}}
+						aria-label='language'
+						style={{ display: 'contents' }}
+					>
+						<GrLanguage className='nav-item-icon' />
 						{i18n.language === 'en' ? 'EN' : 'TR'}
 					</Link>
 					<Link aria-label='user' to='/login' style={{ display: 'contents' }}>
@@ -148,6 +179,7 @@ function Navbar() {
 					</Link>
 					<HiOutlineMenuAlt3
 						className='nav-item-icon'
+						id='menu-button'
 						onClick={() => {
 							setWindowWidth(window.innerWidth);
 							setMenuOpen(!menuOpen);

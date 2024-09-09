@@ -2,10 +2,11 @@ import React from 'react';
 import './CalendarEventItem.css';
 import { LesMillsEvents } from '../../assets/LesmillsEvents';
 import { HashLink } from 'react-router-hash-link';
-import { lesMillsPrograms } from '../../assets/LesmillsPrograms';
+import LesMillsPrograms from '../../assets/LesmillsPrograms';
 import Button from '../Button/Button';
 import UpcomingEvents from './UpcomingEvents';
 function CalendarEventItem({ eventId }) {
+	const lesMillsPrograms = LesMillsPrograms();
 	const allEvents = LesMillsEvents;
 	const today = new Date();
 
@@ -27,14 +28,10 @@ function CalendarEventItem({ eventId }) {
 	return (
 		<div className='upcoming-events-container selected-events'>
 			{Math.floor(
-				(activeEvent.fullDate.getTime() - today.getTime()) /
-					(1000 * 3600 * 24)
+				(activeEvent.fullDate.getTime() - today.getTime()) / (1000 * 3600 * 24)
 			) < -1 ? ( //tarihi geçen etkinliği göstermemek için
 				<div className='border-container'>
-					<HashLink
-						className=''
-						to={`/programlar#${eventProgram[0]?.id}`}
-					>
+					<HashLink className='' to={`/programlar#${eventProgram[0]?.id}`}>
 						<img
 							src={eventProgram[0]?.logo}
 							alt='logo'
@@ -42,16 +39,13 @@ function CalendarEventItem({ eventId }) {
 						/>
 					</HashLink>
 					<p>
-						Bu etkinliğimizin maalesef tarihi geçmiştir. Başka
-						etkinliklerimize göz atmaya devam edebilirsiniz!
+						Bu etkinliğimizin maalesef tarihi geçmiştir. Başka etkinliklerimize
+						göz atmaya devam edebilirsiniz!
 					</p>
 				</div>
 			) : (
 				<div className='border-container'>
-					<HashLink
-						className=''
-						to={`/programlar#${eventProgram[0]?.id}`}
-					>
+					<HashLink className='' to={`/programlar#${eventProgram[0]?.id}`}>
 						<img
 							src={eventProgram[0]?.logo}
 							alt='logo'
@@ -61,8 +55,7 @@ function CalendarEventItem({ eventId }) {
 					<p>{eventProgram[0]?.sum}</p>
 
 					<p>
-						{activeEvent.program} programını kapsayan bu
-						etkinliğimize{' '}
+						{activeEvent.program} programını kapsayan bu etkinliğimize{' '}
 						{Math.floor(
 							(activeEvent.fullDate.getTime() - today.getTime()) /
 								(1000 * 3600 * 24) +

@@ -1,27 +1,28 @@
-export const faqQuestions = [
-  {
-    title: "Neden Lesmills Eğitmeni Olmalıyım",
-    response:
-      "- MASTER GRUP EGZERSİZ ÖĞRETMENİ OLUN\nSahip olduğunuzu asla bilmediğiniz yetenekleri ve güçlü yönleri keşfedin, dünyanın en iyi Eğitmenlerinden rehberlik alın, düzenli eğitim ve kaynaklar alın ve usta bir grup egzersiz Eğitmeni olma yolculuğunuza başlayın.\n\n - 3 AYDA BİR YENİ MÜZİK VE HAREKETLER\nSınıfınızın ilgisini canlı tutmak ve ilham almak için her 3 ayda bir en yeni müzik ve koreografiyi alın. \n\n - BİLİMSEL OLARAK KANITLANMIŞ ANTRENMANLARI ÖĞRETİN\n Programlarımızın , üyelerinize sonuç vereceklerinden emin olmak için Penn State University ile ortaklaşa yürüttüğümüz çalışma sonucunda herbir program titizlikle test edilir.\n\n- ÖZEL EĞİTMEN AVANTAJLARI\n Adidas, Polar, Stages Cycling ve LES MILLS+ ile olan ortaklıklarımızdan özel teklifler alın.",
-  },
-  {
-    title: "Sertifikaya Giden Yolculuğunuz",
-    response:
-      "1- EĞİTİM İÇİN KAYDOLUN\nİlk adımınız, size uygun yer ve zamanda bir temel eğitim kursuna kaydolmaktır.\n- Eğitimini almak istediğinİz programı seçin.\n- Eğitmen Bilgi Formunu doldur.\n- Eğitmen sözleşmesini imzala. \n- Ödemeni yap. \n\n2- EĞİTİME KATIL\nYeni Ekibinizle iki günlük yoğun, ilham verici öğrenmeye hazır olun. \n- Sana gönderilen Eğitim dokümanlarını incele\n - Eğitime %100 Katılım göster. \n\n3- VİDEONUZU GÖNDERİN\nBaşlangıç eğitimini geçtikten sonra son adımınız bir değerlendirme videosu göndermektir.",
-  },
-  {
-    title: "Eğitimde Beni Bekleyenler",
-    response:
-      "Farklı öğrenme stillerine uyacak şekilde tasarlanan kursunuz, dersleri, grup tartışmalarını, uygulamalı egzersiz seanslarını ve öğretmenlik uygulamasını içerecektir. \nKonular şunları içerir: \n- Sınıf yapısı ve faydaları\n- Koreografi nasıl yorumlanır, anlaşılır ve öğrenilir? \n- Doğru egzersiz tekniği nasıl yapılır ve değerlendirilir? \n- Egzersizler neden belirli bir şekilde yürütülür? \n- Hem güvenli hem de ilham verici olması için sınıfa nasıl koçluk yapılır? \n- Unutulmaz, eğlenceli ve etkili bir egzersiz deneyimi nasıl oluşturulur? \nSınıf boyutu 8 - 24 katılımcıya kadardır. \n\nNasıl Hazırlanırım?\n- Eğitiminize katılmadan önce çok sayıda Les Mills dersine katılmanızı öneririz, böylece iyi hazırlanmış olursunuz\n- Eğitiminiz başlamadan yaklaşık 10 gün önce, öğreneceğiniz yayının bir videosu ve eğitime hazırlanmanıza yardımcı olacak ön çalışma dahil olmak üzere eğitim materyallerinizi alacaksınız. \n- Öğrenmeniz için size iki parça verilecek ve notlarınıza bakmadan yalnızca çalan müzikle sunum yapana kadar bunları pratik etmeniz gerekiyor. \n- Koreografiyi öğrenmek ve serbest uygulama pratiği yapmak için birkaç saat ayırmanızı öneririz.",
-  },
-  {
-    title: "Eğitim İçin Nelere İhtiyacım Var",
-    response:
-      "Eğitmen El Kitabınız \nEğitim materyallerinize erişmek için bir akıllı telefon veya iPod \nKulaklıklar \nNot almak için kalem ve kağıt \nBir kıyafet değişikliği - terleyeceksiniz! \nYemek ve su \nİlk günden sonra ödev olarak ayırdığınız bölümleri gözden geçirebilmeniz için bir dizüstü bilgisayar veya tablet. \nYalnızca Çevrimiçi: Eğitim süresince sabit bir internet bağlantısına, bir bilgisayara veya mobil cihaza (mikrofonlu) ve kameraya erişiminiz olacaktır.",
-  },
-  {
-    title: "İlk Eğitimden Sonra Neler Olur",
-    response:
-      "İki günlük eğitiminizi başarıyla tamamladıktan sonra, tüm sınıfa ders verirken çekilmiş bir videonuzu göndermelisiniz. Videonuzu hazırlamak ve göndermek için altmış gününüz olacak. \nVideo gönderiminize hazırlanmak için mevcut eğitmenlerle gölge öğretime mümkün olduğunca fazla zaman ayırmanızı öneririz. \n\nGeçmek için, aşağıdaki konularda yetkinlik göstermeniz gerekir: \n1- Koreografi \n2- Teknik \n3- Koçluk \n\nEğitim sonucunda Bütünleme ile Geçti sonucu alan katılımcılar, tam bir sınıfı (Dersin Tamamını) kaydetmeden önce 1 parça videosunu değerlendirme için göndereceklerdir. Gönderim gereklilikleri ve başarılı bir videonun nasıl sunulacağı hakkında daha fazla bilgi eğitiminizde verilecektir.",
-  },
-];
+import { useTranslation } from 'react-i18next';
+function FaqQuestions() {
+	const { t, i18n } = useTranslation('faqQuestions');
+	const faqQuestions = [
+		{
+			title: t('question1.title'),
+			response: t('question1.response'),
+		},
+		{
+			title: t('question2.title'),
+			response: t('question2.response'),
+		},
+		{
+			title: t('question3.title'),
+			response: t('question3.response'),
+		},
+		{
+			title: t('question4.title'),
+			response: t('question4.response'),
+		},
+		{
+			title: t('question5.title'),
+			response: t('question5.response'),
+		},
+	];
+	return faqQuestions;
+}
+export default FaqQuestions;

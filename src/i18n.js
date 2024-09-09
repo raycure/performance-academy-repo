@@ -4,27 +4,20 @@ import { initReactI18next } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 import translationEN from './locales/en/translation.json';
 import translationTR from './locales/tr/translation.json';
-// the translations
-// (tip move them in a JSON file and import them,
-// or even better, manage them separated from your code: https://react.i18next.com/guides/multiple-translation-files)
-// const resources = {
-// 	en: {
-// 		translation: {
-// 			'Welcome to React': 'Welcome to React and react-i18next',
-// 		},
-// 	},
-// 	tr: {
-// 		translation: {
-// 			'Welcome to React': 'Bienvenue à React et react-i18next',
-// 		},
-// 	},
-// };
+import programsEN from './locales/en/programs.json';
+import programsTR from './locales/tr/programs.json';
+import faqQuestionsEN from './locales/en/faqQuestions.json';
+import faqQuestionsTR from './locales/tr/faqQuestions.json';
 const resources = {
 	en: {
 		translation: translationEN,
+		faqQuestions: faqQuestionsEN,
+		programs: programsEN,
 	},
 	tr: {
 		translation: translationTR,
+		faqQuestions: faqQuestionsTR,
+		programs: programsTR,
 	},
 };
 i18n
