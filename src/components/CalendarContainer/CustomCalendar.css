@@ -57,6 +57,10 @@
 .fc {
 	max-width: 750px;
 }
+.fc .fc-cell-shaded,
+.fc .fc-day-disabled {
+	background: none;
+}
 @media (max-width: 1650px) {
 	.fc .fc-toolbar.fc-header-toolbar {
 		font-size: var(--fs-400);

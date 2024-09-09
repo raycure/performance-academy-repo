@@ -57,6 +57,7 @@ function CalendarContainer() {
 				eventClick={handleEventClick}
 				eventContent={renderEvents}
 				eventBackgroundColor={events.color}
+				validRange={{ start: '2024-09-01', end: '2025-01-01' }} //we're gonna put the range of the events here
 			/>
 		</div>
 	);
