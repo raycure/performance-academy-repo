@@ -4,10 +4,10 @@ function LesmillsPrograms() {
 	const lesMillsPrograms = {
 		[t('cat1.title')]: [
 			{
-				title: t('cat1.program1.title'),
-				logo: t('cat1.program1.logo'),
-				picture: t('cat1.program1.picture'),
-				id: t('cat1.program1.id'),
+				title: 'BODYPUMP',
+				logo: '/classLogo/BODYPUMP.png',
+				picture: '',
+				id: 'BODYPUMP',
 				sum: t('cat1.program1.sum'),
 				description: t('cat1.program1.description'),
 				whyMember: t('cat1.program1.whyMember'),
@@ -19,10 +19,10 @@ function LesmillsPrograms() {
 				result: t('cat1.program1.result'),
 			},
 			{
-				title: t('cat1.program2.title'),
-				logo: t('cat1.program2.logo'),
-				picture: t('cat1.program2.picture'),
-				id: t('cat1.program2.id'),
+				title: 'BODYCOMBAT',
+				logo: '/classLogo/BODYCOMBAT.png',
+				picture: '',
+				id: 'BODYCOMBAT',
 				sum: t('cat1.program2.sum'),
 				description: t('cat1.program2.description'),
 				whyMember: t('cat1.program2.whyMember'),

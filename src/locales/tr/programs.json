@@ -2,13 +2,9 @@
 	"cat1": {
 		"title": "GRUP FITNESS PROGRAMLARI",
 		"program1": {
-			"title": "BODYPUMP",
-			"logo": "/classLogo/BODYPUMP.png",
-			"picture": "",
-			"id": "BODYPUMP",
 			"sum": "Üyeleriniz Genel Vücut Antrenmanı ile güç oluşturmak, zayıflamak ve formda olmak ve tüm ana kasları çalıştırmak mı istiyor? LesMills BODYPUMP, kalori yakmak ve yağsız, atletik kaslar oluşturmak için bilimsel olarak kanıtlanmış, dünyanın en popüler halter egzersiz programıdır.",
 			"description": "BODYPUMP™, hızlı bir şekilde zayıflamak, formda kalmak ve kas kuvvetini arttırmak isteyen herkesin katılabileceği, kanıtlanmış bir formül olan THE REP EFFECT'e dayalı halter ile yapılan bir egzersiz sınıfıdır. \n BODYPUMP, çok sayıda tekrarla birlikte hafif ila orta ağırlıkları kullanan, 540 kaloriye kadar yağ yakımı sağlayan bir Genel Vücut Antrenmanıdır.  Bilimselliği kanıtlanmış egzersizlerin sürükleyici ve ilham veren  müzikle birleşmesi, Eğitmenlerin  harika ve motive edici bir ders sunmasını sağlıyor.",
-			"whyMember": "Sonuçlar motive edicidir.  Ve BODYPUMP sonuç verir.  Üyeleriniz, ilham verici bir grup deneyiminin bir parçası olarak ve daha fazlası için geri dönmeye hazır olarak sınıftan meydan okumuş ve motive olmuş hissederek ayrılacaklar.  İdeal olarak, üyeler en iyi etkiyi elde etmek için haftada üç kez ders yapmalıdır. \nBODYPUMP, yoğun kulüplerdeki üyeler için de harika bir seçenektir - ekipman için sıraya girmek zorunda kalmadan etkili ağırlık çalışmasıdır.",
+			"whyMember": "Sonuçlar motive edicidir. Ve BODYPUMP sonuç verir. Üyeleriniz, ilham verici bir grup deneyiminin bir parçası olarak ve daha fazlası için geri dönmeye hazır olarak sınıftan meydan okumuş ve motive olmuş hissederek ayrılacaklar.  İdeal olarak, üyeler en iyi etkiyi elde etmek için haftada üç kez ders yapmalıdır. \nBODYPUMP, yoğun kulüplerdeki üyeler için de harika bir seçenektir - ekipman için sıraya girmek zorunda kalmadan etkili ağırlık çalışmasıdır.",
 			"whyYou": "30, 45 veya 55 dakikalık bir formatta çalıştırılabilen BODYPUMP size  Program Çizelgenizde esneklik sağlar.  Üyelerinizin düzenli olarak erişebilmelerini sağlamak için, tam bir saat aralığı olmadığında bile en yoğun zamanlarda planlayabilirsiniz.  LesMills Eğitmenleri, her seviyedeki üyeye ilham verici ve güvenli bir antrenman sunmak için özel olarak eğitilir. \nBODYPUMP yapan insanlar bunu düzenli olarak yapıyor ve geri gelmeye devam ediyor.Onlara talep edilen fiziksel sonuçları verir - şişmeden güçlü ve atletik bir vücut ayrıca ağırlığa dayalı bir antrenman yapmanın hızlı ve etkili bir yolu olduğu için, zaman kaybetmek istemeyen meşgul üyelerin ihtiyaçlarını karşılar.",
 			"type": "Kuvvet",
 			"lessons": "30, 45 veya 55 dakika.  Canlı, Sanal ve İsteğe Bağlı",
@@ -17,10 +13,6 @@
 			"result": "Güç, Yağ Kaybı, Güçlenme"
 		},
 		"program2": {
-			"title": "BODYCOMBAT",
-			"logo": "/classLogo/BODYCOMBAT.png",
-			"picture": "",
-			"id": "BODYCOMBAT",
 			"sum": "Üyeleriniz gerçek sonuçlar veren güçlendirici bir antrenman arıyorsa, işte budur.İnanılmaz derecede popüler olan Les Mills BODYCOMBAT antrenmanımız, kardiyovasküler kondisyonunu arttırmak ve tüm vücudu çalıştırmak için temassız dövüş sanatlarından ilham alan egzersizler kullanarak üyelerinizi formda, hızlı ve güçlü kılar.",
 			"description": "BODYCOMBAT® Yumruk ve tekme atılarak yapılan ancak herhangi bir fiziksel temasın olmadığı gurup dersi antrenmandır.  Katılımcılar tüm vücutlarını zinde ve güçlü hisseder, büyük miktarda kalori yakar, stresi azaltır, güçlenmiş hisseder ve vücutlarında bir enerji patlaması yaşarlar. Bir derste 740 kalori yakmak mümkündür.Sürükleyici müzik  ve güçlü rol model eğitmenler tarafından desteklenen katılımcılar, yumruk ve tekme atarak kalori yakacak ve kardiyo Fitness seviyelerini en yüksek noktaya  taşıyacaklardır.",
 			"whyMember": "Stres seviyelerini dengeye getirmek ve kondisyonlarını arttırmak isteyen üyeler için BODYCOMBAT eksiksiz bir pakettir.  Bacakları çalıştırır, kolları, sırtı ve omuzları şekillendirir ve core bölgemizin güçlü çalışmasını sağlar.  Aynı zamanda kalorileri yakar, koordinasyonu, çevikliği ve hızı artırır ve kişilerin güçlü hissetmelerini sağlar.",
@@ -32,10 +24,6 @@
 			"result": "Geliştirilmiş kardiyo zindeliği, artan kalori yakımı ve güçlenme"
 		},
 		"program3": {
-			"title": "",
-			"logo": "",
-			"picture": "",
-			"id": "",
 			"sum": "",
 			"description": "",
 			"whyMember": "",
@@ -47,10 +35,6 @@
 			"result": ""
 		},
 		"program4": {
-			"title": "",
-			"logo": "",
-			"picture": "",
-			"id": "",
 			"sum": "",
 			"description": "",
 			"whyMember": "",
@@ -62,10 +46,6 @@
 			"result": ""
 		},
 		"program5": {
-			"title": "",
-			"logo": "",
-			"picture": "",
-			"id": "",
 			"sum": "",
 			"description": "",
 			"whyMember": "",
@@ -77,10 +57,6 @@
 			"result": ""
 		},
 		"program6": {
-			"title": "",
-			"logo": "",
-			"picture": "",
-			"id": "",
 			"sum": "",
 			"description": "",
 			"whyMember": "",
@@ -92,10 +68,6 @@
 			"result": ""
 		},
 		"program7": {
-			"title": "",
-			"logo": "",
-			"picture": "",
-			"id": "",
 			"sum": "",
 			"description": "",
 			"whyMember": "",
@@ -107,10 +79,6 @@
 			"result": ""
 		},
 		"program8": {
-			"title": "",
-			"logo": "",
-			"picture": "",
-			"id": "",
 			"sum": "",
 			"description": "",
 			"whyMember": "",
@@ -122,10 +90,6 @@
 			"result": ""
 		},
 		"program9": {
-			"title": "",
-			"logo": "",
-			"picture": "",
-			"id": "",
 			"sum": "",
 			"description": "",
 			"whyMember": "",
@@ -137,10 +101,6 @@
 			"result": ""
 		},
 		"program10": {
-			"title": "",
-			"logo": "",
-			"picture": "",
-			"id": "",
 			"sum": "",
 			"description": "",
 			"whyMember": "",
@@ -152,10 +112,6 @@
 			"result": ""
 		},
 		"program11": {
-			"title": "",
-			"logo": "",
-			"picture": "",
-			"id": "",
 			"sum": "",
 			"description": "",
 			"whyMember": "",
@@ -167,10 +123,6 @@
 			"result": ""
 		},
 		"program12": {
-			"title": "",
-			"logo": "",
-			"picture": "",
-			"id": "",
 			"sum": "",
 			"description": "",
 			"whyMember": "",
@@ -185,10 +137,6 @@
 	"cat2": {
 		"title": "",
 		"program1": {
-			"title": "",
-			"logo": "",
-			"picture": "",
-			"id": "",
 			"sum": "",
 			"description": "",
 			"whyMember": "",
@@ -203,10 +151,6 @@
 	"cat3": {
 		"title": "",
 		"program1": {
-			"title": "",
-			"logo": "",
-			"picture": "",
-			"id": "",
 			"sum": "",
 			"description": "",
 			"whyMember": "",
@@ -218,10 +162,6 @@
 			"result": ""
 		},
 		"program2": {
-			"title": "",
-			"logo": "",
-			"picture": "",
-			"id": "",
 			"sum": "",
 			"description": "",
 			"whyMember": "",
