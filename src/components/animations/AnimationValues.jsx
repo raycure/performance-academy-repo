@@ -120,12 +120,8 @@ const socialSlide = {
 	initial: {
 		opacity: 1,
 	},
-	animate: (windowWidth) => {
-		// if (windowWidth < 50) {
-		// }
-		return {
-			x: '2.5rem',
-		};
+	animate: {
+		x: '2.5rem',
 	},
 };
 const backgroundFill = {
@@ -142,10 +138,13 @@ const backgroundFill = {
 		left: 0,
 	},
 };
+
 const rightToLeft = {
-	initial: {
-		opacity: 1,
-		x: 500,
+	initial: (windowWidth) => {
+		return {
+			opacity: 1,
+			x: windowWidth <= 570 ? '100%' : windowWidth * 0.7,
+		};
 	},
 	animate: {
 		opacity: 1,

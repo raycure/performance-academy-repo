@@ -21,6 +21,7 @@ import {
 } from '../animations/AnimationValues';
 import instagramBackground from '../../assets/instagram-background.jpg';
 import { useTranslation } from 'react-i18next';
+import { set } from 'mongoose';
 function Navbar() {
 	const [menuOpen, setMenuOpen] = useState(false);
 	const toggleNavMenu = () => {
@@ -93,7 +94,7 @@ function Navbar() {
 	const changeLanguage = (lng) => {
 		i18n.changeLanguage(lng);
 	};
-
+	const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 	return (
 		<div className='navigation-outer-container user-select-none'>
 			<nav className='nav-container nav-inner-container'>
@@ -148,14 +149,11 @@ function Navbar() {
 					<HiOutlineMenuAlt3
 						className='nav-item-icon'
 						onClick={() => {
+							setWindowWidth(window.innerWidth);
 							setMenuOpen(!menuOpen);
 							if (typeof window != 'undefined' && window.document) {
 								document.body.style.overflow = 'hidden';
 							}
-							// requestAnimationFrame(() => {
-							// 	const menuElement = document.getElementById('menu-navigation');
-							// 	const menuWidth = menuElement?.offsetWidth;
-							// });
 						}} //menu acıp scroll kapatıyor
 					/>
 				</div>
@@ -168,6 +166,7 @@ function Navbar() {
 					menuOpen ? 'menu-open' : 'display-hidden'
 				}`}
 				id='menu-navigation'
+				custom={windowWidth}
 			>
 				<FiX className='navbar-xmark' onClick={toggleNavMenu} />
 				<div className='menu-inner-container'>

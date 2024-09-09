@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState, createRef } from 'react';
 import EventExpandedItem from '../../components/EventItem/EventExpandedItem';
 import { MdArrowBackIosNew, MdArrowForwardIos } from 'react-icons/md';
 import { motion, useAnimation, useInView } from 'framer-motion';
+import { HashLink } from 'react-router-hash-link';
 
 function PaginationContainer() {
 	//const lineRefs = useRef([]);
@@ -51,10 +52,21 @@ function PaginationContainer() {
 	// useEffect(() => {
 	// 	console.log('look', lineRefs.current);
 	// }, []);
+	const scrollWithOffset = (el) => {
+		const yCoordinate = el.getBoundingClientRect().top + window.scrollY;
+		const header = document.querySelector('.nav-container');
+		const headerHeight = header ? header.offsetHeight : 0;
+		const yOffset = -headerHeight;
 
+		window.scrollTo({ top: yCoordinate + yOffset, behavior: 'smooth' });
+	};
 	return (
 		<>
-			<motion.div className='event-container' style={{ overflow: 'scroll' }}>
+			<motion.div
+				id='event-pagination'
+				className='event-container'
+				style={{ overflow: 'scroll' }}
+			>
 				{paginatedEvents.map((event, index) => {
 					// if (!lineRefs.current[index]) {
 					// 	lineRefs.current[index] = createRef();
@@ -120,7 +132,13 @@ function PaginationContainer() {
 							}`}
 							key={index}
 						>
-							{number}
+							<HashLink
+								smooth={true}
+								to={`/etkinlikler#event-pagination`}
+								scroll={(el) => scrollWithOffset(el)}
+							>
+								{number}
+							</HashLink>
 						</button>
 					))}
 				</div>
