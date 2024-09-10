@@ -1,11 +1,12 @@
 import React from 'react';
 import { useEffect, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import Button from '../../components/Button/Button.jsx';
 import './registerStyle.css';
 import { register } from '../../auth/auth.service.js';
 import { useDispatch } from 'react-redux';
 import AuthenticationGreet from './AuthenticationGreet.jsx';
+import Notification from '../../components/Notification/Notification.jsx';
 import {
 	faCheck,
 	faTimes,
@@ -13,6 +14,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import logo from '../../assets/LesmillsLogo.png';
+import { useNavigate } from 'react-router-dom';
 
 const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
@@ -21,6 +23,15 @@ function RegisterForm() {
 	const userRef = useRef();
 	const errRef = useRef();
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
+
+	const [notification, setNotification] = useState(null);
+	const showNotification = (message, type) => {
+		setNotification({ message, type });
+	};
+	const handleCloseNotification = () => {
+		setNotification(null);
+	};
 
 	const [user, setUser] = useState('');
 	const [validName, setValidName] = useState(false);
@@ -68,11 +79,16 @@ function RegisterForm() {
 		try {
 			const registerData = { username: user, password: pwd, email: mail };
 			const response = await dispatch(register({ registerData }));
+
 			setSuccess(true);
 			setUser('');
 			setPwd('');
 			setMatchPwd('');
+			navigate('/login');
 		} catch (err) {
+			if (err.response?.status === 429) {
+				setErrMsg('Too many requests, please try again later.');
+			}
 			setErrMsg(err.data.message);
 		}
 	}
@@ -218,6 +234,10 @@ function RegisterForm() {
 
 				<div className='authentication-button-container'>
 					<Button
+						onClick={() =>
+							success &&
+							showNotification('Success! Operation completed.', 'info')
+						}
 						disabled={!validName || !validPwd || !validMatch ? true : false}
 						type='submit'
 					>
@@ -229,6 +249,13 @@ function RegisterForm() {
 					</Link>
 				</div>
 			</form>
+			{notification && (
+				<Notification
+					message={notification.message}
+					type={notification.type}
+					onClose={handleCloseNotification}
+				/>
+			)}
 			<AuthenticationGreet />
 		</div>
 	);

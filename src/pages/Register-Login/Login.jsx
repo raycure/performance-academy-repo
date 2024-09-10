@@ -150,11 +150,11 @@ function Login() {
 					<Link to='/register' className='fs-400'>
 						Bir hesabınız yok mu? Buradan kaydolun!
 					</Link>
-					{/* <label onClick={handleSub}>
+					<label onClick={handleSub}>
 						<br /> User Name: Test{' '}
 						{localStorage.getItem('accessToken') != '' ? '1' : '0'}
 					</label>
-					<Button onClick={handleLogout}>Çıkış Yapın</Button> */}
+					<Button onClick={handleLogout}>Çıkış Yapın</Button>
 				</form>
 			</>
 			<AuthenticationGreet />
