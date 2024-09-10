@@ -50,7 +50,7 @@ const accordion = {
 		height: 'auto',
 		opacity: 1,
 		transition: {
-			duration: 1,
+			duration: 0.4,
 		},
 	},
 };

@@ -160,8 +160,7 @@ textarea::-ms-textarea-placeholder {
 }
 .authentication-button-container {
 	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
+	flex-direction: column;
 	margin-top: auto;
 }
 .text-align-right {

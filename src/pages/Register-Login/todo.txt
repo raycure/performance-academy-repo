@@ -1,3 +1,4 @@
+add if you didnt receieved email and shit
 what should i return after a 200 reg
 add lazy loading
 add forgot password
@@ -9,7 +10,7 @@ add animations for every form
 add not allowing users open up login page if they are logged in or some other way of ensuring i can track if they logged in or not
 add appearing animation for req in forms
 add auto deleting when refresh token expires
-
-
+text area animation
+ensuring i can track if they logged in or not
 no connection error doesnt appear in login
 too many request error notify system 

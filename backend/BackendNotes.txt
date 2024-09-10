@@ -11,3 +11,14 @@ extraReducers allow us to listen other reducers actions and other Slices actions
 
 
 redux doesnt store any data after a refresh you gotta store persist it for it to work its faster than localStorage btw
+
+
+problem is top to bottom 
+while doing so the top elements height shrinks while the other grows 
+in bottom to top element shrinks
+
+100 expended 200 total 300
+150 expended 200 total 350
+
+300+ - 
+450 further away grom gwo

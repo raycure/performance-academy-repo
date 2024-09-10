@@ -215,6 +215,7 @@ function RegisterForm() {
 					<FontAwesomeIcon icon={faInfoCircle} />
 					Must match the first password input field.
 				</p>
+
 				<div className='authentication-button-container'>
 					<Button
 						disabled={!validName || !validPwd || !validMatch ? true : false}
