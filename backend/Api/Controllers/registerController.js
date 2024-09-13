@@ -3,7 +3,7 @@ import pkg from 'bcryptjs';
 const { hash, compare } = pkg;
 import jwt from 'jsonwebtoken';
 import { ObjectId } from 'mongodb';
-// import EmailSender from './emailSender.js';
+import EmailSender from './emailSender.js';
 
 const register = async (req, res) => {
 	try {
@@ -30,15 +30,15 @@ const register = async (req, res) => {
 			process.env.MAIL_TOKEN_SECRET,
 			{ expiresIn: '1d' }
 		);
-		// const verifyLink = process.env.ACTIVATION_LINK + '/' + emailVerifyToken;
-		// try {
-		// 	await EmailSender(verifyLink, email);
-		// } catch (error) {
-		// 	console.log('email couldnt been sent');
-		// }
+		const verifyLink = process.env.ACTIVATION_LINK + '/' + emailVerifyToken;
+		try {
+			await EmailSender(verifyLink, email);
+		} catch (error) {
+			console.log('email couldnt been sent');
+		}
 
-		existingUser.attemptsToLogin = 0;
-		await existingUser.save();
+		// existingUser.attemptsToLogin = 0;
+		// await existingUser.save();
 		res.sendStatus(200);
 
 		// todo response with the users id nothing else ig.

@@ -27,7 +27,7 @@ app.use(express.urlencoded({ extended: false }));
 
 const limiter = rateLimit({
 	windowMs: 1000 * 60 * 60,
-	max: 1,
+	max: 100,
 	handler: (req, res, next) => {
 		res.status(429).json({
 			message: 'Too many requests, please try again later.',

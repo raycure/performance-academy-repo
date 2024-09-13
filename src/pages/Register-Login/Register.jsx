@@ -79,12 +79,13 @@ function RegisterForm() {
 		try {
 			const registerData = { username: user, password: pwd, email: mail };
 			const response = await dispatch(register({ registerData }));
-
 			setSuccess(true);
 			setUser('');
 			setPwd('');
 			setMatchPwd('');
-			navigate('/login');
+			setTimeout(() => {
+				navigate('/login');
+			}, 2000);
 		} catch (err) {
 			if (err.response?.status === 429) {
 				setErrMsg('Too many requests, please try again later.');
