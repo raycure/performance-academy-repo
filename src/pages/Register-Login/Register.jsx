@@ -4,7 +4,7 @@ import { Link, Navigate } from 'react-router-dom';
 import Button from '../../components/Button/Button.jsx';
 import './registerStyle.css';
 import { register } from '../../auth/auth.service.js';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import AuthenticationGreet from './AuthenticationGreet.jsx';
 import Notification from '../../components/Notification/Notification.jsx';
 import {
@@ -15,11 +15,13 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import logo from '../../assets/LesmillsLogo.png';
 import { useNavigate } from 'react-router-dom';
+import { selectError } from '../../redux/auth/authStateSlice.js';
 
 const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 
 function RegisterForm() {
+	const fetchError = useSelector(selectError);
 	const userRef = useRef();
 	const errRef = useRef();
 	const dispatch = useDispatch();
@@ -65,6 +67,9 @@ function RegisterForm() {
 	useEffect(() => {
 		setErrMsg('');
 	}, [user, pwd, matchPwd]);
+	useEffect(() => {
+		success && showNotification('Success! Operation completed.', 'info');
+	}, [success]);
 
 	async function handleSubmit(e) {
 		e.preventDefault();
@@ -90,7 +95,10 @@ function RegisterForm() {
 			if (err.response?.status === 429) {
 				setErrMsg('Too many requests, please try again later.');
 			}
-			setErrMsg(err.data.message);
+
+			err.payload.data === undefined // if the req fails assumed no connection.
+				? setErrMsg('int baglanti falan')
+				: setErrMsg(err.payload?.data?.message);
 		}
 	}
 	return (
@@ -114,8 +122,6 @@ function RegisterForm() {
 						ref={userRef}
 						autoComplete='off'
 						onChange={(e) => setUser(e.target.value)}
-						// look up for e its a onchange's default object and target here means the element
-						// that triggered the event and value is the whatever the text written in the input field
 						value={user}
 						required
 						aria-invalid={validName ? 'false' : 'true'}
@@ -235,10 +241,6 @@ function RegisterForm() {
 
 				<div className='authentication-button-container'>
 					<Button
-						onClick={() =>
-							success &&
-							showNotification('Success! Operation completed.', 'info')
-						}
 						disabled={!validName || !validPwd || !validMatch ? true : false}
 						type='submit'
 					>

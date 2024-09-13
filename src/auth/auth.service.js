@@ -18,11 +18,11 @@ export const register =
 			);
 			if (fetchData.rejected.match(response)) {
 				console.log('response authta:', response);
-
-				return Promise.reject(response.payload);
+				throw response || 'An unknown error occurred';
 			}
 			return response;
 		} catch (error) {
+			console.log('response authta:', error);
 			return Promise.reject(error);
 		}
 	};
@@ -39,10 +39,11 @@ export const login =
 				})
 			);
 			if (fetchData.rejected.match(response)) {
-				return Promise.reject(response.payload);
+				throw response || 'An unknown error occurred';
 			}
 			return response;
 		} catch (error) {
+			console.log('response authta catchte:', error);
 			return Promise.reject(error);
 		}
 	};
