@@ -37,7 +37,7 @@ function CalendarContainer() {
 	return (
 		<div
 			id='calendar-container'
-			className='calendar-container user-select-none bg-primary-400 bottom-space'
+			className='calendar-container user-select-none bg-primary-500'
 		>
 			<CalendarEventItem eventClicked={eventClicked} eventId={activeEventId} />
 			<FullCalendar

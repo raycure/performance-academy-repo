@@ -12,38 +12,36 @@ import store from './redux/store';
 import Cookies from './pages/Legal/Cookies';
 import PrivacyPolicy from './pages/Legal/PrivacyPolicy';
 import Test from './pages/Test';
-import Loading from './components/Loading/Loading';
-import React, { Suspense } from 'react';
+import React from 'react';
 
 function App() {
 	return (
+		//</><Suspense fallback={<Loading />}>
 		<>
 			<Provider store={store}>
-				<Suspense fallback={<Loading />}>
-					<BrowserRouter>
-						<Routes>
-							<Route path='/' element={<Layout />}>
-								<Route index element={<Main />} />
-								<Route path='etkinlikler' element={<Events />} />
-								<Route path='programlar' element={<Classes />} />
-								<Route path='iletişim' element={<Contact />} />
-								<Route path='register' element={<Register />} />
-								<Route path='login' element={<Login />} />
-								<Route path='çerezler' element={<Cookies />} />
-								<Route path='test' element={<Test />} />
-								<Route
-									path='kişisel-verilerin-korunması'
-									element={<PrivacyPolicy />}
-								/>
-								<Route
-									path='*'
-									element={<NoPage />}
-									//required for undefined urls
-								/>
-							</Route>
-						</Routes>
-					</BrowserRouter>
-				</Suspense>
+				<BrowserRouter>
+					<Routes>
+						<Route path='/' element={<Layout />}>
+							<Route index element={<Main />} />
+							<Route path='etkinlikler' element={<Events />} />
+							<Route path='programlar' element={<Classes />} />
+							<Route path='iletişim' element={<Contact />} />
+							<Route path='register' element={<Register />} />
+							<Route path='login' element={<Login />} />
+							<Route path='çerezler' element={<Cookies />} />
+							<Route path='test' element={<Test />} />
+							<Route
+								path='kişisel-verilerin-korunması'
+								element={<PrivacyPolicy />}
+							/>
+							<Route
+								path='*'
+								element={<NoPage />}
+								//required for undefined urls
+							/>
+						</Route>
+					</Routes>
+				</BrowserRouter>
 			</Provider>
 		</>
 	);

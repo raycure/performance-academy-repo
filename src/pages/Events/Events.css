@@ -28,6 +28,12 @@
 	align-self: center;
 	height: 70%;
 }
+.dark-background {
+	width: 100%;
+	padding: 3rem 0;
+	background-color: var(--clr-primary-500);
+}
+
 @media (max-width: 1350px) {
 	.calendar-container {
 		grid-template-columns: 4fr 4fr;

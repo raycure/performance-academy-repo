@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useLayoutEffect } from 'react';
 import './Navbar.css';
 import { Link, NavLink } from 'react-router-dom'; //u cant style the links directly
 import { FaUser } from 'react-icons/fa6';
@@ -95,15 +95,14 @@ function Navbar() {
 	const changeLanguage = (lng) => {
 		i18n.changeLanguage(lng);
 	};
-	const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-	const handleWindowSizeChange = () => {
+	const [windowWidth, setWindowWidth] = useState(0);
+	let resizeWindow = () => {
 		setWindowWidth(window.innerWidth);
 	};
 	useEffect(() => {
-		window.addEventListener('resize', handleWindowSizeChange);
-		return () => {
-			window.removeEventListener('resize', handleWindowSizeChange);
-		};
+		resizeWindow();
+		window.addEventListener('resize', resizeWindow);
+		return () => window.removeEventListener('resize', resizeWindow);
 	}, []);
 	const handleClickOutside = (event) => {
 		const path = event.composedPath ? event.composedPath() : [];
@@ -181,7 +180,6 @@ function Navbar() {
 						className='nav-item-icon'
 						id='menu-button'
 						onClick={() => {
-							setWindowWidth(window.innerWidth);
 							setMenuOpen(!menuOpen);
 							if (typeof window != 'undefined' && window.document) {
 								document.body.style.overflow = 'hidden';

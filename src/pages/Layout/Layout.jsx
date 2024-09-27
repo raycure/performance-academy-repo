@@ -6,10 +6,10 @@ import { RiArrowUpSLine } from 'react-icons/ri';
 import { HashLink } from 'react-router-hash-link';
 import { useLocation } from 'react-router-dom';
 import { useLayoutEffect } from 'react';
-// import ResizeObserver from 'resize-observer-polyfill';
-// import { useScroll } from 'framer-motion';
+//import SmoothScrollContainer from '../../components/Containers/SmoothScrollContainer';
 function Layout() {
 	const Wrapper = ({ children }) => {
+		//for going to top of the page on path change
 		const location = useLocation();
 		useLayoutEffect(() => {
 			document.documentElement.scrollTo({
@@ -20,24 +20,8 @@ function Layout() {
 		}, [location.pathname]);
 		return children;
 	};
-	// document.addEventListener('wheel', function (event) {
-	// 	if (event.deltaY > 0) {
-	// 		event.preventDefault();
-	// 		smoothScroll(document.documentElement, 100, 100);
-	// 	}
-	// });
-	// function smoothScroll(domElement, pixel, delay) {
-	// 	const intervalToRepeat = 25;
-	// 	const step = (intervalToRepeat * pixel) / delay;
-	// 	if (step < pixel) {
-	// 		domElement.scrollTop += step;
-	// 		setTimeout(function () {
-	// 			smoothScroll(domElement, pixel - step, delay);
-	// 		}, intervalToRepeat);
-	// 	}
-	// }
-
 	return (
+		//<SmoothScrollContainer>
 		<Wrapper>
 			<Navbar />
 			<Outlet />

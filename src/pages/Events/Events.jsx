@@ -33,7 +33,9 @@ function Events() {
 				<p className='text-container'></p>
 			</div>
 			<p>{t('localizationTesting')}</p>
-			<CalendarContainer />
+			<div className='dark-background bottom-space'>
+				<CalendarContainer />
+			</div>
 			<PaginationContainer />
 		</>
 	);

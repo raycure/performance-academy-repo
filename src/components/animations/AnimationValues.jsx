@@ -122,6 +122,9 @@ const socialSlide = {
 	},
 	animate: {
 		x: '2.5rem',
+		transition: {
+			duration: 0.2,
+		},
 	},
 };
 const backgroundFill = {
@@ -136,6 +139,9 @@ const backgroundFill = {
 		height: '100%',
 		top: 0,
 		left: 0,
+		transition: {
+			duration: 0.2,
+		},
 	},
 };
 

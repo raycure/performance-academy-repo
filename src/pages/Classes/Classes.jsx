@@ -5,32 +5,34 @@ import { useLocation } from 'react-router-dom';
 import backgroundText from '../../assets/CHOOSE-HAPPY.png';
 import { motion } from 'framer-motion';
 import { backgroundFill } from '../../components/animations/AnimationValues';
-
+import { useTranslation } from 'react-i18next';
 function Classes() {
 	const location = useLocation();
+	const { t, i18n } = useTranslation('programs');
 	const [classType, setClassType] = useState(
 		location.state ? location.state : 'all'
 	);
 	function classSelectHandler(newClassType) {
 		setClassType(newClassType);
+		console.log('type', classType);
 	}
 	const windowWidth = window.innerWidth;
 	const programNames = [
 		{
-			label: 'Tüm Programlar',
+			label: t('cat4'),
 			selector: 'all',
 		},
 		{
-			label: 'Grup Fitness Programları',
-			selector: 'GRUP FITNESS PROGRAMLARI',
+			label: t('cat1.title'),
+			selector: t('cat1.title'),
 		},
 		{
-			label: 'Çocuk ve Genç Programları',
-			selector: 'ÇOCUK VE GENÇ PROGRAMLARI',
+			label: t('cat2.title'),
+			selector: t('cat2.title'),
 		},
 		{
-			label: 'Yüksek Yoğunluklu Interval Programlar',
-			selector: 'YÜKSEK YOĞUNLUKLU INTERVAL PROGRAMLAR',
+			label: t('cat3.title'),
+			selector: t('cat3.title'),
 		},
 	];
 	return (

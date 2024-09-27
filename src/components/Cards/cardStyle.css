@@ -20,7 +20,8 @@
 	position: relative;
 	transform-style: preserve-3d;
 	transition: transform 1s;
-	border-radius: 3px;
+	border-radius: 30px;
+	background-color: black;
 }
 
 .flipped {
@@ -63,5 +64,5 @@
 
 /* added to prevent overflow and prevent issues width container width remove later */
 .cardContent {
-	padding: 0 2.5rem;
+	padding: 2.5rem;
 }

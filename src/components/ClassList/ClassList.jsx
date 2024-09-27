@@ -60,6 +60,8 @@ function ClassList({ classType }) {
 
 	const classes = Object.keys(lesMillsPrograms).map((category) => {
 		if (category !== classType && classType !== 'all') {
+			console.log('cat', category, 'class', classType);
+
 			return;
 		}
 		return lesMillsPrograms[category].map((program, subIndex) => {
@@ -160,6 +162,7 @@ function ClassList({ classType }) {
 									className={`classes-more-info-container top-border-light fs-400 ${
 										windowWidth < 1130 && 'fs-300'
 									}`}
+									style={{ marginTop: {} }} //height alıp ona gore ver
 								>
 									<div>
 										<p>Egzersiz Tipi: {program.type}</p>

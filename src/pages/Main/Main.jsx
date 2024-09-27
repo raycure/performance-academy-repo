@@ -10,7 +10,6 @@ import { downToUp } from '../../components/animations/AnimationValues.jsx';
 import Banner from '../../components/Banner/Banner';
 import { button } from '../../components/animations/AnimationValues.jsx';
 
-import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 function Main() {
@@ -86,7 +85,7 @@ function Main() {
 	return (
 		<>
 			{/* <Banner /> */}
-			<Container className='even-columns'>
+			<Container className='even-columns bottom-space'>
 				<div>
 					{/* <div className="fs-primary-heading">Lesmills Nedir?</div> */}
 					<div className='fs-primary-heading'>Lesmills Eğitmeni Olun</div>

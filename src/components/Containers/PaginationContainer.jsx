@@ -15,6 +15,19 @@ function PaginationContainer() {
 	const paginatedEvents = eventItems.slice(firstIndex, lastIndex);
 	const pageAmount = Math.ceil(eventItems.length / eventsPerPage);
 	const paginationNumbers = [...Array(pageAmount + 1).keys()].slice(1);
+	const paginationRef = useRef(null);
+	const executeScroll = () => {
+		const header = document.querySelector('.nav-container');
+		const headerHeight = header ? header.offsetHeight : 0;
+		if (paginationRef.current) {
+			const targetPosition =
+				paginationRef.current.getBoundingClientRect().top + window.scrollY;
+			window.scrollTo({
+				top: targetPosition - headerHeight,
+				behavior: 'smooth',
+			});
+		}
+	};
 	// const mainControls = useAnimation();
 	// const inViewStates = paginatedEvents.map(() => useRef(false));
 
@@ -37,16 +50,19 @@ function PaginationContainer() {
 		if (paginationPageNumber !== 1) {
 			setPaginationPageNumber(paginationPageNumber - 1);
 		}
+		executeScroll();
 	}
 
 	function nextPage() {
 		if (paginationPageNumber !== pageAmount) {
 			setPaginationPageNumber(paginationPageNumber + 1);
 		}
+		executeScroll();
 	}
 
 	function changePageNumber(id) {
 		setPaginationPageNumber(id);
+		executeScroll();
 	}
 
 	// useEffect(() => {
@@ -64,6 +80,7 @@ function PaginationContainer() {
 		<>
 			<motion.div
 				id='event-pagination'
+				ref={paginationRef}
 				className='event-container'
 				style={{ overflow: 'scroll' }}
 			>
@@ -132,13 +149,7 @@ function PaginationContainer() {
 							}`}
 							key={index}
 						>
-							<HashLink
-								smooth={true}
-								to={`/etkinlikler#event-pagination`}
-								scroll={(el) => scrollWithOffset(el)}
-							>
-								{number}
-							</HashLink>
+							{number}
 						</button>
 					))}
 				</div>
