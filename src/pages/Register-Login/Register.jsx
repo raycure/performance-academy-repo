@@ -1,11 +1,12 @@
 import React from 'react';
 import { useEffect, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import Button from '../../components/Button/Button.jsx';
 import './registerStyle.css';
 import { register } from '../../auth/auth.service.js';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import AuthenticationGreet from './AuthenticationGreet.jsx';
+import Notification from '../../components/Notification/Notification.jsx';
 import {
 	faCheck,
 	faTimes,
@@ -13,19 +14,46 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import logo from '../../assets/LesmillsLogo.png';
-
-const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
+import { useNavigate } from 'react-router-dom';
+import { selectError } from '../../redux/auth/authStateSlice.js';
+import { motion } from 'framer-motion';
+import { descending } from '../../components/animations/AnimationValues.jsx';
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 
 function RegisterForm() {
+	const usernameValidationRules = [
+		{
+			test: (username) => !/^[a-zA-Z]/.test(username),
+			message: 'have to start with a letter.',
+		},
+		{
+			test: (username) => !/^[a-zA-Z0-9.]+$/.test(username),
+			message: 'only letters numbers and dots.',
+		},
+		{
+			test: (username) => username.length < 4 || username.length >= 24,
+			message: '4 to 24 characters.',
+		},
+	];
+
+	const fetchError = useSelector(selectError);
 	const userRef = useRef();
 	const errRef = useRef();
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
 
-	const [user, setUser] = useState('');
+	const [notification, setNotification] = useState(null);
+	const showNotification = (message, type) => {
+		setNotification({ message, type });
+	};
+	const handleCloseNotification = () => {
+		setNotification(null);
+	};
+
+	const [username, setUsername] = useState('');
 	const [validName, setValidName] = useState(false);
 	const [mail, setMail] = useState('');
-	const [userFocus, setUserFocus] = useState(false);
+	const [userFocus, setUsernameFocus] = useState(false);
 
 	const [pwd, setPwd] = useState('');
 	const [validPwd, setValidPwd] = useState(false);
@@ -43,8 +71,10 @@ function RegisterForm() {
 	}, []);
 
 	useEffect(() => {
-		setValidName(USER_REGEX.test(user));
-	}, [user]);
+		const valid = usernameValidationRules.every((rule) => !rule.test(username));
+		console.log(valid);
+		setValidName(valid);
+	}, [username]);
 
 	useEffect(() => {
 		setValidPwd(PWD_REGEX.test(pwd));
@@ -53,14 +83,17 @@ function RegisterForm() {
 
 	useEffect(() => {
 		setErrMsg('');
-	}, [user, pwd, matchPwd]);
+	}, [username, pwd, matchPwd]);
+	useEffect(() => {
+		success && showNotification('Success! Operation completed.', 'info');
+	}, [success]);
 
 	async function handleSubmit(e) {
 		e.preventDefault();
-		const v1 = USER_REGEX.test(user);
+		// const v1 = USER_REGEX.test(user);
 		const v2 = PWD_REGEX.test(pwd);
 		const userAttempts = 0;
-		if (!v1 || !v2) {
+		if (!v2) {
 			setErrMsg('invalid entry');
 			return;
 		}
@@ -72,8 +105,17 @@ function RegisterForm() {
 			setUser('');
 			setPwd('');
 			setMatchPwd('');
+			setTimeout(() => {
+				navigate('/login');
+			}, 2000);
 		} catch (err) {
-			setErrMsg(err.data.message);
+			if (err.response?.status === 429) {
+				setErrMsg('Too many requests, please try again later.');
+			}
+
+			err.payload.data === undefined // if the req fails assumed no connection.
+				? setErrMsg('int baglanti falan')
+				: setErrMsg(err.payload?.data?.message);
 		}
 	}
 	return (
@@ -93,18 +135,16 @@ function RegisterForm() {
 						type='text'
 						placeholder='Kullanıcı Adı'
 						id='username'
-						className={validName || user ? 'form-icon-active' : ''}
+						className={validName || username ? 'form-icon-active' : ''}
 						ref={userRef}
 						autoComplete='off'
-						onChange={(e) => setUser(e.target.value)}
-						// look up for e its a onchange's default object and target here means the element
-						// that triggered the event and value is the whatever the text written in the input field
-						value={user}
+						onChange={(e) => setUsername(e.target.value)}
+						value={username}
 						required
 						aria-invalid={validName ? 'false' : 'true'}
 						aria-describedby='uidnote'
-						onFocus={() => setUserFocus(true)}
-						onBlur={() => setUserFocus(false)}
+						onFocus={() => setUsernameFocus(true)}
+						onBlur={() => setUsernameFocus(false)}
 					/>
 					<div htmlFor='username' className='form-icon'>
 						<FontAwesomeIcon
@@ -113,23 +153,22 @@ function RegisterForm() {
 						/>
 						<FontAwesomeIcon
 							icon={faTimes}
-							className={validName || !user ? 'hide' : 'invalid'}
+							className={validName || !username ? 'hide' : 'invalid'}
 						/>
 					</div>
+					<motion.p
+						initial='hidden'
+						variants={descending}
+						whileInView='show'
+						id='uidnote'
+						className={
+							userFocus && username && !validName ? 'instructions' : 'offscreen'
+						}
+					>
+						{usernameValidationRules.find((rule) => rule.test(username))
+							?.message || ''}
+					</motion.p>
 				</div>
-				<p
-					id='uidnote'
-					className={
-						userFocus && user && !validName ? 'instructions' : 'offscreen'
-					}
-				>
-					<FontAwesomeIcon icon={faInfoCircle} />
-					4 to 24 characters.
-					<br />
-					Must begin with a letter.
-					<br />
-					Letters, numbers, underscores, hyphens allowed.
-				</p>
 				<div className='centerLineAnimation'>
 					<input
 						type='email'
@@ -215,6 +254,7 @@ function RegisterForm() {
 					<FontAwesomeIcon icon={faInfoCircle} />
 					Must match the first password input field.
 				</p>
+
 				<div className='authentication-button-container'>
 					<Button
 						disabled={!validName || !validPwd || !validMatch ? true : false}
@@ -228,6 +268,13 @@ function RegisterForm() {
 					</Link>
 				</div>
 			</form>
+			{notification && (
+				<Notification
+					message={notification.message}
+					type={notification.type}
+					onClose={handleCloseNotification}
+				/>
+			)}
 			<AuthenticationGreet />
 		</div>
 	);

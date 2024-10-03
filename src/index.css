@@ -578,3 +578,16 @@ hr {
 .notHoveredLineAnimation.lineAnimation::before {
 	animation: slideOut 1s forwards;
 }
+
+.test {
+	background-color: red;
+	width: 100%;
+	padding: 1rem 0.2rem;
+	border-radius: 10px;
+	text-align: center;
+}
+
+.test2 {
+	width: 100%;
+	/* align-self: flex-end; */
+}

@@ -5,8 +5,10 @@ import LesMillsPrograms from '../../assets/LesmillsPrograms';
 import { MdOutlineDoubleArrow } from 'react-icons/md';
 import name from '/ornek.jpg';
 import { Link, redirect } from 'react-router-dom';
+import { useCallback } from 'react';
 import {
 	AnimatePresence,
+	m,
 	motion,
 	useAnimation,
 	useInView,
@@ -15,48 +17,33 @@ import { leftToRightForClasses } from '../animations/AnimationValues.jsx';
 import { accordion } from '../animations/AnimationValues.jsx';
 import { createRef } from 'react';
 
-// todo to useRef make a component
-
 function ClassList({ classType }) {
-	const lesMillsPrograms = LesMillsPrograms();
-	const [activeClass, setActiveClass] = useState(null);
-
-	useEffect(() => {
-		lineRefs.current = Object.keys(lesMillsPrograms).flatMap((category) =>
-			lesMillsPrograms[category].map((_, subIndex) => {
-				lineRefs.current[subIndex] ?? createRef();
-			})
-		);
-	});
-	const lineRefs = React.useRef([]);
+	const mainControls = useAnimation();
 	const windowWidth = window.innerWidth;
-
-	function classClickHandler(id) {
+	const [activeClass, setActiveClass] = useState(null);
+	const classClickHandler = (id) => {
 		setActiveClass(id);
+	};
 
-		// boyut degistikten sonra calisiyor cunku classclickhandler boyut degistiriyo
-		requestAnimationFrame(() => {
-			const element = document.getElementById(id);
-			if (element) {
-				const elementRect = element.getBoundingClientRect(); //uzaklık ve uzunluklari obje halinde donduruyor
-				const elementTop = elementRect.top + window.scrollY; //pageYOffset deprecated scrollY kullan
-				const elementHeight = element.scrollHeight;
-				element.style.height = elementHeight;
-				const header = document.querySelector('.nav-container'); //i guess this has to be the way cunku oburleri olmadı
-				const headerHeight = header ? header.offsetHeight : 0; //0 default bulamazsa diye
+	const scrollToTheTop = useCallback((id) => {
+		setTimeout(() => {
+			const divElement = document.querySelector(`#${id}`);
+			const divHeight = divElement ? divElement.offsetTop : 0;
+			const headerElement = document.querySelector(
+				'.navigation-outer-container'
+			);
+			const headerHeight = headerElement.offsetHeight;
+			window.scrollTo({
+				behavior: 'smooth',
+				top: divHeight - headerHeight,
+			});
+		}, 500);
+	}, []);
 
-				const middle =
-					elementTop -
-					window.innerHeight / 2 +
-					elementHeight / 2 -
-					headerHeight / 2;
-				window.scrollTo({
-					top: elementTop - headerHeight, // Subtract the header height if there is one
-					behavior: 'smooth',
-				});
-			}
-		});
-	}
+	const handleButtonClick = (id) => {
+		classClickHandler(id);
+		scrollToTheTop(id);
+	};
 
 	const classes = Object.keys(lesMillsPrograms).map((category) => {
 		if (category !== classType && classType !== 'all') {
@@ -70,12 +57,12 @@ function ClassList({ classType }) {
 			return (
 				<>
 					<motion.div
-						ref={lineRefs.current[subIndex]}
-						variants={leftToRightForClasses}
 						initial='hidden'
+						animate={mainControls}
+						variants={leftToRightForClasses}
 						whileInView='show'
 						viewport={{ once: true, amount: 0.1 }}
-						custom={subIndex}
+						custom={program.id}
 					>
 						<div
 							key={subIndex}
@@ -106,10 +93,10 @@ function ClassList({ classType }) {
 											initial='hidden'
 											animate='animate'
 											exit={{
-												opacity: 0,
+												opacity: 1,
 												height: 0,
 												transition: {
-													duration: 0.8,
+													duration: 0.5,
 												},
 											}}
 										>
@@ -147,7 +134,11 @@ function ClassList({ classType }) {
 												</div>
 												<Button
 													className='center-vertical'
-													onClick={() => classClickHandler(program.id)}
+													onClick={() => {
+														// scrollToTheTop(program.id);
+														handleButtonClick(program.id);
+														// classClickHandler(program.id);
+													}}
 												>
 													{!isActive ? 'Daha Fazlası' : 'Programa Katılın'}
 													<MdOutlineDoubleArrow color='white' />
@@ -171,7 +162,9 @@ function ClassList({ classType }) {
 									</div>
 									<Button
 										classProp={'classes-btn'}
-										onClick={() => classClickHandler(program.id)}
+										onClick={() => {
+											handleButtonClick(program.id);
+										}}
 										className='center-vertical'
 									>
 										{!isActive ? 'Daha Fazlası' : 'Programa Katılın'}
@@ -192,3 +185,203 @@ function ClassList({ classType }) {
 	return <>{classes}</>;
 }
 export default ClassList;
+
+// import React, { useEffect, useRef, useState } from 'react';
+// import './ClassList.css';
+// import Button from '../Button/Button';
+// import { lesMillsPrograms } from '../../assets/LesmillsPrograms';
+// import { MdHeadsetOff, MdOutlineDoubleArrow } from 'react-icons/md';
+// import name from '/ornek.jpg';
+// import { Link, redirect } from 'react-router-dom';
+// import { useCallback } from 'react';
+// import { AnimatePresence, motion, useAnimation } from 'framer-motion';
+// import { leftToRightForClasses } from '../animations/AnimationValues.jsx';
+// import { accordion } from '../animations/AnimationValues.jsx';
+// import { createRef } from 'react';
+
+// function ClassList({ classType }) {
+// 	const lineRefs = useRef([]);
+// 	const mainControls = useAnimation();
+// 	const windowWidth = window.innerWidth;
+// 	const [activeClass, setActiveClass] = useState(null);
+// 	const classClickHandler = useCallback((id) => {
+// 		console.log('classClickHandler called with id:', id);
+// 		setActiveClass((prevActiveClass) => {
+// 			console.log('Previous active class:', prevActiveClass);
+// 			console.log('New active class:', id);
+// 		});
+// 	}, []);
+
+// 	const scrollToTheTop = useCallback((id) => {
+// 		setTimeout(() => {
+// 			console.log('linrefs: ', id);
+// 			const divElement = document.querySelector(`#${id}`);
+// 			const divHeight = divElement ? divElement.offsetTop : 0;
+// 			const headerElement = document.querySelector(
+// 				'.navigation-outer-container'
+// 			);
+// 			const headerHeight = headerElement.offsetHeight;
+// 			window.scrollTo({
+// 				behavior: 'smooth',
+// 				top: divHeight - headerHeight,
+// 			});
+// 		}, 1000);
+// 		// elemHeight = divElement.offsetHeight;
+
+// 		// console.log('divs height: ', id.offsetHeight);
+
+// 		// if (ref) {
+// 		// 	console.log('Ref is valid, scrolling to:', ref);
+// 		// 	console.log('ref', ref.current.offsetHeight);
+// 		// } else {
+// 		// 	console.error('Invalid ref passed to scrollToTheTop');
+// 		// }
+// 	}, []);
+
+// 	const handleButtonClick = (id) => {
+// 		classClickHandler(id);
+// 		scrollToTheTop(id);
+// 	};
+
+// 	const classes = Object.keys(lesMillsPrograms).map((category) => {
+// 		if (category !== classType && classType !== 'all') {
+// 			return;
+// 		}
+// 		return lesMillsPrograms[category].map((program, subIndex) => {
+// 			const isActive = activeClass === program.id;
+
+// 			if (!lineRefs.current[program.id]) {
+// 				lineRefs.current[program.id] = createRef();
+// 			}
+
+// 			return (
+// 				<>
+// 					<motion.div
+// 						initial='hidden'
+// 						ref={lineRefs.current[program.id]}
+// 						animate={mainControls}
+// 						variants={leftToRightForClasses}
+// 						whileInView='show'
+// 						viewport={{ once: true, amount: 0.1 }}
+// 						custom={program.id}
+// 					>
+// 						<div
+// 							key={subIndex}
+// 							className={`class-item-container text-container top-border-light ${
+// 								windowWidth < 1130 && 'fs-400'
+// 							}`}
+// 							id={program.id}
+// 						>
+// 							{windowWidth > 930 && (
+// 								<img
+// 									aria-label='program pic'
+// 									className='img class-img'
+// 									src={name}
+// 								/>
+// 							)}
+// 							<div>
+// 								<img
+// 									aria-label='logo'
+// 									className='img class-logo'
+// 									src={program.logo}
+// 								/>
+// 								<p className='slogan'>{program.sum}</p>
+
+// 								<AnimatePresence>
+// 									{isActive && (
+// 										<motion.div
+// 											variants={accordion}
+// 											initial='hidden'
+// 											animate='animate'
+// 											exit={{
+// 												opacity: 1,
+// 												height: 0,
+// 												transition: {
+// 													duration: 1,
+// 												},
+// 											}}
+// 										>
+// 											{windowWidth <= 930 && windowWidth > 650 && (
+// 												<img
+// 													aria-label='program pic'
+// 													className='img class-img'
+// 													src={name}
+// 												/>
+// 											)}
+// 											<p>{program.description}</p>
+// 											{windowWidth <= 650 && (
+// 												<img
+// 													aria-label='program pic'
+// 													className='img class-img'
+// 													src={name}
+// 												/>
+// 											)}
+// 											<p>{program.whyMember}</p>
+// 											<p>{program.whyYou}</p>
+// 											<p>Sonuçlar: {program.result}</p>
+// 											<Link
+// 												onClick={() => {
+// 													setActiveClass(null);
+// 												}}
+// 												className='user-select-none'
+// 											>
+// 												Daha az göster
+// 											</Link>
+// 											<div className='classes-more-info-container top-border-light'>
+// 												<div>
+// 													<p>Egzersiz Tipi: {program.type}</p>
+// 													<p>Ekipman: {program.equipment}</p>
+// 													<p>Kime Yönelik: {program.for}</p>
+// 												</div>
+// 												<Button
+// 													className='center-vertical'
+// 													onClick={() => {
+// 														// scrollToTheTop(program.id);
+// 														// classClickHandler(program.id);
+// 														handleButtonClick(program.id);
+// 													}}
+// 												>
+// 													{!isActive ? 'Daha Fazlası' : 'Programa Katılın'}
+// 													<MdOutlineDoubleArrow color='white' />
+// 												</Button>
+// 											</div>
+// 										</motion.div>
+// 									)}
+// 								</AnimatePresence>
+// 							</div>
+// 							{!isActive && (
+// 								<div
+// 									className={`classes-more-info-container top-border-light fs-400 ${
+// 										windowWidth < 1130 && 'fs-300'
+// 									}`}
+// 								>
+// 									<div>
+// 										<p>Egzersiz Tipi: {program.type}</p>
+// 										<p>Ekipman: {program.equipment}</p>
+// 										<p>Kime Yönelik: {program.for}</p>
+// 									</div>
+// 									<Button
+// 										classProp={'classes-btn'}
+// 										onClick={() => {
+// 											handleButtonClick(program.id);
+// 										}}
+// 										className='center-vertical'
+// 									>
+// 										{!isActive ? 'Daha Fazlası' : 'Programa Katılın'}
+// 										<MdOutlineDoubleArrow
+// 											style={{ marginTop: 2 }}
+// 											color='white'
+// 										/>
+// 									</Button>
+// 								</div>
+// 							)}
+// 							<div className='background-image class-background-shape'></div>
+// 						</div>
+// 					</motion.div>
+// 				</>
+// 			);
+// 		});
+// 	});
+// 	return <>{classes}</>;
+// }
+// export default ClassList;
