@@ -34,8 +34,8 @@ function PaginationContainer() {
 		executeScroll();
 	}
 
-		window.scrollTo({ top: yCoordinate + yOffset, behavior: 'smooth' });
-	};
+	window.scrollTo({ top: yCoordinate + yOffset, behavior: 'smooth' });
+
 	return (
 		<>
 			<motion.div
