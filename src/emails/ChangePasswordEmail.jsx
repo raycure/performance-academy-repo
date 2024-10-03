@@ -16,6 +16,28 @@ import EmailComponent from '../components/Containers/EmailComponent';
 const username = 'beep';
 const passResetLink =
 	'https://www.trendyol.com/coverzone/kablosuz-karaoke-cift-mikrofon-6-35mm-sahne-performansi-partiler-aktiviteler-amfi-hoparlor-icin-wn06-p-826296697';
+const dataEN = {
+	preview: 'You have requested to change your password.',
+	greeting: 'Hi',
+	content: {
+		text: `To change your password, click the button below.\nPlease
+					remember that this doesn't change your password in the Les Mills
+					Releases App.`,
+		button: 'Reset Password',
+	},
+	footer:
+		"If you're having trouble clicking the 'Reset Password' button, copy and paste the URL below into your web browser: ",
+};
+const dataTR = {
+	preview: '',
+	greeting: '',
+	content: {
+		text: '',
+		button: '',
+	},
+	footer: '',
+};
+const local = dataEN;
 function AddWbr() {
 	const modifiedText = passResetLink.split('').map((char, index) => (
 		<React.Fragment key={index}>
@@ -41,19 +63,17 @@ export default function Email() {
 					fontStyle='normal'
 				/>
 			</Head>
-			<Preview>You have requested to change your password.</Preview>
+			<Preview>{local.preview}</Preview>
 			<EmailComponent>
 				<Section>
-					<Text style={titleText}>Hi {username}!</Text>
-					<Text>
-						To change your password, click the button below. <br /> Please
-						remember that this doesn't change your password in the Les Mills
-						Releases App.
+					<Text style={titleText}>
+						{local.greeting} {username}!
 					</Text>
+					<Text>{local.content.text}</Text>
 					<Row>
 						<Column align='center'>
 							<Button href={passResetLink} style={button}>
-								Reset Password
+								{local.content.button}
 							</Button>
 						</Column>
 					</Row>
@@ -61,8 +81,7 @@ export default function Email() {
 				<Hr />
 				<Section>
 					<Text>
-						If you're having trouble clicking the "Reset Password" button, copy
-						and paste the URL below into your web browser: {AddWbr()}
+						{local.footer} {AddWbr()}
 					</Text>
 				</Section>
 			</EmailComponent>

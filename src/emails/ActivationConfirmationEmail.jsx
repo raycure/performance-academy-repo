@@ -14,8 +14,36 @@ import EmailComponent from '../components/Containers/EmailComponent';
 const username = 'boop';
 const program = 'Body Combat';
 const firstPurchase = true;
+const type = 'account';
+const dataEN = {
+	preview: `Your ${
+		type === 'account' ? 'account ' : 'event '
+	}has been activated.`,
+	greeting: 'Hi',
+	content: {
+		ternary: ['Your account ', `The ${program} event on your account `],
+		text: `has been succesfully activated! You can now use the Les Mills
+					Releases App to watch and go through the lesson content any time you
+					want to.\nIf you're having problems feel free to`,
+		contact: ' contact us through this link',
+	},
+	footer: [
+		'Les Mills Releases App for Android',
+		'Les Mills Releases App for IOS',
+	],
+};
+const dataTR = {
+	preview: '',
+	greeting: '',
+	content: {
+		ternary: [],
+		text: ``,
+		contact: '',
+	},
+	footer: [],
+};
+const local = dataEN;
 export default function Email() {
-	const type = 'account';
 	return (
 		<Html>
 			<Head>
@@ -30,24 +58,20 @@ export default function Email() {
 					fontStyle='normal'
 				/>
 			</Head>
-			<Preview>
-				Your {type === 'account' ? 'account' : 'event'} has been activated.
-			</Preview>
+			<Preview>{local.preview}</Preview>
 			<EmailComponent>
 				<Section>
-					<Text style={titleText}>Hi {username}!</Text>
+					<Text style={titleText}>
+						{local.greeting} {username}!
+					</Text>
 					<Text>
 						{firstPurchase ? (
-							<>Your account</>
+							<>{local.content.ternary[0]}</>
 						) : (
-							<>The {program} event on your account</>
+							<>{local.content.ternary[1]}</>
 						)}
-						has been succesfully activated! You can now use the Les Mills
-						Releases App to watch and go through the lesson content any time you
-						want.
-						<br />
-						If you're having problems free to
-						{<Link href=''> contact us through this link</Link>}!
+						{local.content.text}
+						{<Link href=''>{local.content.contact}</Link>}!
 					</Text>
 				</Section>
 				<Hr />

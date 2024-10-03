@@ -16,7 +16,13 @@ import EmailComponent from '../components/Containers/EmailComponent';
 const username = 'baap';
 const verifyLink =
 	'https://www.trendyol.com/coverzone/kablosuz-karaoke-cift-mikrofon-6-35mm-sahne-performansi-partiler-aktiviteler-amfi-hoparlor-icin-wn06-p-826296697';
-
+const dataEn = {
+	preview: '',
+	greeting: '',
+	content: {},
+	footer: [],
+};
+const local = dataEn;
 // const linkLineBreaked = () => {
 // 	const updatedLink = verifyLink.replace(/./g, '$&<wbr/>');
 // 	console.log(updatedLink);
