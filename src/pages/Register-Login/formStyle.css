@@ -148,7 +148,7 @@ textarea::-ms-textarea-placeholder {
 	flex-direction: column;
 	flex-grow: 1;
 	padding: 3rem 5rem;
-	gap: 0.9rem;
+	gap: 2rem;
 	background-color: var(--clr-primary-trnsp);
 }
 .form-icon {

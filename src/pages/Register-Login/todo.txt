@@ -1,4 +1,3 @@
-
 * add if you didnt receieved email and shit
 * what should i return after a 200 reg
 * add lazy loading
@@ -8,7 +7,7 @@
 * style forgot password and reg mail
 * add scrolling for classes use useRef
 * add animations for every form
-* add not allowing users open up login page if they are logged in or some other way of ensuring i can track if they logged in or not
+* add not allowing users open up login page if they are logged in or some other way of enssuring i can track if they logged in or not
 * add appearing animation for req in forms
 * add auto deleting when refresh token expires
 * text area animation
@@ -18,3 +17,78 @@
 
 * no connection error doesnt appear
 * add valid email checker meow gang gang bang
+
+gun 1
+Bugün, Dveb Yazılım şirketinde gerçekleştirdiğim stajımın ilk gününe başladım. Staj kapsamında
+öncelikle eğitim personeli tarafından şirketin tanıtımı ve işleyiş süreçleri hakkında bilgilendirme yapıldı. Bir sorunum oldugunda sirket icinde kimlere danisabilecegim anlatildi. Butun staj boyunca benden sorumlu olacak Umut Bey ile tanistim. Calismaya gectigimizde sirketin guncel olarak ustunde calistigi projesi uzerinden proje dosyalarinin dizayni ve mimarisi tanitildi. Umut Bey'e onceki deneyimlerimi acikladiktan sonra kendisi once kullandigim dillerle kiyaslama yaparak benim icin yeni bi dil olan phpyi ve CodeIgniter Frameworkunun benim bildigim yazilim dillere benzerliklerini farklarini acikladi. Gunun geri kalaninda egitim temel bi anlayis gelistirmem icin egitim materyalleri arastirmasi yaptim. Her adimda konuyla alakali bilgisi olabilecek herkese cesitli sorular sordum arastirmam biter bitmez materyale basladim. kursta Backend yani arayuzlerin etkilesimini saglamak uzerine stj yaptigimdan ilk olarak kolaylik saglamasi adina internetten bir tema indirdik. Kalan zamanda veritabani ve github Entegrasyonu ER Diyagramının anlatimi gibi teorik anlatimlarla gecti.
+
+
+gun 2
+Ikinci gunumde veritbani algoritmalari arasindaki farklari, kurs icerindeki kullanima seklimize hangisinin en uygun olacagini ogrendim. Verilen bilgiler hakkinda merak ettigim sorularimi sordum sirketin kullandigi veritabanina duzenleme yetkisi verilmeden erisim talep ettim. Butun onemli bilgiler hali hazirda enkripte edilerek saklandigi icin sadece genel dosya agaci yapisina bir ornek oldugu icin erisim iznim verildi. Frameworke onemli Ayarlamalarda bulundum. CodeIgniter Frameworkunun ozelliklerinden olan helper functionlari (yardimci fonksiyonlari) URL'e  (sitelerin arama motorlarinda kayitli olan adresleri) nasil erisebilecegimi ogrendim 
+
+gun 3 
+bugun httaccess dosyasinin ne oldugunu ne ise yaradigini nasil github Entegrasyonunda buluta yuklenmesini engelleyebilecegimi ogrendim. Kurstaki temel bilgileri  onceki deneyimlerim sayesinde hizlica tarayip bitirdim ve  kursun asil projesine dair tanitimi izledim. Ana projemizin amaci hem yonetici hem musteri kisimlari olan iki ayri arayuzlu bir eticaret sitesi yapmakti. Kurs boyunca, kursun Her bolumundeki adimi izlemeden once kendim yapacak olsaydim nasil yapardim diye dusunerek kodun mantigi hakkinda genel bir diyagram cizdim. coktan bildigim bilgilerle yapabilecegimi dusunuyorsam da oncesinde bir prototip olarak yine basitce kendim kodladyip oyle kursa devam ettim.x 
+
+gun 4 
+bugun ana projede cok kullanacagimiz, backend gelistirmenin temellerinden olan CRUD (yarat, oku, guncelle, sil) islemleri olarak bilinen islemlerden ilkiyle yani veri yaratmayla basladim. pekcok durumda pekcok veri islemi yapildigindan ve CRUD islemlerinin duzgun yonetilmemesi performans sorunlarina sebep oldugundan gunumun tamamini CRUD islemleri gerceklestirirken dikkat edilmesi gereken seyleri ogrenerek gecirdim. bana tum erisim yetkileriyel acilan test amacli sunucuda ilk memory leak (hafiza sizintisi) hatami aldim. bu projede ve digerlerinde kullanabilecegim kod icersinde cagirilirken birden cok degisken verilerek modifiye edilebilen bir veri giris alani component'i (bileseni) kodladim.
+
+gun 5
+bugun arayuzlerindeki forumlarin hepsi icin sunucu tarafından dondurulen hatalarin (404, 400 gibi)  uyarilarin gosterilmesi entegresyonuna basladim. Hemen ardindan bu hatalarin gosterilirken kullanici deneyimini iyilestirmek icin hata yazisinin baslangic opakligini sifira yani gorunmez yaptim ve baslangic konumunu olmasi gereken yerin hemen biraz yukarisina  ayarladim. Hemen ardından, bu hatalar gösterilirken kullanıcı deneyimini iyileştirmek amacıyla hata yazısının başlangıç opaklığını sıfıra, yani görünmez seviyeye ayarladım ve başlangıç konumunu olması gereken yerin hemen yukarısında olacak şekilde belirledim. Animasyon tetiklendiğinde ise opaklığın normale dönüp, yazının aşağı doğru hareket ederek olması gereken yere yerleşmesini sağlayacak bir yukarıdan aşağıya kayma animasyonu ekledim. 
+
+gun 6
+bugun Crud islemlerinden veritabanindan verinin okunma islemini yaptim. Musteri tarafindan goruntuleninen arayuzde musteri rolunden (normal sartlarda boyle bir kontrolu yapmama gerek yoktu sadece bir pratik olarak gordugumden yaptim) sisteme girilmesi durumunda dummy data'yi (gercek olmayan test amacli kullanilan data) gosterilmesini sagladim. cok fazla data olmasi durumunda goruntunun bozulmamasini sagladim. Okunurlurlugu arttirmak icin ust uste gelen her iki veri bloguna farkli arkaplan tonlari verdim. Veri bloklarina daha sonrasinda kullanmam gerekecek silme ve guncelleme ikonlari koydum. Veritabanindan gelen verinin cok uzun olmasi durumunda belli bir karaktere kadar goruntulenmesi sonrasinda uc nokta olmasini saglayan fonksiyon yazdim.
+
+gun 7
+bugun Crud islemlerinden veritabanindan verinin silinme islemini yaptim. Hem kullanici arayuzunde sepetten urun silme butonunu ve yonetici 
+tarafinda urunu gosterimden kaldiran iptal butonunu ekledim. Bu butonlarin sunucuya CRUD islemi istegi atildiginda backend endpoint'ini 
+(isteklerin arayuzlerden backend'e gonderdikleri backend'de istenilen islemin yapilmasini asenkron olarak calisarak saglayan fonksiyonlar) 
+sonraki kullanimlara uygun olmasini saglamak icin dinamik sekilde yazdim.Gerekli testlerden sonrasinda sunucuya yuklemeye karar verdim boylece 
+projemi sunucuya yukleyerek yerel gelistirmeden endustride asil olarak kullanilan sunucuda gelistirme ortaminina gecirmis oldum. silme islemlerinde kullaniciya tekrar dogrulamasini talep eden bir uyari pop-up'i kodladim. 
+
+
+
+gun 8
+bugun Crud islemlerinden veritabanindan verinin guncellenme islemini yaptim. Hem kullanici arayuzunde sepetteki urun miktarini azaltan arttiran butonlari ve yonetici tarafinda urunun aktif ya da pasif olmasini saglayan switch (anahtar) butonunu ekledim. seppeteki urun miktari ve fiyatlarina gore toplam tutari ve kdv gibi ekstra tuturlari gosteren bir arayuz kodladim. IDE'mi (Entegre Geliştirme Ortamı) Visual Studio Code'dan PHP dili icin ozel olarak tasarlanmis olan PHP Storm'la degistirdim. Yonetici tarafinda urunlerin gosterilmes sirasini manuel olarak surukle ve birakla ayarlayabildikleri bir fonksiyon gelistirdim, bu fonksiyonunun veritabaniyla entegre ederek sayfa yenilenmelerinde ve diger sisteme girislerde ayni sirada kalmasini sagladim. Projenin kurstaki ornek dizaynini begenmedigimden kendi begenecegim sekilde degisiklikler yaptim.
+
+
+gun 9
+yonetici arayuzunde urunlerin resimlerini girebilmelerini saglayan bir fonksiyon yazdim. Bu resimlerin sirasini dun yaptigim surukle ve birak siralama sistemiyle ve her resim icin manuel olarak sirasasini secebilecekleri bir veri girisi alaniyla destekledim.  ilk gosterilecek olan ana resmi secmeleri ozellegini ekledim. Boylece kullanici urunun ustune imlecini getirdiginde urunun sirali resimleri tek tek gosterilmeye baslaniyor ve imlec urunun uzerinden ayrildiginda ise ana resime gecis yapiliyor. Ayrica imlec urunun ustune getirildiginde resmin cok az miktarda buyumesini sagladim. Umut Beyin istegi uzerine sirketin ustunde calistigi bir site icin blog yazilarini kontrol ettim. Yapay zekayla yazilmis olan metinleri daha gundelik bir dille baska bir yapay zekaya tekrar yazdirdim duzenledim. En son, test olarak yapay zeka tespit botlariyla metinleri kontrol ettim.
+
+
+gun 10
+Dun icerigini hazirladigim blog sayfasini bana verilen dizayna uygun olacak sekilde stilledim. Umit Bey'den yaptiklarimi yorumlamasini nelere odaklanmam gerektigini soylemesini istedim. Layout (yerlesim duzeni) tiplerini daha iyi ogrenmemi ve siteyi responsive (ekran boyutuna gore layout'un degismesi veya sitenin bilesenlerinin ekran boyutuna gore boy ve genislik almasi) yapabilecek media querry'leri yapmami istedi. Her iki konuda da daha oncesinde deneyimim oldugu icin dediklerini uygulamam kisa sure surdu. kullanilan  bu gune kadar yapmayip biriktirdigim kucuk ozellikleri projeye ekleyerek, cozmem gereken uyarilarirla ugrasarak gecirdim. Yapicaklarim bittiginde projem gorsel olarak cok daha guzel duruyordu. Gunun kalaninda Giris sistemi icin gerekli olan CodeIgniter fonksiyonlarini sifre enkripte etmeyi ve yeni helper fonksiyonlarini (yardimci fonksiyonlari) ogrenerek gecirdim. 
+
+gun 11
+Bugun dun ogrenmeye basladigim teorik bilgileri her sitede olan kullanici kayit sistemi ve kullanici giris sistemini yapmaya basladim. Veritabaninda kullanicinin girebilecegi butun bilgilere ozel veritabani tablosu olusturdum.f Veri giris alanlarina script attacklarini engellemesi icin gerekli olan "no-tags" ozelligini ekledim. Bu ozellik JavaScript tarayicida calistigindan veritabani goruntulenirken veri olarak bir script girildiyse bile scriptin calismasini engeller. Daha sonrasinda veri alanlarina girilen karakter sayisini limitledim ve bazi karekterlerin girilmesi durumunda ozel uyari verilmesini kodladim. Veritabaninin ele gecirilmesi durumunda sifre ve diger hassas bilgilerin korunmasi gerektiginden bu bilgilerin enkripte edilip oyle kaydedilmelerini sagladim. Genel olarak giris yapmanin mantigini anlasam da deneyimsizligimden kaynaklanan durumlardan dolayi hem kayit olmayi hem de giris yapma ozelligini bitiremedim.
+
+gun 12
+Bugun kullanici dogrulama sistemlerindeki rol kavramini erisim yetkilerini ve bunlarin onemini ve nasil ayarlayabilecegimizi ogrendim. Bu projedeki rolleri: musteri, magaza sahibi yani satici ve yonetici olarak belirledim. Musteri urun siparis etme yorum birakma magzalara soru sorma gibi yetkilere sahip, Magaza rolu; urun stoklarini degistirme urun silme urun olusturma kampanya olusturma yorumlara veya sorulara cevap verme yetkilerine sahip Yonetici rolu; magazlarin olusturduklari urun gonderilerini gorunteliyip dogrudan magzayla iletisime gecebilen uygunsuz yorumlari gonderileri kaldirabilme yetkilerine sahip. Gunun kalanini "kayit ol ve giris yap" forumlarina daha oncesinde entegre ettigim sunucu hatalarini gosteren uyari sistemini ekleyerek gecirdim. 
+
+gun 13
+Cogu sitede bulunan farkli giris yapma yontemlerinden biri olan "Facebook ile Giriş Yap" fonksiyonalitesini entegre etmek için Facebook'un Facebook Login API'sini kullanmanız gerekir. Bunun icin, ilk olarak, Facebook Geliştirici Portalı'na girdim yeni bir uygulama olusturdum. Facebook'un uygulama tiplerinde gezerken sosyal medya uygulamalarini pekcok sekilde bir projeye entegre edebilecegimizi ogrendim fakat bu projede sadece giris yapma yontemi ozelligin kullanmaya karar verdim. Uygulamayı oluşturduktan sonra, App ID (uygulama kimliği) ve uygulama App Secret'i (gizli anahtarı) github'a yuklenmeyecek olan "Facebook config" dosyasina gecirdim. Bu iki ozel bilgi sadece yazilimcilar tarafindan gorulmesi gerektiginden boyle bir islem yaptim.
+
+
+gun 14 
+Facebook Geliştirici Portalı'ndaki Geri Dönüş URL'imi (örneğin, http://benim-projem/fb-callback.php) kodlarıma dahil ettim ve uygulamanın Facebook Hesabındaki eriştiği bilgiler için gerekli izinleri ayarladım. Geri kalan işlemleri de bitirdikten sonra, giriş doğrulama işlemi Facebook'un kendisi tarafından çalıştırıldığından, ekstra test yapmadan sistemi geliştirici modundan canlı moda aldım. Kendi projemde kontrol etmem gereken tek durum, kullanıcıların kayıt olma/giriş yapma işlemlerinde veritabanına, sitenin kendi authentication (kullanıcı doğrulama) fonksiyonunda olduğu gibi, doğru kullanıcı verilerinin kaydedildiğinden emin olmakti.
+
+
+gun 15
+Bugun, "Twitter ile Giriş Yap" fonksiyonalitesinin nasil yapilabilecegine baktim ve Facebook ile yaptigim adimlara cok benzer oldugunu ogrendim. En buyuk farklilik bu sistemlerin gelistiriciye dondurdugu bilgiler tiplerideydi. Twitterin gonderdigi id'nin Twitter kullanici isminden de elde edilebilecegini fark ettim fakat bu projede bir kullanicinin id numarisini ogrenmek hicbir guvenlik acigina neden olmadigindan ozel bir id verme geregi duymadim. Butun kayit olma ve giris yapma islemleri icin islem yapilan tarihi kayit etme fonksiyonunu ekledim. Google'in sagladigi Analytic toollari her ne kadar cok kullanisli olsalar da bazi verilerin gelistiriceler tarafindan ozel olarak elde edilmesi gerekiyor zira bu bilgiler projenin ileri sureclerinde etkilesim analizleri icin kullaniliyor
+
+
+gun 16
+paprikaBugün Google hesabı ile giriş yapma/kayıt fonksiyonalitesini entegre ettim. Aralarından en kolayı açık ara farkla Google'ın sağladığı API'ydı. Umut Bey'in isteği üzerine şirketin üstünde çalıştığı proje için istedikleri tarzlarda stok fotoğraflar buldum ve bazı fotoğrafları Photoshop'la istenen formata getirdim. Tekrardan Umut Bey'in isteği üzerine, benim şimdiye kadar yaptıklarımdan daha kompleks olduğundan, ödeme yöntemleri API'larını şirket projesinde nasıl entegre edildigini incelemeye başladım. Şirketlerin sağladıkları dokümantasyonları okudum. Kendisinden güncel olarak üzerinde çalıştığı ödeme yöntemini açıklamasını istedim ve günün geri kalanını anlattıklarını dinleyerek geçirdim. 
+
+//not written
+
+gun 17  
+Kullanıcıların sepet işlemini tamamladıktan sonra ödeme yöntemini seçtiklerinde karşılaşacakları kredi/banka kartı arayüzünün tasarımını, internet üzerinde ücretsiz tasarım hizmeti sunan platformlardan birinden temin ettim. Tercih ettiğim tasarımda, kredi/banka kartı bilgilerinin kullanici veri alanlarina girdikce gorsel olarak da gosterildigi bir tasarimdi. Bu kart gosterimine on yuzdeki bilgiler girilip arka yuzdeki CVV gibi bilgilere gecildiginde donme animasyonu ekledim. Girilen bilgileri "bilgilerimi hatirla" kutucugu tiklendigi durumunda veritabanina belli bir sure icerisinde silinecek sekilde kaydedilme ozelligini ekledim.
+
+gun 18
+Kullanicilarin sepete ekledikleri urunleri sayfayi yenilemeleri halinde de erisebilmeleri icin cerezlerde saklanmasini kodladim. Cerezlerin calisma mantigini surelerini ayarlamayi tiplerini ogrendim. Favori urunler sayfasi olusturmaya karar verdim  ve urunlere favorilere butonu ekledim. Bu butona tiklandiginda secilen urunun id'si direkt olarak kullaniciya ait bilgilerin yer aldigi veritabani tablosunda kaydedilmesi gerektiginden butona tekrar tekrar tiklanmasi istenmeyecek kadar veritabani istegiyle sonuclanir. Bir yandan da her tiklandiginda belli bir sure boyunca butonu pasif renge getirmek de kotu bir kullanici deneyimiyle sonuclanir. Bu yuzden butona her tiklanildiginda kullanici her ne kadar ani bir geri donus alsa da arka planda istek sadece belli bi sure sonra butonun son haline gore istekte bulunmasini kodladim.
+
+gun 19 
+Bir onceki gun yaptigim buton istek limitleyicisi aslinda pek cok alanda kullanilan rate Limiter (hizmet limitleyicisi) olarak bilinen konseptin bir ornegiydi. Bugun bunun butun veritabani ve backend istekleri icin gecerli olacak sekilde rate Limiter kavramini ve nasil entegre edilebilecegini ogrendim. Bu fonksiyonalite Servis dışı bırakma saldırılarina bir onlem olmasinin yani sira gereksiz istekleri azaltarak veritabani ve sunucu masraflarini dusuruyor. Ayrica farkli islem turleri farkli limitasyonlar gerektirdiginden her istek tipine ozel limitleri ayarladim. Giris yapmamis olan kullanicinin erismemesi gereken sayfalara tiklamasi durumunda "giris yap" sayfasina yonlendirmeyi ekledim. 
+
+gun 20
+bugun, Her sitede bulunan kullanim kosullari cerezlerin onaylanmasi ve ozellestirmesi gibi ozellikleri nasil ekleyebilecegimi ogrenerek gecirdim. Kullanici konumuna gore sitenin dilinin degismesi gerektiginden nasil cerezlerle konum bilgisi alabilecegimi ogrendim fakat kullanicinin siteye eristigi arama motorunun dilini ogrenmek daha kolay bir yol oldugundan bu yolu tercih ettim. Kullanici butun cerezleri reddetiginde tercih edilen dili soran bir pop-up kodladim. Bugun Dveb'teki son gunum oldugundan Umut Bey'in neden baska bir sirkete gectigim hakkindaki sordugu sorulari yanitladim. Ayrica Umut Bey'in kariyer hikayesini ve isle alakali tavsiyelerini dinledim. Gun sonunda da Butun takim arkadaslarimla vedalastim. aldigim tavsiyeleri dikkate alarak kendime yeni is yerimde dikkate alacagim bir staj sonrasi yol haritasi cizdim.
