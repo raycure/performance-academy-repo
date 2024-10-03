@@ -51,7 +51,7 @@ function ClassList({ classType }) {
 
 			return;
 		}
-		return lesMillsPrograms[category].map((program, subIndex) => {
+		return LesMillsPrograms[category].map((program, subIndex) => {
 			const isActive = activeClass === program.id;
 
 			return (
