@@ -1,8 +1,7 @@
-import React, { useEffect, useStatee } from 'react';
+import React, { useRef, useState } from 'react';
 import EventExpandedItem from '../../components/EventItem/EventExpandedItem';
 import { MdArrowBackIosNew, MdArrowForwardIos } from 'react-icons/md';
-import { motion } from 'framer-motion';
-import { useState } from 'react';
+import { motion, useAnimation, useInView } from 'framer-motion';
 
 function PaginationContainer() {
 	const eventItems = EventExpandedItem();
@@ -14,7 +13,19 @@ function PaginationContainer() {
 	const paginatedEvents = eventItems.slice(firstIndex, lastIndex);
 	const pageAmount = Math.ceil(eventItems.length / eventsPerPage);
 	const paginationNumbers = [...Array(pageAmount + 1).keys()].slice(1);
-
+	const paginationRef = useRef(null);
+	const executeScroll = () => {
+		const header = document.querySelector('.nav-container');
+		const headerHeight = header ? header.offsetHeight : 0;
+		if (paginationRef.current) {
+			const targetPosition =
+				paginationRef.current.getBoundingClientRect().top + window.scrollY;
+			window.scrollTo({
+				top: targetPosition - headerHeight,
+				behavior: 'smooth',
+			});
+		}
+	};
 	function prePage() {
 		if (paginationPageNumber !== 1) {
 			setPaginationPageNumber(paginationPageNumber - 1);
@@ -33,9 +44,14 @@ function PaginationContainer() {
 		setPaginationPageNumber(id);
 		executeScroll();
 	}
+	const scrollWithOffset = (el) => {
+		const yCoordinate = el.getBoundingClientRect().top + window.scrollY;
+		const header = document.querySelector('.nav-container');
+		const headerHeight = header ? header.offsetHeight : 0;
+		const yOffset = -headerHeight;
 
-	window.scrollTo({ top: yCoordinate + yOffset, behavior: 'smooth' });
-
+		window.scrollTo({ top: yCoordinate + yOffset, behavior: 'smooth' });
+	};
 	return (
 		<>
 			<motion.div
@@ -52,6 +68,11 @@ function PaginationContainer() {
 							viewport={{ amount: 0.1 }}
 							className='grid-event-item-container'
 						>
+							{/* <img
+							src='/ornek.jpg'
+							alt='event photo'
+							className='background-image'
+						/> */}
 							{event}
 						</motion.div>
 					);
