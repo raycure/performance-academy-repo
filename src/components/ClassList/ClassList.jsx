@@ -1,59 +1,74 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import './ClassList.css';
 import Button from '../Button/Button';
 import LesMillsPrograms from '../../assets/LesmillsPrograms';
 import { MdOutlineDoubleArrow } from 'react-icons/md';
 import name from '/ornek.jpg';
 import { Link } from 'react-router-dom';
-import { useCallback } from 'react';
-import { AnimatePresence, motion, useAnimation } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { leftToRightForClasses } from '../animations/AnimationValues.jsx';
 import { accordion } from '../animations/AnimationValues.jsx';
+import { createRef } from 'react';
 
 function ClassList({ classType }) {
-	const mainControls = useAnimation();
-	const windowWidth = window.innerWidth;
+	const lesMillsPrograms = LesMillsPrograms();
 	const [activeClass, setActiveClass] = useState(null);
-	const classClickHandler = (id) => {
+
+	useEffect(() => {
+		lineRefs.current = Object.keys(lesMillsPrograms).flatMap((category) =>
+			lesMillsPrograms[category].map((_, subIndex) => {
+				lineRefs.current[subIndex] ?? createRef();
+			})
+		);
+	});
+	const lineRefs = React.useRef([]);
+	const windowWidth = window.innerWidth;
+
+	function classClickHandler(id) {
 		setActiveClass(id);
-	};
 
-	const scrollToTheTop = useCallback((id) => {
-		setTimeout(() => {
-			const divElement = document.querySelector(`#${id}`);
-			const divHeight = divElement ? divElement.offsetTop : 0;
-			const headerElement = document.querySelector(
-				'.navigation-outer-container'
-			);
-			const headerHeight = headerElement.offsetHeight;
-			window.scrollTo({
-				behavior: 'smooth',
-				top: divHeight - headerHeight,
-			});
-		}, 500);
-	}, []);
+		// boyut degistikten sonra calisiyor cunku classclickhandler boyut degistiriyo
+		requestAnimationFrame(() => {
+			const element = document.getElementById(id);
+			if (element) {
+				const elementRect = element.getBoundingClientRect(); //uzaklık ve uzunluklari obje halinde donduruyor
+				const elementTop = elementRect.top + window.scrollY; //pageYOffset deprecated scrollY kullan
+				const elementHeight = element.scrollHeight;
+				element.style.height = elementHeight;
+				const header = document.querySelector('.nav-container'); //i guess this has to be the way cunku oburleri olmadı
+				const headerHeight = header ? header.offsetHeight : 0; //0 default bulamazsa diye
 
-	const handleButtonClick = (id) => {
-		classClickHandler(id);
-		scrollToTheTop(id);
-	};
-	const classes = Object.keys(LesMillsPrograms).map((category) => {
+				const middle =
+					elementTop -
+					window.innerHeight / 2 +
+					elementHeight / 2 -
+					headerHeight / 2;
+				window.scrollTo({
+					top: elementTop - headerHeight, // Subtract the header height if there is one
+					behavior: 'smooth',
+				});
+			}
+		});
+	}
+
+	const classes = Object.keys(lesMillsPrograms).map((category) => {
 		if (category !== classType && classType !== 'all') {
 			console.log('cat', category, 'class', classType);
 
 			return;
 		}
-		return LesMillsPrograms[category].map((program, subIndex) => {
+		return lesMillsPrograms[category].map((program, subIndex) => {
 			const isActive = activeClass === program.id;
+
 			return (
 				<>
 					<motion.div
-						initial='hidden'
-						animate={mainControls}
+						ref={lineRefs.current[subIndex]}
 						variants={leftToRightForClasses}
+						initial='hidden'
 						whileInView='show'
 						viewport={{ once: true, amount: 0.1 }}
-						custom={program.id}
+						custom={subIndex}
 					>
 						<div
 							key={subIndex}
@@ -84,10 +99,10 @@ function ClassList({ classType }) {
 											initial='hidden'
 											animate='animate'
 											exit={{
-												opacity: 1,
+												opacity: 0,
 												height: 0,
 												transition: {
-													duration: 0.5,
+													duration: 0.8,
 												},
 											}}
 										>
@@ -125,11 +140,7 @@ function ClassList({ classType }) {
 												</div>
 												<Button
 													className='center-vertical'
-													onClick={() => {
-														// scrollToTheTop(program.id);
-														handleButtonClick(program.id);
-														// classClickHandler(program.id);
-													}}
+													onClick={() => classClickHandler(program.id)}
 												>
 													{!isActive ? 'Daha Fazlası' : 'Programa Katılın'}
 													<MdOutlineDoubleArrow color='white' />
@@ -153,9 +164,7 @@ function ClassList({ classType }) {
 									</div>
 									<Button
 										classProp={'classes-btn'}
-										onClick={() => {
-											handleButtonClick(program.id);
-										}}
+										onClick={() => classClickHandler(program.id)}
 										className='center-vertical'
 									>
 										{!isActive ? 'Daha Fazlası' : 'Programa Katılın'}
