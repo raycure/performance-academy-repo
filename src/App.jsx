@@ -13,6 +13,7 @@ import Cookies from './pages/Legal/Cookies';
 import PrivacyPolicy from './pages/Legal/PrivacyPolicy';
 import Test from './pages/Test';
 import React from 'react';
+import ClassInfo from './pages/ClassInfo/ClassInfo';
 
 function App() {
 	return (
@@ -28,6 +29,7 @@ function App() {
 							<Route path='iletişim' element={<Contact />} />
 							<Route path='register' element={<Register />} />
 							<Route path='login' element={<Login />} />
+							<Route path='program' element={<ClassInfo />} />
 							<Route path='çerezler' element={<Cookies />} />
 							<Route path='test' element={<Test />} />
 							<Route
