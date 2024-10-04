@@ -1,21 +1,14 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useState } from 'react';
 import './ClassList.css';
 import Button from '../Button/Button';
 import LesMillsPrograms from '../../assets/LesmillsPrograms';
 import { MdOutlineDoubleArrow } from 'react-icons/md';
 import name from '/ornek.jpg';
-import { Link, redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useCallback } from 'react';
-import {
-	AnimatePresence,
-	m,
-	motion,
-	useAnimation,
-	useInView,
-} from 'framer-motion';
+import { AnimatePresence, motion, useAnimation } from 'framer-motion';
 import { leftToRightForClasses } from '../animations/AnimationValues.jsx';
 import { accordion } from '../animations/AnimationValues.jsx';
-import { createRef } from 'react';
 
 function ClassList({ classType }) {
 	const mainControls = useAnimation();
@@ -44,7 +37,6 @@ function ClassList({ classType }) {
 		classClickHandler(id);
 		scrollToTheTop(id);
 	};
-
 	const classes = Object.keys(LesMillsPrograms).map((category) => {
 		if (category !== classType && classType !== 'all') {
 			console.log('cat', category, 'class', classType);
@@ -53,7 +45,6 @@ function ClassList({ classType }) {
 		}
 		return LesMillsPrograms[category].map((program, subIndex) => {
 			const isActive = activeClass === program.id;
-
 			return (
 				<>
 					<motion.div
