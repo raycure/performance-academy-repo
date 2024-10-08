@@ -25,24 +25,27 @@ function Login() {
 	useEffect(() => {
 		userRef.current.focus();
 	}, []);
-	useEffect(() => {
-		console.log('errMsg degisti', errMsg);
 
-		errRef.current.focus();
-	}, [errMsg]);
+	useEffect(() => {
+		const isLoggedIn = localStorage.getItem('isLoggedIn');
+		if (isLoggedIn === 'true') {
+			navigate('/');
+		}
+	}, []);
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		try {
 			const loginData = { email: mail, password: pwd };
 			const response = await dispatch(login({ loginData }));
-			const accessToken = response.accessToken;
+			const accessToken = response.payload.accessToken;
 			localStorage.setItem('accessToken', accessToken);
+			const isLoggedIn = response ? true : false; //todo change it to user roles and stuff
+			localStorage.setItem('isLoggedIn', isLoggedIn);
 			setMail('');
 			setPwd('');
 			setSuccess(true);
 			setLocalLoading(true);
-
 			setTimeout(() => {
 				navigate('/');
 			}, 5000);
@@ -50,55 +53,14 @@ function Login() {
 			if (err.response?.status === 429) {
 				setErrMsg('Too many requests, please try again later.');
 			}
-			err.payload.data === undefined // if the req fails assumed no connection.
+			console.log('err', err);
+
+			err.payload.data === undefined // todo find a way to listen for no internet connection
 				? setErrMsg('int baglanti falan')
 				: setErrMsg(err.payload?.data?.message);
 		}
 	};
 
-	async function handleSub() {
-		try {
-			const accessToken = localStorage.getItem('accessToken');
-			const response = await axios.get('/test', {
-				withCredentials: true,
-				headers: { Authorization: `Bearer ${accessToken}` },
-			});
-			console.log('response login.jsx: ', response.status);
-		} catch (err) {
-			if (err.response.status === 401 || err.response.status === 403) {
-				console.log(
-					'Token expired or unauthorized, attempting to refresh token...'
-				);
-				const refreshResponse = await axios.get('/refresh', {
-					withCredentials: true,
-				});
-				const newAccessToken = refreshResponse.data.accessToken;
-				localStorage.setItem('accessToken', newAccessToken);
-				response = await axios.get('/test', {
-					withCredentials: true,
-					headers: { Authorization: `Bearer ${newAccessToken}` },
-				});
-			}
-		}
-	}
-
-	async function handleLogout() {
-		console.log({
-			accessToken: localStorage.getItem('accessToken'),
-		});
-		const response = await axios.post(
-			'/logout',
-			{},
-			{
-				withCredentials: true,
-			}
-		);
-		console.log(response);
-
-		if (response.status === 200) {
-			localStorage.removeItem('accessToken');
-		}
-	}
 	return (
 		<>
 			{/* {success ? (
@@ -146,13 +108,10 @@ function Login() {
 					<Link>maili tekrar yollamak icin tiklayin</Link>
 
 					<div className='authentication-button-container'>
-						<Button isLoading={localLoading || isLoading} classProp={'test'}>
-							{' '}
-							Giriş Yapın
-						</Button>
+						<Button isLoading={localLoading || isLoading}> Giriş Yapın</Button>
 						<p
 							ref={errRef}
-							className={errMsg ? 'errmsg' : 'errmsg'}
+							className={errMsg ? 'errmsg' : 'errmsg'} // todo wth
 							aria-live='assertive'
 						>
 							{errMsg}
@@ -164,7 +123,6 @@ function Login() {
 				</form>
 				<AuthenticationGreet />
 			</div>
-			{/* )} */}
 		</>
 	);
 }

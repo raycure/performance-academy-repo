@@ -52,30 +52,150 @@ input {
 
 .centerLineAnimation {
 	position: relative;
-}
-
-.topCenterLineAnimation {
 	width: 100%;
 }
 
-.custom-textarea {
+.divForBorder {
 	resize: none;
 	height: 100%;
 	width: 100%;
+	position: relative;
+	box-sizing: content-box;
+}
+.custom-textarea {
 	overflow-y: auto;
 	overflow-x: hidden;
-	/* border: 1px solid var(--clr-neutral-100); */
-	border-right: 1px solid var(--clr-neutral-100);
-
-	transition: border-top 0.5s ease;
-	transition: border-right 0.5s ease;
-}
-.custom-textarea:hover {
-	border-right: var(--clr-neutral-100) solid 1px;
+	border: 2px solid var(--clr-neutral-100);
+	height: 100%;
 }
 
-.centerLineAnimation::before,
-.topCenterLineAnimation::after {
+.textarea-bottom-left-line,
+.textarea-bottom-right-line,
+.textarea-top-left-line,
+.textarea-top-right-line {
+	position: absolute;
+	height: 2px;
+	background-color: red;
+	width: 0;
+	transition: all 0.5s ease;
+}
+
+.textarea-left-lower-line,
+.textarea-left-upper-line,
+.textarea-right-upper-line,
+.textarea-right-lower-line {
+	position: absolute;
+	height: 0px;
+	background-color: red;
+	width: 2px;
+	transition: all 0.5s ease;
+}
+
+/* .textarea-bottom-left-line {
+	left: 0%;
+	bottom: 0;
+}
+.textarea-bottom-right-line {
+	right: 0%;
+	bottom: 0;
+}
+.textarea-top-right-line {
+	right: 0%;
+	top: 0;
+}
+.textarea-top-left-line {
+	left: 0%;
+	top: 0;
+}
+
+.textarea-right-upper-line {
+	bottom: 50%;
+	right: 0;
+}
+
+.textarea-right-lower-line {
+	top: 50%;
+	right: 0;
+}
+
+.textarea-left-upper-line {
+	bottom: 50%;
+	left: 0;
+}
+.textarea-left-lower-line {
+	left: 0;
+	top: 50%;
+} */
+.textarea-bottom-left-line {
+	right: 50%;
+	bottom: 0;
+}
+.textarea-bottom-right-line {
+	left: 50%;
+	bottom: 0;
+}
+.textarea-top-right-line {
+	left: 50%;
+	top: 0;
+}
+.textarea-top-left-line {
+	right: 50%;
+	top: 0;
+}
+.textarea-right-upper-line {
+	top: 0%;
+	right: 0;
+}
+.textarea-right-lower-line {
+	bottom: 0%;
+	right: 0;
+}
+.textarea-left-upper-line {
+	top: 0%;
+	left: 0;
+}
+.textarea-left-lower-line {
+	left: 0;
+	bottom: 0%;
+}
+
+@keyframes expand-bottomTop-borders {
+	to {
+		width: 50%;
+	}
+}
+
+@keyframes expand-leftRight-borders {
+	to {
+		height: 50%;
+	}
+}
+
+.divForBorder:hover .textarea-bottom-left-line,
+.divForBorder:focus-within .textarea-bottom-left-line,
+.divForBorder:hover .textarea-bottom-right-line,
+.divForBorder:focus-within .textarea-bottom-right-line,
+.divForBorder:hover .textarea-top-right-line,
+.divForBorder:focus-within .textarea-top-right-line,
+.divForBorder:hover .textarea-top-left-line,
+.divForBorder:focus-within .textarea-top-left-line {
+	animation: expand-bottomTop-borders ease forwards 0.75s;
+}
+
+.divForBorder:hover .textarea-right-upper-line,
+.divForBorder:focus-within .textarea-right-upper-line,
+.divForBorder:hover .textarea-right-lower-line,
+.divForBorder:focus-within .textarea-right-lower-line,
+.divForBorder:hover .textarea-left-upper-line,
+.divForBorder:focus-within .textarea-left-upper-line,
+.divForBorder:hover .textarea-left-lower-line,
+.divForBorder:focus-within .textarea-left-lower-line {
+	animation: expand-leftRight-borders 0.5s ease forwards 0.75s;
+}
+
+/*textarea-left-lower-border textarea-right-upper-border textarea-right-lower-border*/
+
+.centerLineAnimation::before {
 	content: '';
 	position: absolute;
 	width: 0;
@@ -89,18 +209,12 @@ input {
 	bottom: 0;
 }
 
-.topCenterLineAnimation::after {
-	top: 0;
-}
-
-.centerLineAnimation:hover::before,
-.topCenterLineAnimation:hover::after {
+.centerLineAnimation:hover::before {
 	width: 100%;
 	left: 0;
 }
 
-.centerLineAnimation:focus-within::before,
-.topCenterLineAnimation:focus-within::after {
+.centerLineAnimation:focus-within::before {
 	width: 100%;
 	left: 0;
 }

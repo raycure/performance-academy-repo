@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useLayoutEffect } from 'react';
 import './Navbar.css';
 import { Link, NavLink } from 'react-router-dom'; //u cant style the links directly
-import { FaUser } from 'react-icons/fa6';
+import { FaCookie, FaUser } from 'react-icons/fa6';
 import Button from '../Button/Button';
 import logo from '../../assets/LesmillsLogo.png';
 import { HiOutlineMenuAlt3 } from 'react-icons/hi';
@@ -14,6 +14,7 @@ import { FaLinkedinIn } from 'react-icons/fa6';
 import { FaFacebookF } from 'react-icons/fa6';
 import { FaPinterestP } from 'react-icons/fa6';
 import { motion } from 'framer-motion';
+import Cookies from 'js-cookie';
 import {
 	rightToLeft,
 	socialSlide,
@@ -21,9 +22,16 @@ import {
 } from '../animations/AnimationValues';
 import instagramBackground from '../../assets/instagram-background.jpg';
 import { useTranslation } from 'react-i18next';
-import { set } from 'mongoose';
 
 function Navbar() {
+	//if the user is logged in it hides the register button
+	const [isLoggedin, setIsLoggedin] = useState(false);
+	useLayoutEffect(() => {
+		const isLoggedIn = localStorage.getItem('isLoggedIn');
+		console.log(isLoggedIn);
+		setIsLoggedin(isLoggedIn);
+	}, []);
+
 	const [menuOpen, setMenuOpen] = useState(false);
 	const toggleNavMenu = () => {
 		setMenuOpen(false);
@@ -156,7 +164,12 @@ function Navbar() {
 					<Link aria-label='user' to='/login' style={{ display: 'contents' }}>
 						<FaUser className='nav-item-icon' />
 					</Link>
-					<Button redirect={'/register'}>Kaydol</Button>
+					<Button
+						classProp={`${isLoggedin ? 'display-hidden' : ''}`}
+						redirect={'/register'}
+					>
+						Kaydol
+					</Button>
 				</div>
 				<div className='menu nav-container'>
 					<Link
@@ -250,7 +263,11 @@ function Navbar() {
 						</motion.div>
 					))}
 				</div>
-				<Button onClick={toggleNavMenu} redirect={'/register'}>
+				<Button
+					onClick={toggleNavMenu}
+					redirect={'/register'}
+					classProp={`${isLoggedin ? 'display-hidden' : ''}`}
+				>
 					Kaydol
 				</Button>
 			</motion.ul>

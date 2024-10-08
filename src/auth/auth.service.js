@@ -6,8 +6,6 @@ import { fetchData } from '../redux/auth/authStateSlice.js';
 export const register =
 	({ registerData }) =>
 	async (dispatch) => {
-		console.log('service calisti');
-
 		try {
 			const response = await dispatch(
 				fetchData({
@@ -17,7 +15,6 @@ export const register =
 				})
 			);
 			if (fetchData.rejected.match(response)) {
-				console.log('response authta:', response);
 				throw response || 'An unknown error occurred';
 			}
 			return response;

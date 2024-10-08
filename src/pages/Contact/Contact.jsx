@@ -6,8 +6,6 @@ function Contact() {
 	return (
 		<>
 			<FAQ />
-			{/* <div> */}
-
 			<div id='contact-form-grad '>
 				<ContactForm />
 			</div>

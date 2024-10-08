@@ -35,7 +35,29 @@ function RegisterForm() {
 			message: '4 to 24 characters.',
 		},
 	];
-
+	const passwordValidationRules = [
+		{
+			test: (pwd) => !/(?=.*[a-z])(?=.*[A-Z])/.test(pwd),
+			message: 'At least one uppercase and one lowercase letter.',
+		},
+		{
+			test: (pwd) => !/(?=.*\d)/.test(pwd),
+			message: 'At least one numeral.',
+		},
+		{
+			test: (pwd) => /\s/.test(pwd),
+			message: 'No spaces.',
+		},
+		{
+			test: (pwd) =>
+				!/^[a-zA-Z\d~!?@#$%^&*_\-\+\(\)\[\]\{\}><\/\\|"'\.,:;]+$/.test(pwd),
+			message: 'Only Latin characters.',
+		},
+		{
+			test: (username) => pwd.length < 8 || pwd.length >= 24,
+			message: '8 to 24 characters.',
+		},
+	];
 	const fetchError = useSelector(selectError);
 	const userRef = useRef();
 	const errRef = useRef();
@@ -72,18 +94,22 @@ function RegisterForm() {
 
 	useEffect(() => {
 		const valid = usernameValidationRules.every((rule) => !rule.test(username));
-		console.log(valid);
 		setValidName(valid);
 	}, [username]);
 
 	useEffect(() => {
-		setValidPwd(PWD_REGEX.test(pwd));
-		setValidMatch(pwd === matchPwd);
-	}, [pwd, matchPwd]);
+		const valid = passwordValidationRules.every((rule) => !rule.test(pwd));
+		setValidPwd(valid);
+	}, [pwd]);
+
+	// useEffect(() => {
+	// 	setValidMatch(pwd === matchPwd);
+	// }, [pwd, matchPwd]);
 
 	useEffect(() => {
 		setErrMsg('');
 	}, [username, pwd, matchPwd]);
+
 	useEffect(() => {
 		success && showNotification('Success! Operation completed.', 'info');
 	}, [success]);
@@ -91,30 +117,33 @@ function RegisterForm() {
 	async function handleSubmit(e) {
 		e.preventDefault();
 		// const v1 = USER_REGEX.test(user);
-		const v2 = PWD_REGEX.test(pwd);
-		const userAttempts = 0;
-		if (!v2) {
-			setErrMsg('invalid entry');
-			return;
-		}
+		// const v2 = PWD_REGEX.test(pwd);
+		// if (!v2) {
+		// 	setErrMsg('invalid entry');
+		// 	return;
+		// } //todo prevent making a submit if theres no validpwd and username and
 
 		try {
-			const registerData = { username: user, password: pwd, email: mail };
+			const registerData = { username: username, password: pwd, email: mail };
 			const response = await dispatch(register({ registerData }));
 			setSuccess(true);
-			setUser('');
+			setUsername('');
 			setPwd('');
 			setMatchPwd('');
+			const isLoggedIn = response ? true : false; //todo change it to user roles and stuff
+			const accessToken = response.payload.accessToken;
+			localStorage.setItem('isLoggedIn', isLoggedIn);
+			localStorage.setItem('accessToken', accessToken);
 			setTimeout(() => {
-				navigate('/login');
+				navigate('/');
 			}, 2000);
 		} catch (err) {
 			if (err.response?.status === 429) {
 				setErrMsg('Too many requests, please try again later.');
 			}
 
-			err.payload.data === undefined // if the req fails assumed no connection.
-				? setErrMsg('int baglanti falan')
+			err.payload.data === undefined
+				? setErrMsg('int baglanti falan') // todo gercekten kontrol etmiyor server kapatilinca ancak calisiyor ve baglanti yokken calismiyor
 				: setErrMsg(err.payload?.data?.message);
 		}
 	}
@@ -204,24 +233,31 @@ function RegisterForm() {
 							className={validPwd || !pwd ? 'hide' : 'invalid'}
 						/>
 					</div>
+					<motion.p
+						initial='hidden'
+						variants={descending}
+						whileInView='show'
+						id='pwdnote'
+						className={
+							pwdFocus && !validPwd && pwd ? 'instructions' : 'offscreen'
+						}
+					>
+						{passwordValidationRules.find((rule) => rule.test(pwd))?.message ||
+							''}
+					</motion.p>
 				</div>
-				<p
-					id='pwdnote'
-					className={pwdFocus && !validPwd ? 'instructions' : 'offscreen'}
-				>
-					<FontAwesomeIcon icon={faInfoCircle} />
-					8 to 24 characters.
-					<br />
+				{/* <FontAwesomeIcon icon={faInfoCircle} /> */}
+				{/* 8 to 24 characters. */}
+				{/* <br />
 					Must include uppercase and lowercase letters, a number and a special
 					character.
-					<br />
-					Allowed special characters:{' '}
-					<span aria-label='exclamation mark'>!</span>{' '}
+					<br /> */}
+				{/* Allowed special characters:{' '} */}
+				{/* <span aria-label='exclamation mark'>!</span>{' '}
 					<span aria-label='at symbol'>@</span>{' '}
 					<span aria-label='hashtag'>#</span>{' '}
 					<span aria-label='dollar sign'>$</span>{' '}
-					<span aria-label='percent'>%</span>
-				</p>
+					<span aria-label='percent'>%</span> */}
 				<div className='relative-position centerLineAnimation'>
 					<input
 						type='password'
