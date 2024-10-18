@@ -14,6 +14,7 @@ import PrivacyPolicy from './pages/Legal/PrivacyPolicy';
 import Test from './pages/Test';
 import React from 'react';
 import ClassInfo from './pages/ClassInfo/ClassInfo';
+import Enroll from './pages/Enroll/Enroll';
 
 function App() {
 	return (
@@ -30,6 +31,7 @@ function App() {
 							<Route path='register' element={<Register />} />
 							<Route path='login' element={<Login />} />
 							<Route path='program' element={<ClassInfo />} />
+							<Route path='program-kaydı' element={<Enroll />} />
 							<Route path='çerezler' element={<Cookies />} />
 							<Route path='test' element={<Test />} />
 							<Route

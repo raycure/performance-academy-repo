@@ -11,6 +11,7 @@ import Banner from '../../components/Banner/Banner';
 import { button } from '../../components/animations/AnimationValues.jsx';
 
 import { useNavigate } from 'react-router-dom';
+import FAQ from '../../components/FAQ/FAQ.jsx';
 
 function Main() {
 	const lesMillsPrograms = LesMillsPrograms();
@@ -85,7 +86,7 @@ function Main() {
 	return (
 		<>
 			{/* <Banner /> */}
-			<Container className='even-columns bottom-space'>
+			<Container className='even-columns'>
 				<div>
 					{/* <div className="fs-primary-heading">Lesmills Nedir?</div> */}
 					<div className='fs-primary-heading'>Lesmills Eğitmeni Olun</div>
@@ -118,6 +119,7 @@ function Main() {
 			<div className='carousel-container'>
 				<CardCarousel />
 			</div>
+			<FAQ />
 			{/* <Container>
         <video width="100%" controls >
           <source src="path-to-your-video.mp4" type="video/mp4" />

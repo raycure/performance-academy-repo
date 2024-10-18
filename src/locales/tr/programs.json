@@ -10,7 +10,7 @@
 			"lessons": "30, 45 veya 55 dakika.  Canlı, Sanal ve İsteğe Bağlı",
 			"equipment": "Halter, Ağırlık Plakaları, Step",
 			"for": "Herkes",
-			"result": "Güç, Yağ Kaybı, Güçlenme"
+			"result": "Kas, Yağ Kaybı, Güçlenme"
 		},
 		"program2": {
 			"sum": "Üyeleriniz gerçek sonuçlar veren güçlendirici bir antrenman arıyorsa, işte budur.İnanılmaz derecede popüler olan Les Mills BODYCOMBAT antrenmanımız, kardiyovasküler kondisyonunu arttırmak ve tüm vücudu çalıştırmak için temassız dövüş sanatlarından ilham alan egzersizler kullanarak üyelerinizi formda, hızlı ve güçlü kılar.",
@@ -21,7 +21,7 @@
 			"lessons": "30, 45 veya 55 dakika.  Canlı, sanal ve isteğe bağlı",
 			"equipment": "Yok",
 			"for": "Herkes",
-			"result": "Geliştirilmiş kardiyo zindeliği, artan kalori yakımı ve güçlenme"
+			"result": "Kardiyo Zindeliği, Kalori Yakımı, Güçlenme"
 		},
 		"program3": {
 			"sum": "Herkes için ideal olan LES MILLS BODYBALANCE, müzik eşliğinde Tai Chi ve Pilates unsurlarıyla modern bir yoga yorumudur.  Bir fitness kulübü ortamı için bilimsel olarak tasarlanmış olup zihninizi, bedeninizi ve yaşamınızı iyileştirecektir",
@@ -32,7 +32,7 @@
 			"lessons": "30, 45 veya 55 dakika.  Canlı, sanal ve isteğe bağlı",
 			"equipment": "Yoga matı (isteğe bağlı)",
 			"for": "Herkes",
-			"result": "Geliştirilmiş Core gücü ve esnekliği, stres azaltma"
+			"result": "Core Gücü, Esneklik, Stres Azaltma"
 		},
 		"program4": {
 			"sum": "Seçkin atletik antrenman ilkelerinden ilham alan LES MILLS CORE™, harika bir core gücü ve spor performansı oluşturmak için bilimsel  ve temel antrenmandır.  Üyeleriniz daha güçlü core gücü oluşturacak ve diğer antrenmanlardan daha iyi sonuçlar alacak.",
@@ -43,18 +43,18 @@
 			"lessons": "30 dakika.  Canlı, Sanal ve İsteğe Bağlı",
 			"equipment": "Egzersiz bandı, ağırlık plakası",
 			"for": "Herkes",
-			"result": "Geliştirilmiş Core gücü, vücud postürünü geliştirme ve  vücutta kas kitlesini artırma"
+			"result": "Core Gücü, Postür Geliştirme, Kas Kitlesini Artırma"
 		},
 		"program5": {
 			"sum": "Kalori yakmak, kas kitlesini artırmak  ve zayıflamak gibi genel vücut antrenmanı arayan kulüp üyeleri için Les Mills BODYATTACK idealdir.  Tüm fitness seviyelerine uygun seçeneklerle BODYATTACK, son derece motive edici bir egzersiz için kardiyo, çeviklik ve kuvvet egzersizlerini birleştirir/",
-			"description": "BODYATTACK™, kardiyo fitness, dayanıklılık ve çevikliğe odaklanan yüksek enerjili, eğlenceli ve atletik bir antrenmandır.\nKoşma, zıplama ve zıplama gibi atletik hareketleri şınav ve squat gibi kuvvet egzersizleriyle birleştirerek bir antrenman sırasında 730 kaloriye* kadar yakabilirsiniz.  Spordan ilham alan bu egzersizler aynı zamanda kardiyo dayanıklılığı geliştirecek, koordinasyonu ve çevikliği artıracak.",
+			"description": "BODYATTACK™, kardiyo fitness, dayanıklılık ve çevikliğe odaklanan yüksek enerjili, eğlenceli ve atletik bir antrenmandır.\nKoşma, zıplama ve zıplama gibi atletik hareketleri şınav ve squat gibi kuvvet egzersizleriyle birleştirerek bir antrenman sırasında 730 kaloriye kadar yakabilirsiniz.  Spordan ilham alan bu egzersizler aynı zamanda kardiyo dayanıklılığı geliştirecek, koordinasyonu ve çevikliği artıracak.",
 			"whyMember": "Araştırmalar, hayata uyum sağlamanın sırrının yavaş bir yapı olduğunu gösteriyor.  BODYATTAACK, üyelerinizin kendi seviyelerinde antrenman yapmalarına ve antrenmanı mevcut kondisyon seviyelerine uyacak şekilde ayarlayarak zaman içinde gelişmelerine olanak tanır.  Haftada 2-3 dersle başlayabilir ve oradan inşa edebilirler.\nBODYATTACK, atletik takım antrenmanının motivasyonunu ve mücadelesini seven, ancak yoğun hayatlarında bir spor takımına katılmaya vakti olmayan üyeler için de harika bir seçenektir.",
 			"whyYou": "30, 45 veya 55 dakikalık formatta çalıştırılabilen BODYATTACK, size Program Çizelgenizde esneklik sağlar. Üyelerinizin düzenli olarak erişebilmelerini sağlamak için, tam bir saat aralığı olmadığında bile en yoğun zamanlarda planlayabilirsiniz.\nBODYATTAK, günlük yaşam için fonksiyonel zindelik sağlayan eğlenceli, popüler ve bağımlılık yapan bir egzersizdir.  Hiçbir ekipman gerektirmez, bu nedenle stüdyonuza yerleştirmesi kolay bir programdır.  Ve LES MILLS Eğitmenleri, her düzeyde deneyime sahip üyeler için ilham verici bir çalışma sunacak eğitime sahiptir.",
 			"type": "Kardiyo",
 			"lessons": "30, 45 veya 55 dakika.  Canlı ve Talep Üzerine",
 			"equipment": "Yok",
 			"for": "Herkes",
-			"result": "Geliştirilmiş kardiyo kondisyon ve dayanıklılık, tonlama ve şekillendirme, geliştirilmiş çeviklik"
+			"result": "Kardiyo, Dayanıklılık, Tonlama ve Şekillendirme, Çeviklik"
 		},
 		"program6": {
 			"sum": "Grup aktivitelerine yeni başlayanlar için mükemmel bir başlangıç olan LES MILLS RPM, üyelerinizin kalori yakmasına, kardiyo kondisyon seviyesinin  geliştirmesine ve kondisyon seviyelerine uyacak şekilde yoğunluğu artırmasına  olanak tanıyan oldukça motive edici ve genellikle bağımlılık yapan bir Bisiklet antrenmanıdır.",
@@ -65,7 +65,7 @@
 			"lessons": "45 dakika.  Canlı, sanal ve Talep Üzerine",
 			"equipment": "Sabit Bisiklet",
 			"for": "Herkes",
-			"result": "Geliştirilmiş kardiyo fitness, yağ kaybı"
+			"result": "Kardiyo, Fitness, Yağ Kaybı"
 		},
 		"program7": {
 			"sum": "Eğlenceyi seven, delicesine bağımlılık yapan bir dans çalışması olan Les Mills SH'BAM, egodan arınmış bir bölgedir - dans deneyimi gerektirmez.  Yüksek enerjili bir kardiyo egzersizi yaparken, eğitmenlerinizin partiyi getirmesine ve üyelerinizin sahip olduklarını hiç bilmedikleri hareketleri bulmalarına yardımcı olmasına izin verin.",
@@ -76,7 +76,7 @@
 			"lessons": "45 veya 30 dakika.  Canlı, Sanal ve İsteğe Bağlı",
 			"equipment": "Yok",
 			"for": "Herkes",
-			"result": "Gelişmiş kardiyo Seviyesi ve çeviklik, Güçlenme"
+			"result": "Kardiyo Zindeliği, Çeviklik, Güçlenme"
 		},
 		"program8": {
 			"sum": "Üyeleriniz dans etmeyi seviyorsa, tamamen benzersiz dans programımız Les Mills BODYJAM'e aşık olacaklar.  Dünyanın her yerinden en taze hareketlerden ve en trend müziklerden ilham alan BODYJAM, fitness stüdyonuzu bir dans pistine dönüştüren yüksek enerjili kardiyo egzersizidir.",
@@ -87,7 +87,7 @@
 			"lessons": "30, 45 veya 55 dakika",
 			"equipment": "Yok",
 			"for": "Herkes",
-			"result": "Geliştirilmiş kardiyo kondisyon ve çeviklik, artan kalori yakma"
+			"result": "Kardiyo Kondisyon, Çeviklik, Kalori Yakma"
 		},
 		"program9": {
 			"sum": "Les Mills BODYSTEP ile üyelerinize bacakları ve kalçaları sıkılaştıran etkili  Tüm Vücud Kardiyo çalışması sunun.  Canlandırıcı, eğlenceli ve sonuçlara dayalı yüksek enerjili bir program oluşturmak için 25 yılı aşkın süredir orijinal Step Programı geliştiriyoruz.",
@@ -98,7 +98,7 @@
 			"lessons": "30, 45 veya 55 dakika.  Canlı ve Talep Üzerine",
 			"equipment": "Step ve serbest ağırlıklar",
 			"for": "Herkes",
-			"result": "Geliştirilmiş kardiyo seviyesi, bacaklar ve kalçalarda kas tonu gelişimi"
+			"result": "Kardiyo Zindeliği, Bacaklar ve Kalçalarda Kas Tonu Gelişimi"
 		},
 		"program10": {
 			"sum": "Etkili güç blokları, kardiyo ve core egzersizleri sunan eğlenceli ve işlevsel bir eğitim programı mı sunmak istiyorsunuz, LES MILLS TONE tam size göre.  Bu tüm vücut antrenmanı tüm üyeleri kapsar ve kondisyon seviyeleri ne olursa olsun kendi hızlarında antrenman yapmalarına olanak tanır/",
@@ -109,7 +109,7 @@
 			"lessons": "45 dakika",
 			"equipment": "Direnç bandı ve hafif serbest ağırlıklar",
 			"for": "Herkes",
-			"result": "Güç, kardiyo ve Core antrenmanı"
+			"result": "Güç, Kardiyo, Core Antrenmanı"
 		},
 		"program11": {
 			"sum": "THE TRIP gibisini bulamazsınız!  Bu, bizim efor-eğlence dediğimiz kondisyonun geleceğine bir yolculuktur.  Sinemadan, canlı konser deneyimlerinden ve etkileşimli oyunlardan ilham alan THE TRIP, amaca yönelik bir stüdyo, canlı eğitmenler ve sürükleyici videoyu birleştiren sürükleyici bir fitness deneyimidir.  Bu antrenmanın potansiyeli sınırsızdır.",
@@ -120,7 +120,7 @@
 			"lessons": "40 dakika. Canlı ve Talep Üzerine.",
 			"equipment": "Sürükleyici fitness stüdyosu",
 			"for": "Herkes",
-			"result": "Geliştirilmiş kardiyo kondisyon"
+			"result": "Geliştirilmiş Kardiyo Kondisyonu"
 		},
 		"program12": {
 			"sum": "Bale için eğitim almış veya sadece yeni bir kendini ifade etme arayışında olan herkes LES MILLS BARRE'yi sevecektir.  Üyeleriniz için geleneksel bale barından kurtulmuş, benzersiz bir şekilde zarif bir kuvvet ve stabilite antrenmanı olan LES MILLS BARRE, harika yağ yakımı sağlar.",
@@ -131,7 +131,7 @@
 			"lessons": "30 dakika.  Canlı ve Talep Üzerine",
 			"equipment": "2 küçük el ağırlığı",
 			"for": "Herkes",
-			"result": "Artan güç ve kararlılık, güçlenme"
+			"result": "Artan Güç ve Kararlılık, Güçlenme"
 		}
 	},
 	"cat2": {
@@ -145,7 +145,7 @@
 			"lessons": "Dersler 30 ile 55 dakika arasında değişmektedir.  Canlı, Sanal ve İsteğe Bağlı",
 			"equipment": "Yok",
 			"for": "2-16 yaş arası çocuklar ve gençler",
-			"result": "Güven, enerji, sağlıklı bedenler ve zihinler"
+			"result": "Güven, Enerji, Sağlıklı Bedenler ve Zihinler"
 		}
 	},
 	"cat3": {
@@ -170,7 +170,7 @@
 			"lessons": "30 dakika.  Canlı, Sanal ve İsteğe Bağlı.",
 			"equipment": "\nSerbest ağırlıklar (GRIT CARDIO)\nStep, halter ve serbest ağırlıklar (GRIT STRENGTH)\nStep ve serbest ağırlıklar (GRIT Athletic)",
 			"for": "Kondisyonlarını bir sonraki seviyeye taşımak isteyen üyeler",
-			"result": "Geliştirilmiş kardiyo zindeliği ve çevikliği, yağsız kas büyümesi, artan kalori yakma ve yağ kaybı"
+			"result": "Kardiyo zindeliği ve Çeviklik, Kaslanma, Kalori yakma ve Yağ kaybı"
 		}
 	},
 	"cat4": "TÜM PROGRAMLAR"

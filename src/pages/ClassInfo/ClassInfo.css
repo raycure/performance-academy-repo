@@ -1,0 +1,48 @@
+.poster-heading {
+	font-size: 12vh;
+	font-weight: bold;
+}
+.poster-background-shape {
+	left: 50%;
+	width: 30%;
+	background-color: black;
+	-ms-transform: skewX(-40deg);
+	-webkit-transform: skewX(-40deg);
+	transform: skewX(-40deg);
+	z-index: -1;
+}
+.class-info-sum {
+	padding: 3rem 22vw;
+	text-align: center;
+	font-size: var(--fs-650);
+}
+.class-info-grid {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-row: 2;
+	margin-inline: auto;
+	width: 65vw;
+	gap: 1rem;
+}
+.payment-but-con {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	padding: 2rem;
+}
+.class-rec-con {
+	display: grid;
+	grid-template-columns: 280px 280px 280px 1fr;
+	margin: 2rem 5rem;
+}
+.class-rec-item {
+	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+	justify-content: end;
+	height: 270px;
+}
+.class-rec-con a:hover {
+	opacity: 0.7;
+}

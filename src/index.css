@@ -117,9 +117,11 @@ body::-webkit-scrollbar-thumb {
 a:not([class]) {
 	text-decoration-skip-ink: auto;
 }
-a,
-a:visited {
+a {
 	color: #fff;
+}
+a:visited {
+	color: none;
 }
 /* Make images easier to work with */
 img,
@@ -337,6 +339,7 @@ hr {
 	height: 100%;
 	display: block;
 	object-fit: cover;
+	z-index: -2;
 }
 .relative-position {
 	position: relative;
@@ -364,6 +367,9 @@ hr {
 }
 .text-primary-400 {
 	color: var(--clr-primary-400);
+}
+.text-primary-500 {
+	color: var(--clr-primary-500);
 }
 .text-accent-400 {
 	color: var(--clr-accent-400);
@@ -401,6 +407,9 @@ hr {
 }
 .bg-neutral-900 {
 	background-color: var(--clr-neutral-900);
+}
+.bg-primary-trnsp {
+	background-color: var(--clr-primary-trnsp);
 }
 
 .fw-bold {

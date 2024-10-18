@@ -15,7 +15,6 @@
 // LES-MILLS-TONE
 // THE-TRIP
 // LES-MILLS-BARRE
-
 function assignUniqueIds(events) {
 	return events.map((event, index) => ({
 		...event,
@@ -27,21 +26,24 @@ function assignUniqueIds(events) {
 export const LesMillsEvents = assignUniqueIds([
 	{
 		title: 'meow',
-		date: '2024-08-20',
+		date: '2024-11-20',
 		color: '#d4006a',
 		program: 'BORN-TO-MOVE',
+		price: '435',
 	},
 	{
 		title: 'LES-MILLS-GRIT',
-		date: '2024-08-26',
+		date: '2024-11-26',
 		color: '#d4006a',
 		program: 'LES-MILLS-GRIT',
+		price: '345',
 	},
 	{
 		title: 'meowww',
-		date: '2024-08-29',
+		date: '2024-10-29',
 		color: '#d4006a',
 		program: 'BODYSTEP',
+		price: '345',
 	},
 	{
 		title: 'THE-TRIP',

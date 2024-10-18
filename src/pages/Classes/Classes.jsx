@@ -46,7 +46,7 @@ function Classes() {
 				<img
 					src={backgroundText}
 					alt='events page hero'
-					className='events-hero-text'
+					className='hero-text'
 				/>
 			</div>
 

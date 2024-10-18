@@ -27,10 +27,8 @@ function Events() {
 				<img
 					src={backgroundText}
 					alt='events page hero'
-					className='events-hero-text'
+					className='hero-text'
 				/>
-
-				<p className='text-container'></p>
 			</div>
 			<p>{t('localizationTesting')}</p>
 			<div className='dark-background bottom-space'>

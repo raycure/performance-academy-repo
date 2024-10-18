@@ -67,6 +67,7 @@
 }
 .icon-light-container:hover {
 	border: 1px solid rgba(255, 255, 255, 0);
+	animation: pulse 0.3s linear 1;
 }
 .social-icon-background {
 	position: absolute;

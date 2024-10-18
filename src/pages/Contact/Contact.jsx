@@ -5,9 +5,7 @@ import ContactForm from '../../components/Forms/ContactForm';
 function Contact() {
 	return (
 		<>
-			<FAQ />
-			{/* <div> */}
-
+			{/*yazı ekle*/}
 			<div id='contact-form-grad '>
 				<ContactForm />
 			</div>

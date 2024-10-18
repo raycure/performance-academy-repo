@@ -16,13 +16,26 @@ import EmailComponent from '../components/Containers/EmailComponent';
 const username = 'baap';
 const verifyLink =
 	'https://www.trendyol.com/coverzone/kablosuz-karaoke-cift-mikrofon-6-35mm-sahne-performansi-partiler-aktiviteler-amfi-hoparlor-icin-wn06-p-826296697';
-const dataEn = {
+const dataEN = {
+	preview: 'You have succesfully opened an account.',
+	greeting: 'Hi',
+	content: {
+		text: 'Please click the button below to verify your email address.',
+		button: 'Verify Email Adress',
+	},
+	footer:
+		"If you're having trouble clicking the 'Verify Email Address' button, copy and paste the URL below into your web browser:",
+};
+const dataTR = {
 	preview: '',
 	greeting: '',
-	content: {},
-	footer: [],
+	content: {
+		text: '',
+		button: '',
+	},
+	footer: '',
 };
-const local = dataEn;
+const local = dataEN;
 // const linkLineBreaked = () => {
 // 	const updatedLink = verifyLink.replace(/./g, '$&<wbr/>');
 // 	console.log(updatedLink);
@@ -53,21 +66,21 @@ export default function Email() {
 					fontStyle='normal'
 				/>
 			</Head>
-			<Preview>You have succesfully opened an account.</Preview>
+			<Preview>{local.preview}</Preview>
 			<EmailComponent>
 				<Section>
 					<Row>
-						<Text style={titleText}>Hi {username}!</Text>
+						<Text style={titleText}>
+							{local.greeting} {username}!
+						</Text>
 					</Row>
 					<Row>
-						<Text>
-							Please click the button below to verify your email address.
-						</Text>
+						<Text>{local.content.text}</Text>
 					</Row>
 					<Row>
 						<Column align='center'>
 							<Button href={verifyLink} style={button}>
-								Verify Email Adress
+								{local.content.button}
 							</Button>
 						</Column>
 					</Row>
@@ -75,8 +88,7 @@ export default function Email() {
 				<Hr style={line} />
 				<Section>
 					<Text>
-						If you're having trouble clicking the "Verify Email Address" button,
-						copy and paste the URL below into your web browser: {AddWbr()}
+						{local.footer} {AddWbr()}
 					</Text>
 				</Section>
 			</EmailComponent>

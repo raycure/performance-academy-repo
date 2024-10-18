@@ -55,7 +55,7 @@ const appear = {
 };
 
 const accordion = {
-	hidden: {
+	initial: {
 		height: 0,
 		opacity: 0,
 	},
@@ -63,7 +63,7 @@ const accordion = {
 		height: 'auto',
 		opacity: 1,
 		transition: {
-			duration: 0.5,
+			duration: 0.7,
 		},
 	},
 };
@@ -173,6 +173,16 @@ const rightToLeft = {
 		},
 	},
 };
+const upwardFill = {
+	initial: { opacity: 1 },
+	animate: {
+		height: '100%',
+		transition: {
+			duration: 0.5,
+			type: 'tween',
+		},
+	},
+};
 
 export {
 	downToUp,
@@ -187,4 +197,5 @@ export {
 	backgroundFill,
 	descending,
 	rightToLeft,
+	upwardFill,
 };

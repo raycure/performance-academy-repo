@@ -40,6 +40,7 @@
 }
 .carousel-container .card-carousel-event-background {
 	opacity: 0.5;
+	z-index: 0;
 }
 .carousel-container .swiper-3d .swiper-slide-shadow,
 .swiper-3d .swiper-slide-shadow-left,
