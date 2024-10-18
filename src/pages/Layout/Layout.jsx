@@ -6,6 +6,8 @@ import { RiArrowUpSLine } from 'react-icons/ri';
 import { HashLink } from 'react-router-hash-link';
 import { useLocation } from 'react-router-dom';
 import { useLayoutEffect } from 'react';
+import CustomNotification from '../../components/Notification/Notification.jsx';
+
 //import SmoothScrollContainer from '../../components/Containers/SmoothScrollContainer';
 function Layout() {
 	const Wrapper = ({ children }) => {
@@ -24,6 +26,7 @@ function Layout() {
 		//<SmoothScrollContainer>
 		<Wrapper>
 			<Navbar />
+			<CustomNotification />
 			<Outlet />
 			<Footer />
 			<HashLink

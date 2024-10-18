@@ -164,7 +164,7 @@ function Navbar() {
 					<Link aria-label='user' to='/login' style={{ display: 'contents' }}>
 						<FaUser className='nav-item-icon' />
 					</Link>
-					<Button
+					<Button //todo custom event kullanarak refresh gerektirmeden gizle
 						classProp={`${isLoggedin ? 'display-hidden' : ''}`}
 						redirect={'/register'}
 					>

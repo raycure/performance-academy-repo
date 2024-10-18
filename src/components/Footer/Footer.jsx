@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Footer.css';
 import logo from '../../assets/LesmillsLogo.png';
 import { HashLink } from 'react-router-hash-link';

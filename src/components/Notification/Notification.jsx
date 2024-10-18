@@ -5,17 +5,50 @@ import { GoInfo } from 'react-icons/go';
 import { FiCheckCircle } from 'react-icons/fi';
 
 import { FiXCircle } from 'react-icons/fi';
+import { MdClose } from 'react-icons/md';
 
-const Notification = ({ message, type, duration = 3000000, onClose }) => {
+const CustomNotification = () => {
+	//todo color and style properly
+	const [notification, setNotification] = useState(null);
+
 	useEffect(() => {
-		const timer = setTimeout(() => {
-			onClose();
-		}, duration);
-		return () => clearTimeout(timer);
-	}, [duration, onClose]);
+		window.addEventListener('notificationEvent', handleStorageChange);
+		const savedNotification = JSON.parse(localStorage.getItem('Notifexp'));
+		if (savedNotification) {
+			setNotification(savedNotification);
+		}
+
+		return () => {
+			window.removeEventListener('storage', handleStorageChange);
+		};
+	}, []);
+
+	const handleStorageChange = () => {
+		const savedNotification = JSON.parse(localStorage.getItem('Notifexp'));
+		if (savedNotification) {
+			console.log('notiffff', savedNotification);
+			setNotification(savedNotification);
+		}
+	};
+
+	useEffect(() => {
+		if (notification?.duration) {
+			const timer = setTimeout(() => {
+				closeNotification();
+			}, notification.duration);
+			return () => clearTimeout(timer);
+		}
+	}, [notification]);
+
+	if (!notification) return null;
+
+	const closeNotification = () => {
+		setNotification(null);
+		localStorage.removeItem('Notifexp');
+	};
 
 	const renderIcon = () => {
-		switch (type) {
+		switch (notification.type) {
 			case 'info':
 				return <GoInfo style={{ width: 20, height: 20 }} />;
 			case 'success':
@@ -28,13 +61,15 @@ const Notification = ({ message, type, duration = 3000000, onClose }) => {
 	};
 
 	return (
-		<div className={`notification ${type}`}>
-			<button className='close-btn' onClick={onClose}>
+		<div className={`notification ${notification.type}`}>
+			<div className='notification-content'>
 				{renderIcon()}
-			</button>
-			{message}
+				<span>{notification.message}</span>
+				<button className='close-btn' onClick={closeNotification}>
+					<MdClose style={{ width: 20, height: 20, color: '#a33749' }} />
+				</button>
+			</div>
 		</div>
 	);
 };
-
-export default Notification;
+export default CustomNotification;

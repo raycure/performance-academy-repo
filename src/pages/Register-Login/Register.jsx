@@ -6,7 +6,6 @@ import './registerStyle.css';
 import { register } from '../../auth/auth.service.js';
 import { useDispatch, useSelector } from 'react-redux';
 import AuthenticationGreet from './AuthenticationGreet.jsx';
-import Notification from '../../components/Notification/Notification.jsx';
 import {
 	faCheck,
 	faTimes,
@@ -58,19 +57,12 @@ function RegisterForm() {
 			message: '8 to 24 characters.',
 		},
 	];
+
 	const fetchError = useSelector(selectError);
 	const userRef = useRef();
 	const errRef = useRef();
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
-
-	const [notification, setNotification] = useState(null);
-	const showNotification = (message, type) => {
-		setNotification({ message, type });
-	};
-	const handleCloseNotification = () => {
-		setNotification(null);
-	};
 
 	const [username, setUsername] = useState('');
 	const [validName, setValidName] = useState(false);
@@ -86,7 +78,6 @@ function RegisterForm() {
 	const [matchFocus, setMatchFocus] = useState(false);
 
 	const [errMsg, setErrMsg] = useState('');
-	const [success, setSuccess] = useState(false);
 
 	useEffect(() => {
 		userRef.current.focus();
@@ -102,17 +93,24 @@ function RegisterForm() {
 		setValidPwd(valid);
 	}, [pwd]);
 
-	// useEffect(() => {
-	// 	setValidMatch(pwd === matchPwd);
-	// }, [pwd, matchPwd]);
+	useEffect(() => {
+		setValidMatch(pwd === matchPwd);
+	}, [pwd, matchPwd]);
 
 	useEffect(() => {
 		setErrMsg('');
 	}, [username, pwd, matchPwd]);
 
-	useEffect(() => {
-		success && showNotification('Success! Operation completed.', 'info');
-	}, [success]);
+	function displayNotif() {
+		const myObject = {
+			type: 'info',
+			duration: 5000,
+			message: 'Verify Mail sent',
+		};
+		localStorage.setItem('Notifexp', JSON.stringify(myObject));
+		const notificationEvent = new Event('notificationEvent');
+		window.dispatchEvent(notificationEvent);
+	}
 
 	async function handleSubmit(e) {
 		e.preventDefault();
@@ -126,7 +124,6 @@ function RegisterForm() {
 		try {
 			const registerData = { username: username, password: pwd, email: mail };
 			const response = await dispatch(register({ registerData }));
-			setSuccess(true);
 			setUsername('');
 			setPwd('');
 			setMatchPwd('');
@@ -134,6 +131,7 @@ function RegisterForm() {
 			const accessToken = response.payload.accessToken;
 			localStorage.setItem('isLoggedIn', isLoggedIn);
 			localStorage.setItem('accessToken', accessToken);
+			displayNotif();
 			setTimeout(() => {
 				navigate('/');
 			}, 2000);
@@ -141,8 +139,9 @@ function RegisterForm() {
 			if (err.response?.status === 429) {
 				setErrMsg('Too many requests, please try again later.');
 			}
+			console.log('err', err);
 
-			err.payload.data === undefined
+			err.payload?.data === undefined
 				? setErrMsg('int baglanti falan') // todo gercekten kontrol etmiyor server kapatilinca ancak calisiyor ve baglanti yokken calismiyor
 				: setErrMsg(err.payload?.data?.message);
 		}
@@ -190,9 +189,7 @@ function RegisterForm() {
 						variants={descending}
 						whileInView='show'
 						id='uidnote'
-						className={
-							userFocus && username && !validName ? 'instructions' : 'offscreen'
-						}
+						className={username && !validName ? 'instructions' : 'offscreen'}
 					>
 						{usernameValidationRules.find((rule) => rule.test(username))
 							?.message || ''}
@@ -238,26 +235,12 @@ function RegisterForm() {
 						variants={descending}
 						whileInView='show'
 						id='pwdnote'
-						className={
-							pwdFocus && !validPwd && pwd ? 'instructions' : 'offscreen'
-						}
+						className={!validPwd && pwd ? 'instructions' : 'offscreen'}
 					>
 						{passwordValidationRules.find((rule) => rule.test(pwd))?.message ||
 							''}
 					</motion.p>
 				</div>
-				{/* <FontAwesomeIcon icon={faInfoCircle} /> */}
-				{/* 8 to 24 characters. */}
-				{/* <br />
-					Must include uppercase and lowercase letters, a number and a special
-					character.
-					<br /> */}
-				{/* Allowed special characters:{' '} */}
-				{/* <span aria-label='exclamation mark'>!</span>{' '}
-					<span aria-label='at symbol'>@</span>{' '}
-					<span aria-label='hashtag'>#</span>{' '}
-					<span aria-label='dollar sign'>$</span>{' '}
-					<span aria-label='percent'>%</span> */}
 				<div className='relative-position centerLineAnimation'>
 					<input
 						type='password'
@@ -275,21 +258,33 @@ function RegisterForm() {
 					<div htmlFor='confirm_pwd' className='form-icon'>
 						<FontAwesomeIcon
 							icon={faCheck}
-							className={validMatch && matchPwd ? 'valid' : 'hide'}
+							className={validMatch && matchPwd && validPwd ? 'valid' : 'hide'}
 						/>
 						<FontAwesomeIcon
 							icon={faTimes}
-							className={validMatch || !matchPwd ? 'hide' : 'invalid'}
+							className={
+								(!validMatch || !pwd || !validPwd) && matchPwd
+									? 'invalid'
+									: 'hide'
+							}
 						/>
 					</div>
+					<motion.p
+						initial='hidden'
+						variants={descending}
+						whileInView='show'
+						id='confirmnote'
+						className={
+							(!validMatch || !pwd || !validPwd) && matchPwd
+								? 'instructions'
+								: 'offscreen'
+						}
+					>
+						{!validPwd
+							? 'no valid password'
+							: 'Must match the first password input field'}
+					</motion.p>
 				</div>
-				<p
-					id='confirmnote'
-					className={matchFocus && !validMatch ? 'instructions' : 'offscreen'}
-				>
-					<FontAwesomeIcon icon={faInfoCircle} />
-					Must match the first password input field.
-				</p>
 
 				<div className='authentication-button-container'>
 					<Button
@@ -304,13 +299,6 @@ function RegisterForm() {
 					</Link>
 				</div>
 			</form>
-			{notification && (
-				<Notification
-					message={notification.message}
-					type={notification.type}
-					onClose={handleCloseNotification}
-				/>
-			)}
 			<AuthenticationGreet />
 		</div>
 	);

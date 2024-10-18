@@ -10,7 +10,6 @@ import { downToUp } from '../../components/animations/AnimationValues.jsx';
 import Banner from '../../components/Banner/Banner';
 import { button } from '../../components/animations/AnimationValues.jsx';
 import { useState } from 'react';
-
 import axios from '../api/axios.js';
 import { useNavigate } from 'react-router-dom';
 
@@ -37,6 +36,9 @@ function Main() {
 	function routeChange(category) {
 		navigate('/programlar', { state: category });
 	}
+
+	async function sendVerifyMailTest() {}
+
 	const cards = Object.keys(lesMillsPrograms).map((category, index) => {
 		const backContent = (
 			<div
@@ -194,8 +196,6 @@ function Main() {
 					LESMILLS
 				</a>
 			</div>
-
-			{/* <RegisterForm /> */}
 		</>
 	);
 }
