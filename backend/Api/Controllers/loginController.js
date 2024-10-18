@@ -3,8 +3,8 @@ import pkg from 'bcryptjs';
 import Joi from 'joi';
 import jwt from 'jsonwebtoken';
 import * as dotenv from 'dotenv';
-import Sessions from '../Models/sessionModel.js';
 dotenv.config();
+import Sessions from '../Models/sessionModel.js';
 const { hash, compare } = pkg;
 
 const login = async (req, res) => {
@@ -50,18 +50,19 @@ const login = async (req, res) => {
 			email: user.email,
 		},
 		process.env.ACCESS_TOKEN_SECRET,
-		{ expiresIn: '3s' }
+		{ expiresIn: '3s' } //todo change it
 	);
 	const refreshToken = jwt.sign(
 		{
 			userId: user._id,
 		},
 		process.env.REFRESH_TOKEN_SECRET,
-		{ expiresIn: '5m' }
+		{ expiresIn: '3s' } //todo change it
 	);
 	res.cookie('jwt', refreshToken, {
 		httpOnly: true,
 		maxAge: 1000 * 60 * 60 * 24 * 30,
+		// maxAge: 1000 * 3, //todo delete it
 		sameSite: 'Lax',
 		path: '/',
 		secure: process.env.ENVIROMENT === 'development' ? 'false' : 'true',

@@ -6,7 +6,6 @@ import './registerStyle.css';
 import { register } from '../../auth/auth.service.js';
 import { useDispatch, useSelector } from 'react-redux';
 import AuthenticationGreet from './AuthenticationGreet.jsx';
-import Notification from '../../components/Notification/Notification.jsx';
 import {
 	faCheck,
 	faTimes,
@@ -35,20 +34,35 @@ function RegisterForm() {
 			message: '4 to 24 characters.',
 		},
 	];
+	const passwordValidationRules = [
+		{
+			test: (pwd) => !/(?=.*[a-z])(?=.*[A-Z])/.test(pwd),
+			message: 'At least one uppercase and one lowercase letter.',
+		},
+		{
+			test: (pwd) => !/(?=.*\d)/.test(pwd),
+			message: 'At least one numeral.',
+		},
+		{
+			test: (pwd) => /\s/.test(pwd),
+			message: 'No spaces.',
+		},
+		{
+			test: (pwd) =>
+				!/^[a-zA-Z\d~!?@#$%^&*_\-\+\(\)\[\]\{\}><\/\\|"'\.,:;]+$/.test(pwd),
+			message: 'Only Latin characters.',
+		},
+		{
+			test: (username) => pwd.length < 8 || pwd.length >= 24,
+			message: '8 to 24 characters.',
+		},
+	];
 
 	const fetchError = useSelector(selectError);
 	const userRef = useRef();
 	const errRef = useRef();
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
-
-	const [notification, setNotification] = useState(null);
-	const showNotification = (message, type) => {
-		setNotification({ message, type });
-	};
-	const handleCloseNotification = () => {
-		setNotification(null);
-	};
 
 	const [username, setUsername] = useState('');
 	const [validName, setValidName] = useState(false);
@@ -64,7 +78,6 @@ function RegisterForm() {
 	const [matchFocus, setMatchFocus] = useState(false);
 
 	const [errMsg, setErrMsg] = useState('');
-	const [success, setSuccess] = useState(false);
 
 	useEffect(() => {
 		userRef.current.focus();
@@ -72,49 +85,64 @@ function RegisterForm() {
 
 	useEffect(() => {
 		const valid = usernameValidationRules.every((rule) => !rule.test(username));
-		console.log(valid);
 		setValidName(valid);
 	}, [username]);
 
 	useEffect(() => {
-		setValidPwd(PWD_REGEX.test(pwd));
+		const valid = passwordValidationRules.every((rule) => !rule.test(pwd));
+		setValidPwd(valid);
+	}, [pwd]);
+
+	useEffect(() => {
 		setValidMatch(pwd === matchPwd);
 	}, [pwd, matchPwd]);
 
 	useEffect(() => {
 		setErrMsg('');
 	}, [username, pwd, matchPwd]);
-	useEffect(() => {
-		success && showNotification('Success! Operation completed.', 'info');
-	}, [success]);
+
+	function displayNotif() {
+		const myObject = {
+			type: 'info',
+			duration: 5000,
+			message: 'Verify Mail sent',
+		};
+		localStorage.setItem('Notifexp', JSON.stringify(myObject));
+		const notificationEvent = new Event('notificationEvent');
+		window.dispatchEvent(notificationEvent);
+	}
 
 	async function handleSubmit(e) {
 		e.preventDefault();
 		// const v1 = USER_REGEX.test(user);
-		const v2 = PWD_REGEX.test(pwd);
-		const userAttempts = 0;
-		if (!v2) {
-			setErrMsg('invalid entry');
-			return;
-		}
+		// const v2 = PWD_REGEX.test(pwd);
+		// if (!v2) {
+		// 	setErrMsg('invalid entry');
+		// 	return;
+		// } //todo prevent making a submit if theres no validpwd and username and
 
 		try {
-			const registerData = { username: user, password: pwd, email: mail };
+			const registerData = { username: username, password: pwd, email: mail };
 			const response = await dispatch(register({ registerData }));
-			setSuccess(true);
-			setUser('');
+			setUsername('');
 			setPwd('');
 			setMatchPwd('');
+			const isLoggedIn = response ? true : false; //todo change it to user roles and stuff
+			const accessToken = response.payload.accessToken;
+			localStorage.setItem('isLoggedIn', isLoggedIn);
+			localStorage.setItem('accessToken', accessToken);
+			displayNotif();
 			setTimeout(() => {
-				navigate('/login');
+				navigate('/');
 			}, 2000);
 		} catch (err) {
 			if (err.response?.status === 429) {
 				setErrMsg('Too many requests, please try again later.');
 			}
+			console.log('err', err);
 
-			err.payload.data === undefined // if the req fails assumed no connection.
-				? setErrMsg('int baglanti falan')
+			err.payload?.data === undefined
+				? setErrMsg('int baglanti falan') // todo gercekten kontrol etmiyor server kapatilinca ancak calisiyor ve baglanti yokken calismiyor
 				: setErrMsg(err.payload?.data?.message);
 		}
 	}
@@ -161,9 +189,7 @@ function RegisterForm() {
 						variants={descending}
 						whileInView='show'
 						id='uidnote'
-						className={
-							userFocus && username && !validName ? 'instructions' : 'offscreen'
-						}
+						className={username && !validName ? 'instructions' : 'offscreen'}
 					>
 						{usernameValidationRules.find((rule) => rule.test(username))
 							?.message || ''}
@@ -204,24 +230,17 @@ function RegisterForm() {
 							className={validPwd || !pwd ? 'hide' : 'invalid'}
 						/>
 					</div>
+					<motion.p
+						initial='hidden'
+						variants={descending}
+						whileInView='show'
+						id='pwdnote'
+						className={!validPwd && pwd ? 'instructions' : 'offscreen'}
+					>
+						{passwordValidationRules.find((rule) => rule.test(pwd))?.message ||
+							''}
+					</motion.p>
 				</div>
-				<p
-					id='pwdnote'
-					className={pwdFocus && !validPwd ? 'instructions' : 'offscreen'}
-				>
-					<FontAwesomeIcon icon={faInfoCircle} />
-					8 to 24 characters.
-					<br />
-					Must include uppercase and lowercase letters, a number and a special
-					character.
-					<br />
-					Allowed special characters:{' '}
-					<span aria-label='exclamation mark'>!</span>{' '}
-					<span aria-label='at symbol'>@</span>{' '}
-					<span aria-label='hashtag'>#</span>{' '}
-					<span aria-label='dollar sign'>$</span>{' '}
-					<span aria-label='percent'>%</span>
-				</p>
 				<div className='relative-position centerLineAnimation'>
 					<input
 						type='password'
@@ -239,21 +258,33 @@ function RegisterForm() {
 					<div htmlFor='confirm_pwd' className='form-icon'>
 						<FontAwesomeIcon
 							icon={faCheck}
-							className={validMatch && matchPwd ? 'valid' : 'hide'}
+							className={validMatch && matchPwd && validPwd ? 'valid' : 'hide'}
 						/>
 						<FontAwesomeIcon
 							icon={faTimes}
-							className={validMatch || !matchPwd ? 'hide' : 'invalid'}
+							className={
+								(!validMatch || !pwd || !validPwd) && matchPwd
+									? 'invalid'
+									: 'hide'
+							}
 						/>
 					</div>
+					<motion.p
+						initial='hidden'
+						variants={descending}
+						whileInView='show'
+						id='confirmnote'
+						className={
+							(!validMatch || !pwd || !validPwd) && matchPwd
+								? 'instructions'
+								: 'offscreen'
+						}
+					>
+						{!validPwd
+							? 'no valid password'
+							: 'Must match the first password input field'}
+					</motion.p>
 				</div>
-				<p
-					id='confirmnote'
-					className={matchFocus && !validMatch ? 'instructions' : 'offscreen'}
-				>
-					<FontAwesomeIcon icon={faInfoCircle} />
-					Must match the first password input field.
-				</p>
 
 				<div className='authentication-button-container'>
 					<Button
@@ -268,13 +299,6 @@ function RegisterForm() {
 					</Link>
 				</div>
 			</form>
-			{notification && (
-				<Notification
-					message={notification.message}
-					type={notification.type}
-					onClose={handleCloseNotification}
-				/>
-			)}
 			<AuthenticationGreet />
 		</div>
 	);

@@ -96,3 +96,16 @@
 		padding: 0.5rem;
 	}
 }
+
+.page-poster-container {
+	overflow: hidden;
+	height: 40vh;
+	position: relative;
+	display: flex;
+	justify-content: center;
+}
+.events-hero-text {
+	position: relative;
+	align-self: center;
+	height: 70%;
+}

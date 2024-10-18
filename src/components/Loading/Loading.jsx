@@ -1,8 +1,18 @@
 import React from 'react';
 import './Loading.css';
-//dots #23
-//spinner #13
 function Loading() {
-	return;
+	return (
+		<div
+			style={{
+				height: '50vh',
+				margin: 'auto',
+				display: 'flex',
+				flexWrap: 'wrap',
+				alignContent: 'flex-end',
+			}}
+		>
+			<span class='loader'></span>
+		</div>
+	);
 }
 export default Loading;

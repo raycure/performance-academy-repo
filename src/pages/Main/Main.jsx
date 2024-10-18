@@ -9,16 +9,37 @@ import { motion } from 'framer-motion';
 import { downToUp } from '../../components/animations/AnimationValues.jsx';
 import Banner from '../../components/Banner/Banner';
 import { button } from '../../components/animations/AnimationValues.jsx';
-
+import { useState } from 'react';
+import axios from '../api/axios.js';
 import { useNavigate } from 'react-router-dom';
 import FAQ from '../../components/FAQ/FAQ.jsx';
 
 function Main() {
+	//todo delete it later
+	async function handleLogout() {
+		console.log({
+			accessToken: localStorage.getItem('accessToken'),
+		});
+		const response = await axios.post('/logout', {
+			withCredentials: true,
+		});
+		console.log(response);
+		localStorage.removeItem('isLoggedIn');
+
+		if (response.status === 200) {
+			localStorage.removeItem('accessToken');
+		}
+	}
+
+	const [subSuccess, setSubSuccess] = useState(false);
 	const lesMillsPrograms = LesMillsPrograms();
 	let navigate = useNavigate();
 	function routeChange(category) {
 		navigate('/programlar', { state: category });
 	}
+
+	async function sendVerifyMailTest() {}
+
 	const cards = Object.keys(lesMillsPrograms).map((category, index) => {
 		const backContent = (
 			<div
@@ -82,9 +103,53 @@ function Main() {
 			</motion.div>
 		);
 	});
+	async function handleSub() {
+		try {
+			const accessToken = localStorage.getItem('accessToken');
+			const response = await axios.get('/test', {
+				withCredentials: true,
+				headers: { Authorization: `Bearer ${accessToken}` },
+			});
+			console.log('response login.jsx: ', response);
+			setSubSuccess(true);
+		} catch (err) {
+			console.log(err);
+
+			if (err?.response?.status === 401 || err?.response?.status === 403) {
+				console.log(
+					'Token expired or unauthorized, attempting to refresh token...'
+				);
+				const refreshResponse = await axios.get('/refresh', {
+					withCredentials: true,
+				});
+				const newAccessToken = refreshResponse.data.accessToken;
+				localStorage.setItem('accessToken', newAccessToken);
+				const response = await axios.get('/test', {
+					withCredentials: true,
+					headers: { Authorization: `Bearer ${newAccessToken}` },
+				});
+				setSubSuccess(true);
+			}
+		}
+	}
+
+	async function deleteToken() {
+		localStorage.removeItem('accessToken');
+	}
 
 	return (
 		<>
+			<button onClick={handleSub}>
+				{subSuccess ? (
+					<p>Request was successful!</p>
+				) : (
+					<p>Click to submit request</p>
+				)}
+			</button>
+			<br></br>
+			<button onClick={deleteToken}> delete token</button>
+			<br></br>
+			<button onClick={handleLogout}>logout</button>
 			{/* <Banner /> */}
 			<Container className='even-columns'>
 				<div>
@@ -133,8 +198,6 @@ function Main() {
 					LESMILLS
 				</a>
 			</div>
-
-			{/* <RegisterForm /> */}
 		</>
 	);
 }

@@ -3,7 +3,7 @@ import axios from '../../pages/api/axios.js';
 
 const initialState = {
 	current: {},
-	isLoggedIn: false,
+	isLoggedIn: false, //todo drop the local storage way and use redux its necessary for roles and security
 	status: 'idle',
 	isLoading: false,
 	isSuccess: false,
@@ -14,11 +14,9 @@ export const fetchData = createAsyncThunk(
 	'auth/fetchStatus',
 	async ({ method, url, data = null }, { rejectWithValue }) => {
 		try {
-			console.log('fetchdata calisti');
 			const response = await axios({ method, url, data });
 			return response.data;
 		} catch (error) {
-			console.log('sliceta error alindi', error);
 			const responseData = {
 				data: error.response?.data,
 				status: error.response?.status,
@@ -60,6 +58,6 @@ const authSlice = createSlice({
 
 export const selectIsLoading = (state) => state.auth.isLoading;
 export const selectAuthIsSuccess = (state) => state.auth.isSuccess;
-export const selectError = (state) => state.auth.error;
+export const selectError = (state) => state.auth.error; // todo is this really necessary
 export default authSlice.reducer;
 export const { logout } = authSlice.actions;

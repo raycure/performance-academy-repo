@@ -48,20 +48,28 @@ function ContactForm() {
 						</div>
 					</div>
 
-					<div className='centerLineAnimation' style={{ width: '100%' }}>
+					<div className='centerLineAnimation'>
 						<input placeholder='Mailiniz' type='email' />
 					</div>
-					<div className='centerLineAnimation' style={{ width: '100%' }}>
+					<div className='centerLineAnimation'>
 						<input placeholder='Konu' type='text' />
 					</div>
 
-					<div className='centerLineAnimation topCenterLineAnimation'>
+					<div className='divForBorder'>
 						<textarea
 							className='custom-textarea'
 							placeholder='Mesajınız...'
 							rows='5'
 							data-role='none'
-						/>
+						></textarea>
+						<span className='textarea-bottom-left-line'></span>
+						<span className='textarea-bottom-right-line'></span>
+						<span className='textarea-right-upper-line'></span>
+						<span className='textarea-right-lower-line'></span>
+						<span className='textarea-left-upper-line'></span>
+						<span className='textarea-left-lower-line'></span>
+						<span className='textarea-top-left-line'></span>
+						<span className='textarea-top-right-line'></span>
 					</div>
 					<Button>Gönder</Button>
 				</div>

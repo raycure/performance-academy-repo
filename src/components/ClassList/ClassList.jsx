@@ -6,6 +6,7 @@ import { MdOutlineDoubleArrow } from 'react-icons/md';
 import name from '/ornek.jpg';
 import { motion } from 'framer-motion';
 import { leftToRightForClasses } from '../animations/AnimationValues.jsx';
+
 function ClassList({ classType }) {
 	const lesMillsPrograms = LesmillsPrograms();
 	const windowWidth = window.innerWidth;
@@ -50,7 +51,7 @@ function ClassList({ classType }) {
 								className={`classes-more-info-container top-border-light fs-400 ${
 									windowWidth < 1130 && 'fs-300'
 								}`}
-								style={{ marginTop: {} }} //height alıp ona gore ver
+								style={{ marginTop: {} }} //todo height alıp ona gore ver
 							>
 								<div>
 									<p>Egzersiz Tipi: {program.type}</p>
