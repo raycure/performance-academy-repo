@@ -7,11 +7,10 @@ function Button({
 	children,
 	redirect,
 	navProp,
-	style,
+	styleProp,
 	disabled,
 	onClick,
 	classProp,
-	className,
 	isLoading,
 }) {
 	const navigate = useNavigate();
@@ -23,19 +22,17 @@ function Button({
 	};
 
 	return (
-		<div className={className}>
-			<motion.button
-				className={`btn ${classProp}`}
-				whileHover={!disabled ? { scale: 1.08 } : {}}
-				whileTap={!disabled ? { scale: 0.8 } : {}}
-				transition={{ type: 'spring', stiffness: 200, damping: 30 }}
-				onClick={onClick ? onClick : handleClick}
-				disabled={disabled}
-				style={style}
-			>
-				{isLoading ? 'Loading...' : children}
-			</motion.button>
-		</div>
+		<motion.button
+			className={`btn ${classProp}`}
+			style={{ ...styleProp }}
+			whileHover={!disabled ? { scale: 1.08 } : {}}
+			whileTap={!disabled ? { scale: 0.8 } : {}}
+			transition={{ type: 'spring', stiffness: 200, damping: 30 }}
+			onClick={onClick ? onClick : handleClick}
+			disabled={disabled}
+		>
+			{isLoading ? 'Loading...' : children}
+		</motion.button>
 	);
 }
 

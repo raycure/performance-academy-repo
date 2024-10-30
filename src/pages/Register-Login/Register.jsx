@@ -17,6 +17,9 @@ import { useNavigate } from 'react-router-dom';
 import { selectError } from '../../redux/auth/authStateSlice.js';
 import { motion } from 'framer-motion';
 import { descending } from '../../components/animations/AnimationValues.jsx';
+
+import './formStyle.css';
+
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 
 function RegisterForm() {

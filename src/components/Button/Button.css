@@ -1,60 +1,59 @@
 .btn {
-  padding: 0.5rem 1.5rem;
-  background: red;
-  text-align: center;
-  color: white;
-  border-radius: 4px;
-  border: none;
-  font-size: 20px;
-  font-weight: bold;
-  cursor: pointer;
-  position: relative;
-  overflow: hidden;
+	padding: 0.5rem 1.5rem;
+	text-align: center;
+	color: white;
+	border-radius: 4px;
+	border: none;
+	font-size: 20px;
+	font-weight: bold;
+	cursor: pointer;
+	position: relative;
+	overflow: hidden;
 }
 
 .btn:hover {
-  color: black;
+	color: black;
 }
 
 .btn:after {
-  content: "";
-  background: white;
-  position: absolute;
-  z-index: -1;
-  left: -20%;
-  right: -20%;
-  top: 0;
-  bottom: 0;
-  transform: skewX(-45deg) scale(0, 1);
-  transition: all 0.7s;
+	content: '';
+	background: white;
+	position: absolute;
+	z-index: -1;
+	left: -20%;
+	right: -20%;
+	top: 0;
+	bottom: 0;
+	transform: skewX(-45deg) scale(0, 1);
+	transition: all 0.7s;
 }
 
 .btn:hover:after {
-  transform: skewX(-45deg) scale(1, 1);
-  -webkit-transition: all 0.5s;
-  transition: all 0.5s;
+	transform: skewX(-45deg) scale(1, 1);
+	-webkit-transition: all 0.5s;
+	transition: all 0.5s;
 }
 
 .btn:active {
-  box-shadow: 0 4px red;
+	box-shadow: 0 4px red;
 }
 .btn:disabled {
-  background: gray;
-  color: #ccc;
-  cursor: not-allowed;
+	background: gray;
+	color: #ccc;
+	cursor: not-allowed;
 }
 
 .btn:disabled:after {
-  background: none;
+	background: none;
 }
 
 .classes-btn {
-  display: flex;
-  gap: 6px;
-  padding: 0.5rem 1rem;
-  align-items: center;
+	display: flex;
+	gap: 6px;
+	padding: 0.5rem 1rem;
+	align-items: center;
 }
 
 .navbar-btn {
-  padding: 0.25rem 0.65rem;
+	padding: 0.25rem 0.65rem;
 }

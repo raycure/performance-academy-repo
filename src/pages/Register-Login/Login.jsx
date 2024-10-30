@@ -105,7 +105,6 @@ function Login() {
 							placeholder='Şifre'
 						/>
 					</div>
-					<Link>maili tekrar yollamak icin tiklayin</Link>
 
 					<div className='authentication-button-container'>
 						<Button isLoading={localLoading || isLoading}> Giriş Yapın</Button>
@@ -116,10 +115,11 @@ function Login() {
 						>
 							{errMsg}
 						</p>
+						<Link to='/register' className='fs-400'>
+							Bir hesabınız yok mu? <br />
+							Buradan kaydolun!
+						</Link>
 					</div>
-					<Link to='/register' className='fs-400'>
-						Bir hesabınız yok mu? Buradan kaydolun!
-					</Link>
 				</form>
 				<AuthenticationGreet />
 			</div>
