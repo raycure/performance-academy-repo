@@ -120,6 +120,7 @@ textarea::-ms-textarea-placeholder {
 .authentication-form {
 	display: flex;
 	flex-direction: column;
+	justify-content: space-between;
 	flex-grow: 1;
 	padding: 3rem 5rem;
 	gap: 2rem;
@@ -134,7 +135,7 @@ textarea::-ms-textarea-placeholder {
 }
 .authentication-button-container {
 	display: flex;
-	flex-direction: column;
+	justify-content: space-between;
 	margin-top: auto;
 }
 .text-align-right {

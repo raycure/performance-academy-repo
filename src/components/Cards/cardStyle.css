@@ -63,6 +63,3 @@
 }
 
 /* added to prevent overflow and prevent issues width container width remove later */
-.cardContent {
-	padding: 2.5rem;
-}

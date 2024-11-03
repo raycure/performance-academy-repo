@@ -28,7 +28,6 @@ function Navbar() {
 	const [isLoggedin, setIsLoggedin] = useState(false);
 	useLayoutEffect(() => {
 		const isLoggedIn = localStorage.getItem('isLoggedIn');
-		console.log('loggedIn:', isLoggedIn);
 		setIsLoggedin(isLoggedIn);
 	}, []);
 
@@ -135,8 +134,14 @@ function Navbar() {
 			document.removeEventListener('mousedown', handleClickOutside);
 		};
 	}, [menuOpen]);
+	const [isOpen, setIsOpen] = useState(false);
+
+	const toggleDropdown = () => {
+		setIsOpen(!isOpen);
+	};
+
 	return (
-		<div className='navigation-outer-container user-select-none'>
+		<div className='navigation-outer-container user-select-none' id='navbar'>
 			<nav className='nav-container nav-inner-container'>
 				<Link to='/' aria-label='logo' style={{ display: 'contents' }}>
 					<img alt='beep' className='logo' src={logo}></img>
@@ -165,9 +170,23 @@ function Navbar() {
 						<GrLanguage className='nav-item-icon' />
 						{i18n.language === 'en' ? 'EN' : 'TR'}
 					</Link>
-					<Link aria-label='user' to='/login' style={{ display: 'contents' }}>
+					{/* <Link aria-label='user' to='/login' style={{ display: 'contents' }}>
 						<FaUser className='nav-item-icon' />
-					</Link>
+					</Link> */}
+
+					{/* <Button onClick={handleDropDownMenu}>
+						<FaUser className='nav-item-icon' />
+					</Button>
+					<motion.div className='drop-down-menu'></motion.div> */}
+
+					<div className='dropdown'>
+						<FaUser className='nav-item-icon' onClick={toggleDropdown} />
+						<div className={`dropdown-content ${isOpen ? 'open' : ''}`}>
+							<h4 id='test'>signout</h4>
+							<h4 id='test'>user info</h4>
+						</div>
+					</div>
+
 					<Button //todo custom event kullanarak refresh gerektirmeden gizle
 						classProp={`${isLoggedin ? 'display-hidden' : ''}`}
 						redirect={'/register'}

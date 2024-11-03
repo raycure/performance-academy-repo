@@ -64,3 +64,62 @@
 // }
 
 // export default Test;
+<ul className='testul'>
+	<li className='testListItem'>
+		<CiGlobe className='testicon' />
+		<h2 className='fs-minimal-heading'>Uluslararası Sertifikalar</h2>
+	</li>
+	<p id='testlistspan'>
+		{/* Les Mills onaylı sertifikalarınız, tüm dünyada geçerli olan
+						uluslararası bir standart sunarak kariyerinize yeni ve heyecan
+						verici kapılar açacaktır. Bu sertifikalar, fitness ve eğitmenlik
+						alanında küresel bir kalite damgası niteliğinde olup, dünyanın her
+						yerindeki prestijli spor merkezleri ve sağlık kulüplerince
+						tanınmaktadır. */}
+		kurslarimizdan alacaginiz sertifikalar dunyanin her yerinde gecerlidir
+	</p>
+	<li className='testListItem'>
+		<ChartNoAxesCombined className='testicon' />
+		<h2 className='fs-minimal-heading'>Her Seviyeye uygun</h2>
+	</li>
+	<p id='testlistspan'>
+		{/* İster yıllardır eğitmenlik yapıyor olun, ister yolculuğunuza yeni
+						başlıyor olun, Les Mills kursları her seviyeden kullanıcıya uygun,
+						kapsayıcı ve esnek eğitim programları sunmaktadır. Temel seviyeden
+						profesyonel düzeye kadar, herkesin ihtiyacına ve hedefine özel
+						içerikler geliştiren Les Mills, fitness dünyasında herkes için bir
+						gelişim yolu sunmaktadır. Kendi hızınızda, kendi hedefinize uygun
+						olarak ilerleyebileceğiniz bu programlar, size profesyonel gelişim
+						için kusursuz bir platform sağlar. */}
+		ister deneyimli olun ister yeni basliyor olun kurslarimiz her duzeye
+		uygundur
+	</p>
+	<li className='testListItem'>
+		<Gem className='testicon' />
+		<h2 className='fs-minimal-heading'>Geleceğe Yatırım</h2>
+	</li>
+	<p id='testlistspan'>
+		Les Mills sertifikaları, fitness endüstrisinde sadece bir eğitim değil, aynı
+		zamanda geleceğe yapılmış stratejik bir yatırımdır. Hızla değişen sağlık ve
+		fitness sektöründe sürekli güncellenen içerikleriyle size rekabet avantajı
+		sağlayan bu kurslar, profesyonel gelişiminize uzun vadeli bir perspektif
+		kazandırır. Dünya standartlarında bir eğitim modeliyle, sektörün ihtiyaç
+		duyduğu nitelikleri kazanırken, aynı zamanda küresel bir kariyer hedefine
+		doğru emin adımlarla ilerlersiniz.
+	</p>
+	<li className='testListItem'>
+		<CalendarClock className='testicon' />
+		<CalendarCheck2 className='testicon' />
+		<Calendar1 className='testicon' />
+		<CalendarFold className='testicon' />
+		<Calendar className='testicon' />
+		<CalendarRange className='testicon' />
+		timed events
+	</li>
+
+	<li className='testListItem'>
+		<HiUserGroup className='testicon' />
+	</li>
+</ul>;
+
+// asil bu
