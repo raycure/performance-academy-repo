@@ -2,6 +2,13 @@
 	font-size: 12vh;
 	font-weight: bold;
 }
+.page-poster-container {
+	overflow: hidden;
+	height: 40vh;
+	position: relative;
+	display: flex;
+	justify-content: center;
+}
 .poster-background-shape {
 	left: 50%;
 	width: 30%;

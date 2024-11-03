@@ -19,29 +19,34 @@ const dataEN = {
 	greeting: 'Hi',
 	content: {
 		text: [
-			`We have confirmed that you have bought our ${program} program! `,
-			"You will receive a new lesson video every 3 months so don't forgetto regularly check the new content out!",
+			`We have confirmed that you have bought our ${program} program event! `,
+			"You will receive new lesson content every 3 months so don't forget to regularly check the new content out!",
 		],
 		ternary: [
 			"We are working on activating your account on our Les Mills Releases App for you to use on your phone. When your account is activated you will receive a confirmation email regarding that. If you don't receive one in 5 business days feel free to",
 			"We are working on activating the event on your account in our Les Mills Releases App. When the event is activated on your account you will receive a confirmation email regarding that. If you don't receive one in 5 business days feel free to",
 		],
 		contact: ' contact us through this link',
+		text2: `You can access the ${program} event opening video in the "my courses" section on our website!`,
 	},
-	footer: [
-		'Les Mills Releases App for Android',
-		'Les Mills Releases App for IOS',
-	],
+	footer: [' App for Android', ' App for IOS'],
 };
 const dataTR = {
-	preview: '',
-	greeting: '',
+	preview: 'Başarıyla bir etkinliğimize katıldınız.',
+	greeting: 'Merhaba',
 	content: {
-		text: [],
-		ternary: [,],
-		contact: '',
+		text: [
+			`${program} programı etkinliğimize katıldığınızı başarıyla doğruladık! `,
+			'Her 3 ayda bir bu program için yeni içeriklere ulaşabileceksiniz, bu sebeple düzenli olarak uygulamamızı kontrol etmeyi unutmayın!',
+		],
+		ternary: [
+			'Les Mills Releases uygulamamızı kullanabilmeniz için hesabınızı akifleştirmeye çalışıyoruz. Hesabınız aktifleştirildiğinde bir aktivasyon maili alacaksınız. Eğer 5 iş günü içerisinde bu maili alamazsanız bize ',
+			'Les Mills Releases uygulamamızda hesabınız için bu etkinliği akifleştirmeye çalışıyoruz. Etkinlik aktifleştirildiğinde bir aktivasyon maili alacaksınız. Eğer 5 iş günü içerisinde bu maili alamazsanız bize ',
+		],
+		contact: 'bu link üzerinden ulaşabilirsiniz!',
+		text2: `Şimdiden sitemizde bulunan "kurslarım" bölümünden ${program} etkinliğimizin açılış videosunu izleyebilirsiniz!`,
 	},
-	footer: [],
+	footer: [' IOS Uygulaması', ' Android Uygulaması'],
 };
 const local = dataEN;
 export default function Email() {
@@ -80,17 +85,18 @@ export default function Email() {
 						)}{' '}
 						{local.content.text[1]}
 					</Text>
+					<Text>{local.content.text2}</Text>
 				</Section>
 				<Hr />
 				<Section>
 					<Row>
 						<Link href='https://play.google.com/store/apps/details?id=nz.co.lmidigital&hl=en&pli=1'>
-							{local.footer[0]}
+							Les Mills Releases{local.footer[0]}
 						</Link>
 					</Row>
 					<Row>
 						<Link href='https://apps.apple.com/us/app/les-mills-releases/id1205725378'>
-							{local.footer[1]}
+							Les Mills Releases{local.footer[1]}
 						</Link>
 					</Row>
 				</Section>

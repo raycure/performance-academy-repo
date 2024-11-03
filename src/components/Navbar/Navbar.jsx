@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useLayoutEffect } from 'react';
 import './Navbar.css';
-import { Link, NavLink } from 'react-router-dom'; //u cant style the links directly
+import { Link, NavLink, useNavigate } from 'react-router-dom'; //u cant style the links directly
 import { FaCookie, FaUser } from 'react-icons/fa6';
 import Button from '../Button/Button';
 import logo from '../../assets/LesmillsLogo.png';
@@ -28,7 +28,7 @@ function Navbar() {
 	const [isLoggedin, setIsLoggedin] = useState(false);
 	useLayoutEffect(() => {
 		const isLoggedIn = localStorage.getItem('isLoggedIn');
-		console.log(isLoggedIn);
+		console.log('loggedIn:', isLoggedIn);
 		setIsLoggedin(isLoggedIn);
 	}, []);
 
@@ -76,32 +76,36 @@ function Navbar() {
 			backgroundColor: '#e60023',
 		},
 	];
+	const { t, i18n } = useTranslation('translation');
 	const paths = [
 		{
 			path: '/',
-			label: 'Ana Sayfa',
+			label: t('Navbar.Main'),
 		},
 		{
 			path: '/programlar',
-			label: 'Programlar',
+			label: t('Navbar.Programs'),
 		},
 		{
 			path: '/etkinlikler',
-			label: 'Etkinlikler',
+			label: t('Navbar.Events'),
 		},
 		{
 			path: '/kurslarım',
-			label: 'Kurslarım',
+			label: t('Navbar.MyCourses'),
 		},
 		{
 			path: '/iletişim',
-			label: 'İletişim',
+			label: t('Navbar.Contact'),
 		},
 	];
-	const { t, i18n, ready } = useTranslation();
 
 	const changeLanguage = (lng) => {
 		i18n.changeLanguage(lng);
+	};
+	const handleLanguageChange = (lng) => {
+		localStorage.setItem('locationFallback', location.state);
+		changeLanguage(lng);
 	};
 	const [windowWidth, setWindowWidth] = useState(0);
 	let resizeWindow = () => {
@@ -138,9 +142,9 @@ function Navbar() {
 					<img alt='beep' className='logo' src={logo}></img>
 				</Link>
 				<ul className='nav-list-container nav-container text-accent-400'>
-					{paths.map((path) => {
+					{paths.map((path, index) => {
 						return (
-							<li className='nav-list-item relative-position'>
+							<li className='nav-list-item relative-position' key={index}>
 								<NavLink to={path.path}>{path.label}</NavLink>
 							</li>
 						);
@@ -175,10 +179,10 @@ function Navbar() {
 					<Link
 						onClick={() => {
 							if (i18n.language === 'en') {
-								changeLanguage('tr');
+								handleLanguageChange('tr');
 								return;
 							}
-							changeLanguage('en');
+							handleLanguageChange('en');
 						}}
 						aria-label='language'
 						style={{ display: 'contents' }}
@@ -212,13 +216,13 @@ function Navbar() {
 				custom={windowWidth}
 			>
 				<FiX className='navbar-xmark' onClick={toggleNavMenu} />
-				<div className='menu-inner-container'>
+				<div className='menu-inner-container' key='menucon'>
 					<hr />
-					{paths.map((path) => {
+					{paths.map((path, index) => {
 						return (
 							<>
 								<li>
-									<NavLink onClick={toggleNavMenu} to={path.path}>
+									<NavLink onClick={toggleNavMenu} to={path.path} key={index}>
 										{path.label}
 									</NavLink>
 								</li>

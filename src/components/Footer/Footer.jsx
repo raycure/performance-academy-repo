@@ -14,7 +14,10 @@ import { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { socialSlide, backgroundFill } from '../animations/AnimationValues';
 import instagramBackground from '../../assets/instagram-background.jpg';
+import { useTranslation } from 'react-i18next';
 function Footer() {
+	const { t, i18n } = useTranslation('translation');
+
 	const icons = [
 		{
 			href: 'https://www.instagram.com/lesmills/',
@@ -114,25 +117,29 @@ function Footer() {
 			</div>
 			<div className='footer-container'>
 				<img src={logo} alt='lesmills logo' className='logo' />
-				<p className='text-legal licence-text '>©licenced by my ass 🍑</p>
+				<p className='text-legal licence-text '>
+					{i18n.language === 'tr'
+						? '©Personal Fitness Academy LLC Tarafından Lisanslı'
+						: '©Licenced by Personal Fitness Academy LLC'}
+				</p>
 				<div className='footer-link-container'>
 					<HashLink
 						to='/iletişim#contact-form-grad'
 						className='addLineAnimation'
 					>
-						Bize Ulaşın
+						{t('Footer.Contact')}
 					</HashLink>
 					<HashLink className='addLineAnimation' to='/iletişim#top'>
-						Sık Sorulan Sorular
+						{t('Footer.FAQ')}
 					</HashLink>
 					<HashLink
 						className='addLineAnimation'
 						to='/kişisel-verilerin-korunması#top'
 					>
-						Kişisel Verilerin Korunması
+						{t('Footer.Privacy')}
 					</HashLink>
 					<HashLink className='addLineAnimation' to='/çerezler#top'>
-						Çerezler
+						{t('Footer.Cookies')}
 					</HashLink>
 				</div>
 			</div>

@@ -28,7 +28,8 @@ function CalendarEventItem({ eventId }) {
 	return (
 		<div className='upcoming-events-container selected-events'>
 			{Math.floor(
-				(activeEvent.fullDate.getTime() - today.getTime()) / (1000 * 3600 * 24)
+				(activeEvent.fullStartDate.getTime() - today.getTime()) /
+					(1000 * 3600 * 24)
 			) < -1 ? ( //tarihi geçen etkinliği göstermemek için
 				<div className='border-container'>
 					<HashLink className='' to={`/programlar#${eventProgram[0]?.id}`}>
@@ -57,7 +58,7 @@ function CalendarEventItem({ eventId }) {
 					<p>
 						{activeEvent.program} programını kapsayan bu etkinliğimize{' '}
 						{Math.floor(
-							(activeEvent.fullDate.getTime() - today.getTime()) /
+							(activeEvent.fullStartDate.getTime() - today.getTime()) /
 								(1000 * 3600 * 24) +
 								1
 						)}{' '}

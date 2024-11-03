@@ -23,11 +23,6 @@
 	display: flex;
 	justify-content: center;
 }
-.hero-text {
-	position: relative;
-	align-self: center;
-	height: 70%;
-}
 .dark-background {
 	width: 100%;
 	padding: 3rem 0;

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import './Classes.css';
 import ClassList from '../../components/ClassList/ClassList';
 import { useLocation } from 'react-router-dom';
@@ -46,7 +46,7 @@ function Classes() {
 				<img
 					src={backgroundText}
 					alt='events page hero'
-					className='hero-text'
+					style={{ position: 'relative', alignSelf: 'center', height: '70%' }}
 				/>
 			</div>
 

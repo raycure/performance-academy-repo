@@ -1,8 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import name from '/ornek.jpg';
 import { Link, useLocation } from 'react-router-dom';
 import './ClassInfo.css';
-import Button from '../../components/Button/Button';
 import LesmillsPrograms from '../../assets/LesmillsPrograms';
 import { motion } from 'framer-motion';
 import {
@@ -10,14 +9,14 @@ import {
 	accordion,
 } from '../../components/animations/AnimationValues.jsx';
 import { useTranslation } from 'react-i18next';
+import EventList from '../../components/EventItem/EventList.jsx';
 function ClassInfo() {
-	const { t, i18n } = useTranslation();
+	const { t, i18n } = useTranslation('translation');
 	const location = useLocation();
-	useEffect(() => {
-		// Perform actions that need to re-run when the language changes
-		// such as fetching or updating program data for the current language
-	}, [i18n.language]);
-	const programID = location.state?.program;
+	//useEffect(() => {}, [i18n.language, location.state]);
+
+	const programID =
+		location.state?.program || localStorage.getItem('locationFallback').program;
 	const program = Object.keys(LesmillsPrograms())
 		.map((category) => {
 			return LesmillsPrograms()[category].find((program) => {
@@ -25,12 +24,15 @@ function ClassInfo() {
 			});
 		})
 		.filter(Boolean)[0];
-	//const activeProgram = location.state.program.id;
+
 	const recPrograms = Object.keys(LesmillsPrograms()).map((category) => {
 		const objectLength = LesmillsPrograms()[category]?.length;
 		let randomNum = Math.floor(Math.random() * objectLength);
 		return LesmillsPrograms()[category].slice(randomNum, randomNum + 1);
 	}); //selects 3 random courses from each category
+	if (!program) {
+		return <p>Program not found</p>;
+	}
 	// const openInNewTab = (url) => {
 	// 	window.open(url, '_blank', 'noreferrer');
 	// }; //so the link opens in another tab
@@ -66,7 +68,7 @@ function ClassInfo() {
 					</>
 				)}
 			</div>
-			<div className='payment-but-con bottom-space bg-primary-300 fw-bold'>
+			{/* <div className='payment-but-con bottom-space bg-primary-300 fw-bold'>
 				<p className='fs-650' style={{ textAlign: 'center' }}>
 					{program.title} Programının <br /> Sertifikalı Eğitmeni Olmak İster
 					Misin?
@@ -74,7 +76,12 @@ function ClassInfo() {
 				<Button redirect='/program-kaydı' navProp={program.id}>
 					Bu Programa Katıl!
 				</Button>
-			</div>
+			</div> */}
+			<EventList
+				activeProgram={programID}
+				programTitle={program.title}
+				infoActive={false}
+			/>
 			<ul className='class-rec-con'>
 				{recPrograms.map((rec) => {
 					return rec.map((program, index) => (

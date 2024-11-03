@@ -179,7 +179,6 @@ const upwardFill = {
 		height: '100%',
 		transition: {
 			duration: 0.5,
-			type: 'tween',
 		},
 	},
 };

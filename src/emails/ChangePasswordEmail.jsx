@@ -29,13 +29,16 @@ const dataEN = {
 		"If you're having trouble clicking the 'Reset Password' button, copy and paste the URL below into your web browser: ",
 };
 const dataTR = {
-	preview: '',
-	greeting: '',
+	preview: 'Parolanızı değiştirmeyi talep ettiniz.',
+	greeting: 'Merhaba',
 	content: {
-		text: '',
-		button: '',
+		text: `Parolanızı değiştirmek için aşağıdaki butona basınız.\n
+		Sitemizde kullandığınız bu parolayı değiştirmenin,
+			 Les Mills Releases uygulamasındaki hesabınızın parolasını değiştirmediğini lütfen unutmayınız.`,
+		button: 'Parolamı Değiştir',
 	},
-	footer: '',
+	footer:
+		'Eğer butona basmakta sorun yaşıyorsanız bu linki kopyalayıp tarayıcınıza yapıştırabilirsiniz: ',
 };
 const local = dataEN;
 function AddWbr() {

@@ -1,4 +1,19 @@
 {
-	"localizationTesting": "türkçe bir şey",
-	"loadingText": "Yükleniyor.."
+	"loadingText": "Yükleniyor",
+	"Navbar": {
+		"Main": "Ana Sayfa",
+		"Programs": "Programlar",
+		"Events": "Etkinlikler",
+		"MyCourses": "Kurslarım",
+		"Contact": "İletişim"
+	},
+	"MainPage": {
+		"WelcomeText": "İnsanlara hayatlarını değiştirmeleri için ilham vermeye ve motive etmeye hazır mısınız? İster yıllardır Eğitmenlik yapıyor olun, ister yolculuğunuza yeni başlıyor olun, Les Mills Eğitmeni olarak başarılı bir kariyer için ihtiyacınız olan her şeyi size vereceğiz. Programlarımızdan herhangi birinde Eğitmen olarak eğitim alın - seçim sizin! \nLesmills farklı tarzlarda Grup Fitness Programları yapan dünyaca ünlü bir Eğitim Firmasıdır. Lesmills Programları 130 ülkede çoşkulu bir şekilde yapılmaktadır. Bir çok Eğitmen bu programlardan ilham alıp kendilerini dünya standarlarında star bir Eğitmen haline getirmişlerdir. Eğitimlere katıldığınız ve Sertifikanızı aldığınız taktirde Dünyanın her ülkesinde geçerli olan bu sertifika ile ders verebilirsiniz. O zaman bu eğitimlere nasıl katılabilir ve bu Sertifikayı nasıl alabilirsiniz? Sorusunu genel olarak bir gözden geçirelim."
+	},
+	"Footer": {
+		"Contact": "Bize Ulaşın",
+		"FAQ": "Sık Sorulan Sorular",
+		"Privacy": "Kişisel Verilerin Korunması",
+		"Cookies": "Çerezler"
+	}
 }

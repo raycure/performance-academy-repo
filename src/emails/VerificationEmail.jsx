@@ -27,13 +27,14 @@ const dataEN = {
 		"If you're having trouble clicking the 'Verify Email Address' button, copy and paste the URL below into your web browser:",
 };
 const dataTR = {
-	preview: '',
-	greeting: '',
+	preview: 'Başarıyla bir hesap oluşturdunuz.',
+	greeting: 'Merhaba',
 	content: {
-		text: '',
-		button: '',
+		text: 'Lütfen aşağıdaki butona basarak hesabınızı doğrulayın.',
+		button: 'Hesabınızı Doğrulayın',
 	},
-	footer: '',
+	footer:
+		'Eğer butona basmakta sorun yaşıyorsanız bu linki kopyalayıp tarayıcınıza yapıştırabilirsiniz: ',
 };
 const local = dataEN;
 // const linkLineBreaked = () => {

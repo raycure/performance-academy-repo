@@ -6,6 +6,7 @@ import { MdOutlineDoubleArrow } from 'react-icons/md';
 import name from '/ornek.jpg';
 import { motion } from 'framer-motion';
 import { leftToRightForClasses } from '../animations/AnimationValues.jsx';
+import { useTranslation } from 'react-i18next';
 
 function ClassList({ classType }) {
 	const lesMillsPrograms = LesmillsPrograms();
@@ -14,6 +15,7 @@ function ClassList({ classType }) {
 		if (category !== classType && classType !== 'all') {
 			return;
 		}
+		const { t, i18n } = useTranslation();
 		return lesMillsPrograms[category].map((program, subIndex) => {
 			return (
 				<>
@@ -45,7 +47,10 @@ function ClassList({ classType }) {
 									src={program.logo}
 								/>
 								<p className='slogan'>{program.sum}</p>
-								<p>Dersler: {program.lessons}</p>
+								<p>
+									{i18n.language === 'tr' ? 'Dersler' : 'Lessons'}:{' '}
+									{program.lessons}
+								</p>
 							</div>
 							<div
 								className={`classes-more-info-container top-border-light fs-400 ${
@@ -54,13 +59,21 @@ function ClassList({ classType }) {
 								style={{ marginTop: {} }} //todo height alıp ona gore ver
 							>
 								<div>
-									<p>Egzersiz Tipi: {program.type}</p>
-									<p>Ekipman: {program.equipment}</p>
-									<p>Kime Yönelik: {program.for}</p>
+									<p>
+										{i18n.language === 'tr' ? 'Türü' : 'Type'}: {program.type}
+									</p>
+									<p>
+										{i18n.language === 'tr' ? 'Ekipman' : 'Equipment'}:{' '}
+										{program.equipment}
+									</p>
+									<p>
+										{i18n.language === 'tr' ? 'Kime Yönelik' : 'For'}:{' '}
+										{program.for}
+									</p>
 								</div>
 								<Button
 									classProp={'classes-btn'}
-									redirect={'/program#' + program.id}
+									redirect={'/program'}
 									navProp={{ program: program.id }}
 									className='center-vertical'
 								>

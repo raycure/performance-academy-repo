@@ -27,20 +27,20 @@ const dataEN = {
 					want to.\nIf you're having problems feel free to`,
 		contact: ' contact us through this link',
 	},
-	footer: [
-		'Les Mills Releases App for Android',
-		'Les Mills Releases App for IOS',
-	],
+	footer: [' App for Android', ' App for IOS'],
 };
 const dataTR = {
-	preview: '',
-	greeting: '',
+	preview: `${
+		type === 'account' ? 'Hesabınız ' : 'Hesabınızdaki etkinlik '
+	}aktive edildi.`,
+	greeting: 'Merhaba',
 	content: {
-		ternary: [],
-		text: ``,
-		contact: '',
+		ternary: ['Hesabınız', `Aldığınız ${program} etkinliği hesabınızda`],
+		text: `başarıyla aktive edilmiştir! Les Mills Releases uygulaması ile
+		 almış olduğunuz etkinlik içeriğine istediğiniz zaman ulaşabilirsiniz.\nEğer bir sorun yaşıyorsanız`,
+		contact: 'bu link üzerinden bize ulaşabilirsiniz',
 	},
-	footer: [],
+	footer: [' IOS Uygulaması', ' Android Uygulaması'],
 };
 const local = dataEN;
 export default function Email() {
@@ -78,12 +78,12 @@ export default function Email() {
 				<Section>
 					<Row>
 						<Link href='https://play.google.com/store/apps/details?id=nz.co.lmidigital&hl=en&pli=1'>
-							Les Mills Releases App for Android
+							Les Mills Releases{local.footer[0]}
 						</Link>
 					</Row>
 					<Row>
 						<Link href='https://apps.apple.com/us/app/les-mills-releases/id1205725378'>
-							Les Mills Releases App for IOS
+							Les Mills Releases{local.footer[1]}
 						</Link>
 					</Row>
 				</Section>

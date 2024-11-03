@@ -5,6 +5,7 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import './CustomCalendar.css';
 import { LesMillsEvents } from '../../assets/LesmillsEvents';
 import CalendarEventItem from './CalendarEventItem';
+import { useTranslation } from 'react-i18next';
 
 function CalendarContainer() {
 	const [eventClicked, setEventClicked] = useState(false);
@@ -33,7 +34,7 @@ function CalendarContainer() {
 		const eventDate = new Date(eventInfo.event._instance.range.start).getDate();
 		return <div className='fully-center-item'>{eventDate}</div>;
 	}
-
+	const { t, i18n } = useTranslation();
 	return (
 		<div
 			id='calendar-container'
@@ -43,8 +44,10 @@ function CalendarContainer() {
 			<FullCalendar
 				plugins={[dayGridPlugin]}
 				initialView='dayGridMonth'
-				locale='tr'
-				buttonText={{ today: 'Bugün' }}
+				locale={i18n.language}
+				buttonText={
+					i18n.language === 'tr' ? { today: 'Bugün' } : { today: 'Today' }
+				}
 				editable={false}
 				aspectRatio={1.1}
 				headerToolbar={{

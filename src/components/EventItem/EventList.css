@@ -23,8 +23,17 @@
 .enroll-event-item {
 	border-bottom: 1px solid white;
 	padding: 1rem;
-	margin-inline: 15vw;
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
+}
+.event-list-grid {
+	display: grid;
+	grid-template-columns: 1fr 0.3fr;
+	gap: 2.5rem;
+	margin-inline: 2.5rem;
+}
+.event-list-card {
+	border-radius: 30px;
+	padding: 2rem 1.5rem;
 }
