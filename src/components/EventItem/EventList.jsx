@@ -41,7 +41,12 @@ function EventList({ activeProgram, programTitle, infoActive }) {
 	const [selectedEvent, setSelectedEvent] = useState(eventFallback);
 	const locationClickHandler = () => {
 		window.open(
-			'https://maps.google.com?q=' + selectedEvent.lat + ',' + selectedEvent.lng
+			'https://maps.google.com?q=' +
+				selectedEvent.location[0] +
+				',' +
+				selectedEvent.location[1],
+			'_blank',
+			'noreferrer'
 		);
 	};
 	function prePage() {
@@ -65,6 +70,10 @@ function EventList({ activeProgram, programTitle, infoActive }) {
 	function handleEventSelection(selected) {
 		setSelectedEvent(selected);
 	}
+	if (selectedEvent === null || selectedEvent === undefined) {
+		return <p>Unfortunately theres no event for this program yet.</p>;
+	}
+	console.log(selectedEvent.location);
 
 	return (
 		<div className='event-list-grid'>
@@ -166,6 +175,7 @@ function EventList({ activeProgram, programTitle, infoActive }) {
 			</section>
 			<section className='bg-primary-300 event-list-card'>
 				<p>{selectedEvent.program}</p>
+				<p></p>
 				<p>
 					{selectedEvent.fullStartDate.getDate() +
 						' ' +

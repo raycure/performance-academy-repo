@@ -15,8 +15,8 @@ function ClassInfo() {
 	const location = useLocation();
 	//useEffect(() => {}, [i18n.language, location.state]);
 
-	const programID =
-		location.state?.program || localStorage.getItem('locationFallback').program;
+	const programID = 'BODYSTEP';
+	//location.state?.program || localStorage.getItem('locationFallback').program;
 	const program = Object.keys(LesmillsPrograms())
 		.map((category) => {
 			return LesmillsPrograms()[category].find((program) => {
