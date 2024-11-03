@@ -20,7 +20,7 @@ function ContactForm() {
 						<p className='contact-form-header fs-secondary-heading text-container'>
 							Aradığınızı Bulamadınız Mı?
 						</p>
-						<p className='contact-form-header fs-900 text-container '>
+						<p className='contact-form-header fs-secondary-heading text-container '>
 							Bize Erişin!
 						</p>
 					</div>

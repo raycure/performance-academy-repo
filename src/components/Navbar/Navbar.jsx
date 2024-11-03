@@ -28,7 +28,6 @@ function Navbar() {
 	const [isLoggedin, setIsLoggedin] = useState(false);
 	useLayoutEffect(() => {
 		const isLoggedIn = localStorage.getItem('isLoggedIn');
-		console.log('loggedIn:', isLoggedIn);
 		setIsLoggedin(isLoggedIn);
 	}, []);
 
@@ -142,7 +141,7 @@ function Navbar() {
 	};
 
 	return (
-		<div className='navigation-outer-container user-select-none'>
+		<div className='navigation-outer-container user-select-none' id='navbar'>
 			<nav className='nav-container nav-inner-container'>
 				<Link to='/' aria-label='logo' style={{ display: 'contents' }}>
 					<img alt='beep' className='logo' src={logo}></img>
