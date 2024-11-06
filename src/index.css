@@ -328,6 +328,11 @@ hr {
 .to-top-arrow:hover {
 	opacity: 0.4;
 }
+
+input[type='checkbox'] {
+	accent-color: var(--clr-accent-400);
+}
+
 .banner {
 	width: 100%;
 	background-color: violet;
@@ -553,10 +558,10 @@ hr {
 }
 @keyframes pulse {
 	25% {
-		transform: scale(0.9);
+		transform: scale(0.93);
 	}
 	75% {
-		transform: scale(1.1);
+		transform: scale(1.05);
 	}
 }
 /* ANIMATIONS */
@@ -577,10 +582,6 @@ hr {
 	100% {
 		transform: translateX(200%);
 	}
-}
-
-.footer-link-con > {
-	overflow: hidden;
 }
 
 .addLineAnimation {

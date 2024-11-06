@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useState } from 'react';
 import name from '/ornek.jpg';
 import { Link, useLocation } from 'react-router-dom';
 import './ClassInfo.css';
@@ -10,13 +10,12 @@ import {
 } from '../../components/animations/AnimationValues.jsx';
 import { useTranslation } from 'react-i18next';
 import EventList from '../../components/EventItem/EventList.jsx';
+import { PiBarbell } from 'react-icons/pi';
 function ClassInfo() {
 	const { t, i18n } = useTranslation('translation');
 	const location = useLocation();
-	//useEffect(() => {}, [i18n.language, location.state]);
-
 	const programID = 'BODYSTEP';
-	//location.state?.program || localStorage.getItem('locationFallback').program;
+	//location.state?.program;
 	const program = Object.keys(LesmillsPrograms())
 		.map((category) => {
 			return LesmillsPrograms()[category].find((program) => {
@@ -25,17 +24,19 @@ function ClassInfo() {
 		})
 		.filter(Boolean)[0];
 
-	const recPrograms = Object.keys(LesmillsPrograms()).map((category) => {
-		const objectLength = LesmillsPrograms()[category]?.length;
-		let randomNum = Math.floor(Math.random() * objectLength);
-		return LesmillsPrograms()[category].slice(randomNum, randomNum + 1);
-	}); //selects 3 random courses from each category
+	const recPrograms = Object.values(LesmillsPrograms())
+		.flat()
+		.sort(() => 0.5 - Math.random())
+		.slice(0, 3); //shuffles array and returns 3 random programs
+	const [navbarHeight1, setnavbarHeight1] = useState(0);
+	useLayoutEffect(() => {
+		const navbar = document.querySelector('#navbar');
+		const navbarHeight = navbar.offsetHeight;
+		setnavbarHeight1(navbarHeight);
+	}, []);
 	if (!program) {
 		return <p>Program not found</p>;
 	}
-	// const openInNewTab = (url) => {
-	// 	window.open(url, '_blank', 'noreferrer');
-	// }; //so the link opens in another tab
 	return (
 		<>
 			<div
@@ -52,39 +53,167 @@ function ClassInfo() {
 				<p className='fs-secondary-heading'>{program.result}</p>
 			</div>
 			<p className='class-info-sum'>{program.sum}</p>
-			{/* video */}
-			<div className='class-info-grid bottom-space'>
-				<p>{program.description}</p>
-				<img src={name} alt='' />
-				{!program.why ? (
-					<>
-						<p>{program.whyMember}</p>
-						<p>{program.whyYou}</p>
-					</>
-				) : (
-					<>
-						<p>{program.sum}</p>
-						<p>{program.why}</p>
-					</>
-				)}
-			</div>
-			{/* <div className='payment-but-con bottom-space bg-primary-300 fw-bold'>
-				<p className='fs-650' style={{ textAlign: 'center' }}>
-					{program.title} Programının <br /> Sertifikalı Eğitmeni Olmak İster
-					Misin?
-				</p>
-				<Button redirect='/program-kaydı' navProp={program.id}>
-					Bu Programa Katıl!
-				</Button>
-			</div> */}
+			<section className='class-info-grid'>
+				<img
+					src='/ornek.jpg'
+					alt='name'
+					style={{ height: '100%', objectFit: 'cover', padding: '1rem 0rem' }}
+				/>
+				<div
+					style={{
+						display: 'flex',
+						flexDirection: 'column',
+						justifyContent: 'space-evenly',
+					}}
+				>
+					<p
+						className='fs-minimal-heading fw-bold'
+						style={{ padding: '0.5rem 0rem 0.7rem' }}
+					>
+						{program.title} Nedir?
+					</p>
+					<p>{program.description}</p>
+					<div
+						style={{
+							display: 'flex',
+							flexDirection: 'row',
+							justifyContent: 'center',
+						}}
+					>
+						<hr
+							style={{
+								width: '100%',
+								alignSelf: 'center',
+								margin: '0rem 1.5rem 0rem 0rem',
+							}}
+						/>
+						<PiBarbell
+							style={{
+								display: 'inline-block',
+								minWidth: '1.5rem',
+								height: '100%',
+							}}
+						/>
+						<hr
+							style={{
+								width: '100%',
+								alignSelf: 'center',
+								margin: '0rem 0rem 0rem 1.5rem',
+							}}
+						/>
+					</div>
+					<p>
+						{i18n.language === 'tr' ? 'Türü' : 'Type'}: {program.type}
+					</p>
+					<p>
+						{i18n.language === 'tr' ? 'Gerekli Ekipman' : 'Needed Equipment'}:{' '}
+						{program.equipment}
+					</p>
+					<p>
+						{i18n.language === 'tr' ? 'Kime Yönelik' : 'For'}: {program.for}
+					</p>
+				</div>
+				<div style={{ textAlign: 'center' }}>
+					<div
+						style={{
+							display: 'flex',
+							flexDirection: 'row',
+							justifyContent: 'center',
+						}}
+					>
+						<hr
+							style={{
+								width: '10%',
+								alignSelf: 'center',
+								margin: '0rem 1.5rem',
+							}}
+						/>
+						<PiBarbell
+							style={{
+								display: 'inline-block',
+								minWidth: '1.5rem',
+								height: '100%',
+							}}
+						/>
+						<hr
+							style={{
+								width: '10%',
+								alignSelf: 'center',
+								margin: '0rem 1.5rem',
+							}}
+						/>
+					</div>
+					<p
+						className='fs-minimal-heading fw-bold'
+						style={{ padding: '0.5rem 0rem 0.7rem' }}
+					>
+						Neden {program.title}?
+					</p>
+					{!program.why ? (
+						<>
+							{program.whyMember}
+							<hr
+								style={{
+									width: '80%',
+									border: 'none',
+									borderTop: '0px solid #ccc',
+									margin: '10px 0',
+								}}
+							/>
+							{program.whyYou}
+						</>
+					) : (
+						<>
+							{program.sum}
+							<hr
+								style={{
+									width: '80%',
+									border: 'none',
+									borderTop: '0px solid #ccc',
+									margin: '10px 0',
+								}}
+							/>
+							{program.why}
+						</>
+					)}
+				</div>
+				<img
+					src='/ornek.jpg'
+					alt='name'
+					style={{ height: '100%', objectFit: 'cover', padding: '1rem 0rem' }}
+				/>
+			</section>
+			<section>
+				<video
+					className='testVid'
+					controls
+					style={{ height: `calc(100dvh - ${navbarHeight1}px)` }}
+				>
+					<source src='' type='video/mp4' />
+					Your browser does not support the video tag.
+				</video>
+			</section>
+			<p
+				className='fs-minimal-heading center-item'
+				style={{
+					display: 'flex',
+					flexDirection: 'column',
+					alignItems: 'center',
+					marginBottom: '3rem',
+				}}
+			>
+				Etkinliklerimizden Birisine Katılarak
+				<p className='fs-secondary-heading fw-bold'>{program.title}</p>
+				Programının Sertifikalı Eğitmeni Olmak İster Misin?
+			</p>
 			<EventList
 				activeProgram={programID}
 				programTitle={program.title}
 				infoActive={false}
 			/>
 			<ul className='class-rec-con'>
-				{recPrograms.map((rec) => {
-					return rec.map((program, index) => (
+				{recPrograms.map((program, index) => {
+					return (
 						<motion.li
 							initial='initial'
 							whileHover='animate'
@@ -124,7 +253,7 @@ function ClassInfo() {
 								</Link>
 							</motion.div>
 						</motion.li>
-					));
+					);
 				})}
 				<li
 					className='bg-primary-300'

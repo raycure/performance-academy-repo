@@ -26,10 +26,10 @@
 .class-info-grid {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
-	grid-row: 2;
+	grid-template-rows: auto auto;
 	margin-inline: auto;
 	width: 65vw;
-	gap: 1rem;
+	gap: 2rem;
 }
 .payment-but-con {
 	display: flex;

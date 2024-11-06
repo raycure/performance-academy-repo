@@ -103,7 +103,6 @@ function Navbar() {
 		i18n.changeLanguage(lng);
 	};
 	const handleLanguageChange = (lng) => {
-		localStorage.setItem('locationFallback', location.state);
 		changeLanguage(lng);
 	};
 	const [windowWidth, setWindowWidth] = useState(0);

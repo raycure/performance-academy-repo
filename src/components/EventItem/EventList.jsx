@@ -5,9 +5,18 @@ import { Link } from 'react-router-dom';
 import Button from '../Button/Button';
 import { useTranslation } from 'react-i18next';
 import { MdArrowBackIosNew, MdArrowForwardIos } from 'react-icons/md';
+import { FaCalendarDays } from 'react-icons/fa6';
+import { FaRegClock } from 'react-icons/fa6';
+import { FiMapPin } from 'react-icons/fi';
+import { FaRegUser } from 'react-icons/fa';
+import { FaMoneyCheck } from 'react-icons/fa6';
+import { TbWorld } from 'react-icons/tb';
+import { GrDocumentPdf } from 'react-icons/gr';
+import { GrDocumentUpdate } from 'react-icons/gr';
 
 function EventList({ activeProgram, programTitle, infoActive }) {
 	const today = new Date();
+	const windowWidth = window.innerWidth;
 	const eventFallback = LesMillsEvents.filter((event) => {
 		const eventDate = new Date(event.date);
 		return event.program === activeProgram && eventDate >= today;
@@ -39,6 +48,11 @@ function EventList({ activeProgram, programTitle, infoActive }) {
 	const pageAmount = Math.ceil(eventItems.length / eventsPerPage);
 	const paginationNumbers = [...Array(pageAmount + 1).keys()].slice(1);
 	const [selectedEvent, setSelectedEvent] = useState(eventFallback);
+	const [fileName, setFileName] = useState(null);
+	const handleFileChange = (event) => {
+		const file = event.target.files[0];
+		setFileName(file ? file.name : null);
+	};
 	const locationClickHandler = () => {
 		window.open(
 			'https://maps.google.com?q=' +
@@ -47,7 +61,7 @@ function EventList({ activeProgram, programTitle, infoActive }) {
 				selectedEvent.location[1],
 			'_blank',
 			'noreferrer'
-		);
+		); //biri latitude biri longtitude ama unuttum hangisi hangisi
 	};
 	function prePage() {
 		if (paginationPageNumber !== 1) {
@@ -73,15 +87,15 @@ function EventList({ activeProgram, programTitle, infoActive }) {
 	if (selectedEvent === null || selectedEvent === undefined) {
 		return <p>Unfortunately theres no event for this program yet.</p>;
 	}
-	console.log(selectedEvent.location);
-
 	return (
-		<div className='event-list-grid'>
-			<section>
+		<section className='event-list-grid'>
+			<div className='event-list'>
 				{paginatedEvents.map((event, index) => {
 					return (
 						<section className='enroll-event-item' key={index}>
-							<p style={{ alignContent: 'center' }}>{programTitle}</p>
+							{windowWidth > 640 && (
+								<p style={{ alignContent: 'center' }}>{programTitle}</p>
+							)}
 							<p style={{ alignContent: 'center' }}>
 								{event.fullStartDate.getDate() +
 									' ' +
@@ -122,18 +136,16 @@ function EventList({ activeProgram, programTitle, infoActive }) {
 										Programı İncele
 									</Link>
 									<Button onClick={() => handleEventSelection(event)}>
-										Etkinliği Seç
+										Seç
 									</Button>
 								</div>
 							) : (
-								<Button onClick={() => handleEventSelection(event)}>
-									Etkinliği Seç
-								</Button>
+								<Button onClick={() => handleEventSelection(event)}>Seç</Button>
 							)}
 						</section>
 					);
 				})}
-				<section
+				<div
 					id='eventInfoPagination'
 					style={{
 						display: 'flex',
@@ -171,36 +183,141 @@ function EventList({ activeProgram, programTitle, infoActive }) {
 					>
 						<MdArrowForwardIos />
 					</button>
-				</section>
-			</section>
-			<section className='bg-primary-300 event-list-card'>
-				<p>{selectedEvent.program}</p>
-				<p></p>
-				<p>
-					{selectedEvent.fullStartDate.getDate() +
-						' ' +
-						selectedEvent.fullStartDate.toLocaleString(i18n.language, {
-							month: 'short',
-						}) +
-						' - ' +
-						selectedEvent.fullStartDate.getDate() +
-						' ' +
-						selectedEvent.fullStartDate.toLocaleString(i18n.language, {
-							month: 'short',
-						})}
+				</div>
+			</div>
+			<form className='bg-primary-300 event-list-card'>
+				<p className='fs-300 text-primary-200'>Etkinlik Bilgileri</p>
+				<p className='fs-700'>{selectedEvent.program}</p>
+				<hr style={{ borderWidth: '2px', marginBottom: '1rem' }} />
+				<div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr' }}>
+					<p className='card-item'>
+						<FaCalendarDays />
+						{' ' +
+							selectedEvent.fullStartDate.getDate() +
+							' ' +
+							selectedEvent.fullStartDate.toLocaleString(i18n.language, {
+								month: 'short',
+							}) +
+							' - ' +
+							selectedEvent.fullStartDate.getDate() +
+							' ' +
+							selectedEvent.fullStartDate.toLocaleString(i18n.language, {
+								month: 'short',
+							})}
+					</p>
+					{selectedEvent.time && (
+						<p className='card-item'>
+							<FaRegClock /> {selectedEvent.time}
+						</p>
+					)}
+				</div>
+				{selectedEvent.instructor && (
+					<p className='card-item'>
+						<FaRegUser /> {selectedEvent.instructor} İle!
+					</p>
+				)}
+				<p className='card-item'>
+					<TbWorld />
+					{selectedEvent.online ? 'Çevrim İçi ' : 'Yüz Yüze '}
+					Dersler
 				</p>
 				{selectedEvent.location && (
-					<Link onClick={() => locationClickHandler()}>
-						{selectedEvent.location}
-					</Link>
+					<p className='card-item'>
+						<FiMapPin />
+						<Link
+							style={{ textDecoration: 'underline' }}
+							onClick={() => locationClickHandler()}
+						>
+							{' ' + selectedEvent.location}
+						</Link>
+					</p>
 				)}
-				{selectedEvent.time && <p>{selectedEvent.time}</p>}
-				<p>
-					<b style={{ fontWeight: 'bolder' }}>Fiyat:</b> ${selectedEvent.price}
+				<p className='card-item'>
+					<FaMoneyCheck /> Only ${selectedEvent.price}!
 				</p>
-				<Button>Etkinliğe Katıl!</Button>
-			</section>
-		</div>
+				<div
+					className='center-item'
+					style={{
+						display: 'flex',
+						flexDirection: 'column',
+						alignItems: 'center',
+						marginTop: 'auto',
+					}}
+				>
+					<Link style={{ textDecoration: 'underline' }}>
+						Eğitmen Sözleşmesi İçin Tıklayınız{' '}
+						<GrDocumentPdf
+							style={{
+								display: 'inline-block',
+								position: 'relative',
+								top: '2px',
+							}}
+						/>
+					</Link>
+
+					<p className='fs-400 text-primary-100'>
+						Doldurduğunuz sözleşmeyi buraya yükleyiniz:
+					</p>
+					<input
+						type='file'
+						name='file'
+						id='file'
+						class='inputfile'
+						onChange={handleFileChange}
+						required
+					/>
+					<label htmlFor='file'>
+						<p>
+							<GrDocumentUpdate
+								style={{
+									display: 'inline-block',
+									marginRight: '0.5rem',
+									position: 'relative',
+									top: '2px',
+								}}
+							/>
+							{fileName === null ? 'Choose a File...' : fileName}
+						</p>
+					</label>
+				</div>
+				<div
+					style={{
+						justifyContent: 'center',
+						display: 'flex',
+						flexDirection: 'column',
+					}}
+				>
+					<div>
+						<input
+							type='checkbox'
+							id='acknowledgeCheckbox'
+							name='acknowledgeCheckbox'
+							required
+						/>
+						<label
+							className='fs-300 text-primary-200'
+							htmlFor='acknowledgeCheckbox'
+						>
+							{' '}
+							I agree to the terms and conditions and the privacy policy
+						</label>
+					</div>
+					<Button disabled={fileName === null ? true : false}>
+						Etkinliğe Katıl!
+					</Button>
+				</div>
+			</form>
+			{windowWidth <= 1200 && windowWidth > 720 && (
+				<img
+					style={{
+						objectFit: 'cover',
+						minHeight: '80%',
+						alignSelf: 'center',
+					}}
+					src='/ornek.jpg'
+				/>
+			)}
+		</section>
 	);
 }
 export default EventList;

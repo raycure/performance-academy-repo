@@ -24,6 +24,7 @@
 // 	online: true,
 // 	time: iunno,
 //	location: [40.7719881790364,-74.07145598632484],
+//  instructor: ""
 // }
 function assignUniqueIds(events) {
 	return events.map((event, index) => ({
@@ -93,6 +94,7 @@ export const LesMillsEvents = assignUniqueIds([
 		color: '#d4006a',
 		online: true,
 		location: [40.7719881790364, -74.07145598632484],
+		time: '3.00-17.00',
 		program: 'BODYSTEP',
 	},
 	{
@@ -101,6 +103,8 @@ export const LesMillsEvents = assignUniqueIds([
 		color: '#d4006a',
 		online: true,
 		location: [40.7719881790364, -74.07145598632484],
+
+		time: '3.00-17.00',
 		program: 'BORN-TO-MOVE',
 	},
 	{
@@ -109,6 +113,8 @@ export const LesMillsEvents = assignUniqueIds([
 		color: '#d4006a',
 		online: true,
 		location: [40.7719881790364, -74.07145598632484],
+		instructor: 'cengiz cumur',
+		time: '3.00-17.00',
 		program: 'LES-MILLS-GRIT',
 	},
 	{
@@ -149,6 +155,8 @@ export const LesMillsEvents = assignUniqueIds([
 		color: '#d4006a',
 		program: 'BODYSTEP',
 		location: [40.7719881790364, -74.07145598632484],
+		instructor: 'cengiz cumur',
+		time: '3.00-17.00',
 		online: true,
 	},
 	{
@@ -157,6 +165,8 @@ export const LesMillsEvents = assignUniqueIds([
 		color: '#d4006a',
 		program: 'BODYSTEP',
 		location: [40.7719881790364, -74.07145598632484],
+		instructor: 'cengiz cumur',
+		time: '3.00-17.00',
 		online: true,
 	},
 	{
@@ -165,6 +175,8 @@ export const LesMillsEvents = assignUniqueIds([
 
 		program: 'BODYSTEP',
 		location: [40.7719881790364, -74.07145598632484],
+		instructor: 'cengiz cumur',
+		time: '3.00-17.00',
 		online: false,
 	},
 	{
@@ -172,6 +184,8 @@ export const LesMillsEvents = assignUniqueIds([
 		date: '2024-11-30',
 		color: '#d4006a',
 		location: [40.7719881790364, -74.07145598632484],
+		instructor: 'cengiz cumur',
+		time: '3.00-17.00',
 		program: 'BODYSTEP',
 		online: true,
 	},
@@ -180,6 +194,8 @@ export const LesMillsEvents = assignUniqueIds([
 		date: '2024-11-31',
 		color: '#d4006a',
 		location: [40.7719881790364, -74.07145598632484],
+		instructor: 'cengiz cumur',
+		time: '3.00-17.00',
 		program: 'BODYSTEP',
 		online: true,
 	},
@@ -188,6 +204,8 @@ export const LesMillsEvents = assignUniqueIds([
 		date: '2024-12-05',
 		color: '#d4006a',
 		location: [40.7719881790364, -74.07145598632484],
+		instructor: 'cengiz cumur',
+		time: '3.00-17.00',
 		program: 'BODYSTEP',
 		online: false,
 	},
@@ -196,6 +214,7 @@ export const LesMillsEvents = assignUniqueIds([
 		date: '2024-10-26',
 
 		location: [40.7719881790364, -74.07145598632484],
+		instructor: 'cengiz cumur',
 		program: 'BODYSTEP',
 		online: true,
 	},
