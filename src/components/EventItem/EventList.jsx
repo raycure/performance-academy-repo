@@ -21,7 +21,10 @@ function EventList({ activeProgram, programTitle, infoActive }) {
 		const eventDate = new Date(event.date);
 		return event.program === activeProgram && eventDate >= today;
 	}).slice(0, 1)[0];
-
+	const [acknowledgementChecked, setAcknowledgementChecked] = useState(false);
+	const checkHandler = () => {
+		setAcknowledgementChecked(!acknowledgementChecked);
+	};
 	const { t, i18n } = useTranslation();
 	useEffect(() => {
 		const animatedElements = document.querySelectorAll('.addLineAnimation');
@@ -292,6 +295,8 @@ function EventList({ activeProgram, programTitle, infoActive }) {
 							type='checkbox'
 							id='acknowledgeCheckbox'
 							name='acknowledgeCheckbox'
+							checked={acknowledgementChecked}
+							onChange={checkHandler}
 							required
 						/>
 						<label
@@ -302,7 +307,11 @@ function EventList({ activeProgram, programTitle, infoActive }) {
 							I agree to the terms and conditions and the privacy policy
 						</label>
 					</div>
-					<Button disabled={fileName === null ? true : false}>
+					<Button
+						disabled={
+							fileName === null || !acknowledgementChecked ? true : false
+						}
+					>
 						Etkinliğe Katıl!
 					</Button>
 				</div>

@@ -203,7 +203,7 @@ function ClassInfo() {
 				}}
 			>
 				Etkinliklerimizden Birisine Katılarak
-				<p className='fs-secondary-heading fw-bold'>{program.title}</p>
+				<b className='fs-secondary-heading fw-bold'>{program.title}</b>
 				Programının Sertifikalı Eğitmeni Olmak İster Misin?
 			</p>
 			<EventList

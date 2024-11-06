@@ -12,10 +12,10 @@ function ClassList({ classType }) {
 	const lesMillsPrograms = LesmillsPrograms();
 	const windowWidth = window.innerWidth;
 	const classes = Object.keys(lesMillsPrograms).map((category) => {
+		const { t, i18n } = useTranslation();
 		if (category !== classType && classType !== 'all') {
 			return;
 		}
-		const { t, i18n } = useTranslation();
 		return lesMillsPrograms[category].map((program, subIndex) => {
 			return (
 				<>

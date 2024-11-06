@@ -14,7 +14,6 @@ function Classes() {
 	);
 	function classSelectHandler(newClassType) {
 		setClassType(newClassType);
-		console.log('type', classType);
 	}
 	const windowWidth = window.innerWidth;
 	const programNames = [
