@@ -63,7 +63,7 @@ function Login() {
 
 	return (
 		<>
-			{/* {success ? (
+			{/* {success ? ( //todo decide what to do
 				<section>
 					<h1>You are logged in!</h1>
 					<br />
@@ -108,13 +108,6 @@ function Login() {
 
 					<div className='authentication-button-container'>
 						<Button isLoading={localLoading || isLoading}> Giriş Yapın</Button>
-						<p
-							ref={errRef}
-							className={errMsg ? 'errmsg' : 'errmsg'} // todo wth
-							aria-live='assertive'
-						>
-							{errMsg}
-						</p>
 						<Link to='/register' className='fs-400'>
 							Bir hesabınız yok mu? <br />
 							Buradan kaydolun!

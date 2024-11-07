@@ -3,7 +3,7 @@ import axios from '../../pages/api/axios.js';
 
 const initialState = {
 	current: {},
-	isLoggedIn: false, //todo drop the local storage way and use redux its necessary for roles and security
+	isLoggedIn: false,
 	status: 'idle',
 	isLoading: false,
 	isSuccess: false,

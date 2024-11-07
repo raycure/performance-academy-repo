@@ -38,9 +38,12 @@
 	display: grid;
 	grid-template-columns: 1fr 0.4fr;
 	max-width: 1000px;
-	margin-inline: 18rem;
+	margin-inline: auto;
 	border-radius: 5px;
 	overflow: hidden;
+	--max-width: 1110px;
+	--container-padding: 1rem;
+	width: min(var(--max-width), 100% - (var(--container-padding) * 2));
 }
 .authentication-greeting-container {
 	display: flex;
@@ -66,71 +69,26 @@
 	opacity: 0.4;
 }
 @media (max-width: 1306px) {
-	.authentication-form-container {
-		margin-inline: 16rem;
-	}
-	.authentication-form {
-		padding: 2rem 3rem;
-	}
-	.authentication-form-container {
-		margin-inline: 16rem;
-	}
 	.authentication-form {
 		padding: 2rem 3rem;
 	}
 }
 @media (max-width: 1210px) {
-	.authentication-form-container {
-		margin-inline: 12rem;
-	}
-	.authentication-form {
-		padding: 2rem 2rem;
-	}
-	.authentication-form-container {
-		margin-inline: 12rem;
-	}
 	.authentication-form {
 		padding: 2rem 2rem;
 	}
 }
 @media (max-width: 1024px) {
-	.authentication-form-container {
-		grid-template-columns: 1fr;
-	}
-	.authentication-form {
-		padding: 4rem;
-	}
-	.authentication-form-container {
-		grid-template-columns: 1fr;
-	}
 	.authentication-form {
 		padding: 4rem;
 	}
 }
 @media (max-width: 780px) {
-	.authentication-form-container {
-		margin-inline: 6rem;
-	}
-	.authentication-form {
-		padding: 4rem;
-	}
-	.authentication-form-container {
-		margin-inline: 6rem;
-	}
 	.authentication-form {
 		padding: 4rem;
 	}
 }
 @media (max-width: 600px) {
-	.authentication-form-container {
-		margin-inline: 0;
-	}
-	.authentication-form {
-		padding: 3rem;
-	}
-	.authentication-form-container {
-		margin-inline: 0;
-	}
 	.authentication-form {
 		padding: 3rem;
 	}

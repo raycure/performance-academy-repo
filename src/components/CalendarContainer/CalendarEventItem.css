@@ -11,3 +11,9 @@
 	width: fit-content;
 	justify-self: center;
 }
+.class-logo {
+	width: 100%;
+	max-height: 50px;
+	height: auto;
+	margin-bottom: 0.6rem;
+}

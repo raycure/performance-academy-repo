@@ -1,0 +1,16 @@
+.cookiesBanner {
+	width: 100%;
+	padding: 2rem 4rem;
+	z-index: 99999;
+	position: fixed;
+	bottom: 0;
+	background-color: gray;
+	display: flex;
+	align-items: center;
+}
+
+.cookiesButton {
+	padding: 1rem 2rem;
+	background-color: red;
+	border-radius: 10px;
+}

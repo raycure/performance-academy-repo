@@ -32,7 +32,7 @@ function FAQ() {
 			);
 		});
 	return (
-		<div className='faq-outer-container text-container bottom-space'>
+		<div className='faq-outer-container text-container'>
 			<div>
 				{windowWidth <= 1100 && (
 					<motion.p

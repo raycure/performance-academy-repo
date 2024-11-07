@@ -5,7 +5,6 @@
 	margin: 0px, 3rem;
 }
 .fc .fc-bg-event {
-	background: var(--clr-accent-600);
 	opacity: 100;
 	display: flex;
 	margin: 0.7rem;
@@ -35,10 +34,11 @@
 	border-width: 0px !important;
 }
 
-.fc-day-today {
-	background: #e4ca0700 !important; /* todays color we can make it transparent and stuff if u awnt */
-	border: 3px solid var(--clr-accent-400) !important;
+.fc .fc-day-today {
+	background: #191917 !important; /* todays color we can make it transparent and stuff if u want */
+	border-radius: 8px;
 }
+
 .fc .fc-daygrid-day-top {
 	display: flex;
 	justify-content: center;

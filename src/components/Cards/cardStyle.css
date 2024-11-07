@@ -58,8 +58,3 @@
 .card-inner-container hr:where(:last-child) {
 	display: none;
 }
-.cardContent > div {
-	width: 100%;
-}
-
-/* added to prevent overflow and prevent issues width container width remove later */

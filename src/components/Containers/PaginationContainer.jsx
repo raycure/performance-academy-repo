@@ -78,7 +78,7 @@ function PaginationContainer() {
 					);
 				})}
 			</motion.div>
-			<div className='event-pagination-container bottom-space'>
+			<div className='event-pagination-container'>
 				<button
 					className={`event-pagination-item ${
 						paginationPageNumber === 1 && 'display-hidden'

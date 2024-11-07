@@ -22,7 +22,7 @@ const login = async (req, res) => {
 			success: false,
 			result: null,
 			error: error,
-			message: 'Invalid/Missing credentials.',
+			message: 'email format is incorrect',
 		});
 	}
 
