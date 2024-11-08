@@ -4,7 +4,7 @@
 		"Main": "Ana Sayfa",
 		"Programs": "Programlar",
 		"Events": "Etkinlikler",
-		"MyCourses": "Kurslarım",
+		"MyPrograms": "Programlarım",
 		"Contact": "İletişim"
 	},
 	"MainPage": {
@@ -15,5 +15,10 @@
 		"FAQ": "Sık Sorulan Sorular",
 		"Privacy": "Kişisel Verilerin Korunması",
 		"Cookies": "Çerezler"
+	},
+	"PageNotFound": {
+		"Heading": "Sayfa Bulunamadı",
+		"Text": "Maalesef aradığınız sayfayı bulamadık.",
+		"Button": "Ana Sayfaya Geri Dön"
 	}
 }

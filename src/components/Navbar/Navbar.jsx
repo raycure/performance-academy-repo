@@ -90,8 +90,8 @@ function Navbar() {
 			label: t('Navbar.Events'),
 		},
 		{
-			path: '/kurslarım',
-			label: t('Navbar.MyCourses'),
+			path: '/programlarım',
+			label: t('Navbar.MyPrograms'),
 		},
 		{
 			path: '/iletişim',

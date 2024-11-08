@@ -4,7 +4,7 @@
 		"Main": "Main Page",
 		"Programs": "Programs",
 		"Events": "Events",
-		"MyCourses": "My Courses",
+		"MyPrograms": "My Programs",
 		"Contact": "Contact"
 	},
 	"MainPage": {
@@ -15,5 +15,10 @@
 		"FAQ": "Frequently Asked Questions",
 		"Privacy": "Privacy Policy",
 		"Cookies": "Cookie Policy"
+	},
+	"PageNotFound": {
+		"Heading": "Page Not Found",
+		"Text": "Sorry, we couldn't find the page you're looking for.",
+		"Button": "Go Back To Home Page"
 	}
 }

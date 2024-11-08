@@ -62,13 +62,14 @@ import Main from './pages/Main/Main';
 const Layout = lazy(() => import('./pages/Layout/Layout'));
 const Events = lazy(() => import('./pages/Events/Events'));
 const Contact = lazy(() => import('./pages/Contact/Contact'));
-const NoPage = lazy(() => import('./pages/NoPage/NoPage'));
+const PageNotFound = lazy(() => import('./pages/PageNotFound/PageNotFound'));
 const Register = lazy(() => import('./pages/Register-Login/Register'));
 const Login = lazy(() => import('./pages/Register-Login/Login'));
 const Cookies = lazy(() => import('./pages/Legal/Cookies'));
 const PrivacyPolicy = lazy(() => import('./pages/Legal/PrivacyPolicy'));
 const ClassInfo = lazy(() => import('./pages/ClassInfo/ClassInfo'));
 const Classes = lazy(() => import('./pages/Classes/Classes'));
+const MyPrograms = lazy(() => import('./pages/MyPrograms/MyPrograms'));
 
 function App() {
 	return (
@@ -84,13 +85,14 @@ function App() {
 							<Route path='register' element={<Register />} />
 							<Route path='login' element={<Login />} />
 							<Route path='program' element={<ClassInfo />} />
+							<Route path='programlarım' element={<MyPrograms />} />
 							<Route path='çerezler' element={<Cookies />} />
 							<Route
 								path='kişisel-verilerin-korunması'
 								element={<PrivacyPolicy />}
 							/>
-							<Route path='*' element={<NoPage />} />
 						</Route>
+						<Route path='/*' element={<PageNotFound />} />
 					</Routes>
 				</BrowserRouter>
 			</Suspense>
