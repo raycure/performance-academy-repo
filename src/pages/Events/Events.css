@@ -23,11 +23,6 @@
 	display: flex;
 	justify-content: center;
 }
-.dark-background {
-	width: 100%;
-	padding: 3rem 0;
-	background-color: var(--clr-primary-500);
-}
 
 @media (max-width: 1350px) {
 	.calendar-container {

@@ -20,9 +20,7 @@ function Events() {
 					style={{ position: 'relative', alignSelf: 'center', height: '50%' }}
 				/>
 			</div>
-			<div className='dark-background'>
-				<CalendarContainer />
-			</div>
+			<CalendarContainer />
 			{/* <PaginationContainer /> */}
 		</>
 	);

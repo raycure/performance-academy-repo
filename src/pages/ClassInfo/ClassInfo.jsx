@@ -14,6 +14,7 @@ import { PiBarbell } from 'react-icons/pi';
 function ClassInfo() {
 	const { t, i18n } = useTranslation('translation');
 	const location = useLocation();
+	// this is the one i need from redux
 	const programID = 'BODYSTEP';
 	//location.state?.program;
 	const program = Object.keys(LesmillsPrograms())
