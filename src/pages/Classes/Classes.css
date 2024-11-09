@@ -104,3 +104,8 @@
 	display: flex;
 	justify-content: center;
 }
+@media (max-width: 770px) {
+	.class-selector-bar {
+		font-size: var(--fs-300);
+	}
+}

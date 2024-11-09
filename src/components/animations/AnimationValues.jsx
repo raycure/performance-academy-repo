@@ -173,15 +173,6 @@ const rightToLeft = {
 		},
 	},
 };
-const upwardFill = {
-	initial: { opacity: 1 },
-	animate: {
-		height: '100%',
-		transition: {
-			duration: 0.5,
-		},
-	},
-};
 
 export {
 	downToUp,
@@ -196,5 +187,4 @@ export {
 	backgroundFill,
 	descending,
 	rightToLeft,
-	upwardFill,
 };

@@ -12,7 +12,6 @@ import { useTranslation } from 'react-i18next';
 function FAQ() {
 	const { t, i18n } = useTranslation('faqQuestions');
 	const faqQuestions = FaqQuestions();
-	const windowWidth = window.innerWidth;
 	const [activeQuestionTitle, setActiveQuestionTitle] = useState(null);
 	const activeResponse = faqQuestions
 		.filter((item) => {
@@ -34,7 +33,7 @@ function FAQ() {
 	return (
 		<div className='faq-outer-container text-container bottom-space'>
 			<div>
-				{windowWidth <= 1100 && (
+				<div className='below1100'>
 					<motion.p
 						variants={leftToRight}
 						initial='hidden'
@@ -44,7 +43,7 @@ function FAQ() {
 					>
 						{t('title')}
 					</motion.p>
-				)}
+				</div>
 				{faqQuestions.map((item, index) => {
 					return (
 						<motion.div
@@ -62,16 +61,16 @@ function FAQ() {
 								onClick={() => setActiveQuestionTitle(item.title)}
 							>
 								<FAQItem>{item.title}</FAQItem>
-								{windowWidth <= 1100 &&
-									activeQuestionTitle === item.title &&
-									activeResponse}
+								<p className='below1100'>
+									{activeQuestionTitle === item.title && activeResponse}
+								</p>
 							</div>
 						</motion.div>
 					);
 				})}
 			</div>
-			<div>
-				{windowWidth > 1100 && activeQuestionTitle === null && (
+			<div className='above1100'>
+				{activeQuestionTitle === null && (
 					<motion.p
 						variants={leftToRight}
 						initial='hidden'
@@ -82,7 +81,7 @@ function FAQ() {
 						{t('title')}
 					</motion.p>
 				)}
-				{windowWidth > 1100 && activeResponse}
+				{activeResponse}
 			</div>
 		</div>
 	);

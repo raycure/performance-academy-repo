@@ -6,7 +6,6 @@ import { motion } from 'framer-motion';
 
 function ContactForm() {
 	const contactForm = useRef();
-	const windowWidth = window.innerWidth;
 	return (
 		<div className='contact-form relative-position ' id='contact-form-grad'>
 			<img
@@ -15,30 +14,28 @@ function ContactForm() {
 				className='background-image contact-form-background'
 			/>
 			<div className='container even-columns'>
-				{windowWidth >= 535 && (
-					<div style={{ width: 'fit-content' }}>
-						<p className='contact-form-header fs-secondary-heading text-container'>
-							Aradığınızı Bulamadınız Mı?
-						</p>
-						<p className='contact-form-header fs-secondary-heading text-container '>
-							Bize Erişin!
-						</p>
-					</div>
-				)}
+				<div id='above535' style={{ width: 'fit-content' }}>
+					<p className='contact-form-header fs-secondary-heading text-container'>
+						Aradığınızı Bulamadınız Mı?
+					</p>
+					<p className='contact-form-header fs-secondary-heading text-container '>
+						Bize Erişin!
+					</p>
+				</div>
+
 				<div
 					ref={contactForm}
 					className='contact-form-outer-container box-shadow'
 				>
-					{windowWidth < 535 && (
-						<div>
-							<p className='contact-form-header fs-secondary-heading text-container'>
-								Aradığınızı Bulamadınız Mı?
-							</p>
-							<p className='contact-form-header fs-900 text-container'>
-								Bize Erişin!
-							</p>
-						</div>
-					)}
+					<div id='below535'>
+						<p className='contact-form-header fs-secondary-heading text-container'>
+							Aradığınızı Bulamadınız Mı?
+						</p>
+						<p className='contact-form-header fs-900 text-container'>
+							Bize Erişin!
+						</p>
+					</div>
+
 					<div className='contact-name-input-container'>
 						<div className='centerLineAnimation'>
 							<input placeholder='Adınız' type='text' />

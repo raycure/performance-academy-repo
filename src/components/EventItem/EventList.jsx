@@ -16,7 +16,6 @@ import { GrDocumentUpdate } from 'react-icons/gr';
 
 function EventList({ activeProgram, programTitle, infoActive }) {
 	const today = new Date();
-	const windowWidth = window.innerWidth;
 	const eventFallback = LesMillsEvents.filter((event) => {
 		const eventDate = new Date(event.date);
 		return event.program === activeProgram && eventDate >= today;
@@ -96,9 +95,10 @@ function EventList({ activeProgram, programTitle, infoActive }) {
 				{paginatedEvents.map((event, index) => {
 					return (
 						<section className='enroll-event-item' key={index}>
-							{windowWidth > 640 && (
-								<p style={{ alignContent: 'center' }}>{programTitle}</p>
-							)}
+							<p className='display-none' style={{ alignContent: 'center' }}>
+								{programTitle}
+							</p>
+
 							<p style={{ alignContent: 'center' }}>
 								{event.fullStartDate.getDate() +
 									' ' +
@@ -316,16 +316,15 @@ function EventList({ activeProgram, programTitle, infoActive }) {
 					</Button>
 				</div>
 			</form>
-			{windowWidth <= 1200 && windowWidth > 720 && (
-				<img
-					style={{
-						objectFit: 'cover',
-						minHeight: '80%',
-						alignSelf: 'center',
-					}}
-					src='/ornek.jpg'
-				/>
-			)}
+
+			<img
+				style={{
+					objectFit: 'cover',
+					minHeight: '80%',
+					alignSelf: 'center',
+				}}
+				src='/ornek.jpg'
+			/>
 		</section>
 	);
 }

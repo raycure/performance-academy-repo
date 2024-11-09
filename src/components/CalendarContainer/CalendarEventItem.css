@@ -11,3 +11,8 @@
 	width: fit-content;
 	justify-self: center;
 }
+@media (max-width: 1160px) {
+	.upcoming-events-container .fs-700 {
+		font-size: var(--fs-650);
+	}
+}

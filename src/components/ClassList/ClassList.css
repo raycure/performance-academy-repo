@@ -4,6 +4,9 @@
 	overflow: hidden;
 	padding: 1rem;
 	position: relative;
+	display: grid;
+	grid-template-columns: auto auto;
+	gap: 1rem;
 }
 .classes-more-info-container {
 	display: flex;
@@ -21,7 +24,6 @@
 .class-img {
 	max-height: 400px;
 	height: 40vh;
-	float: left !important;
 	margin-right: 1rem;
 	object-fit: cover;
 }
@@ -48,6 +50,12 @@
 	}
 	.class-item-container {
 		width: 85%;
+		font-size: var(--fs-400);
+	}
+}
+@media (max-width: 1130px) {
+	.classes-more-info-container {
+		font-size: var(--fs-300);
 	}
 }
 @media (max-width: 990px) {
@@ -68,9 +76,7 @@
 		background-color: var(--clr-primary-300);
 	}
 	.class-img {
-		width: 40vh;
-		height: 40vh;
-		margin: 1rem 1rem 1rem 0;
+		display: none;
 	}
 }
 @media (max-width: 660px) {
@@ -80,7 +86,6 @@
 	.class-img {
 		width: 50vh;
 		max-width: 100%;
-		float: none !important;
 		margin: 1rem auto;
 	}
 }

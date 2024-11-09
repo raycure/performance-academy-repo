@@ -78,7 +78,9 @@
 .event-list-card .inputfile + label {
 	cursor: pointer; /* "hand" cursor */
 }
-
+.event-list-grid img {
+	display: none;
+}
 @media (max-width: 1200px) {
 	.event-list-grid {
 		grid-template-columns: auto auto;
@@ -91,6 +93,9 @@
 	.event-list {
 		grid-column: 1/3;
 	}
+	.event-list-grid img {
+		display: block;
+	}
 }
 @media (max-width: 720px) {
 	.event-list-grid {
@@ -99,6 +104,14 @@
 	}
 	.event-list-card {
 		justify-self: center;
+	}
+	.event-list-grid img {
+		display: none;
+	}
+}
+@media (max-width: 640px) {
+	.enroll-event-item .display-none {
+		display: none;
 	}
 }
 @media (max-width: 430px) {

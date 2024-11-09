@@ -53,3 +53,17 @@
 .class-rec-con a:hover {
 	opacity: 0.7;
 }
+.rec-program-info {
+	height: 3rem;
+	transition: 0.6s ease-out;
+}
+.class-rec-item:hover .rec-program-info {
+	height: 100%;
+}
+.rec-program-sum {
+	transition: 0.4s;
+	opacity: 0;
+}
+.class-rec-item:hover .rec-program-sum {
+	opacity: 1;
+}

@@ -11,9 +11,7 @@ function UpcomingEvents() {
 	const eventAmount = windowWidth > 1200 ? 2 : 1;
 	return (
 		<div className='upcoming-events-container	upcoming-events'>
-			<p className={windowWidth > 1160 ? 'fs-700' : 'fs-650'}>
-				Yaklaşan Etkinlikler
-			</p>
+			<p className='fs-700'>Yaklaşan Etkinlikler</p>
 			{allEvents //eger event tıklanmadıysa yaklasan etkinlikleri gostereck
 				.filter((event) => {
 					const eventDate = new Date(event.date);

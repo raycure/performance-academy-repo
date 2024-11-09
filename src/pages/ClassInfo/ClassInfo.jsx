@@ -3,11 +3,6 @@ import name from '/ornek.jpg';
 import { Link, useLocation } from 'react-router-dom';
 import './ClassInfo.css';
 import LesmillsPrograms from '../../assets/LesmillsPrograms';
-import { motion } from 'framer-motion';
-import {
-	upwardFill,
-	accordion,
-} from '../../components/animations/AnimationValues.jsx';
 import { useTranslation } from 'react-i18next';
 import EventList from '../../components/EventItem/EventList.jsx';
 import { PiBarbell } from 'react-icons/pi';
@@ -214,45 +209,36 @@ function ClassInfo() {
 			<ul className='class-rec-con'>
 				{recPrograms.map((program, index) => {
 					return (
-						<motion.li
-							initial='initial'
-							whileHover='animate'
-							key={index}
-							className='class-rec-item relative-position'
-						>
+						<li key={index} className='class-rec-item relative-position'>
 							<img
 								src={name}
 								alt={`rec-picture-${program.title}`}
 								className='background-image'
 							/>
-							<motion.div
-								variants={upwardFill}
+							<div
 								style={{ padding: '0.5rem' }}
-								className='bg-primary-500 bg-primary-trnsp'
+								className='bg-primary-trnsp rec-program-info'
 							>
 								<p className='fw-bold'>{program.title}</p>
-								<motion.p
-									variants={accordion}
-									className='fs-400 text-neutral-100'
-								>
-									{program.sum}
-								</motion.p>
-								<Link
-									to={`/program#${program.id}`}
-									state={{ program: program.id }}
-									className='fs-400 text-neutral-100'
-									onClick={() => {
-										window.scrollTo({
-											top: 0,
-											left: 0,
-											behavior: 'instant',
-										});
-									}}
-								>
-									İncele
-								</Link>
-							</motion.div>
-						</motion.li>
+								<div className='rec-program-sum'>
+									<p className='fs-300 text-neutral-100'>{program.sum}</p>
+									<Link
+										to={`/program#${program.id}`}
+										state={{ program: program.id }}
+										className='fs-400 text-neutral-100'
+										onClick={() => {
+											window.scrollTo({
+												top: 0,
+												left: 0,
+												behavior: 'instant',
+											});
+										}}
+									>
+										İncele
+									</Link>
+								</div>
+							</div>
+						</li>
 					);
 				})}
 				<li
