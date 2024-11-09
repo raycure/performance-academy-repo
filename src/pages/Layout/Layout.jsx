@@ -6,6 +6,7 @@ import { RiArrowUpSLine } from 'react-icons/ri';
 import { HashLink } from 'react-router-hash-link';
 import { useLocation } from 'react-router-dom';
 import { useLayoutEffect } from 'react';
+import CookieConsent from '../Legal/Cookies.jsx';
 import CustomNotification from '../../components/Notification/Notification.jsx';
 
 //import SmoothScrollContainer from '../../components/Containers/SmoothScrollContainer';
@@ -29,6 +30,7 @@ function Layout() {
 			<CustomNotification />
 			<Outlet />
 			<Footer />
+			<CookieConsent />
 			<HashLink
 				aria-label='return top arrow'
 				className='to-top-arrow'

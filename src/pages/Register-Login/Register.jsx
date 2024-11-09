@@ -1,28 +1,25 @@
 import React from 'react';
 import { useEffect, useRef, useState } from 'react';
-import { Link, Navigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Button from '../../components/Button/Button.jsx';
 import './registerStyle.css';
 import { register } from '../../auth/auth.service.js';
 import { useDispatch, useSelector } from 'react-redux';
 import AuthenticationGreet from './AuthenticationGreet.jsx';
-import {
-	faCheck,
-	faTimes,
-	faInfoCircle,
-} from '@fortawesome/free-solid-svg-icons';
+import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import logo from '../../assets/LesmillsLogo.png';
 import { useNavigate } from 'react-router-dom';
 import { selectError } from '../../redux/auth/authStateSlice.js';
 import { motion } from 'framer-motion';
 import { descending } from '../../components/animations/AnimationValues.jsx';
-
+import { selectIsLoading } from '../../redux/auth/authStateSlice.js';
 import './formStyle.css';
 
-const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
-
 function RegisterForm() {
+	let isLoading = useSelector(selectIsLoading); //for button to be in the loading state
+	const [localLoading, setLocalLoading] = useState(false); // the button needs to be in isLoading stage before the api request is pending so the user sees loading state as soon as submitting
+
 	const usernameValidationRules = [
 		{
 			test: (username) => !/^[a-zA-Z]/.test(username),
@@ -105,12 +102,12 @@ function RegisterForm() {
 	}, [username, pwd, matchPwd]);
 
 	function displayNotif() {
-		const myObject = {
+		const verifyNotif = {
 			type: 'info',
 			duration: 5000,
 			message: 'Verify Mail sent',
 		};
-		localStorage.setItem('Notifexp', JSON.stringify(myObject));
+		localStorage.setItem('Notifexp', JSON.stringify(verifyNotif));
 		const notificationEvent = new Event('notificationEvent');
 		window.dispatchEvent(notificationEvent);
 	}
@@ -128,8 +125,10 @@ function RegisterForm() {
 			const registerData = { username: username, password: pwd, email: mail };
 			const response = await dispatch(register({ registerData }));
 			setUsername('');
+			setLocalLoading(true);
 			setPwd('');
 			setMatchPwd('');
+			console.log(response);
 			const isLoggedIn = response ? true : false; //todo change it to user roles and stuff
 			const accessToken = response.payload.accessToken;
 			localStorage.setItem('isLoggedIn', isLoggedIn);
@@ -150,7 +149,7 @@ function RegisterForm() {
 		}
 	}
 	return (
-		<div className='authentication-form-container box-shadow bottom-space'>
+		<div className='authentication-form-container box-shadow'>
 			<form onSubmit={handleSubmit} className='authentication-form'>
 				<img alt='logo' className='logo' src={logo}></img>
 				<p
@@ -293,6 +292,7 @@ function RegisterForm() {
 					<Button
 						disabled={!validName || !validPwd || !validMatch ? true : false}
 						type='submit'
+						isLoading={isLoading || localLoading}
 					>
 						Kaydol
 					</Button>

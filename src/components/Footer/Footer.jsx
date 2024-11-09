@@ -133,7 +133,7 @@ function Footer() {
 						{t('Footer.FAQ')}
 					</HashLink>
 					<HashLink
-						className='addLineAnimation test1'
+						className='addLineAnimation'
 						to='/kişisel-verilerin-korunması#top'
 					>
 						{t('Footer.Privacy')}

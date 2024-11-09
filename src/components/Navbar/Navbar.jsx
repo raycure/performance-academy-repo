@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useLayoutEffect } from 'react';
 import './Navbar.css';
-import { Link, NavLink, useNavigate } from 'react-router-dom'; //u cant style the links directly
-import { FaCookie, FaUser } from 'react-icons/fa6';
+import { Link, NavLink } from 'react-router-dom'; //u cant style the links directly
+import { FaUser } from 'react-icons/fa6';
 import Button from '../Button/Button';
-import logo from '../../assets/LesmillsLogo.png';
+import logo from '../../assets/PFALogo.png';
 import { HiOutlineMenuAlt3 } from 'react-icons/hi';
 import { GrLanguage } from 'react-icons/gr';
 import { FiX } from 'react-icons/fi';
@@ -14,7 +14,6 @@ import { FaLinkedinIn } from 'react-icons/fa6';
 import { FaFacebookF } from 'react-icons/fa6';
 import { FaPinterestP } from 'react-icons/fa6';
 import { motion } from 'framer-motion';
-import Cookies from 'js-cookie';
 import {
 	rightToLeft,
 	socialSlide,
@@ -143,7 +142,7 @@ function Navbar() {
 		<div className='navigation-outer-container user-select-none' id='navbar'>
 			<nav className='nav-container nav-inner-container'>
 				<Link to='/' aria-label='logo' style={{ display: 'contents' }}>
-					<img alt='beep' className='logo' src={logo}></img>
+					<img alt='LessMills logo' className='pfa-logo' src={logo}></img>
 				</Link>
 				<ul className='nav-list-container nav-container text-accent-400'>
 					{paths.map((path, index) => {

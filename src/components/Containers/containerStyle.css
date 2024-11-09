@@ -3,6 +3,7 @@
 	--container-padding: 1rem;
 	width: min(var(--max-width), 100% - (var(--container-padding) * 2));
 	margin-inline: auto;
+	max-width: 100%; /* Prevents overflowing the viewport */
 }
 
 .border-container {

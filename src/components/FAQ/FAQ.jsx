@@ -31,7 +31,7 @@ function FAQ() {
 			);
 		});
 	return (
-		<div className='faq-outer-container text-container bottom-space'>
+		<div className='faq-outer-container text-container'>
 			<div>
 				<div className='below1100'>
 					<motion.p

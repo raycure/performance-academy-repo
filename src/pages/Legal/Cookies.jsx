@@ -1,7 +1,45 @@
-import React from 'react';
-function Cookies() {
+import React, { useEffect, useState } from 'react';
+import './Cookies.css';
+const CookieConsent = () => {
+	const [showBanner, setShowBanner] = useState(false);
+	const [isAccepted, setIsAccepted] = useState(false);
+
+	useEffect(() => {
+		const consent = localStorage.getItem('cookieConsent');
+		console.log(consent);
+		console.log(showBanner);
+		if (consent !== 'accepted') {
+			setShowBanner(true);
+		} else {
+			setIsAccepted(true);
+		}
+	}, []);
+	const handleAccept = () => {
+		setIsAccepted(true);
+		setShowBanner(false);
+		localStorage.setItem('cookieConsent', 'accepted');
+	};
+
+	if (!showBanner) return null;
+
 	return (
-		<div className='bottom-space'>
+		<div className='cookiesBanner'>
+			<p>
+				"This website uses only essential cookies. For more information, please
+				see our <a href='/privacy-policy'>Privacy Policy</a>. By clicking
+				'Accept,' you consent to the use of these cookies."
+			</p>
+			<button className='cookiesButton' onClick={handleAccept}>
+				Accept
+			</button>
+		</div>
+	);
+};
+
+export default CookieConsent;
+
+{
+	/* <div className='bottom-space'>
 			<p>
 				Genel Kullanılmakta olan Internet tarayıcısı aracılığı ile
 				Internet ağ sunucusu tarafından kullanıcıların cihazlarına
@@ -73,7 +111,5 @@ function Cookies() {
 				materyale dair tüm telif hakları, tescilli marka, patent, fikri
 				ve sair mülkiyet hakları Bankamızda saklıdır.
 			</p>
-		</div>
-	);
+		</div> */
 }
-export default Cookies;

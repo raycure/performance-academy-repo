@@ -17,6 +17,7 @@ function CalendarContainer() {
 		const clickedEventId = eventInfo.event._def.publicId;
 		setActiveEventId(clickedEventId);
 		if (windowWidth <= 970) {
+			// scrolls to the event info the event is clicked only on mobile
 			const element = document.getElementById('calendar-container');
 			const elementRect = element.getBoundingClientRect();
 			const elementTop = elementRect.top + window.scrollY;
@@ -32,7 +33,7 @@ function CalendarContainer() {
 	}
 	function renderEvents(eventInfo) {
 		const eventDate = new Date(eventInfo.event._instance.range.start).getDate();
-		return <div className='fully-center-item'>{eventDate}</div>;
+		return <div className='center-item'>{eventDate}</div>;
 	}
 	const { t, i18n } = useTranslation();
 	return (

@@ -16,3 +16,9 @@
 		font-size: var(--fs-650);
 	}
 }
+.class-logo {
+	width: 100%;
+	max-height: 50px;
+	height: auto;
+	margin-bottom: 0.6rem;
+}

@@ -59,7 +59,7 @@ import React, { Suspense, lazy } from 'react';
 import Loading from './components/Loading/Loading';
 import './index.css';
 import Main from './pages/Main/Main';
-const Layout = lazy(() => import('./pages/Layout/Layout'));
+const Layout = lazy(() => import('./pages/Layout/Layout')); //todo choose what to lazily load and what not to
 const Events = lazy(() => import('./pages/Events/Events'));
 const Contact = lazy(() => import('./pages/Contact/Contact'));
 const PageNotFound = lazy(() => import('./pages/PageNotFound/PageNotFound'));

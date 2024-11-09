@@ -26,7 +26,6 @@ const CustomNotification = () => {
 	const handleStorageChange = () => {
 		const savedNotification = JSON.parse(localStorage.getItem('Notifexp'));
 		if (savedNotification) {
-			console.log('notiffff', savedNotification);
 			setNotification(savedNotification);
 		}
 	};

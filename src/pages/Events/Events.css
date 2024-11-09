@@ -14,7 +14,7 @@
 	margin-inline: auto;
 	padding: 1rem;
 	overflow: hidden !important; /*needed dont delete dont ask questions*/
-	/* grid-template-rows: 1fr 1fr 1fr; */
+	grid-template-rows: 1fr 1fr 1fr;
 }
 .page-poster-container {
 	overflow: hidden;
@@ -22,11 +22,6 @@
 	position: relative;
 	display: flex;
 	justify-content: center;
-}
-.dark-background {
-	width: 100%;
-	padding: 3rem 0;
-	background-color: var(--clr-primary-500);
 }
 
 @media (max-width: 1350px) {
@@ -44,7 +39,7 @@
 @media (max-width: 1150px) {
 	.calendar-container {
 		grid-template-columns: 5fr 4fr;
-		width: 80vw;
+		width: 70vw;
 	}
 }
 

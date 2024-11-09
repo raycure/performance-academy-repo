@@ -4,6 +4,12 @@
 	justify-content: space-between;
 	align-items: center;
 }
+@media (max-width: 50em) {
+	.nav-inner-container {
+		padding: 1rem 0.5rem;
+	}
+}
+
 .navigation-outer-container {
 	/* background-color: var(--clr-primary-400); */
 	background-color: var(--clr-primary-400);
@@ -28,14 +34,9 @@
 	gap: 0.2rem;
 }
 
-/* .drop-down-menu {
-	display: none;
-} */
-
 .drop-down-menu {
 	display: flex;
 	padding: 2rem;
-	background-color: red;
 	height: 200px;
 	width: 100px;
 	flex-direction: column;
@@ -48,9 +49,14 @@
 	width: 1.4rem;
 }
 .logo {
-	display: block;
 	width: clamp(5rem, 10vw, 20rem);
 	padding: 0.8rem 0rem;
+	display: block;
+}
+
+.pfa-logo {
+	display: block;
+	width: clamp(5rem, 5vw, 20rem);
 }
 .nav-list-item {
 	height: 100%;
@@ -199,7 +205,6 @@
 
 .dropdown {
 	position: relative;
-	background-color: red;
 }
 
 .dropdown-content {
