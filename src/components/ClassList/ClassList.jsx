@@ -7,90 +7,98 @@ import name from '/ornek.jpg';
 import { motion } from 'framer-motion';
 import { leftToRightForClasses } from '../animations/AnimationValues.jsx';
 import { useTranslation } from 'react-i18next';
-
+import { useDispatch, useSelector } from 'react-redux';
+import { setId } from '../../redux/Slices/ProgramIdSlice.js';
+import { useNavigate } from 'react-router-dom';
 function ClassList({ classType }) {
 	const lesMillsPrograms = LesmillsPrograms();
+	const navigate = useNavigate();
+	const dispatch = useDispatch();
+	const handleSelectId = (id) => {
+		dispatch(setId(id));
+		navigate('/program');
+	};
+
+	const { t, i18n } = useTranslation();
 	const classes = Object.keys(lesMillsPrograms).map((category) => {
-		const { t, i18n } = useTranslation();
-		if (category !== classType && classType !== 'all') {
+		if (category !== classType && classType !== 'all' && classType === null) {
 			return;
 		}
 		return lesMillsPrograms[category].map((program, subIndex) => {
 			return (
-				<>
-					<motion.div
-						variants={leftToRightForClasses}
-						initial='hidden'
-						whileInView='show'
-						viewport={{ once: true, amount: 0.1 }}
-						custom={subIndex}
+				<motion.div
+					variants={leftToRightForClasses}
+					initial='hidden'
+					whileInView='show'
+					viewport={{ once: true, amount: 0.1 }}
+					custom={subIndex}
+					key={program.id}
+				>
+					<div
+						className='class-item-container text-container top-border-light'
+						id={program.id}
 					>
+						<img
+							aria-label='program pic'
+							className='img class-img'
+							src={name}
+						/>
 						<div
-							key={subIndex}
-							className='class-item-container text-container top-border-light'
-							id={program.id}
+							style={{
+								display: 'flex',
+								flexDirection: 'column',
+								justifyContent: 'space-between',
+								padding: '1rem 0',
+							}}
 						>
-							<img
-								aria-label='program pic'
-								className='img class-img'
-								src={name}
-							/>
+							<div>
+								<img
+									aria-label='logo'
+									className='img class-logo'
+									src={program.logo}
+								/>
+								<p className='slogan'>{program.sum}</p>
+								<p>
+									{i18n.language === 'tr' ? 'Dersler' : 'Lessons'}:{' '}
+									{program.lessons}
+								</p>
+							</div>
 							<div
-								style={{
-									display: 'flex',
-									flexDirection: 'column',
-									justifyContent: 'space-between',
-									padding: '1rem 0',
-								}}
+								className='classes-more-info-container top-border-light fs-400 '
+								style={{ marginTop: {} }} //todo height alıp ona gore ver
 							>
 								<div>
-									<img
-										aria-label='logo'
-										className='img class-logo'
-										src={program.logo}
-									/>
-									<p className='slogan'>{program.sum}</p>
 									<p>
-										{i18n.language === 'tr' ? 'Dersler' : 'Lessons'}:{' '}
-										{program.lessons}
+										{i18n.language === 'tr' ? 'Türü' : 'Type'}: {program.type}
+									</p>
+									<p>
+										{i18n.language === 'tr' ? 'Ekipman' : 'Equipment'}:{' '}
+										{program.equipment}
+									</p>
+									<p>
+										{i18n.language === 'tr' ? 'Kime Yönelik' : 'For'}:{' '}
+										{program.for}
 									</p>
 								</div>
-								<div
-									className='classes-more-info-container top-border-light fs-400 '
-									style={{ marginTop: {} }} //todo height alıp ona gore ver
+								<Button
+									classProp={'classes-btn'}
+									redirect={'/program'}
+									navProp={{ program: program.id }}
+									className='center-vertical'
+									onClick={() => handleSelectId(program.id)}
 								>
-									<div>
-										<p>
-											{i18n.language === 'tr' ? 'Türü' : 'Type'}: {program.type}
-										</p>
-										<p>
-											{i18n.language === 'tr' ? 'Ekipman' : 'Equipment'}:{' '}
-											{program.equipment}
-										</p>
-										<p>
-											{i18n.language === 'tr' ? 'Kime Yönelik' : 'For'}:{' '}
-											{program.for}
-										</p>
-									</div>
-									<Button
-										classProp={'classes-btn'}
-										redirect={'/program'}
-										navProp={{ program: program.id }}
-										className='center-vertical'
-									>
-										İncele
-										<MdOutlineDoubleArrow
-											style={{ marginTop: 2 }}
-											color='white'
-										/>
-									</Button>
-								</div>
+									İncele
+									<MdOutlineDoubleArrow
+										style={{ marginTop: 2 }}
+										color='white'
+									/>
+								</Button>
 							</div>
-
-							<div className='background-image class-background-shape'></div>
 						</div>
-					</motion.div>
-				</>
+
+						<div className='background-image class-background-shape'></div>
+					</div>
+				</motion.div>
 			);
 		});
 	});

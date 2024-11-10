@@ -14,11 +14,7 @@ import { FaLinkedinIn } from 'react-icons/fa6';
 import { FaFacebookF } from 'react-icons/fa6';
 import { FaPinterestP } from 'react-icons/fa6';
 import { motion } from 'framer-motion';
-import {
-	rightToLeft,
-	socialSlide,
-	backgroundFill,
-} from '../animations/AnimationValues';
+import { socialSlide, backgroundFill } from '../animations/AnimationValues';
 import instagramBackground from '../../assets/instagram-background.jpg';
 import { useTranslation } from 'react-i18next';
 
@@ -104,15 +100,16 @@ function Navbar() {
 	const handleLanguageChange = (lng) => {
 		changeLanguage(lng);
 	};
-	const [windowWidth, setWindowWidth] = useState(0);
-	let resizeWindow = () => {
-		setWindowWidth(window.innerWidth);
+
+	const handleResize = () => {
+		setMenuOpen(false);
+		document.body.style.overflowY = 'unset';
 	};
 	useEffect(() => {
-		resizeWindow();
-		window.addEventListener('resize', resizeWindow);
-		return () => window.removeEventListener('resize', resizeWindow);
-	}, []);
+		window.addEventListener('resize', handleResize);
+		return () => window.removeEventListener('resize', handleResize);
+	}, []); //in the event of a resize closes the menu and makes the page scrollable again
+
 	const handleClickOutside = (event) => {
 		const path = event.composedPath ? event.composedPath() : [];
 		if (
@@ -222,17 +219,23 @@ function Navbar() {
 					/>
 				</div>
 			</nav>
-			<motion.ul
-				variants={rightToLeft}
-				initial='initial'
-				whileInView='animate'
-				className={`text-accent-400 bg-primary-400 box-shadow ${
-					menuOpen ? 'menu-open' : 'display-hidden'
+			<ul
+				className={`text-accent-400 bg-primary-400 menu-close ${
+					menuOpen && 'box-shadow menu-open'
 				}`}
 				id='menu-navigation'
-				custom={windowWidth}
 			>
-				<FiX className='navbar-xmark' onClick={toggleNavMenu} />
+				<FiX
+					style={{
+						alignSelf: 'flex-start',
+						width: '1.5rem',
+						height: '1.5rem',
+						color: 'white',
+						position: 'relative',
+						left: '-2rem',
+					}}
+					onClick={toggleNavMenu}
+				/>
 				<div className='menu-inner-container' key='menucon'>
 					<hr />
 					{paths.map((path, index) => {
@@ -291,7 +294,7 @@ function Navbar() {
 				>
 					Kaydol
 				</Button>
-			</motion.ul>
+			</ul>
 		</div>
 	);
 }

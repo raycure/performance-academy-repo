@@ -54,8 +54,11 @@
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import store from './redux/store';
 import React, { Suspense, lazy } from 'react';
+import ReactDOM from 'react-dom';
+import { PersistGate } from 'redux-persist/integration/react';
+import store, { persistor } from './redux/store';
+
 import Loading from './components/Loading/Loading';
 import './index.css';
 import Main from './pages/Main/Main';
@@ -74,28 +77,30 @@ const MyPrograms = lazy(() => import('./pages/MyPrograms/MyPrograms'));
 function App() {
 	return (
 		<Provider store={store}>
-			<Suspense fallback={<Loading />}>
-				<BrowserRouter>
-					<Routes>
-						<Route path='/' element={<Layout />}>
-							<Route index element={<Main />} />
-							<Route path='etkinlikler' element={<Events />} />
-							<Route path='programlar' element={<Classes />} />
-							<Route path='iletişim' element={<Contact />} />
-							<Route path='register' element={<Register />} />
-							<Route path='login' element={<Login />} />
-							<Route path='program' element={<ClassInfo />} />
-							<Route path='programlarım' element={<MyPrograms />} />
-							<Route path='çerezler' element={<Cookies />} />
-							<Route
-								path='kişisel-verilerin-korunması'
-								element={<PrivacyPolicy />}
-							/>
-						</Route>
-						<Route path='/*' element={<PageNotFound />} />
-					</Routes>
-				</BrowserRouter>
-			</Suspense>
+			<PersistGate loading={<Loading />} persistor={persistor}>
+				<Suspense fallback={<Loading />}>
+					<BrowserRouter>
+						<Routes>
+							<Route path='/' element={<Layout />}>
+								<Route index element={<Main />} />
+								<Route path='etkinlikler' element={<Events />} />
+								<Route path='programlar' element={<Classes />} />
+								<Route path='iletişim' element={<Contact />} />
+								<Route path='register' element={<Register />} />
+								<Route path='login' element={<Login />} />
+								<Route path='program' element={<ClassInfo />} />
+								<Route path='programlarım' element={<MyPrograms />} />
+								<Route path='çerezler' element={<Cookies />} />
+								<Route
+									path='kişisel-verilerin-korunması'
+									element={<PrivacyPolicy />}
+								/>
+							</Route>
+							<Route path='/*' element={<PageNotFound />} />
+						</Routes>
+					</BrowserRouter>
+				</Suspense>
+			</PersistGate>
 		</Provider>
 	);
 }

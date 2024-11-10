@@ -1,17 +1,16 @@
-import React, { useEffect, useLayoutEffect, useState } from 'react';
+import React, { useLayoutEffect, useState } from 'react';
 import name from '/ornek.jpg';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './ClassInfo.css';
 import LesmillsPrograms from '../../assets/LesmillsPrograms';
 import { useTranslation } from 'react-i18next';
 import EventList from '../../components/EventItem/EventList.jsx';
 import { PiBarbell } from 'react-icons/pi';
+import { useSelector } from 'react-redux';
 function ClassInfo() {
 	const { t, i18n } = useTranslation('translation');
-	const location = useLocation();
-	// this is the one i need from redux
-	const programID = 'BODYSTEP';
-	//location.state?.program;
+	const programID = useSelector((state) => state.selectedProgramId.id);
+
 	const program = Object.keys(LesmillsPrograms())
 		.map((category) => {
 			return LesmillsPrograms()[category].find((program) => {
@@ -24,12 +23,6 @@ function ClassInfo() {
 		.flat()
 		.sort(() => 0.5 - Math.random())
 		.slice(0, 3); //shuffles array and returns 3 random programs
-	const [navbarHeight1, setnavbarHeight1] = useState(0);
-	useLayoutEffect(() => {
-		const navbar = document.querySelector('#navbar');
-		const navbarHeight = navbar.offsetHeight;
-		setnavbarHeight1(navbarHeight);
-	}, []);
 	if (!program) {
 		return <p>Program not found</p>;
 	}
@@ -180,11 +173,7 @@ function ClassInfo() {
 				/>
 			</section>
 			<section>
-				<video
-					className='testVid'
-					controls
-					style={{ height: `calc(100dvh - ${navbarHeight1}px)` }}
-				>
+				<video className='testVid' controls style={{ width: '100%' }}>
 					<source src='' type='video/mp4' />
 					Your browser does not support the video tag.
 				</video>
