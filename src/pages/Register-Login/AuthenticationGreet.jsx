@@ -13,7 +13,9 @@ import {
 	backgroundFill,
 } from '../../components/animations/AnimationValues';
 import instagramBackground from '../../assets/instagram-background.jpg';
+import { useTranslation } from 'react-i18next';
 function AuthenticationGreet() {
+	const { t, i18n } = useTranslation('translation');
 	const icons = [
 		{
 			href: 'https://www.instagram.com/lesmills/',
@@ -49,12 +51,10 @@ function AuthenticationGreet() {
 			/>
 			<img alt='logo' className='logo' src={logo}></img>
 			<div className='greeting-content-container'>
-				<p className='fs-secondary-heading'>Merhabalar!</p>
-				<p className='fs-400'>
-					We’re on a mission to create a fitter planet. This doesn’t mean making
-					people work out. It means helping people fall in love with fitness so
-					that they want to work out.
+				<p className='fs-secondary-heading'>
+					{t('Authentication.CardGreet.0')}
 				</p>
+				<p className='fs-400'>{t('Authentication.CardGreet.1')}</p>
 				<div className='greeting-social-icons'>
 					{icons.map((icon, index) => (
 						<motion.div
@@ -92,9 +92,7 @@ function AuthenticationGreet() {
 					))}
 				</div>
 			</div>
-			<p className='text-legal text-white'>
-				Bir hesap oluşturduğunuzda, Kullanım Koşulları'nı kabul etmiş olursunuz.
-			</p>
+			<p className='text-legal text-white'>{t('Authentication.CardGreet.2')}</p>
 		</div>
 	);
 }

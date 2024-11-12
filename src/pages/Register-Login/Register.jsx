@@ -15,46 +15,57 @@ import { motion } from 'framer-motion';
 import { descending } from '../../components/animations/AnimationValues.jsx';
 import { selectIsLoading } from '../../redux/auth/authStateSlice.js';
 import './formStyle.css';
+import { useTranslation } from 'react-i18next';
 
 function RegisterForm() {
+	const { t, i18n } = useTranslation('translation');
 	let isLoading = useSelector(selectIsLoading); //for button to be in the loading state
 	const [localLoading, setLocalLoading] = useState(false); // the button needs to be in isLoading stage before the api request is pending so the user sees loading state as soon as submitting
-
+	const userIdValidationRules = [
+		{
+			test: (userId) => !/^[0-9]+$/.test(userId),
+			message: t('Authentication.Validation.UserId.0'),
+		},
+		{
+			test: (userId) => userId.length != 11,
+			message: t('Authentication.Validation.UserId.1'),
+		},
+	];
 	const usernameValidationRules = [
 		{
 			test: (username) => !/^[a-zA-Z]/.test(username),
-			message: 'have to start with a letter.',
+			message: t('Authentication.Validation.Username.0'),
 		},
 		{
 			test: (username) => !/^[a-zA-Z0-9.]+$/.test(username),
-			message: 'only letters numbers and dots.',
+			message: t('Authentication.Validation.Username.1'),
 		},
 		{
 			test: (username) => username.length < 4 || username.length >= 24,
-			message: '4 to 24 characters.',
+			message: t('Authentication.Validation.Username.2'),
 		},
 	];
 	const passwordValidationRules = [
 		{
 			test: (pwd) => !/(?=.*[a-z])(?=.*[A-Z])/.test(pwd),
-			message: 'At least one uppercase and one lowercase letter.',
+			message: t('Authentication.Validation.Password.0'),
 		},
 		{
 			test: (pwd) => !/(?=.*\d)/.test(pwd),
-			message: 'At least one numeral.',
+			message: t('Authentication.Validation.Password.1'),
 		},
 		{
 			test: (pwd) => /\s/.test(pwd),
-			message: 'No spaces.',
+			message: t('Authentication.Validation.Password.2'),
 		},
 		{
 			test: (pwd) =>
 				!/^[a-zA-Z\d~!?@#$%^&*_\-\+\(\)\[\]\{\}><\/\\|"'\.,:;]+$/.test(pwd),
-			message: 'Only Latin characters.',
+			message: t('Authentication.Validation.Password.3'),
 		},
 		{
-			test: (username) => pwd.length < 8 || pwd.length >= 24,
-			message: '8 to 24 characters.',
+			test: (pwd) => pwd.length < 8 || pwd.length >= 24,
+			message: t('Authentication.Validation.Password.4'),
 		},
 	];
 
@@ -68,6 +79,10 @@ function RegisterForm() {
 	const [validName, setValidName] = useState(false);
 	const [mail, setMail] = useState('');
 	const [userFocus, setUsernameFocus] = useState(false);
+
+	const [userId, setUserId] = useState('');
+	const [validUserId, setValidUserId] = useState(false);
+	const [userIdFocus, setUserIdFocus] = useState(false);
 
 	const [pwd, setPwd] = useState('');
 	const [validPwd, setValidPwd] = useState(false);
@@ -89,6 +104,11 @@ function RegisterForm() {
 	}, [username]);
 
 	useEffect(() => {
+		const valid = userIdValidationRules.every((rule) => !rule.test(userId));
+		setValidUserId(valid);
+	}, [userId]);
+
+	useEffect(() => {
 		const valid = passwordValidationRules.every((rule) => !rule.test(pwd));
 		setValidPwd(valid);
 	}, [pwd]);
@@ -99,7 +119,7 @@ function RegisterForm() {
 
 	useEffect(() => {
 		setErrMsg('');
-	}, [username, pwd, matchPwd]);
+	}, [username, userId, pwd, matchPwd]);
 
 	function displayNotif() {
 		const verifyNotif = {
@@ -122,10 +142,16 @@ function RegisterForm() {
 		// } //todo prevent making a submit if theres no validpwd and username and
 
 		try {
-			const registerData = { username: username, password: pwd, email: mail };
+			const registerData = {
+				username: username,
+				userId: userId,
+				password: pwd,
+				email: mail,
+			};
 			const response = await dispatch(register({ registerData }));
 			setUsername('');
 			setLocalLoading(true);
+			setUserId('');
 			setPwd('');
 			setMatchPwd('');
 			console.log(response);
@@ -159,43 +185,93 @@ function RegisterForm() {
 				>
 					{errMsg}
 				</p>
-				<p ref={userRef}>Kaydolun!</p>
+				<p ref={userRef}>{t('Authentication.Greet.0')}</p>
 				<div className='relative-position centerLineAnimation'>
-					<input
-						type='text'
-						placeholder='Kullanıcı Adı'
-						id='username'
-						className={validName || username ? 'form-icon-active' : ''}
-						ref={userRef}
-						autoComplete='off'
-						onChange={(e) => setUsername(e.target.value)}
-						value={username}
-						required
-						aria-invalid={validName ? 'false' : 'true'}
-						aria-describedby='uidnote'
-						onFocus={() => setUsernameFocus(true)}
-						onBlur={() => setUsernameFocus(false)}
-					/>
-					<div htmlFor='username' className='form-icon'>
-						<FontAwesomeIcon
-							icon={faCheck}
-							className={validName ? 'valid' : 'hide'}
-						/>
-						<FontAwesomeIcon
-							icon={faTimes}
-							className={validName || !username ? 'hide' : 'invalid'}
-						/>
-					</div>
-					<motion.p
-						initial='hidden'
-						variants={descending}
-						whileInView='show'
-						id='uidnote'
-						className={username && !validName ? 'instructions' : 'offscreen'}
+					<div
+						style={{
+							display: 'grid',
+							gap: '1rem',
+							gridTemplateColumns: '1fr 1fr',
+						}}
 					>
-						{usernameValidationRules.find((rule) => rule.test(username))
-							?.message || ''}
-					</motion.p>
+						<div>
+							<input
+								type='text'
+								placeholder={t('Authentication.Username')}
+								id='username'
+								className={validName || username ? 'form-icon-active' : ''}
+								ref={userRef}
+								autoComplete='off'
+								onChange={(e) => setUsername(e.target.value)}
+								value={username}
+								required
+								aria-invalid={validName ? 'false' : 'true'}
+								aria-describedby='uidnote'
+								onFocus={() => setUsernameFocus(true)}
+								onBlur={() => setUsernameFocus(false)}
+							/>
+							<div htmlFor='username' className='form-icon'>
+								<FontAwesomeIcon
+									icon={faCheck}
+									className={validName ? 'valid' : 'hide'}
+								/>
+								<FontAwesomeIcon
+									icon={faTimes}
+									className={validName || !username ? 'hide' : 'invalid'}
+								/>
+							</div>
+							<motion.p
+								initial='hidden'
+								variants={descending}
+								whileInView='show'
+								id='uidnote'
+								className={
+									username && !validName ? 'instructions' : 'offscreen'
+								}
+							>
+								{usernameValidationRules.find((rule) => rule.test(username))
+									?.message || ''}
+							</motion.p>
+						</div>
+						<div>
+							<input
+								type='text'
+								placeholder={t('Authentication.UserId')}
+								id='userId'
+								className={validUserId || userId ? 'form-icon-active' : ''}
+								autoComplete='off'
+								onChange={(e) => setUserId(e.target.value)}
+								value={userId}
+								required
+								aria-invalid={validUserId ? 'false' : 'true'}
+								aria-describedby='uidnote'
+								onFocus={() => setUserIdFocus(true)}
+								onBlur={() => setUserIdFocus(false)}
+							/>
+							<div htmlFor='userId' className='form-icon'>
+								<FontAwesomeIcon
+									icon={faCheck}
+									className={validUserId ? 'valid' : 'hide'}
+								/>
+								<FontAwesomeIcon
+									icon={faTimes}
+									className={validUserId || !userId ? 'hide' : 'invalid'}
+								/>
+							</div>
+							<motion.p
+								initial='hidden'
+								variants={descending}
+								whileInView='show'
+								id='uidnote'
+								className={
+									userId && !validUserId ? 'instructions' : 'offscreen'
+								}
+							>
+								{userIdValidationRules.find((rule) => rule.test(userId))
+									?.message || ''}
+							</motion.p>
+						</div>
+					</div>
 				</div>
 				<div className='centerLineAnimation'>
 					<input
@@ -212,7 +288,7 @@ function RegisterForm() {
 					<input
 						type='password'
 						id='password'
-						placeholder='Şifre'
+						placeholder={t('Authentication.Password.0')}
 						className={validPwd || pwd ? 'form-icon-active' : ''}
 						onChange={(e) => setPwd(e.target.value)}
 						value={pwd}
@@ -247,7 +323,7 @@ function RegisterForm() {
 					<input
 						type='password'
 						id='confirm_pwd'
-						placeholder='Tekrar Şifre'
+						placeholder={t('Authentication.Password.1')}
 						className={matchPwd ? 'form-icon-active' : ''}
 						onChange={(e) => setMatchPwd(e.target.value)}
 						value={matchPwd}
@@ -294,11 +370,10 @@ function RegisterForm() {
 						type='submit'
 						isLoading={isLoading || localLoading}
 					>
-						Kaydol
+						{i18n.language === 'en' ? 'Sign Up' : 'Kaydol'}
 					</Button>
-					<Link to='/login' className='fs-400 text-align-right'>
-						Zaten bir hesabınız var mı? <br />
-						Buradan giriş yapın!
+					<Link to='/login' className='fs-400 text-align-right text-container'>
+						{t('Authentication.Redirect.0')}
 					</Link>
 				</div>
 			</form>

@@ -144,7 +144,7 @@ function Navbar() {
 				<ul className='nav-list-container nav-container text-accent-400'>
 					{paths.map((path, index) => {
 						return (
-							<li className='nav-list-item relative-position' key={index}>
+							<li className='nav-list-item relative-position' key={path.label}>
 								<NavLink to={path.path}>{path.label}</NavLink>
 							</li>
 						);
@@ -186,7 +186,7 @@ function Navbar() {
 						classProp={`${isLoggedin ? 'display-hidden' : ''}`}
 						redirect={'/register'}
 					>
-						Kaydol
+						{i18n.language === 'en' ? 'Sign Up' : 'Kaydol'}
 					</Button>
 				</div>
 				<div className='menu nav-container'>
@@ -236,18 +236,18 @@ function Navbar() {
 					}}
 					onClick={toggleNavMenu}
 				/>
-				<div className='menu-inner-container' key='menucon'>
+				<div className='menu-inner-container'>
 					<hr />
 					{paths.map((path, index) => {
 						return (
-							<>
+							<div style={{ height: '100%' }} key={path.label + index}>
 								<li>
 									<NavLink onClick={toggleNavMenu} to={path.path} key={index}>
 										{path.label}
 									</NavLink>
 								</li>
 								<hr />
-							</>
+							</div>
 						);
 					})}
 				</div>
@@ -292,7 +292,7 @@ function Navbar() {
 					redirect={'/register'}
 					classProp={`${isLoggedin ? 'display-hidden' : ''}`}
 				>
-					Kaydol
+					{i18n.language === 'en' ? 'Sign Up' : 'Kaydol'}
 				</Button>
 			</ul>
 		</div>

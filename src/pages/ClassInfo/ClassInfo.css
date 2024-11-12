@@ -1,5 +1,5 @@
 .poster-heading {
-	font-size: 12vh;
+	font-size: 4rem;
 	font-weight: bold;
 }
 .page-poster-container {
@@ -19,17 +19,19 @@
 	z-index: -1;
 }
 .class-info-sum {
-	padding: 3rem 22vw;
+	padding: 3rem;
+	margin-inline: auto;
+	max-width: 800px;
 	text-align: center;
 	font-size: var(--fs-650);
 }
 .class-info-grid {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
-	grid-template-rows: auto auto;
 	margin-inline: auto;
-	width: 65vw;
+	max-width: 1260px;
 	gap: 2rem;
+	padding-inline: 2rem;
 }
 .payment-but-con {
 	display: flex;
@@ -40,8 +42,10 @@
 }
 .class-rec-con {
 	display: grid;
-	grid-template-columns: 280px 280px 280px 1fr;
-	margin: 2rem 5rem;
+	grid-template-columns: 280px 280px 280px auto;
+	margin: 2rem auto;
+	padding-inline: 3rem;
+	max-width: 1540px;
 }
 .class-rec-item {
 	overflow: hidden;
@@ -54,7 +58,7 @@
 	opacity: 0.7;
 }
 .rec-program-info {
-	height: 3rem;
+	height: 3.5rem;
 	transition: 0.6s ease-out;
 }
 .class-rec-item:hover .rec-program-info {
@@ -66,4 +70,68 @@
 }
 .class-rec-item:hover .rec-program-sum {
 	opacity: 1;
+}
+.rec-program-info .more-link {
+	display: none;
+}
+@media (max-width: 1280px) {
+	.class-rec-con {
+		grid-template-columns: 280px 280px 280px;
+		width: fit-content;
+	}
+	.class-rec-con .class-rec-item:nth-child(3) {
+		display: none;
+	}
+}
+@media (max-width: 940px) {
+	.class-rec-con {
+		grid-template-columns: 280px 280px;
+		grid-template-rows: 1fr 1fr;
+		width: fit-content;
+	}
+	.class-rec-con .all {
+		grid-column: 2/3;
+		border-bottom-right-radius: 7rem;
+	}
+	.class-rec-con .all p {
+		display: none;
+	}
+	.rec-program-info .more-link {
+		display: block;
+	}
+	.rec-program-info {
+		height: 5rem;
+		display: flex;
+		flex-direction: column;
+		gap: 0.3rem;
+	}
+	.rec-program-sum {
+		display: none;
+	}
+	.class-rec-item:hover .rec-program-info {
+		height: 5rem;
+	}
+	.class-info-grid {
+		grid-template-columns: 1fr;
+		max-width: 640px;
+	}
+	.poster-heading {
+		font-size: 3.5rem;
+	}
+	.page-poster-container .fs-minimal-heading {
+		font-size: 1.5rem;
+	}
+	.class-rec-con .class-rec-item:nth-child(3) {
+		display: flex;
+	}
+}
+@media (max-width: 660px) and (min-width: 385px) {
+	.class-rec-con {
+		display: none;
+	}
+}
+@media (max-width: 540px) {
+	.page-poster-container .fs-minimal-heading {
+		display: none;
+	}
 }

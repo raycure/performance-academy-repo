@@ -20,5 +20,57 @@
 		"Heading": "Page Not Found",
 		"Text": "Sorry, we couldn't find the page you're looking for.",
 		"Button": "Go Back To Home Page"
+	},
+	"Authentication": {
+		"Greet": ["Sign Up Here!", "Sign In Here!"],
+		"Username": "Username",
+		"UserId": "TR Government ID",
+		"Password": ["Password", "Repeat Password"],
+		"Validation": {
+			"Username": [
+				"HAs to start with a letter.",
+				"Only letters, numbers and dots can be used.",
+				"Between 4 to 24 characters."
+			],
+			"UserId": ["Only numbers can be used.", "Has to be 11 numbers."],
+			"Password": [
+				"At least one uppercase and one lowercase letter required.",
+				"At least one numeral required.",
+				"Spaces aren't allowed.",
+				"Only Latin characters are allowed.",
+				"Between 8 to 24 characters."
+			]
+		},
+		"Redirect": [
+			"Already have an account?\nLogin here!",
+			"Don't have an account?\nSign up here!"
+		],
+		"CardGreet": [
+			"Hello!",
+			"We’re on a mission to create a fitter planet. This doesn’t mean making people work out. It means helping people fall in love with fitness so that they want to work out.",
+			"When you create an account you agree to the Privacy Policy."
+		]
+	},
+	"Contact": {
+		"GreetText": [
+			"Our mission is to help build healthy bodies, lives, families andcommunities through fitness.",
+			"We love helping others improve their health, both physicallyand mentally, and have fun doing it! Our ultimate goal is to helpimprove the lives of our members through our passion and focus onhealth and fitness."
+		],
+		"Value": {
+			"Heading": "Our Core Values",
+			"Title": ["BE BRAVE", "UNITED", "CHANGE THE WORLD"],
+			"Context": [
+				"We aim to be undisputed world champions in fitness, and we relentlessly pursue that goal.",
+				"Our customers, our instructors and our people are our team. We succeed as one.",
+				"We are devoted to health and wellbeing. Creating a fitter planet is the reason we are here."
+			]
+		},
+		"Form": {
+			"Title": "Contact Us",
+			"Name": "Name",
+			"Surname": "Surename",
+			"Topic": "Topic",
+			"Context": "Your Question"
+		}
 	}
 }

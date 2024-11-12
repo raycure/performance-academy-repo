@@ -13,7 +13,7 @@ import { FaMoneyCheck } from 'react-icons/fa6';
 import { TbWorld } from 'react-icons/tb';
 import { GrDocumentPdf } from 'react-icons/gr';
 import { GrDocumentUpdate } from 'react-icons/gr';
-
+import { GrDocumentVerified } from 'react-icons/gr';
 function EventList({ activeProgram, programTitle, infoActive }) {
 	const today = new Date();
 	const eventFallback = LesMillsEvents.filter((event) => {
@@ -112,9 +112,7 @@ function EventList({ activeProgram, programTitle, infoActive }) {
 										month: 'short',
 									})}
 							</p>
-							{infoActive && (
-								<p style={{ alignContent: 'center' }}>{event.price}$</p>
-							)}
+
 							<p style={{ alignContent: 'center' }}>
 								{event.online ? 'Çevrim İçi' : 'Yüz Yüze'}
 							</p>
@@ -136,7 +134,7 @@ function EventList({ activeProgram, programTitle, infoActive }) {
 										}}
 										className='addLineAnimation'
 									>
-										Programı İncele
+										İncele
 									</Link>
 									<Button onClick={() => handleEventSelection(event)}>
 										Seç
@@ -271,15 +269,30 @@ function EventList({ activeProgram, programTitle, infoActive }) {
 					/>
 					<label htmlFor='file'>
 						<p>
-							<GrDocumentUpdate
-								style={{
-									display: 'inline-block',
-									marginRight: '0.5rem',
-									position: 'relative',
-									top: '2px',
-								}}
-							/>
-							{fileName === null ? 'Choose a File...' : fileName}
+							{fileName === null ? (
+								<GrDocumentUpdate
+									style={{
+										display: 'inline-block',
+										marginRight: '0.5rem',
+										position: 'relative',
+										top: '2px',
+									}}
+								/>
+							) : (
+								<GrDocumentVerified
+									style={{
+										display: 'inline-block',
+										marginRight: '0.5rem',
+										position: 'relative',
+										top: '2px',
+									}}
+								/>
+							)}
+							{fileName === null
+								? 'Choose a File...'
+								: fileName.length > 10
+								? `${fileName.substring(0, 10)}...`
+								: fileName}
 						</p>
 					</label>
 				</div>

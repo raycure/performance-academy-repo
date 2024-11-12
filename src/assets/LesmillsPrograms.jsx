@@ -34,10 +34,10 @@ function LesmillsPrograms() {
 				result: t('cat1.program2.result'),
 			},
 			{
-				title: 'LES MILLS BODYBALANCE',
+				title: 'BODYBALANCE',
 				logo: '/classLogo/BODYBALANCE.png',
 				picture: '',
-				id: 'LES-MILLS-BODYBALANCE',
+				id: 'BODYBALANCE',
 				sum: t('cat1.program3.sum'),
 				description: t('cat1.program3.description'),
 				whyMember: t('cat1.program3.whyMember'),

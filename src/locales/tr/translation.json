@@ -20,5 +20,57 @@
 		"Heading": "Sayfa Bulunamadı",
 		"Text": "Maalesef aradığınız sayfayı bulamadık.",
 		"Button": "Ana Sayfaya Geri Dön"
+	},
+	"Authentication": {
+		"Greet": ["Kaydolun", "Giriş Yapın"],
+		"Username": "Kullanıcı Adı",
+		"UserId": "TC Kimlik No",
+		"Password": ["Şifre", "Şifre Tekrarı"],
+		"Validation": {
+			"Username": [
+				"Harfle başlanması gerek.",
+				"Sadece harfler, sayılar ve nokta geçerlidir.",
+				"4 ila 24 karakter aralığı olmalıdır."
+			],
+			"UserId": ["Sadece sayılar geçerlidir.", "11 rakam olmalıdır."],
+			"Password": [
+				"En az birer küçük ve büyük harf gereklidir.",
+				"En az bir rakam gereklidir.",
+				"Boşluk bırakılmamalıdır.",
+				"Sadece Latin karakterler geçerlidir.",
+				"8 ila 24 karakter aralığında olmalıdır."
+			]
+		},
+		"Redirect": [
+			"Zaten bir hesabınız var mı?\nBuradan giriş yapın!",
+			"Bir hesabınız yok mu?\nBuradan kaydolun!"
+		],
+		"CardGreet": [
+			"Merhaba!",
+			"Daha fit bir dünya yaratma misyonundayız. İnsanları spor yapmaya zorlamayı kast etmiyoruz! Amacımız insanları spora tutuşturup, egzersizi severek yapmalarını sağlamak.",
+			"Bir hesap oluşturduğunuzda, Kullanım Koşulları'nı kabul etmiş olursunuz."
+		]
+	},
+	"Contact": {
+		"GreetText": [
+			"Misyonumuz, spor aracılığıyla sağlıklı bedenler, yaşamlar, aileler ve topluluklar inşa etmeye yardımcı olmaktır.",
+			"Başkalarına hem fiziksel hem de zihinsel sağlıklarını geliştirmelerine yardımcı olmayı seviyoruz ve bunu yaparken eğleniyoruz! Son hedefimiz, sağlık ve fitness konusundaki tutkumuz ve odaklanmamız sayesinde üyelerimizin yaşamlarını iyileştirmeye yardımcı olmaktır."
+		],
+		"Value": {
+			"Heading": "Temel Değerlerimiz",
+			"Title": ["CESUR OL", "BİRLEŞMİŞ", "DÜNYAYI DEĞİŞTİR"],
+			"Context": [
+				"Amacımız fitness alanında tartışmasız dünya şampiyonu olmak ve bu hedefi amansızca takip ediyoruz.",
+				"Müşterilerimiz, eğitmenlerimiz ve çalışanlarımız bizim ekibimizdir. Birlikte başarırız.",
+				"Sağlık ve refaha adanmış durumdayız. Daha sağlıklı bir gezegen yaratmak burada olmamızın sebebi."
+			]
+		},
+		"Form": {
+			"Title": "Bize Erişin!",
+			"Name": "İsim",
+			"Surname": "Soyisim",
+			"Topic": "Konu",
+			"Context": "Sorunuz"
+		}
 	}
 }

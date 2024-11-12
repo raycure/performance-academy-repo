@@ -1,35 +1,3 @@
-.contact-form-outer-container {
-	align-items: center;
-	width: 40vw;
-	padding: 4rem 6rem;
-	border-radius: 20px;
-	position: relative;
-	background-color: var(--clr-primary-trnsp);
-	display: flex;
-	flex-direction: column;
-	gap: 1.5rem;
-}
-.contact-name-input-container {
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	gap: 1.5rem;
-	width: 100%;
-}
-.contact-form-header {
-	text-align: start;
-}
-
-.contact-form-background {
-	z-index: -1;
-}
-#contact-form-grad {
-	background-image: linear-gradient(
-		var(--clr-primary-400),
-		transparent,
-		transparent
-	);
-}
 input:-webkit-autofill {
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: var(--clr-neutral-100) !important;
@@ -117,15 +85,7 @@ textarea:-ms-textarea-placeholder {
 textarea::-ms-textarea-placeholder {
 	color: #adadad;
 }
-.authentication-form {
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-	flex-grow: 1;
-	padding: 3rem 5rem;
-	gap: 2rem;
-	background-color: var(--clr-primary-trnsp);
-}
+
 .form-icon {
 	position: absolute;
 	top: 0.85rem;
@@ -244,54 +204,4 @@ textarea::-ms-textarea-placeholder {
 .divForBorder:hover .textarea-left-lower-line,
 .divForBorder:focus-within .textarea-left-lower-line {
 	animation: expand-leftRight-borders 0.5s ease forwards 0.75s;
-}
-/* Text area animation ends */
-.contact-form #above535 {
-	display: block;
-}
-.contact-form #below535 {
-	display: none;
-}
-@media (max-width: 1100px) {
-	.contact-form-outer-container {
-		padding: 4rem 3rem;
-	}
-}
-@media (max-width: 990px) {
-	.contact-form-outer-container {
-		padding: 4rem 2rem;
-		width: 100%;
-		margin-inline: 0;
-	}
-	.contact-form {
-		flex-direction: column;
-		justify-content: center;
-		align-content: center;
-		padding-inline: 3vw;
-	}
-}
-
-@media (max-width: 800px) {
-	.contact-form {
-		padding-inline: 14vw;
-	}
-}
-@media (max-width: 535px) {
-	.contact-form-outer-container {
-		border-radius: 0;
-	}
-	.contact-form #above535 {
-		display: none;
-	}
-	.contact-form #below535 {
-		display: block;
-	}
-	.contact-form {
-		padding-inline: 0vw;
-		height: fit-content;
-		padding: 0;
-	}
-	.contact-form .container {
-		--container-padding: 0rem;
-	}
 }

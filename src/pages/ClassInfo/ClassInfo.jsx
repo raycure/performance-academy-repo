@@ -6,6 +6,7 @@ import LesmillsPrograms from '../../assets/LesmillsPrograms';
 import { useTranslation } from 'react-i18next';
 import EventList from '../../components/EventItem/EventList.jsx';
 import { PiBarbell } from 'react-icons/pi';
+import { MdDoubleArrow } from 'react-icons/md';
 import { useSelector } from 'react-redux';
 function ClassInfo() {
 	const { t, i18n } = useTranslation('translation');
@@ -21,10 +22,18 @@ function ClassInfo() {
 
 	const recPrograms = Object.values(LesmillsPrograms())
 		.flat()
+		.filter((prog) => {
+			return prog.id !== program.id;
+		})
 		.sort(() => 0.5 - Math.random())
 		.slice(0, 3); //shuffles array and returns 3 random programs
+
 	if (!program) {
-		return <p>Program not found</p>;
+		return (
+			<p>
+				{i18n.language === 'en' ? 'Program Not Found' : 'Program Bulunamadı'}
+			</p>
+		);
 	}
 	return (
 		<>
@@ -39,7 +48,7 @@ function ClassInfo() {
 					src={name}
 				/>
 				<p className='poster-heading'>{program.title}</p>
-				<p className='fs-secondary-heading'>{program.result}</p>
+				<p className='fs-minimal-heading'>{program.result}</p>
 			</div>
 			<p className='class-info-sum'>{program.sum}</p>
 			<section className='class-info-grid'>
@@ -55,12 +64,16 @@ function ClassInfo() {
 						justifyContent: 'space-evenly',
 					}}
 				>
-					<p
+					<div
 						className='fs-minimal-heading fw-bold'
 						style={{ padding: '0.5rem 0rem 0.7rem' }}
 					>
-						{program.title} Nedir?
-					</p>
+						{i18n.language === 'en' ? (
+							<p>What Is {program.title}?</p>
+						) : (
+							<p>{program.title} Nedir?</p>
+						)}
+					</div>
 					<p>{program.description}</p>
 					<div
 						style={{
@@ -136,7 +149,7 @@ function ClassInfo() {
 						className='fs-minimal-heading fw-bold'
 						style={{ padding: '0.5rem 0rem 0.7rem' }}
 					>
-						Neden {program.title}?
+						{i18n.language === 'en' ? 'Why' : 'Neden'} {program.title}?
 					</p>
 					{!program.why ? (
 						<>
@@ -178,23 +191,32 @@ function ClassInfo() {
 					Your browser does not support the video tag.
 				</video>
 			</section>
-			<p
+			<div
 				className='fs-minimal-heading center-item'
 				style={{
 					display: 'flex',
 					flexDirection: 'column',
 					alignItems: 'center',
-					marginBottom: '3rem',
+					padding: '1rem',
+					marginBottom: '2rem',
 				}}
 			>
-				Etkinliklerimizden Birisine Katılarak
-				<b className='fs-secondary-heading fw-bold'>{program.title}</b>
-				Programının Sertifikalı Eğitmeni Olmak İster Misin?
-			</p>
+				<p style={{ textAlign: 'center' }}>
+					{i18n.language === 'en'
+						? 'Would You Like To Become a Certified'
+						: 'Etkinliklerimizden Birisine Katılarak'}
+				</p>
+				<p className='fs-secondary-heading fw-bold'>{program.title}</p>
+				<p style={{ textAlign: 'center' }}>
+					{i18n.language === 'en'
+						? 'Instructor by Joining One of Our Events?'
+						: 'Programının Sertifikalı Eğitmeni Olmak İster Misin?'}
+				</p>
+			</div>
 			<EventList
 				activeProgram={programID}
 				programTitle={program.title}
-				infoActive={false}
+				infoActive={true}
 			/>
 			<ul className='class-rec-con'>
 				{recPrograms.map((program, index) => {
@@ -210,6 +232,26 @@ function ClassInfo() {
 								className='bg-primary-trnsp rec-program-info'
 							>
 								<p className='fw-bold'>{program.title}</p>
+								<Link
+									to={`/program#${program.id}`}
+									state={{ program: program.id }}
+									className='fs-400 text-neutral-100 more-link'
+									onClick={() => {
+										window.scrollTo({
+											top: 0,
+											left: 0,
+											behavior: 'instant',
+										});
+									}}
+									style={{
+										display: 'flex',
+										alignItems: 'center',
+										gap: '0.2rem',
+									}}
+								>
+									{i18n.language === 'en' ? 'More' : 'İncele'}
+									<MdDoubleArrow style={{ width: '1rem', height: '100%' }} />
+								</Link>
 								<div className='rec-program-sum'>
 									<p className='fs-300 text-neutral-100'>{program.sum}</p>
 									<Link
@@ -224,7 +266,7 @@ function ClassInfo() {
 											});
 										}}
 									>
-										İncele
+										{i18n.language === 'en' ? 'More' : 'İncele'}
 									</Link>
 								</div>
 							</div>
@@ -232,18 +274,24 @@ function ClassInfo() {
 					);
 				})}
 				<li
-					className='bg-primary-300'
+					className='bg-primary-300 all'
 					style={{
 						display: 'flex',
 						flexDirection: 'column',
 						textAlign: 'center',
 						alignItems: 'center',
 						justifyContent: 'center',
+						padding: '0 1rem',
 					}}
 				>
-					<p>Aradığınız başka bir program mı var?</p>
+					<p>
+						{i18n.language === 'en'
+							? 'Looking for Something Else'
+							: 'Aradığınız başka bir program mı var'}
+						?
+					</p>
 					<Link to='/programlar' className='fs-650'>
-						Tüm Programları İncele
+						{i18n.language === 'en' ? 'All Programs' : 'Tüm Programlar'}
 					</Link>
 				</li>
 			</ul>

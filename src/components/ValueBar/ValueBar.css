@@ -1,0 +1,30 @@
+.value-bar .swiper {
+	display: none;
+}
+.value-outer-container {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	max-width: 1000px;
+	margin-inline: auto;
+	padding-inline: 3rem;
+	gap: 1.5rem;
+}
+.value-inner-container {
+	display: flex;
+	flex-direction: column;
+}
+
+@media (max-width: 750px) {
+	.value-outer-container {
+		padding-inline: 1rem;
+		gap: 1rem;
+	}
+}
+@media (max-width: 680px) {
+	.value-bar .swiper {
+		display: block;
+	}
+	.value-outer-container {
+		display: none;
+	}
+}

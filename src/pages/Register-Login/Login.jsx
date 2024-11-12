@@ -8,8 +8,10 @@ import './formStyle.css';
 import Button from '../../components/Button/Button.jsx';
 import logo from '../../assets/LesmillsLogo.png';
 import { selectIsLoading } from '../../redux/auth/authStateSlice.js';
+import { useTranslation } from 'react-i18next';
 
 function Login() {
+	const { t, i18n } = useTranslation('translation');
 	const userRef = useRef();
 	const errRef = useRef();
 	const navigate = useNavigate();
@@ -82,7 +84,7 @@ function Login() {
 					>
 						{errMsg}
 					</p>
-					<h1>Giriş Yapın</h1>
+					<h1>{t('Authentication.Greet.1')}</h1>
 					<div className='centerLineAnimation'>
 						<input
 							type='email'
@@ -102,15 +104,19 @@ function Login() {
 							onChange={(e) => setPwd(e.target.value)}
 							value={pwd}
 							required
-							placeholder='Şifre'
+							placeholder={t('Authentication.Password.0')}
 						/>
 					</div>
 
 					<div className='authentication-button-container'>
-						<Button isLoading={localLoading || isLoading}> Giriş Yapın</Button>
-						<Link to='/register' className='fs-400'>
-							Bir hesabınız yok mu? <br />
-							Buradan kaydolun!
+						<Button isLoading={localLoading || isLoading}>
+							{i18n.language === 'en' ? 'Sign In' : 'Giriş Yap'}
+						</Button>
+						<Link
+							to='/register'
+							className='fs-400 text-align-right text-container'
+						>
+							{t('Authentication.Redirect.1')}
 						</Link>
 					</div>
 				</form>

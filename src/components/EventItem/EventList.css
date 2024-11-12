@@ -60,7 +60,7 @@
 	background-color: var(--clr-primary-400);
 	display: inline-block;
 	width: fit-content;
-	padding: 0.5rem 1.4rem;
+	padding: 0.5rem 1.2rem;
 	margin: 0.5rem;
 	border-radius: 0.3rem;
 	text-overflow: ellipsis;
@@ -97,7 +97,7 @@
 		display: block;
 	}
 }
-@media (max-width: 720px) {
+@media (max-width: 740px) {
 	.event-list-grid {
 		grid-template-columns: 1fr;
 		gap: 1rem;
@@ -108,13 +108,12 @@
 	.event-list-grid img {
 		display: none;
 	}
-}
-@media (max-width: 640px) {
 	.enroll-event-item .display-none {
 		display: none;
 	}
 }
-@media (max-width: 430px) {
+
+@media (max-width: 540px) {
 	.event-list-grid {
 		margin-inline: 1rem;
 		gap: 0;
