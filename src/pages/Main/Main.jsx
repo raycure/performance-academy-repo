@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useLayoutEffect } from 'react';
+import React, { act, Fragment, useEffect, useLayoutEffect } from 'react';
 import './Main.css';
 import Container from '../../components/Containers/Container';
 import isim from '/ornek.jpg';
@@ -11,7 +11,7 @@ import { useState } from 'react';
 import axios from '../api/axios.js';
 import { useNavigate } from 'react-router-dom';
 import { CiGlobe } from 'react-icons/ci';
-import { Gem } from 'lucide-react';
+import { Gem, User } from 'lucide-react';
 import { Calendar1 } from 'lucide-react';
 import { useRef } from 'react';
 import { ChartNoAxesCombined } from 'lucide-react';
@@ -21,6 +21,9 @@ import Banner from '../../components/Banner/Banner.jsx';
 import FAQ from '../../components/FAQ/FAQ.jsx';
 import testortheflamboyantimg from '../../assets/testortheflamboyantimg.png';
 import logo from '../../assets/LesmillsLogo.png';
+
+import { ArrowUp, ArrowDown } from 'lucide-react';
+import certificationProcess from './TestText.jsx';
 
 function Main() {
 	const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -166,9 +169,145 @@ function Main() {
 		offset: ['start end', ' end start'], // first start is the top of the element and the end is the end of the screen ['',''] first quates are when the animation starts and the second one is when it ends
 	});
 
+	const [activeStep, setActiveStep] = useState(0);
+	const progressStepContainerRefs = useRef(
+		certificationProcess.map(() => React.createRef())
+	);
+	const progressStepLineRefs = useRef(
+		certificationProcess.map(() => React.createRef())
+	);
+
+	const NextStepHandler = () => {
+		if (activeStep < certificationProcess.length - 1) {
+			setActiveStep((prevStep) => prevStep + 1);
+		}
+		if (progressStepContainerRefs.current) {
+			progressStepContainerRefs.current.forEach((ref, index) => {
+				if (ref.current) {
+					if (activeStep + 1 == index) {
+						ref.current.classList.remove('inActiveStepNumber');
+						ref.current.classList.add('activeStepNumber');
+					}
+				}
+			});
+		}
+		if (progressStepLineRefs.current) {
+			progressStepLineRefs.current.forEach((ref, index) => {
+				if (ref.current) {
+					if (activeStep == index) {
+						ref.current.classList.remove('inActiveLine');
+						ref.current.classList.add('activeLine');
+					}
+				}
+			});
+		}
+	};
+
+	function previousStepHandler() {
+		if (activeStep > 0) {
+			setActiveStep((prevStep) => prevStep - 1);
+			if (progressStepContainerRefs.current) {
+				progressStepContainerRefs.current.forEach((ref, index) => {
+					if (ref.current) {
+						if (activeStep == index) {
+							ref.current.classList.add('inActiveStepNumber');
+						}
+					}
+				});
+			}
+			console.log('af', activeStep);
+
+			if (progressStepLineRefs.current) {
+				progressStepLineRefs.current.forEach((ref, index) => {
+					if (ref.current) {
+						if (activeStep - 1 == index) {
+							ref.current.classList.add('inActiveLine');
+						}
+					}
+				});
+			}
+		}
+	}
+
 	const scrollWith = useTransform(scrollYProgress, [0.3, 0.632], [0, -250]); // [0,0.91] is how much its being scrolled .91 because of the header [0,-250] for the top attribute and it changes based on the 0 to 0.91
 	return (
 		<>
+			<Container className='even-columns'>
+				<div className='stepText'>
+					<button
+						className='nextButton center-item'
+						onClick={previousStepHandler}
+					>
+						<ArrowUp strokeWidth={1.25} />
+					</button>
+					<h3 className='fs-700'>{certificationProcess[activeStep].title}</h3>
+					<p className='fs-500'>{certificationProcess[activeStep].text}</p>
+					<button onClick={NextStepHandler} className='center-item'>
+						<ArrowDown strokeWidth={1.25} />
+					</button>
+				</div>
+				<div className='stepProgressBarContainer'>
+					{certificationProcess.map((step, index) => (
+						<div
+							className='stepProgressBar'
+							style={{
+								marginBottom: '40px',
+							}}
+						>
+							<div className='programStepContainers'>
+								<span className='programStepNumbers'>{step.step}</span>
+								<span
+									className='stepNumberAnimation'
+									style={{ backgroundColor: index === 0 ? 'red' : '' }}
+									ref={progressStepContainerRefs.current[index]}
+								></span>
+								{index < 4 && (
+									<span
+										className='progressLine'
+										ref={progressStepLineRefs.current[index]}
+									></span>
+								)}
+							</div>
+							<h3 className='fs-600'>{step.title}</h3>
+						</div>
+					))}
+				</div>
+			</Container>
+			<Container className='landingPageContainer'>
+				<div className='landingParagraph'>
+					<h2 className='fs-secondary-heading'>Performance Academy</h2>
+					<p className='fs-650' style={{ maxWidth: '40rem' }}>
+						Become a world-class Les Mills Instructor and transform lives
+						through fitness. Our internationally recognized certification
+						program equips you with everything needed to teach in 130+ countries
+					</p>
+					<p className='fs-400 paragraph'>
+						Transform lives through movement and inspire others to reach their
+						potential. Join our passionate community of fitness leaders who are
+						changing the way people experience exercise around the globe.
+						Whether you're an experienced instructor or just starting your
+						journey, we'll provide you with the tools, knowledge, and support to
+						build a rewarding career teaching world-class group fitness. Our
+						comprehensive training program gives you everything you need to
+						succeed - from mastering program techniques to developing your
+						coaching presence. Start your journey today and become part of a
+						global movement that's revolutionizing fitness, one class at a time.
+					</p>
+				</div>
+				<div>
+					<ul className='milestones'>
+						<h4>milestones</h4>
+						<li>SCIENCE-BASED APPROACH</li>
+						<li>comprehensive resources</li>
+						<li>globally respected certification</li>
+						<li>in-person and online events</li>
+						<li>vibrant active Lesmills' community</li>
+						<li>for everyone</li>
+						<li>easy process</li>
+						<li>valuable</li>
+					</ul>
+				</div>
+			</Container>
 			<Container
 				styleProp={{
 					gap:
@@ -194,28 +333,27 @@ function Main() {
 						<span>Lesmills </span>
 						<span>Eğitmeni Olun</span>
 					</div>
+					<p></p>
 					<p>
 						İnsanlara hayatlarını değiştirmeleri için ilham vermeye ve motive
 						etmeye hazır mısınız? İster yıllardır Eğitmenlik yapıyor olun, ister
 						yolculuğunuza yeni başlıyor olun, Les Mills Eğitmeni olarak başarılı
 						bir kariyer için ihtiyacınız olan her şeyi size vereceğiz.
 						Programlarımızdan herhangi birinde Eğitmen olarak eğitim alın -
-						seçim sizin!
-					</p>
-					<p>
-						Lesmills farklı tarzlarda Grup Fitness Programları yapan dünyaca
-						ünlü bir Eğitim Firmasıdır. Lesmills Programları 130 ülkede çoşkulu
-						bir şekilde yapılmaktadır. Bir çok Eğitmen bu programlardan ilham
-						alıp kendilerini dünya standarlarında star bir Eğitmen haline
-						getirmişlerdir. Eğitimlere katıldığınız ve Sertifikanızı aldığınız
-						taktirde Dünyanın her ülkesinde geçerli olan bu sertifika ile ders
-						verebilirsiniz. O zaman bu eğitimlere nasıl katılabilir ve bu
-						Sertifikayı nasıl alabilirsiniz? Sorusunu genel olarak bir gözden
-						geçirelim.
+						seçim sizin! Lesmills farklı tarzlarda Grup Fitness Programları
+						yapan dünyaca ünlü bir Eğitim Firmasıdır. Lesmills Programları 130
+						ülkede çoşkulu bir şekilde yapılmaktadır. Bir çok Eğitmen bu
+						programlardan ilham alıp kendilerini dünya standarlarında star bir
+						Eğitmen haline getirmişlerdir. Eğitimlere katıldığınız ve
+						Sertifikanızı aldığınız taktirde Dünyanın her ülkesinde geçerli olan
+						bu sertifika ile ders verebilirsiniz. O zaman bu eğitimlere nasıl
+						katılabilir ve bu Sertifikayı nasıl alabilirsiniz? Sorusunu genel
+						olarak bir gözden geçirelim.
 					</p>
 				</div>
 				<img src={isim} className='image'></img>
 			</Container>
+
 			<div className='bannerLikeImageContainer' ref={scrollingImgRef}>
 				<motion.div
 					style={{
@@ -351,7 +489,6 @@ function Main() {
 					</div>
 				</div>
 			</Container>
-			;
 		</>
 	);
 }

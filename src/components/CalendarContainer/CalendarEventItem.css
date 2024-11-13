@@ -17,8 +17,7 @@
 	}
 }
 .class-logo {
-	width: 100%;
+	width: auto;
 	max-height: 50px;
 	height: auto;
-	margin-bottom: 0.6rem;
 }

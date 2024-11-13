@@ -213,11 +213,7 @@ function ClassInfo() {
 						: 'Programının Sertifikalı Eğitmeni Olmak İster Misin?'}
 				</p>
 			</div>
-			<EventList
-				activeProgram={programID}
-				programTitle={program.title}
-				infoActive={true}
-			/>
+			<EventList activeProgram={programID} infoActive={true} />
 			<ul className='class-rec-con'>
 				{recPrograms.map((program, index) => {
 					return (

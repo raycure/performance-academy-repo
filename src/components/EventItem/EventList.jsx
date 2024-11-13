@@ -14,7 +14,8 @@ import { TbWorld } from 'react-icons/tb';
 import { GrDocumentPdf } from 'react-icons/gr';
 import { GrDocumentUpdate } from 'react-icons/gr';
 import { GrDocumentVerified } from 'react-icons/gr';
-function EventList({ activeProgram, programTitle, infoActive }) {
+import LesmillsPrograms from '../../assets/LesmillsPrograms';
+function EventList({ activeProgram, infoActive }) {
 	const today = new Date();
 	const eventFallback = LesMillsEvents.filter((event) => {
 		const eventDate = new Date(event.date);
@@ -65,6 +66,8 @@ function EventList({ activeProgram, programTitle, infoActive }) {
 			'noreferrer'
 		); //biri latitude biri longtitude ama unuttum hangisi hangisi
 	};
+	const programs = Object.values(LesmillsPrograms()).flat();
+
 	function prePage() {
 		if (paginationPageNumber !== 1) {
 			setPaginationPageNumber(paginationPageNumber - 1);
@@ -93,6 +96,11 @@ function EventList({ activeProgram, programTitle, infoActive }) {
 		<section className='event-list-grid'>
 			<div className='event-list'>
 				{paginatedEvents.map((event, index) => {
+					const programTitle = programs.filter((program) => {
+						return program.id === activeProgram;
+					})[0].title;
+					console.log(programTitle);
+
 					return (
 						<section className='enroll-event-item' key={index}>
 							<p className='display-none' style={{ alignContent: 'center' }}>

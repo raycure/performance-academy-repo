@@ -9,7 +9,7 @@ function Contact() {
 	return (
 		<>
 			<section>
-				<p className='fs-minimal-heading contact-text'>
+				<p className='fs-650 contact-text'>
 					{t('Contact.GreetText.0')}
 					<br /> {t('Contact.GreetText.1')}
 				</p>

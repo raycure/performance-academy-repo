@@ -635,11 +635,7 @@ input[type='checkbox'] {
 	gap: 1rem;
 	border-radius: 15px;
 	background-color: #191917;
-	/* secondary color? */
-}
-
-#testlistspan {
-	padding-bottom: 2rem;
+	/*todo choose a secondary color? */
 }
 
 .gridCardContainer {
@@ -668,14 +664,41 @@ input[type='checkbox'] {
 	background-color: transparent;
 }
 
-.testspann {
-	position: absolute;
-	/* top: 184px; */
-	border: 1px red solid;
-	height: 1px;
-	width: 100%;
+.landingParagraph {
+	display: flex;
+	flex-direction: column;
+	gap: 0.6rem;
 }
 
-#testttt {
-	overflow: hidden;
+.landingPageContainer {
+	display: grid;
+	grid-template-columns: 7fr 3fr;
+	gap: 4rem;
+}
+
+.paragraph {
+	max-width: 40rem;
+	margin-top: 1.4rem;
+}
+
+.milestones li:nth-child(n) {
+	background-color: #0b0b0b;
+}
+.milestones li:nth-child(2n) {
+	background-color: #f0f0f0;
+}
+
+.milestones {
+	margin-top: 3.1rem;
+}
+
+.stepProgressBar {
+	display: flex;
+	align-items: center;
+	gap: 20px;
+}
+
+.steps {
+	display: grid;
+	grid-template-columns: 7fr 3fr;
 }

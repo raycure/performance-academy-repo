@@ -39,12 +39,6 @@
 	);
 }
 
-@media (max-width: 1024px) {
-	.contact-text {
-		font-size: var(--fs-650);
-	}
-}
-
 @media (max-width: 6900px) {
 	.contact-form-outer-container {
 		padding: 4rem 4rem;

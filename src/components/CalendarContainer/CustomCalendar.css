@@ -4,12 +4,7 @@
 .fc-header-toolbar .fc-toolbar {
 	margin: 0px, 3rem;
 }
-.fc .fc-bg-event {
-	opacity: 100;
-	display: flex;
-	margin: 0.7rem;
-	border-radius: 8px;
-}
+
 .fc-theme-standard .fc-day:has(.fc-event-start):hover {
 	opacity: 0.9 !important;
 	animation: pulse 0.3s linear 1;
@@ -34,11 +29,6 @@
 	border-width: 0px !important;
 }
 
-.fc .fc-day-today {
-	background: #191917 !important; /* todays color we can make it transparent and stuff if u want */
-	border-radius: 8px;
-}
-
 .fc .fc-daygrid-day-top {
 	display: flex;
 	justify-content: center;
@@ -54,12 +44,43 @@
 .fc a:hover {
 	opacity: 1 !important;
 } /*abi ben linkleri genel otomatik hoverlama vermistim burda onu kapadım aslında onu da animation yapıncakapıycam*/
-.fc {
-	max-width: 750px;
-}
 .fc .fc-cell-shaded,
 .fc .fc-day-disabled {
 	background: none;
+}
+
+:root {
+	--fc-today-bg-color: blue;
+}
+
+.fc .fc-daygrid-day.fc-day-today {
+	background-color: transparent !important;
+	position: relative;
+}
+
+.fc .fc-daygrid-day.fc-day-today::before {
+	content: '';
+	width: calc(100% - 1.4rem);
+	height: calc(100% - 1.4rem);
+	position: absolute;
+	background-color: red;
+	margin: 0.7rem;
+	box-sizing: border-box;
+	border-radius: 8px;
+}
+
+.fc .fc-bg-event {
+	opacity: 100;
+	display: flex;
+	align-items: center;
+	border-radius: 8px;
+	background-color: cadetblue;
+	/* todo give the proper coloring  */
+	margin: 0.7rem;
+}
+
+.fc .fc-event-future {
+	background-color: bisque !important;
 }
 @media (max-width: 1650px) {
 	.fc .fc-toolbar.fc-header-toolbar {
@@ -70,4 +91,31 @@
 	.fc .fc-toolbar.fc-header-toolbar {
 		font-size: var(--fs-300);
 	}
+}
+
+@media (max-width: 350px) {
+	.fc-toolbar-title {
+		padding-left: 1rem;
+		font-size: 1em;
+	}
+	.fc .fc-bg-event {
+		width: 25px;
+		height: 25px;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		margin: 0;
+	}
+	.fc .fc-daygrid-day.fc-day-today::before {
+		width: 25px;
+		height: 25px;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		margin: 0;
+	}
+}
+
+.fc .fc-daygrid-bg-harness {
+	overflow: visible;
 }
