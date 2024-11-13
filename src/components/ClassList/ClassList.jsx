@@ -30,63 +30,58 @@ function ClassList({ classType }) {
 							className='class-item-container text-container top-border-light'
 							id={program.id}
 						>
-							<img
-								aria-label='program pic'
-								className='img class-img'
-								src={name}
-							/>
+							{windowWidth > 930 && (
+								<img
+									aria-label='program pic'
+									className='img class-img'
+									src={name}
+								/>
+							)}
+							<div>
+								<img
+									aria-label='logo'
+									className='img class-logo'
+									src={program.logo}
+								/>
+								<p className='slogan'>{program.sum}</p>
+								<p>
+									{i18n.language === 'tr' ? 'Dersler' : 'Lessons'}:{' '}
+									{program.lessons}
+								</p>
+							</div>
 							<div
-								style={{
-									display: 'flex',
-									flexDirection: 'column',
-									justifyContent: 'space-between',
-									padding: '1rem 0',
-								}}
+								className={`classes-more-info-container top-border-light fs-400 ${
+									windowWidth < 1130 && 'fs-300'
+								}`}
+								style={{ marginTop: {} }} //todo height alıp ona gore ver
 							>
 								<div>
-									<img
-										aria-label='logo'
-										className='img class-logo'
-										src={program.logo}
-									/>
-									<p className='slogan'>{program.sum}</p>
 									<p>
-										{i18n.language === 'tr' ? 'Dersler' : 'Lessons'}:{' '}
-										{program.lessons}
+										{i18n.language === 'tr' ? 'Türü' : 'Type'}: {program.type}
+									</p>
+									<p>
+										{i18n.language === 'tr' ? 'Ekipman' : 'Equipment'}:{' '}
+										{program.equipment}
+									</p>
+									<p>
+										{i18n.language === 'tr' ? 'Kime Yönelik' : 'For'}:{' '}
+										{program.for}
 									</p>
 								</div>
-								<div
-									className='classes-more-info-container top-border-light fs-400 '
-									style={{ marginTop: {} }} //todo height alıp ona gore ver
+								<Button
+									classProp={'classes-btn'}
+									redirect={'/program'}
+									navProp={{ program: program.id }}
+									// i want you to save this program.id to redux to use in classinfo page as programID
+									className='center-vertical'
 								>
-									<div>
-										<p>
-											{i18n.language === 'tr' ? 'Türü' : 'Type'}: {program.type}
-										</p>
-										<p>
-											{i18n.language === 'tr' ? 'Ekipman' : 'Equipment'}:{' '}
-											{program.equipment}
-										</p>
-										<p>
-											{i18n.language === 'tr' ? 'Kime Yönelik' : 'For'}:{' '}
-											{program.for}
-										</p>
-									</div>
-									<Button
-										classProp={'classes-btn'}
-										redirect={'/program'}
-										navProp={{ program: program.id }}
-										className='center-vertical'
-									>
-										İncele
-										<MdOutlineDoubleArrow
-											style={{ marginTop: 2 }}
-											color='white'
-										/>
-									</Button>
-								</div>
+									İncele
+									<MdOutlineDoubleArrow
+										style={{ marginTop: 2 }}
+										color='white'
+									/>
+								</Button>
 							</div>
-
 							<div className='background-image class-background-shape'></div>
 						</div>
 					</motion.div>

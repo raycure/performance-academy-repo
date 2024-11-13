@@ -31,8 +31,8 @@ function EventItem() {
 					<h3>Yaklaşan Etkinlik!</h3>
 					<p className='event-text'>
 						{eventDate.toLocaleDateString()} tarihinde {event.title}{' '}
-						programından oluşan etkinliğimiz yakınlaşmakta!
-						Etkinliğimize son {daysLeft} gün!
+						programından oluşan etkinliğimiz yakınlaşmakta! Etkinliğimize son{' '}
+						{daysLeft} gün!
 					</p>
 					<HashLink
 						smooth

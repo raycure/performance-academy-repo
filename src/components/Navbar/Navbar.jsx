@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useLayoutEffect } from 'react';
 import './Navbar.css';
-import { Link, NavLink } from 'react-router-dom'; //u cant style the links directly
+import { Link, NavLink, useNavigate } from 'react-router-dom'; //u cant style the links directly
 import { FaUser } from 'react-icons/fa6';
 import Button from '../Button/Button';
 import logo from '../../assets/PFALogo.png';
@@ -21,8 +21,10 @@ import {
 } from '../animations/AnimationValues';
 import instagramBackground from '../../assets/instagram-background.jpg';
 import { useTranslation } from 'react-i18next';
+import { Navigate } from 'react-router-dom';
 
 function Navbar() {
+	const navigate = useNavigate();
 	//if the user is logged in it hides the register button
 	const [isLoggedin, setIsLoggedin] = useState(false);
 	useLayoutEffect(() => {
@@ -132,11 +134,26 @@ function Navbar() {
 			document.removeEventListener('mousedown', handleClickOutside);
 		};
 	}, [menuOpen]);
-	const [isOpen, setIsOpen] = useState(false);
 
+	const [isOpen, setIsOpen] = useState(false);
 	const toggleDropdown = () => {
 		setIsOpen(!isOpen);
 	};
+
+	async function handleLogout() {
+		console.log({
+			accessToken: localStorage.getItem('accessToken'),
+		});
+		const response = await axios.post('/logout', {
+			withCredentials: true,
+		});
+		console.log(response);
+		localStorage.removeItem('isLoggedIn');
+
+		if (response.status === 200) {
+			localStorage.removeItem('accessToken');
+		}
+	}
 
 	return (
 		<div className='navigation-outer-container user-select-none' id='navbar'>
@@ -168,20 +185,21 @@ function Navbar() {
 						<GrLanguage className='nav-item-icon' />
 						{i18n.language === 'en' ? 'EN' : 'TR'}
 					</Link>
-					{/* <Link aria-label='user' to='/login' style={{ display: 'contents' }}>
-						<FaUser className='nav-item-icon' />
-					</Link> */}
 
-					{/* <Button onClick={handleDropDownMenu}>
+					<div className='userDropDown' onClick={toggleDropdown}>
 						<FaUser className='nav-item-icon' />
-					</Button>
-					<motion.div className='drop-down-menu'></motion.div> */}
-
-					<div className='dropdown'>
-						<FaUser className='nav-item-icon' onClick={toggleDropdown} />
-						<div className={`dropdown-content ${isOpen ? 'open' : ''}`}>
-							<h4 id='test'>signout</h4>
-							<h4 id='test'>user info</h4>
+						<div className={`dropdown-content ${isOpen ? 'open' : 'closed'}`}>
+							<h4
+								style={{ color: 'black' }}
+								onClick={() => {
+									navigate('/kullaniciBilgileri');
+								}}
+							>
+								user info
+							</h4>
+							<h4 style={{ color: 'black' }} onClick={handleLogout}>
+								signout
+							</h4>
 						</div>
 					</div>
 

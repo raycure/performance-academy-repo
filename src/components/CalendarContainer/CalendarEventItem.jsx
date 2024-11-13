@@ -41,7 +41,8 @@ function CalendarEventItem({ eventId }) {
 					</HashLink>
 					<p>
 						Bu etkinliğimizin maalesef tarihi geçmiştir. Başka etkinliklerimize
-						göz atmaya devam edebilirsiniz!
+						göz atmaya devam edebilirsiniz! Bu etkinliğimizin maalesef tarihi
+						geçmiştir.
 					</p>
 				</div>
 			) : (

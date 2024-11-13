@@ -32,7 +32,7 @@ const Banner = () => {
 		<Container>
 			<div className='gridCardContainer'>
 				<div className='gridCard' style={bannerStyle}>
-					<div className='programStepContainers center-item center-item'>
+					<div className='programStepContainers center-item'>
 						<span className='programStepNumbers'>1</span>
 					</div>
 					<div className='gridCardHeading center-item'>

@@ -1,5 +1,7 @@
 import { color } from 'framer-motion';
 
+//todo maybe try this transition       transition: { ease: [0.78, 0.14, 0.15, 0.86] }
+
 const downToUp = {
 	hidden: {
 		y: 100,

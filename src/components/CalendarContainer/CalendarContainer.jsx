@@ -42,27 +42,28 @@ function CalendarContainer() {
 			className='calendar-container user-select-none bg-primary-500'
 		>
 			<CalendarEventItem eventClicked={eventClicked} eventId={activeEventId} />
-			<FullCalendar
-				plugins={[dayGridPlugin]}
-				initialView='dayGridMonth'
-				locale={i18n.language}
-				buttonText={
-					i18n.language === 'tr' ? { today: 'Bugün' } : { today: 'Today' }
-				}
-				editable={false}
-				aspectRatio={1.1}
-				headerToolbar={{
-					start: 'today',
-					center: 'title',
-					end: 'prev,next',
-				}}
-				eventDisplay='background'
-				events={events}
-				eventClick={handleEventClick}
-				eventContent={renderEvents}
-				eventBackgroundColor={events.color}
-				validRange={{ start: '2024-09-01', end: '2025-01-01' }} //we're gonna put the range of the events here
-			/>
+			<div className='testCalendars'>
+				<FullCalendar
+					plugins={[dayGridPlugin]}
+					initialView='dayGridMonth'
+					locale={i18n.language}
+					buttonText={
+						i18n.language === 'tr' ? { today: 'Bugün' } : { today: 'Today' }
+					}
+					editable={false}
+					aspectRatio={1.1}
+					headerToolbar={{
+						start: 'today',
+						center: 'title',
+						end: 'prev,next',
+					}}
+					eventDisplay='background'
+					events={events}
+					eventClick={handleEventClick}
+					eventContent={renderEvents}
+					validRange={{ start: '2024-09-01', end: '2025-01-01' }} //we're gonna put the range of the events here
+				/>
+			</div>
 		</div>
 	);
 }

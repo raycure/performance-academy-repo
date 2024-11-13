@@ -4,7 +4,6 @@
 	position: relative;
 }
 .event-item-container {
-	background-color: var(--clr-accent-600);
 	padding: 3rem 1.5rem;
 	display: flex;
 	flex-direction: column;
