@@ -8,7 +8,41 @@
 		"Contact": "İletişim"
 	},
 	"MainPage": {
-		"WelcomeText": "İnsanlara hayatlarını değiştirmeleri için ilham vermeye ve motive etmeye hazır mısınız? İster yıllardır Eğitmenlik yapıyor olun, ister yolculuğunuza yeni başlıyor olun, Les Mills Eğitmeni olarak başarılı bir kariyer için ihtiyacınız olan her şeyi size vereceğiz. Programlarımızdan herhangi birinde Eğitmen olarak eğitim alın - seçim sizin! \nLesmills farklı tarzlarda Grup Fitness Programları yapan dünyaca ünlü bir Eğitim Firmasıdır. Lesmills Programları 130 ülkede çoşkulu bir şekilde yapılmaktadır. Bir çok Eğitmen bu programlardan ilham alıp kendilerini dünya standarlarında star bir Eğitmen haline getirmişlerdir. Eğitimlere katıldığınız ve Sertifikanızı aldığınız taktirde Dünyanın her ülkesinde geçerli olan bu sertifika ile ders verebilirsiniz. O zaman bu eğitimlere nasıl katılabilir ve bu Sertifikayı nasıl alabilirsiniz? Sorusunu genel olarak bir gözden geçirelim."
+		"WelcomeText": "İnsanlara hayatlarını değiştirmeleri için ilham vermeye ve motive etmeye hazır mısınız? İster yıllardır Eğitmenlik yapıyor olun, ister yolculuğunuza yeni başlıyor olun, Les Mills Eğitmeni olarak başarılı bir kariyer için ihtiyacınız olan her şeyi size vereceğiz. Programlarımızdan herhangi birinde Eğitmen olarak eğitim alın - seçim sizin! \nLesmills farklı tarzlarda Grup Fitness Programları yapan dünyaca ünlü bir Eğitim Firmasıdır. Lesmills Programları 130 ülkede çoşkulu bir şekilde yapılmaktadır. Bir çok Eğitmen bu programlardan ilham alıp kendilerini dünya standarlarında star bir Eğitmen haline getirmişlerdir. Eğitimlere katıldığınız ve Sertifikanızı aldığınız taktirde Dünyanın her ülkesinde geçerli olan bu sertifika ile ders verebilirsiniz. O zaman bu eğitimlere nasıl katılabilir ve bu Sertifikayı nasıl alabilirsiniz? Sorusunu genel olarak bir gözden geçirelim.",
+		"LandingParagraph": [
+			"Dünya çapında bir Les Mills Eğitmeni olun ve fitness ile hayatları dönüştürün. Uluslararası alanda tanınan sertifikasyon programımız, 130'dan fazla ülkede öğretim yapabilmeniz için gerekli her şeyi sağlar.",
+			"Hareket yoluyla hayatları dönüştürün ve başkalarına potansiyellerine ulaşmaları için ilham verin. Dünyanın dört bir yanında insanların egzersiz deneyimlerini değiştiren, tutkulu fitness liderleri topluluğumuza katılın. İster deneyimli bir eğitmen olun, ister yolculuğunuza yeni başlayın, dünya çapında grup fitness eğitimi vererek ödüllendirici bir kariyer inşa etmeniz için size gereken araçlar, bilgi ve desteği sağlıyoruz. Kapsamlı eğitim programımız, program tekniklerini ustalıkla kullanmaktan koçluk becerilerinizi geliştirmeye kadar başarılı olmanız için ihtiyacınız olan her şeyi sunar. Yolculuğunuza bugün başlayın ve fitness dünyasında devrim yaratan, bir sınıfta birer birey olarak dönüşüm gerçekleştiren bu küresel hareketin bir parçası olun."
+		],
+		"CardsTitle": "Kategorilerimize Bir Göz Atın!",
+		"EventsTitle": "",
+		"GridCard": {
+			"Title": [
+				"Uluslararası Sertifikalar",
+				"Her Seviyeye uygun",
+				"Geleceğe Yatırım",
+				"Her 3 Ayda Yeni İçerikler"
+			],
+			"Content": [
+				"Les Mills sertifikalı bir eğitmen olarak, dünya çapında 130'dan fazla ülkede tanınan seçkin bir fitness profesyonelleri topluluğuna katılacaksınız. Sertifika programlarımız, altı kıtada önde gelen sağlık kulüpleri ve fitness tesisleri tarafından güvenilen, grup fitness eğitiminde altın standarttır.",
+				"Başlangıç noktanız ne olursa olsun, Les Mills sertifikası sürekli bir gelişim yolculuğu olarak tasarlanmıştır. Düzenli atölye çalışmaları, üç ayda bir program güncellemeleri ve sürekli eğitim fırsatları, hem yeni hem de deneyimli eğitmenlerin fitness bilimi ve öğretim metodolojisindeki en son gelişmeleri takip etmelerini sağlar.",
+				"Bir Les Mills sertifikası seçtiğinizde, yalnızca bir sertifika için ödeme yapmıyorsunuz – ilk günden itibaren gerçek değer sunan eksiksiz bir kariyer araç setine yatırım yapıyorsunuz. Sertifikasyon maliyetlerimiz, Les Mills'i fitness sektöründe öne çıkaran kapsamlı destek, kanıtlanmış programlar ve sürekli sağlanan avantajları yansıtmaktadır.",
+				"Les Mills deneyiminizi bir sonraki seviyeye taşımak için, özverili eğitmenlere özel etkinlikler sunuyoruz. İster fiziksel olarak katılın ister çevrim içi, her çeyrekte yeni içeriklere erişim sağlayarak eğitim yolculuğunuzu genişletmek ve ilham vermek için buradayız. Her etkinlikte, en güncel kaynaklar, uzman rehberliği ve benzersiz bir motivasyonla kendinizi yenileyin. Etkinizin gücünü artırın ve her üç ayda bir bağlı kalın!"
+			]
+		}
+	},
+	"Banner": {
+		"Title": [
+			"EĞİTİME KAYDOL",
+			"EĞİTİME KATIL",
+			"ÖN ÇALIŞMA",
+			"VİDEONU GÖNDER"
+		],
+		"Content": [
+			"Uygun bir zamanda ve yerde temel bir\n eğitim kursuna rezervasyon yap",
+			"Yeni rolünüzü keşfederek \nkısa bir koreografi parçası öğren",
+			"Yeni takım arkadaşlarınıza çevrim içi veya yüz yüze\n katılarak dünya çapında tanınan eğitimin bir parçası olun",
+			"İlk eğitimi geçtikten sonra son adım olarak\n bir değerlendirme videosu gönder"
+		]
 	},
 	"Footer": {
 		"Contact": "Bize Ulaşın",
@@ -72,5 +106,21 @@
 			"Topic": "Konu",
 			"Context": "Sorunuz"
 		}
+	},
+	"CertificationSteps": {
+		"Title": [
+			"Size Hitap Eden Programı Bulun",
+			"Ders Kiti ve Sözleşmenizi Korumaya Alın",
+			"Kendi Temponuzda Öğrenin",
+			"Yeteneklerinizi Sergileyin",
+			"Özel Etkinliklere Erişim"
+		],
+		"Content": [
+			"Kariyer hedeflerinize ve uzmanlık alanınıza uygun, özenle hazırlanmış profesyonel kurslar listemizi inceleyin. Her ders, sektörde öne çıkmanız için ihtiyacınız olan becerileri sağlamayı hedefler.",
+			"Dersinizi seçtikten sonra, başarıya ulaşmanız için gereken tüm materyalleri içeren kapsamlı Ders Kitini satın alın. Sadece imzalı bir sözleşme yükleyerek taahhüdünüzü onaylayın ve başlangıç için tüm işlemlerinizi doğrulayalım.",
+			"Öğrenim yolculuğunuza, sizi içine çeken tanıtıcı videomuzla başlayın. Daha sonra, kursa mobil uygulamamızdan devam edebileceğiniz bir yönlendirme alacaksınız — hepsi avucunuzun içinde!",
+			"Bir dizi görevi tamamladığınız bir video göndererek ustalığınızı kanıtlayın. Uzman ekibimiz gönderiminizi doğrulayacak ve onaylandıktan sonra, çabanızın ve bağlılığınızın sembolü olan resmi sertifikanızı alacaksınız.",
+			"Hem çevrimiçi hem de yüz yüze özel etkinliklere katılarak öğrenme deneyiminizi geliştirin. Diğer eğitmenlerle ağ oluşturun, atölyelere katılın ve becerilerinizi daha da geliştirmek için uygulamalı deneyimler kazanın."
+		]
 	}
 }

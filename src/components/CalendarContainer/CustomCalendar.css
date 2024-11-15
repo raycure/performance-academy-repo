@@ -5,10 +5,6 @@
 	margin: 0px, 3rem;
 }
 
-.fc-theme-standard .fc-day:has(.fc-event-start):hover {
-	opacity: 0.9 !important;
-	animation: pulse 0.3s linear 1;
-} /* event ustunde hoverlayınca opacity azaltma */
 .fc .fc-daygrid-day-number {
 	padding: 0;
 	z-index: 0;
@@ -80,7 +76,12 @@
 }
 
 .fc .fc-event-future {
-	background-color: bisque !important;
+	background-color: rgb(76, 5, 21) !important;
+	padding: 1rem;
+}
+.fc .fc-event-future:hover {
+	background-color: rgb(52, 2, 14) !important;
+	animation: pulse 0.3s linear 1;
 }
 @media (max-width: 1650px) {
 	.fc .fc-toolbar.fc-header-toolbar {
@@ -93,6 +94,11 @@
 	}
 }
 
+@media (max-width: 910px) {
+	.fc .fc-event-future {
+		padding: 0.5rem;
+	}
+}
 @media (max-width: 350px) {
 	.fc-toolbar-title {
 		padding-left: 1rem;

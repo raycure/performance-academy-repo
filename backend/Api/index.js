@@ -13,7 +13,7 @@ import credentials from './Middleware/credentials.js';
 import corsOptions from '../config/corsOptions.js';
 import rateLimit from 'express-rate-limit';
 import uploadRoute from './Routes/uploadRoute.js';
-import userInfoRoute from './Routes/userInfoRoute.js';
+//import userInfoRoute from './Routes/userInfoRoute.js';
 
 const port = 3001;
 
@@ -44,7 +44,7 @@ app.use('/register', registerRoute);
 app.use('/', verifyMailRoute);
 app.use('/login', loginRoute);
 app.use('/refresh', jwtRefresRoute);
-app.use('/userInfo', userInfoRoute);
+//app.use('/userInfo', userInfoRoute);
 // todo add verifyjwt for info
 app.use(verifyJWT);
 app.use('/test', testRoute);

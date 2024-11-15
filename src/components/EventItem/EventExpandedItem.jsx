@@ -15,12 +15,10 @@ function EventExpandedItem() {
 	// 	today.getDate() + 100
 	// );
 	const events = LesMillsEvents.filter((event) => {
-		const eventDate = new Date(event.date);
-		return eventDate >= today; //eventDate <= dateTwentyDaysAfter &&
+		return event.fullStartDate >= today; //event.fullStartDate <= dateTwentyDaysAfter &&
 	}).map((event) => {
-		const eventDate = new Date(event.date);
 		const daysLeft = Math.floor(
-			(eventDate.getTime() - today.getTime()) / (1000 * 3600 * 24) + 1
+			(event.fullStartDate.getTime() - today.getTime()) / (1000 * 3600 * 24) + 1
 		);
 
 		return (
@@ -31,9 +29,9 @@ function EventExpandedItem() {
 			>
 				<h3>{event.title}</h3>
 				<p className='event-text'>
-					{eventDate.toLocaleDateString()} tarihinde {event.title}{' '}
-					programından oluşan etkinliğimiz yakınlaşmakta!
-					Etkinliğimize son {daysLeft} gün! cokcokcooooookk text
+					{event.fullStartDate.toLocaleDateString()} tarihinde {event.title}{' '}
+					programından oluşan etkinliğimiz yakınlaşmakta! Etkinliğimize son{' '}
+					{daysLeft} gün! cokcokcooooookk text
 				</p>
 				<HashLink
 					smooth

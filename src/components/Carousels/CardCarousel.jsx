@@ -9,7 +9,7 @@ import './Carousel.css';
 export default () => {
 	const eventItems = EventItem();
 	const windowWidth = window.innerWidth;
-	const slideAmount = windowWidth > 770 ? 3 : windowWidth > 500 ? 2 : 1.5;
+	const slideAmount = windowWidth > 1020 ? 3 : windowWidth > 580 ? 2 : 1.5;
 	return (
 		<Swiper
 			modules={[Pagination, Autoplay, EffectCoverflow]}
@@ -18,7 +18,7 @@ export default () => {
 			scrollbar={{ draggable: true }}
 			// onSlideChange={() => console.log('slide change')}
 			// onSwiper={(swiper) => console.log(swiper)}
-			//autoplay={{ delay: 5000, disableOnInteraction: false }}
+			autoplay={{ delay: 10000, disableOnInteraction: true }}
 			effect='coverflow'
 			centeredSlides={true}
 			grabCursor={true}
@@ -26,8 +26,8 @@ export default () => {
 			coverflowEffect={{
 				rotate: 0,
 				stretch: 0,
-				depth: 70,
-				modifier: 3,
+				//depth: 70,
+				//modifier: 3,
 			}}
 			slidesPerView={slideAmount}
 		>

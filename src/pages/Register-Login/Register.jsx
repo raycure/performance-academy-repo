@@ -21,16 +21,16 @@ function RegisterForm() {
 	const { t, i18n } = useTranslation('translation');
 	let isLoading = useSelector(selectIsLoading); //for button to be in the loading state
 	const [localLoading, setLocalLoading] = useState(false); // the button needs to be in isLoading stage before the api request is pending so the user sees loading state as soon as submitting
-	const userIdValidationRules = [
-		{
-			test: (userId) => !/^[0-9]+$/.test(userId),
-			message: t('Authentication.Validation.UserId.0'),
-		},
-		{
-			test: (userId) => userId.length != 11,
-			message: t('Authentication.Validation.UserId.1'),
-		},
-	];
+	// const userIdValidationRules = [
+	// 	{
+	// 		test: (userId) => !/^[0-9]+$/.test(userId),
+	// 		message: t('Authentication.Validation.UserId.0'),
+	// 	},
+	// 	{
+	// 		test: (userId) => userId.length != 11,
+	// 		message: t('Authentication.Validation.UserId.1'),
+	// 	},
+	// ];
 	const usernameValidationRules = [
 		{
 			test: (username) => !/^[a-zA-Z]/.test(username),
@@ -80,9 +80,9 @@ function RegisterForm() {
 	const [mail, setMail] = useState('');
 	const [userFocus, setUsernameFocus] = useState(false);
 
-	const [userId, setUserId] = useState('');
-	const [validUserId, setValidUserId] = useState(false);
-	const [userIdFocus, setUserIdFocus] = useState(false);
+	// const [userId, setUserId] = useState('');
+	// const [validUserId, setValidUserId] = useState(false);
+	// const [userIdFocus, setUserIdFocus] = useState(false);
 
 	const [pwd, setPwd] = useState('');
 	const [validPwd, setValidPwd] = useState(false);
@@ -103,10 +103,10 @@ function RegisterForm() {
 		setValidName(valid);
 	}, [username]);
 
-	useEffect(() => {
-		const valid = userIdValidationRules.every((rule) => !rule.test(userId));
-		setValidUserId(valid);
-	}, [userId]);
+	// useEffect(() => {
+	// 	const valid = userIdValidationRules.every((rule) => !rule.test(userId));
+	// 	setValidUserId(valid);
+	// }, [userId]);
 
 	useEffect(() => {
 		const valid = passwordValidationRules.every((rule) => !rule.test(pwd));
@@ -119,7 +119,7 @@ function RegisterForm() {
 
 	useEffect(() => {
 		setErrMsg('');
-	}, [username, userId, pwd, matchPwd]);
+	}, [username, pwd, matchPwd]);
 
 	function displayNotif() {
 		const verifyNotif = {
@@ -144,14 +144,14 @@ function RegisterForm() {
 		try {
 			const registerData = {
 				username: username,
-				userId: userId,
+				//userId: userId,
 				password: pwd,
 				email: mail,
 			};
 			const response = await dispatch(register({ registerData }));
 			setUsername('');
 			setLocalLoading(true);
-			setUserId('');
+			//setUserId('');
 			setPwd('');
 			setMatchPwd('');
 			console.log(response);
@@ -233,7 +233,7 @@ function RegisterForm() {
 									?.message || ''}
 							</motion.p>
 						</div>
-						<div>
+						{/* <div>
 							<input
 								type='text'
 								placeholder={t('Authentication.UserId')}
@@ -270,7 +270,7 @@ function RegisterForm() {
 								{userIdValidationRules.find((rule) => rule.test(userId))
 									?.message || ''}
 							</motion.p>
-						</div>
+						</div> */}
 					</div>
 				</div>
 				<div className='centerLineAnimation'>

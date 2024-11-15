@@ -6,7 +6,6 @@ function LesmillsPrograms() {
 			{
 				title: 'BODYPUMP',
 				logo: '/classLogo/BODYPUMP.png',
-				picture: '',
 				additionalPictures: [
 					{
 						url: 'https://d2lsjsqnstxud9.cloudfront.net/media/13959BF0-BCE0-4B85-83FC898FABC86C4C/365BF308-3E09-40C9-9E35204A3A883A48/webimage-50c1fbd9-ccb1-4d99-82a8-7eabb7af94fa.png',
@@ -43,7 +42,6 @@ function LesmillsPrograms() {
 			{
 				title: 'BODYCOMBAT',
 				logo: '/classLogo/BODYCOMBAT.png',
-				picture: '',
 				additionalPictures: [
 					{
 						url: 'https://d2lsjsqnstxud9.cloudfront.net/media/13959BF0-BCE0-4B85-83FC898FABC86C4C/4F93822E-1A1E-48B7-A8DBA85BC29DE840/webimage-7c2034ae-a4c5-4415-bb32-90dfdadda5b8.png',
@@ -81,7 +79,6 @@ function LesmillsPrograms() {
 			{
 				title: 'BODYBALANCE',
 				logo: '/classLogo/BODYBALANCE.png',
-				picture: '',
 				additionalPictures: [
 					{
 						url: 'https://d2lsjsqnstxud9.cloudfront.net/media/13959BF0-BCE0-4B85-83FC898FABC86C4C/6F20D63C-595A-49B0-983845AA5C7CAFAB/A993D0BF-8723-497B-82F5176F61FBB321/webimage-A5668372-6756-431F-90443E24C34AFA0C.png',
@@ -123,7 +120,6 @@ function LesmillsPrograms() {
 			{
 				title: 'LES MILLS CORE',
 				logo: '/classLogo/CORE.png',
-				picture: '',
 				additionalPictures: [
 					{
 						url: 'https://d2lsjsqnstxud9.cloudfront.net/media/13959BF0-BCE0-4B85-83FC898FABC86C4C/043D6B6C-F9C2-447C-8D4B43480F1F9600/webimage-DCE070F8-59AB-4AED-B3EED9A43915BD3C.png',
@@ -164,7 +160,6 @@ function LesmillsPrograms() {
 			{
 				title: 'BODYATTACK',
 				logo: '/classLogo/BODYATTACK.png',
-				picture: '',
 				additionalPictures: [
 					{
 						url: 'https://d2lsjsqnstxud9.cloudfront.net/media/13959BF0-BCE0-4B85-83FC898FABC86C4C/6A3EE364-68C7-42E5-BEB2B6B299B86A66/webimage-6ED73243-9086-4933-926A11BD4D735C34.png',
@@ -205,7 +200,6 @@ function LesmillsPrograms() {
 			{
 				title: 'RPM',
 				logo: '/classLogo/RPM.png',
-				picture: '',
 				id: 'RPM',
 				sum: t('cat1.program6.sum'),
 				description: t('cat1.program6.description'),
@@ -220,7 +214,6 @@ function LesmillsPrograms() {
 			{
 				title: 'SH’BAM',
 				logo: '/classLogo/SH’BAM.png',
-				picture: '',
 				additionalPictures: [
 					{
 						url: 'https://d2lsjsqnstxud9.cloudfront.net/media/13959BF0-BCE0-4B85-83FC898FABC86C4C/BC73DCE1-576C-47CB-BE4E8090BCE23034/webimage-33314017-B9B1-48F1-8828FD94556ED1B9.png',
@@ -267,7 +260,6 @@ function LesmillsPrograms() {
 			{
 				title: 'BODYJAM',
 				logo: '/classLogo/BODYJAM.png',
-				picture: '',
 				additionalPictures: [
 					{
 						url: 'https://d2lsjsqnstxud9.cloudfront.net/media/13959BF0-BCE0-4B85-83FC898FABC86C4C/A2E13E1F-3B64-42D5-8217C60424DE97E5/webimage-F142161C-3ED2-476B-9F37C38760E93C36.png',
@@ -320,7 +312,6 @@ function LesmillsPrograms() {
 			{
 				title: 'BODYSTEP',
 				logo: '/classLogo/BODYSTEP.png',
-				picture: '',
 				additionalPictures: [
 					{
 						url: 'https://d2lsjsqnstxud9.cloudfront.net/media/13959BF0-BCE0-4B85-83FC898FABC86C4C/03BFDEE2-12E4-4D3A-B6B5E56D6B60F1E1/webimage-FCFED11C-86D6-4F07-902C62B32659C8C2.png',
@@ -373,7 +364,6 @@ function LesmillsPrograms() {
 			{
 				title: 'LES MILLS TONE',
 				logo: '/classLogo/TONE.png',
-				picture: '',
 				additionalPictures: [
 					{
 						url: 'https://d2lsjsqnstxud9.cloudfront.net/media/13959BF0-BCE0-4B85-83FC898FABC86C4C/7A65DBA1-DFC7-4756-BEB38345DBE274E6/webimage-FAC5C027-4A59-4D44-A1A39E21FD41E6FB.png',
@@ -414,7 +404,6 @@ function LesmillsPrograms() {
 			{
 				title: 'THE TRIP',
 				logo: '/classLogo/THE-TRIP.png',
-				picture: '',
 				additionalPictures: [
 					{
 						url: 'https://d2lsjsqnstxud9.cloudfront.net/media/13959BF0-BCE0-4B85-83FC898FABC86C4C/01516D71-7D7E-4AD8-93E3C8456A2876B0/webimage-CAD0162B-3614-475E-A6FAED808858FCA8.png',
@@ -467,7 +456,6 @@ function LesmillsPrograms() {
 			{
 				title: 'LES MILLS BARRE',
 				logo: '/classLogo/BARRE.png',
-				picture: '',
 				additionalPictures: [
 					{
 						url: 'https://d2lsjsqnstxud9.cloudfront.net/media/13959BF0-BCE0-4B85-83FC898FABC86C4C/21A6A94E-CDA6-4991-B5A1BA4D21B1D4B5/webimage-FCA8FDA7-AC28-4BF8-BC6A5CFB12F5C85E.png',
@@ -510,7 +498,6 @@ function LesmillsPrograms() {
 			{
 				title: 'BORN TO MOVE',
 				logo: '/classLogo/BORNTOMOVE.png',
-				picture: '',
 				additionalPictures: [
 					{
 						url: 'https://d2lsjsqnstxud9.cloudfront.net/media/13959BF0-BCE0-4B85-83FC898FABC86C4C/A33E350A-F10B-469C-BF29329EF49D9897/webimage-2EC03E69-AF61-43CA-8D9E9EA10FD8186C.png',
@@ -559,7 +546,6 @@ function LesmillsPrograms() {
 			{
 				title: 'LES MILLS SPRINT',
 				logo: '/classLogo/SPRINT.png',
-				picture: '',
 				additionalPictures: [
 					{
 						url: 'https://d2lsjsqnstxud9.cloudfront.net/media/13959BF0-BCE0-4B85-83FC898FABC86C4C/192D1A9B-D4B0-4836-9301E13305EB8403/webimage-65F067DD-4B3C-4D2B-B4041F76164C993E.png',
@@ -606,7 +592,6 @@ function LesmillsPrograms() {
 			{
 				title: 'LES MILLS GRIT',
 				logo: '/classLogo/GRIT.png',
-				picture: '',
 				additionalPictures: [
 					{
 						url: 'https://d2lsjsqnstxud9.cloudfront.net/media/13959BF0-BCE0-4B85-83FC898FABC86C4C/74417EEE-A720-4805-AE47B4C9EDF12F2F/webimage-4F7A6C4A-1CDD-429E-B17EFDF33AEAB9B0.png',

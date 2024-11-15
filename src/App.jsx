@@ -19,6 +19,7 @@ const PrivacyPolicy = lazy(() => import('./pages/Legal/PrivacyPolicy'));
 const ClassInfo = lazy(() => import('./pages/ClassInfo/ClassInfo'));
 const Classes = lazy(() => import('./pages/Classes/Classes'));
 const UserInfo = lazy(() => import('./pages/UserInfo/UserInfo'));
+const UserInfoFake = lazy(() => import('./pages/UserInfo/UserInfoFake'));
 const MyPrograms = lazy(() => import('./pages/MyPrograms/MyPrograms'));
 
 function App() {
@@ -39,6 +40,7 @@ function App() {
 								<Route path='programlarım' element={<MyPrograms />} />
 								<Route path='çerezler' element={<Cookies />} />
 								<Route path='info' element={<UserInfo />} />
+								<Route path='bilgilerim' element={<UserInfoFake />} />
 								<Route
 									path='kişisel-verilerin-korunması'
 									element={<PrivacyPolicy />}

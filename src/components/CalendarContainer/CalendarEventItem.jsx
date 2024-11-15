@@ -5,11 +5,30 @@ import { HashLink } from 'react-router-hash-link';
 import LesMillsPrograms from '../../assets/LesmillsPrograms';
 import Button from '../Button/Button';
 import UpcomingEvents from './UpcomingEvents';
+import { useTranslation } from 'react-i18next';
+import { useDispatch, useSelector } from 'react-redux';
+import { setEventId } from '../../redux/Slices/CalendarEventSlice.js';
 function CalendarEventItem({ eventId }) {
+	const { i18n, t } = useTranslation('');
 	const lesMillsPrograms = LesMillsPrograms();
 	const allEvents = LesMillsEvents;
 	const today = new Date();
+	const dispatch = useDispatch();
+	const handleCalendarEventSelect = (id) => {
+		dispatch(setEventId(id));
+		const element = document.getElementById('event-select-form');
+		const offset = 200;
+		if (element) {
+			const elementPosition =
+				element.getBoundingClientRect().top + window.scrollY;
+			const offsetPosition = elementPosition - offset;
 
+			window.scrollTo({
+				top: offsetPosition,
+				behavior: 'smooth',
+			});
+		}
+	};
 	if (!eventId) {
 		return <UpcomingEvents />;
 	}
@@ -27,10 +46,7 @@ function CalendarEventItem({ eventId }) {
 
 	return (
 		<div className='upcoming-events-container selected-events'>
-			{Math.floor(
-				(activeEvent.fullStartDate.getTime() - today.getTime()) /
-					(1000 * 3600 * 24)
-			) < -1 ? ( //tarihi geçen etkinliği göstermemek için
+			{activeEvent.fullStartDate <= today ? (
 				<div className='border-container'>
 					<HashLink className='' to={`/programlar#${eventProgram[0]?.id}`}>
 						<img
@@ -40,9 +56,9 @@ function CalendarEventItem({ eventId }) {
 						/>
 					</HashLink>
 					<p>
-						Bu etkinliğimizin maalesef tarihi geçmiştir. Başka etkinliklerimize
-						göz atmaya devam edebilirsiniz! Bu etkinliğimizin maalesef tarihi
-						geçmiştir.
+						{i18n.language === 'en'
+							? 'Unfortunately this event has passed. You can continue looking through our other events.'
+							: 'Bu etkinliğimizin maalesef tarihi geçmiştir. Başka etkinliklerimize göz atmaya devam edebilirsiniz!'}
 					</p>
 				</div>
 			) : (
@@ -54,18 +70,34 @@ function CalendarEventItem({ eventId }) {
 							className='img class-logo'
 						/>
 					</HashLink>
-					<p>{eventProgram[0]?.sum}</p>
+					<p id='calendar-item-sum'>{eventProgram[0]?.sum}</p>
+					{i18n.language === 'en' ? (
+						<p>
+							There's only
+							{Math.floor(
+								(activeEvent.fullStartDate.getTime() - today.getTime()) /
+									(1000 * 3600 * 24) +
+									1
+							)}{' '}
+							days till our {activeEvent.program} event. If you're interested in
+							this event join before it passes!
+						</p>
+					) : (
+						<p>
+							{activeEvent.program} programını kapsayan bu etkinliğimize{' '}
+							{Math.floor(
+								(activeEvent.fullStartDate.getTime() - today.getTime()) /
+									(1000 * 3600 * 24) +
+									1
+							)}{' '}
+							gün kalmıştır. Bu etkinliğimizle ilgileniyorsanız kaçırmadan
+							katılın!
+						</p>
+					)}
 
-					<p>
-						{activeEvent.program} programını kapsayan bu etkinliğimize{' '}
-						{Math.floor(
-							(activeEvent.fullStartDate.getTime() - today.getTime()) /
-								(1000 * 3600 * 24) +
-								1
-						)}{' '}
-						gün kalmıştır.
-					</p>
-					<Button>Etkinliğe Katılın</Button>
+					<Button onClick={() => handleCalendarEventSelect(activeEvent.id)}>
+						{i18n.language === 'en' ? 'Join Event' : 'Etkinliğe Katılın'}
+					</Button>
 				</div>
 			)}
 		</div>

@@ -1,0 +1,30 @@
+.inputfile {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+.inputfile + label {
+	background-color: var(--clr-primary-400);
+	display: inline-block;
+	width: fit-content;
+	padding: 0.5rem 1.2rem;
+	margin: 0.5rem;
+	border-radius: 0.3rem;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+	vertical-align: top;
+	max-width: 13rem;
+}
+
+.inputfile:focus + label,
+.inputfile + label:hover {
+	background-color: var(--clr-accent-400);
+	animation: pulse 0.3s linear 1;
+}
+.inputfile + label {
+	cursor: pointer; /* "hand" cursor */
+}

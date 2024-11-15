@@ -11,13 +11,18 @@
 	width: fit-content;
 	justify-self: center;
 }
+.class-logo {
+	width: auto;
+	max-height: 50px;
+	height: auto;
+}
 @media (max-width: 1160px) {
 	.upcoming-events-container .fs-700 {
 		font-size: var(--fs-650);
 	}
 }
-.class-logo {
-	width: auto;
-	max-height: 50px;
-	height: auto;
+@media (max-width: 850px) {
+	.upcoming-events-container #calendar-item-sum {
+		display: none;
+	}
 }

@@ -34,7 +34,7 @@ function Classes() {
 		},
 	];
 	return (
-		<div>
+		<div className='class-outer-container'>
 			<div className='page-poster-container'>
 				<img
 					src='/ornek.jpg'

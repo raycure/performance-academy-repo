@@ -1,6 +1,7 @@
 import React from 'react';
 import './bannerStyle.css';
 import Container from '../Containers/Container';
+import { useTranslation } from 'react-i18next';
 
 const Banner = () => {
 	const bannerData = {
@@ -27,7 +28,7 @@ const Banner = () => {
 		backgroundColor: 'transparent',
 		textAlign: 'center',
 	};
-
+	const { t, i18n } = useTranslation('translation');
 	return (
 		<Container>
 			<div className='gridCardContainer'>
@@ -36,12 +37,11 @@ const Banner = () => {
 						<span className='programStepNumbers'>1</span>
 					</div>
 					<div className='gridCardHeading center-item'>
-						<h2 className='fs-minimal-heading'>SIGN UP FOR TRAINING</h2>
+						<h2 className='fs-minimal-heading center-item'>
+							{t('Banner.Title.0')}
+						</h2>
 					</div>
-					<p>
-						Book onto an initial training course at a time <br />
-						and place that suits
-					</p>
+					<p className='text-container'>{t('Banner.Content.0')}</p>
 				</div>
 				<div className='gridCard' style={bannerStyle}>
 					<div className='programStepContainers center-item'>
@@ -49,38 +49,33 @@ const Banner = () => {
 					</div>
 
 					<div className='gridCardHeading center-item'>
-						<h2 className='fs-minimal-heading'>ATTEND TRAINING</h2>
+						<h2 className='fs-minimal-heading center-item'>
+							{t('Banner.Title.1')}
+						</h2>
 					</div>
-					<p>
-						Get a taste of your new role
-						<br /> by learning a short choreographed track
-					</p>
+					<p className='text-container'>{t('Banner.Content.1')}</p>
 				</div>
 				<div className='gridCard' style={bannerStyle}>
 					<div className='programStepContainers center-item'>
 						<span className='programStepNumbers'>3</span>
 					</div>
 					<div className='gridCardHeading'>
-						<h2 className='fs-minimal-heading center-item'>PRE-WORK</h2>
+						<h2 className='fs-minimal-heading center-item'>
+							{t('Banner.Title.2')}
+						</h2>
 					</div>
-					<p>
-						Join your new teammates online or <br />
-						in-person for world-leading training
-					</p>
+					<p className='text-container'>{t('Banner.Content.2')}</p>
 				</div>
 				<div className='gridCard' style={bannerStyle}>
 					<div className='programStepContainers center-item'>
 						<span className='programStepNumbers'>4</span>
 					</div>
 					<div className='gridCardHeading'>
-						<h2 className='fs-minimal-heading center-item '>
-							SUBMIT YOUR VIDEO
+						<h2 className='fs-minimal-heading center-item'>
+							{t('Banner.Title.3')}
 						</h2>
 					</div>
-					<p>
-						After passing initial training your final step is <br />
-						to submit an assessment video
-					</p>
+					<p className='text-container'>{t('Banner.Content.3')}</p>
 				</div>
 			</div>
 		</Container>

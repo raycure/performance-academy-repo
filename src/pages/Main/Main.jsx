@@ -10,27 +10,22 @@ import { downToUp } from '../../components/animations/AnimationValues.jsx';
 import { useState } from 'react';
 import axios from '../api/axios.js';
 import { useNavigate } from 'react-router-dom';
-import { CiGlobe } from 'react-icons/ci';
-import { Gem, User } from 'lucide-react';
-import { Calendar1 } from 'lucide-react';
 import { useRef } from 'react';
-import { ChartNoAxesCombined } from 'lucide-react';
-import { Earth } from 'lucide-react';
-import Banner from '../../components/Banner/Banner.jsx';
 
+import Banner from '../../components/Banner/Banner.jsx';
 import FAQ from '../../components/FAQ/FAQ.jsx';
 import testortheflamboyantimg from '../../assets/testortheflamboyantimg.png';
-import logo from '../../assets/LesmillsLogo.png';
 
-import { ArrowUp, ArrowDown } from 'lucide-react';
-import certificationProcess from './TestText.jsx';
+import { useTranslation } from 'react-i18next';
+import CertificationSteps from '../../components/CertificationSteps/CertificationSteps.jsx';
+import BecomeInstructorCards from '../../components/BecomeInstructorCards/BecomeInstructorCards.jsx';
 
 function Main() {
 	const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 	//todo delete it later
 	async function handleLogout() {
 		console.log({
-			accessToken: localStorage.getItem('accessToken'),
+			accessToken: localStoraz.getItem('accessToken'),
 		});
 		const response = await axios.post('/logout', {
 			withCredentials: true,
@@ -63,6 +58,7 @@ function Main() {
 	function routeChange(category) {
 		navigate('/programlar', { state: category });
 	}
+	const { i18n, t } = useTranslation('translation');
 	const cards = Object.keys(lesMillsPrograms).map((category, index) => {
 		const backContent = (
 			<div
@@ -95,7 +91,11 @@ function Main() {
 							))}
 					</Fragment>
 				))}
-				<h1 className='detailText center-item'> click to see more</h1>
+				<h1 className='detailText center-item'>
+					{i18n.language === 'en'
+						? 'Click to see more'
+						: 'Daha fazla bilgi için tıklayınız'}
+				</h1>
 			</div>
 		);
 		const frontContent = (
@@ -169,130 +169,16 @@ function Main() {
 		offset: ['start end', ' end start'], // first start is the top of the element and the end is the end of the screen ['',''] first quates are when the animation starts and the second one is when it ends
 	});
 
-	const [activeStep, setActiveStep] = useState(0);
-	const progressStepContainerRefs = useRef(
-		certificationProcess.map(() => React.createRef())
-	);
-	const progressStepLineRefs = useRef(
-		certificationProcess.map(() => React.createRef())
-	);
-
-	const NextStepHandler = () => {
-		if (activeStep < certificationProcess.length - 1) {
-			setActiveStep((prevStep) => prevStep + 1);
-		}
-		if (progressStepContainerRefs.current) {
-			progressStepContainerRefs.current.forEach((ref, index) => {
-				if (ref.current) {
-					if (activeStep + 1 == index) {
-						ref.current.classList.remove('inActiveStepNumber');
-						ref.current.classList.add('activeStepNumber');
-					}
-				}
-			});
-		}
-		if (progressStepLineRefs.current) {
-			progressStepLineRefs.current.forEach((ref, index) => {
-				if (ref.current) {
-					if (activeStep == index) {
-						ref.current.classList.remove('inActiveLine');
-						ref.current.classList.add('activeLine');
-					}
-				}
-			});
-		}
-	};
-
-	function previousStepHandler() {
-		if (activeStep > 0) {
-			setActiveStep((prevStep) => prevStep - 1);
-			if (progressStepContainerRefs.current) {
-				progressStepContainerRefs.current.forEach((ref, index) => {
-					if (ref.current) {
-						if (activeStep == index) {
-							ref.current.classList.add('inActiveStepNumber');
-						}
-					}
-				});
-			}
-			console.log('af', activeStep);
-
-			if (progressStepLineRefs.current) {
-				progressStepLineRefs.current.forEach((ref, index) => {
-					if (ref.current) {
-						if (activeStep - 1 == index) {
-							ref.current.classList.add('inActiveLine');
-						}
-					}
-				});
-			}
-		}
-	}
-
 	const scrollWith = useTransform(scrollYProgress, [0.3, 0.632], [0, -250]); // [0,0.91] is how much its being scrolled .91 because of the header [0,-250] for the top attribute and it changes based on the 0 to 0.91
 	return (
 		<>
-			<Container className='even-columns'>
-				<div className='stepText'>
-					<button
-						className='nextButton center-item'
-						onClick={previousStepHandler}
-					>
-						<ArrowUp strokeWidth={1.25} />
-					</button>
-					<h3 className='fs-700'>{certificationProcess[activeStep].title}</h3>
-					<p className='fs-500'>{certificationProcess[activeStep].text}</p>
-					<button onClick={NextStepHandler} className='center-item'>
-						<ArrowDown strokeWidth={1.25} />
-					</button>
-				</div>
-				<div className='stepProgressBarContainer'>
-					{certificationProcess.map((step, index) => (
-						<div
-							className='stepProgressBar'
-							style={{
-								marginBottom: '40px',
-							}}
-						>
-							<div className='programStepContainers'>
-								<span className='programStepNumbers'>{step.step}</span>
-								<span
-									className='stepNumberAnimation'
-									style={{ backgroundColor: index === 0 ? 'red' : '' }}
-									ref={progressStepContainerRefs.current[index]}
-								></span>
-								{index < 4 && (
-									<span
-										className='progressLine'
-										ref={progressStepLineRefs.current[index]}
-									></span>
-								)}
-							</div>
-							<h3 className='fs-600'>{step.title}</h3>
-						</div>
-					))}
-				</div>
-			</Container>
 			<Container className='landingPageContainer'>
 				<div className='landingParagraph'>
-					<h2 className='fs-secondary-heading'>Performance Academy</h2>
+					<h2 className='fs-secondary-heading'>Performance Fitness Academy</h2>
 					<p className='fs-650' style={{ maxWidth: '40rem' }}>
-						Become a world-class Les Mills Instructor and transform lives
-						through fitness. Our internationally recognized certification
-						program equips you with everything needed to teach in 130+ countries
+						{t('MainPage.LandingParagraph.0')}
 					</p>
-					<p className='fs-400 paragraph'>
-						Transform lives through movement and inspire others to reach their
-						potential. Join our passionate community of fitness leaders who are
-						changing the way people experience exercise around the globe.
-						Whether you're an experienced instructor or just starting your
-						journey, we'll provide you with the tools, knowledge, and support to
-						build a rewarding career teaching world-class group fitness. Our
-						comprehensive training program gives you everything you need to
-						succeed - from mastering program techniques to developing your
-						coaching presence. Start your journey today and become part of a
-						global movement that's revolutionizing fitness, one class at a time.
-					</p>
+					<p className='fs-400 paragraph'>{t('MainPage.LandingParagraph.1')}</p>
 				</div>
 				<div>
 					<ul className='milestones'>
@@ -308,6 +194,33 @@ function Main() {
 					</ul>
 				</div>
 			</Container>
+			<Banner />
+
+			<Container className='even-columns '>
+				<div>
+					<div className='fs-primary-heading'>
+						{i18n.language === 'en' ? "What's Lesmills?" : 'Lesmills Nedir?'}
+					</div>
+					<div className='fs-primary-heading' style={{ color: '#edfb06' }}>
+						{i18n.language === 'en' ? 'Become a' : 'Lesmills'} <wbr />
+						{i18n.language === 'en' ? 'Lesmills Instructor' : 'Eğitmeni Olun'}
+					</div>
+					<p>{t('MainPage.WelcomeText')}</p>
+				</div>
+				<img src={isim} className='image'></img>
+			</Container>
+
+			<video
+				className='fullSizedVid'
+				controls
+				style={{ height: `calc(100dvh - ${navbarHeight}px)` }}
+			>
+				<source src='path-to-your-video.mp4' type='video/mp4' />
+				Your browser does not support the video tag.
+			</video>
+			<h2 className='fs-primary-heading center-item'>
+				{t('MainPage.CardsTitle')}
+			</h2>
 			<Container
 				styleProp={{
 					gap:
@@ -318,42 +231,7 @@ function Main() {
 			>
 				{cards}
 			</Container>
-			<video
-				className='fullSizedVid'
-				controls
-				style={{ height: `calc(100dvh - ${navbarHeight}px)` }}
-			>
-				<source src='path-to-your-video.mp4' type='video/mp4' />
-				Your browser does not support the video tag.
-			</video>
-			<Container className='even-columns '>
-				<div>
-					<div className='fs-primary-heading'>Lesmills Nedir?</div>
-					<div className='fs-primary-heading' style={{ color: '#edfb06' }}>
-						<span>Lesmills </span>
-						<span>Eğitmeni Olun</span>
-					</div>
-					<p></p>
-					<p>
-						İnsanlara hayatlarını değiştirmeleri için ilham vermeye ve motive
-						etmeye hazır mısınız? İster yıllardır Eğitmenlik yapıyor olun, ister
-						yolculuğunuza yeni başlıyor olun, Les Mills Eğitmeni olarak başarılı
-						bir kariyer için ihtiyacınız olan her şeyi size vereceğiz.
-						Programlarımızdan herhangi birinde Eğitmen olarak eğitim alın -
-						seçim sizin! Lesmills farklı tarzlarda Grup Fitness Programları
-						yapan dünyaca ünlü bir Eğitim Firmasıdır. Lesmills Programları 130
-						ülkede çoşkulu bir şekilde yapılmaktadır. Bir çok Eğitmen bu
-						programlardan ilham alıp kendilerini dünya standarlarında star bir
-						Eğitmen haline getirmişlerdir. Eğitimlere katıldığınız ve
-						Sertifikanızı aldığınız taktirde Dünyanın her ülkesinde geçerli olan
-						bu sertifika ile ders verebilirsiniz. O zaman bu eğitimlere nasıl
-						katılabilir ve bu Sertifikayı nasıl alabilirsiniz? Sorusunu genel
-						olarak bir gözden geçirelim.
-					</p>
-				</div>
-				<img src={isim} className='image'></img>
-			</Container>
-
+			<CertificationSteps />
 			<div className='bannerLikeImageContainer' ref={scrollingImgRef}>
 				<motion.div
 					style={{
@@ -369,15 +247,17 @@ function Main() {
 				<span className='testspann' style={{ top: `${testHeight1}px` }}></span>
 			</div> */}
 			{/* //todo vidi gizle butonu */}
-			<Banner />
+
+			<BecomeInstructorCards />
 			<h2 className='fs-primary-heading center-item'>
-				Kategorilerimiz arasindan secim yapin
+				{i18n.language === 'en'
+					? 'Our Upcoming Events'
+					: 'Yaklaşan Etkinliklerimiz'}
 			</h2>
-			<h2 className='fs-primary-heading center-item'>Yaklasan etkinlikler</h2>
 			<div className='carousel-container'>
 				<CardCarousel />
 			</div>
-			<FAQ></FAQ>
+			<FAQ />
 			{/* <div className='btn-container center-item'>
 				<a href='#' className='btn-shine'>
 					LESMILLS
@@ -394,101 +274,6 @@ function Main() {
 			<button onClick={deleteToken}> delete token</button>
 			<br></br>
 			<button onClick={handleLogout}>logout</button>
-			<Container>
-				<div className='fs-primary-heading center-item'>
-					<img
-						alt='Les Mills logo'
-						className='logo'
-						src={logo}
-						style={{
-							height: '3.5rem',
-							width: 'auto',
-							marginRight: '1rem',
-							float: 'left',
-						}}
-					/>
-
-					<span style={{ marginTop: '0.5rem' }}> Eğitmen Olun</span>
-				</div>
-				<div className='gridCardContainer'>
-					<div className='gridCard'>
-						<div className='gridCardHeading'>
-							<Earth strokeWidth={1.25} className='cardIcon' />
-							<h2 className='fs-minimal-heading'>Uluslararası Sertifikalar</h2>
-						</div>
-						<p>
-							As a Les Mills certified instructor, you'll join an elite
-							community of fitness professionals recognized in over 130
-							countries worldwide. Our certification programs are the gold
-							standard in group fitness education, trusted by leading health
-							clubs and fitness facilities across six continents.
-						</p>
-						{/* Les Mills sertifikalı bir eğitmen olarak, dünya çapında 130'dan
-							fazla ülkede tanınan seçkin bir fitness profesyonelleri
-							topluluğuna katılacaksınız. Sertifika programlarımız, altı kıtada
-							önde gelen sağlık kulüpleri ve fitness tesisleri tarafından
-							güvenilen, grup fitness eğitiminde altın standarttır. */}
-					</div>
-					<div className='gridCard'>
-						<div className='gridCardHeading'>
-							<ChartNoAxesCombined className='cardIcon' />
-							<h2 className='fs-minimal-heading'>Her Seviyeye uygun</h2>
-						</div>
-						<p>
-							Regardless of your starting point, Les Mills certification is
-							designed to be a journey of continuous growth. Regular workshops,
-							quarterly program updates, and ongoing education opportunities
-							ensure that both new and experienced instructors stay current with
-							the latest developments in fitness science and teaching
-							methodology.
-						</p>
-						{/* Başlangıç noktanız ne olursa olsun, Les Mills sertifikası sürekli
-							bir gelişim yolculuğu olarak tasarlanmıştır. Düzenli atölye
-							çalışmaları, üç ayda bir program güncellemeleri ve sürekli eğitim
-							fırsatları, hem yeni hem de deneyimli eğitmenlerin fitness bilimi
-							ve öğretim metodolojisindeki en son gelişmeleri takip etmelerini
-							sağlar. */}
-					</div>
-					<div className='gridCard'>
-						<div className='gridCardHeading'>
-							<Gem className='cardIcon' strokeWidth={1.25} />
-							<h2 className='fs-minimal-heading'>Geleceğe Yatırım</h2>
-						</div>
-						<p>
-							When you choose a Les Mills certification, you're not just paying
-							for a certificate – you're investing in a complete career toolkit
-							that delivers real value from day one. Our certification costs
-							reflect the comprehensive support, proven programs, and ongoing
-							benefits that set Les Mills apart in the fitness industry.
-						</p>
-						{/* Bir Les Mills sertifikası seçtiğinizde, yalnızca bir sertifika
-							için ödeme yapmıyorsunuz – ilk günden itibaren gerçek değer sunan
-							eksiksiz bir kariyer araç setine yatırım yapıyorsunuz.
-							Sertifikasyon maliyetlerimiz, Les Mills'i fitness sektöründe öne
-							çıkaran kapsamlı destek, kanıtlanmış programlar ve sürekli
-							sağlanan avantajları yansıtmaktadır. */}
-					</div>
-					<div className='gridCard'>
-						<div className='gridCardHeading'>
-							<Calendar1 className='cardIcon' strokeWidth={1.25} />
-							<h2 className='fs-minimal-heading'>Exclusive Quarterly Events</h2>
-						</div>
-						<p>
-							Get ready to elevate your Les Mills journey with exclusive
-							quarterly events for certified instructors. Join us in-person or
-							online for limited-time gatherings designed to enhance your skills
-							and energize your teaching. Don't miss these special opportunities
-							every three months.
-						</p>
-						{/* Les Mills deneyiminizi özel üç aylık etkinliklerimizle
-							güçlendirmeye hazırlanın! Her üç ayda bir, yalnızca sertifikalı
-							Les Mills eğitmenlerine özel, sınırlı süreli buluşmalar sunuyoruz.
-							İster enerjik yüz yüze etkinliklerimize katılmayı tercih edin,
-							ister dinamik çevrim içi deneyimlerimize erişin, bu etkinlikler
-							becerilerinizi bir üst seviyeye taşımak için tasarlanmıştır. */}
-					</div>
-				</div>
-			</Container>
 		</>
 	);
 }

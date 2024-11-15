@@ -11,13 +11,17 @@ import test from '../../assets/test.png';
 import axios from '../api/axios';
 import { useTranslation } from 'react-i18next';
 import PaginationContainer from '../../components/Containers/PaginationContainer';
+import { useLocation } from 'react-router-dom';
 
 function Events() {
 	const { t, i18n } = useTranslation('programs');
 	const lesMillsPrograms = LesmillsPrograms();
-	const programID = 'BODYSTEP';
-
+	const location = useLocation();
 	const programNames = [
+		{
+			label: t('cat4'),
+			selector: 'all',
+		},
 		{
 			label: t('cat1.title'),
 			selector: t('cat1.title'),
@@ -38,11 +42,16 @@ function Events() {
 	const [file, setFile] = useState(null);
 	const [message, setMessage] = useState('');
 
+	const [onlineCheck, setOnlineCheck] = useState(null);
 	const handleFileChange = (event) => {
 		const selectedFile = event.target.files[0];
 
 		if (selectedFile && selectedFile.type !== 'application/pdf') {
-			setMessage('Please select a PDF file.');
+			setMessage(
+				i18n.language === 'en'
+					? 'Please select a PDF file.'
+					: 'Lütfen bir PDF dosyası seçiniz.'
+			);
 			setFile(null);
 		} else {
 			setMessage('');
@@ -53,7 +62,11 @@ function Events() {
 	const handleUpload = async (event) => {
 		event.preventDefault();
 		if (!file) {
-			setMessage('Please select a PDF file to upload');
+			setMessage(
+				i18n.language === 'en'
+					? 'Please select a PDF file.'
+					: 'Lütfen bir PDF dosyası seçiniz.'
+			);
 			return;
 		}
 		const formData = new FormData();
@@ -67,9 +80,17 @@ function Events() {
 				},
 			});
 
-			setMessage('File uploaded successfully!');
+			setMessage(
+				i18n.language === 'en'
+					? 'File uploaded successfully!'
+					: 'Dosya başarıyla yüklendi.'
+			);
 		} catch (error) {
-			setMessage('Error uploading file');
+			setMessage(
+				i18n.language === 'en'
+					? 'Error uploading file'
+					: 'Dosya yüklenirken bir sorun oluştu'
+			);
 			console.error('Error:', error);
 		} finally {
 		}
@@ -83,7 +104,16 @@ function Events() {
 	const toggleClassDropdown = () => {
 		setIsClassMenuOpen(!isClassMenuOpen);
 	};
-
+	const handleCategorySelect = (cat) => {
+		if (cat === 'all') {
+			setActiveClass('all');
+		}
+		setActiveCategory(cat);
+		toggleCategoryDropdown();
+	};
+	const handleOnlineSelect = (value) => {
+		setOnlineCheck(value);
+	};
 	// to close menus when its clicked outside
 	const catMenuRef = useRef(null);
 	const classMenuRef = useRef(null);
@@ -107,8 +137,25 @@ function Events() {
 		};
 	}, [catMenuRef, classMenuRef]);
 
+	useEffect(() => {
+		if (location.state?.scrollToElement) {
+			const element = document.getElementById(location.state?.elementId);
+			const offset = 200;
+
+			if (element) {
+				const elementPosition =
+					element.getBoundingClientRect().top + window.scrollY;
+				const offsetPosition = elementPosition - offset;
+
+				window.scrollTo({
+					top: offsetPosition,
+					behavior: 'smooth',
+				});
+			}
+		}
+	}, [location]);
 	const classes = Object.keys(lesMillsPrograms).map((category) => {
-		if (category !== activeCategory) return null;
+		if (category !== activeCategory || activeCategory === 'all') return null;
 		return lesMillsPrograms[category].map((classTitle, index) => {
 			return (
 				<div
@@ -126,9 +173,7 @@ function Events() {
 	});
 
 	return (
-		<>
-			<h2 className='fs-650 center-item'>choose a class</h2>
-
+		<div id='event-page'>
 			<div className='page-poster-container '>
 				<img
 					src='/ornek.jpg'
@@ -141,85 +186,116 @@ function Events() {
 					style={{ position: 'relative', alignSelf: 'center', height: '50%' }}
 				/>
 			</div>
-			<CalendarContainer />
-			<Container>
-				<div className='classPick'>
-					<div className='dropDownMenus'>
-						<div className='dropDownCategoryMenu'>
-							<button
-								className='dropDownCategoriesButton'
-								onClick={toggleCategoryDropdown}
-								onMouseEnter={() => setIsCatMenuOpen(true)}
-							>
-								Categories
-							</button>
-							<div
-								className={`dropDownCategories ${
-									isCatMenuOpen ? 'dropDownCategoriesActive' : ''
-								}`}
-								ref={catMenuRef}
-								onMouseLeave={() => setIsCatMenuOpen(false)}
-							>
-								{programNames.map((program, index) => (
-									<div
-										key={index}
-										className='dropDownCategoryItem'
-										onClick={() => {
-											setActiveCategory(program.selector);
-											toggleCategoryDropdown();
-										}}
-										style={
-											activeCategory === program.selector
-												? { backgroundColor: 'gray' }
-												: {}
-										}
-									>
-										{program.label}
-									</div>
-								))}
-							</div>
-						</div>
-						<div className='dropDownCategoryMenu'>
-							<button
-								className='dropDownCategoriesButton'
-								onClick={activeCategory ? toggleClassDropdown : null}
-								onMouseEnter={
-									activeCategory ? () => setIsClassMenuOpen(true) : null
-								}
-								style={{ color: !activeCategory ? '#6e6e73' : 'white' }}
-							>
-								Classes
-							</button>
 
-							<div
-								onMouseLeave={() => setIsClassMenuOpen(false)}
-								ref={classMenuRef}
-								className={`dropDownCategories ${
-									isClassMenuOpen ? 'dropDownCategoriesActive' : ''
-								}`}
-								style={{ color: 'black' }}
-							>
-								{classes}
-							</div>
+			<CalendarContainer />
+			<h2 className='fs-650 center-item' style={{ padding: '2rem' }}>
+				{i18n.language === 'en' ? 'CHOOSE AN EVENT' : 'ETKİNLİKLERİMİZ'}
+			</h2>
+
+			<div className='classPick'>
+				<div className='dropDownMenus'>
+					<div className='dropDownCategoryMenu'>
+						<button
+							className='dropDownCategoriesButton'
+							onClick={toggleCategoryDropdown}
+							onMouseEnter={() => setIsCatMenuOpen(true)}
+						>
+							{i18n.language === 'en' ? 'Categories' : 'Kategoriler'}
+						</button>
+						<div
+							className={`dropDownCategories ${
+								isCatMenuOpen && 'dropDownCategoriesActive'
+							}`}
+							ref={catMenuRef}
+							onMouseLeave={() => setIsCatMenuOpen(false)}
+						>
+							{programNames.map((program, index) => (
+								<div
+									key={index}
+									className='dropDownCategoryItem'
+									onClick={() => {
+										handleCategorySelect(program.selector);
+									}}
+									style={
+										activeCategory === program.selector
+											? { backgroundColor: 'gray' }
+											: {}
+									}
+								>
+									{program.label}
+								</div>
+							))}
 						</div>
 					</div>
-					<div class='radio-group'>
-						<div class='radio-option'>
-							<input type='radio' name='radio-option' class='radio-btn' />
-							<label class='radio-label'>online</label>
-						</div>
-						<div class='radio-option'>
-							<input type='radio' name='radio-option' class='radio-btn' />
-							<label class='radio-label'>in-person</label>
+					<div className='dropDownCategoryMenu'>
+						<button
+							className='dropDownCategoriesButton'
+							onClick={
+								activeCategory && activeCategory !== 'all'
+									? toggleClassDropdown
+									: null
+							}
+							onMouseEnter={
+								activeCategory && activeCategory !== 'all'
+									? () => setIsClassMenuOpen(true)
+									: null
+							}
+							style={{
+								color:
+									!activeCategory || activeCategory === 'all'
+										? '#6e6e73'
+										: 'white',
+							}}
+						>
+							{i18n.language === 'en' ? 'Programs' : 'Programlar'}
+						</button>
+
+						<div
+							onMouseLeave={() => setIsClassMenuOpen(false)}
+							ref={classMenuRef}
+							className={`dropDownCategories ${
+								isClassMenuOpen && 'dropDownCategoriesActive'
+							}`}
+							style={{ color: 'black' }}
+						>
+							{classes}
 						</div>
 					</div>
 				</div>
-			</Container>
+				<div class='radio-group'>
+					<div class='radio-option'>
+						<input
+							value={true}
+							type='radio'
+							name='radio-option'
+							class='radio-btn'
+							checked={onlineCheck === true}
+							onChange={() => handleOnlineSelect(true)}
+						/>
+						<label class='radio-label'>
+							{i18n.language === 'en' ? 'Online' : 'Sanal'}
+						</label>
+					</div>
+					<div class='radio-option'>
+						<input
+							value={false}
+							type='radio'
+							name='radio-option'
+							class='radio-btn'
+							checked={onlineCheck === false}
+							onChange={() => handleOnlineSelect(false)}
+						/>
+						<label class='radio-label'>
+							{i18n.language === 'en' ? 'In-Person' : 'Canlı'}
+						</label>
+					</div>
+				</div>
+			</div>
 
 			<EventList
 				key={activeClass}
-				activeProgram={activeClass ? activeClass : programID}
-				// todo decide what to show if there havent been a selection
+				onlineCheck={onlineCheck}
+				activeProgram={activeClass ? activeClass : 'all'}
 				infoActive={true}
 			/>
 
@@ -236,7 +312,7 @@ function Events() {
 				<button type='submit'>submit</button>
 			</form>
 			{message && <p>{message}</p>}
-		</>
+		</div>
 	);
 }
 

@@ -34,28 +34,6 @@
 	justify-content: center;
 }
 
-@media (max-width: 1150px) {
-	.calendar-container {
-		max-width: 900px;
-	}
-}
-
-@media (max-width: 1000px) {
-	.event-container {
-		width: 80vw;
-	}
-}
-@media (max-width: 640px) {
-	.event-container {
-		width: 65vw;
-		grid-template-columns: 1fr;
-	}
-	.calendar-container {
-		display: flex;
-		flex-direction: column;
-	}
-}
-
 .logo-buttons {
 	width: auto;
 	max-height: 66px;
@@ -75,15 +53,6 @@
 	gap: 0.5rem 1rem;
 	--container-padding: 1rem;
 	width: min(var(--max-width), 100% - (var(--container-padding)));
-}
-
-@media (max-width: 700px) {
-	.logoButtonContainer {
-		overflow-x: auto;
-		display: grid;
-		grid-auto-columns: 36%;
-		width: 100%;
-	}
 }
 
 .card-carousel-event-container {
@@ -174,7 +143,6 @@
 
 .dropDownCategoryMenu {
 	position: relative;
-	width: 20rem;
 }
 
 .dropDownCategoriesButton {
@@ -236,9 +204,9 @@
 	appearance: none;
 	-webkit-appearance: none;
 	-moz-appearance: none;
-	width: 20px;
+	width: 18px;
 	margin-right: 5px;
-	height: 20px;
+	height: 18px;
 	border-radius: 50%;
 	border: 2px solid #ccc;
 	outline: none;
@@ -251,8 +219,8 @@
 .radio-btn:before {
 	content: '';
 	transform: translate(-50%, -50%);
-	width: 12px;
-	height: 12px;
+	width: 9px;
+	height: 9px;
 	border-radius: 50%;
 	background-color: transparent;
 	transform: scale(0);
@@ -261,7 +229,7 @@
 
 .radio-btn:checked:before {
 	transform: scale(1);
-	background-color: #4299e1;
+	background-color: var(--clr-accent-400);
 }
 
 .radio-label {
@@ -270,4 +238,51 @@
 
 .classPick {
 	display: flex;
+	padding: 0.8rem 20vw;
+	background-color: var(--clr-primary-400);
+}
+@media (max-width: 1150px) {
+	.calendar-container {
+		max-width: 900px;
+	}
+}
+
+@media (max-width: 1000px) {
+	.event-container {
+		width: 80vw;
+	}
+}
+@media (max-width: 700px) {
+	.logoButtonContainer {
+		overflow-x: auto;
+		display: grid;
+		grid-auto-columns: 36%;
+		width: 100%;
+	}
+}
+
+@media (max-width: 640px) {
+	.event-container {
+		width: 65vw;
+		grid-template-columns: 1fr;
+	}
+	.calendar-container {
+		display: flex;
+		flex-direction: column;
+	}
+	.radio-group {
+		gap: 0.6rem;
+		margin-inline: auto;
+	}
+	.dropDownCategoriesButton {
+		padding: 10px 14px;
+	}
+	#event-page .container {
+		--container-padding: 0rem;
+	}
+}
+@media (max-width: 500px) {
+	#event-page .fc img {
+		display: none;
+	}
 }

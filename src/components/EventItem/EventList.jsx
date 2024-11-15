@@ -15,11 +15,14 @@ import { GrDocumentPdf } from 'react-icons/gr';
 import { GrDocumentUpdate } from 'react-icons/gr';
 import { GrDocumentVerified } from 'react-icons/gr';
 import LesmillsPrograms from '../../assets/LesmillsPrograms';
-function EventList({ activeProgram, infoActive }) {
+import { useSelector } from 'react-redux';
+function EventList({ activeProgram, infoActive, onlineCheck }) {
 	const today = new Date();
 	const eventFallback = LesMillsEvents.filter((event) => {
-		const eventDate = new Date(event.date);
-		return event.program === activeProgram && eventDate >= today;
+		if (activeProgram === 'all') {
+			return event.fullStartDate >= today;
+		}
+		return event.program === activeProgram && event.fullStartDate >= today;
 	}).slice(0, 1)[0];
 	const [acknowledgementChecked, setAcknowledgementChecked] = useState(false);
 	const checkHandler = () => {
@@ -40,9 +43,22 @@ function EventList({ activeProgram, infoActive }) {
 		});
 	});
 	const eventItems = LesMillsEvents.filter((event) => {
-		const eventDate = new Date(event.date);
-		return event.program === activeProgram && eventDate >= today;
+		if (activeProgram === 'all') {
+			if (onlineCheck === true) {
+				return event.fullStartDate >= today && event.online === true;
+			} else if (onlineCheck === false) {
+				return event.fullStartDate >= today && event.online === false;
+			}
+			return event.fullStartDate >= today;
+		}
+		if (onlineCheck === true) {
+			return event.fullStartDate >= today && event.online === true;
+		} else if (onlineCheck === false) {
+			return event.fullStartDate >= today && event.online === false;
+		}
+		return event.program === activeProgram && event.fullStartDate >= today;
 	});
+
 	const [paginationPageNumber, setPaginationPageNumber] = useState(1);
 	const eventsPerPage = 6;
 	const lastIndex = paginationPageNumber * eventsPerPage;
@@ -88,19 +104,53 @@ function EventList({ activeProgram, infoActive }) {
 	}
 	function handleEventSelection(selected) {
 		setSelectedEvent(selected);
+		const element = document.getElementById('event-select-form');
+		const offset = 200;
+		if (element) {
+			const elementPosition =
+				element.getBoundingClientRect().top + window.scrollY;
+			const offsetPosition = elementPosition - offset;
+
+			window.scrollTo({
+				top: offsetPosition,
+				behavior: 'smooth',
+			});
+		}
 	}
-	if (selectedEvent === null || selectedEvent === undefined) {
-		return <p>Unfortunately theres no event for this program yet.</p>;
+
+	let calendarSelectId = useSelector(
+		(state) => state.calendarSelectedEventId.id
+	);
+	useEffect(() => {
+		const calendarSelectedEvent = LesMillsEvents.find((event) => {
+			return event.id === calendarSelectId;
+		});
+		if (!calendarSelectedEvent) {
+			return;
+		}
+		setSelectedEvent(calendarSelectedEvent);
+	}, [calendarSelectId]);
+	useEffect(() => {
+		if (selectedEvent === null || selectedEvent === undefined) {
+			setSelectedEvent(eventFallback);
+		}
+	}, [selectedEvent]);
+	if (paginatedEvents === null || paginatedEvents === undefined) {
+		return (
+			<p style={{ textAlign: 'center', padding: '4rem' }}>
+				{i18n.language === 'en'
+					? 'Unfortunately theres no event for this program yet.'
+					: 'Üzgünüz yakın zaman içerisinde bu program için bir etkinlik yok.'}
+			</p>
+		);
 	}
 	return (
 		<section className='event-list-grid'>
 			<div className='event-list'>
 				{paginatedEvents.map((event, index) => {
 					const programTitle = programs.filter((program) => {
-						return program.id === activeProgram;
+						return program.id === event.program;
 					})[0].title;
-					console.log(programTitle);
-
 					return (
 						<section className='enroll-event-item' key={index}>
 							<p className='display-none' style={{ alignContent: 'center' }}>
@@ -114,15 +164,21 @@ function EventList({ activeProgram, infoActive }) {
 										month: 'short',
 									}) +
 									' - ' +
-									event.fullStartDate.getDate() +
+									event.fullEndDate.getDate() +
 									' ' +
-									event.fullStartDate.toLocaleString(i18n.language, {
+									event.fullEndDate.toLocaleString(i18n.language, {
 										month: 'short',
 									})}
 							</p>
 
 							<p style={{ alignContent: 'center' }}>
-								{event.online ? 'Çevrim İçi' : 'Yüz Yüze'}
+								{event.online
+									? i18n.language === 'en'
+										? 'Online'
+										: 'Çevrim İçi'
+									: i18n.language === 'en'
+									? 'In Person'
+									: 'Yüz Yüze'}
 							</p>
 							{infoActive ? (
 								<div
@@ -142,14 +198,16 @@ function EventList({ activeProgram, infoActive }) {
 										}}
 										className='addLineAnimation'
 									>
-										İncele
+										{i18n.language === 'en' ? 'View' : 'İncele'}
 									</Link>
 									<Button onClick={() => handleEventSelection(event)}>
-										Seç
+										{i18n.language === 'en' ? 'Select' : 'Seç'}
 									</Button>
 								</div>
 							) : (
-								<Button onClick={() => handleEventSelection(event)}>Seç</Button>
+								<Button onClick={() => handleEventSelection(event)}>
+									{i18n.language === 'en' ? 'Select' : 'Seç'}
+								</Button>
 							)}
 						</section>
 					);
@@ -194,8 +252,10 @@ function EventList({ activeProgram, infoActive }) {
 					</button>
 				</div>
 			</div>
-			<form className='bg-primary-300 event-list-card'>
-				<p className='fs-300 text-primary-200'>Etkinlik Bilgileri</p>
+			<form className='bg-primary-300 event-list-card' id='event-select-form'>
+				<p className='fs-300 text-primary-200'>
+					{i18n.language === 'en' ? 'Event Details' : 'Etkinlik Bilgileri'}
+				</p>
 				<p className='fs-700'>{selectedEvent.program}</p>
 				<hr style={{ borderWidth: '2px', marginBottom: '1rem' }} />
 				<div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr' }}>
@@ -208,9 +268,9 @@ function EventList({ activeProgram, infoActive }) {
 								month: 'short',
 							}) +
 							' - ' +
-							selectedEvent.fullStartDate.getDate() +
+							selectedEvent.fullEndDate.getDate() +
 							' ' +
-							selectedEvent.fullStartDate.toLocaleString(i18n.language, {
+							selectedEvent.fullEndDate.toLocaleString(i18n.language, {
 								month: 'short',
 							})}
 					</p>
@@ -222,13 +282,21 @@ function EventList({ activeProgram, infoActive }) {
 				</div>
 				{selectedEvent.instructor && (
 					<p className='card-item'>
-						<FaRegUser /> {selectedEvent.instructor} İle!
+						<FaRegUser />{' '}
+						{i18n.language === 'en'
+							? `With ${selectedEvent.instructor}!`
+							: `${selectedEvent.instructor} İle!`}
 					</p>
 				)}
 				<p className='card-item'>
 					<TbWorld />
-					{selectedEvent.online ? 'Çevrim İçi ' : 'Yüz Yüze '}
-					Dersler
+					{selectedEvent.online
+						? i18n.language === 'en'
+							? 'Online Lessons'
+							: 'Çevrim İçi Dersler'
+						: i18n.language === 'en'
+						? 'In Person Lessons'
+						: 'Yüz Yüze Dersler'}
 				</p>
 				{selectedEvent.location && (
 					<p className='card-item'>
@@ -242,7 +310,8 @@ function EventList({ activeProgram, infoActive }) {
 					</p>
 				)}
 				<p className='card-item'>
-					<FaMoneyCheck /> Only ${selectedEvent.price}!
+					<FaMoneyCheck /> {i18n.language === 'en' ? 'Only' : 'Sadece'} $
+					{selectedEvent.price}!
 				</p>
 				<div
 					className='center-item'
@@ -254,7 +323,9 @@ function EventList({ activeProgram, infoActive }) {
 					}}
 				>
 					<Link style={{ textDecoration: 'underline' }}>
-						Eğitmen Sözleşmesi İçin Tıklayınız{' '}
+						{i18n.language === 'en'
+							? 'Click For The Instructor Contract'
+							: 'Eğitmen Sözleşmesi İçin Tıklayınız'}
 						<GrDocumentPdf
 							style={{
 								display: 'inline-block',
@@ -265,7 +336,9 @@ function EventList({ activeProgram, infoActive }) {
 					</Link>
 
 					<p className='fs-400 text-primary-100'>
-						Doldurduğunuz sözleşmeyi buraya yükleyiniz:
+						{i18n.language === 'en'
+							? 'Upload the contract you filled:'
+							: 'Doldurduğunuz sözleşmeyi yükleyiniz:'}
 					</p>
 					<input
 						type='file'
@@ -297,7 +370,9 @@ function EventList({ activeProgram, infoActive }) {
 								/>
 							)}
 							{fileName === null
-								? 'Choose a File...'
+								? i18n.language === 'en'
+									? 'Choose a File...'
+									: 'Dosya Seçin...'
 								: fileName.length > 10
 								? `${fileName.substring(0, 10)}...`
 								: fileName}
@@ -324,8 +399,9 @@ function EventList({ activeProgram, infoActive }) {
 							className='fs-300 text-primary-200'
 							htmlFor='acknowledgeCheckbox'
 						>
-							{' '}
-							I agree to the terms and conditions and the privacy policy
+							{i18n.language === 'en'
+								? ' I agree to the terms and conditions and the privacy policy'
+								: ' Kullanım koşulları ve gizlilik politikasını kabul ediyorum.'}
 						</label>
 					</div>
 					<Button
@@ -333,7 +409,7 @@ function EventList({ activeProgram, infoActive }) {
 							fileName === null || !acknowledgementChecked ? true : false
 						}
 					>
-						Etkinliğe Katıl!
+						{i18n.language === 'en' ? 'Attend Event!' : 'Etkinliğe Katıl!'}
 					</Button>
 				</div>
 			</form>
