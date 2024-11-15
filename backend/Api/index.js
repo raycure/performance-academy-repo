@@ -12,8 +12,9 @@ import cookieParser from 'cookie-parser';
 import credentials from './Middleware/credentials.js';
 import corsOptions from '../config/corsOptions.js';
 import rateLimit from 'express-rate-limit';
-import uploadRoute from './Routes/uploadRoute.js';
-//import userInfoRoute from './Routes/userInfoRoute.js';
+// import uploadRoute from './Routes/uploadRoute.js';
+import contectFormRoute from './Routes/contectFormRoute.js';
+// import userInfoRoute from './Routes/userInfoRoute.js';
 
 const port = 3001;
 
@@ -38,13 +39,14 @@ const limiter = rateLimit({
 });
 
 app.use('/', limiter);
-app.use('/upload', uploadRoute);
-app.use('/logout', logoutRoute);
+// app.use('/upload', uploadRoute);
 app.use('/register', registerRoute);
-app.use('/', verifyMailRoute);
 app.use('/login', loginRoute);
 app.use('/refresh', jwtRefresRoute);
-//app.use('/userInfo', userInfoRoute);
+app.use('/logout', logoutRoute);
+app.use('/submitContactForm', contectFormRoute);
+app.use('/', verifyMailRoute);
+// app.use('/userInfo', userInfoRoute);
 // todo add verifyjwt for info
 app.use(verifyJWT);
 app.use('/test', testRoute);

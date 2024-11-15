@@ -78,6 +78,23 @@
 	gap: 2rem;
 	background-color: var(--clr-primary-trnsp);
 }
+
+.twoInputAreas {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 1.5rem;
+}
+
+.birthdate {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.calendarIcon {
+	position: absolute;
+	right: 0;
+}
+
 @media (max-width: 1024px) {
 	.authentication-form {
 		padding: 3rem 4rem;

@@ -1,7 +1,8 @@
 import { useRef, useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from '../api/axios.js';
-import { login } from '../../auth/auth.service.js';
+import { AuthService } from '../../auth/auth.service.js';
+
 import AuthenticationGreet from './AuthenticationGreet.jsx';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
 import './formStyle.css';
@@ -18,7 +19,7 @@ function Login() {
 	let isLoading = useSelector(selectIsLoading);
 	const dispatch = useDispatch();
 
-	const [mail, setMail] = useState('');
+	const [mailorNationalID, setMailorNationalID] = useState('');
 	const [pwd, setPwd] = useState('');
 	const [errMsg, setErrMsg] = useState('');
 	const [success, setSuccess] = useState(false);
@@ -28,23 +29,36 @@ function Login() {
 		userRef.current.focus();
 	}, []);
 
-	useEffect(() => {
-		const isLoggedIn = localStorage.getItem('isLoggedIn');
-		if (isLoggedIn === 'true') {
-			navigate('/');
-		}
-	}, []);
+	// todo delete it im switching to a redux based approach
+	// useEffect(() => {
+	// 	const isLoggedIn = localStorage.getItem('isLoggedIn');
+	// 	if (isLoggedIn === 'true') {
+	// 		navigate('/');
+	// 	}
+	// }, []);
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		try {
-			const loginData = { email: mail, password: pwd };
-			const response = await dispatch(login({ loginData }));
+			let loginData;
+			if (mailorNationalID.includes('@')) {
+				console.log(mailorNationalID);
+
+				loginData = { email: mailorNationalID, password: pwd };
+			} else {
+				console.log(mailorNationalID);
+
+				loginData = { nationalID: mailorNationalID, password: pwd };
+			}
+
+			const response = await dispatch(
+				AuthService({ data: loginData, endpoint: '/login ' })
+			);
 			const accessToken = response.payload.accessToken;
 			localStorage.setItem('accessToken', accessToken);
 			const isLoggedIn = response ? true : false; //todo change it to user roles and stuff
 			localStorage.setItem('isLoggedIn', isLoggedIn);
-			setMail('');
+			setMailorNationalID('');
 			setPwd('');
 			setSuccess(true);
 			setLocalLoading(true);
@@ -65,15 +79,6 @@ function Login() {
 
 	return (
 		<>
-			{/* {success ? ( //todo decide what to do
-				<section>
-					<h1>You are logged in!</h1>
-					<br />
-					<p>
-						<a href='#'>Go to Home</a>
-					</p>
-				</section>
-			) : ( */}
 			<div className='authentication-form-container box-shadow'>
 				<form onSubmit={handleSubmit} className='authentication-form'>
 					<img alt='logo' className='logo' src={logo}></img>
@@ -87,14 +92,15 @@ function Login() {
 					<h1>{t('Authentication.Greet.1')}</h1>
 					<div className='centerLineAnimation'>
 						<input
-							type='email'
-							id='email'
+							type='text'
 							ref={userRef}
 							autoComplete='off'
-							onChange={(e) => setMail(e.target.value)}
-							value={mail}
+							onChange={(e) => setMailorNationalID(e.target.value)}
+							value={mailorNationalID}
 							required
-							placeholder='Email'
+							placeholder={
+								i18n.language === 'tr' ? 'e-mail ya da TC' : 'email or TC'
+							}
 						/>
 					</div>
 					<div className='centerLineAnimation'>

@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Button from '../../components/Button/Button.jsx';
 import './registerStyle.css';
-import { register } from '../../auth/auth.service.js';
+import { AuthService } from '../../auth/auth.service.js';
 import { useDispatch, useSelector } from 'react-redux';
 import AuthenticationGreet from './AuthenticationGreet.jsx';
 import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
@@ -21,28 +21,25 @@ function RegisterForm() {
 	const { t, i18n } = useTranslation('translation');
 	let isLoading = useSelector(selectIsLoading); //for button to be in the loading state
 	const [localLoading, setLocalLoading] = useState(false); // the button needs to be in isLoading stage before the api request is pending so the user sees loading state as soon as submitting
-	// const userIdValidationRules = [
-	// 	{
-	// 		test: (userId) => !/^[0-9]+$/.test(userId),
-	// 		message: t('Authentication.Validation.UserId.0'),
-	// 	},
-	// 	{
-	// 		test: (userId) => userId.length != 11,
-	// 		message: t('Authentication.Validation.UserId.1'),
-	// 	},
-	// ];
-	const usernameValidationRules = [
+	const nationalIDrules = [
 		{
-			test: (username) => !/^[a-zA-Z]/.test(username),
-			message: t('Authentication.Validation.Username.0'),
+			test: (nationalID) => !/^[0-9]+$/.test(nationalID),
+			message: t('Authentication.Validation.UserId.0'),
 		},
 		{
-			test: (username) => !/^[a-zA-Z0-9.]+$/.test(username),
-			message: t('Authentication.Validation.Username.1'),
+			test: (nationalID) => nationalID.length != 11,
+			message: t('Authentication.Validation.UserId.1'),
+		},
+	];
+	const nameSurnameRules = [
+		{
+			test: (nameOrSurname) => !/^[a-zA-Z\s]+$/.test(nameOrSurname),
+			message: t('Authentication.Validation.nameOrSurname.0'),
 		},
 		{
-			test: (username) => username.length < 4 || username.length >= 24,
-			message: t('Authentication.Validation.Username.2'),
+			test: (nameOrSurname) =>
+				nameOrSurname.length < 3 || nameOrSurname.length >= 24,
+			message: t('Authentication.Validation.nameOrSurname.1'),
 		},
 	];
 	const passwordValidationRules = [
@@ -71,26 +68,27 @@ function RegisterForm() {
 
 	const fetchError = useSelector(selectError);
 	const userRef = useRef();
+	const dateRef = useRef();
 	const errRef = useRef();
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
-	const [username, setUsername] = useState('');
+	const [name, setName] = useState('');
+	const [surname, setSurname] = useState('');
 	const [validName, setValidName] = useState(false);
+	const [validSurename, setValidSurname] = useState(false);
+	const [validNationalID, setValidNationalID] = useState(false);
+	const [birthDate, setBirthDate] = useState('');
+	const [forApiBirthDate, setForApiBirthDate] = useState('');
+	const [birthDateError, setBirthDateError] = useState('');
 	const [mail, setMail] = useState('');
-	const [userFocus, setUsernameFocus] = useState(false);
-
-	// const [userId, setUserId] = useState('');
-	// const [validUserId, setValidUserId] = useState(false);
-	// const [userIdFocus, setUserIdFocus] = useState(false);
-
+	const [validBirthDate, setValidBirthDate] = useState(false);
+	const [nationalID, setNationalID] = useState('');
 	const [pwd, setPwd] = useState('');
 	const [validPwd, setValidPwd] = useState(false);
-	const [pwdFocus, setPwdFocus] = useState(false);
 
 	const [matchPwd, setMatchPwd] = useState('');
 	const [validMatch, setValidMatch] = useState(false);
-	const [matchFocus, setMatchFocus] = useState(false);
 
 	const [errMsg, setErrMsg] = useState('');
 
@@ -99,14 +97,19 @@ function RegisterForm() {
 	}, []);
 
 	useEffect(() => {
-		const valid = usernameValidationRules.every((rule) => !rule.test(username));
+		const valid = nameSurnameRules.every((rule) => !rule.test(name));
 		setValidName(valid);
-	}, [username]);
+	}, [name]);
 
-	// useEffect(() => {
-	// 	const valid = userIdValidationRules.every((rule) => !rule.test(userId));
-	// 	setValidUserId(valid);
-	// }, [userId]);
+	useEffect(() => {
+		const valid = nameSurnameRules.every((rule) => !rule.test(surname));
+		setValidSurname(valid);
+	}, [surname]);
+
+	useEffect(() => {
+		const valid = nationalIDrules.every((rule) => !rule.test(nationalID));
+		setValidNationalID(valid);
+	}, [nationalID]);
 
 	useEffect(() => {
 		const valid = passwordValidationRules.every((rule) => !rule.test(pwd));
@@ -119,7 +122,7 @@ function RegisterForm() {
 
 	useEffect(() => {
 		setErrMsg('');
-	}, [username, pwd, matchPwd]);
+	}, [name, nationalID, pwd, matchPwd]);
 
 	function displayNotif() {
 		const verifyNotif = {
@@ -134,24 +137,22 @@ function RegisterForm() {
 
 	async function handleSubmit(e) {
 		e.preventDefault();
-		// const v1 = USER_REGEX.test(user);
-		// const v2 = PWD_REGEX.test(pwd);
-		// if (!v2) {
-		// 	setErrMsg('invalid entry');
-		// 	return;
-		// } //todo prevent making a submit if theres no validpwd and username and
-
 		try {
 			const registerData = {
-				username: username,
-				//userId: userId,
+				name: name,
+				surname: surname,
+				nationalID: nationalID,
+				birthDate: forApiBirthDate,
 				password: pwd,
 				email: mail,
 			};
-			const response = await dispatch(register({ registerData }));
-			setUsername('');
+			const response = await dispatch(
+				AuthService({ data: registerData, endpoint: '/register' })
+			);
+			setName('');
+			setSurname('');
 			setLocalLoading(true);
-			//setUserId('');
+			setNationalID('');
 			setPwd('');
 			setMatchPwd('');
 			console.log(response);
@@ -174,6 +175,70 @@ function RegisterForm() {
 				: setErrMsg(err.payload?.data?.message);
 		}
 	}
+
+	useEffect(() => {
+		if (birthDate.length === 0) {
+			setBirthDateError('');
+		}
+	}, [birthDate]);
+
+	useEffect(() => {
+		if (!validBirthDate) {
+			setForApiBirthDate(null);
+		}
+	}, [validBirthDate]);
+
+	function handleBirthDate(e) {
+		let formattedDate = '';
+		if (e.target.value.length < 11) {
+			const value = e.target.value.replace(/\D/g, '');
+			let day = value.substring(0, 2);
+			let month = value.substring(2, 4);
+			let year = value.substring(4, 8);
+			const currentYear = new Date().getFullYear();
+			for (let i = 0; i < value.length; i++) {
+				if (
+					(month.length <= 1 && parseInt(month) > 1) ||
+					(day.length <= 1 && parseInt(day) > 3) ||
+					(month.length === 2 && parseInt(month) > 12) ||
+					parseInt(day) > 31 ||
+					(day.length === 2 && parseInt(day) <= 0) ||
+					(month.length === 2 && parseInt(month) <= 0)
+				) {
+					setBirthDateError('invalid date');
+					return;
+				}
+				if (
+					parseInt(year) > currentYear ||
+					(year.length === 4 && parseInt(year) < 1900)
+				) {
+					setBirthDateError('invalid year');
+					return;
+				}
+				setBirthDateError('');
+				if (i === 2 || i === 4) {
+					formattedDate += '/' + value[i];
+				} else {
+					formattedDate += value[i];
+				}
+			}
+			if (formattedDate.length === 10 && year.length === 4) {
+				setValidBirthDate(true);
+				const isoDate = new Date(
+					Date.UTC(parseInt(year), parseInt(month) - 1, parseInt(day)) -
+						new Date().getTimezoneOffset() * 60000
+				);
+				setForApiBirthDate(isoDate);
+				setBirthDateError('');
+			} else {
+				setValidBirthDate(false);
+			}
+		} else {
+			return;
+		}
+		setBirthDate(formattedDate);
+	}
+
 	return (
 		<div className='authentication-form-container box-shadow'>
 			<form onSubmit={handleSubmit} className='authentication-form'>
@@ -185,39 +250,31 @@ function RegisterForm() {
 				>
 					{errMsg}
 				</p>
-				<p ref={userRef}>{t('Authentication.Greet.0')}</p>
-				<div className='relative-position centerLineAnimation'>
-					<div
-						style={{
-							display: 'grid',
-							gap: '1rem',
-							gridTemplateColumns: '1fr 1fr',
-						}}
-					>
+				<p>{t('Authentication.Greet.0')}</p>
+				<div className='twoInputAreas'>
+					<div className='relative-position centerLineAnimation'>
 						<div>
 							<input
 								type='text'
-								placeholder={t('Authentication.Username')}
-								id='username'
-								className={validName || username ? 'form-icon-active' : ''}
+								placeholder={t('Authentication.Name')}
+								id='name'
+								className={validName || name ? 'form-icon-active' : ''}
 								ref={userRef}
 								autoComplete='off'
-								onChange={(e) => setUsername(e.target.value)}
-								value={username}
+								onChange={(e) => setName(e.target.value)}
+								value={name}
 								required
 								aria-invalid={validName ? 'false' : 'true'}
 								aria-describedby='uidnote'
-								onFocus={() => setUsernameFocus(true)}
-								onBlur={() => setUsernameFocus(false)}
 							/>
-							<div htmlFor='username' className='form-icon'>
+							<div htmlFor='name' className='form-icon'>
 								<FontAwesomeIcon
 									icon={faCheck}
 									className={validName ? 'valid' : 'hide'}
 								/>
 								<FontAwesomeIcon
 									icon={faTimes}
-									className={validName || !username ? 'hide' : 'invalid'}
+									className={validName || !name ? 'hide' : 'invalid'}
 								/>
 							</div>
 							<motion.p
@@ -225,37 +282,36 @@ function RegisterForm() {
 								variants={descending}
 								whileInView='show'
 								id='uidnote'
-								className={
-									username && !validName ? 'instructions' : 'offscreen'
-								}
+								className={name && !validName ? 'instructions' : 'offscreen'}
 							>
-								{usernameValidationRules.find((rule) => rule.test(username))
-									?.message || ''}
+								{nameSurnameRules.find((rule) => rule.test(name))?.message ||
+									''}
 							</motion.p>
 						</div>
-						{/* <div>
+					</div>
+
+					<div className='relative-position centerLineAnimation'>
+						<div>
 							<input
 								type='text'
-								placeholder={t('Authentication.UserId')}
-								id='userId'
-								className={validUserId || userId ? 'form-icon-active' : ''}
+								placeholder={t('Authentication.Surname')}
+								id='surname'
+								className={validSurename || surname ? 'form-icon-active' : ''}
 								autoComplete='off'
-								onChange={(e) => setUserId(e.target.value)}
-								value={userId}
+								onChange={(e) => setSurname(e.target.value)}
+								value={surname}
 								required
-								aria-invalid={validUserId ? 'false' : 'true'}
+								aria-invalid={validSurename ? 'false' : 'true'}
 								aria-describedby='uidnote'
-								onFocus={() => setUserIdFocus(true)}
-								onBlur={() => setUserIdFocus(false)}
 							/>
-							<div htmlFor='userId' className='form-icon'>
+							<div htmlFor='surname' className='form-icon'>
 								<FontAwesomeIcon
 									icon={faCheck}
-									className={validUserId ? 'valid' : 'hide'}
+									className={validSurename ? 'valid' : 'hide'}
 								/>
 								<FontAwesomeIcon
 									icon={faTimes}
-									className={validUserId || !userId ? 'hide' : 'invalid'}
+									className={validSurename || !surname ? 'hide' : 'invalid'}
 								/>
 							</div>
 							<motion.p
@@ -264,13 +320,14 @@ function RegisterForm() {
 								whileInView='show'
 								id='uidnote'
 								className={
-									userId && !validUserId ? 'instructions' : 'offscreen'
+									surname && !validSurename ? 'instructions' : 'offscreen'
 								}
 							>
-								{userIdValidationRules.find((rule) => rule.test(userId))
-									?.message || ''}
+								{nameSurnameRules.find((rule) => rule.test(surname))?.message ||
+									''}
 							</motion.p>
-						</div> */}
+						</div>{' '}
+						*/}
 					</div>
 				</div>
 				<div className='centerLineAnimation'>
@@ -284,6 +341,69 @@ function RegisterForm() {
 						required
 					/>
 				</div>
+				<div className='twoInputAreas'>
+					{/* nationalID input */}
+					<div>
+						<div className='centerLineAnimation relative-position'>
+							<input
+								type='text'
+								placeholder={t('Authentication.UserId')}
+								id='nationalID'
+								className={
+									validNationalID || nationalID ? 'form-icon-active' : ''
+								}
+								autoComplete='off'
+								onChange={(e) => setNationalID(e.target.value)}
+								value={nationalID}
+								required
+								aria-invalid={validNationalID ? 'false' : 'true'}
+								aria-describedby='uidnote'
+							/>
+							<div htmlFor='nationalID' className='form-icon'>
+								<FontAwesomeIcon
+									icon={faCheck}
+									className={validNationalID ? 'valid' : 'hide'}
+								/>
+								<FontAwesomeIcon
+									icon={faTimes}
+									className={
+										validNationalID || !nationalID ? 'hide' : 'invalid'
+									}
+								/>
+							</div>
+							<motion.p
+								initial='hidden'
+								variants={descending}
+								whileInView='show'
+								id='uidnote'
+								className={
+									nationalID && !validNationalID ? 'instructions' : 'offscreen'
+								}
+							>
+								{nationalIDrules.find((rule) => rule.test(nationalID))
+									?.message || ''}
+							</motion.p>
+						</div>
+					</div>
+
+					<div className='relative-position centerLineAnimation'>
+						<input
+							value={birthDate}
+							placeholder={i18n.language === 'tr' ? 'GG/AA/YYYY' : 'DD/MM/YYYY'}
+							onChange={(e) => handleBirthDate(e)}
+						></input>
+						<motion.p
+							initial='hidden'
+							variants={descending}
+							whileInView='show'
+							id='uidnote'
+							className={birthDateError ? 'instructions' : 'offscreen'}
+						>
+							{birthDateError}
+						</motion.p>
+					</div>
+				</div>
+
 				<div className='relative-position centerLineAnimation'>
 					<input
 						type='password'
@@ -295,8 +415,6 @@ function RegisterForm() {
 						required
 						aria-invalid={validPwd ? 'false' : 'true'}
 						aria-describedby='pwdnote'
-						onFocus={() => setPwdFocus(true)}
-						onBlur={() => setPwdFocus(false)}
 					/>
 					<div htmlFor='password' className='form-icon'>
 						<FontAwesomeIcon
@@ -330,8 +448,6 @@ function RegisterForm() {
 						required
 						aria-invalid={validMatch ? 'false' : 'true'}
 						aria-describedby='confirmnote'
-						onFocus={() => setMatchFocus(true)}
-						onBlur={() => setMatchFocus(false)}
 					/>
 					<div htmlFor='confirm_pwd' className='form-icon'>
 						<FontAwesomeIcon
@@ -366,7 +482,16 @@ function RegisterForm() {
 
 				<div className='authentication-button-container'>
 					<Button
-						disabled={!validName || !validPwd || !validMatch ? true : false}
+						disabled={
+							!validName ||
+							!validPwd ||
+							!validMatch ||
+							!validName ||
+							!validBirthDate ||
+							!validNationalID
+								? true
+								: false
+						}
 						type='submit'
 						isLoading={isLoading || localLoading}
 					>

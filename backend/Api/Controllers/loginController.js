@@ -8,76 +8,101 @@ import Sessions from '../Models/sessionModel.js';
 const { hash, compare } = pkg;
 
 const login = async (req, res) => {
-	const { email, password } = req.body;
+	try {
+		const { email, nationalID, password } = req.body;
+		// only one of the two is required both cant be required
+		const loginSchema = Joi.object({
+			email: Joi.string().email().optional(),
+			nationalID: Joi.string().optional(),
+			password: Joi.string().required(),
+		}).xor('email', 'nationalID');
+		try {
+			await loginSchema.validateAsync({
+				...(email && { email }),
+				...(nationalID && { nationalID }),
+				password,
+			});
+		} catch (validationError) {
+			return res.status(400).json({
+				success: false,
+				message: validationError.details[0].message,
+			});
+		}
 
-	const objectSchema = Joi.object({
-		email: Joi.string()
-			.email({ tlds: { allow: true } })
-			.required(),
-		password: Joi.string().required(),
-	});
-	const { error, value } = objectSchema.validate({ email, password });
-	if (error) {
-		return res.status(409).json({
+		// Build query based on which identifier is provided
+		const query = {
+			removed: false,
+			...(email && { email }),
+			...(nationalID && { nationalID }),
+		};
+
+		const user = await Users.findOne(query);
+
+		if (!user) {
+			return res.status(404).json({
+				success: false,
+				result: null,
+				message: 'No account found with provided credentials.',
+			});
+		}
+		let databasePassword = await Users.findOne({
+			_id: user._id,
+			removed: false,
+		});
+
+		const isMatch = await pkg.compare(password, databasePassword.password);
+
+		if (!isMatch) {
+			return res.status(403).json({
+				success: false,
+				result: null,
+				message: 'Invalid credentials.',
+			});
+		}
+
+		const accessToken = jwt.sign(
+			{
+				userId: user._id,
+				email: user.email,
+			},
+			process.env.ACCESS_TOKEN_SECRET,
+			{ expiresIn: '3s' } //todo change it
+		);
+
+		const refreshToken = jwt.sign(
+			{
+				userId: user._id,
+			},
+			process.env.REFRESH_TOKEN_SECRET,
+			{ expiresIn: '3s' } //todo change it
+		);
+
+		res.cookie('jwt', refreshToken, {
+			httpOnly: true,
+			maxAge: 1000 * 60 * 60 * 24 * 30,
+			sameSite: 'Lax',
+			path: '/',
+			secure: process.env.ENVIROMENT === 'development' ? false : true,
+		});
+
+		const addActiveUser = await Sessions.create({
+			token: refreshToken,
+			userId: user._id,
+		});
+
+		return res.status(200).json({
+			accessToken: accessToken,
+			user,
+			message: 'Successfully login user',
+		});
+	} catch (error) {
+		return res.status(500).json({
 			success: false,
 			result: null,
 			error: error,
-			message: 'email format is incorrect',
+			message: 'An error occurred during login',
 		});
 	}
-
-	const user = await Users.findOne({ email: email, removed: false });
-	if (!user)
-		return res.status(404).json({
-			success: false,
-			result: null,
-			message: 'No account with this email has been registered.',
-		});
-	let databasePassword = await Users.findOne({ _id: user._id, removed: false });
-
-	const isMatch = await pkg.compare(password, databasePassword.password);
-
-	if (!isMatch)
-		return res.status(403).json({
-			success: false,
-			result: null,
-			message: 'Invalid credentials.',
-		});
-
-	const accessToken = jwt.sign(
-		{
-			userId: user._id,
-			email: user.email,
-		},
-		process.env.ACCESS_TOKEN_SECRET,
-		{ expiresIn: '3s' } //todo change it
-	);
-	const refreshToken = jwt.sign(
-		{
-			userId: user._id,
-		},
-		process.env.REFRESH_TOKEN_SECRET,
-		{ expiresIn: '3s' } //todo change it
-	);
-	res.cookie('jwt', refreshToken, {
-		httpOnly: true,
-		maxAge: 1000 * 60 * 60 * 24 * 30,
-		// maxAge: 1000 * 3, //todo delete it
-		sameSite: 'Lax',
-		path: '/',
-		secure: process.env.ENVIROMENT === 'development' ? 'false' : 'true',
-	});
-	const addActiveUser = await Sessions.create({
-		token: refreshToken,
-		userId: user._id,
-		// expiresAt: new Date(Date.now() + 30 * 1000), // 7 days from now
-	});
-
-	return res.status(200).json({
-		accessToken: accessToken,
-		user,
-		message: 'Successfully login user',
-	});
 };
 
 export default login;

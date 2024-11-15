@@ -1,0 +1,7 @@
+{
+  "execMap": {
+    "js": "node_modules/.bin/babel-node"
+  },
+  "watch": ["src", "backend"],
+  "ext": "js,jsx"
+}

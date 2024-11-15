@@ -57,14 +57,14 @@
 	},
 	"Authentication": {
 		"Greet": ["Kaydolun", "Giriş Yapın"],
-		"Username": "Kullanıcı Adı",
+		"Name": "İsim",
+		"Surname": "Soyad",
 		"UserId": "TC Kimlik No",
 		"Password": ["Şifre", "Şifre Tekrarı"],
 		"Validation": {
-			"Username": [
-				"Harfle başlanması gerek.",
-				"Sadece harfler, sayılar ve nokta geçerlidir.",
-				"4 ila 24 karakter aralığı olmalıdır."
+			"nameOrSurname": [
+				"Sadece karakterler ve boşluk geçerlidir.",
+				"4 ila 24 karakter aralığında olmalıdır."
 			],
 			"UserId": ["Sadece sayılar geçerlidir.", "11 rakam olmalıdır."],
 			"Password": [

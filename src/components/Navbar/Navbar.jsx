@@ -18,16 +18,19 @@ import { socialSlide, backgroundFill } from '../animations/AnimationValues';
 import instagramBackground from '../../assets/instagram-background.jpg';
 import { useTranslation } from 'react-i18next';
 import { Navigate } from 'react-router-dom';
-
+import axios from '../../pages/api/axios';
+import { useSelector } from 'react-redux';
+import { selectIsLoggedIn } from '../../redux/auth/authStateSlice';
+import { AuthService } from '../../auth/auth.service';
+import { useDispatch } from 'react-redux';
 function Navbar() {
-	const navigate = useNavigate();
-	//if the user is logged in it hides the register button
-	const [isLoggedin, setIsLoggedin] = useState(false);
-	useLayoutEffect(() => {
-		const isLoggedIn = localStorage.getItem('isLoggedIn');
-		setIsLoggedin(isLoggedIn);
-	}, []);
+	const dispatch = useDispatch();
+	const isLoggedIn = useSelector(selectIsLoggedIn);
+	useEffect(() => {
+		console.log('isLoggedInRedux', isLoggedIn);
+	}, [isLoggedIn]);
 
+	const navigate = useNavigate();
 	const [menuOpen, setMenuOpen] = useState(false);
 	const toggleNavMenu = () => {
 		setMenuOpen(false);
@@ -138,15 +141,12 @@ function Navbar() {
 	};
 
 	async function handleLogout() {
-		console.log({
-			accessToken: localStorage.getItem('accessToken'),
-		});
-		const response = await axios.post('/logout', {
-			withCredentials: true,
-		});
-		console.log(response);
-		localStorage.removeItem('isLoggedIn');
-
+		const response = await dispatch(
+			AuthService({
+				endpoint: '/logout ',
+				config: { credewithCredentials: true },
+			})
+		);
 		if (response.status === 200) {
 			localStorage.removeItem('accessToken');
 		}
@@ -200,8 +200,8 @@ function Navbar() {
 						</div>
 					</div>
 
-					<Button //todo custom event kullanarak refresh gerektirmeden gizle
-						classProp={`${isLoggedin ? 'display-hidden' : ''}`}
+					<Button
+						classProp={`${isLoggedIn ? 'display-hidden' : ''}`}
 						redirect={'/register'}
 					>
 						{i18n.language === 'en' ? 'Sign Up' : 'Kaydol'}
@@ -308,7 +308,7 @@ function Navbar() {
 				<Button
 					onClick={toggleNavMenu}
 					redirect={'/register'}
-					classProp={`${isLoggedin ? 'display-hidden' : ''}`}
+					classProp={`${isLoggedIn} && display-hidden`}
 				>
 					{i18n.language === 'en' ? 'Sign Up' : 'Kaydol'}
 				</Button>

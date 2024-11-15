@@ -1,9 +1,10 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import '../../pages/Register-Login/formStyle.css';
 import Button from '../Button/Button';
 import '../../components/Containers/containerStyle.css';
 import '../../pages/Contact/Contact.css';
 import { useTranslation } from 'react-i18next';
+import axios from '../../pages/api/axios';
 
 function ContactForm() {
 	const contactForm = useRef();
@@ -13,6 +14,10 @@ function ContactForm() {
 	const [Topic, setTopic] = useState('');
 	const [Context, setContext] = useState('');
 	const { t, i18n } = useTranslation('translation');
+
+	function handleContactFormSubmission() {}
+
+	const [isLoggedIn, setIsLoggedin] = useState(false);
 	return (
 		<div className='contact-form relative-position ' id='contact-form-grad'>
 			<img
@@ -22,6 +27,7 @@ function ContactForm() {
 			/>
 
 			<form
+				onSubmit={handleContactFormSubmission}
 				ref={contactForm}
 				className='contact-form-outer-container box-shadow'
 			>
@@ -29,7 +35,7 @@ function ContactForm() {
 					{t('Contact.Form.Title')}
 				</p>
 				<div className='contact-name-input-container'>
-					<div className='centerLineAnimation'>
+					<div className={`${isLoggedIn && 'hide'} centerLineAnimation`}>
 						<input
 							onChange={(e) => setName(e.target.value)}
 							value={Name}
@@ -38,7 +44,7 @@ function ContactForm() {
 							type='text'
 						/>
 					</div>
-					<div className='centerLineAnimation'>
+					<div className={`${isLoggedIn && 'hide'} centerLineAnimation`}>
 						<input
 							onChange={(e) => setSurname(e.target.value)}
 							value={Surname}
@@ -49,7 +55,7 @@ function ContactForm() {
 					</div>
 				</div>
 
-				<div className='centerLineAnimation'>
+				<div className={`${isLoggedIn && 'hide'} centerLineAnimation`}>
 					<input
 						onChange={(e) => setMail(e.target.value)}
 						value={Mail}
@@ -73,7 +79,7 @@ function ContactForm() {
 						required
 						className='custom-textarea'
 						placeholder={t('Contact.Form.Context') + '...'}
-						rows='5'
+						rows='7'
 						data-role='none'
 						onChange={(e) => setContext(e.target.value)}
 						value={Context}
@@ -87,7 +93,10 @@ function ContactForm() {
 					<span className='textarea-top-left-line'></span>
 					<span className='textarea-top-right-line'></span>
 				</div>
-				<Button disabled={!Context || !Name || !Surname || !Mail || !Topic}>
+				<Button
+					disabled={!Context || !Name || !Surname || !Mail || !Topic}
+					type='submit'
+				>
 					{i18n.language === 'en' ? 'Send' : 'Gönder'}
 				</Button>
 			</form>

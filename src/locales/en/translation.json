@@ -57,13 +57,14 @@
 	},
 	"Authentication": {
 		"Greet": ["Sign Up Here!", "Sign In Here!"],
+		"Name": "Name",
+		"Surname": "Surname",
 		"Username": "Username",
 		"UserId": "TR Government ID",
 		"Password": ["Password", "Repeat Password"],
 		"Validation": {
-			"Username": [
-				"HAs to start with a letter.",
-				"Only letters, numbers and dots can be used.",
+			"nameOrSurname": [
+				"Only letters and whitespace character is allowed",
 				"Between 4 to 24 characters."
 			],
 			"UserId": ["Only numbers can be used.", "Has to be 11 numbers."],

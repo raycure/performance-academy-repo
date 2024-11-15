@@ -12,10 +12,15 @@ const initialState = {
 
 export const fetchData = createAsyncThunk(
 	'auth/fetchStatus',
-	async ({ method, url, data = null }, { rejectWithValue }) => {
+	// data can be empty to include api calls like logout
+	async ({ method, url, data = {}, config = {} }, { rejectWithValue }) => {
 		try {
-			const response = await axios({ method, url, data });
-			return response.data;
+			// spreads the config argument for it to work properly
+			const response = await axios({ method, url, data, ...config });
+			return {
+				data: response.data,
+				endpoint: url,
+			};
 		} catch (error) {
 			const responseData = {
 				data: error.response?.data,
@@ -29,12 +34,6 @@ export const fetchData = createAsyncThunk(
 const authSlice = createSlice({
 	name: 'auth',
 	initialState,
-	reducers: {
-		logout: (state) => {
-			state.isLoggedIn = false;
-			state.current = {};
-		},
-	},
 	extraReducers: (builder) => {
 		builder
 			.addCase(fetchData.pending, (state) => {
@@ -45,7 +44,13 @@ const authSlice = createSlice({
 				state.status = 'succeeded';
 				state.isLoading = false;
 				state.isSuccess = true;
-				state.current = action.payload;
+				state.current = action.payload.data;
+				if (action.payload.endpoint.includes('/login')) {
+					state.isLoggedIn = true;
+				}
+				if (action.payload.endpoint.includes('/logout')) {
+					state.isLoggedIn = false;
+				}
 			})
 			.addCase(fetchData.rejected, (state, action) => {
 				state.status = 'failed';
@@ -57,7 +62,8 @@ const authSlice = createSlice({
 });
 
 export const selectIsLoading = (state) => state.auth.isLoading;
+export const selectIsLoggedIn = (state) => state.auth.isLoggedIn;
 export const selectAuthIsSuccess = (state) => state.auth.isSuccess;
-export const selectError = (state) => state.auth.error; // todo is this really necessary
+export const selectError = (state) => state.auth.error;
+export const selectAuthState = (state) => state.auth;
 export default authSlice.reducer;
-export const { logout } = authSlice.actions;
