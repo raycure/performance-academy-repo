@@ -89,10 +89,26 @@
 		height: 100%;
 	}
 }
-
+.certftn-prcss-outer-con {
+	display: flex;
+	max-width: 930px;
+	margin-inline: auto;
+}
+.stepProgressBarContainer {
+	min-width: fit-content;
+}
 .stepText {
 	display: flex;
 	flex-direction: column;
 	gap: 2rem;
 	align-self: center;
+}
+@media (max-width: 800px) {
+	.stepProgressBarContainer .fs-600 {
+		display: none;
+	}
+	.certftn-prcss-outer-con {
+		flex-direction: row-reverse;
+		gap: 2.5rem;
+	}
 }

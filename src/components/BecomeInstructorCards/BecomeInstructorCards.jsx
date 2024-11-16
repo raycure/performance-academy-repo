@@ -10,12 +10,11 @@ import './BecomeInstructorCards.css';
 function BecomeInstructorCards() {
 	const { i18n, t } = useTranslation('translation');
 	return (
-		<Container>
+		<Container className='bcm-instr-cards-outer-con'>
 			<div
 				className='fs-primary-heading center-item'
 				style={{
 					display: 'flex',
-					gap: '1rem',
 					alignContent: 'center',
 					fontStyle: 'italic',
 				}}
@@ -23,14 +22,9 @@ function BecomeInstructorCards() {
 				{i18n.language === 'en' && 'BECOME A '}
 				<img
 					alt='Les Mills logo'
-					className='logo'
+					className='logo bcm-instr-cards-logo'
 					src={logo}
-					style={{
-						height: '4rem',
-						width: 'auto',
-						position: 'relative',
-						bottom: '2px',
-					}}
+					style={{ width: 'auto' }}
 				/>
 				{i18n.language === 'en' ? 'INSTRUCTOR' : 'EĞİTMENİ OLUN'}
 			</div>

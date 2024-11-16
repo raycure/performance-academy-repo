@@ -88,7 +88,7 @@ function CertificationSteps() {
 	}
 
 	return (
-		<Container className='even-columns'>
+		<Container className='certftn-prcss-outer-con'>
 			<div className='stepText'>
 				<button
 					className='nextButton center-item'

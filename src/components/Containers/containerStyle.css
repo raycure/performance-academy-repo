@@ -40,23 +40,6 @@
 .event-pagination-item:hover {
 	opacity: 0.6;
 }
-.input-outer-container {
-	width: 100%;
-	display: flex;
-	text-align: start;
-	border: 1px solid rgb(255, 255, 255);
-	resize: none;
-	margin: 0.8rem 0;
-	border-radius: 10px;
-	padding: 0.2rem;
-}
-.input-outer-container input {
-	width: 100%;
-	height: fit-content;
-}
-.input-outer-container-large {
-	height: 10rem;
-}
 .grid-event-item-container {
 	display: flex;
 	justify-content: center;

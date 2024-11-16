@@ -1,0 +1,115 @@
+/* General Reset for Padding and Margin */
+.privacy-policy body,
+.privacy-policy h1,
+.privacy-policy h2,
+.privacy-policy h3,
+.privacy-policy h4,
+.privacy-policy h5,
+.privacy-policy h6,
+.privacy-policy p,
+.privacy-policy ul,
+.privacy-policy ol,
+.privacy-policy li,
+.privacy-policy div {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+/* Body Style */
+.privacy-policy body {
+	font-family: Arial, sans-serif;
+	line-height: 1.6;
+	padding: 20px;
+}
+
+/* Headings */
+.privacy-policy h1 {
+	font-size: 2em;
+	margin-bottom: 20px;
+	padding: 10px 0;
+}
+
+.privacy-policy h2 {
+	font-size: 1.75em;
+	margin-bottom: 15px;
+	padding: 8px 0;
+}
+
+.privacy-policy h3,
+.privacy-policy h4,
+.privacy-policy h5,
+.privacy-policy h6 {
+	margin-bottom: 10px;
+	padding: 5px 0;
+}
+
+/* Paragraphs */
+.privacy-policy p {
+	margin-bottom: 15px;
+	padding: 5px 0;
+}
+
+/* Lists */
+.privacy-policy ul,
+.privacy-policy ol {
+	margin-bottom: 15px;
+	padding-left: 20px;
+}
+
+.privacy-policy li {
+	margin-bottom: 10px;
+}
+
+/* Div Containers */
+.privacy-policy div {
+	margin-bottom: 20px;
+	padding: 10px;
+}
+
+/* Utility Classes for Padding and Margin */
+.privacy-policy .padding-small {
+	padding: 5px;
+}
+
+.privacy-policy .padding-medium {
+	padding: 15px;
+}
+
+.privacy-policy .padding-large {
+	padding: 30px;
+}
+
+.privacy-policy .margin-small {
+	margin: 5px;
+}
+
+.privacy-policy .margin-medium {
+	margin: 15px;
+}
+
+.privacy-policy .margin-large {
+	margin: 30px;
+}
+/* Lists Styling */
+.privacy-policy ul {
+	list-style-type: disc; /* Adds dots to unordered lists */
+	margin-left: 20px; /* Adds spacing from the left for nested lists */
+	padding-left: 20px; /* Adds consistent padding inside the list */
+}
+
+.privacy-policy ol {
+	list-style-type: decimal; /* Adds numbers to ordered lists */
+	margin-left: 20px;
+	padding-left: 20px;
+}
+
+.privacy-policy ul li,
+.privacy-policy ol li {
+	margin-bottom: 10px; /* Adds spacing between list items */
+}
+
+.privacy-policy {
+	max-width: 950px;
+	margin-inline: auto;
+}

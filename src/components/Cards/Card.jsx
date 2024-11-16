@@ -15,7 +15,7 @@ function Card({ backContent, frontContent }) {
 			onMouseLeave={handleClick}
 		>
 			<div className={`card ${flipped ? 'flipped' : ''}`}>
-				<div className='front cardContent'>{frontContent}</div>
+				<div className='front'>{frontContent}</div>
 				<div className='back'>{backContent} </div>
 			</div>
 		</div>

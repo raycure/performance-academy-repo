@@ -1,73 +1,546 @@
 import React, { useEffect, useState } from 'react';
+import './UserInfo.css';
+import { FaEdit } from 'react-icons/fa';
+import { BsExclamationLg } from 'react-icons/bs';
+import { RxCheckCircled } from 'react-icons/rx';
+import { GrDocumentUpdate } from 'react-icons/gr';
+import { GrDocumentVerified } from 'react-icons/gr';
+import { FaSave } from 'react-icons/fa';
+import { MdDeleteForever } from 'react-icons/md';
+import { IoLogOutOutline } from 'react-icons/io5';
 import { useTranslation } from 'react-i18next';
-import LesmillsPrograms from '../../assets/LesmillsPrograms';
+import { ImCancelCircle } from 'react-icons/im';
+import { FaArrowRotateRight } from 'react-icons/fa6';
+import { IoEyeOff } from 'react-icons/io5';
+import { IoEye } from 'react-icons/io5';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
+function UserInfoFake() {
+	const { t, i18n } = useTranslation('translation');
+	const contractverified = false;
+	const [isEditing, setIsEditing] = useState(false);
+	const [passwordOn, setPasswordOn] = useState(true);
+	const [fileName, setFileName] = useState(null);
+	const handleFileChange = (event) => {
+		const file = event.target.files[0];
+		setFileName(file ? file.name : null);
+	};
+	const [name, setName] = useState('');
+	const [surname, setSurname] = useState('');
+	const [id, setId] = useState('');
+	const [birthDate, setBirthDate] = useState('');
+	const [mail, setMail] = useState('');
+	const [password, setPassword] = useState('');
 
-function UserInfo() {
-	const { t } = useTranslation('programs');
-	const lesMillsPrograms = LesmillsPrograms();
-
-	const programCategories = [
+	const [validName, setValidName] = useState('');
+	const [validSurname, setValidSurname] = useState('');
+	const [validId, setValidId] = useState('');
+	const [validBirthDate, setValidBirthDate] = useState('');
+	const [validMail, setValidMail] = useState('');
+	const [validPassword, setValidPassword] = useState('');
+	//I DIDNT SEE WHERE U CALL THE MESSAGES SORRY THEYRE NOT SHOWN
+	const nameRules = [
 		{
-			label: t('cat1.title'),
-			selector: t('cat1.title'),
+			test: (name) => !/^[A-Za-z]+$/.test(name),
+			message: t('Authentication.Validation.nameOrSurname.0'),
 		},
 		{
-			label: t('cat2.title'),
-			selector: t('cat2.title'),
-		},
-		{
-			label: t('cat3.title'),
-			selector: t('cat3.title'),
+			test: (name) => name.length < 3 || name.length >= 24,
+			message: t('Authentication.Validation.nameOrSurname.1'),
 		},
 	];
-
-	const [programImages, setProgramImages] = useState([]);
+	const idRules = [
+		{
+			test: (id) => !/^\d+$/.test(id),
+			message: t('Authentication.Validation.UserId.0'),
+		},
+		{
+			test: (id) => id.length !== 11,
+			message: t('Authentication.Validation.UserId.1'),
+		},
+	];
+	const mailRules = [
+		{
+			test: (mail) => !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(mail),
+			message:
+				i18n.language === 'en'
+					? 'Mail must be a valid email address.'
+					: 'Geçerli bir e-posta formatında olmalıdır.',
+		},
+		{
+			test: (mail) => mail.length > 50,
+			message:
+				i18n.language === 'en'
+					? 'Mail must not exceed 50 characters.'
+					: '50 karakteri geçmemelidir.',
+		},
+	];
+	const birthDateRules = [
+		{
+			test: (birthDate) => isNaN(new Date(birthDate).getTime()),
+			message:
+				i18n.language === 'en'
+					? 'Birth date must be a valid date.'
+					: 'İstenen formatta yazılmalıdır.',
+		},
+	];
+	const passwordRules = [
+		{
+			test: (pwd) => !/(?=.*[a-z])(?=.*[A-Z])/.test(pwd),
+			message: t('Authentication.Validation.Password.0'),
+		},
+		{
+			test: (pwd) => !/(?=.*\d)/.test(pwd),
+			message: t('Authentication.Validation.Password.1'),
+		},
+		{
+			test: (pwd) => /\s/.test(pwd),
+			message: t('Authentication.Validation.Password.2'),
+		},
+		{
+			test: (pwd) =>
+				!/^[a-zA-Z\d~!?@#$%^&*_\-\+\(\)\[\]\{\}><\/\\|"'\.,:;]+$/.test(pwd),
+			message: t('Authentication.Validation.Password.3'),
+		},
+		{
+			test: (pwd) => pwd.length < 8 || pwd.length >= 24,
+			message: t('Authentication.Validation.Password.4'),
+		},
+	];
+	useEffect(() => {
+		const valid = nameRules.every((rule) => !rule.test(name));
+		setValidName(valid);
+	}, [name]);
 
 	useEffect(() => {
-		const processedImages = Object.entries(lesMillsPrograms).map(
-			([category, programs]) => ({
-				category,
-				programs: programs.map((program) => ({
-					title: program.title,
-					images: program.additionalPictures || [],
-				})),
-			})
-		);
+		const valid = nameRules.every((rule) => !rule.test(surname));
+		setValidSurname(valid);
+	}, [surname]);
 
-		setProgramImages(processedImages);
-	}, [lesMillsPrograms]);
+	useEffect(() => {
+		const valid = idRules.every((rule) => !rule.test(id));
+		setValidId(valid);
+	}, [id]);
 
+	useEffect(() => {
+		const valid = birthDateRules.every((rule) => !rule.test(birthDate));
+		setValidBirthDate(valid);
+	}, [birthDate]);
+
+	useEffect(() => {
+		const valid = mailRules.every((rule) => !rule.test(mail));
+		setValidMail(valid);
+	}, [mail]);
+
+	useEffect(() => {
+		const valid = passwordRules.every((rule) => !rule.test(password));
+		setValidPassword(valid);
+	}, [password]);
 	return (
-		<div className='p-4'>
-			{programImages.map((category, categoryIndex) => (
-				<div key={categoryIndex} className='mb-8'>
-					<h2 className='text-xl font-bold mb-4'>
-						{programCategories[categoryIndex]?.label || category.category}
-					</h2>
-
-					{category.programs.map((program, programIndex) => (
-						<div key={programIndex} className='mb-6'>
-							<h3 className='text-lg font-semibold mb-3'>{program.title}</h3>
-
-							<div className='flex flex-wrap gap-4'>
-								{program.images.map((image, imageIndex) => (
-									<img
-										key={imageIndex}
-										src={image.url}
-										alt={
-											image.alt || `${program.title} image ${imageIndex + 1}`
-										}
-										className='w-48 h-48 rounded-lg object-cover'
-										loading='lazy'
-									/>
-								))}
-							</div>
-						</div>
-					))}
+		<section className='user-info-page'>
+			<div className='user-info-inner-con user-info-title-con'>
+				<div>
+					<p className='fs-minimal-heading' style={{ fontWeight: 'bolder' }}>
+						{i18n.language === 'en' ? 'Your Account' : 'Hesabınız'}
+					</p>
+					<p>
+						{i18n.language === 'en'
+							? 'See or edit information on this page.'
+							: 'Bilgilerinizi bu sayfadan değiştirin veya kontrol edin.'}
+					</p>
 				</div>
-			))}
-		</div>
+				<button
+					style={{ display: 'flex', width: 'fit-content' }}
+					onClick={() => setIsEditing(true)}
+					className={`${!isEditing ? '' : 'display-hidden'} user-info-edit-btn`}
+				>
+					{i18n.language === 'en' ? 'Edit' : 'Düzenle'}
+					<FaEdit
+						style={{
+							position: 'relative',
+							top: '2px',
+							marginLeft: '0.5rem',
+							width: '1.2rem',
+						}}
+					/>
+				</button>
+				<button
+					style={{ color: '#ef3f3f', display: 'flex', width: 'fit-content' }}
+					onClick={() => setIsEditing(false)}
+					className={`${isEditing ? '' : 'display-hidden'} user-info-edit-btn`}
+				>
+					{i18n.language === 'en' ? 'Cancel Changes' : 'İptal Et'}
+					<ImCancelCircle
+						style={{
+							position: 'relative',
+							top: '4px',
+							marginLeft: '0.4rem',
+							width: '1rem',
+						}}
+					/>
+				</button>
+			</div>
+			<div className='user-info-inner-con'>
+				<p className='fs-650' style={{ fontWeight: 'bolder' }}>
+					{i18n.language === 'en' ? 'Personal Information' : 'Kişisel Bilgiler'}
+				</p>
+				<p>
+					{i18n.language === 'en'
+						? 'Manage your personal information.'
+						: 'Kişisel bilgilerinizi düzenleyin'}
+				</p>
+				<div className='user-info-grid'>
+					<div
+						className={`relative-position ${
+							validName || name ? 'form-icon-active' : ''
+						}`}
+						style={{ display: 'flex', flexDirection: 'column' }}
+					>
+						<label htmlFor='name'>
+							{i18n.language === 'en' ? 'Name' : 'İsim'}
+						</label>
+						<input
+							readOnly={!isEditing}
+							type='text'
+							id='name'
+							name='name'
+							onChange={(e) => setName(e.target.value)}
+						/>
+						<div className='form-icon'>
+							<FontAwesomeIcon
+								icon={faCheck}
+								className={validName ? 'valid' : 'hide'}
+							/>
+							<FontAwesomeIcon
+								icon={faTimes}
+								className={validName || !name ? 'hide' : 'invalid'}
+							/>
+						</div>
+					</div>
+					<div
+						className={`relative-position ${
+							validSurname || surname ? 'form-icon-active' : ''
+						}`}
+						style={{ display: 'flex', flexDirection: 'column' }}
+					>
+						<label htmlFor='surname'>
+							{i18n.language === 'en' ? 'Surname' : 'Soyad'}
+						</label>
+						<input
+							readOnly={!isEditing}
+							type='text'
+							id='surname'
+							name='surname'
+							onChange={(e) => setSurname(e.target.value)}
+						/>
+						<div className='form-icon'>
+							<FontAwesomeIcon
+								icon={faCheck}
+								className={validSurname ? 'valid' : 'hide'}
+							/>
+							<FontAwesomeIcon
+								icon={faTimes}
+								className={validSurname || !surname ? 'hide' : 'invalid'}
+							/>
+						</div>
+					</div>
+					<div
+						className={`relative-position ${
+							validId || id ? 'form-icon-active' : ''
+						}`}
+						style={{ display: 'flex', flexDirection: 'column' }}
+					>
+						<label htmlFor='userId'>
+							{i18n.language === 'en' ? 'TR Government ID' : 'TC Kimlik No'}
+						</label>
+						<input
+							readOnly={!isEditing}
+							type='text'
+							id='userId'
+							name='userId'
+							onChange={(e) => setId(e.target.value)}
+						/>
+						<div className='form-icon'>
+							<FontAwesomeIcon
+								icon={faCheck}
+								className={validId ? 'valid' : 'hide'}
+							/>
+							<FontAwesomeIcon
+								icon={faTimes}
+								className={validId || !id ? 'hide' : 'invalid'}
+							/>
+						</div>
+					</div>
+					<div
+						className={`relative-position ${
+							validBirthDate || birthDate ? 'form-icon-active' : ''
+						}`}
+						style={{ display: 'flex', flexDirection: 'column' }}
+					>
+						<label htmlFor='birthDate'>
+							{i18n.language === 'en' ? 'Birth Date' : 'Doğum Tarihi'}
+						</label>
+						<input
+							readOnly={!isEditing}
+							type='text'
+							id='birthDate'
+							name='birthDate'
+							onChange={(e) => setBirthDate(e.target.value)}
+						/>
+						<div className='form-icon'>
+							<FontAwesomeIcon
+								icon={faCheck}
+								className={validBirthDate ? 'valid' : 'hide'}
+							/>
+							<FontAwesomeIcon
+								icon={faTimes}
+								className={validBirthDate || !birthDate ? 'hide' : 'invalid'}
+							/>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div className='user-info-inner-con'>
+				<p className='fs-650' style={{ fontWeight: 'bolder' }}>
+					{i18n.language === 'en' ? 'Account Information' : 'Hesap Bilgileri'}
+				</p>
+				<p>
+					{i18n.language === 'en'
+						? 'Manage your account information.'
+						: 'Hesap bilgilerinizi düzenleyin.'}
+				</p>
+				<div
+					style={{ display: 'flex', flexDirection: 'column' }}
+					className={`relative-position ${
+						validMail || mail ? 'form-icon-active' : ''
+					}`}
+				>
+					<label htmlFor='mail'>Email</label>
+					<input
+						readOnly={!isEditing}
+						type='text'
+						id='mail'
+						name='mail'
+						onChange={(e) => setMail(e.target.value)}
+						style={{ width: '70%' }}
+					/>
+					<div
+						className='form-icon'
+						style={{ position: 'relative', bottom: '1.9rem' }}
+					>
+						<FontAwesomeIcon
+							icon={faCheck}
+							className={validMail ? 'valid' : 'hide'}
+						/>
+						<FontAwesomeIcon
+							icon={faTimes}
+							className={validMail || !mail ? 'hide' : 'invalid'}
+						/>
+					</div>
+				</div>
+				<div style={{ display: 'flex', flexDirection: 'column' }}>
+					<label htmlFor='password'>
+						{i18n.language === 'en' ? 'Password' : 'Şifre'}
+					</label>
+					<div
+						style={{ alignItems: 'center', display: 'flex' }}
+						className={`relative-position ${
+							validPassword || password ? 'form-icon-active' : ''
+						}`}
+					>
+						<input
+							readOnly={!isEditing}
+							type={passwordOn ? 'password' : 'text'}
+							id='password'
+							name='password'
+							onChange={(e) => setPassword(e.target.value)}
+							style={{ width: '55%' }}
+						/>
+						<button
+							style={{ margin: 'auto 0.5rem' }}
+							onClick={() => setPasswordOn(!passwordOn)}
+						>
+							{passwordOn ? (
+								<IoEyeOff
+									style={{
+										display: 'inline-block',
+										width: '1.3rem',
+										height: '100%',
+										flexShrink: '0',
+										position: 'relative',
+										top: '4px',
+									}}
+								/>
+							) : (
+								<IoEye
+									style={{
+										display: 'inline-block',
+										width: '1.3rem',
+										height: '100%',
+										flexShrink: '0',
+										position: 'relative',
+										top: '4px',
+									}}
+								/>
+							)}
+						</button>
+						<div className='form-icon'>
+							<FontAwesomeIcon
+								icon={faCheck}
+								className={validPassword ? 'valid' : 'hide'}
+							/>
+							<FontAwesomeIcon
+								icon={faTimes}
+								className={validPassword || !password ? 'hide' : 'invalid'}
+							/>
+						</div>
+					</div>
+				</div>
+				<div className='user-info-contract-con'>
+					{contractverified === true ? (
+						<p style={{ color: 'green', display: 'flex' }}>
+							<RxCheckCircled
+								style={{
+									position: 'relative',
+									top: '4px',
+									height: '100%',
+									width: '1rem',
+									marginRight: '0.3rem',
+									flexShrink: '0',
+								}}
+							/>{' '}
+							{i18n.language === 'en'
+								? 'Instructor Contract Verified'
+								: 'Antrenör Sözleşmesi Doğrulandı'}
+						</p>
+					) : contractverified === false ? (
+						<p style={{ color: '#ef3f3f', display: 'flex' }}>
+							<BsExclamationLg
+								style={{
+									position: 'relative',
+									top: '3px',
+									width: '1rem',
+									marginRight: '0.3rem',
+									flexShrink: '0',
+								}}
+							/>{' '}
+							{i18n.language === 'en'
+								? 'Instructor Contract Not Verified, Upload the Contract Again'
+								: 'Antrenör Sözleşmesi Doğrulanamadı, Lütfen Tekrar Yükleyiniz'}
+						</p>
+					) : (
+						<p style={{ color: 'gray', display: 'flex' }}>
+							<FaArrowRotateRight
+								style={{
+									position: 'relative',
+									top: '4px',
+									height: '100%',
+									width: '1rem',
+									marginRight: '0.3rem',
+									flexShrink: '0',
+								}}
+							/>{' '}
+							{i18n.language === 'en'
+								? 'Instructor Contract Under Review...'
+								: 'Antrenör Sözleşmesi Kontrol Ediliyor...'}
+						</p>
+					)}
+					{contractverified === false && (
+						<>
+							<input
+								type='file'
+								name='file'
+								id='file'
+								class='inputfile'
+								onChange={handleFileChange}
+								required
+							/>
+							<label htmlFor='file'>
+								<p>
+									{fileName === null ? (
+										<GrDocumentUpdate
+											style={{
+												display: 'inline-block',
+												marginRight: '0.5rem',
+												position: 'relative',
+												top: '2px',
+												flexShrink: '0',
+											}}
+										/>
+									) : (
+										<GrDocumentVerified
+											style={{
+												display: 'inline-block',
+												marginRight: '0.5rem',
+												position: 'relative',
+												top: '2px',
+												flexShrink: '0',
+											}}
+										/>
+									)}
+									{fileName === null
+										? i18n.language === 'en'
+											? 'Choose a File...'
+											: 'Dosya Seçin...'
+										: fileName.length > 10
+										? `${fileName.substring(0, 10)}...`
+										: fileName}
+								</p>
+							</label>
+						</>
+					)}
+				</div>
+			</div>
+			<div style={{ margin: '1rem 0' }}>
+				<p className='fs-650' style={{ fontWeight: 'bolder' }}>
+					{i18n.language === 'en' ? 'Account Security' : 'Hesap Güvenliği'}
+				</p>
+				<p>
+					{i18n.language === 'en'
+						? 'Manage your account security.'
+						: 'Hesap güvenliğinizi düzenleyin.'}
+				</p>
+				<div className='user-info-btn-con'>
+					<button className='user-info-btn'>
+						<IoLogOutOutline
+							style={{
+								position: 'relative',
+								width: '1.3rem',
+								height: '100%',
+								flexShrink: '0',
+							}}
+						/>
+						{i18n.language === 'en' ? 'Log out' : 'Çıkış Yapın'}
+					</button>
+					<button className='user-info-btn user-delete-btn'>
+						<MdDeleteForever
+							style={{
+								position: 'relative',
+								width: '1.3rem',
+								height: '100%',
+								flexShrink: '0',
+							}}
+						/>
+						{i18n.language === 'en' ? 'Delete Account' : 'Hesabınızı Silin'}
+					</button>
+					<button
+						className={`user-info-btn ${isEditing ? '' : 'display-hidden'}`}
+					>
+						<FaSave
+							style={{
+								position: 'relative',
+								width: '1.1rem',
+								height: '100%',
+								flexShrink: '0',
+							}}
+						/>
+						{i18n.language === 'en'
+							? 'Save Changes'
+							: 'Değişiklikleri Kaydedin'}
+					</button>
+				</div>
+			</div>
+		</section>
 	);
 }
-
-export default UserInfo;
+export default UserInfoFake;

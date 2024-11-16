@@ -1,0 +1,92 @@
+/* todo make it responsive */
+
+.bannerLikeImageContainer {
+	width: 100%;
+	position: relative;
+	height: 300px;
+	overflow: hidden;
+	background-color: transparent;
+}
+
+.landingParagraph {
+	display: flex;
+	flex-direction: column;
+	gap: 0.6rem;
+}
+
+.landingPageContainer {
+	display: flex;
+	justify-content: space-between;
+	max-width: 1110px;
+}
+
+.landingPageContainer .paragraph {
+	max-width: 40rem;
+	margin-top: 1.4rem;
+}
+
+.milestones li:nth-child(n) {
+	background-color: #0b0b0b;
+}
+.milestones li:nth-child(2n) {
+	background-color: #f0f0f0;
+	color: #0b0b0b;
+}
+
+.milestones {
+	margin: 1.5rem;
+}
+.milestones li {
+	padding: 0.7rem;
+	border-radius: 0.5rem;
+	width: fit-content;
+}
+.main-welcome-text-outer-con {
+	display: grid;
+	grid-template-columns: 0.6fr 0.5fr;
+	max-width: 1150px;
+	margin-inline: auto;
+	padding: 1rem;
+}
+@media (max-width: 1024px) {
+	.landingPageContainer {
+		display: flex;
+		flex-direction: column;
+		max-width: 750px;
+		padding-inline: 1.5rem;
+	}
+	.landingPageContainer .paragraph {
+		max-width: unset;
+	}
+	.milestones {
+		display: none;
+	}
+	.main-welcome-text-outer-con {
+		display: grid;
+		grid-template-columns: 0.6fr 0.5fr;
+		max-width: 1150px;
+		margin-inline: auto;
+		padding: 1rem;
+	}
+	.main-welcome-text-outer-con {
+		display: flex;
+		flex-direction: column-reverse;
+		max-width: 800px;
+		text-align: center;
+	}
+	.main-welcome-text-outer-con img {
+		display: none;
+	}
+}
+@media (max-width: 800px) {
+	.landingPageContainer .fs-650 {
+		font-size: var(--fs-600);
+		font-weight: bolder;
+	}
+	.cardContent {
+		display: none !important;
+	}
+	#cards-title {
+		display: none;
+	}
+}

@@ -3,7 +3,7 @@ import './containerStyle.css';
 import './columnStyle.css';
 function Container({ children, className, styleProp }) {
 	return (
-		<div className={`${className} container `} style={styleProp}>
+		<div className={`container ${className}`} style={styleProp}>
 			{children}
 		</div>
 	);

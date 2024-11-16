@@ -175,9 +175,7 @@ function Main() {
 			<Container className='landingPageContainer'>
 				<div className='landingParagraph'>
 					<h2 className='fs-secondary-heading'>Performance Fitness Academy</h2>
-					<p className='fs-650' style={{ maxWidth: '40rem' }}>
-						{t('MainPage.LandingParagraph.0')}
-					</p>
+					<p className='fs-650 paragraph'>{t('MainPage.LandingParagraph.0')}</p>
 					<p className='fs-400 paragraph'>{t('MainPage.LandingParagraph.1')}</p>
 				</div>
 				<div>
@@ -196,8 +194,8 @@ function Main() {
 			</Container>
 			<Banner />
 
-			<Container className='even-columns '>
-				<div>
+			<div className='main-welcome-text-outer-con'>
+				<div className='main-welcome-text-inner-con'>
 					<div className='fs-primary-heading'>
 						{i18n.language === 'en' ? "What's Lesmills?" : 'Lesmills Nedir?'}
 					</div>
@@ -208,7 +206,7 @@ function Main() {
 					<p>{t('MainPage.WelcomeText')}</p>
 				</div>
 				<img src={isim} className='image'></img>
-			</Container>
+			</div>
 
 			<video
 				className='fullSizedVid'
@@ -218,7 +216,11 @@ function Main() {
 				<source src='path-to-your-video.mp4' type='video/mp4' />
 				Your browser does not support the video tag.
 			</video>
-			<h2 className='fs-primary-heading center-item'>
+			<h2
+				className='fs-primary-heading center-item'
+				id='cards-title'
+				style={{ margin: '2rem auto' }}
+			>
 				{t('MainPage.CardsTitle')}
 			</h2>
 			<Container
@@ -249,7 +251,10 @@ function Main() {
 			{/* //todo vidi gizle butonu */}
 
 			<BecomeInstructorCards />
-			<h2 className='fs-primary-heading center-item'>
+			<h2
+				className='fs-primary-heading center-item'
+				style={{ margin: '2rem auto' }}
+			>
 				{i18n.language === 'en'
 					? 'Our Upcoming Events'
 					: 'Yaklaşan Etkinliklerimiz'}
