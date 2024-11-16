@@ -6,7 +6,7 @@ import { fetchData } from '../redux/auth/authStateSlice.js';
 export const AuthService =
 	// data can be empty to include api calls like logout
 
-		({ endpoint, data = {}, config }) =>
+		({ endpoint, data = {} }) =>
 		async (dispatch) => {
 			try {
 				const response = await dispatch(
@@ -14,7 +14,6 @@ export const AuthService =
 						method: 'POST',
 						url: `${endpoint}`,
 						data: data,
-						config,
 					})
 				);
 				if (fetchData.rejected.match(response)) {

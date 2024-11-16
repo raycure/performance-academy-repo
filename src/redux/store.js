@@ -1,4 +1,4 @@
-import { configureStore, combineReducers } from '@reduxjs/toolkit';
+import { configureStore } from '@reduxjs/toolkit';
 import storage from 'redux-persist/lib/storage';
 import { persistReducer, persistStore } from 'redux-persist';
 import authReducer from './auth/authStateSlice.js';
@@ -16,17 +16,23 @@ const persistedProgramIdReducer = persistReducer(
 	programIdReducer
 );
 
+const authPersistConfig = {
+	key: 'auth',
+	storage,
+	whitelist: ['isLoggedIn'],
+};
+
+const persistedAuthReducer = persistReducer(authPersistConfig, authReducer);
+
 const store = configureStore({
 	reducer: {
-		auth: authReducer,
+		auth: persistedAuthReducer,
 		selectedProgramId: persistedProgramIdReducer,
 		calendarSelectedEventId: calendarEventReducer,
 	},
 	middleware: (getDefaultMiddleware) =>
 		getDefaultMiddleware({
-			thunk: {
-				extraArgument: authService,
-			},
+			thunk: { extraArgument: authService },
 			serializableCheck: false,
 		}),
 });

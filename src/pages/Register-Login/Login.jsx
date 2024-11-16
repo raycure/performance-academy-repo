@@ -19,8 +19,8 @@ function Login() {
 	let isLoading = useSelector(selectIsLoading);
 	const dispatch = useDispatch();
 
-	const [mailorNationalID, setMailorNationalID] = useState('');
-	const [pwd, setPwd] = useState('');
+	const [mailorNationalID, setMailorNationalID] = useState('11111111111');
+	const [pwd, setPwd] = useState('aaA!1aaa');
 	const [errMsg, setErrMsg] = useState('');
 	const [success, setSuccess] = useState(false);
 	const [localLoading, setLocalLoading] = useState(false);
@@ -54,7 +54,11 @@ function Login() {
 			const response = await dispatch(
 				AuthService({ data: loginData, endpoint: '/login ' })
 			);
-			const accessToken = response.payload.accessToken;
+			console.log('response to lofin', response);
+
+			const accessToken = response.payload.data.accessToken;
+			console.log('accessToken loginde', accessToken);
+
 			localStorage.setItem('accessToken', accessToken);
 			const isLoggedIn = response ? true : false; //todo change it to user roles and stuff
 			localStorage.setItem('isLoggedIn', isLoggedIn);
@@ -62,9 +66,11 @@ function Login() {
 			setPwd('');
 			setSuccess(true);
 			setLocalLoading(true);
-			setTimeout(() => {
-				navigate('/');
-			}, 5000);
+			navigate('/');
+
+			// setTimeout(() => {
+			// 	navigate('/');
+			// }, 2000);
 		} catch (err) {
 			if (err.response?.status === 429) {
 				setErrMsg('Too many requests, please try again later.');
@@ -79,6 +85,7 @@ function Login() {
 
 	return (
 		<>
+			11111111111 <br></br> aaA!1aaa
 			<div className='authentication-form-container box-shadow'>
 				<form onSubmit={handleSubmit} className='authentication-form'>
 					<img alt='logo' className='logo' src={logo}></img>

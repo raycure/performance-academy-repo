@@ -155,15 +155,13 @@ function RegisterForm() {
 			setNationalID('');
 			setPwd('');
 			setMatchPwd('');
-			console.log(response);
-			const isLoggedIn = response ? true : false; //todo change it to user roles and stuff
+			// todo log the user in
 			const accessToken = response.payload.accessToken;
-			localStorage.setItem('isLoggedIn', isLoggedIn);
 			localStorage.setItem('accessToken', accessToken);
 			displayNotif();
 			setTimeout(() => {
 				navigate('/');
-			}, 2000);
+			}, 1500);
 		} catch (err) {
 			if (err.response?.status === 429) {
 				setErrMsg('Too many requests, please try again later.');
@@ -326,8 +324,7 @@ function RegisterForm() {
 								{nameSurnameRules.find((rule) => rule.test(surname))?.message ||
 									''}
 							</motion.p>
-						</div>{' '}
-						*/}
+						</div>
 					</div>
 				</div>
 				<div className='centerLineAnimation'>

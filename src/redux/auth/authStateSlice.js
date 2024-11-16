@@ -10,13 +10,34 @@ const initialState = {
 	error: null,
 };
 
+function test() {
+	const setupAxiosDefaults = (token) => {
+		if (token) {
+			console.log('token does exist');
+			axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+		} else {
+			console.log('token doesnt exist');
+			delete axios.defaults.headers.common['Authorization'];
+		}
+		axios.defaults.withCredentials = true;
+	};
+
+	const savedToken = localStorage.getItem('accessToken');
+
+	if (savedToken) {
+		setupAxiosDefaults(savedToken);
+	}
+}
+
 export const fetchData = createAsyncThunk(
 	'auth/fetchStatus',
 	// data can be empty to include api calls like logout
-	async ({ method, url, data = {}, config = {} }, { rejectWithValue }) => {
+	async ({ method, url, data = {} }, { rejectWithValue }) => {
+		test();
+		axios.defaults.withCredentials = true;
 		try {
 			// spreads the config argument for it to work properly
-			const response = await axios({ method, url, data, ...config });
+			const response = await axios({ method, url, data });
 			return {
 				data: response.data,
 				endpoint: url,

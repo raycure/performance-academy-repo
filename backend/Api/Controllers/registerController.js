@@ -9,8 +9,9 @@ dotenv.config();
 import Sessions from '../Models/sessionModel.js';
 
 const register = async (req, res) => {
+	console.log(process.env.ACTIVATION_LINK);
 	try {
-		const { email } = req.body;
+		const { email, nationalID } = req.body;
 		const existingUser = await Users.findOne({ email });
 		if (existingUser) {
 			return res.status(409).json({
@@ -33,14 +34,15 @@ const register = async (req, res) => {
 			{ expiresIn: '1d' }
 		);
 		const verifyLink = process.env.ACTIVATION_LINK + '/' + emailVerifyToken;
-		try {
-			await EmailSender(verifyLink, email);
-		} catch (error) {
-			console.log('email couldnt been sent');
-		}
+		// try {
+		// 	await EmailSender(verifyLink, email);
+		// } catch (error) {
+		// 	console.log('email couldnt been sent');
+		// }
 		const accessToken = jwt.sign(
 			{
 				userId: userId,
+				nationalID: nationalID,
 				email: email,
 			},
 			process.env.ACCESS_TOKEN_SECRET,
