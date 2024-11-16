@@ -11,6 +11,7 @@ const login = async (req, res) => {
 	try {
 		const { email, nationalID, password } = req.body;
 		// only one of the two is required both cant be required
+
 		const loginSchema = Joi.object({
 			email: Joi.string().email().optional(),
 			nationalID: Joi.string().optional(),
@@ -64,17 +65,20 @@ const login = async (req, res) => {
 			{
 				userId: user._id,
 				email: user.email,
+				nationalID: user.nationalID,
 			},
 			process.env.ACCESS_TOKEN_SECRET,
-			{ expiresIn: '3s' } //todo change it
+			{ expiresIn: '10m' } //todo change it
 		);
 
 		const refreshToken = jwt.sign(
 			{
 				userId: user._id,
+				...(nationalID && { nationalID }),
+				...(email && { email }),
 			},
 			process.env.REFRESH_TOKEN_SECRET,
-			{ expiresIn: '3s' } //todo change it
+			{ expiresIn: '1d' } //todo change it
 		);
 
 		res.cookie('jwt', refreshToken, {
@@ -90,6 +94,7 @@ const login = async (req, res) => {
 			userId: user._id,
 		});
 
+		// todo decide if i should retunr the user or nah
 		return res.status(200).json({
 			accessToken: accessToken,
 			user,

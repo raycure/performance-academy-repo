@@ -5,19 +5,71 @@ import '../../components/Containers/containerStyle.css';
 import '../../pages/Contact/Contact.css';
 import { useTranslation } from 'react-i18next';
 import axios from '../../pages/api/axios';
+import { useSelector } from 'react-redux';
+import { selectIsLoggedIn } from '../../redux/auth/authStateSlice';
+import { useDispatch } from 'react-redux';
+import { AuthService } from '../../auth/auth.service';
 
 function ContactForm() {
 	const contactForm = useRef();
 	const [Name, setName] = useState('');
 	const [Surname, setSurname] = useState('');
-	const [Mail, setMail] = useState('');
+	const [Mail, setMail] = useState('13garbomail@gmail.com');
+	// todo delete the default value
 	const [Topic, setTopic] = useState('');
 	const [Context, setContext] = useState('');
 	const { t, i18n } = useTranslation('translation');
+	const dispatch = useDispatch();
 
-	function handleContactFormSubmission() {}
+	async function handleContactFormSubmission(e) {
+		e.preventDefault();
+		try {
+			const accessToken = localStorage.getItem('accessToken');
+			const contactFormData = {
+				name: Name,
+				surname: Surname,
+				email: Mail,
+				topic: Topic,
+				question: Context,
+			};
 
-	const [isLoggedIn, setIsLoggedin] = useState(false);
+			console.log('old token', accessToken);
+
+			const response = await dispatch(
+				AuthService({
+					data: contactFormData,
+					endpoint: '/submitContactForm',
+				})
+			);
+			const newToken = response.payload.data.newAccessToken;
+			localStorage.setItem('accessToken', newToken);
+			console.log(newToken);
+
+			// if (isLoggedIn) {
+			// 	// to refresh the token
+			// 	if (err?.response?.status === 401 || err?.response?.status === 403) {
+			// 		console.log(
+			// 			'Token expired or unauthorized, attempting to refresh token...'
+			// 		);
+			// 		const refreshResponse = await axios.get('/refresh', {
+			// 			withCredentials: true,
+			// 		});
+			// 		const newAccessToken = refreshResponse.data.accessToken;
+			// 		localStorage.setItem('accessToken', newAccessToken);
+			// 		const response = await dispatch(
+			// 			AuthService({
+			// 				data: contactFormData,
+			// 				endpoint: '/submitContactForm',
+			// 			})
+			// 		);
+			// 	}
+			// }
+		} catch (err) {
+			console.log('err', err);
+		}
+	}
+
+	let isLoggedIn = useSelector(selectIsLoggedIn);
 	return (
 		<div className='contact-form relative-position ' id='contact-form-grad'>
 			<img
@@ -34,36 +86,40 @@ function ContactForm() {
 				<p className='contact-form-header fs-900 text-container'>
 					{t('Contact.Form.Title')}
 				</p>
-				<div className='contact-name-input-container'>
-					<div className={`${isLoggedIn && 'hide'} centerLineAnimation`}>
-						<input
-							onChange={(e) => setName(e.target.value)}
-							value={Name}
-							required
-							placeholder={t('Contact.Form.Name')}
-							type='text'
-						/>
+				{!isLoggedIn && (
+					<div className='contact-name-input-container'>
+						<div className={'hide centerLineAnimation centerLineAnimation'}>
+							<input
+								onChange={(e) => setName(e.target.value)}
+								value={Name}
+								required
+								placeholder={t('Contact.Form.Name')}
+								type='text'
+							/>
+						</div>
+						<div className={'hide centerLineAnimation centerLineAnimation'}>
+							<input
+								onChange={(e) => setSurname(e.target.value)}
+								value={Surname}
+								required
+								placeholder={t('Contact.Form.Surname')}
+								type='text'
+							/>
+						</div>
 					</div>
-					<div className={`${isLoggedIn && 'hide'} centerLineAnimation`}>
-						<input
-							onChange={(e) => setSurname(e.target.value)}
-							value={Surname}
-							required
-							placeholder={t('Contact.Form.Surname')}
-							type='text'
-						/>
-					</div>
-				</div>
+				)}
 
-				<div className={`${isLoggedIn && 'hide'} centerLineAnimation`}>
-					<input
-						onChange={(e) => setMail(e.target.value)}
-						value={Mail}
-						required
-						placeholder='Mail'
-						type='email'
-					/>
-				</div>
+				{!isLoggedIn && (
+					<div className='hide centerLineAnimation centerLineAnimation'>
+						<input
+							onChange={(e) => setMail(e.target.value)}
+							value={Mail}
+							required
+							placeholder='Mail'
+							type='email'
+						/>
+					</div>
+				)}
 				<div className='centerLineAnimation'>
 					<input
 						onChange={(e) => setTopic(e.target.value)}
@@ -94,7 +150,7 @@ function ContactForm() {
 					<span className='textarea-top-right-line'></span>
 				</div>
 				<Button
-					disabled={!Context || !Name || !Surname || !Mail || !Topic}
+					// disabled={!Context || !Name || !Surname || !Mail || !Topic}
 					type='submit'
 				>
 					{i18n.language === 'en' ? 'Send' : 'Gönder'}

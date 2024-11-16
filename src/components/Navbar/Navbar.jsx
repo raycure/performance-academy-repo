@@ -25,10 +25,7 @@ import { AuthService } from '../../auth/auth.service';
 import { useDispatch } from 'react-redux';
 function Navbar() {
 	const dispatch = useDispatch();
-	const isLoggedIn = useSelector(selectIsLoggedIn);
-	useEffect(() => {
-		console.log('isLoggedInRedux', isLoggedIn);
-	}, [isLoggedIn]);
+	let isLoggedIn = useSelector(selectIsLoggedIn);
 
 	const navigate = useNavigate();
 	const [menuOpen, setMenuOpen] = useState(false);
@@ -141,15 +138,8 @@ function Navbar() {
 	};
 
 	async function handleLogout() {
-		const response = await dispatch(
-			AuthService({
-				endpoint: '/logout ',
-				config: { credewithCredentials: true },
-			})
-		);
-		if (response.status === 200) {
-			localStorage.removeItem('accessToken');
-		}
+		const response = await dispatch(AuthService({ endpoint: '/logout' }));
+		localStorage.removeItem('accessToken');
 	}
 
 	return (

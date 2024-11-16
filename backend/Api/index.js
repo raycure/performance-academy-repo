@@ -7,13 +7,14 @@ import jwtRefresRoute from './Routes/jwtRefresRoute.js';
 import testRoute from './Routes/testRoute.js';
 import logoutRoute from './Routes/logoutRoute.js';
 import verifyMailRoute from './Routes/verifyMailRoute.js';
-import verifyJWT from './Middleware/verifyJWT.js';
 import cookieParser from 'cookie-parser';
 import credentials from './Middleware/credentials.js';
 import corsOptions from '../config/corsOptions.js';
 import rateLimit from 'express-rate-limit';
+// import verifyJWT from './Middleware/verifyJWT.js';
+import authMiddleware from './Middleware/handleAuth.js';
 // import uploadRoute from './Routes/uploadRoute.js';
-import contectFormRoute from './Routes/contectFormRoute.js';
+import contactFormRoute from './Routes/contactFormRoute.js';
 // import userInfoRoute from './Routes/userInfoRoute.js';
 
 const port = 3001;
@@ -44,11 +45,11 @@ app.use('/register', registerRoute);
 app.use('/login', loginRoute);
 app.use('/refresh', jwtRefresRoute);
 app.use('/logout', logoutRoute);
-app.use('/submitContactForm', contectFormRoute);
 app.use('/', verifyMailRoute);
 // app.use('/userInfo', userInfoRoute);
 // todo add verifyjwt for info
-app.use(verifyJWT);
+app.use('/submitContactForm', authMiddleware, contactFormRoute);
+// app.use(verifyJWT);
 app.use('/test', testRoute);
 
 mongoose
