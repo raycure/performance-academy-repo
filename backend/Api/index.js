@@ -15,7 +15,7 @@ import rateLimit from 'express-rate-limit';
 import authMiddleware from './Middleware/handleAuth.js';
 // import uploadRoute from './Routes/uploadRoute.js';
 import contactFormRoute from './Routes/contactFormRoute.js';
-// import userInfoRoute from './Routes/userInfoRoute.js';
+import userInfoRoute from './Routes/userInfoRoute.js';
 
 const port = 3001;
 
@@ -47,6 +47,7 @@ app.use('/refresh', jwtRefresRoute);
 app.use('/logout', logoutRoute);
 app.use('/', verifyMailRoute);
 // app.use('/userInfo', userInfoRoute);
+app.use('/userInfo', authMiddleware, userInfoRoute);
 // todo add verifyjwt for info
 app.use('/submitContactForm', authMiddleware, contactFormRoute);
 // app.use(verifyJWT);

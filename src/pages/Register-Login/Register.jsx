@@ -147,7 +147,11 @@ function RegisterForm() {
 				email: mail,
 			};
 			const response = await dispatch(
-				AuthService({ data: registerData, endpoint: '/register' })
+				AuthService({
+					data: registerData,
+					endpoint: '/register',
+					method: 'POST',
+				})
 			);
 			setName('');
 			setSurname('');

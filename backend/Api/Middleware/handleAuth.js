@@ -44,6 +44,7 @@ const authMiddleware = async (req, res, next) => {
 		if (refreshMockRes.statusCode === 200) {
 			req.user = refreshMockRes.responseData.returnedValue;
 			req.isAuthenticated = true;
+			req.isTokenRefresh = true;
 			return next();
 		}
 

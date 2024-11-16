@@ -30,7 +30,7 @@ const refreshJwt = async (req, res) => {
 				},
 
 				process.env.ACCESS_TOKEN_SECRET,
-				{ expiresIn: '1m' } //todo change it
+				{ expiresIn: '10s' } //todo change it
 			);
 			res.status(200).json({
 				message: 'successful refresh',

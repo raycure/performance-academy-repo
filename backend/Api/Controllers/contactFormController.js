@@ -38,6 +38,7 @@ const contactFormController = async (req, res) => {
 				question,
 			});
 			res.status(200).json({ message: 'fuck youuu' });
+			// todo change it
 		}
 	} catch (error) {
 		res.status(500).json({ message: 'contact form submission failed' });
@@ -45,3 +46,5 @@ const contactFormController = async (req, res) => {
 };
 
 export default contactFormController;
+
+// todo add shcema and joi

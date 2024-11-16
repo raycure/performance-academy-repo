@@ -8,7 +8,10 @@ import { Link, Navigate, useNavigate } from 'react-router-dom';
 import './formStyle.css';
 import Button from '../../components/Button/Button.jsx';
 import logo from '../../assets/LesmillsLogo.png';
-import { selectIsLoading } from '../../redux/auth/authStateSlice.js';
+import {
+	selectIsLoading,
+	selectIsLoggedIn,
+} from '../../redux/auth/authStateSlice.js';
 import { useTranslation } from 'react-i18next';
 
 function Login() {
@@ -26,8 +29,16 @@ function Login() {
 	const [localLoading, setLocalLoading] = useState(false);
 
 	useEffect(() => {
+		checkIsLoggedIn();
 		userRef.current.focus();
 	}, []);
+
+	let isLoggedIn = useSelector(selectIsLoggedIn);
+	const checkIsLoggedIn = () => {
+		if (isLoggedIn) {
+			navigate('/');
+		}
+	};
 
 	// todo delete it im switching to a redux based approach
 	// useEffect(() => {
@@ -52,7 +63,11 @@ function Login() {
 			}
 
 			const response = await dispatch(
-				AuthService({ data: loginData, endpoint: '/login ' })
+				AuthService({
+					data: loginData,
+					method: 'POST',
+					endpoint: '/login ',
+				})
 			);
 			console.log('response to lofin', response);
 

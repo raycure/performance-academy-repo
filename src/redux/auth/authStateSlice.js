@@ -32,17 +32,24 @@ function test() {
 export const fetchData = createAsyncThunk(
 	'auth/fetchStatus',
 	// data can be empty to include api calls like logout
-	async ({ method, url, data = {} }, { rejectWithValue }) => {
+	async ({ url, data = {}, method }, { rejectWithValue }) => {
 		test();
 		axios.defaults.withCredentials = true;
 		try {
 			// spreads the config argument for it to work properly
-			const response = await axios({ method, url, data });
+			const response = await axios({
+				method,
+				url,
+				data,
+				method: method,
+			});
 			return {
 				data: response.data,
 				endpoint: url,
 			};
 		} catch (error) {
+			console.log('sliceta error', error);
+
 			const responseData = {
 				data: error.response?.data,
 				status: error.response?.status,

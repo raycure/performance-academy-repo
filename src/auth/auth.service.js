@@ -6,12 +6,13 @@ import { fetchData } from '../redux/auth/authStateSlice.js';
 export const AuthService =
 	// data can be empty to include api calls like logout
 
-		({ endpoint, data = {} }) =>
+
+		({ endpoint, data = {}, method }) =>
 		async (dispatch) => {
 			try {
 				const response = await dispatch(
 					fetchData({
-						method: 'POST',
+						method: method,
 						url: `${endpoint}`,
 						data: data,
 					})

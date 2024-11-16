@@ -68,7 +68,7 @@ const login = async (req, res) => {
 				nationalID: user.nationalID,
 			},
 			process.env.ACCESS_TOKEN_SECRET,
-			{ expiresIn: '10m' } //todo change it
+			{ expiresIn: '10s' } //todo change it
 		);
 
 		const refreshToken = jwt.sign(
