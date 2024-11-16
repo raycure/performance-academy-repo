@@ -4,7 +4,6 @@ import cors from 'cors';
 import registerRoute from './Routes/registerRoute.js';
 import loginRoute from './Routes/loginRoute.js';
 import jwtRefresRoute from './Routes/jwtRefresRoute.js';
-import testRoute from './Routes/testRoute.js';
 import logoutRoute from './Routes/logoutRoute.js';
 import verifyMailRoute from './Routes/verifyMailRoute.js';
 import cookieParser from 'cookie-parser';
@@ -40,18 +39,13 @@ const limiter = rateLimit({
 });
 
 app.use('/', limiter);
-// app.use('/upload', uploadRoute);
 app.use('/register', registerRoute);
 app.use('/login', loginRoute);
 app.use('/refresh', jwtRefresRoute);
 app.use('/logout', logoutRoute);
 app.use('/', verifyMailRoute);
-// app.use('/userInfo', userInfoRoute);
 app.use('/userInfo', authMiddleware, userInfoRoute);
-// todo add verifyjwt for info
 app.use('/submitContactForm', authMiddleware, contactFormRoute);
-// app.use(verifyJWT);
-app.use('/test', testRoute);
 
 mongoose
 	.connect(
