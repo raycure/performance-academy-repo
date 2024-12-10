@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import '../Register-Login/formStyle.css';
 import './UserInfo.css';
 import { FaEdit } from 'react-icons/fa';
 import { BsExclamationLg } from 'react-icons/bs';
@@ -15,8 +16,84 @@ import { IoEyeOff } from 'react-icons/io5';
 import { IoEye } from 'react-icons/io5';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { motion } from 'framer-motion';
+import { descending } from '../../components/animations/AnimationValues';
+import { useDispatch } from 'react-redux';
+import { AuthService } from '../../auth/auth.service';
+import { useNavigate } from 'react-router-dom';
+
 function UserInfo() {
+	const dispatch = useDispatch();
+	useEffect(() => {
+		initUserInfo();
+	}, []);
+
+	function displayNotif() {
+		const loginRequiredNotif = {
+			type: 'info',
+			duration: 5000,
+			message: 'login required',
+		};
+		localStorage.setItem('Notifexp', JSON.stringify(loginRequiredNotif));
+		const Notifexp = new Event('notificationEvent');
+		window.dispatchEvent(Notifexp);
+	}
+
+	const initUserInfo = async () => {
+		try {
+			const response = await dispatch(
+				AuthService({
+					method: 'GET',
+					endpoint: '/userInfo',
+				})
+			);
+			console.log(
+				'response for initUserInfo',
+				response.payload.data.accessToken
+			);
+
+			const user = response.payload.data.foundUser;
+
+			const date = new Date(user.birthDate);
+			const day = String(date.getDate()).padStart(2, '0'); // Get day and add leading zero if needed
+			const month = String(date.getMonth() + 1).padStart(2, '0'); // Get month (0-indexed) and add leading zero
+			const year = date.getFullYear();
+
+			setNationalID(user.nationalID.toString());
+			setMail(user.email);
+			setName(user.name);
+			setSurname(user.surname);
+			setBirthDate(day + '/' + month + '/' + year);
+		} catch (error) {
+			// const status = error.payload.status;
+			// if (status === 401) {
+			// 	displayNotif();
+			// 	navigate('/');
+			// }
+			console.log('userinfo fetch error', error);
+		}
+	};
+
+	async function handleSubmit(e) {
+		e.preventDefault();
+		const updateData = {
+			name,
+			surname,
+			nationalID,
+			birthDate,
+			email: mail,
+		};
+		const response = await dispatch(
+			AuthService({
+				method: 'POST',
+				endpoint: '/userInfo',
+				data: { updateData },
+			})
+		);
+	}
+
 	const { t, i18n } = useTranslation('translation');
+	const navigate = useNavigate();
 	const contractverified = false;
 	const [isEditing, setIsEditing] = useState(false);
 	const [passwordOn, setPasswordOn] = useState(true);
@@ -27,35 +104,38 @@ function UserInfo() {
 	};
 	const [name, setName] = useState('');
 	const [surname, setSurname] = useState('');
-	const [id, setId] = useState('');
 	const [birthDate, setBirthDate] = useState('');
 	const [mail, setMail] = useState('');
 	const [password, setPassword] = useState('');
+	const [nationalID, setNationalID] = useState('');
+	const [forApiBirthDate, setForApiBirthDate] = useState('');
 
+	const [birthDateError, setBirthDateError] = useState('');
 	const [validName, setValidName] = useState('');
 	const [validSurname, setValidSurname] = useState('');
-	const [validId, setValidId] = useState('');
+	const [validNationalId, setValidNationalId] = useState('');
 	const [validBirthDate, setValidBirthDate] = useState('');
 	const [validMail, setValidMail] = useState('');
 	const [validPassword, setValidPassword] = useState('');
-	//I DIDNT SEE WHERE U CALL THE MESSAGES SORRY THEYRE NOT SHOWN
-	const nameRules = [
+
+	const nameSurnameRules = [
 		{
-			test: (name) => !/^[A-Za-z]+$/.test(name),
+			test: (nameOrSurname) => !/^[a-zA-Z\s]+$/.test(nameOrSurname),
 			message: t('Authentication.Validation.nameOrSurname.0'),
 		},
 		{
-			test: (name) => name.length < 3 || name.length >= 24,
+			test: (nameOrSurname) =>
+				nameOrSurname.length < 3 || nameOrSurname.length >= 24,
 			message: t('Authentication.Validation.nameOrSurname.1'),
 		},
 	];
 	const idRules = [
 		{
-			test: (id) => !/^\d+$/.test(id),
+			test: (nationalID) => !/^\d+$/.test(nationalID),
 			message: t('Authentication.Validation.UserId.0'),
 		},
 		{
-			test: (id) => id.length !== 11,
+			test: (nationalID) => nationalID.length !== 11,
 			message: t('Authentication.Validation.UserId.1'),
 		},
 	];
@@ -108,22 +188,23 @@ function UserInfo() {
 		},
 	];
 	useEffect(() => {
-		const valid = nameRules.every((rule) => !rule.test(name));
+		const valid = nameSurnameRules.every((rule) => !rule.test(name));
 		setValidName(valid);
 	}, [name]);
 
 	useEffect(() => {
-		const valid = nameRules.every((rule) => !rule.test(surname));
+		const valid = nameSurnameRules.every((rule) => !rule.test(surname));
 		setValidSurname(valid);
 	}, [surname]);
 
 	useEffect(() => {
-		const valid = idRules.every((rule) => !rule.test(id));
-		setValidId(valid);
-	}, [id]);
+		const valid = idRules.every((rule) => !rule.test(nationalID));
+		setValidNationalId(valid);
+	}, [nationalID]);
 
 	useEffect(() => {
 		const valid = birthDateRules.every((rule) => !rule.test(birthDate));
+
 		setValidBirthDate(valid);
 	}, [birthDate]);
 
@@ -136,6 +217,65 @@ function UserInfo() {
 		const valid = passwordRules.every((rule) => !rule.test(password));
 		setValidPassword(valid);
 	}, [password]);
+
+	const handleEditing = (e) => {
+		if (!isEditing) {
+			e.target.blur();
+		}
+	};
+
+	function handleBirthDate(e) {
+		handleEditing();
+		let formattedDate = '';
+		if (e.target.value.length < 11) {
+			const value = e.target.value.replace(/\D/g, '');
+			let day = value.substring(0, 2);
+			let month = value.substring(2, 4);
+			let year = value.substring(4, 8);
+			const currentYear = new Date().getFullYear();
+			for (let i = 0; i < value.length; i++) {
+				if (
+					(month.length <= 1 && parseInt(month) > 1) ||
+					(day.length <= 1 && parseInt(day) > 3) ||
+					(month.length === 2 && parseInt(month) > 12) ||
+					parseInt(day) > 31 ||
+					(day.length === 2 && parseInt(day) <= 0) ||
+					(month.length === 2 && parseInt(month) <= 0)
+				) {
+					setBirthDateError('invalid date');
+					return;
+				}
+				if (
+					parseInt(year) > currentYear ||
+					(year.length === 4 && parseInt(year) < 1900)
+				) {
+					setBirthDateError('invalid year');
+					return;
+				}
+				setBirthDateError('');
+				if (i === 2 || i === 4) {
+					formattedDate += '/' + value[i];
+				} else {
+					formattedDate += value[i];
+				}
+			}
+			if (formattedDate.length === 10 && year.length === 4) {
+				setValidBirthDate(true);
+				const isoDate = new Date(
+					Date.UTC(parseInt(year), parseInt(month) - 1, parseInt(day)) -
+						new Date().getTimezoneOffset() * 60000
+				);
+				setForApiBirthDate(isoDate);
+				setBirthDateError('');
+			} else {
+				setValidBirthDate(false);
+			}
+		} else {
+			return;
+		}
+		setBirthDate(formattedDate);
+	}
+
 	return (
 		<section className='user-info-page'>
 			<div className='user-info-inner-con user-info-title-con'>
@@ -191,111 +331,182 @@ function UserInfo() {
 				</p>
 				<div className='user-info-grid'>
 					<div
-						className={`relative-position ${
-							validName || name ? 'form-icon-active' : ''
-						}`}
-						style={{ display: 'flex', flexDirection: 'column' }}
+						style={{
+							display: 'flex',
+							flexDirection: 'column',
+							cursor: isEditing ? 'pointer' : 'not-allowed',
+						}}
 					>
 						<label htmlFor='name'>
 							{i18n.language === 'en' ? 'Name' : 'İsim'}
 						</label>
-						<input
-							readOnly={!isEditing}
-							type='text'
-							id='name'
-							name='name'
-							onChange={(e) => setName(e.target.value)}
-						/>
-						<div className='form-icon'>
-							<FontAwesomeIcon
-								icon={faCheck}
-								className={validName ? 'valid' : 'hide'}
+						<div className='relative-position'>
+							<input
+								readOnly={!isEditing}
+								type='text'
+								id='name'
+								name='name'
+								value={name}
+								onChange={(e) => setName(e.target.value)}
+								onClick={handleEditing}
+								className={` ${validName || name ? 'form-icon-active' : ''}`}
 							/>
-							<FontAwesomeIcon
-								icon={faTimes}
-								className={validName || !name ? 'hide' : 'invalid'}
-							/>
+							<div className='form-icon'>
+								<FontAwesomeIcon
+									icon={faCheck}
+									className={validName ? 'valid' : 'hide'}
+								/>
+								<FontAwesomeIcon
+									icon={faTimes}
+									className={validName || !name ? 'hide' : 'invalid'}
+								/>
+							</div>
+							<motion.p
+								initial='hidden'
+								variants={descending}
+								whileInView='show'
+								className={!validName && name ? 'instructions' : 'offscreen'}
+							>
+								{nameSurnameRules.find((rule) => rule.test(name))?.message ||
+									''}
+							</motion.p>
 						</div>
 					</div>
 					<div
-						className={`relative-position ${
-							validSurname || surname ? 'form-icon-active' : ''
-						}`}
-						style={{ display: 'flex', flexDirection: 'column' }}
+						style={{
+							display: 'flex',
+							flexDirection: 'column',
+							cursor: isEditing ? 'pointer' : 'not-allowed',
+						}}
 					>
 						<label htmlFor='surname'>
 							{i18n.language === 'en' ? 'Surname' : 'Soyad'}
 						</label>
-						<input
-							readOnly={!isEditing}
-							type='text'
-							id='surname'
-							name='surname'
-							onChange={(e) => setSurname(e.target.value)}
-						/>
-						<div className='form-icon'>
-							<FontAwesomeIcon
-								icon={faCheck}
-								className={validSurname ? 'valid' : 'hide'}
+						<div className='relative-position'>
+							<input
+								readOnly={!isEditing}
+								type='text'
+								id='surname'
+								value={surname}
+								name='surname'
+								onChange={(e) => setSurname(e.target.value)}
+								onClick={handleEditing}
+								className={` ${
+									!validSurname || surname ? 'form-icon-active' : ''
+								}`}
 							/>
-							<FontAwesomeIcon
-								icon={faTimes}
-								className={validSurname || !surname ? 'hide' : 'invalid'}
-							/>
+							<div className='form-icon'>
+								<FontAwesomeIcon
+									icon={faCheck}
+									className={validSurname ? 'valid' : 'hide'}
+								/>
+								<FontAwesomeIcon
+									icon={faTimes}
+									className={validSurname || !surname ? 'hide' : 'invalid'}
+								/>
+							</div>
+							<motion.p
+								initial='hidden'
+								variants={descending}
+								whileInView='show'
+								className={
+									!validSurname && surname ? 'instructions' : 'offscreen'
+								}
+							>
+								{nameSurnameRules.find((rule) => rule.test(surname))?.message ||
+									''}
+							</motion.p>
 						</div>
 					</div>
 					<div
-						className={`relative-position ${
-							validId || id ? 'form-icon-active' : ''
-						}`}
-						style={{ display: 'flex', flexDirection: 'column' }}
+						style={{
+							display: 'flex',
+							flexDirection: 'column',
+							cursor: isEditing ? 'pointer' : 'not-allowed',
+						}}
 					>
-						<label htmlFor='userId'>
+						<label htmlFor='nationalID'>
 							{i18n.language === 'en' ? 'TR Government ID' : 'TC Kimlik No'}
 						</label>
-						<input
-							readOnly={!isEditing}
-							type='text'
-							id='userId'
-							name='userId'
-							onChange={(e) => setId(e.target.value)}
-						/>
-						<div className='form-icon'>
-							<FontAwesomeIcon
-								icon={faCheck}
-								className={validId ? 'valid' : 'hide'}
+
+						<div className='relative-position'>
+							<input
+								readOnly={!isEditing}
+								type='text'
+								id='nationalID'
+								name='nationalID'
+								onChange={(e) => setNationalID(e.target.value)}
+								onClick={handleEditing}
+								value={nationalID}
+								className={` ${
+									validNationalId || nationalID ? 'form-icon-active' : ''
+								}`}
 							/>
-							<FontAwesomeIcon
-								icon={faTimes}
-								className={validId || !id ? 'hide' : 'invalid'}
-							/>
+							<div className='form-icon'>
+								<FontAwesomeIcon
+									icon={faCheck}
+									className={validNationalId ? 'valid' : 'hide'}
+								/>
+								<FontAwesomeIcon
+									icon={faTimes}
+									className={
+										validNationalId || !nationalID ? 'hide' : 'invalid'
+									}
+								/>
+							</div>
+							<motion.p
+								initial='hidden'
+								variants={descending}
+								whileInView='show'
+								className={
+									!validNationalId && nationalID ? 'instructions' : 'offscreen'
+								}
+							>
+								{idRules.find((rule) => rule.test(nationalID))?.message || ''}
+							</motion.p>
 						</div>
 					</div>
 					<div
-						className={`relative-position ${
-							validBirthDate || birthDate ? 'form-icon-active' : ''
-						}`}
-						style={{ display: 'flex', flexDirection: 'column' }}
+						style={{
+							display: 'flex',
+							flexDirection: 'column',
+							cursor: isEditing ? 'pointer' : 'not-allowed',
+						}}
 					>
 						<label htmlFor='birthDate'>
 							{i18n.language === 'en' ? 'Birth Date' : 'Doğum Tarihi'}
 						</label>
-						<input
-							readOnly={!isEditing}
-							type='text'
-							id='birthDate'
-							name='birthDate'
-							onChange={(e) => setBirthDate(e.target.value)}
-						/>
-						<div className='form-icon'>
-							<FontAwesomeIcon
-								icon={faCheck}
-								className={validBirthDate ? 'valid' : 'hide'}
+						<div className='relative-position'>
+							<input
+								value={birthDate}
+								readOnly={!isEditing}
+								placeholder={
+									i18n.language === 'tr' ? 'GG/AA/YYYY' : 'DD/MM/YYYY'
+								}
+								onChange={(e) => handleBirthDate(e)}
+								className={` ${
+									validBirthDate || birthDate ? 'form-icon-active' : ''
+								}`}
 							/>
-							<FontAwesomeIcon
-								icon={faTimes}
-								className={validBirthDate || !birthDate ? 'hide' : 'invalid'}
-							/>
+							<div className='form-icon'>
+								<FontAwesomeIcon
+									icon={faCheck}
+									className={validBirthDate ? 'valid' : 'hide'}
+								/>
+								<FontAwesomeIcon
+									icon={faTimes}
+									className={validBirthDate || !birthDate ? 'hide' : 'invalid'}
+								/>
+							</div>
+							<motion.p
+								initial='hidden'
+								variants={descending}
+								whileInView='show'
+								id='uidnote'
+								className={birthDateError ? 'instructions' : 'offscreen'}
+							>
+								{birthDateError}
+							</motion.p>
 						</div>
 					</div>
 				</div>
@@ -310,43 +521,55 @@ function UserInfo() {
 						: 'Hesap bilgilerinizi düzenleyin.'}
 				</p>
 				<div
-					style={{ display: 'flex', flexDirection: 'column' }}
-					className={`relative-position ${
-						validMail || mail ? 'form-icon-active' : ''
-					}`}
+					style={{
+						display: 'flex',
+						flexDirection: 'column',
+					}}
 				>
 					<label htmlFor='mail'>Email</label>
-					<input
-						readOnly={!isEditing}
-						type='text'
-						id='mail'
-						name='mail'
-						onChange={(e) => setMail(e.target.value)}
-						style={{ width: '70%' }}
-					/>
-					<div
-						className='form-icon'
-						style={{ position: 'relative', bottom: '1.9rem' }}
-					>
-						<FontAwesomeIcon
-							icon={faCheck}
-							className={validMail ? 'valid' : 'hide'}
+					<div className='relative-position'>
+						<input
+							readOnly={!isEditing}
+							type='text'
+							id='mail'
+							name='mail'
+							value={mail}
+							onChange={(e) => setMail(e.target.value)}
+							style={{
+								width: '55%',
+								cursor: isEditing ? 'pointer' : 'not-allowed',
+							}}
+							onClick={handleEditing}
+							className={` ${validMail || mail ? 'form-icon-active' : ''}`}
 						/>
-						<FontAwesomeIcon
-							icon={faTimes}
-							className={validMail || !mail ? 'hide' : 'invalid'}
-						/>
+						<div style={{ top: '20%' }} className='form-icon'>
+							<FontAwesomeIcon
+								icon={faCheck}
+								className={validMail ? 'valid' : 'hide'}
+							/>
+							<FontAwesomeIcon
+								icon={faTimes}
+								className={validMail || !mail ? 'hide' : 'invalid'}
+							/>
+						</div>
 					</div>
 				</div>
-				<div style={{ display: 'flex', flexDirection: 'column' }}>
+				<div
+					style={{
+						display: 'flex',
+						flexDirection: 'column',
+						marginTop: '1rem',
+					}}
+				>
 					<label htmlFor='password'>
 						{i18n.language === 'en' ? 'Password' : 'Şifre'}
 					</label>
 					<div
-						style={{ alignItems: 'center', display: 'flex' }}
-						className={`relative-position ${
-							validPassword || password ? 'form-icon-active' : ''
-						}`}
+						style={{
+							alignItems: 'center',
+							display: 'flex',
+						}}
+						className='relative-position'
 					>
 						<input
 							readOnly={!isEditing}
@@ -354,7 +577,14 @@ function UserInfo() {
 							id='password'
 							name='password'
 							onChange={(e) => setPassword(e.target.value)}
-							style={{ width: '55%' }}
+							style={{
+								width: '55%',
+								cursor: isEditing ? 'pointer' : 'not-allowed',
+							}}
+							onClick={handleEditing}
+							className={` ${
+								validPassword || password ? 'form-icon-active' : ''
+							}`}
 						/>
 						<button
 							style={{ margin: 'auto 0.5rem' }}
@@ -384,7 +614,7 @@ function UserInfo() {
 								/>
 							)}
 						</button>
-						<div className='form-icon'>
+						<div style={{ top: '20%' }} className='form-icon'>
 							<FontAwesomeIcon
 								icon={faCheck}
 								className={validPassword ? 'valid' : 'hide'}
@@ -451,11 +681,14 @@ function UserInfo() {
 								type='file'
 								name='file'
 								id='file'
-								class='inputfile'
+								className='inputfile'
 								onChange={handleFileChange}
 								required
 							/>
-							<label htmlFor='file'>
+							<label
+								htmlFor='file'
+								onClick={(e) => !isEditing && e.preventDefault()}
+							>
 								<p>
 									{fileName === null ? (
 										<GrDocumentUpdate
@@ -525,6 +758,7 @@ function UserInfo() {
 					</button>
 					<button
 						className={`user-info-btn ${isEditing ? '' : 'display-hidden'}`}
+						onClick={handleSubmit}
 					>
 						<FaSave
 							style={{

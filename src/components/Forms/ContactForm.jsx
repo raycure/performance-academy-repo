@@ -41,29 +41,6 @@ function ContactForm() {
 					endpoint: '/submitContactForm',
 				})
 			);
-			const newToken = response.payload.data.newAccessToken;
-			localStorage.setItem('accessToken', newToken);
-			console.log(newToken);
-
-			// if (isLoggedIn) {
-			// 	// to refresh the token
-			// 	if (err?.response?.status === 401 || err?.response?.status === 403) {
-			// 		console.log(
-			// 			'Token expired or unauthorized, attempting to refresh token...'
-			// 		);
-			// 		const refreshResponse = await axios.get('/refresh', {
-			// 			withCredentials: true,
-			// 		});
-			// 		const newAccessToken = refreshResponse.data.accessToken;
-			// 		localStorage.setItem('accessToken', newAccessToken);
-			// 		const response = await dispatch(
-			// 			AuthService({
-			// 				data: contactFormData,
-			// 				endpoint: '/submitContactForm',
-			// 			})
-			// 		);
-			// 	}
-			// }
 		} catch (err) {
 			console.log('err', err);
 		}

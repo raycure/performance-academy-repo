@@ -96,14 +96,30 @@
 	width: fit-content;
 	align-items: center;
 }
+
+.user-info-page .form-icon-active input {
+	padding-left: 1.6rem;
+}
+
 .user-info-page .form-icon {
 	position: absolute;
-	bottom: 18%;
-	left: 0.6rem;
+	height: 16px;
+	top: 0.7rem;
+	left: 0.5rem;
 }
-.user-info-page .form-icon-active input {
-	padding-left: 1.8rem;
+
+.user-info-page .instructions {
+	color: white;
+	position: relative;
+	margin-top: 0.7rem;
+	font-size: 0.85rem;
 }
+
+.user-info-page .offscreen {
+	position: absolute;
+	left: -9999px;
+}
+
 .user-info-btn:hover {
 	color: var(--clr-primary-500);
 	background-color: white;

@@ -1,9 +1,12 @@
 import express from 'express';
-import userInfo from '../Controllers/userInfoController';
+import {
+	userInfoFetchController,
+	userInfoPutController,
+} from '../Controllers/userInfoController.js';
 
 const router = express.Router();
 
-router.get('/', userInfo);
-// todo not sure if its get or post here
+router.get('/', userInfoFetchController);
+router.post('/', userInfoPutController);
 
 export default router;

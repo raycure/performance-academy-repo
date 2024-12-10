@@ -16,10 +16,12 @@ const refreshJwt = async (req, res) => {
 	const foundUser = await Users.findOne({
 		_id: new ObjectId(userIdFromToken),
 	});
-	if (!foundUser) return res.status(403).json({ message: 'tampereed jwt' });
+
+	if (!foundUser) return res.status(403).json({ message: 'tampered jwt' });
 	try {
 		jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, async (err) => {
 			if (err) {
+				res.status(403).json({ message: 'refresh failed', error: err });
 				await Sessions.findOneAndDelete(userIdFromToken);
 			}
 			const accessToken = jwt.sign(
@@ -30,7 +32,7 @@ const refreshJwt = async (req, res) => {
 				},
 
 				process.env.ACCESS_TOKEN_SECRET,
-				{ expiresIn: '1m' } //todo change it
+				{ expiresIn: '5s' } //todo change it
 			);
 			res.status(200).json({
 				message: 'successful refresh',
@@ -38,6 +40,8 @@ const refreshJwt = async (req, res) => {
 			});
 		});
 	} catch (error) {
+		console.log('refresh error', error);
+
 		res.status(403).json({
 			message: 'refresh failed',
 			returnedValue: null,

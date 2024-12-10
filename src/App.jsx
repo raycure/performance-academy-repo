@@ -21,6 +21,9 @@ const PrivacyPolicy = lazy(() => import('./pages/Legal/PrivacyPolicy'));
 const ClassInfo = lazy(() => import('./pages/ClassInfo/ClassInfo'));
 const Classes = lazy(() => import('./pages/Classes/Classes'));
 const MyPrograms = lazy(() => import('./pages/MyPrograms/MyPrograms'));
+const Suspended = lazy(() =>
+	import('./pages/SuspenseNotificationPages/IpBlocked')
+);
 
 function App() {
 	return (
@@ -40,6 +43,7 @@ function App() {
 								<Route path='programlarım' element={<MyPrograms />} />
 								<Route path='çerezler' element={<Cookies />} />
 								<Route path='bilgilerim' element={<UserInfo />} />
+								<Route path='engellendi' element={<Suspended />} />
 								<Route path='süreç' element={<Process />} />
 								<Route
 									path='kişisel-verilerin-korunması'

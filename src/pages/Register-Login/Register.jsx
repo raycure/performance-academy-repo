@@ -147,7 +147,11 @@ function RegisterForm() {
 				email: mail,
 			};
 			const response = await dispatch(
-				AuthService({ data: registerData, endpoint: '/register' })
+				AuthService({
+					data: registerData,
+					endpoint: '/register',
+					method: 'POST',
+				})
 			);
 			setName('');
 			setSurname('');
@@ -155,9 +159,6 @@ function RegisterForm() {
 			setNationalID('');
 			setPwd('');
 			setMatchPwd('');
-			// todo log the user in
-			const accessToken = response.payload.accessToken;
-			localStorage.setItem('accessToken', accessToken);
 			displayNotif();
 			setTimeout(() => {
 				navigate('/');

@@ -180,7 +180,7 @@ function Navbar() {
 							<h4
 								style={{ color: 'black' }}
 								onClick={() => {
-									navigate('/kullaniciBilgileri');
+									navigate('/bilgilerim');
 								}}
 							>
 								user info

@@ -8,6 +8,7 @@ import { useLocation } from 'react-router-dom';
 import { useLayoutEffect } from 'react';
 import CookieConsent from '../Legal/Cookies.jsx';
 import CustomNotification from '../../components/Notification/Notification.jsx';
+import IsIpBlocked from '../../components/IpBlocked/IsIpBlocked.jsx';
 
 //import SmoothScrollContainer from '../../components/Containers/SmoothScrollContainer';
 function Layout() {
@@ -28,6 +29,7 @@ function Layout() {
 		<Wrapper>
 			<Navbar />
 			<CustomNotification />
+			<IsIpBlocked />
 			<Outlet />
 			<Footer />
 			<CookieConsent />

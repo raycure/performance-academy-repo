@@ -11,7 +11,7 @@ function Loading() {
 				alignContent: 'flex-end',
 			}}
 		>
-			<span class='loader'></span>
+			<span className='loader'></span>
 		</div>
 	);
 }

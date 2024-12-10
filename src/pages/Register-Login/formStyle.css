@@ -94,7 +94,7 @@ textarea::-ms-textarea-placeholder {
 	top: 0.85rem;
 }
 .form-icon-active {
-	padding-left: 1.5rem;
+	padding-left: 1.7rem !important;
 }
 .authentication-button-container {
 	display: flex;

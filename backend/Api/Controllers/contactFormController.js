@@ -2,9 +2,6 @@ import jwt from 'jsonwebtoken';
 import ContactQuestions from '../Models/contactFormModel.js';
 import Users from '../Models/userModel.js';
 import * as dotenv from 'dotenv';
-import verifyJWT from '../Middleware/verifyJWT.js';
-import refreshTokenController from './refreshJwt.js';
-import { User } from 'lucide-react';
 import { ObjectId } from 'mongodb';
 
 dotenv.config();
@@ -38,6 +35,7 @@ const contactFormController = async (req, res) => {
 				question,
 			});
 			res.status(200).json({ message: 'fuck youuu' });
+			// todo change it
 		}
 	} catch (error) {
 		res.status(500).json({ message: 'contact form submission failed' });
@@ -45,3 +43,5 @@ const contactFormController = async (req, res) => {
 };
 
 export default contactFormController;
+
+// todo add shcema and joi

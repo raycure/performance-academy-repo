@@ -19,13 +19,18 @@ import testortheflamboyantimg from '../../assets/testortheflamboyantimg.png';
 import { useTranslation } from 'react-i18next';
 import CertificationSteps from '../../components/CertificationSteps/CertificationSteps.jsx';
 import BecomeInstructorCards from '../../components/BecomeInstructorCards/BecomeInstructorCards.jsx';
+import Button from '../../components/Button/Button.jsx';
+import { AuthService } from '../../auth/auth.service.js';
+import { useDispatch } from 'react-redux';
 
 function Main() {
+	const dispatch = useDispatch();
 	const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 	//todo delete it later
+
 	async function handleLogout() {
 		console.log({
-			accessToken: localStoraz.getItem('accessToken'),
+			accessToken: localStorage.getItem('accessToken'),
 		});
 		const response = await axios.post('/logout', {
 			withCredentials: true,
@@ -53,6 +58,7 @@ function Main() {
 	// }, []);
 
 	const [subSuccess, setSubSuccess] = useState(false);
+	const [ipAddress, setIpAddress] = useState();
 	const lesMillsPrograms = LesMillsPrograms();
 	let navigate = useNavigate();
 	function routeChange(category) {
@@ -147,19 +153,78 @@ function Main() {
 		}
 	}
 
-	async function deleteToken() {
-		localStorage.removeItem('accessToken');
-	}
-
 	const scrollingImgRef = useRef(null);
 	const { scrollYProgress } = useScroll({
 		target: scrollingImgRef,
 		offset: ['start end', ' end start'], // first start is the top of the element and the end is the end of the screen ['',''] first quates are when the animation starts and the second one is when it ends
 	});
+	async function testPayment() {
+		const programId = selectedEvent.title;
+		const response = await dispatch(
+			AuthService({
+				data: { id: programId },
+				method: 'POST',
+				endpoint: '/pay',
+			})
+		);
+		const paymentUrl = response.payload.data.url;
+		if (paymentUrl) {
+			window.location = paymentUrl;
+		}
+		console.log('response');
+	}
+
+	async function handleIpBlockReq(e) {
+		e.preventDefault();
+		try {
+			const response = await dispatch(
+				AuthService({
+					data: { ip: ipAddress },
+					method: 'POST',
+					endpoint: '/blockIp',
+				})
+			);
+		} catch (error) {
+			console.log(error);
+		}
+	}
+
+	async function testpurchases() {
+		const response = await dispatch(
+			AuthService({
+				data: {},
+				method: 'GET',
+				endpoint: '/pay',
+			})
+		);
+		console.log('response for testpurchases ', response);
+	}
 
 	const scrollWith = useTransform(scrollYProgress, [0.3, 0.632], [0, -250]); // [0,0.91] is how much its being scrolled .91 because of the header [0,-250] for the top attribute and it changes based on the 0 to 0.91
 	return (
 		<>
+			<button onClick={testpurchases}> fsajdsa</button>
+
+			<form onSubmit={handleIpBlockReq}>
+				<input
+					onChange={(e) => setIpAddress(e.target.value)}
+					value={ipAddress}
+					required
+					type='text'
+				/>
+				<Button type='submit'>
+					{i18n.language === 'en' ? 'Send' : 'Gönder'}
+				</Button>
+			</form>
+			<button onClick={handleSub}>
+				{subSuccess ? (
+					<p>Request was successful!</p>
+				) : (
+					<p>Click to submit request</p>
+				)}
+			</button>
+			<br></br>
+			<button onClick={handleLogout}>logout</button>
 			<div className='main-welcome-text-outer-con'>
 				<div className='main-welcome-text-inner-con'>
 					<div className='fs-primary-heading'>
@@ -261,17 +326,6 @@ function Main() {
 					LESMILLS
 				</a>
 			</div> */}
-			<button onClick={handleSub}>
-				{subSuccess ? (
-					<p>Request was successful!</p>
-				) : (
-					<p>Click to submit request</p>
-				)}
-			</button>
-			<br></br>
-			<button onClick={deleteToken}> delete token</button>
-			<br></br>
-			<button onClick={handleLogout}>logout</button>
 		</>
 	);
 }

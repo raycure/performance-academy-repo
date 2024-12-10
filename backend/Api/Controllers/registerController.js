@@ -9,7 +9,6 @@ dotenv.config();
 import Sessions from '../Models/sessionModel.js';
 
 const register = async (req, res) => {
-	console.log(process.env.ACTIVATION_LINK);
 	try {
 		const { email, nationalID } = req.body;
 		const existingUser = await Users.findOne({ email });
@@ -34,11 +33,11 @@ const register = async (req, res) => {
 			{ expiresIn: '1d' }
 		);
 		const verifyLink = process.env.ACTIVATION_LINK + '/' + emailVerifyToken;
-		// try {
-		// 	await EmailSender(verifyLink, email);
-		// } catch (error) {
-		// 	console.log('email couldnt been sent');
-		// }
+		try {
+			await EmailSender();
+		} catch (error) {
+			console.log('email couldnt been sent');
+		}
 		const accessToken = jwt.sign(
 			{
 				userId: userId,
@@ -61,11 +60,21 @@ const register = async (req, res) => {
 			// maxAge: 1000 * 3, //todo delete it
 			sameSite: 'Lax',
 			path: '/',
-			secure: process.env.ENVIROMENT === 'development' ? 'false' : 'true',
+			secure: process.env.ENVIRONMENT === 'development' ? 'false' : 'true',
 		});
+
+		const clientIp = (
+			req.headers['x-forwarded-for'] ||
+			req.ip ||
+			req.connection.remoteAddress ||
+			''
+		)
+			.split(',')[0]
+			.trim();
 		const addActiveUser = await Sessions.create({
 			token: refreshToken,
 			userId: userId,
+			ip: clientIp,
 			// expiresAt: new Date(Date.now() + 30 * 1000), // 7 days from now
 		});
 		res.status(200).json({
@@ -159,7 +168,7 @@ export default register;
 // 			// maxAge: 1000 * 3, //todo delete it
 // 			sameSite: 'Lax',
 // 			path: '/',
-// 			secure: process.env.ENVIROMENT === 'development' ? 'false' : 'true',
+// 			secure: process.env.ENVIRONMENT === 'development' ? 'false' : 'true',
 // 		});
 // 		const addActiveUser = await Sessions.create({
 // 			token: refreshToken,

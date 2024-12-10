@@ -1,26 +1,29 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import ProgramOverview from '../../components/ProgramOverview/ProgramOverview';
+import { selectIsLoggedIn } from '../../redux/auth/authStateSlice';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+
 import { useTranslation } from 'react-i18next';
 import LicenceContactRedirect from '../../components/LicenceContactRedirect/LicenceContactRedirect';
 function MyPrograms() {
-	const userEventIDs = [
-		'0',
-		'1',
-		'2',
-		'3',
-		'4',
-		'5',
-		'6',
-		'7',
-		'8',
-		'9',
-		'10',
-		'11',
-		'12',
-		'13',
-		'14',
-	];
+	const userEventIDs = ['1', '3'];
+	const navigate = useNavigate();
 	const { i18n } = useTranslation('');
+	let isLoggedIn = useSelector(selectIsLoggedIn);
+	useEffect(() => {
+		if (!isLoggedIn) {
+			const verifyNotif = {
+				type: 'info',
+				duration: 5000,
+				message: 'Please login',
+			};
+			localStorage.setItem('Notifexp', JSON.stringify(verifyNotif));
+			const notificationEvent = new Event('notificationEvent');
+			window.dispatchEvent(notificationEvent);
+			navigate('/login');
+		}
+	}, []);
 	return (
 		<div>
 			<p
