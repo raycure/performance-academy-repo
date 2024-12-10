@@ -5,6 +5,8 @@ import { ObjectId } from 'mongodb';
 dotenv.config();
 
 const handleLogout = async (req, res) => {
+	console.log('reached to logout controller');
+
 	const cookies = req.cookies;
 	if (!cookies?.jwt) return res.sendStatus(204);
 

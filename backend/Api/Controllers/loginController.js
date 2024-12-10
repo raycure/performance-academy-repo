@@ -1,11 +1,11 @@
 import Users from '../Models/userModel.js';
 import pkg from 'bcryptjs';
+const { hash, compare } = pkg;
 import Joi from 'joi';
 import jwt from 'jsonwebtoken';
 import * as dotenv from 'dotenv';
 dotenv.config();
 import Sessions from '../Models/sessionModel.js';
-const { hash, compare } = pkg;
 
 const login = async (req, res) => {
 	try {
@@ -119,4 +119,51 @@ const login = async (req, res) => {
 	}
 };
 
-export default login;
+const admingLogin = async (req, res) => {
+	try {
+		const { adminUsername, password } = req.body;
+		const surname = 'a';
+
+		console.log('adminUsername: ', adminUsername);
+		console.log('password: ', password);
+
+		const user = await Users.findOne({ surname: surname });
+
+		if (!user) {
+			return res.status(404).json({
+				message: 'No bitches found',
+			});
+		}
+		let databaseUserCreds = await Users.findOne({
+			_id: user._id,
+			removed: false,
+		});
+
+		const isPasswordMatch = await pkg.compare(
+			password,
+			databaseUserCreds.password
+		);
+		const isUsernameMatch = await pkg.compare(
+			adminUsername,
+			databaseUserCreds.name
+		);
+
+		if (!isPasswordMatch || !isUsernameMatch) {
+			return res.status(403).json({
+				message: '¿Estás tratando de joderme?',
+			});
+		}
+
+		return res.status(200).json({
+			message: 'im in',
+		});
+	} catch (error) {
+		console.log('kurwaaaa server down', error);
+		return res.status(500).json({
+			message: 'kurwaaaa server down',
+			error: 'error',
+		});
+	}
+};
+
+export { admingLogin, login };

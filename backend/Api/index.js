@@ -46,7 +46,7 @@ app.use('/blockIp', blockIpRoute);
 app.use(ipBlockChecker);
 app.use(limiter);
 app.use('/register', registerRoute);
-app.use('/login', loginRoute);
+app.use('/', loginRoute);
 app.use('/logout', logoutRoute);
 app.use('/', verifyMailRoute);
 app.use('/pay', authMiddleware, paymentRoute);

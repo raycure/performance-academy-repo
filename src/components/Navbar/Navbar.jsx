@@ -139,7 +139,9 @@ function Navbar() {
 	};
 
 	async function handleLogout() {
-		const response = await dispatch(AuthService({ endpoint: '/logout' }));
+		const response = await dispatch(
+			AuthService({ endpoint: '/logout', method: 'POST' })
+		);
 		localStorage.removeItem('accessToken');
 	}
 
@@ -186,7 +188,7 @@ function Navbar() {
 								user info
 							</h4>
 							<h4 style={{ color: 'black' }} onClick={handleLogout}>
-								signout
+								{i18n.language === 'en' ? 'Sign out' : 'Çıkış yap'}
 							</h4>
 						</div>
 					</div>

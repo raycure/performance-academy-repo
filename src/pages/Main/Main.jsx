@@ -26,7 +26,6 @@ import { useDispatch } from 'react-redux';
 function Main() {
 	const dispatch = useDispatch();
 	const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-	//todo delete it later
 
 	async function handleLogout() {
 		console.log({
