@@ -19,36 +19,58 @@ import { motion } from 'framer-motion';
 import { descending } from '../../components/animations/AnimationValues';
 import { useDispatch } from 'react-redux';
 import { AuthService } from '../../auth/auth.service';
+import { useNavigate } from 'react-router-dom';
 
 function UserInfo() {
 	const dispatch = useDispatch();
 	useEffect(() => {
-		makeApiCall();
+		initUserInfo();
 	}, []);
 
-	const makeApiCall = async () => {
-		const response = await dispatch(
-			AuthService({
-				method: 'GET',
-				endpoint: '/userInfo',
-			})
-		);
-		const user = response.payload.data.foundUser;
+	function displayNotif() {
+		const loginRequiredNotif = {
+			type: 'info',
+			duration: 5000,
+			message: 'login required',
+		};
+		localStorage.setItem('Notifexp', JSON.stringify(loginRequiredNotif));
+		const Notifexp = new Event('notificationEvent');
+		window.dispatchEvent(Notifexp);
+	}
 
-		if (response.payload.data.newAccessToken) {
-			const newAccessToken = response.payload.data.newAccessToken;
-			localStorage.setItem('accessToken', newAccessToken);
+	const initUserInfo = async () => {
+		try {
+			const response = await dispatch(
+				AuthService({
+					method: 'GET',
+					endpoint: '/userInfo',
+				})
+			);
+			console.log(
+				'response for initUserInfo',
+				response.payload.data.accessToken
+			);
+
+			const user = response.payload.data.foundUser;
+
+			const date = new Date(user.birthDate);
+			const day = String(date.getDate()).padStart(2, '0'); // Get day and add leading zero if needed
+			const month = String(date.getMonth() + 1).padStart(2, '0'); // Get month (0-indexed) and add leading zero
+			const year = date.getFullYear();
+
+			setNationalID(user.nationalID.toString());
+			setMail(user.email);
+			setName(user.name);
+			setSurname(user.surname);
+			setBirthDate(day + '/' + month + '/' + year);
+		} catch (error) {
+			// const status = error.payload.status;
+			// if (status === 401) {
+			// 	displayNotif();
+			// 	navigate('/');
+			// }
+			console.log('userinfo fetch error', error);
 		}
-		const date = new Date(user.birthDate);
-		const day = String(date.getDate()).padStart(2, '0'); // Get day and add leading zero if needed
-		const month = String(date.getMonth() + 1).padStart(2, '0'); // Get month (0-indexed) and add leading zero
-		const year = date.getFullYear();
-
-		setMail(user.email);
-		setNationalID(user.nationalID);
-		setName(user.name);
-		setSurname(user.surname);
-		setBirthDate(day + '/' + month + '/' + year);
 	};
 
 	async function handleSubmit(e) {
@@ -67,11 +89,10 @@ function UserInfo() {
 				data: { updateData },
 			})
 		);
-
-		console.log('update response', response);
 	}
 
 	const { t, i18n } = useTranslation('translation');
+	const navigate = useNavigate();
 	const contractverified = false;
 	const [isEditing, setIsEditing] = useState(false);
 	const [passwordOn, setPasswordOn] = useState(true);
@@ -82,10 +103,10 @@ function UserInfo() {
 	};
 	const [name, setName] = useState('');
 	const [surname, setSurname] = useState('');
-	const [nationalID, setNationalID] = useState('');
 	const [birthDate, setBirthDate] = useState('');
 	const [mail, setMail] = useState('');
 	const [password, setPassword] = useState('');
+	const [nationalID, setNationalID] = useState('');
 	const [forApiBirthDate, setForApiBirthDate] = useState('');
 
 	const [birthDateError, setBirthDateError] = useState('');
@@ -182,6 +203,7 @@ function UserInfo() {
 
 	useEffect(() => {
 		const valid = birthDateRules.every((rule) => !rule.test(birthDate));
+
 		setValidBirthDate(valid);
 	}, [birthDate]);
 
@@ -202,6 +224,7 @@ function UserInfo() {
 	};
 
 	function handleBirthDate(e) {
+		handleEditing();
 		let formattedDate = '';
 		if (e.target.value.length < 11) {
 			const value = e.target.value.replace(/\D/g, '');
@@ -307,9 +330,6 @@ function UserInfo() {
 				</p>
 				<div className='user-info-grid'>
 					<div
-						className={`relative-position ${
-							validName || name ? 'form-icon-active' : ''
-						}`}
 						style={{
 							display: 'flex',
 							flexDirection: 'column',
@@ -319,24 +339,39 @@ function UserInfo() {
 						<label htmlFor='name'>
 							{i18n.language === 'en' ? 'Name' : 'İsim'}
 						</label>
-						<input
-							readOnly={!isEditing}
-							type='text'
-							id='name'
-							name='name'
-							value={name}
-							onChange={(e) => setName(e.target.value)}
-							onClick={handleEditing}
-						/>
-						<div className='form-icon'>
-							<FontAwesomeIcon
-								icon={faCheck}
-								className={validName ? 'valid' : 'hide'}
+						<div
+							className={`relative-position ${
+								validName || name ? 'form-icon-active' : ''
+							}`}
+						>
+							<input
+								readOnly={!isEditing}
+								type='text'
+								id='name'
+								name='name'
+								value={name}
+								onChange={(e) => setName(e.target.value)}
+								onClick={handleEditing}
 							/>
-							<FontAwesomeIcon
-								icon={faTimes}
-								className={validName || !name ? 'hide' : 'invalid'}
-							/>
+							<div className='form-icon'>
+								<FontAwesomeIcon
+									icon={faCheck}
+									className={validName ? 'valid' : 'hide'}
+								/>
+								<FontAwesomeIcon
+									icon={faTimes}
+									className={validName || !name ? 'hide' : 'invalid'}
+								/>
+							</div>
+							<motion.p
+								initial='hidden'
+								variants={descending}
+								whileInView='show'
+								className={!validName && name ? 'instructions' : 'offscreen'}
+							>
+								{nameSurnameRules.find((rule) => rule.test(name))?.message ||
+									''}
+							</motion.p>
 						</div>
 					</div>
 					<div
@@ -351,10 +386,9 @@ function UserInfo() {
 						</label>
 						<div
 							className={`relative-position ${
-								!validNationalId ? 'form-icon-active' : ''
+								!validSurname || surname ? 'form-icon-active' : ''
 							}`}
 						>
-							{/* soyad */}
 							<input
 								readOnly={!isEditing}
 								type='text'
@@ -394,20 +428,20 @@ function UserInfo() {
 							cursor: isEditing ? 'pointer' : 'not-allowed',
 						}}
 					>
-						<label htmlFor='nationalId'>
+						<label htmlFor='nationalID'>
 							{i18n.language === 'en' ? 'TR Government ID' : 'TC Kimlik No'}
 						</label>
 
 						<div
 							className={`relative-position ${
-								!validNationalId ? 'form-icon-active' : ''
+								validNationalId || nationalID ? 'form-icon-active' : ''
 							}`}
 						>
 							<input
 								readOnly={!isEditing}
 								type='text'
-								id='nationalId'
-								name='nationalId'
+								id='nationalID'
+								name='nationalID'
 								onChange={(e) => setNationalID(e.target.value)}
 								onClick={handleEditing}
 								value={nationalID}
@@ -436,10 +470,7 @@ function UserInfo() {
 							</motion.p>
 						</div>
 					</div>
-					{/* <div
-						className={`relative-position ${
-							validBirthDate || birthDate ? 'form-icon-active' : ''
-						}`}
+					<div
 						style={{
 							display: 'flex',
 							flexDirection: 'column',
@@ -449,41 +480,29 @@ function UserInfo() {
 						<label htmlFor='birthDate'>
 							{i18n.language === 'en' ? 'Birth Date' : 'Doğum Tarihi'}
 						</label>
-						<input
-							readOnly={!isEditing}
-							type='text'
-							id='birthDate'
-							name='birthDate'
-							value={birthDate}
-							onChange={(e) => setBirthDate(e.target.value)}
-							onClick={handleBirthDate}
-						/>
-						<div className='form-icon'>
-							<FontAwesomeIcon
-								icon={faCheck}
-								className={validBirthDate ? 'valid' : 'hide'}
-							/>
-							<FontAwesomeIcon
-								icon={faTimes}
-								className={validBirthDate || !birthDate ? 'hide' : 'invalid'}
-							/>
-						</div>
-					</div> */}
-					<div className='relative-position centerLineAnimation'>
-						<input
-							value={birthDate}
-							placeholder={i18n.language === 'tr' ? 'GG/AA/YYYY' : 'DD/MM/YYYY'}
-							onChange={(e) => handleBirthDate(e)}
-						></input>
-						<motion.p
-							initial='hidden'
-							variants={descending}
-							whileInView='show'
-							id='uidnote'
-							className={birthDateError ? 'instructions' : 'offscreen'}
+						<div
+							className={`relative-position ${
+								validBirthDate || birthDate ? 'form-icon-active' : ''
+							}`}
 						>
-							{birthDateError}
-						</motion.p>
+							<input
+								value={birthDate}
+								readOnly={!isEditing}
+								placeholder={
+									i18n.language === 'tr' ? 'GG/AA/YYYY' : 'DD/MM/YYYY'
+								}
+								onChange={(e) => handleBirthDate(e)}
+							></input>
+							<motion.p
+								initial='hidden'
+								variants={descending}
+								whileInView='show'
+								id='uidnote'
+								className={birthDateError ? 'instructions' : 'offscreen'}
+							>
+								{birthDateError}
+							</motion.p>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -501,36 +520,36 @@ function UserInfo() {
 						display: 'flex',
 						flexDirection: 'column',
 					}}
-					className={`relative-position ${
-						validMail || mail ? 'form-icon-active' : ''
-					}`}
 				>
 					<label htmlFor='mail'>Email</label>
-					<input
-						readOnly={!isEditing}
-						type='text'
-						id='mail'
-						name='mail'
-						value={mail}
-						onChange={(e) => setMail(e.target.value)}
-						style={{
-							width: '70%',
-							cursor: isEditing ? 'pointer' : 'not-allowed',
-						}}
-						onClick={handleEditing}
-					/>
 					<div
-						className='form-icon'
-						style={{ position: 'relative', bottom: '1.9rem' }}
+						className={`relative-position ${
+							validMail || mail ? 'form-icon-active' : ''
+						}`}
 					>
-						<FontAwesomeIcon
-							icon={faCheck}
-							className={validMail ? 'valid' : 'hide'}
+						<input
+							readOnly={!isEditing}
+							type='text'
+							id='mail'
+							name='mail'
+							value={mail}
+							onChange={(e) => setMail(e.target.value)}
+							style={{
+								width: '55%',
+								cursor: isEditing ? 'pointer' : 'not-allowed',
+							}}
+							onClick={handleEditing}
 						/>
-						<FontAwesomeIcon
-							icon={faTimes}
-							className={validMail || !mail ? 'hide' : 'invalid'}
-						/>
+						<div className='form-icon'>
+							<FontAwesomeIcon
+								icon={faCheck}
+								className={validMail ? 'valid' : 'hide'}
+							/>
+							<FontAwesomeIcon
+								icon={faTimes}
+								className={validMail || !mail ? 'hide' : 'invalid'}
+							/>
+						</div>
 					</div>
 				</div>
 				<div style={{ display: 'flex', flexDirection: 'column' }}>
@@ -653,7 +672,7 @@ function UserInfo() {
 								type='file'
 								name='file'
 								id='file'
-								class='inputfile'
+								className='inputfile'
 								onChange={handleFileChange}
 								required
 							/>

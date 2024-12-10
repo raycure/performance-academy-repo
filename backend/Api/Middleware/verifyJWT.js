@@ -2,17 +2,20 @@ import jwt from 'jsonwebtoken';
 import * as dotenv from 'dotenv';
 dotenv.config();
 
-const verifyJWT = (req, res) => {
+const verifyJWT = async (req, res) => {
 	const authHeader = req.headers['authorization'];
-	if (!authHeader)
+	if (!authHeader) {
+		console.log('header is missing');
 		return res.status(401).json({ message: 'Token is missing or invalid' });
-
+	}
 	const token = authHeader.split(' ')[1];
 
+	console.log('token', token);
+
 	try {
-		jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, decoded) => {
+		jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, async (err) => {
 			if (err) {
-				throw err;
+				return res.status(403).json({ message: 'Token verification failed' });
 			}
 			res.status(200).json({
 				message: 'successful verify jwt',
@@ -20,7 +23,8 @@ const verifyJWT = (req, res) => {
 			});
 		});
 	} catch (error) {
-		return res.status(403).json({ message: 'Token verification failed' });
+		console.error('Unexpected error:', error);
+		return res.status(500).json({ message: 'Internal server error' });
 	}
 };
 

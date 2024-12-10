@@ -1,6 +1,4 @@
 import axios from '../pages/api/axios.js';
-import { API_BASE_URL } from '../config/serverApiConfig.js';
-import { useDispatch } from 'react-redux';
 import { fetchData } from '../redux/auth/authStateSlice.js';
 
 export const AuthService =
@@ -9,6 +7,7 @@ export const AuthService =
 
 		({ endpoint, data = {}, method }) =>
 		async (dispatch) => {
+			// const navigate = useNavigate();
 			try {
 				const response = await dispatch(
 					fetchData({
@@ -17,12 +16,29 @@ export const AuthService =
 						data: data,
 					})
 				);
+
+				const isAccessTokenRefresh =
+					response.payload.headers &&
+					response.payload.headers['x-refreshed-token'];
+
+				console.log('isAccessTokenRefresh', isAccessTokenRefresh);
+				if (isAccessTokenRefresh) {
+					let newAccessToken = response.payload.data.accessToken;
+					localStorage.setItem('accessToken', newAccessToken);
+				}
 				if (fetchData.rejected.match(response)) {
 					throw response || 'An unknown error occurred';
 				}
+
 				return response;
 			} catch (error) {
-				console.log('response authta:', error);
+				const isIpBlocked =
+					error.payload.headers && error.payload.headers['ip-blocked'];
+				if (isIpBlocked) {
+					const ipBlockedEvent = new Event('ipBlockedEvent');
+					window.dispatchEvent(ipBlockedEvent);
+				}
+				// console.log();
 				return Promise.reject(error);
 			}
 		};

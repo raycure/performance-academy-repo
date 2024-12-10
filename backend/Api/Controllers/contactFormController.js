@@ -2,9 +2,6 @@ import jwt from 'jsonwebtoken';
 import ContactQuestions from '../Models/contactFormModel.js';
 import Users from '../Models/userModel.js';
 import * as dotenv from 'dotenv';
-import verifyJWT from '../Middleware/verifyJWT.js';
-import refreshTokenController from './refreshJwt.js';
-import { User } from 'lucide-react';
 import { ObjectId } from 'mongodb';
 
 dotenv.config();

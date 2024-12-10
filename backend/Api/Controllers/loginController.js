@@ -86,12 +86,21 @@ const login = async (req, res) => {
 			maxAge: 1000 * 60 * 60 * 24 * 30,
 			sameSite: 'Lax',
 			path: '/',
-			secure: process.env.ENVIROMENT === 'development' ? false : true,
+			secure: process.env.ENVIRONMENT === 'development' ? false : true,
 		});
 
+		const clientIp = (
+			req.headers['x-forwarded-for'] ||
+			req.ip ||
+			req.connection.remoteAddress ||
+			''
+		)
+			.split(',')[0]
+			.trim();
 		const addActiveUser = await Sessions.create({
 			token: refreshToken,
 			userId: user._id,
+			ip: clientIp,
 		});
 
 		// todo decide if i should retunr the user or nah

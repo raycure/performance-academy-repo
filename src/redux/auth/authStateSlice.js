@@ -23,6 +23,7 @@ function test() {
 	};
 
 	const savedToken = localStorage.getItem('accessToken');
+	console.log('localdeki token ', savedToken);
 
 	if (savedToken) {
 		setupAxiosDefaults(savedToken);
@@ -34,25 +35,23 @@ export const fetchData = createAsyncThunk(
 	// data can be empty to include api calls like logout
 	async ({ url, data = {}, method }, { rejectWithValue }) => {
 		test();
-		axios.defaults.withCredentials = true;
 		try {
-			// spreads the config argument for it to work properly
 			const response = await axios({
-				method,
 				url,
 				data,
 				method: method,
 			});
+			console.log('try respnse in slice', response);
 			return {
 				data: response.data,
+				headers: response?.headers,
 				endpoint: url,
 			};
 		} catch (error) {
-			console.log('sliceta error', error);
-
 			const responseData = {
 				data: error.response?.data,
 				status: error.response?.status,
+				headers: error.response?.headers,
 			};
 			return rejectWithValue(responseData);
 		}

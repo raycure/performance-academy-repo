@@ -5,7 +5,6 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "d": "nodemon ./Api/index.js"
   },
   "author": "",
@@ -23,5 +22,9 @@
     "nodemon": "^3.1.4",
     "pdf-lib": "^1.17.1",
     "redux-thunk": "^3.1.0"
+  },
+  "devDependencies": {
+    "@types/nodemailer": "^6.4.17",
+    "ts-node": "^10.9.2"
   }
 }

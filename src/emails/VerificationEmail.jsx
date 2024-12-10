@@ -52,7 +52,7 @@ function AddWbr() {
 
 	return <Link href={verifyLink}>{modifiedText}</Link>;
 }
-export default function Email() {
+export default function verificationEmail() {
 	return (
 		<Html>
 			<Head>

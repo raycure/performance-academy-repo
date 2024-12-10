@@ -41,9 +41,6 @@ function ContactForm() {
 					endpoint: '/submitContactForm',
 				})
 			);
-			const newToken = response.payload.data.newAccessToken;
-			localStorage.setItem('accessToken', newToken);
-			console.log(newToken);
 		} catch (err) {
 			console.log('err', err);
 		}

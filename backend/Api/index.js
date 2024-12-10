@@ -3,28 +3,32 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import registerRoute from './Routes/registerRoute.js';
 import loginRoute from './Routes/loginRoute.js';
-import jwtRefresRoute from './Routes/jwtRefresRoute.js';
 import logoutRoute from './Routes/logoutRoute.js';
 import verifyMailRoute from './Routes/verifyMailRoute.js';
 import cookieParser from 'cookie-parser';
 import credentials from './Middleware/credentials.js';
 import corsOptions from '../config/corsOptions.js';
 import rateLimit from 'express-rate-limit';
-// import verifyJWT from './Middleware/verifyJWT.js';
 import authMiddleware from './Middleware/handleAuth.js';
-// import uploadRoute from './Routes/uploadRoute.js';
+import uploadRoute from './Routes/uploadRoute.js';
 import contactFormRoute from './Routes/contactFormRoute.js';
 import userInfoRoute from './Routes/userInfoRoute.js';
-
+import paymentRoute from './Routes/paymentRoute.js';
+import blockIpRoute from './Routes/blockIpRoute.js';
+import ipBlockChecker from './Middleware/ipBlockChecker.js';
+import * as dotenv from 'dotenv';
+import webhook from './Controllers/webhook.js';
+dotenv.config();
 const port = 3001;
 
+// very important note if a controller requires authmiddleware it has to return req.user as accesstoken
 const app = express();
-
 app.use(credentials);
-
-// app.set("trust proxy",1) for production dont know what it does though
+app.set('trust proxy', 1);
 app.use(cors(corsOptions));
 app.use(cookieParser());
+app.use('/webhook', express.raw({ type: 'application/json' }), webhook);
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
@@ -38,15 +42,17 @@ const limiter = rateLimit({
 	},
 });
 
-app.use('/', limiter);
+app.use('/blockIp', blockIpRoute);
+app.use(ipBlockChecker);
+app.use(limiter);
 app.use('/register', registerRoute);
 app.use('/login', loginRoute);
-app.use('/refresh', jwtRefresRoute);
 app.use('/logout', logoutRoute);
 app.use('/', verifyMailRoute);
+app.use('/pay', authMiddleware, paymentRoute);
+
 app.use('/userInfo', authMiddleware, userInfoRoute);
 app.use('/submitContactForm', authMiddleware, contactFormRoute);
-
 mongoose
 	.connect(
 		'mongodb+srv://devemresr:IHybYDDzzbfGdcGe@performance-academy.2x7gw.mongodb.net/Performance_Academy?retryWrites=true&w=majority&appName=Performance-Academy'

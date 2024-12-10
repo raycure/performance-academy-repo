@@ -96,13 +96,9 @@
 	width: fit-content;
 	align-items: center;
 }
-/* .user-info-page .form-icon {
-	position: absolute;
-	bottom: 18%;
-	left: 0.6rem;
-} */
-.user-info-page .form-icon-active input {
-	padding-left: 1.3rem;
+
+.form-icon-active input {
+	padding-left: 1.6rem;
 }
 
 .form-icon {

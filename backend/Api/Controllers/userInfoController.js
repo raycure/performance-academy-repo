@@ -1,6 +1,5 @@
 import Users from '../Models/userModel.js';
 import jwt from 'jsonwebtoken';
-import { User } from 'lucide-react';
 import { ObjectId } from 'mongodb';
 
 export const userInfoFetchController = async (req, res) => {
@@ -11,20 +10,13 @@ export const userInfoFetchController = async (req, res) => {
 			_id: new ObjectId(userIDfromRefresh),
 		});
 
-		// const { name, surename, email, nationalID, birthDate } = foundUser;
-		// const userObject = { name, surename, email, nationalID, birthDate };
-
-		if (req.isTokenRefresh) {
-			res.status(200).json({
-				message: 'fuck youuu refreshed',
-				newAccessToken: req.user,
-				foundUser,
-			});
-		} else {
-			res.status(200).json({ message: 'fuck youuu', foundUser });
-		}
+		res.status(200).json({
+			message: 'userinfo fetch successful',
+			foundUser,
+			accessToken: req.user,
+		});
 	} else {
-		res.status(401).json({ message: 'fuck youuu youre not authed' });
+		res.status(401).json({ message: 'not authed' });
 	}
 };
 
@@ -47,7 +39,7 @@ export const userInfoPutController = async (req, res) => {
 		}
 
 		const plainUser = foundUser.toObject();
-		// mongo's object are different than pain objects
+		// mongo's object are different than plain objects
 
 		const fieldsToUpdate = {};
 		Object.keys(updateData).forEach((key) => {

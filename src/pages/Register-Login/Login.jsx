@@ -66,22 +66,21 @@ function Login() {
 				AuthService({
 					data: loginData,
 					method: 'POST',
-					endpoint: '/login ',
+					endpoint: '/login',
 				})
 			);
-			console.log('response to lofin', response);
-
+			console.log('response loginde ', response);
 			const accessToken = response.payload.data.accessToken;
 			console.log('accessToken loginde', accessToken);
-
 			localStorage.setItem('accessToken', accessToken);
+
 			const isLoggedIn = response ? true : false; //todo change it to user roles and stuff
 			localStorage.setItem('isLoggedIn', isLoggedIn);
 			setMailorNationalID('');
 			setPwd('');
 			setSuccess(true);
 			setLocalLoading(true);
-			navigate('/');
+			// navigate('/');
 
 			// setTimeout(() => {
 			// 	navigate('/');

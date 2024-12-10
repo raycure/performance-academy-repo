@@ -34,11 +34,41 @@ const UserSchema = mongoose.Schema(
 			type: Boolean,
 			default: false,
 		},
+		blocked: {
+			type: Boolean,
+			default: false,
+		},
+		purchases: [
+			{
+				productId: {
+					type: String,
+					required: true,
+				},
+				purchaseDate: {
+					type: Date,
+					default: Date.now,
+				},
+				boughtPrice: {
+					type: Number,
+				},
+			},
+		],
 	},
 	{
 		timestamps: true,
 	}
 );
+
+UserSchema.methods.checkIfItsAlreadyBought = function (productId) {
+	// Check if product already purchased to prevent duplicates
+	const existingPurchase = this.purchases.find(
+		(purchase) => purchase.productId.toString() === productId.toString()
+	);
+
+	if (existingPurchase) {
+		throw new Error('Product already purchased');
+	}
+};
 
 const Users = mongoose.model('Users', UserSchema);
 

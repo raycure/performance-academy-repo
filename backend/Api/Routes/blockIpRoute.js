@@ -1,9 +1,7 @@
 import express from 'express';
-import { test } from '../Controllers/productController.js';
-
+import blockIp from '../Middleware/blockIp.js';
 
 const router = express.Router();
-
-router.get('/', test);
+router.post('/', blockIp);
 
 export default router;
