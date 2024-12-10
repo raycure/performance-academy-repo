@@ -1,5 +1,4 @@
-import React, { useLayoutEffect, useState } from 'react';
-import name from '/ornek.jpg';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import './ClassInfo.css';
 import LesmillsPrograms from '../../assets/LesmillsPrograms';
@@ -8,6 +7,7 @@ import EventList from '../../components/EventItem/EventList.jsx';
 import { PiBarbell } from 'react-icons/pi';
 import { MdDoubleArrow } from 'react-icons/md';
 import { useSelector } from 'react-redux';
+import BynderEmbed from '../../components/BynderEmbed/BynderEmbed.jsx';
 function ClassInfo() {
 	const { t, i18n } = useTranslation('translation');
 	const programID = useSelector((state) => state.selectedProgramId.id);
@@ -45,18 +45,14 @@ function ClassInfo() {
 					aria-label='program pic'
 					className='background-image'
 					style={{ opacity: 0.6 }}
-					src={name}
+					src={program.additionalPictures[3].url}
 				/>
 				<p className='poster-heading'>{program.title}</p>
 				<p className='fs-minimal-heading'>{program.result}</p>
 			</div>
 			<p className='class-info-sum'>{program.sum}</p>
 			<section className='class-info-grid'>
-				<img
-					src='/ornek.jpg'
-					alt='name'
-					style={{ height: '100%', objectFit: 'cover', padding: '1rem 0rem' }}
-				/>
+				<img src={program.additionalPictures[1].url} alt='name' />
 				<div
 					style={{
 						display: 'flex',
@@ -179,47 +175,45 @@ function ClassInfo() {
 						</>
 					)}
 				</div>
-				<img
-					src='/ornek.jpg'
-					alt='name'
-					style={{ height: '100%', objectFit: 'cover', padding: '1rem 0rem' }}
-				/>
+				<img src={program.additionalPictures[3].url} alt='name' />
 			</section>
+			<BynderEmbed
+				mediaId={program.mediaId}
+				accountUrl='https://marketing.lesmills.com'
+				language={i18n.language}
+				autoplay={false}
+			/>
 			<section>
-				<video className='testVid' controls style={{ width: '100%' }}>
-					<source src='' type='video/mp4' />
-					Your browser does not support the video tag.
-				</video>
+				<div
+					className='fs-minimal-heading center-item'
+					style={{
+						display: 'flex',
+						flexDirection: 'column',
+						alignItems: 'center',
+						padding: '1rem',
+						marginBottom: '2rem',
+					}}
+				>
+					<p style={{ textAlign: 'center' }}>
+						{i18n.language === 'en'
+							? 'Would You Like To Become a Certified'
+							: 'Etkinliklerimizden Birisine Katılarak'}
+					</p>
+					<p className='fs-secondary-heading fw-bold'>{program.title}</p>
+					<p style={{ textAlign: 'center' }}>
+						{i18n.language === 'en'
+							? 'Instructor by Joining One of Our Events?'
+							: 'Programının Sertifikalı Eğitmeni Olmak İster Misin?'}
+					</p>
+				</div>
+				<EventList activeProgram={programID} infoActive={false} />
 			</section>
-			<div
-				className='fs-minimal-heading center-item'
-				style={{
-					display: 'flex',
-					flexDirection: 'column',
-					alignItems: 'center',
-					padding: '1rem',
-					marginBottom: '2rem',
-				}}
-			>
-				<p style={{ textAlign: 'center' }}>
-					{i18n.language === 'en'
-						? 'Would You Like To Become a Certified'
-						: 'Etkinliklerimizden Birisine Katılarak'}
-				</p>
-				<p className='fs-secondary-heading fw-bold'>{program.title}</p>
-				<p style={{ textAlign: 'center' }}>
-					{i18n.language === 'en'
-						? 'Instructor by Joining One of Our Events?'
-						: 'Programının Sertifikalı Eğitmeni Olmak İster Misin?'}
-				</p>
-			</div>
-			<EventList activeProgram={programID} infoActive={true} />
 			<ul className='class-rec-con'>
 				{recPrograms.map((program, index) => {
 					return (
 						<li key={index} className='class-rec-item relative-position'>
 							<img
-								src={name}
+								src={program.additionalPictures[0].url}
 								alt={`rec-picture-${program.title}`}
 								className='background-image'
 							/>

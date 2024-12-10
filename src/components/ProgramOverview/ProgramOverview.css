@@ -1,43 +1,89 @@
-.program-overview-outer-con {
+.prog-overview-outer-con {
+	display: flex;
+	margin: 2rem auto;
+	max-width: 1200px;
+	border-image: linear-gradient(
+			to bottom,
+			var(--clr-primary-400) 0%,
+			var(--clr-primary-200) 100%
+		)
+		1;
+	/* border-image: linear-gradient(to bottom, #3acfd5 0%, #3a4ed5 100%) 1;*/
+	border-width: 2px;
+	border-style: solid;
+}
+.prog-overview-info-con {
+	width: 600px;
+	padding: 1rem;
 	display: flex;
 	flex-direction: column;
-	margin: 4rem 20%;
-	border-top-left-radius: 16px;
-	border-top-right-radius: 16px;
-}
-.program-overview-info-con {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	padding: 2rem;
-	gap: 1rem;
-}
-.program-overview-inner-con {
-	display: grid;
-	width: 100%;
-	grid-template-columns: 1fr 1fr;
-	gap: 1.5rem;
-	margin-bottom: 1.5rem;
-}
-.program-overview-inner-con div {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
+	justify-content: space-evenly;
 	gap: 0.5rem;
 }
-@media (max-width: 768px) {
-	.program-overview-outer-con {
-		margin: 4rem 7%;
+.prog-overview-sum {
+	display: grid;
+	grid-template-columns: repeat(3, auto);
+	align-self: center;
+	gap: 1rem;
+}
+.prog-overview-sum span {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+}
+.prog-overview-icon {
+	width: 1.3rem;
+	height: 1.3rem;
+	flex-shrink: 0;
+}
+.program-overview-button-con {
+	display: grid;
+	grid-template-areas: 'a b' 'c d';
+	gap: 0.7rem;
+}
+.program-overview-button-con button {
+	padding: 0.5rem;
+	border-radius: 6px;
+	border: 1px solid white;
+	grid-area: auto;
+	font-size: var(--fs-400);
+	display: flex;
+}
+.program-overview-button-con button:hover {
+	background-color: var(--clr-primary-300);
+}
+.program-overview-button-con button:hover .overview-icon {
+	animation: pulse 0.3s ease;
+}
+.program-overview-button-con button:active {
+	border: 1px solid var(--clr-accent-400);
+	background-color: var(--clr-accent-400);
+	transform: scale(0.95);
+	transition: 0.15s ease-out;
+}
+
+@media (max-width: 850px) {
+	.prog-overview-outer-con {
+		flex-direction: column;
 	}
-	.program-overview-outer-con .fs-minimal-heading {
-		font-size: var(--fs-650);
+	.prog-overview-info-con {
+		width: 100%;
+		padding: 3rem 2rem;
+		justify-content: unset;
+		gap: 1.5rem;
 	}
-	.program-overview-inner-con {
-		font-size: var(--fs-500);
+	.prog-overview-sum {
+		gap: 2rem;
 	}
 }
-@media (max-width: 470px) {
-	.program-overview-outer-con hr {
-		display: none;
+
+@media (max-width: 540px) {
+	.prog-overview-info-con {
+		padding: 2rem 1rem;
+		gap: 1rem;
+	}
+	.prog-overview-sum {
+		gap: 1rem;
 	}
 }

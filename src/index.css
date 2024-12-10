@@ -246,7 +246,10 @@ button {
 	color: inherit;
 	font: inherit;
 }
-
+section {
+	margin-top: 9rem;
+	margin-bottom: 9rem;
+}
 /* Remove all animations, transitions and scroll for people that prefer not to see them */
 @media (prefers-reduced-motion: reduce) {
 	html:focus-within {
@@ -564,6 +567,22 @@ input[type='password'] {
 	}
 	75% {
 		transform: scale(1.05);
+	}
+}
+@-moz-keyframes rotate {
+	100% {
+		-moz-transform: rotate(360deg);
+	}
+}
+@-webkit-keyframes rotate {
+	100% {
+		-webkit-transform: rotate(360deg);
+	}
+}
+@keyframes rotate {
+	100% {
+		-webkit-transform: rotate(360deg);
+		transform: rotate(360deg);
 	}
 }
 /* ANIMATIONS */

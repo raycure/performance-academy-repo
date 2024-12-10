@@ -108,6 +108,9 @@
 .privacy-policy ol li {
 	margin-bottom: 10px; /* Adds spacing between list items */
 }
+.privacy-policy a {
+	text-decoration: underline;
+}
 
 .privacy-policy {
 	max-width: 950px;

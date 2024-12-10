@@ -12,7 +12,7 @@ import {
 	Button,
 } from '@react-email/components';
 import * as React from 'react';
-import EmailComponent from '../components/Containers/EmailComponent';
+import EmailComponent from './EmailComponent';
 const username = 'beep';
 const passResetLink =
 	'https://www.trendyol.com/coverzone/kablosuz-karaoke-cift-mikrofon-6-35mm-sahne-performansi-partiler-aktiviteler-amfi-hoparlor-icin-wn06-p-826296697';
@@ -20,11 +20,10 @@ const dataEN = {
 	preview: 'You have requested to change your password.',
 	greeting: 'Hi',
 	content: {
-		text: `To change your password, click the button below.\nPlease
-					remember that this doesn't change your password in the Les Mills
-					Releases App.`,
+		text: 'To change your password, click the button below.',
 		button: 'Reset Password',
 	},
+	regards: ['Best regards,', 'Team'],
 	footer:
 		"If you're having trouble clicking the 'Reset Password' button, copy and paste the URL below into your web browser: ",
 };
@@ -32,11 +31,10 @@ const dataTR = {
 	preview: 'Parolanızı değiştirmeyi talep ettiniz.',
 	greeting: 'Merhaba',
 	content: {
-		text: `Parolanızı değiştirmek için aşağıdaki butona basınız.\n
-		Sitemizde kullandığınız bu parolayı değiştirmenin,
-			 Les Mills Releases uygulamasındaki hesabınızın parolasını değiştirmediğini lütfen unutmayınız.`,
+		text: 'Parolanızı değiştirmek için aşağıdaki butona basınız.',
 		button: 'Parolamı Değiştir',
 	},
+	regards: ['İyi dileklerimizle,', 'Takımı'],
 	footer:
 		'Eğer butona basmakta sorun yaşıyorsanız bu linki kopyalayıp tarayıcınıza yapıştırabilirsiniz: ',
 };
@@ -80,6 +78,11 @@ export default function Email() {
 							</Button>
 						</Column>
 					</Row>
+					<Text>
+						{local.regards[0]}
+						<br />
+						Performance Fitness Academy {local.regards[1]}
+					</Text>
 				</Section>
 				<Hr />
 				<Section>

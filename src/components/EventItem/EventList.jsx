@@ -11,9 +11,6 @@ import { FiMapPin } from 'react-icons/fi';
 import { FaRegUser } from 'react-icons/fa';
 import { FaMoneyCheck } from 'react-icons/fa6';
 import { TbWorld } from 'react-icons/tb';
-import { GrDocumentPdf } from 'react-icons/gr';
-import { GrDocumentUpdate } from 'react-icons/gr';
-import { GrDocumentVerified } from 'react-icons/gr';
 import LesmillsPrograms from '../../assets/LesmillsPrograms';
 import { useSelector } from 'react-redux';
 function EventList({ activeProgram, infoActive, onlineCheck }) {
@@ -43,7 +40,11 @@ function EventList({ activeProgram, infoActive, onlineCheck }) {
 		});
 	});
 	const eventItems = LesMillsEvents.filter((event) => {
-		if (activeProgram === 'all') {
+		if (
+			activeProgram === 'all' ||
+			activeProgram === null ||
+			activeProgram === undefined
+		) {
 			if (onlineCheck === true) {
 				return event.fullStartDate >= today && event.online === true;
 			} else if (onlineCheck === false) {
@@ -52,9 +53,17 @@ function EventList({ activeProgram, infoActive, onlineCheck }) {
 			return event.fullStartDate >= today;
 		}
 		if (onlineCheck === true) {
-			return event.fullStartDate >= today && event.online === true;
+			return (
+				event.program === activeProgram &&
+				event.fullStartDate >= today &&
+				event.online === true
+			);
 		} else if (onlineCheck === false) {
-			return event.fullStartDate >= today && event.online === false;
+			return (
+				event.program === activeProgram &&
+				event.fullStartDate >= today &&
+				event.online === false
+			);
 		}
 		return event.program === activeProgram && event.fullStartDate >= today;
 	});
@@ -135,6 +144,10 @@ function EventList({ activeProgram, infoActive, onlineCheck }) {
 			setSelectedEvent(eventFallback);
 		}
 	}, [selectedEvent]);
+	const daysLeft = Math.floor(
+		(selectedEvent.fullStartDate.getTime() - today.getTime()) /
+			(1000 * 3600 * 24)
+	);
 	if (paginatedEvents === null || paginatedEvents === undefined) {
 		return (
 			<p style={{ textAlign: 'center', padding: '4rem' }}>
@@ -144,81 +157,92 @@ function EventList({ activeProgram, infoActive, onlineCheck }) {
 			</p>
 		);
 	}
+	if (eventItems.length === 0) {
+		return (
+			<p style={{ textAlign: 'center', padding: '4rem' }}>
+				{i18n.language === 'en'
+					? 'Unfortunately theres no event fitting the criteria you picked.'
+					: 'Üzgünüz seçtiğiniz özelliklere uygun bir etkinlik yok.'}
+			</p>
+		);
+	}
 	return (
-		<section className='event-list-grid'>
+		<div className='event-list-grid'>
 			<div className='event-list'>
-				{paginatedEvents.map((event, index) => {
-					const programTitle = programs.filter((program) => {
-						return program.id === event.program;
-					})[0].title;
-					return (
-						<section className='enroll-event-item' key={index}>
-							<p className='display-none' style={{ alignContent: 'center' }}>
-								{programTitle}
-							</p>
+				<div>
+					{paginatedEvents.map((event, index) => {
+						const programTitle = programs.filter((program) => {
+							return program.id === event.program;
+						})[0].title;
+						return (
+							<div className='enroll-event-item' key={index}>
+								<p className='display-none' style={{ alignContent: 'center' }}>
+									{programTitle}
+								</p>
 
-							<p style={{ alignContent: 'center' }}>
-								{event.fullStartDate.getDate() +
-									' ' +
-									event.fullStartDate.toLocaleString(i18n.language, {
-										month: 'short',
-									}) +
-									' - ' +
-									event.fullEndDate.getDate() +
-									' ' +
-									event.fullEndDate.toLocaleString(i18n.language, {
-										month: 'short',
-									})}
-							</p>
-
-							<p style={{ alignContent: 'center' }}>
-								{event.online
-									? i18n.language === 'en'
-										? 'Online'
-										: 'Çevrim İçi'
-									: i18n.language === 'en'
-									? 'In Person'
-									: 'Yüz Yüze'}
-							</p>
-							{infoActive ? (
-								<div
-									style={{
-										gap: '1rem',
-										display: 'flex',
-										flexDirection: 'row',
-										alignItems: 'center',
-									}}
-								>
-									<Link
-										to={'/program#' + event.program}
-										state={{ program: event.program }}
+								<p style={{ alignContent: 'center' }}>
+									{event.fullStartDate.getDate() +
+										' ' +
+										event.fullStartDate.toLocaleString(i18n.language, {
+											month: 'short',
+										}) +
+										' - ' +
+										event.fullEndDate.getDate() +
+										' ' +
+										event.fullEndDate.toLocaleString(i18n.language, {
+											month: 'short',
+										})}
+								</p>
+								<p style={{ alignContent: 'center' }}>
+									{event.online
+										? i18n.language === 'en'
+											? 'Online'
+											: 'Çevrim İçi'
+										: i18n.language === 'en'
+										? 'In Person'
+										: 'Yüz Yüze'}
+								</p>
+								{infoActive ? (
+									<div
 										style={{
+											gap: '1rem',
+											display: 'flex',
+											flexDirection: 'row',
 											alignItems: 'center',
-											height: 'fit-content',
 										}}
-										className='addLineAnimation'
 									>
-										{i18n.language === 'en' ? 'View' : 'İncele'}
-									</Link>
+										<Link
+											to={'/program#' + event.program}
+											state={{ program: event.program }}
+											style={{
+												alignItems: 'center',
+												height: 'fit-content',
+											}}
+											className='addLineAnimation'
+										>
+											{i18n.language === 'en' ? 'View' : 'İncele'}
+										</Link>
+										<Button onClick={() => handleEventSelection(event)}>
+											{i18n.language === 'en' ? 'Select' : 'Seç'}
+										</Button>
+									</div>
+								) : (
 									<Button onClick={() => handleEventSelection(event)}>
 										{i18n.language === 'en' ? 'Select' : 'Seç'}
 									</Button>
-								</div>
-							) : (
-								<Button onClick={() => handleEventSelection(event)}>
-									{i18n.language === 'en' ? 'Select' : 'Seç'}
-								</Button>
-							)}
-						</section>
-					);
-				})}
+								)}
+							</div>
+						);
+					})}
+				</div>
 				<div
 					id='eventInfoPagination'
 					style={{
 						display: 'flex',
 						flexDirection: 'row',
 						justifyContent: 'center',
-						margin: '0.6rem auto',
+						margin: '0.6rem',
+						width: '100%',
 					}}
 				>
 					<button
@@ -305,85 +329,21 @@ function EventList({ activeProgram, infoActive, onlineCheck }) {
 							style={{ textDecoration: 'underline' }}
 							onClick={() => locationClickHandler()}
 						>
-							{' ' + selectedEvent.location}
+							{i18n.language === 'en' ? 'See on Map' : 'Haritada Görüntüleyin'}
 						</Link>
 					</p>
 				)}
 				<p className='card-item'>
 					<FaMoneyCheck /> {i18n.language === 'en' ? 'Only' : 'Sadece'} $
-					{selectedEvent.price}!
+					{daysLeft <= 28 ? 300 : 350}!
+					{/* 4 hafta içinde mi diye checkleyip ona göre fiyat */}
 				</p>
-				<div
-					className='center-item'
-					style={{
-						display: 'flex',
-						flexDirection: 'column',
-						alignItems: 'center',
-						marginTop: 'auto',
-					}}
-				>
-					<Link style={{ textDecoration: 'underline' }}>
-						{i18n.language === 'en'
-							? 'Click For The Instructor Contract'
-							: 'Eğitmen Sözleşmesi İçin Tıklayınız'}
-						<GrDocumentPdf
-							style={{
-								display: 'inline-block',
-								position: 'relative',
-								top: '2px',
-							}}
-						/>
-					</Link>
-
-					<p className='fs-400 text-primary-100'>
-						{i18n.language === 'en'
-							? 'Upload the contract you filled:'
-							: 'Doldurduğunuz sözleşmeyi yükleyiniz:'}
-					</p>
-					<input
-						type='file'
-						name='file'
-						id='file'
-						class='inputfile'
-						onChange={handleFileChange}
-						required
-					/>
-					<label htmlFor='file'>
-						<p>
-							{fileName === null ? (
-								<GrDocumentUpdate
-									style={{
-										display: 'inline-block',
-										marginRight: '0.5rem',
-										position: 'relative',
-										top: '2px',
-									}}
-								/>
-							) : (
-								<GrDocumentVerified
-									style={{
-										display: 'inline-block',
-										marginRight: '0.5rem',
-										position: 'relative',
-										top: '2px',
-									}}
-								/>
-							)}
-							{fileName === null
-								? i18n.language === 'en'
-									? 'Choose a File...'
-									: 'Dosya Seçin...'
-								: fileName.length > 10
-								? `${fileName.substring(0, 10)}...`
-								: fileName}
-						</p>
-					</label>
-				</div>
 				<div
 					style={{
 						justifyContent: 'center',
 						display: 'flex',
 						flexDirection: 'column',
+						height: '100%',
 					}}
 				>
 					<div>
@@ -422,7 +382,7 @@ function EventList({ activeProgram, infoActive, onlineCheck }) {
 				}}
 				src='/ornek.jpg'
 			/>
-		</section>
+		</div>
 	);
 }
 export default EventList;

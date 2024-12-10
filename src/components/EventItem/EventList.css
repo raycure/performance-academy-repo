@@ -39,7 +39,7 @@
 	padding: 1.5rem 2rem 2rem;
 	display: flex;
 	flex-direction: column;
-	margin: 1rem 0px 2rem;
+	margin: 1rem 0px 0px;
 	max-width: 400px;
 	min-height: 460px;
 }
@@ -80,6 +80,14 @@
 }
 .event-list-grid img {
 	display: none;
+}
+.event-list .enroll-event-item:nth-child(even) {
+	background-color: #43434b3c;
+}
+.event-list {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
 }
 @media (max-width: 1200px) {
 	.event-list-grid {

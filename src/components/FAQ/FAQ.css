@@ -19,10 +19,12 @@
 }
 .faq-item-container:hover {
 	background-color: #f0f8ff37;
+	border-radius: 5px;
 	opacity: 0.8;
 }
 .faq-item-active {
 	background-color: #f0f8ff3a;
+	border-radius: 5px;
 }
 .faq-outer-container .below1100 {
 	display: none;

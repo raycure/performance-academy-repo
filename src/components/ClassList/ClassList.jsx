@@ -3,11 +3,10 @@ import './ClassList.css';
 import Button from '../Button/Button';
 import LesmillsPrograms from '../../assets/LesmillsPrograms';
 import { MdOutlineDoubleArrow } from 'react-icons/md';
-import name from '/ornek.jpg';
 import { motion } from 'framer-motion';
 import { leftToRightForClasses } from '../animations/AnimationValues.jsx';
 import { useTranslation } from 'react-i18next';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { setId } from '../../redux/Slices/ProgramIdSlice.js';
 import { useNavigate } from 'react-router-dom';
 function ClassList({ classType }) {
@@ -21,7 +20,7 @@ function ClassList({ classType }) {
 
 	const { t, i18n } = useTranslation();
 	const classes = Object.keys(lesMillsPrograms).map((category) => {
-		if (category !== classType && classType !== 'all' && classType === null) {
+		if (category !== classType && classType !== 'all') {
 			return;
 		}
 		return lesMillsPrograms[category].map((program, subIndex) => {
@@ -36,13 +35,18 @@ function ClassList({ classType }) {
 					className='class-item-container text-container top-border-light'
 					id={program.id}
 				>
-					<img aria-label='program pic' className='img class-img' src={name} />
+					<img
+						aria-label={program.additionalPictures[0].alt}
+						className='img class-img'
+						src={program.additionalPictures[0].url}
+						alt={program.additionalPictures[0].alt}
+					/>
 					<div
 						style={{
 							display: 'flex',
 							flexDirection: 'column',
 							justifyContent: 'space-between',
-							padding: '1rem 0',
+							padding: '1rem 0 0',
 						}}
 					>
 						<div>
@@ -52,15 +56,12 @@ function ClassList({ classType }) {
 								src={program.logo}
 							/>
 							<p className='slogan'>{program.sum}</p>
-							<p>
+							<p className='class-lesson-amount'>
 								{i18n.language === 'tr' ? 'Dersler' : 'Lessons'}:{' '}
 								{program.lessons}
 							</p>
 						</div>
-						<div
-							className='classes-more-info-container top-border-light fs-400 '
-							style={{ marginTop: {} }} //todo height alıp ona gore ver
-						>
+						<div className='classes-more-info-container top-border-light fs-400 '>
 							<div>
 								<p>
 									{i18n.language === 'tr' ? 'Türü' : 'Type'}: {program.type}

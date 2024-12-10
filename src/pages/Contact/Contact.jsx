@@ -15,7 +15,7 @@ function Contact() {
 				</p>
 			</section>
 			<ValueBar />
-			<div id='contact-form-grad '>
+			<div id='contact-form-grad'>
 				<ContactForm />
 			</div>
 		</>

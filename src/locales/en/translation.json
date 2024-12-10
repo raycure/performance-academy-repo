@@ -4,7 +4,7 @@
 		"Main": "Main Page",
 		"Programs": "Programs",
 		"Events": "Events",
-		"MyPrograms": "My Programs",
+		"Process": "Process",
 		"Contact": "Contact"
 	},
 	"MainPage": {
@@ -14,19 +14,18 @@
 			"Transform lives through movement and inspire others to reach their potential. Join our passionate community of fitness leaders who are changing the way people experience exercise around the globe. Whether you're an experienced instructor or just starting your journey, we'll provide you with the tools, knowledge, and support to build a rewarding career teaching world-class group fitness. Our comprehensive training program gives you everything you need to succeed - from mastering program techniques to developing your coaching presence. Start your journey today and become part of a global movement that's revolutionizing fitness, one class at a time."
 		],
 		"CardsTitle": "Get a Peek Into Our Categories!",
-		"EventsTitle": "",
 		"GridCard": {
 			"Title": [
 				"International Certifications",
 				"Suitable For Anyone",
 				"A Big Investment",
-				"More Content Every Quarter"
+				"Up To Date Content"
 			],
 			"Content": [
-				"As a Les Mills certified instructor, you'll join an elite community of fitness professionals recognized in over 130 countries worldwide. Our certification programs are the gold standard in group fitness education, trusted by leading health clubs and fitness facilities across six continents.",
-				"Regardless of your starting point, Les Mills certification is designed to be a journey of continuous growth. Regular workshops, quarterly program updates, and ongoing education opportunities ensure that both new and experienced instructors stay current with the latest developments in fitness science and teaching methodology.",
-				"When you choose a Les Mills certification, you're not just paying for a certificate – you're investing in a complete career toolkit that delivers real value from day one. Our certification costs reflect the comprehensive support, proven programs, and ongoing benefits that set Les Mills apart in the fitness industry.",
-				"Take your Les Mills experience to the next level with exclusive events for dedicated instructors. Whether you join us in person or online, you’ll gain access to new content every quarter, designed to inspire and expand your teaching journey. With each event, look forward to fresh resources, expert guidance, and unmatched motivation to keep you at the top of your game. Elevate your impact and stay connected every three months!"
+				"As a Les Mills certified instructor, you will become part of a globally recognized and respected community of fitness professionals in over 130 countries. Our certifications are accepted by leading health clubs and fitness centers across six continents and are considered the gold standard in the industry. These certifications will open doors to global prestige in your career.",
+				"Les Mills certifications are designed to help individuals at all levels achieve their goals. No matter your starting point in fitness, our certification programs enable you to succeed through hard work and discipline. Our assessment processes allow you to develop your skills step by step and reward your efforts with a professional certification.",
+				"Obtaining a Les Mills certification is much more than just earning a document; it is a powerful investment in your career and personal development. Our certifications provide expertise that will make you stand out in the industry, while continuous training and career support tools offer long-term benefits. With this investment, you add value to your future and move confidently toward success.",
+				"Les Mills programs are constantly updated every three months to keep you in line with innovations in the fitness world. New choreographies are created in harmony with the latest music, and the most current content aligned with fitness trends is offered every quarter. By joining our License Program, in addition to earning your training certificate, you will have access to all our new content every three months!"
 			]
 		}
 	},
@@ -34,14 +33,14 @@
 		"Title": [
 			"SIGN UP FOR TRAINING",
 			"ATTEND TRAINING",
-			"PRE-WORK",
-			"SUBMIT YOUR VIDEO"
+			"SUBMIT YOUR VIDEO",
+			"EARN YOUR CERTIFICATE"
 		],
 		"Content": [
 			"Book onto an initial training course at a time \n and place that suits",
 			"Get a taste of your new role \n by learning a short choreographed track",
-			"Join your new teammates online or \n in-person for world-leading training",
-			"After passing initial training your final step is \n to submit an assessment video"
+			"After initial training your final step is \n to submit an assessment video",
+			"When your training video is accepted get\n your certificate through e-mail!"
 		]
 	},
 	"Footer": {
@@ -122,6 +121,37 @@
 			"Start your learning journey with our engaging introductory video. After that, you’ll be redirected to our mobile app, where you can continue the course, all from the palm of your hand.",
 			"Prove your mastery by submitting a video of yourself completing a set of tasks. Our expert team will verify your submission, and once approved, you’ll receive your official certification — a symbol of your hard work and dedication.",
 			"Enhance your learning experience by booking exclusive events, both online and in person. Network with fellow instructors, attend workshops, and gain hands-on experience to further hone your skills."
+		]
+	},
+	"Process": {
+		"Entry": "Les Mills signs license contracts with clubs and certified Instructors on a corporate level. If you want to use Les Mills programs in your business or teach classes as a Les Mills Instructor, let’s review the steps you need to follow.",
+		"Comparison": {
+			"Entry": "At Performance Fitness Academy, we provide both instructor certifications and licenses, each serving a distinct purpose in the world of fitness training. To avoid confusion, here is a detailed explanation of what each entails.",
+			"Certification": {
+				"Explanation": "An Instructor Certification is an individual qualification designed for fitness professionals who want to teach group fitness classes in their chosen Les Mills program. By attending our program events and passing the necessary assessments, you become a certified Les Mills Instructor. This certification demonstrates your expertise, knowledge, and ability to deliver safe and effective classes.",
+				"Close": "While a certification qualifies you to teach, you can only hold classes in a facility that holds a Les Mills License. Certification alone does not permit you to operate independently or teach Les Mills programs in unlicensed establishments."
+			},
+			"License": {
+				"Explanation": "A License is a business agreement that allows establishments (such as fitness clubs, gyms, or hotels) to legally offer Les Mills programs. It applies to the organization, not the individual instructor. A license grants a business the rights to include Les Mills programs in its fitness offerings. It is required for any establishment that wants to legally host classes taught by certified instructors.",
+				"Feature": [
+					"Facilities pay a licensing fee to use specific Les Mills programs.",
+					"Licensed establishments ensure their instructors are trained and certified.",
+					"Businesses receive quarterly updates (kits) with new music, choreography, and Masterclass videos to keep programs fresh and engaging."
+				]
+			}
+		},
+		"Hybrid": "This system is specifically designed for Turkey to allow Instructors to teach in boutique fitness studios, small hotels without branches, and open spaces. These businesses can utilize the instructors' licenses without paying additional licensing fees. In this system, the Instructor pays an annual license fee and receives a kit (Music, Choreography, and Master Class video) from us four times a year, every three months.",
+		"Operation": "This system applies to fitness clubs with more than two branches, A-plus hotels, and hotel chains. Fitness clubs or hotels pay a licensing fee for the programs they wish to use and have their in-house Instructors trained. Once the Instructors are certified, they can teach the licensed programs owned by the business. Additionally, the business can hire Les Mills-certified Instructors to work for them. In this system, businesses pay for program license usage, Instructor Certification Training, and the Instructors' kit fees (Music, Choreography, and Master Class videos).",
+		"Contact": "With a Les Mills Training Licence, have certified Lesmills instructors give lessons in your own clubs! To buy a licence you need to contact us.",
+		"Overview": [
+			"Are you ready to inspire and motivate people to change their lives? Whether you have been teaching for years or are just starting your journey, we provide everything you need for a successful career as a Les Mills Instructor.",
+			"Train as an Instructor in any of our programs – the choice is yours!",
+			"The 2-day course is conducted during the announced training hours. You can choose to attend an in-person training event or an online training event.",
+			"You will receive comprehensive training materials, including music and choreography.",
+			"Top-class trainers will guide you step by step throughout the training.",
+			"By the end of the training, you will have learned how to teach your chosen Les Mills program safely and effectively.",
+			"We expect great things from our instructors, so within 60 days of completing your Initial Training, you will also need to submit an assessment video to demonstrate that your skills are at the highest level.",
+			"All certifications must be completed within six months of attending the training."
 		]
 	}
 }

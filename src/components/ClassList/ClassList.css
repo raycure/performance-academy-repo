@@ -7,6 +7,7 @@
 	display: grid;
 	grid-template-columns: auto auto;
 	gap: 1rem;
+	max-width: 1200px;
 }
 .classes-more-info-container {
 	display: flex;
@@ -17,6 +18,9 @@
 .class-outer-container .class-item-container:nth-child(even) {
 	background-color: var(--clr-primary-350);
 }
+.class-outer-container {
+	font-size: var(--fs-400);
+}
 .class-logo {
 	height: 2.5rem;
 	margin-bottom: 0.6rem;
@@ -25,7 +29,9 @@
 }
 .class-img {
 	max-height: 400px;
-	height: 40vh;
+	height: 25vw;
+	max-width: 400px;
+	width: 25vw;
 	margin-right: 1rem;
 	object-fit: cover;
 }
@@ -39,12 +45,8 @@
 	.class-img {
 		height: 30vh;
 	}
-	.classes-more-info-container {
-		font-size: var(--fs-400);
-	}
 	.class-item-container {
 		width: 85%;
-		font-size: var(--fs-400);
 	}
 }
 @media (max-width: 1130px) {
@@ -54,16 +56,25 @@
 }
 @media (max-width: 990px) {
 	.class-img {
-		width: 30vh;
+		width: 32vh;
 		height: 35vh;
 		object-fit: cover;
 	}
 	.class-item-container .class-logo {
 		height: 2rem;
 	}
+	.class-item-container {
+		width: 95%;
+	}
 }
 @media (max-width: 930px) {
-	.class-img {
+	.class-lesson-amount {
+		display: none;
+	}
+	.classes-more-info-container {
+		justify-content: center;
+	}
+	.classes-more-info-container div {
 		display: none;
 	}
 }
@@ -75,8 +86,16 @@
 	}
 }
 @media (max-width: 600px) {
+	.class-img {
+		display: none;
+	}
+	.classes-btn {
+		width: fit-content;
+	}
+	.class-item-container {
+		min-height: 300px;
+	}
 	.classes-more-info-container {
-		flex-direction: column;
-		justify-content: center;
+		margin-top: 1rem;
 	}
 }

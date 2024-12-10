@@ -15,7 +15,7 @@ import { IoEyeOff } from 'react-icons/io5';
 import { IoEye } from 'react-icons/io5';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
-function UserInfoFake() {
+function UserInfo() {
 	const { t, i18n } = useTranslation('translation');
 	const contractverified = false;
 	const [isEditing, setIsEditing] = useState(false);
@@ -543,4 +543,4 @@ function UserInfoFake() {
 		</section>
 	);
 }
-export default UserInfoFake;
+export default UserInfo;

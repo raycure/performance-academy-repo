@@ -52,7 +52,7 @@ function BecomeInstructorCards() {
 							{t('MainPage.GridCard.Title.1')}
 						</h2>
 					</div>
-					<p>{t('MainPage.GridCard.Content.2')}</p>
+					<p>{t('MainPage.GridCard.Content.1')}</p>
 				</div>
 				<div className='gridCard'>
 					<div className='gridCardHeading'>

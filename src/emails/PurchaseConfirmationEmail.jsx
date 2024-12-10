@@ -8,45 +8,59 @@ import {
 	Hr,
 	Link,
 	Row,
+	Column,
 } from '@react-email/components';
 import * as React from 'react';
-import EmailComponent from '../components/Containers/EmailComponent';
+import EmailComponent from './EmailComponent';
+import { FaGlobeAfrica } from 'react-icons/fa';
 const username = 'boop';
-const program = 'Body Combat';
-const firstPurchase = true;
+const eventdata = {
+	startDate: '2024-08-04',
+	endDate: '2024-08-06',
+	program: 'Body Combat',
+	online: true,
+	location: [40.7719881790364, -74.07145598632484],
+};
 const dataEN = {
-	preview: 'You have succesfully purchased an event from us.',
+	preview: 'We have succesfully confirmed your purchase.',
 	greeting: 'Hi',
 	content: {
 		text: [
-			`We have confirmed that you have bought our ${program} program event! `,
-			"You will receive new lesson content every 3 months so don't forget to regularly check the new content out!",
+			`We have confirmed that you have bought our ${eventdata.program} program event. `,
+			`Thank you for joining us on this journey, we are thrilled to have you here with us! Now that we have confirmed the transaction you can acquire the initial content we have provided through the `,
+			' my courses page',
+			'.',
+			`Don't forget that the event you have purchased will start on ${eventdata.startDate} and end on ${eventdata.endDate} dates.`,
 		],
 		ternary: [
-			"We are working on activating your account on our Les Mills Releases App for you to use on your phone. When your account is activated you will receive a confirmation email regarding that. If you don't receive one in 5 business days feel free to",
-			"We are working on activating the event on your account in our Les Mills Releases App. When the event is activated on your account you will receive a confirmation email regarding that. If you don't receive one in 5 business days feel free to",
+			`You can view the location of the event with this link.`,
+			`The event will be held on Zoom, the meeting link will be sent to you between 1-3 days before the event starts through e-mail.`,
 		],
-		contact: ' contact us through this link',
-		text2: `You can access the ${program} event opening video in the "my courses" section on our website!`,
 	},
-	footer: [' App for Android', ' App for IOS'],
+	regards: ['Best regards,', 'Team'],
+	contact: ["If you're having a trouble", ' contact us through this link.'],
 };
 const dataTR = {
-	preview: 'Başarıyla bir etkinliğimize katıldınız.',
+	preview: 'Başarıyla bir ödemenizi aldık.',
 	greeting: 'Merhaba',
 	content: {
 		text: [
-			`${program} programı etkinliğimize katıldığınızı başarıyla doğruladık! `,
-			'Her 3 ayda bir bu program için yeni içeriklere ulaşabileceksiniz, bu sebeple düzenli olarak uygulamamızı kontrol etmeyi unutmayın!',
+			`${eventdata.program} programı etkinliğimize katıldığınızı başarıyla doğruladık! `,
+			`Bize bu yolculukta katıldığınız için çok heyecanlıyız, sizi aramızda görmek çok hoş! Ödeme doğrulamasının ardından ön içeriklere `,
+			'kurslarım',
+			' sayfasından ulaşabilirsiniz',
+			`Satın almış olduğunuz etkinliğin ${eventdata.startDate} ila ${eventdata.endDate} tarihleri arasında gerçekleştirileceğini unutmayınız.`,
 		],
 		ternary: [
-			'Les Mills Releases uygulamamızı kullanabilmeniz için hesabınızı akifleştirmeye çalışıyoruz. Hesabınız aktifleştirildiğinde bir aktivasyon maili alacaksınız. Eğer 5 iş günü içerisinde bu maili alamazsanız bize ',
-			'Les Mills Releases uygulamamızda hesabınız için bu etkinliği akifleştirmeye çalışıyoruz. Etkinlik aktifleştirildiğinde bir aktivasyon maili alacaksınız. Eğer 5 iş günü içerisinde bu maili alamazsanız bize ',
+			`Lokasyonu görüntülemek için tıklayınız.`,
+			'Etkinlik Zoom üzerinden gerçekleştirilecek, toplantı linki etkinliğin başlama tarihinden 1 ila 3 gün önce e-mail yoluyla gönderilecektir.',
 		],
-		contact: 'bu link üzerinden ulaşabilirsiniz!',
-		text2: `Şimdiden sitemizde bulunan "kurslarım" bölümünden ${program} etkinliğimizin açılış videosunu izleyebilirsiniz!`,
 	},
-	footer: [' IOS Uygulaması', ' Android Uygulaması'],
+	regards: ['İyi dileklerimizle,', 'Takımı'],
+	contact: [
+		'Eğer bir sorun yaşıyorsanız bize',
+		' bu link üzerinden ulaşabilirsiniz.',
+	],
 };
 const local = dataEN;
 export default function Email() {
@@ -70,35 +84,42 @@ export default function Email() {
 					<Text style={titleText}>
 						{local.greeting} {username}!
 					</Text>
+					<Text>{local.content.text[0]}</Text>
 					<Text>
-						{local.content.text[0]}
-						{firstPurchase ? (
-							<>
-								{local.content.ternary[0]}
-								{<Link href=''>{local.content.contact}</Link>}!
-							</>
-						) : (
-							<>
-								{local.content.ternary[1]}
-								{<Link href=''>{local.content.contact}</Link>}!
-							</>
-						)}{' '}
 						{local.content.text[1]}
+						<Link href='https://infopfa.com/kurslarım'>
+							{local.content.text[2]}
+						</Link>
+						{local.content.text[3]} {local.content.text[4]}
 					</Text>
-					<Text>{local.content.text2}</Text>
+					{local.online ? (
+						<Text>{local.content.ternary[1]}</Text>
+					) : (
+						<Row>
+							<Column align='center'>
+								<Link
+									href={
+										'https://maps.google.com?q=' +
+										eventdata.location[0] +
+										',' +
+										eventdata.location[1]
+									}
+								>
+									<FaGlobeAfrica /> {local.content.ternary[0]}
+								</Link>
+							</Column>
+						</Row>
+					)}
+					<Text>
+						{local.regards[0]}
+						<br />
+						Performance Fitness Academy {local.regards[1]}
+					</Text>
 				</Section>
 				<Hr />
 				<Section>
-					<Row>
-						<Link href='https://play.google.com/store/apps/details?id=nz.co.lmidigital&hl=en&pli=1'>
-							Les Mills Releases{local.footer[0]}
-						</Link>
-					</Row>
-					<Row>
-						<Link href='https://apps.apple.com/us/app/les-mills-releases/id1205725378'>
-							Les Mills Releases{local.footer[1]}
-						</Link>
-					</Row>
+					{local.contact[0]}
+					<Link href='https://infopfa.com/iletişim'>{local.contact[1]}</Link>
 				</Section>
 			</EmailComponent>
 		</Html>

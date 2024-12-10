@@ -4,7 +4,7 @@
 		"Main": "Ana Sayfa",
 		"Programs": "Programlar",
 		"Events": "Etkinlikler",
-		"MyPrograms": "Programlarım",
+		"Process": "İşleme Süreci",
 		"Contact": "İletişim"
 	},
 	"MainPage": {
@@ -14,19 +14,18 @@
 			"Hareket yoluyla hayatları dönüştürün ve başkalarına potansiyellerine ulaşmaları için ilham verin. Dünyanın dört bir yanında insanların egzersiz deneyimlerini değiştiren, tutkulu fitness liderleri topluluğumuza katılın. İster deneyimli bir eğitmen olun, ister yolculuğunuza yeni başlayın, dünya çapında grup fitness eğitimi vererek ödüllendirici bir kariyer inşa etmeniz için size gereken araçlar, bilgi ve desteği sağlıyoruz. Kapsamlı eğitim programımız, program tekniklerini ustalıkla kullanmaktan koçluk becerilerinizi geliştirmeye kadar başarılı olmanız için ihtiyacınız olan her şeyi sunar. Yolculuğunuza bugün başlayın ve fitness dünyasında devrim yaratan, bir sınıfta birer birey olarak dönüşüm gerçekleştiren bu küresel hareketin bir parçası olun."
 		],
 		"CardsTitle": "Kategorilerimize Bir Göz Atın!",
-		"EventsTitle": "",
 		"GridCard": {
 			"Title": [
 				"Uluslararası Sertifikalar",
-				"Her Seviyeye uygun",
+				"Her Seviyeye Uygun",
 				"Geleceğe Yatırım",
-				"Her 3 Ayda Yeni İçerikler"
+				"Güncel İçerikler"
 			],
 			"Content": [
-				"Les Mills sertifikalı bir eğitmen olarak, dünya çapında 130'dan fazla ülkede tanınan seçkin bir fitness profesyonelleri topluluğuna katılacaksınız. Sertifika programlarımız, altı kıtada önde gelen sağlık kulüpleri ve fitness tesisleri tarafından güvenilen, grup fitness eğitiminde altın standarttır.",
-				"Başlangıç noktanız ne olursa olsun, Les Mills sertifikası sürekli bir gelişim yolculuğu olarak tasarlanmıştır. Düzenli atölye çalışmaları, üç ayda bir program güncellemeleri ve sürekli eğitim fırsatları, hem yeni hem de deneyimli eğitmenlerin fitness bilimi ve öğretim metodolojisindeki en son gelişmeleri takip etmelerini sağlar.",
-				"Bir Les Mills sertifikası seçtiğinizde, yalnızca bir sertifika için ödeme yapmıyorsunuz – ilk günden itibaren gerçek değer sunan eksiksiz bir kariyer araç setine yatırım yapıyorsunuz. Sertifikasyon maliyetlerimiz, Les Mills'i fitness sektöründe öne çıkaran kapsamlı destek, kanıtlanmış programlar ve sürekli sağlanan avantajları yansıtmaktadır.",
-				"Les Mills deneyiminizi bir sonraki seviyeye taşımak için, özverili eğitmenlere özel etkinlikler sunuyoruz. İster fiziksel olarak katılın ister çevrim içi, her çeyrekte yeni içeriklere erişim sağlayarak eğitim yolculuğunuzu genişletmek ve ilham vermek için buradayız. Her etkinlikte, en güncel kaynaklar, uzman rehberliği ve benzersiz bir motivasyonla kendinizi yenileyin. Etkinizin gücünü artırın ve her üç ayda bir bağlı kalın!"
+				"Les Mills sertifikalı bir eğitmen olarak, dünya çapında 130'dan fazla ülkede tanınan ve saygı duyulan bir fitness profesyonelleri topluluğunun parçası olacaksınız. Sertifikalarımız, altı kıtada lider sağlık kulüpleri ve fitness merkezleri tarafından kabul görmekte ve sektörde uluslararası bir standart olarak değerlendirilmektedir. Bu sertifikalar, kariyerinizde kapıları aralayacak bir global prestij sunar.",
+				"Les Mills sertifikaları, her seviyeden bireylerin hedeflerine ulaşabilmesi için tasarlanmıştır. Sertifika programlarımız, fitness alanında başlangıç noktanız ne olursa olsun, azim ve disiplinle çalışarak başarıya ulaşmanızı sağlar. Değerlendirme süreçlerimiz, yeteneklerinizi adım adım geliştirmenize olanak tanır ve çabanızın karşılığını profesyonel bir sertifikayla almanızı mümkün kılar.",
+				"Bir Les Mills sertifikasına sahip olmak, yalnızca bir belge edinmekten çok daha fazlasıdır; bu, kariyeriniz ve kişisel gelişiminiz için güçlü bir yatırım anlamına gelir. Sertifikalarımız, sektörde kendinizi öne çıkaracak bir uzmanlık sağlarken, sürekli eğitim ve kariyer destek araçlarımız, uzun vadeli bir avantaj sunar. Bu yatırımla geleceğinize değer katın ve başarıya giden yolda emin adımlarla ilerleyin.",
+				"Les Mills programları, fitness dünyasındaki yeniliklere ayak uydurmanız için her üç ayda bir güncellenen içeriklerle sürekli olarak yenilenir. Yeni koreografiler, en son müziklerle uyumlu olarak oluşturulur ve her 3 ayda en güncel fitness trendlerine uygun içerikler sunulur. Sadece eğitim sertifikası almakla kalmayıp Lisans Programımıza da katılırsanız bütün yeni içeriklerimize her üç ayda bir kavuşabilirsiniz!"
 			]
 		}
 	},
@@ -34,14 +33,14 @@
 		"Title": [
 			"EĞİTİME KAYDOL",
 			"EĞİTİME KATIL",
-			"ÖN ÇALIŞMA",
-			"VİDEONU GÖNDER"
+			"VİDEONU GÖNDER",
+			"SERTİFİKANI AL"
 		],
 		"Content": [
 			"Uygun bir zamanda ve yerde temel bir\n eğitim kursuna rezervasyon yap",
 			"Yeni rolünüzü keşfederek \nkısa bir koreografi parçası öğren",
-			"Yeni takım arkadaşlarınıza çevrim içi veya yüz yüze\n katılarak dünya çapında tanınan eğitimin bir parçası olun",
-			"İlk eğitimi geçtikten sonra son adım olarak\n bir değerlendirme videosu gönder"
+			"İlk eğitimi geçtikten sonra son adım olarak\n bir değerlendirme videosu gönder",
+			"Değerlendirme videon kabul edildiğinde \nsertifikana e-mail yoluyla kavuş!"
 		]
 	},
 	"Footer": {
@@ -121,6 +120,37 @@
 			"Öğrenim yolculuğunuza, sizi içine çeken tanıtıcı videomuzla başlayın. Daha sonra, kursa mobil uygulamamızdan devam edebileceğiniz bir yönlendirme alacaksınız — hepsi avucunuzun içinde!",
 			"Bir dizi görevi tamamladığınız bir video göndererek ustalığınızı kanıtlayın. Uzman ekibimiz gönderiminizi doğrulayacak ve onaylandıktan sonra, çabanızın ve bağlılığınızın sembolü olan resmi sertifikanızı alacaksınız.",
 			"Hem çevrimiçi hem de yüz yüze özel etkinliklere katılarak öğrenme deneyiminizi geliştirin. Diğer eğitmenlerle ağ oluşturun, atölyelere katılın ve becerilerinizi daha da geliştirmek için uygulamalı deneyimler kazanın."
+		]
+	},
+	"Process": {
+		"Entry": "Les Mills kurumsal olarak kulüplerle ve sertifikalı Eğitmenlerle lisans sözleşmesi imzalar. Eğer işletmenizde LesMills programlarını kullanmak veya LesMills Eğitmeni olarak ders vermek istiyorsanız nasıl bir yol izleyeceğinizi gözden geçirelim.",
+		"Comparison": {
+			"Entry": "Performance Fitness Academy olarak, hem Les Mills eğitmen sertifikaları hem de Les Mills lisansları sağlıyoruz. Ancak, her ikisi farklı bir amaca hizmet ediyor. Şimdi bu ikisinin farklarını açıklayalım.",
+			"Certification": {
+				"Explanation": "Eğitmen Sertifikası, belirli bir Les Mills programında fitness dersleri vermek isteyen bireysel fitness profesyonelleri için tasarlanmış bir niteliktir. Eğitim programlarımızın etkinlerine katılarak ve gerekli değerlendirmeleri geçerek, Les Mills Sertifikalı Eğitmeni olabilirsiniz. Bu sertifika, uzmanlığınızı, bilginizi ve etkili dersler verebilme yeteneğinizi kanıtlar.",
+				"Close": "Sertifika, ders verme yetkisi sağlasa da, yalnızca Les Mills Lisansı bulunan bir tesiste ders verebilirsiniz. Sertifika tek başına bağımsız çalışmanıza veya lisanssız bir tesiste Les Mills programları öğretmenize izin vermez."
+			},
+			"License": {
+				"Explanation": "Lisans, işletmelere (örneğin, fitness kulüpleri, spor salonları veya oteller) Les Mills programlarını yasal olarak sunma hakkı veren bir ticari anlaşmadır. Bu, bireysel eğitmenler için değil, işletmeler için geçerlidir. Lisans, bir işletmeye Les Mills programlarını fitness hizmetlerine dahil etme hakkı tanır. Sertifikalı eğitmenlerin bu programları yasal olarak sunabilmesi için tesisin lisans sahibi olması gerekir.",
+				"Feature": [
+					"İşletmeler, belirli Les Mills programlarını kullanmak için lisans ücreti öder.",
+					"Lisanslı işletmeler, eğitmenlerinin eğitim almasını ve sertifikalandırılmasını sağlar.",
+					"İşletmeler, her üç ayda bir güncellenen müzik, koreografi ve Master Class videolarını içeren kitlere erişir."
+				]
+			}
+		},
+		"Hybrid": "Bu sistem Eğitmenlerin, butik fitness stüdyolarında, şubesi olmayan küçük otellerde ve açık alanlarda ders verebilmesi için türkiyeye özgü olarak tasarlanmıştır.Bu işletmeler eğitmenlerin lisansını kullanabilirler ve ekstra lisans ücreti ödemezler. Bu sistemde Eğitmen yıllık lisans ücreti öder ve tarafımızdan kendisine her 3 ayda bir olmak üzere yıllık dört defa kit (Müzik, Koreografi ve Master Class videosu) gönderilir.",
+		"Operation": "Bu sistem iki şubeden fazla tesise sahip olan Fitness Klüplerini, A plus otel ve otel zincirlerini kapsar. Fitness Klüpleri veya oteller kullanmak istediği programlar için lisans ücreti öder ve kendi bünyesinde çalışan Eğitmenlere eğitim aldırır. Eğitmenler sertifikalarını aldıklarında işletmenin sahip olduğu lisanslı programların dersini verebilirler, ayrıca işletme Les Mills sertifikasına sahip eğitmenler ile anlaşıp bünyesinde çalıştırabilir. Bu sistemde işetmeler programların lisans kullanımı + Eğitmenlerin Sertifika Eğitimi + Eğitmenlerin kit ödemesi (Müzik, Koreografi ve Master Class videosu) için ödeme yaparlar.",
+		"Contact": "Les Mills Eğitim Lisansı ile kulüplerinizde sertifikalı eğitmenler ile Lesmills dersleri verin! Lisans almak için bizimle iletişime geçmeniz gerekmektedir.",
+		"Overview": [
+			"İnsanlara hayatlarını değiştirmeleri için ilham vermeye ve motive etmeye hazır mısınız? İster yıllardır eğitmenlik yapıyor olun, ister yolculuğunuza yeni başlıyor olun, Les Mills Eğitmeni olarak başarılı bir kariyer için ihtiyacınız olan her şeyi size vereceğiz.",
+			"Programlarımızdan herhangi birinde Eğitmen olarak eğitim alın - seçim sizin!",
+			"2 günlük kurs açıklanan eğitim saatleri boyunca yürütülür. Yüz yüze eğitim etkinliğine veya çevrimiçi bir eğitim etkinliğine katılmayı seçebilirsiniz.",
+			"Müzik ve koreografi dahil olmak üzere kapsamlı eğitim materyalleri alacaksınız.",
+			"Birinci sınıf eğitmenler sizi eğitim boyunca adım adım yönlendirir",
+			"Eğitimin sonunda, seçtiğiniz Les Mills programını nasıl güvenli ve etkili bir şekilde öğreteceğinizi öğrenmiş olacaksınız.",
+			"Eğitmenlerimizden harika şeyler bekliyoruz, bu nedenle becerilerinizin en üst düzeyde olduğunu göstermek için Başlangıç Eğitiminizi tamamladıktan sonraki 60 gün içinde bir değerlendirme videosu da göndermeniz gerekecek.",
+			"Tüm sertifikalar, eğitime katılmanızdan sonraki altı ay içinde tamamlanmalıdır."
 		]
 	}
 }

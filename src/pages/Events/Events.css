@@ -252,6 +252,11 @@
 		width: 80vw;
 	}
 }
+@media (max-width: 870px) {
+	.classPick {
+		padding: 0.8rem 5vw;
+	}
+}
 @media (max-width: 700px) {
 	.logoButtonContainer {
 		overflow-x: auto;
@@ -272,7 +277,6 @@
 	}
 	.radio-group {
 		gap: 0.6rem;
-		margin-inline: auto;
 	}
 	.dropDownCategoriesButton {
 		padding: 10px 14px;
@@ -281,8 +285,17 @@
 		--container-padding: 0rem;
 	}
 }
-@media (max-width: 500px) {
+@media (max-width: 530px) {
 	#event-page .fc img {
 		display: none;
+	}
+	.radio-group {
+		flex-direction: column;
+		gap: 0.2rem;
+		align-items: flex-start;
+	}
+	.classPick {
+		align-items: center;
+		padding: 0.8rem 10vw;
 	}
 }

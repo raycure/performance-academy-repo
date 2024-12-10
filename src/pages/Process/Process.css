@@ -1,0 +1,109 @@
+.process-outer-con .page-poster-container {
+	overflow: hidden;
+	height: 20vw;
+	position: relative;
+	display: flex;
+	justify-content: center;
+}
+.process-select-outer-con {
+	max-width: 750px;
+	margin-inline: auto;
+	border: solid 1px var(--clr-primary-200);
+	border-radius: 15px;
+	overflow: hidden;
+	background-color: var(--clr-primary-400);
+	-webkit-box-shadow: 0px 0px 8px 2px rgba(51, 50, 51, 0.5);
+	-moz-box-shadow: 0px 0px 8px 2px rgba(51, 50, 51, 0.5);
+	box-shadow: 0px 0px 8px 2px rgba(51, 50, 51, 0.5);
+}
+.process-text-con {
+	padding: 1.5rem 2rem 2.5rem;
+	min-height: 300px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+.process-select-button-con {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+	padding-top: 1.4rem;
+}
+.process-select-button-con button {
+	padding: 0.5rem;
+	width: 40%;
+	text-align: center;
+	border: solid 1px white;
+	border-radius: 0.3rem;
+	transition: 0.4s;
+}
+.process-select-button-con .inactive:hover {
+	background-color: var(--clr-primary-300);
+}
+.process-select-button-con .active {
+	background-color: var(--clr-accent-400);
+	border: solid 1px var(--clr-accent-400);
+	color: white;
+}
+.process-entry-text {
+	margin-inline: auto;
+	width: 40%;
+	text-align: center;
+	max-width: 580px;
+	font-size: 1.3rem;
+}
+.process-initial-list {
+	font-size: 1.1rem;
+	display: flex;
+	flex-direction: column;
+	margin-inline: auto;
+	max-width: 1000px;
+	gap: 1.5rem;
+}
+.process-contact-con p {
+	width: 50%;
+	max-width: 650px;
+	text-align: center;
+	margin-inline: auto;
+}
+.process-contact-con {
+	padding: 2rem;
+	margin: 3rem 0;
+}
+.process-contact-link:hover .process-contact-icon {
+	animation: rotate 0.7s ease-in-out;
+	-webkit-animation: rotate 0.7s ease-in-out;
+	-moz-animation: rotate 0.7s ease-in-out;
+}
+.process-comparison-con {
+	max-width: 900px;
+	padding: 0px 2rem;
+	margin-inline: auto;
+}
+.process-license-list li {
+	margin-top: 0.5rem;
+}
+.process-contact-con p {
+	font-size: 1.3rem;
+}
+@media (max-width: 800px) {
+	.process-contact-con p {
+		font-size: 1.2rem;
+		width: 70%;
+	}
+}
+@media (max-width: 550px) {
+	.process-comparison-con {
+		padding: 1rem;
+	}
+	.process-text-con {
+		padding: 1.5rem 1rem 2.5rem;
+	}
+	.process-contact-con p {
+		font-size: 1.2rem;
+		width: 90%;
+	}
+	.process-outer-con .page-poster-container {
+		display: none;
+	}
+}

@@ -6,10 +6,12 @@ import 'swiper/css/pagination';
 import 'swiper/css/effect-coverflow';
 import EventItem from '../EventItem/EventItem';
 import './Carousel.css';
+import LesmillsPrograms from '../../assets/LesmillsPrograms';
+import { LesMillsEvents } from '../../assets/LesmillsEvents';
 export default () => {
-	const eventItems = EventItem();
 	const windowWidth = window.innerWidth;
 	const slideAmount = windowWidth > 1020 ? 3 : windowWidth > 580 ? 2 : 1.5;
+	const today = new Date();
 	return (
 		<Swiper
 			modules={[Pagination, Autoplay, EffectCoverflow]}
@@ -31,20 +33,31 @@ export default () => {
 			}}
 			slidesPerView={slideAmount}
 		>
-			{eventItems.map((event, index) => {
-				return (
-					<SwiperSlide key={index}>
-						<div className='card-carousel-event-container'>
-							<img
-								src='/ornek.jpg'
-								alt='event photo'
-								className='background-image card-carousel-event-background'
-							/>
-							{event}
-						</div>
-					</SwiperSlide>
-				);
-			})}
+			{LesMillsEvents.filter((event) => {
+				return event.fullStartDate >= today; //event.fullStartDate <= dateTwentyDaysAfter &&
+			})
+				.splice(0, 8)
+				.map((event, index) => {
+					const programPic = Object.keys(LesmillsPrograms())
+						.map((category) => {
+							return LesmillsPrograms()[category].find((program) => {
+								return program.id === event.program;
+							});
+						})
+						.find((program) => program !== undefined).additionalPictures[2].url;
+					return (
+						<SwiperSlide key={index}>
+							<div className='card-carousel-event-container'>
+								<img
+									src={programPic}
+									alt='event photo'
+									className='background-image card-carousel-event-background'
+								/>
+								<EventItem event={event} />
+							</div>
+						</SwiperSlide>
+					);
+				})}
 		</Swiper>
 	);
 };

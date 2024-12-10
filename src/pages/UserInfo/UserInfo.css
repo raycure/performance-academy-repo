@@ -113,9 +113,14 @@
 	border: 1px solid #ef3f3f;
 	color: #ef3f3f;
 }
+.user-info-btn:active {
+	transform: scale(0.95);
+	transition: 0.15s ease-out;
+}
 .user-delete-btn:hover {
 	color: white;
 	background-color: #ef3f3f;
+	animation: none;
 }
 .user-info-title-con {
 	flex-direction: row;

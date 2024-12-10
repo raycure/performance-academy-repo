@@ -31,7 +31,7 @@ const Banner = () => {
 	const { t, i18n } = useTranslation('translation');
 	return (
 		<Container>
-			<div className='gridCardContainer'>
+			<section className='gridCardContainer' style={{ marginInline: 'auto' }}>
 				<div className='gridCard' style={bannerStyle}>
 					<div className='programStepContainers center-item'>
 						<span className='programStepNumbers'>1</span>
@@ -77,7 +77,7 @@ const Banner = () => {
 					</div>
 					<p className='text-container'>{t('Banner.Content.3')}</p>
 				</div>
-			</div>
+			</section>
 		</Container>
 	);
 };

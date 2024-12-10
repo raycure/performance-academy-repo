@@ -88,7 +88,10 @@ function CertificationSteps() {
 	}
 
 	return (
-		<Container className='certftn-prcss-outer-con'>
+		<Container
+			className='certftn-prcss-outer-con'
+			styleProp={{ margin: '7rem auto' }}
+		>
 			<div className='stepText'>
 				<button
 					className='nextButton center-item'

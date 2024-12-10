@@ -10,8 +10,8 @@ import EventList from '../../components/EventItem/EventList';
 import test from '../../assets/test.png';
 import axios from '../api/axios';
 import { useTranslation } from 'react-i18next';
-import PaginationContainer from '../../components/Containers/PaginationContainer';
 import { useLocation } from 'react-router-dom';
+import CertificationSteps from '../../components/CertificationSteps/CertificationSteps';
 
 function Events() {
 	const { t, i18n } = useTranslation('programs');
@@ -42,7 +42,7 @@ function Events() {
 	const [file, setFile] = useState(null);
 	const [message, setMessage] = useState('');
 
-	const [onlineCheck, setOnlineCheck] = useState(null);
+	const [onlineCheck, setOnlineCheck] = useState(undefined);
 	const handleFileChange = (event) => {
 		const selectedFile = event.target.files[0];
 
@@ -188,6 +188,8 @@ function Events() {
 			</div>
 
 			<CalendarContainer />
+
+			<CertificationSteps />
 			<h2 className='fs-650 center-item' style={{ padding: '2rem' }}>
 				{i18n.language === 'en' ? 'CHOOSE AN EVENT' : 'ETKİNLİKLERİMİZ'}
 			</h2>
@@ -265,7 +267,7 @@ function Events() {
 				<div class='radio-group'>
 					<div class='radio-option'>
 						<input
-							value={true}
+							value={onlineCheck}
 							type='radio'
 							name='radio-option'
 							class='radio-btn'
@@ -278,7 +280,7 @@ function Events() {
 					</div>
 					<div class='radio-option'>
 						<input
-							value={false}
+							value={!onlineCheck}
 							type='radio'
 							name='radio-option'
 							class='radio-btn'
@@ -287,6 +289,19 @@ function Events() {
 						/>
 						<label class='radio-label'>
 							{i18n.language === 'en' ? 'In-Person' : 'Canlı'}
+						</label>
+					</div>
+					<div class='radio-option'>
+						<input
+							value={onlineCheck === null || onlineCheck === undefined}
+							type='radio'
+							name='radio-option'
+							class='radio-btn'
+							checked={onlineCheck === null || onlineCheck === undefined}
+							onChange={() => handleOnlineSelect(null)}
+						/>
+						<label class='radio-label'>
+							{i18n.language === 'en' ? 'All' : 'Hepsi'}
 						</label>
 					</div>
 				</div>

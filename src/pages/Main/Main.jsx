@@ -67,13 +67,7 @@ function Main() {
 				onClick={() => routeChange(category)}
 			>
 				<img
-					src={
-						category === 'GRUP FITNESS PROGRAMLARI'
-							? '/ornek.jpg'
-							: category === 'ÇOCUK VE GENÇ PROGRAMLARI'
-							? '/ornek.jpg'
-							: '/ornek.jpg'
-					}
+					src={lesMillsPrograms[category][0].additionalPictures[2].url}
 					alt='events page hero'
 					className='background-image opacity-low'
 				/>
@@ -105,13 +99,7 @@ function Main() {
 			>
 				<h2 className='fs-650'>{category}</h2>
 				<img
-					src={
-						category === 'GRUP FITNESS PROGRAMLARI'
-							? '/ornek.jpg'
-							: category === 'ÇOCUK VE GENÇ PROGRAMLARI'
-							? '/ornek.jpg'
-							: '/ornek.jpg'
-					}
+					src={lesMillsPrograms[category][0].additionalPictures[3].url}
 					alt='events page hero'
 					className='background-image opacity-low'
 				/>
@@ -172,6 +160,29 @@ function Main() {
 	const scrollWith = useTransform(scrollYProgress, [0.3, 0.632], [0, -250]); // [0,0.91] is how much its being scrolled .91 because of the header [0,-250] for the top attribute and it changes based on the 0 to 0.91
 	return (
 		<>
+			<div className='main-welcome-text-outer-con'>
+				<div className='main-welcome-text-inner-con'>
+					<div className='fs-primary-heading'>
+						{i18n.language === 'en' ? "What's Lesmills?" : 'Lesmills Nedir?'}
+					</div>
+					<div className='fs-primary-heading' style={{ color: '#edfb06' }}>
+						{i18n.language === 'en' ? 'Become a' : 'Lesmills'} <wbr />
+						{i18n.language === 'en' ? 'Lesmills Instructor' : 'Eğitmeni Olun'}
+					</div>
+					<p>{t('MainPage.WelcomeText')}</p>
+				</div>
+				<img src={isim} className='image' />
+			</div>
+			<section>
+				<video
+					className='fullSizedVid'
+					controls
+					style={{ height: `calc(100dvh - ${navbarHeight}px)` }}
+				>
+					<source src='path-to-your-video.mp4' type='video/mp4' />
+					Your browser does not support the video tag.
+				</video>
+			</section>
 			<Container className='landingPageContainer'>
 				<div className='landingParagraph'>
 					<h2 className='fs-secondary-heading'>Performance Fitness Academy</h2>
@@ -194,47 +205,27 @@ function Main() {
 			</Container>
 			<Banner />
 
-			<div className='main-welcome-text-outer-con'>
-				<div className='main-welcome-text-inner-con'>
-					<div className='fs-primary-heading'>
-						{i18n.language === 'en' ? "What's Lesmills?" : 'Lesmills Nedir?'}
-					</div>
-					<div className='fs-primary-heading' style={{ color: '#edfb06' }}>
-						{i18n.language === 'en' ? 'Become a' : 'Lesmills'} <wbr />
-						{i18n.language === 'en' ? 'Lesmills Instructor' : 'Eğitmeni Olun'}
-					</div>
-					<p>{t('MainPage.WelcomeText')}</p>
-				</div>
-				<img src={isim} className='image'></img>
-			</div>
+			<section>
+				<h2
+					className='fs-primary-heading center-item'
+					id='cards-title'
+					style={{ margin: '2rem auto' }}
+				>
+					{t('MainPage.CardsTitle')}
+				</h2>
+				<Container
+					styleProp={{
+						gap:
+							// windowWidth < 1130 ? '30px' : windowWidth < 768 ? '20px' : '10px',
+							windowWidth > 1110 ? '30px' : '10px',
+					}}
+					className='even-columns cardContent'
+				>
+					{cards}
+				</Container>
+			</section>
 
-			<video
-				className='fullSizedVid'
-				controls
-				style={{ height: `calc(100dvh - ${navbarHeight}px)` }}
-			>
-				<source src='path-to-your-video.mp4' type='video/mp4' />
-				Your browser does not support the video tag.
-			</video>
-			<h2
-				className='fs-primary-heading center-item'
-				id='cards-title'
-				style={{ margin: '2rem auto' }}
-			>
-				{t('MainPage.CardsTitle')}
-			</h2>
-			<Container
-				styleProp={{
-					gap:
-						// windowWidth < 1130 ? '30px' : windowWidth < 768 ? '20px' : '10px',
-						windowWidth > 1110 ? '30px' : '10px',
-				}}
-				className='even-columns cardContent'
-			>
-				{cards}
-			</Container>
-			<CertificationSteps />
-			<div className='bannerLikeImageContainer' ref={scrollingImgRef}>
+			<section className='bannerLikeImageContainer' ref={scrollingImgRef}>
 				<motion.div
 					style={{
 						top: scrollWith,
@@ -243,7 +234,7 @@ function Main() {
 				>
 					<img src={testortheflamboyantimg} />
 				</motion.div>
-			</div>
+			</section>
 			{/* <div style={{ position: 'relative' }} id='testttt'>
 				<img src={testortheflamboyantimg} style={{ top: testHeight1 }}></img>
 				<span className='testspann' style={{ top: `${testHeight1}px` }}></span>
@@ -251,17 +242,19 @@ function Main() {
 			{/* //todo vidi gizle butonu */}
 
 			<BecomeInstructorCards />
-			<h2
-				className='fs-primary-heading center-item'
-				style={{ margin: '2rem auto' }}
-			>
-				{i18n.language === 'en'
-					? 'Our Upcoming Events'
-					: 'Yaklaşan Etkinliklerimiz'}
-			</h2>
-			<div className='carousel-container'>
-				<CardCarousel />
-			</div>
+			<section>
+				<h2
+					className='fs-primary-heading center-item'
+					style={{ margin: '2rem auto' }}
+				>
+					{i18n.language === 'en'
+						? 'Our Upcoming Events'
+						: 'Yaklaşan Etkinliklerimiz'}
+				</h2>
+				<div className='carousel-container'>
+					<CardCarousel />
+				</div>
+			</section>
 			<FAQ />
 			{/* <div className='btn-container center-item'>
 				<a href='#' className='btn-shine'>

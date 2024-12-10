@@ -70,7 +70,7 @@ function CalendarContainer() {
 	}
 
 	return (
-		<div
+		<section
 			id='calendar-container'
 			className='calendar-container user-select-none bg-primary-500'
 		>
@@ -97,7 +97,7 @@ function CalendarContainer() {
 					validRange={{ start: '2024-11-01', end: '2025-04-01' }} //we're gonna put the range of the events here
 				/>
 			</div>
-		</div>
+		</section>
 	);
 }
 export default CalendarContainer;

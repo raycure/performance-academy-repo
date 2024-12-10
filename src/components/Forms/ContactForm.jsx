@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import '../../pages/Register-Login/formStyle.css';
 import Button from '../Button/Button';
 import '../../components/Containers/containerStyle.css';

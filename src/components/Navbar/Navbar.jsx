@@ -79,6 +79,10 @@ function Navbar() {
 			label: t('Navbar.Main'),
 		},
 		{
+			path: '/süreç',
+			label: t('Navbar.Process'),
+		},
+		{
 			path: '/programlar',
 			label: t('Navbar.Programs'),
 		},
@@ -86,10 +90,7 @@ function Navbar() {
 			path: '/etkinlikler',
 			label: t('Navbar.Events'),
 		},
-		{
-			path: '/programlarım',
-			label: t('Navbar.MyPrograms'),
-		},
+
 		{
 			path: '/iletişim',
 			label: t('Navbar.Contact'),

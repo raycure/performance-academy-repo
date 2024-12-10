@@ -12,7 +12,7 @@ import {
 	Column,
 } from '@react-email/components';
 import * as React from 'react';
-import EmailComponent from '../components/Containers/EmailComponent';
+import EmailComponent from './EmailComponent';
 const username = 'baap';
 const verifyLink =
 	'https://www.trendyol.com/coverzone/kablosuz-karaoke-cift-mikrofon-6-35mm-sahne-performansi-partiler-aktiviteler-amfi-hoparlor-icin-wn06-p-826296697';
@@ -23,6 +23,7 @@ const dataEN = {
 		text: 'Please click the button below to verify your email address.',
 		button: 'Verify Email Adress',
 	},
+	regards: ['Best regards,', 'Team'],
 	footer:
 		"If you're having trouble clicking the 'Verify Email Address' button, copy and paste the URL below into your web browser:",
 };
@@ -33,6 +34,7 @@ const dataTR = {
 		text: 'Lütfen aşağıdaki butona basarak hesabınızı doğrulayın.',
 		button: 'Hesabınızı Doğrulayın',
 	},
+	regards: ['İyi dileklerimizle,', 'Takımı'],
 	footer:
 		'Eğer butona basmakta sorun yaşıyorsanız bu linki kopyalayıp tarayıcınıza yapıştırabilirsiniz: ',
 };
@@ -47,7 +49,7 @@ function AddWbr() {
 		<React.Fragment key={index}>
 			{char}
 			<wbr />
-		</React.Fragment> //for not having unnecessary nodes, basically <></> but with key
+		</React.Fragment>
 	));
 
 	return <Link href={verifyLink}>{modifiedText}</Link>;
@@ -85,6 +87,11 @@ export default function Email() {
 							</Button>
 						</Column>
 					</Row>
+					<Text>
+						{local.regards[0]}
+						<br />
+						Performance Fitness Academy {local.regards[1]}
+					</Text>
 				</Section>
 				<Hr style={line} />
 				<Section>

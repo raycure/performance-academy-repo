@@ -8,6 +8,8 @@ import store, { persistor } from './redux/store';
 import Loading from './components/Loading/Loading';
 import './index.css';
 import Main from './pages/Main/Main';
+import Process from './pages/Process/Process';
+import UserInfo from './pages/UserInfo/UserInfo';
 const Layout = lazy(() => import('./pages/Layout/Layout')); //todo choose what to lazily load and what not to
 const Events = lazy(() => import('./pages/Events/Events'));
 const Contact = lazy(() => import('./pages/Contact/Contact'));
@@ -18,7 +20,6 @@ const Cookies = lazy(() => import('./pages/Legal/Cookies'));
 const PrivacyPolicy = lazy(() => import('./pages/Legal/PrivacyPolicy'));
 const ClassInfo = lazy(() => import('./pages/ClassInfo/ClassInfo'));
 const Classes = lazy(() => import('./pages/Classes/Classes'));
-const UserInfo = lazy(() => import('./pages/UserInfo/UserInfo'));
 const MyPrograms = lazy(() => import('./pages/MyPrograms/MyPrograms'));
 
 function App() {
@@ -39,6 +40,7 @@ function App() {
 								<Route path='programlarım' element={<MyPrograms />} />
 								<Route path='çerezler' element={<Cookies />} />
 								<Route path='bilgilerim' element={<UserInfo />} />
+								<Route path='süreç' element={<Process />} />
 								<Route
 									path='kişisel-verilerin-korunması'
 									element={<PrivacyPolicy />}

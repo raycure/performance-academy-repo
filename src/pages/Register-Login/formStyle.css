@@ -1,10 +1,12 @@
-input:-webkit-autofill {
+#contact-form-grad input,
+.authentication-form-container input:-webkit-autofill {
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: var(--clr-neutral-100) !important;
 } /* autofillde arkaplan olmasın diye */
-
-textarea,
-input {
+#contact-form-grad input,
+#contact-form-grad textarea,
+.authentication-form-container textarea,
+.authentication-form-container input {
 	all: unset;
 	margin: 0;
 	padding: 0.8rem;
@@ -13,7 +15,8 @@ input {
 	box-sizing: border-box;
 }
 
-input {
+#contact-form-grad input,
+.authentication-form-container input {
 	padding: 0.8rem 0.5rem 0.3rem;
 	border-bottom: 2px solid var(--clr-neutral-100);
 }
@@ -47,23 +50,23 @@ input {
 	left: 0;
 }
 
-input::placeholder {
+.authentication-form-container input::placeholder {
 	color: #adadad;
 }
 
-input::-webkit-input-placeholder {
+.authentication-form-container input::-webkit-input-placeholder {
 	color: #adadad;
 }
 
-input::-moz-placeholder {
+.authentication-form-container input::-moz-placeholder {
 	color: #adadad;
 }
 
-input:-ms-input-placeholder {
+.authentication-form-container input:-ms-input-placeholder {
 	color: #adadad;
 }
 
-input::-ms-input-placeholder {
+.authentication-form-container input::-ms-input-placeholder {
 	color: #adadad;
 }
 textarea::placeholder {
@@ -116,7 +119,7 @@ textarea::-ms-textarea-placeholder {
 	box-sizing: border-box;
 	overflow-y: auto;
 	overflow-x: hidden;
-	border: 2px solid var(--clr-neutral-100);
+	border: 2px solid var(--clr-neutral-100) !important;
 	height: 100%;
 	width: 100%;
 }
