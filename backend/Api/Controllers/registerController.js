@@ -58,17 +58,8 @@ const register = async (req, res) => {
 				surname,
 				verifyLink
 			);
-			// const response = await EmailSender(
-			// 	'contactConfirmationEmail',
-			// 	language,
-			// 	email,
-			// 	name,
-			// 	surname
-			// );
 		} catch (error) {
-			console.log(error);
-
-			console.log('email couldnt been sent');
+			console.log('error at sending email', error);
 		}
 		const accessToken = jwt.sign(
 			{
@@ -112,8 +103,6 @@ const register = async (req, res) => {
 			accessToken: accessToken,
 			message: 'Successfully login user',
 		});
-
-		// todo response with the users id nothing else ig.
 	} catch (error) {
 		console.log('error', error);
 

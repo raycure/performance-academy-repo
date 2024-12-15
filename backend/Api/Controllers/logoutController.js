@@ -5,14 +5,20 @@ import { ObjectId } from 'mongodb';
 dotenv.config();
 
 const handleLogout = async (req, res) => {
-	console.log('reached to logout controller');
-
 	const cookies = req.cookies;
 	if (!cookies?.jwt) return res.sendStatus(204);
 
 	const refreshToken = cookies.jwt;
-	const decoded = jwt.decode(refreshToken);
-	const userIdFromToken = decoded.userId;
+
+	let decodedToken;
+	try {
+		decodedToken = jwt.decode(refreshToken);
+	} catch (decodeError) {
+		return res.status(403).json({
+			message: 'Invalid token. Please delete cache and re-login.',
+		});
+	}
+	const userIdFromToken = decodedToken.userId;
 	await Sessions.deleteOne({
 		identifiers: {
 			$elemMatch: {
