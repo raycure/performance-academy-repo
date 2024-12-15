@@ -11,12 +11,21 @@ const authMiddleware = async (req, res, next) => {
 			return res.status(401).json({ message: 'Login Required' });
 		}
 
-		const decodedToken = jwt.decode(refreshToken);
+		let decodedToken;
+		try {
+			decodedToken = jwt.decode(refreshToken);
+		} catch (decodeError) {
+			return res.status(403).json({
+				message: 'Invalid token. Please log out and log back in.',
+			});
+		}
 		const userIdFromToken = decodedToken.userId;
 
 		const foundActiveSession = await Sessions.findOne({
 			userId: new ObjectId(userIdFromToken),
 		});
+
+		console.log('foundActiveSession', foundActiveSession);
 
 		if (!foundActiveSession) {
 			return res.status(404).json({ message: 'no active session' });

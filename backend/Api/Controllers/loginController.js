@@ -39,14 +39,7 @@ const login = async (req, res) => {
 			...(nationalID && { nationalID }),
 		};
 
-		console.log('email in login controller', email);
-		console.log('nationalID in login controller', nationalID);
-		console.log('password in login controller', password);
-		console.log('quert', query);
-
 		const user = await Users.findOne(query);
-
-		console.log('quert', user);
 		if (!user) {
 			return res.status(404).json({
 				success: false,
