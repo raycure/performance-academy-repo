@@ -174,19 +174,6 @@ function Events() {
 
 	return (
 		<div id='event-page'>
-			<div className='page-poster-container '>
-				<img
-					src='/ornek.jpg'
-					alt='events page hero'
-					className='background-image'
-				/>
-				<img
-					src={backgroundText}
-					alt='events page hero'
-					style={{ position: 'relative', alignSelf: 'center', height: '50%' }}
-				/>
-			</div>
-
 			<CalendarContainer />
 
 			<CertificationSteps />
@@ -317,7 +304,7 @@ function Events() {
 			/>
 
 			{/* <PaginationContainer /> */}
-			<form onSubmit={handleUpload}>
+			{/* <form onSubmit={handleUpload}>
 				<input
 					type='file'
 					onChange={handleFileChange}
@@ -325,7 +312,7 @@ function Events() {
 				/>
 				<button type='submit'>submit</button>
 			</form>
-			{message && <p>{message}</p>}
+			{message && <p>{message}</p>} */}
 		</div>
 	);
 }

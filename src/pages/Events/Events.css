@@ -1,5 +1,5 @@
 .calendar-container {
-	--max-width: 1110px;
+	--max-width: 1050px;
 	--container-padding: 1rem;
 	width: min(var(--max-width), 100% - (var(--container-padding)));
 	margin-inline: auto;
@@ -7,7 +7,7 @@
 	grid-template-columns: 4fr 6fr;
 }
 
-/* for pagination events */
+/* for pagination events
 .event-container {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
@@ -17,49 +17,10 @@
 	width: 60vw;
 	margin-inline: auto;
 	padding: 1rem;
-	overflow: hidden !important; /*needed dont delete dont ask questions*/
+	overflow: hidden !important; /*needed dont delete dont ask questions
 	grid-template-rows: 1fr 1fr 1fr;
-}
+} */
 
-.testCalendar {
-	border: 2px orange solid;
-}
-
-/* for the banner image */
-.page-poster-container {
-	overflow: hidden;
-	height: 40vh;
-	position: relative;
-	display: flex;
-	justify-content: center;
-}
-
-.logo-buttons {
-	width: auto;
-	max-height: 66px;
-	height: auto;
-	/* border: 2px solid red; */
-	background-color: #191917;
-	padding: 1rem;
-	border-radius: 10px;
-}
-
-.logoButtonContainer {
-	display: flex;
-	flex-wrap: wrap;
-	--max-width: 1110px;
-	margin-inline: auto;
-	justify-content: center;
-	gap: 0.5rem 1rem;
-	--container-padding: 1rem;
-	width: min(var(--max-width), 100% - (var(--container-padding)));
-}
-
-.card-carousel-event-container {
-	border-radius: 20px;
-	overflow: hidden;
-	position: relative;
-}
 .swiper-scrollbar {
 	display: none;
 }
@@ -229,30 +190,22 @@
 	}
 }
 
-@media (max-width: 1000px) {
+/* @media (max-width: 1000px) {
 	.event-container {
 		width: 80vw;
 	}
-}
+} */
 @media (max-width: 870px) {
 	.classPick {
 		padding: 0.8rem 5vw;
 	}
 }
-@media (max-width: 700px) {
-	.logoButtonContainer {
-		overflow-x: auto;
-		display: grid;
-		grid-auto-columns: 36%;
-		width: 100%;
-	}
-}
 
 @media (max-width: 640px) {
-	.event-container {
+	/* .event-container {
 		width: 65vw;
 		grid-template-columns: 1fr;
-	}
+	} */
 	.calendar-container {
 		display: flex;
 		flex-direction: column;
@@ -278,6 +231,5 @@
 	}
 	.classPick {
 		align-items: center;
-		padding: 0.8rem 10vw;
 	}
 }

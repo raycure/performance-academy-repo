@@ -17,6 +17,11 @@
 	background-color: black;
 	opacity: 0.5;
 }
+.card-carousel-event-container {
+	border-radius: 20px;
+	overflow: hidden;
+	position: relative;
+}
 .swiper-scrollbar {
 	display: none;
 }

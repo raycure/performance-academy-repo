@@ -83,7 +83,7 @@ function ClassList({ classType }) {
 								onClick={() => handleSelectId(program.id)}
 							>
 								İncele
-								<MdOutlineDoubleArrow style={{ marginTop: 2 }} color='white' />
+								<MdOutlineDoubleArrow style={{ marginTop: 2 }} />
 							</Button>
 						</div>
 					</div>

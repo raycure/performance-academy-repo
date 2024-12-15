@@ -201,7 +201,10 @@ function EventList({ activeProgram, infoActive, onlineCheck }) {
 						})[0].title;
 						return (
 							<div className='enroll-event-item' key={index}>
-								<p className='display-none' style={{ alignContent: 'center' }}>
+								<p
+									className='event-list-title'
+									style={{ alignContent: 'center', minWidth: '8rem' }}
+								>
 									{programTitle}
 								</p>
 
@@ -218,7 +221,10 @@ function EventList({ activeProgram, infoActive, onlineCheck }) {
 											month: 'short',
 										})}
 								</p>
-								<p style={{ alignContent: 'center' }}>
+								<p
+									className='event-list-online'
+									style={{ alignContent: 'center' }}
+								>
 									{event.online
 										? i18n.language === 'en'
 											? 'Online'
@@ -305,7 +311,9 @@ function EventList({ activeProgram, infoActive, onlineCheck }) {
 				<p className='fs-300 text-primary-200'>
 					{i18n.language === 'en' ? 'Event Details' : 'Etkinlik Bilgileri'}
 				</p>
-				<p className='fs-700'>{selectedEvent.program}</p>
+				<p style={{ textAlign: 'center' }} className='fs-700'>
+					{selectedEvent.program}
+				</p>
 				<hr style={{ borderWidth: '2px', marginBottom: '1rem' }} />
 				<div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr' }}>
 					<p className='card-item'>
@@ -365,10 +373,12 @@ function EventList({ activeProgram, infoActive, onlineCheck }) {
 				</p>
 				<div
 					style={{
-						justifyContent: 'center',
+						justifyContent: 'end',
 						display: 'flex',
 						flexDirection: 'column',
 						height: '100%',
+						gap: '1rem',
+						marginBottom: '1.5rem',
 					}}
 				>
 					<div>
@@ -392,6 +402,7 @@ function EventList({ activeProgram, infoActive, onlineCheck }) {
 					<Button
 						// disabled={!acknowledgementChecked ? true : false}
 						// todo add contract verification
+						styleProp={{ marginInline: 'auto' }}
 						onClick={(e) => Payment(e)}
 					>
 						{i18n.language === 'en' ? 'Attend Event!' : 'Etkinliğe Katıl!'}

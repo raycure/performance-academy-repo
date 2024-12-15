@@ -34,7 +34,7 @@ function RegisterForm() {
 	];
 	const nameSurnameRules = [
 		{
-			test: (nameOrSurname) => !/^[a-zA-Z\s]+$/.test(nameOrSurname),
+			test: (nameOrSurname) => !/^[a-zA-ZçğıöşüÇĞİÖŞÜ\s]+$/.test(nameOrSurname),
 			message: t('Authentication.Validation.nameOrSurname.0'),
 		},
 		{

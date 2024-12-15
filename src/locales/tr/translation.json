@@ -109,17 +109,17 @@
 	"CertificationSteps": {
 		"Title": [
 			"Size Hitap Eden Programı Bulun",
-			"Ders Kiti ve Sözleşmenizi Korumaya Alın",
-			"Kendi Temponuzda Öğrenin",
+			"Sözleşmenizi Korumaya Alın",
+			"Eğitime Katılın",
 			"Yeteneklerinizi Sergileyin",
-			"Özel Etkinliklere Erişim"
+			"Tekrar Şansları"
 		],
 		"Content": [
-			"Kariyer hedeflerinize ve uzmanlık alanınıza uygun, özenle hazırlanmış profesyonel kurslar listemizi inceleyin. Her ders, sektörde öne çıkmanız için ihtiyacınız olan becerileri sağlamayı hedefler.",
-			"Dersinizi seçtikten sonra, başarıya ulaşmanız için gereken tüm materyalleri içeren kapsamlı Ders Kitini satın alın. Sadece imzalı bir sözleşme yükleyerek taahhüdünüzü onaylayın ve başlangıç için tüm işlemlerinizi doğrulayalım.",
-			"Öğrenim yolculuğunuza, sizi içine çeken tanıtıcı videomuzla başlayın. Daha sonra, kursa mobil uygulamamızdan devam edebileceğiniz bir yönlendirme alacaksınız — hepsi avucunuzun içinde!",
-			"Bir dizi görevi tamamladığınız bir video göndererek ustalığınızı kanıtlayın. Uzman ekibimiz gönderiminizi doğrulayacak ve onaylandıktan sonra, çabanızın ve bağlılığınızın sembolü olan resmi sertifikanızı alacaksınız.",
-			"Hem çevrimiçi hem de yüz yüze özel etkinliklere katılarak öğrenme deneyiminizi geliştirin. Diğer eğitmenlerle ağ oluşturun, atölyelere katılın ve becerilerinizi daha da geliştirmek için uygulamalı deneyimler kazanın."
+			"Kariyer hedeflerinize ve uzmanlık alanınıza uygun, özenle hazırlanmış profesyonel kurslar listemizi inceleyin. Tüm programlarımız, sektörde öne çıkmanız için ihtiyacınız olan becerileri sağlamayı hedefliyor.",
+			"Dersinizi seçtikten sonra, başarıya ulaşmanız için gereken tüm materyalleri içeren kapsamlı eğitimlerimize kaydolun. Sadece imzalı bir sözleşme yükleyerek taahhüdünüzü onaylayın ve başlangıç için tüm işlemlerinizi doğrulayalım.",
+			"Öğrenim yolculuğunuza, sizi içine çeken tanıtıcı videomuz ve koreografilerimizle başlayın! Katıldığınız etkinliğimizde Eğitmen Sertifikanıza ulaşmak için gerekecek olan her şeyi öğrenin!",
+			"Bir koreografiyi tamamladığınız bir video göndererek ustalığınızı kanıtlayın. Uzman ekibimiz gönderiminizi doğrulayacak ve onaylandıktan sonra resmi sertifikanıza ulaşacaksınız.",
+			"İlk değerlendirme turunda başarılı olamamanız durumunda, sınav ücreti dahilinde iki ek değerlendirme hakkınız bulunmaktadır. Bu sayede, sınavda başarısız olsanız dahi yeni bir etkinliğe katılmadan değerlendirme hakkınızı tekrar kullanabilirsiniz."
 		]
 	},
 	"Process": {

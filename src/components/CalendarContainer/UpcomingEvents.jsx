@@ -10,9 +10,8 @@ function UpcomingEvents() {
 	const lesMillsPrograms = LesMillsPrograms();
 	const allEvents = LesMillsEvents;
 	const today = new Date();
-	const windowWidth = window.innerWidth;
-	const eventAmount = windowWidth > 1200 ? 2 : 1;
-	const { t, i18n } = useTranslation('');
+	const eventAmount = 1;
+	const { i18n } = useTranslation('');
 	const dispatch = useDispatch();
 	const handleCalendarEventSelect = (id) => {
 		dispatch(setEventId(id));
@@ -32,7 +31,7 @@ function UpcomingEvents() {
 	return (
 		<div className='upcoming-events-container	upcoming-events'>
 			<p className='fs-700'>
-				{i18n.language === 'en' ? 'Upcoming Events' : 'Yaklaşan Etkinlikler'}
+				{i18n.language === 'en' ? 'Upcoming Event' : 'Yaklaşan Etkinlik'}
 			</p>
 			{allEvents //eger event tıklanmadıysa yaklasan etkinlikleri gostereck
 				.filter((event) => {
@@ -53,21 +52,26 @@ function UpcomingEvents() {
 						})
 						.filter(Boolean);
 					return (
-						<div className='border-container' key={event.id}>
+						<div className='border-container'>
 							<HashLink smooth={true} to={`/programlar#${event.program}`}>
 								<img
-									className='img class-logo'
 									src={eventProgram[0]?.logo}
-									alt=''
+									alt='logo'
+									className='img class-logo'
 								/>
 							</HashLink>
+							<p id='calendar-item-sum'>{eventProgram[0]?.sum}</p>
 							{i18n.language === 'en' ? (
-								<p style={{ textAlign: 'center' }}>
-									Last {daysLeft} days to join this event!
+								<p>
+									There's only
+									{daysLeft} days till our {event.program} event. If you're
+									interested in this event join before it passes!
 								</p>
 							) : (
-								<p style={{ textAlign: 'center' }}>
-									Etkinliğimize katılmak için son {daysLeft} gününüz kaldı!
+								<p>
+									{event.program} programını kapsayan bu etkinliğimize{' '}
+									{daysLeft} gün kalmıştır. Bu etkinliğimizle ilgileniyorsanız
+									kaçırmadan katılın!
 								</p>
 							)}
 

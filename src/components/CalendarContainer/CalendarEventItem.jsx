@@ -2,16 +2,16 @@ import React from 'react';
 import './CalendarEventItem.css';
 import { LesMillsEvents } from '../../assets/LesmillsEvents';
 import { HashLink } from 'react-router-hash-link';
-import LesMillsPrograms from '../../assets/LesmillsPrograms';
 import Button from '../Button/Button';
 import UpcomingEvents from './UpcomingEvents';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { setEventId } from '../../redux/Slices/CalendarEventSlice.js';
+import LesmillsPrograms from '../../assets/LesmillsPrograms';
 function CalendarEventItem({ eventId }) {
 	const { i18n, t } = useTranslation('');
-	const lesMillsPrograms = LesMillsPrograms();
-	const allEvents = LesMillsEvents;
+	const programs = LesmillsPrograms();
+	const events = LesMillsEvents;
 	const today = new Date();
 	const dispatch = useDispatch();
 	const handleCalendarEventSelect = (id) => {
@@ -32,13 +32,12 @@ function CalendarEventItem({ eventId }) {
 	if (!eventId) {
 		return <UpcomingEvents />;
 	}
-
-	const activeEvent = allEvents.find((event) => {
-		return eventId === event.id.toString();
+	const activeEvent = events.find((program) => {
+		return eventId === program.id.toString();
 	});
-	const eventProgram = Object.keys(lesMillsPrograms)
+	const eventProgram = Object.keys(programs)
 		.map((category) => {
-			return lesMillsPrograms[category].find((program) => {
+			return programs[category].find((program) => {
 				return program.id === activeEvent.program;
 			});
 		})

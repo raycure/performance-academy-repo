@@ -39,7 +39,7 @@
 }
 .fc a:hover {
 	opacity: 1 !important;
-} /*abi ben linkleri genel otomatik hoverlama vermistim burda onu kapadım aslında onu da animation yapıncakapıycam*/
+}
 .fc .fc-cell-shaded,
 .fc .fc-day-disabled {
 	background: none;

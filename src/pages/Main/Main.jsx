@@ -105,20 +105,7 @@ function Main() {
 	const scrollWith = useTransform(scrollYProgress, [0.3, 0.632], [0, -250]); // [0,0.91] is how much its being scrolled .91 because of the header [0,-250] for the top attribute and it changes based on the 0 to 0.91
 	return (
 		<>
-			<div className='main-welcome-text-outer-con'>
-				<div className='main-welcome-text-inner-con'>
-					<div className='fs-primary-heading'>
-						{i18n.language === 'en' ? "What's Lesmills?" : 'Lesmills Nedir?'}
-					</div>
-					<div className='fs-primary-heading' style={{ color: '#edfb06' }}>
-						{i18n.language === 'en' ? 'Become a' : 'Lesmills'} <wbr />
-						{i18n.language === 'en' ? 'Lesmills Instructor' : 'Eğitmeni Olun'}
-					</div>
-					<p>{t('MainPage.WelcomeText')}</p>
-				</div>
-				<img src={isim} className='image' />
-			</div>
-			<section>
+			<div>
 				<video
 					className='fullSizedVid'
 					controls
@@ -127,6 +114,16 @@ function Main() {
 					<source src='path-to-your-video.mp4' type='video/mp4' />
 					Your browser does not support the video tag.
 				</video>
+			</div>
+			<section className='main-welcome-text-outer-con'>
+				<h1>
+					{i18n.language === 'en' ? "What's Les Mills?" : 'Les Mills Nedir?'}
+				</h1>
+				{/* <div className='fs-primary-heading' style={{ color: '#edfb06' }}>
+						{i18n.language === 'en' ? 'Become a' : 'Lesmills'} <wbr />
+						{i18n.language === 'en' ? 'Lesmills Instructor' : 'Eğitmeni Olun'}
+					</div> */}
+				<p style={{ paddingInline: '0.5rem' }}>{t('MainPage.WelcomeText')}</p>
 			</section>
 			<Container className='landingPageContainer'>
 				<div className='landingParagraph'>
@@ -160,9 +157,7 @@ function Main() {
 				</h2>
 				<Container
 					styleProp={{
-						gap:
-							// windowWidth < 1130 ? '30px' : windowWidth < 768 ? '20px' : '10px',
-							windowWidth > 1110 ? '30px' : '10px',
+						gap: windowWidth > 1110 ? '30px' : '10px',
 					}}
 					className='even-columns cardContent'
 				>

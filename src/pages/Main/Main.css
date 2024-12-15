@@ -42,11 +42,19 @@
 	width: fit-content;
 }
 .main-welcome-text-outer-con {
-	display: grid;
-	grid-template-columns: 0.6fr 0.5fr;
-	max-width: 1150px;
+	display: flex;
+	flex-direction: column;
+	max-width: 900px;
 	margin-inline: auto;
-	padding: 1rem;
+	gap: 1.5rem;
+	align-items: center;
+	padding-inline: 1.5rem;
+	text-align: center;
+}
+.main-welcome-text-outer-con h1 {
+	font-weight: bolder;
+	text-shadow: -7px -7px var(--clr-accent-400);
+	font-size: 4.5rem;
 }
 @media (max-width: 1024px) {
 	.landingPageContainer {
@@ -61,22 +69,6 @@
 	.milestones {
 		display: none;
 	}
-	.main-welcome-text-outer-con {
-		display: grid;
-		grid-template-columns: 0.6fr 0.5fr;
-		max-width: 1150px;
-		margin-inline: auto;
-		padding: 1rem;
-	}
-	.main-welcome-text-outer-con {
-		display: flex;
-		flex-direction: column-reverse;
-		max-width: 800px;
-		text-align: center;
-	}
-	.main-welcome-text-outer-con img {
-		display: none;
-	}
 }
 @media (max-width: 800px) {
 	.landingPageContainer .fs-650 {
@@ -88,5 +80,15 @@
 	}
 	#cards-title {
 		display: none;
+	}
+	.main-welcome-text-outer-con h1 {
+		text-shadow: -4px -4px var(--clr-accent-400);
+		font-size: 3rem;
+	}
+}
+@media (max-width: 500px) {
+	.main-welcome-text-outer-con h1 {
+		text-shadow: -3px -3px var(--clr-accent-400);
+		font-size: 2.2rem;
 	}
 }

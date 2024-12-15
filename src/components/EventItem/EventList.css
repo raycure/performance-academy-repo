@@ -87,7 +87,18 @@
 	.event-list-grid img {
 		display: none;
 	}
-	.enroll-event-item .display-none {
+	.enroll-event-item {
+		border-bottom: 1px solid white;
+		padding: 1rem;
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		font-size: var(--fs-400);
+	}
+	.enroll-event-item .addLineAnimation {
+		display: none;
+	}
+	.event-list-online {
 		display: none;
 	}
 }
@@ -96,5 +107,8 @@
 	.event-list-grid {
 		margin-inline: 1rem;
 		gap: 0;
+	}
+	.event-list-title {
+		min-width: 0px;
 	}
 }
