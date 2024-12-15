@@ -258,7 +258,9 @@ function Events() {
 							className={`dropDownCategories ${
 								isClassMenuOpen && 'dropDownCategoriesActive'
 							}`}
-							style={{ color: 'black' }}
+							style={{
+								width: 'max-content',
+							}}
 						>
 							{classes}
 						</div>
@@ -313,8 +315,6 @@ function Events() {
 				activeProgram={activeClass ? activeClass : 'all'}
 				infoActive={true}
 			/>
-
-			{/* <PaginationContainer /> */}
 			<a href={test} download='test'>
 				test
 			</a>

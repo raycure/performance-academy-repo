@@ -58,19 +58,6 @@ function Process() {
 	];
 	return (
 		<div className='process-outer-con'>
-			<div className='page-poster-container'>
-				<img
-					src='/ornek.jpg'
-					alt='events page hero'
-					className='background-image'
-				/>
-				<p style={{ fontSize: '6.5vw', margin: 'auto', fontWeight: 'bolder' }}>
-					{i18n.language === 'en' ? 'OUR PROCESS' : 'İŞLEME SÜRECİMİZ'}
-				</p>
-			</div>
-			{/* <section>
-				<p className='process-entry-text'>{t('Process.Entry')}</p>
-			</section> */}
 			<div className='process-comparison-con'>
 				<p
 					style={{

@@ -6,7 +6,7 @@ import '../../pages/Process/Process.css';
 function LicenceContactRedirect() {
 	const { i18n, t } = useTranslation('translation');
 	return (
-		<div
+		<section
 			style={{
 				display: 'flex',
 				flexDirection: 'column',
@@ -38,7 +38,7 @@ function LicenceContactRedirect() {
 					className='process-contact-icon'
 				/>
 			</HashLink>
-		</div>
+		</section>
 	);
 }
 export default LicenceContactRedirect;

@@ -9,9 +9,10 @@
 	cursor: pointer;
 	position: relative;
 	overflow: hidden;
+	height: max-content;
 }
 
-.btn:hover {
+.btn:enabled:hover {
 	color: black;
 }
 
@@ -29,13 +30,14 @@
 }
 
 .btn:hover:after {
-	transform: skewX(-45deg) scale(1, 1);
+	transform: skewX(-45deg) scale(1.1, 1.1);
 	-webkit-transition: all 0.5s;
 	transition: all 0.5s;
 }
 
-.btn:active {
-	box-shadow: 0 4px red;
+.btn:enabled:active {
+	scale: 0.9;
+	transition: scale 0.4s;
 }
 .btn:disabled {
 	background: gray;
@@ -52,6 +54,7 @@
 	gap: 6px;
 	padding: 0.5rem 1rem;
 	align-items: center;
+	flex-shrink: 0;
 }
 
 .navbar-btn {

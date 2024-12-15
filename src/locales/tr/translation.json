@@ -152,5 +152,25 @@
 			"Eğitmenlerimizden harika şeyler bekliyoruz, bu nedenle becerilerinizin en üst düzeyde olduğunu göstermek için Başlangıç Eğitiminizi tamamladıktan sonraki 60 gün içinde bir değerlendirme videosu da göndermeniz gerekecek.",
 			"Tüm sertifikalar, eğitime katılmanızdan sonraki altı ay içinde tamamlanmalıdır."
 		]
+	},
+	"MyPrograms": {
+		"Entry": "Bu sayfada, katıldığınız etkinliklerin içeriklerine erişebilirsiniz. Bu içerikler arasında koreografi listesi, etkinliğe özel bir kitapçık ve programa genel bir kitapçık bulunmaktadır.\n\nAyrıca sınav sonuçlarınızı da burada görüntüleyebilirsiniz. Eğer sınavı geçemezseniz, sınava tekrar girmek için gerekli ödemeyi yapabileceğiniz bir bağlantı sağlanacaktır.\n\nSınavı geçmek için üç hakkınız bulunmaktadır. İlk denemenin ardından, her bir sonraki deneme için 50 dolar bir ücret ödemeniz gerekecektir. Eğer üç hakkınızı da kullanır ve sınavı geçemezseniz, tekrar denemek için yeni bir etkinliğe kayıt yaptırmanız gerekecektir.",
+		"item1": "Etkinliğe katıldıktan sonra, eğitim videonuza bu platform üzerinden erişebilirsiniz.",
+		"item4": "Lisans programına katıldıysanız, 3 ayda bir yenilenen içeriklere Les Mills Releases App mobil uygulamamız üzerinden ulaşabilirsiniz.",
+		"item5": [
+			"Lisans içeriklerine erişim için:",
+			"Kayıt işleminizi tamamlamanız gereklidir.",
+			"Hesabınızın aktif hale gelmesi birkaç gün sürebilir; lütfen sabırlı olunuz."
+		],
+		"item2": [
+			"Eğitime katılımınızın ardından:",
+			"Eğitim videonuzu tarafımıza göndermelisiniz.",
+			"Ekibimiz gönderinizi inceleyecek ve performansınızın standartlara uygunluğunu değerlendirecektir."
+		],
+		"item3": [
+			"Performansınız uygun bulunursa:",
+			"Resmi sertifikanızı kazanacaksınız.",
+			"Sertifikanız tarafınıza e-posta yoluyla ulaştırılacaktır."
+		]
 	}
 }

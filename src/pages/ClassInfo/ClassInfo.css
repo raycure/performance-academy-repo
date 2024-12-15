@@ -1,22 +1,26 @@
 .poster-heading {
-	font-size: 4rem;
+	font-size: 15vh;
 	font-weight: bold;
 }
-.page-poster-container {
+.class-info-outer-con .page-poster-container {
 	overflow: hidden;
-	height: 40vh;
+	height: 90vh;
 	position: relative;
 	display: flex;
 	justify-content: center;
 }
-.poster-background-shape {
-	left: 50%;
-	width: 30%;
-	background-color: black;
-	-ms-transform: skewX(-40deg);
-	-webkit-transform: skewX(-40deg);
-	transform: skewX(-40deg);
+.class-info-outer-con .page-poster-container::before {
+	content: ' ';
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	display: block;
+	object-fit: cover;
 	z-index: -1;
+	background-color: black;
+	opacity: 0.5;
 }
 .class-info-sum {
 	padding: 3rem;

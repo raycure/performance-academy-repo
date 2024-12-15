@@ -48,11 +48,12 @@ function ContactForm() {
 
 	let isLoggedIn = useSelector(selectIsLoggedIn);
 	return (
-		<div className='contact-form relative-position ' id='contact-form-grad'>
+		<div className='contact-form relative-position'>
 			<img
-				src='/ornek.jpg'
+				src='https://d2lsjsqnstxud9.cloudfront.net/media/13959BF0-BCE0-4B85-83FC898FABC86C4C/80F2C62C-1E8E-41FE-B1064BA133CF51A1/webimage-6efa76ad-4720-495f-86d8-60b4b9be85da.png'
 				alt='background'
-				className='background-image contact-form-background'
+				className='background-image'
+				style={{ objectPosition: 'right' }}
 			/>
 
 			<form

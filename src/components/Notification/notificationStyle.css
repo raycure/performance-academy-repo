@@ -2,36 +2,97 @@
 	position: fixed;
 	top: 100px;
 	right: 20px;
-	padding: 10px;
-	border-radius: 5px;
+	padding: 1rem 0;
+	border-radius: 1rem;
 	color: #fff;
 	font-size: 14px;
 	z-index: 9999;
+	min-width: 35vw;
+	display: flex;
 }
 
-.success {
-	background-color: #4caf50;
-}
-
-.notification.error {
-	background-color: #f44336;
-}
-
-.notification.info {
-	background-color: #2196f3;
-}
-
-.close-btn {
-	background-color: red;
-	background: none;
-	border: none;
-	color: inherit;
-	font-size: 16px;
-	cursor: pointer;
-}
 .notification-content {
 	display: flex;
 	align-items: center;
-	justify-content: center;
+	justify-content: left;
 	gap: 0.25rem;
+	position: relative;
+	width: 100%;
+	margin-inline: 1rem;
+	gap: 1rem;
+}
+/* .success {
+	background-color: #55d359;
+}
+
+.notification.error {
+	background-color: #ef3f3f;
+}
+
+.notification.info {
+	background-color: #5a72ff;
+}
+.notification.warning {
+	background-color: #f0d71e;
+} */
+.success {
+	background-color: #ddfde7;
+	border: 2px solid #71c58d;
+}
+
+.notification.error {
+	background-color: #eecbc4;
+	border: 2px solid #d27c6d;
+}
+
+.notification.info {
+	background-color: #dae7f9;
+	border: 2px solid #7988df;
+}
+.notification.warning {
+	background-color: #fff6df;
+	border: 2px solid #d8b733;
+}
+.notification-icon {
+	position: relative;
+	font-size: 1.9rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.notification-icon::before {
+	content: ' ';
+	display: block;
+	position: absolute;
+	width: 2.5rem;
+	height: 2.5rem;
+	border-radius: 2rem;
+	z-index: -1;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+.notification.error .notification-icon::before {
+	background-color: #ef3f3f;
+}
+.notification.success .notification-icon::before {
+	background-color: #55d359;
+}
+.notification.info .notification-icon::before {
+	background-color: #5a72ff;
+}
+.notification.warning .notification-icon::before {
+	background-color: #f0d71e;
+}
+.close-btn {
+	background: none;
+	border: none;
+	color: var(--clr-accent-100);
+	cursor: pointer;
+	width: 1rem;
+	height: 1rem;
+	position: absolute;
+	right: 0;
+	top: 50%;
+	transform: translateY(-50%);
 }

@@ -14,10 +14,9 @@ import { useRef } from 'react';
 
 import Banner from '../../components/Banner/Banner.jsx';
 import FAQ from '../../components/FAQ/FAQ.jsx';
-import testortheflamboyantimg from '../../assets/testortheflamboyantimg.png';
+//import testortheflamboyantimg from '../../assets/testortheflamboyantimg.png';
 
 import { useTranslation } from 'react-i18next';
-import CertificationSteps from '../../components/CertificationSteps/CertificationSteps.jsx';
 import BecomeInstructorCards from '../../components/BecomeInstructorCards/BecomeInstructorCards.jsx';
 import Button from '../../components/Button/Button.jsx';
 import { AuthService } from '../../auth/auth.service.js';
@@ -295,9 +294,13 @@ function Main() {
 					style={{
 						top: scrollWith,
 						position: 'absolute',
+						width: '100%',
 					}}
 				>
-					<img src={testortheflamboyantimg} />
+					<img
+						style={{ width: '100%' }}
+						src='https://d2lsjsqnstxud9.cloudfront.net/media/13959BF0-BCE0-4B85-83FC898FABC86C4C/6DBF26B1-EAD1-41E8-87F578CFA9C6CC13/webimage-DB1F8A58-633C-4C11-98798C96D669CA94.jpg'
+					/>
 				</motion.div>
 			</section>
 			{/* <div style={{ position: 'relative' }} id='testttt'>

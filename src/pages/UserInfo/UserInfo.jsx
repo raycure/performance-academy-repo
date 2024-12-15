@@ -21,6 +21,8 @@ import { descending } from '../../components/animations/AnimationValues';
 import { useDispatch } from 'react-redux';
 import { AuthService } from '../../auth/auth.service';
 import { useNavigate } from 'react-router-dom';
+import { GrDocumentPdf } from 'react-icons/gr';
+import { Link } from 'react-router-dom';
 
 function UserInfo() {
 	const dispatch = useDispatch();
@@ -342,6 +344,7 @@ function UserInfo() {
 						</label>
 						<div className='relative-position'>
 							<input
+								autoComplete='off'
 								readOnly={!isEditing}
 								type='text'
 								id='name'
@@ -384,6 +387,7 @@ function UserInfo() {
 						</label>
 						<div className='relative-position'>
 							<input
+								autoComplete='off'
 								readOnly={!isEditing}
 								type='text'
 								id='surname'
@@ -431,6 +435,7 @@ function UserInfo() {
 
 						<div className='relative-position'>
 							<input
+								autoComplete='off'
 								readOnly={!isEditing}
 								type='text'
 								id='nationalID'
@@ -478,6 +483,7 @@ function UserInfo() {
 						</label>
 						<div className='relative-position'>
 							<input
+								autoComplete='off'
 								value={birthDate}
 								readOnly={!isEditing}
 								placeholder={
@@ -529,6 +535,7 @@ function UserInfo() {
 					<label htmlFor='mail'>Email</label>
 					<div className='relative-position'>
 						<input
+							autoComplete='off'
 							readOnly={!isEditing}
 							type='text'
 							id='mail'
@@ -572,6 +579,7 @@ function UserInfo() {
 						className='relative-position'
 					>
 						<input
+							autoComplete='off'
 							readOnly={!isEditing}
 							type={passwordOn ? 'password' : 'text'}
 							id='password'
@@ -626,7 +634,9 @@ function UserInfo() {
 						</div>
 					</div>
 				</div>
-				<div className='user-info-contract-con'>
+				<div
+					style={{ gap: '0.5rem', display: 'flex', flexDirection: 'column' }}
+				>
 					{contractverified === true ? (
 						<p style={{ color: 'green', display: 'flex' }}>
 							<RxCheckCircled
@@ -676,7 +686,27 @@ function UserInfo() {
 						</p>
 					)}
 					{contractverified === false && (
-						<>
+						<div
+							className='center-item'
+							style={{
+								display: 'flex',
+								flexDirection: 'column',
+								alignItems: 'center',
+								marginTop: 'auto',
+							}}
+						>
+							<Link style={{ textDecoration: 'underline' }}>
+								{i18n.language === 'en'
+									? 'Click For The Instructor Contract '
+									: 'Eğitmen Sözleşmesi İçin Tıklayınız '}
+								<GrDocumentPdf
+									style={{
+										display: 'inline-block',
+										position: 'relative',
+										top: '2px',
+									}}
+								/>
+							</Link>
 							<input
 								type='file'
 								name='file'
@@ -685,10 +715,7 @@ function UserInfo() {
 								onChange={handleFileChange}
 								required
 							/>
-							<label
-								htmlFor='file'
-								onClick={(e) => !isEditing && e.preventDefault()}
-							>
+							<label htmlFor='file'>
 								<p>
 									{fileName === null ? (
 										<GrDocumentUpdate
@@ -697,7 +724,7 @@ function UserInfo() {
 												marginRight: '0.5rem',
 												position: 'relative',
 												top: '2px',
-												flexShrink: '0',
+												flexShrink: 'none',
 											}}
 										/>
 									) : (
@@ -707,7 +734,7 @@ function UserInfo() {
 												marginRight: '0.5rem',
 												position: 'relative',
 												top: '2px',
-												flexShrink: '0',
+												flexShrink: 'none',
 											}}
 										/>
 									)}
@@ -720,7 +747,7 @@ function UserInfo() {
 										: fileName}
 								</p>
 							</label>
-						</>
+						</div>
 					)}
 				</div>
 			</div>

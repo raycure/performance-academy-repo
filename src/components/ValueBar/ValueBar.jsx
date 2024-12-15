@@ -13,17 +13,20 @@ function ValueBar() {
 		{
 			title: t('Contact.Value.Title.0'),
 			content: t('Contact.Value.Context.0'),
-			image: '',
+			image:
+				'https://d2csxpduxe849s.cloudfront.net/media/13959BF0-BCE0-4B85-83FC898FABC86C4C/6371B94B-BEFD-4E12-9835705B02D18A59/webimage-F29CD703-F397-4DCE-BB7CE146582915CD.png',
 		},
 		{
 			title: t('Contact.Value.Title.1'),
 			content: t('Contact.Value.Context.1'),
-			image: '',
-		}, //t("Contact.")
+			image:
+				'https://d2lsjsqnstxud9.cloudfront.net/media/13959BF0-BCE0-4B85-83FC898FABC86C4C/A341677E-FE2B-497B-9A0A67005F175693/webimage-2233F2A9-772E-4D73-8B0396906A00E535.png',
+		},
 		{
 			title: t('Contact.Value.Title.2'),
 			content: t('Contact.Value.Context.2'),
-			image: '',
+			image:
+				'https://d2csxpduxe849s.cloudfront.net/media/13959BF0-BCE0-4B85-83FC898FABC86C4C/B2693275-DF4E-48AE-81BB42C8F32CB00A/webimage-12833637-C3EF-4619-8FA36DD9574C091A.png',
 		},
 	];
 	return (
@@ -50,7 +53,7 @@ function ValueBar() {
 				{values.map((value, index) => {
 					return (
 						<SwiperSlide key={index} style={{}}>
-							<img src='/ornek.jpg' alt='value-image' />
+							<img src={value.image} alt='value-image' />
 							<p
 								style={{
 									fontWeight: 'bolder',
@@ -69,7 +72,7 @@ function ValueBar() {
 				{values.map((value, index) => {
 					return (
 						<SwiperSlide key={index} style={{}}>
-							<img src='/ornek.jpg' alt='value-image' />
+							<img src={value.image} alt='value-image' />
 							<p
 								style={{
 									fontWeight: 'bolder',
@@ -90,7 +93,7 @@ function ValueBar() {
 				{values.map((value, index) => {
 					return (
 						<li key={index} className='value-inner-container'>
-							<img src='/ornek.jpg' alt='value-image' />
+							<img src={value.image} alt='value-image' />
 							<p
 								style={{
 									fontWeight: 'bolder',

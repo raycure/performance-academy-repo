@@ -134,7 +134,6 @@ function RegisterForm() {
 		const notificationEvent = new Event('notificationEvent');
 		window.dispatchEvent(notificationEvent);
 	}
-
 	async function handleSubmit(e) {
 		e.preventDefault();
 		try {
@@ -204,14 +203,18 @@ function RegisterForm() {
 					(day.length === 2 && parseInt(day) <= 0) ||
 					(month.length === 2 && parseInt(month) <= 0)
 				) {
-					setBirthDateError('invalid date');
+					setBirthDateError(
+						i18n.language === 'en' ? 'Invalid date' : 'Hatalı tarih formatı.'
+					);
 					return;
 				}
 				if (
 					parseInt(year) > currentYear ||
 					(year.length === 4 && parseInt(year) < 1900)
 				) {
-					setBirthDateError('invalid year');
+					setBirthDateError(
+						i18n.language === 'en' ? 'Invalid year' : 'Hatalı yıl formatı.'
+					);
 					return;
 				}
 				setBirthDateError('');
@@ -241,7 +244,6 @@ function RegisterForm() {
 	return (
 		<div className='authentication-form-container box-shadow'>
 			<form onSubmit={handleSubmit} className='authentication-form'>
-				<img alt='logo' className='logo' src={logo}></img>
 				<p
 					ref={errRef}
 					className={errMsg ? 'errmsg' : 'offscreen'}
@@ -249,7 +251,6 @@ function RegisterForm() {
 				>
 					{errMsg}
 				</p>
-				<p>{t('Authentication.Greet.0')}</p>
 				<div className='twoInputAreas'>
 					<div className='relative-position centerLineAnimation'>
 						<div>
@@ -473,7 +474,9 @@ function RegisterForm() {
 						}
 					>
 						{!validPwd
-							? 'no valid password'
+							? i18n.language === 'en'
+								? 'Not matching.'
+								: 'Eşleştirilemedi.'
 							: 'Must match the first password input field'}
 					</motion.p>
 				</div>

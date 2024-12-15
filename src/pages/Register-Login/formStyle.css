@@ -3,6 +3,18 @@
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: var(--clr-neutral-100) !important;
 } /* autofillde arkaplan olmasın diye */
+.authentication-form-container input:-webkit-autofill,
+#contact-form-grad input:-webkit-autofill,
+.authentication-form-container input:-webkit-autofill:hover,
+#contact-form-grad input:-webkit-autofill:hover,
+.authentication-form-container input:-webkit-autofill:focus,
+#contact-form-grad input:-webkit-autofill:focus,
+.authentication-form-container
+	input:-webkit-autofill:active
+	#contact-form-grad
+	input:-webkit-autofill:active {
+	-webkit-box-shadow: 0 0 0 30px var(--clr-primary-500) inset !important;
+}
 #contact-form-grad input,
 #contact-form-grad textarea,
 .authentication-form-container textarea,

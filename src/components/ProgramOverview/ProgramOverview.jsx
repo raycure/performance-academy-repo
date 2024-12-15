@@ -1,14 +1,16 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './ProgramOverview.css';
 import { LesMillsEvents } from '../../assets/LesmillsEvents';
 import LesmillsPrograms from '../../assets/LesmillsPrograms';
-import { FiMoreHorizontal } from 'react-icons/fi';
 import { HashLink } from 'react-router-hash-link';
 import { useTranslation } from 'react-i18next';
 import { FaRegClock } from 'react-icons/fa';
 import { IoStatsChart } from 'react-icons/io5';
 import { TbWorld } from 'react-icons/tb';
 import { IoMdCloudDownload } from 'react-icons/io';
+import { RxQuestionMarkCircled } from 'react-icons/rx';
+import { IoMdArrowRoundForward } from 'react-icons/io';
+import { Link } from 'react-router-dom';
 function ProgramOverview({ eventID }) {
 	const { i18n, t } = useTranslation('translation');
 	const activeEvent = LesMillsEvents[eventID];
@@ -26,11 +28,27 @@ function ProgramOverview({ eventID }) {
 		const yOffset = -navbarHeight;
 		window.scrollTo({ top: yCoordinate + yOffset, behavior: 'smooth' });
 	};
+	useEffect(() => {
+		const animatedElements = document.querySelectorAll('.addLineAnimation');
+
+		animatedElements.forEach((element) => {
+			element.addEventListener('mouseenter', () => {
+				element.classList.add('lineAnimation');
+				element.addEventListener('mouseleave', () => {
+					element.classList.add('notHoveredLineAnimation');
+				});
+				element.classList.remove('notHoveredLineAnimation');
+			});
+		});
+	});
 	const lessonLength = extractNumbersFromString(program.lessons);
 	const handlePlaylistDowload = () => {};
 	const handleBookletDowload = () => {};
 	const handleChoreographyDowload = () => {};
 	const handleExamDowload = () => {};
+	const assessmentFormResult = true; //dosya yüklendi mi diye, sadece button disablelamak amacıyla kullandım
+	const leftAssessmentTries = 2;
+	const lastExamResult = false;
 	const buttonContent = [
 		{
 			text:
@@ -49,10 +67,6 @@ function ProgramOverview({ eventID }) {
 					? 'Choreography Playlist'
 					: 'Koreografi Şarkıları',
 			function: handlePlaylistDowload,
-		},
-		{
-			text: i18n.language === 'en' ? 'Exam Form' : 'Sınav Formu',
-			function: handleExamDowload,
 		},
 	];
 	function extractNumbersFromString(text) {
@@ -130,6 +144,97 @@ function ProgramOverview({ eventID }) {
 						</span>
 					)}
 				</div>
+				<div className='program-overview-assessment-con'>
+					{lastExamResult === false ? (
+						<div className='fs-400'>
+							<p style={{ color: '#ef3f3f' }}>
+								{i18n.language === 'en'
+									? 'Exam Result: Failed'
+									: 'Sınav Sonucu: Başarısız'}
+							</p>
+							<p>
+								{i18n.language === 'en'
+									? 'Amount of assessment tries left'
+									: 'Kalan sınav deneme hakkı'}
+								: {leftAssessmentTries}
+							</p>
+							{leftAssessmentTries >= 1 ? (
+								<>
+									<hr
+										style={{
+											width: '20%',
+											margin: '0.5rem auto',
+											borderTopWidth: '3px',
+										}}
+									/>
+									<div style={{ textAlign: 'center', marginTop: '0.5rem' }}>
+										<p className='fs-300' style={{ marginBottom: '0.3rem' }}>
+											{i18n.language === 'en'
+												? 'If you want to retake the exam click the link below to pay the exam fee.'
+												: 'Tekrar sınava girmek istiyorsanız aşağıdaki link üzerinden sınav ücretini ödeyebilirsiniz.'}
+										</p>
+										<Link
+											style={{
+												display: 'flex',
+												width: 'fit-content',
+												marginInline: 'auto',
+												gap: '0.3rem',
+											}}
+											className='addLineAnimation'
+										>
+											{i18n.language === 'en'
+												? 'Pay The Exam Fee'
+												: 'Sınav Ücretini Öde'}
+											<IoMdArrowRoundForward
+												style={{
+													position: 'relative',
+													top: '1px',
+													width: '1.2rem',
+													height: '100%',
+												}}
+												className='process-contact-icon'
+											/>
+										</Link>
+									</div>
+								</>
+							) : (
+								<p>
+									{i18n.language === 'en'
+										? 'Unfortunately, your exam attempts have been exhausted. To obtain the certificate, you will need to participate in one of our events again and retake the training from the beginning.'
+										: 'Maalesef sınav haklarınız bitmiştir. Sertifika alabilmek için tekrardan bir etkinliğimize katılıp, eğitimi baştan almanız gerekmektedir.'}
+								</p>
+							)}
+						</div>
+					) : lastExamResult === true ? (
+						<div>
+							<p style={{ color: '#67ef55' }}>
+								{i18n.language === 'en'
+									? 'Exam Result: Passed'
+									: 'Sınav Sonucu: Başarılı'}
+							</p>
+							<p>
+								{i18n.language === 'en'
+									? 'Your certificate will be provided to you through email.'
+									: 'Sertifikanız e-posta yoluyla en yakın zamanda size ulaştırılacaktır.'}
+							</p>
+						</div>
+					) : (
+						<div>
+							<p style={{ color: '#aaaaaa' }}>
+								{i18n.language === 'en'
+									? 'Exam Result: Under Review'
+									: 'Sınav Sonucu: İnceleme Altında'}
+								...
+							</p>
+							<p>
+								{i18n.language === 'en'
+									? 'Amount of assessment tries left'
+									: 'Kalan sınav deneme hakkı'}
+								: {leftAssessmentTries}
+							</p>
+						</div>
+					)}
+				</div>
 				<hr
 					style={{
 						width: '20%',
@@ -138,7 +243,7 @@ function ProgramOverview({ eventID }) {
 						borderTopWidth: '3px',
 					}}
 				/>
-				<label style={{ textAlign: 'center' }}>
+				<label className='fs-400' style={{ textAlign: 'center' }}>
 					{i18n.language === 'en'
 						? 'Click the buttons to download the the contents'
 						: 'İçerikleri indirmek için butonlara tıklayınız'}
@@ -152,6 +257,7 @@ function ProgramOverview({ eventID }) {
 										width: '1.2rem',
 										height: '100%',
 										marginRight: '0.4rem',
+										flexShrink: '0',
 									}}
 									className='overview-icon'
 								/>
@@ -159,19 +265,29 @@ function ProgramOverview({ eventID }) {
 							</button>
 						);
 					})}
+					<button
+						disabled={assessmentFormResult === false}
+						onClick={() => handleExamDowload()}
+					>
+						<IoMdCloudDownload
+							style={{
+								width: '1.2rem',
+								height: '100%',
+								marginRight: '0.4rem',
+								flexShrink: '0',
+							}}
+							className='overview-icon'
+						/>
+						{i18n.language === 'en' ? 'Assessment Form' : 'Değerlendirme Formu'}
+					</button>
 				</div>
 				<HashLink
 					to={'/programlar#' + program.id}
-					style={{
-						position: 'absolute',
-						right: '1rem',
-						bottom: '0.5rem',
-						fontSize: '1.3rem',
-					}}
+					className='program-overview-redirect-icon'
 					smooth
 					scroll={(el) => scrollWithOffset(el)}
 				>
-					<FiMoreHorizontal />
+					<RxQuestionMarkCircled />
 				</HashLink>
 			</div>
 		</div>

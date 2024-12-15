@@ -72,6 +72,13 @@
 	opacity: 1;
 	transform: translateY(0px);
 }
+.page-poster-container {
+	overflow: hidden;
+	height: 40vh;
+	position: relative;
+	display: flex;
+	justify-content: center;
+}
 @media (max-width: 770px) {
 	.class-selector-item {
 		padding-inline: 0.5rem;
@@ -97,13 +104,6 @@
 	}
 }
 
-.page-poster-container {
-	overflow: hidden;
-	height: 40vh;
-	position: relative;
-	display: flex;
-	justify-content: center;
-}
 @media (max-width: 770px) {
 	.class-selector-bar {
 		font-size: var(--fs-300);

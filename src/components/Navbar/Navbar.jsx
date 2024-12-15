@@ -137,6 +137,27 @@ function Navbar() {
 	const toggleDropdown = () => {
 		setIsOpen(!isOpen);
 	};
+	const handleUserDropdownClickOutside = (event) => {
+		const path = event.composedPath ? event.composedPath() : [];
+		if (
+			!path.some(
+				(el) =>
+					el.id === 'navbar-dropdown' || el.id === 'navbar-dropdown-button'
+			)
+		) {
+			setIsOpen(false);
+		}
+	};
+	useEffect(() => {
+		if (isOpen) {
+			document.addEventListener('mousedown', handleUserDropdownClickOutside);
+		} else {
+			document.removeEventListener('mousedown', handleUserDropdownClickOutside);
+		}
+		return () => {
+			document.removeEventListener('mousedown', handleUserDropdownClickOutside);
+		};
+	}, [isOpen]);
 
 	async function handleLogout() {
 		const response = await dispatch(AuthService({ endpoint: '/logout' }));
@@ -159,6 +180,25 @@ function Navbar() {
 					})}
 				</ul>
 				<div className='nav-btn-container nav-container'>
+					<div className='userDropDown' onClick={toggleDropdown}>
+						<FaUser id='navbar-dropdown-button' className='nav-item-icon' />
+						<div
+							id='navbar-dropdown'
+							style={{ top: '2rem' }}
+							className={`dropdown-content ${isOpen ? 'open' : 'closed'}`}
+						>
+							<h4
+								onClick={() => {
+									navigate('/bilgilerim');
+								}}
+							>
+								{i18n.language === 'en' ? 'My Account' : 'Hesabım'}
+							</h4>
+							<h4 onClick={handleLogout}>
+								{i18n.language === 'en' ? 'Logout' : 'Çıkış Yap'}
+							</h4>
+						</div>
+					</div>
 					<Link
 						onClick={() => {
 							if (i18n.language === 'en') {
@@ -173,24 +213,6 @@ function Navbar() {
 						<GrLanguage className='nav-item-icon' />
 						{i18n.language === 'en' ? 'EN' : 'TR'}
 					</Link>
-
-					<div className='userDropDown' onClick={toggleDropdown}>
-						<FaUser className='nav-item-icon' />
-						<div className={`dropdown-content ${isOpen ? 'open' : 'closed'}`}>
-							<h4
-								style={{ color: 'black' }}
-								onClick={() => {
-									navigate('/bilgilerim');
-								}}
-							>
-								user info
-							</h4>
-							<h4 style={{ color: 'black' }} onClick={handleLogout}>
-								signout
-							</h4>
-						</div>
-					</div>
-
 					<Button
 						classProp={`${isLoggedIn ? 'display-hidden' : ''}`}
 						redirect={'/register'}

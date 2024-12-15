@@ -76,11 +76,7 @@ function EventList({ activeProgram, infoActive, onlineCheck }) {
 	const pageAmount = Math.ceil(eventItems.length / eventsPerPage);
 	const paginationNumbers = [...Array(pageAmount + 1).keys()].slice(1);
 	const [selectedEvent, setSelectedEvent] = useState(eventFallback);
-	const [fileName, setFileName] = useState(null);
-	const handleFileChange = (event) => {
-		const file = event.target.files[0];
-		setFileName(file ? file.name : null);
-	};
+
 	const locationClickHandler = () => {
 		window.open(
 			'https://maps.google.com?q=' +
@@ -97,19 +93,16 @@ function EventList({ activeProgram, infoActive, onlineCheck }) {
 		if (paginationPageNumber !== 1) {
 			setPaginationPageNumber(paginationPageNumber - 1);
 		}
-		//executeScroll();
 	}
 
 	function nextPage() {
 		if (paginationPageNumber !== pageAmount) {
 			setPaginationPageNumber(paginationPageNumber + 1);
 		}
-		//executeScroll();
 	}
 
 	function changePageNumber(id) {
 		setPaginationPageNumber(id);
-		//executeScroll();
 	}
 	function handleEventSelection(selected) {
 		setSelectedEvent(selected);
@@ -148,6 +141,9 @@ function EventList({ activeProgram, infoActive, onlineCheck }) {
 		(selectedEvent.fullStartDate.getTime() - today.getTime()) /
 			(1000 * 3600 * 24)
 	);
+	const programImg = programs.filter((program) => {
+		return program.id === selectedEvent.program;
+	})[0].additionalPictures[2].url;
 	if (paginatedEvents === null || paginatedEvents === undefined) {
 		return (
 			<p style={{ textAlign: 'center', padding: '4rem' }}>
@@ -364,11 +360,7 @@ function EventList({ activeProgram, infoActive, onlineCheck }) {
 								: ' Kullanım koşulları ve gizlilik politikasını kabul ediyorum.'}
 						</label>
 					</div>
-					<Button
-						disabled={
-							fileName === null || !acknowledgementChecked ? true : false
-						}
-					>
+					<Button disabled={!acknowledgementChecked ? true : false}>
 						{i18n.language === 'en' ? 'Attend Event!' : 'Etkinliğe Katıl!'}
 					</Button>
 				</div>
@@ -380,7 +372,7 @@ function EventList({ activeProgram, infoActive, onlineCheck }) {
 					minHeight: '80%',
 					alignSelf: 'center',
 				}}
-				src='/ornek.jpg'
+				src={programImg}
 			/>
 		</div>
 	);

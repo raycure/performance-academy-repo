@@ -117,7 +117,7 @@ function Footer() {
 			</div>
 			<div className='footer-container'>
 				<img src={logo} alt='lesmills logo' className='logo' />
-				<p className='text-legal licence-text '>
+				<p className='text-legal'>
 					{i18n.language === 'tr'
 						? '©Personal Fitness Academy LLC Tarafından Lisanslı'
 						: '©Licenced by Personal Fitness Academy LLC'}

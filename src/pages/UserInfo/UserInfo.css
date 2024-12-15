@@ -1,17 +1,35 @@
 .user-info-page input:-webkit-autofill {
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: var(--clr-neutral-100) !important;
-} /* autofillde arkaplan olmasın diye */
-
+} /*no autofill color*/
+.user-info-page input:-webkit-autofill,
+.user-info-page input:-webkit-autofill:hover,
+.user-info-page input:-webkit-autofill:focus,
+.user-info-page input:-webkit-autofill:active {
+	-webkit-box-shadow: 0 0 0 30px var(--clr-primary-400) inset !important;
+}
 .user-info-inner-con label {
 	color: var(--clr-primary-100);
 	font-size: var(--fs-400);
 }
-.user-info-inner-con input:focus {
+.user-info-inner-con input:not(:read-only):focus {
 	border: 1px solid white;
 }
 
-.user-info-inner-con input {
+.user-info-inner-con input:not(:read-only) {
+	all: unset;
+	margin: 0;
+	padding: 0.8rem;
+	border: 1px solid rgba(140, 140, 150, 0.377);
+	width: 100%;
+	box-sizing: border-box;
+	padding: 0.4rem 1rem;
+	border-radius: 0.6rem;
+	-webkit-box-shadow: 0px 1px 3px 1px rgba(71, 71, 71, 0.4);
+	-moz-box-shadow: 0px 1px 3px 1px rgba(71, 71, 71, 0.4);
+	box-shadow: 0px 1px 3px 1px rgba(71, 71, 71, 0.4);
+}
+.user-info-inner-con input:read-only {
 	all: unset;
 	margin: 0;
 	padding: 0.8rem;
@@ -20,9 +38,6 @@
 	box-sizing: border-box;
 	padding: 0.4rem 1rem;
 	border-radius: 0.6rem;
-	-webkit-box-shadow: 0px 1px 3px 1px rgba(71, 71, 71, 0.4);
-	-moz-box-shadow: 0px 1px 3px 1px rgba(71, 71, 71, 0.4);
-	box-shadow: 0px 1px 3px 1px rgba(71, 71, 71, 0.4);
 }
 .user-info-inner-con input[type='password'] {
 	font-family: Verdana;
@@ -107,7 +122,9 @@
 	top: 0.7rem;
 	left: 0.5rem;
 }
-
+.user-info-page div:has(input:read-only) .form-icon {
+	display: none;
+}
 .user-info-page .instructions {
 	color: white;
 	position: relative;
@@ -147,14 +164,8 @@
 	display: flex;
 	justify-content: center;
 }
-.user-info-contract-con {
-	display: flex;
-	align-items: center;
-}
+
 @media (max-width: 800px) {
-	.user-info-contract-con {
-		flex-direction: column;
-	}
 }
 @media (max-width: 570px) {
 	.user-info-grid {

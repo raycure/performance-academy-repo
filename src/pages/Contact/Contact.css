@@ -29,9 +29,6 @@
 .contact-form {
 	padding: 4rem 2rem;
 }
-.contact-form-background {
-	z-index: -1;
-}
 #contact-form-grad {
 	background-image: linear-gradient(
 		var(--clr-primary-400),

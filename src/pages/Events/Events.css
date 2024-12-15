@@ -108,7 +108,6 @@
 .swiper-3d .swiper-slide-shadow-bottom {
 	border-radius: 20px;
 }
-
 .categoryNamesContainer {
 	display: flex;
 	gap: 15px;
@@ -116,35 +115,29 @@
 	border-bottom: 2px solid transparent;
 	transition: border-color 0.3s ease;
 }
-
 .categoryNamesContainer h3 {
 	margin: 0;
 }
-
 .categoryNamesContainer h3:hover {
 	border-bottom: 2px solid #000; /* Adds a line under category on hover */
 }
-
-.logosContainer {
-	display: flex;
-	flex-wrap: wrap;
-	gap: 10px;
-	margin-top: 20px;
-}
-
-.logosContainer img {
-	width: 50px; /* Adjust logo size as needed */
-	height: auto;
-}
-
 .dropDownMenus {
 	display: flex;
 }
-
 .dropDownCategoryMenu {
 	position: relative;
 }
-
+.dropDownCategories {
+	position: absolute;
+	display: none;
+	background-color: var(--clr-primary-350);
+	color: white;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	padding: 10px;
+	border-radius: 5px;
+	z-index: 1;
+	font-size: var(--fs-400);
+}
 .dropDownCategoriesButton {
 	padding: 10px 20px;
 	color: white;
@@ -153,32 +146,21 @@
 	border-radius: 5px;
 	font-size: 16px;
 }
-
-.dropDownCategories {
-	position: absolute;
-	display: none;
-	background-color: #f9f9f9;
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-	padding: 10px;
-	border-radius: 5px;
-	z-index: 1;
-}
-
 .dropDownCategoriesActive {
 	display: flex;
 	flex-direction: column;
 	margin-top: 10px;
 }
-
+.dropDownCategoryItem:not(:last-of-type) {
+	border-bottom: 1px solid white;
+}
 .dropDownCategoryItem {
 	padding: 8px;
-	color: black;
 	cursor: pointer;
 	transition: background-color 0.2s;
 }
-
 .dropDownCategoryItem:hover {
-	background-color: #e2e2e2;
+	color: var(--clr-primary-100);
 }
 .radioContainer {
 	display: flex;

@@ -62,7 +62,7 @@ function ClassList({ classType }) {
 							</p>
 						</div>
 						<div className='classes-more-info-container top-border-light fs-400 '>
-							<div>
+							<div className='fs-300'>
 								<p>
 									{i18n.language === 'tr' ? 'Türü' : 'Type'}: {program.type}
 								</p>

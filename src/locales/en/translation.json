@@ -153,5 +153,25 @@
 			"We expect great things from our instructors, so within 60 days of completing your Initial Training, you will also need to submit an assessment video to demonstrate that your skills are at the highest level.",
 			"All certifications must be completed within six months of attending the training."
 		]
+	},
+	"MyPrograms": {
+		"Entry": "On this page, you can access the contents of the events you have signed up for. These include a playlist of choreographies, a booklet specific to the event, and a general booklet for the program.\n\nYou can also view your exam results here. If you did not pass, you will be provided with a link to make the payment required to retake the exam.\n\nYou are allowed three attempts to pass the exam. After the first attempt, a fee of $50 will be required for each subsequent attempt. If you exhaust all three attempts without passing, you will need to register for a new event to try again.",
+		"item1": "After participating in the event, you can access your training video through this platform.",
+		"item4": "If you joined a license program, you can access the updated content every 3 months via our Les Mills Releases App mobile application.",
+		"item5": [
+			"To access license content:",
+			"You must complete your registration process.",
+			"Please note that it may take a few days for your account to become active; we appreciate your patience."
+		],
+		"item2": [
+			"After participating in the training:",
+			"You need to submit your training video to us.",
+			"Our team will review your submission and evaluate your performance for compliance with the required standards."
+		],
+		"item3": [
+			"If your performance meets the required standards:",
+			"You will earn your official certificate.",
+			"Your certificate will be sent to you via email."
+		]
 	}
 }

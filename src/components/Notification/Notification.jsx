@@ -1,16 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import './notificationStyle.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { GoInfo } from 'react-icons/go';
-import { FiCheckCircle } from 'react-icons/fi';
-
-import { FiXCircle } from 'react-icons/fi';
+import { IoInformationCircleOutline } from 'react-icons/io5';
+import { FaRegCircleCheck } from 'react-icons/fa6';
+import { TbExclamationCircle } from 'react-icons/tb';
 import { MdClose } from 'react-icons/md';
-
+import { useTranslation } from 'react-i18next';
+import { AiFillExclamationCircle } from 'react-icons/ai';
+import { FaInfoCircle } from 'react-icons/fa';
+import { FaCheckCircle } from 'react-icons/fa';
+import { FaTimesCircle } from 'react-icons/fa';
+import { FaCircleExclamation } from 'react-icons/fa6';
+import { FaCircleXmark } from 'react-icons/fa6';
+import { HiMiniXCircle } from 'react-icons/hi2';
 const CustomNotification = () => {
 	//todo color and style properly
 	const [notification, setNotification] = useState(null);
-
+	const [notificationTitle, setNotificationTitle] = useState('');
+	const { t, i18n } = useTranslation('translation');
 	useEffect(() => {
 		window.addEventListener('notificationEvent', handleStorageChange);
 		const savedNotification = JSON.parse(localStorage.getItem('Notifexp'));
@@ -30,14 +37,14 @@ const CustomNotification = () => {
 		}
 	};
 
-	useEffect(() => {
-		if (notification?.duration) {
-			const timer = setTimeout(() => {
-				closeNotification();
-			}, notification.duration);
-			return () => clearTimeout(timer);
-		}
-	}, [notification]);
+	// useEffect(() => {
+	// 	if (notification?.duration) {
+	// 		const timer = setTimeout(() => {
+	// 			closeNotification();
+	// 		}, notification.duration);
+	// 		return () => clearTimeout(timer);
+	// 	}
+	// }, [notification]);
 
 	if (!notification) return null;
 
@@ -49,23 +56,49 @@ const CustomNotification = () => {
 	const renderIcon = () => {
 		switch (notification.type) {
 			case 'info':
-				return <GoInfo style={{ width: 20, height: 20 }} />;
+				return <FaInfoCircle style={{ width: '87%', height: '87%' }} />;
 			case 'success':
-				return <FiCheckCircle style={{ width: 20, height: 20 }} />;
+				return <FaCheckCircle style={{ width: '90%', height: '90%' }} />;
 			case 'error':
-				return <FiXCircle style={{ width: 20, height: 20 }} />;
+				return <HiMiniXCircle style={{ width: '100%', height: '100%' }} />;
+			case 'warning':
+				return <FaCircleExclamation style={{ width: '85%', height: '85%' }} />;
 			default:
 				return null;
 		}
 	};
-
 	return (
 		<div className={`notification ${notification.type}`}>
 			<div className='notification-content'>
-				{renderIcon()}
-				<span>{notification.message}</span>
+				<p className='notification-icon'>{renderIcon()}</p>
+				<div>
+					<h1 style={{ fontWeight: 'bolder' }} className='text-primary-500'>
+						{notification.type === 'info'
+							? i18n.language === 'en'
+								? 'Info'
+								: 'Bilgi'
+							: notification.type === 'success'
+							? i18n.language === 'en'
+								? 'Success'
+								: 'Başarılı'
+							: notification.type === 'error'
+							? i18n.language === 'en'
+								? 'Error'
+								: 'Sorun'
+							: i18n.language === 'en'
+							? 'Warning'
+							: 'Uyarı'}
+					</h1>
+					<p className='text-accent-100'>{notification.message}</p>
+				</div>
 				<button className='close-btn' onClick={closeNotification}>
-					<MdClose style={{ width: 20, height: 20, color: '#a33749' }} />
+					<MdClose
+						style={{
+							flexShrink: '0',
+							width: '100%',
+							height: '100%',
+						}}
+					/>
 				</button>
 			</div>
 		</div>

@@ -1,12 +1,13 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useRef } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import './ClassInfo.css';
 import LesmillsPrograms from '../../assets/LesmillsPrograms';
 import { useTranslation } from 'react-i18next';
 import EventList from '../../components/EventItem/EventList.jsx';
 import { PiBarbell } from 'react-icons/pi';
 import { MdDoubleArrow } from 'react-icons/md';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { setId } from '../../redux/Slices/ProgramIdSlice.js';
 import BynderEmbed from '../../components/BynderEmbed/BynderEmbed.jsx';
 function ClassInfo() {
 	const { t, i18n } = useTranslation('translation');
@@ -28,6 +29,17 @@ function ClassInfo() {
 		.sort(() => 0.5 - Math.random())
 		.slice(0, 3); //shuffles array and returns 3 random programs
 
+	const navigate = useNavigate();
+	const dispatch = useDispatch();
+	const handleSelectId = (id) => {
+		dispatch(setId(id));
+		navigate('/program');
+		window.scrollTo({
+			top: 0,
+			left: 0,
+			behavior: 'instant',
+		});
+	};
 	if (!program) {
 		return (
 			<p>
@@ -36,7 +48,7 @@ function ClassInfo() {
 		);
 	}
 	return (
-		<>
+		<div className='class-info-outer-con'>
 			<div
 				className='page-poster-container'
 				style={{ paddingLeft: '5vw', flexDirection: 'column' }}
@@ -45,168 +57,170 @@ function ClassInfo() {
 					aria-label='program pic'
 					className='background-image'
 					style={{ opacity: 0.6 }}
-					src={program.additionalPictures[3].url}
+					src={program.additionalPictures[0].url}
 				/>
 				<p className='poster-heading'>{program.title}</p>
 				<p className='fs-minimal-heading'>{program.result}</p>
 			</div>
-			<p className='class-info-sum'>{program.sum}</p>
-			<section className='class-info-grid'>
-				<img src={program.additionalPictures[1].url} alt='name' />
-				<div
-					style={{
-						display: 'flex',
-						flexDirection: 'column',
-						justifyContent: 'space-evenly',
-					}}
-				>
+			<section>
+				<p className='class-info-sum'>{program.sum}</p>
+				<section className='class-info-grid'>
+					<img src={program.additionalPictures[1].url} alt='name' />
 					<div
-						className='fs-minimal-heading fw-bold'
-						style={{ padding: '0.5rem 0rem 0.7rem' }}
+						style={{
+							display: 'flex',
+							flexDirection: 'column',
+							justifyContent: 'space-evenly',
+						}}
 					>
-						{i18n.language === 'en' ? (
-							<p>What Is {program.title}?</p>
+						<div
+							className='fs-minimal-heading fw-bold'
+							style={{ padding: '0.5rem 0rem 0.7rem' }}
+						>
+							{i18n.language === 'en' ? (
+								<p>What Is {program.title}?</p>
+							) : (
+								<p>{program.title} Nedir?</p>
+							)}
+						</div>
+						<p>{program.description}</p>
+						<div
+							style={{
+								display: 'flex',
+								flexDirection: 'row',
+								justifyContent: 'center',
+							}}
+						>
+							<hr
+								style={{
+									width: '100%',
+									alignSelf: 'center',
+									margin: '0rem 1.5rem 0rem 0rem',
+								}}
+							/>
+							<PiBarbell
+								style={{
+									display: 'inline-block',
+									minWidth: '1.5rem',
+									height: '100%',
+								}}
+							/>
+							<hr
+								style={{
+									width: '100%',
+									alignSelf: 'center',
+									margin: '0rem 0rem 0rem 1.5rem',
+								}}
+							/>
+						</div>
+						<p>
+							{i18n.language === 'tr' ? 'Türü' : 'Type'}: {program.type}
+						</p>
+						<p>
+							{i18n.language === 'tr' ? 'Gerekli Ekipman' : 'Needed Equipment'}:{' '}
+							{program.equipment}
+						</p>
+						<p>
+							{i18n.language === 'tr' ? 'Kime Yönelik' : 'For'}: {program.for}
+						</p>
+					</div>
+					<div style={{ textAlign: 'center' }}>
+						<div
+							style={{
+								display: 'flex',
+								flexDirection: 'row',
+								justifyContent: 'center',
+							}}
+						>
+							<hr
+								style={{
+									width: '10%',
+									alignSelf: 'center',
+									margin: '0rem 1.5rem',
+								}}
+							/>
+							<PiBarbell
+								style={{
+									display: 'inline-block',
+									minWidth: '1.5rem',
+									height: '100%',
+								}}
+							/>
+							<hr
+								style={{
+									width: '10%',
+									alignSelf: 'center',
+									margin: '0rem 1.5rem',
+								}}
+							/>
+						</div>
+						<p
+							className='fs-minimal-heading fw-bold'
+							style={{ padding: '0.5rem 0rem 0.7rem' }}
+						>
+							{i18n.language === 'en' ? 'Why' : 'Neden'} {program.title}?
+						</p>
+						{!program.why ? (
+							<>
+								{program.whyMember}
+								<hr
+									style={{
+										width: '80%',
+										border: 'none',
+										borderTop: '0px solid #ccc',
+										margin: '10px 0',
+									}}
+								/>
+								{program.whyYou}
+							</>
 						) : (
-							<p>{program.title} Nedir?</p>
+							<div style={{ fontSize: '0.9rem' }}>
+								{program.sum}
+								<hr
+									style={{
+										width: '80%',
+										border: 'none',
+										borderTop: '0px solid #ccc',
+										margin: '10px 0',
+									}}
+								/>
+								{program.why}
+							</div>
 						)}
 					</div>
-					<p>{program.description}</p>
+					<img src={program.additionalPictures[3].url} alt='name' />
+				</section>
+				<BynderEmbed
+					mediaId={program.mediaId}
+					accountUrl='https://marketing.lesmills.com'
+					language={i18n.language}
+					autoplay={false}
+				/>
+				<section>
 					<div
+						className='fs-minimal-heading center-item'
 						style={{
 							display: 'flex',
-							flexDirection: 'row',
-							justifyContent: 'center',
+							flexDirection: 'column',
+							alignItems: 'center',
+							padding: '1rem',
+							marginBottom: '2rem',
 						}}
 					>
-						<hr
-							style={{
-								width: '100%',
-								alignSelf: 'center',
-								margin: '0rem 1.5rem 0rem 0rem',
-							}}
-						/>
-						<PiBarbell
-							style={{
-								display: 'inline-block',
-								minWidth: '1.5rem',
-								height: '100%',
-							}}
-						/>
-						<hr
-							style={{
-								width: '100%',
-								alignSelf: 'center',
-								margin: '0rem 0rem 0rem 1.5rem',
-							}}
-						/>
+						<p style={{ textAlign: 'center' }}>
+							{i18n.language === 'en'
+								? 'Would You Like To Become a Certified'
+								: 'Etkinliklerimizden Birisine Katılarak'}
+						</p>
+						<p className='fs-secondary-heading fw-bold'>{program.title}</p>
+						<p style={{ textAlign: 'center' }}>
+							{i18n.language === 'en'
+								? 'Instructor by Joining One of Our Events?'
+								: 'Programının Sertifikalı Eğitmeni Olmak İster Misin?'}
+						</p>
 					</div>
-					<p>
-						{i18n.language === 'tr' ? 'Türü' : 'Type'}: {program.type}
-					</p>
-					<p>
-						{i18n.language === 'tr' ? 'Gerekli Ekipman' : 'Needed Equipment'}:{' '}
-						{program.equipment}
-					</p>
-					<p>
-						{i18n.language === 'tr' ? 'Kime Yönelik' : 'For'}: {program.for}
-					</p>
-				</div>
-				<div style={{ textAlign: 'center' }}>
-					<div
-						style={{
-							display: 'flex',
-							flexDirection: 'row',
-							justifyContent: 'center',
-						}}
-					>
-						<hr
-							style={{
-								width: '10%',
-								alignSelf: 'center',
-								margin: '0rem 1.5rem',
-							}}
-						/>
-						<PiBarbell
-							style={{
-								display: 'inline-block',
-								minWidth: '1.5rem',
-								height: '100%',
-							}}
-						/>
-						<hr
-							style={{
-								width: '10%',
-								alignSelf: 'center',
-								margin: '0rem 1.5rem',
-							}}
-						/>
-					</div>
-					<p
-						className='fs-minimal-heading fw-bold'
-						style={{ padding: '0.5rem 0rem 0.7rem' }}
-					>
-						{i18n.language === 'en' ? 'Why' : 'Neden'} {program.title}?
-					</p>
-					{!program.why ? (
-						<>
-							{program.whyMember}
-							<hr
-								style={{
-									width: '80%',
-									border: 'none',
-									borderTop: '0px solid #ccc',
-									margin: '10px 0',
-								}}
-							/>
-							{program.whyYou}
-						</>
-					) : (
-						<>
-							{program.sum}
-							<hr
-								style={{
-									width: '80%',
-									border: 'none',
-									borderTop: '0px solid #ccc',
-									margin: '10px 0',
-								}}
-							/>
-							{program.why}
-						</>
-					)}
-				</div>
-				<img src={program.additionalPictures[3].url} alt='name' />
-			</section>
-			<BynderEmbed
-				mediaId={program.mediaId}
-				accountUrl='https://marketing.lesmills.com'
-				language={i18n.language}
-				autoplay={false}
-			/>
-			<section>
-				<div
-					className='fs-minimal-heading center-item'
-					style={{
-						display: 'flex',
-						flexDirection: 'column',
-						alignItems: 'center',
-						padding: '1rem',
-						marginBottom: '2rem',
-					}}
-				>
-					<p style={{ textAlign: 'center' }}>
-						{i18n.language === 'en'
-							? 'Would You Like To Become a Certified'
-							: 'Etkinliklerimizden Birisine Katılarak'}
-					</p>
-					<p className='fs-secondary-heading fw-bold'>{program.title}</p>
-					<p style={{ textAlign: 'center' }}>
-						{i18n.language === 'en'
-							? 'Instructor by Joining One of Our Events?'
-							: 'Programının Sertifikalı Eğitmeni Olmak İster Misin?'}
-					</p>
-				</div>
-				<EventList activeProgram={programID} infoActive={false} />
+					<EventList activeProgram={programID} infoActive={false} />
+				</section>
 			</section>
 			<ul className='class-rec-con'>
 				{recPrograms.map((program, index) => {
@@ -222,43 +236,24 @@ function ClassInfo() {
 								className='bg-primary-trnsp rec-program-info'
 							>
 								<p className='fw-bold'>{program.title}</p>
+
+								<div className='rec-program-sum'>
+									<p className='fs-300 text-neutral-100'>{program.sum}</p>
+								</div>
 								<Link
 									to={`/program#${program.id}`}
 									state={{ program: program.id }}
 									className='fs-400 text-neutral-100 more-link'
-									onClick={() => {
-										window.scrollTo({
-											top: 0,
-											left: 0,
-											behavior: 'instant',
-										});
-									}}
 									style={{
 										display: 'flex',
 										alignItems: 'center',
 										gap: '0.2rem',
 									}}
+									onClick={() => handleSelectId(program.id)}
 								>
 									{i18n.language === 'en' ? 'More' : 'İncele'}
 									<MdDoubleArrow style={{ width: '1rem', height: '100%' }} />
 								</Link>
-								<div className='rec-program-sum'>
-									<p className='fs-300 text-neutral-100'>{program.sum}</p>
-									<Link
-										to={`/program#${program.id}`}
-										state={{ program: program.id }}
-										className='fs-400 text-neutral-100'
-										onClick={() => {
-											window.scrollTo({
-												top: 0,
-												left: 0,
-												behavior: 'instant',
-											});
-										}}
-									>
-										{i18n.language === 'en' ? 'More' : 'İncele'}
-									</Link>
-								</div>
 							</div>
 						</li>
 					);
@@ -285,7 +280,7 @@ function ClassInfo() {
 					</Link>
 				</li>
 			</ul>
-		</>
+		</div>
 	);
 }
 export default ClassInfo;

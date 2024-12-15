@@ -31,7 +31,7 @@ function FAQ() {
 			);
 		});
 	return (
-		<div className='faq-outer-container text-container'>
+		<section className='faq-outer-container text-container'>
 			<div>
 				<div className='below1100'>
 					<motion.p
@@ -83,7 +83,7 @@ function FAQ() {
 				)}
 				{activeResponse}
 			</div>
-		</div>
+		</section>
 	);
 }
 export default FAQ;
