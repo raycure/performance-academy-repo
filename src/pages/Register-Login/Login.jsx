@@ -18,37 +18,37 @@ import HoneypotInput from '../../components/Forms/HoneypotInput.jsx';
 function Login() {
 	const { t, i18n } = useTranslation('translation');
 	const userRef = useRef();
-	const errRef = useRef();
 	const navigate = useNavigate();
 	let isLoading = useSelector(selectIsLoading);
 	const dispatch = useDispatch();
 
 	const [mailorNationalID, setMailorNationalID] = useState('11111111111');
 	const [pwd, setPwd] = useState('aaA!1aaa');
-	const [errMsg, setErrMsg] = useState('');
-	const [success, setSuccess] = useState(false);
 	const [localLoading, setLocalLoading] = useState(false);
 	const [showForgotPassordForm, setShowForgotPassordForm] = useState(false);
 
-	// useEffect(() => {
-	// 	checkIsLoggedIn();
-	// 	userRef.current.focus();
-	// }, []);
+	useEffect(() => {
+		checkIsLoggedIn();
+		userRef.current.focus();
+	}, []);
 
-	// let isLoggedIn = useSelector(selectIsLoggedIn);
-	// const checkIsLoggedIn = () => {
-	// 	if (isLoggedIn) {
-	// 		navigate('/');
-	// 	}
-	// };
-
-	// todo delete it im switching to a redux based approach
-	// useEffect(() => {
-	// 	const isLoggedIn = localStorage.getItem('isLoggedIn');
-	// 	if (isLoggedIn === 'true') {
-	// 		navigate('/');
-	// 	}
-	// }, []);
+	let isLoggedIn = useSelector(selectIsLoggedIn);
+	const checkIsLoggedIn = () => {
+		if (isLoggedIn) {
+			const verifyNotif = {
+				type: 'error',
+				duration: 2000,
+				message:
+					i18n.language === 'en'
+						? "You're already logged in."
+						: 'Hali hazırda oturumunuz bulunmaktadır.',
+			};
+			localStorage.setItem('Notifexp', JSON.stringify(verifyNotif));
+			const notificationEvent = new Event('notificationEvent');
+			window.dispatchEvent(notificationEvent);
+			navigate('/');
+		}
+	};
 
 	const handleForgotPasswordForm = async () => {
 		try {
@@ -78,7 +78,7 @@ function Login() {
 				);
 			}
 			setMailorNationalID('');
-			setSuccess(true);
+			setPwd('');
 			setLocalLoading(true);
 			// todo addnotif to inform the user
 		} catch (error) {
@@ -101,7 +101,6 @@ function Login() {
 				};
 			}
 			setLocalLoading(true);
-
 			const response = await dispatch(
 				AuthService({
 					data: loginData,
@@ -114,22 +113,11 @@ function Login() {
 
 			setMailorNationalID('');
 			setPwd('');
-			setSuccess(true);
-			setLocalLoading(false);
-			// navigate('/');
-
-			// setTimeout(() => {
-			// 	navigate('/');
-			// }, 2000);
+			setTimeout(() => {
+				navigate('/');
+			}, 1000);
 		} catch (err) {
-			if (err.response?.status === 429) {
-				setErrMsg('Too many requests, please try again later.');
-			}
-			console.log('err', err);
-
-			err.payload.data === undefined // todo find a way to listen for no internet connection
-				? setErrMsg('int baglanti falan')
-				: setErrMsg(err.payload?.data?.message);
+			console.log('an unexpected error happened', err);
 		}
 	};
 
@@ -139,13 +127,6 @@ function Login() {
 			<div className='authentication-form-container box-shadow'>
 				<form onSubmit={handleSubmit} className='authentication-form'>
 					<img alt='logo' className='logo' src={logo}></img>
-					<p
-						ref={errRef}
-						className={errMsg ? 'errmsg' : 'offscreen'}
-						aria-live='assertive'
-					>
-						{errMsg}
-					</p>
 					<h1>{t('Authentication.Greet.1')}</h1>
 					<div className='centerLineAnimation'>
 						<input

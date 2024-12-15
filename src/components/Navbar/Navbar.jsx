@@ -182,32 +182,34 @@ function Navbar() {
 					})}
 				</ul>
 				<div className='nav-btn-container nav-container'>
-					<div className='userDropDown' onClick={toggleDropdown}>
-						<FaUser id='navbar-dropdown-button' className='nav-item-icon' />
-						<div
-							id='navbar-dropdown'
-							style={{ top: '2rem' }}
-							className={`dropdown-content ${isOpen ? 'open' : 'closed'}`}
-						>
-							<h4
-								onClick={() => {
-									navigate('/bilgilerim');
-								}}
+					{isLoggedIn && (
+						<div className='userDropDown' onClick={toggleDropdown}>
+							<FaUser id='navbar-dropdown-button' className='nav-item-icon' />
+							<div
+								id='navbar-dropdown'
+								style={{ top: '2rem' }}
+								className={`dropdown-content ${isOpen ? 'open' : 'closed'}`}
 							>
-								{i18n.language === 'en' ? 'My Account' : 'Hesabım'}
-							</h4>
-							<h4
-								onClick={() => {
-									navigate('/programlarım');
-								}}
-							>
-								{i18n.language === 'en' ? 'My Programs' : 'Programlarım'}
-							</h4>
-							<h4 onClick={handleLogout}>
-								{i18n.language === 'en' ? 'Logout' : 'Çıkış Yap'}
-							</h4>
+								<h4
+									onClick={() => {
+										navigate('/bilgilerim');
+									}}
+								>
+									{i18n.language === 'en' ? 'My Account' : 'Hesabım'}
+								</h4>
+								<h4
+									onClick={() => {
+										navigate('/programlarım');
+									}}
+								>
+									{i18n.language === 'en' ? 'My Programs' : 'Programlarım'}
+								</h4>
+								<h4 onClick={handleLogout}>
+									{i18n.language === 'en' ? 'Logout' : 'Çıkış Yap'}
+								</h4>
+							</div>
 						</div>
-					</div>
+					)}
 					<Link
 						onClick={() => {
 							if (i18n.language === 'en') {

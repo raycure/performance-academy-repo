@@ -23,8 +23,7 @@ function EventList({ activeProgram, infoActive, onlineCheck }) {
 	let isLoggedIn = useSelector(selectIsLoggedIn);
 
 	async function Payment(e) {
-		e.preventDefault;
-
+		e.preventDefault();
 		if (!isLoggedIn) {
 			// todo give a notif that they need to login first
 			navigate('/login');

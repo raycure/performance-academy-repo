@@ -49,6 +49,7 @@ function ClassInfo() {
 	}
 	return (
 		<div className='class-info-outer-con'>
+			<EventList activeProgram={programID} infoActive={false} />
 			<div
 				className='page-poster-container'
 				style={{ paddingLeft: '5vw', flexDirection: 'column' }}
@@ -219,7 +220,7 @@ function ClassInfo() {
 								: 'Programının Sertifikalı Eğitmeni Olmak İster Misin?'}
 						</p>
 					</div>
-					<EventList activeProgram={programID} infoActive={false} />
+					{/* <EventList activeProgram={programID} infoActive={false} /> */}
 				</section>
 			</section>
 			<ul className='class-rec-con'>

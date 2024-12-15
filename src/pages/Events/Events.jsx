@@ -154,6 +154,7 @@ function Events() {
 			}
 		}
 	}, [location]);
+
 	const classes = Object.keys(lesMillsPrograms).map((category) => {
 		if (category !== activeCategory || activeCategory === 'all') return null;
 		return lesMillsPrograms[category].map((classTitle, index) => {
@@ -253,43 +254,43 @@ function Events() {
 						</div>
 					</div>
 				</div>
-				<div class='radio-group'>
-					<div class='radio-option'>
+				<div className='radio-group'>
+					<div className='radio-option'>
 						<input
 							value={onlineCheck}
 							type='radio'
 							name='radio-option'
-							class='radio-btn'
+							className='radio-btn'
 							checked={onlineCheck === true}
 							onChange={() => handleOnlineSelect(true)}
 						/>
-						<label class='radio-label'>
+						<label className='radio-label'>
 							{i18n.language === 'en' ? 'Online' : 'Sanal'}
 						</label>
 					</div>
-					<div class='radio-option'>
+					<div className='radio-option'>
 						<input
 							value={!onlineCheck}
 							type='radio'
 							name='radio-option'
-							class='radio-btn'
+							className='radio-btn'
 							checked={onlineCheck === false}
 							onChange={() => handleOnlineSelect(false)}
 						/>
-						<label class='radio-label'>
+						<label className='radio-label'>
 							{i18n.language === 'en' ? 'In-Person' : 'Canlı'}
 						</label>
 					</div>
-					<div class='radio-option'>
+					<div className='radio-option'>
 						<input
 							value={onlineCheck === null || onlineCheck === undefined}
 							type='radio'
 							name='radio-option'
-							class='radio-btn'
+							className='radio-btn'
 							checked={onlineCheck === null || onlineCheck === undefined}
 							onChange={() => handleOnlineSelect(null)}
 						/>
-						<label class='radio-label'>
+						<label className='radio-label'>
 							{i18n.language === 'en' ? 'All' : 'Hepsi'}
 						</label>
 					</div>

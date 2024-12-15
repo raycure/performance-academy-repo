@@ -41,6 +41,7 @@ export const fetchData = createAsyncThunk(
 				method: method,
 			});
 			console.log('response in slice', response);
+
 			return {
 				data: response.data,
 				status: response.status,
@@ -53,6 +54,9 @@ export const fetchData = createAsyncThunk(
 				status: error.response?.status,
 				headers: error.response?.headers,
 			};
+
+			console.log('error in slice', error);
+
 			return rejectWithValue(responseData);
 		}
 	}
@@ -71,7 +75,6 @@ const authSlice = createSlice({
 				state.status = 'succeeded';
 				state.isLoading = false;
 				state.isSuccess = true;
-				state.current = action.payload.data;
 				if (action.payload.endpoint.includes('/login')) {
 					state.isLoggedIn = true;
 				}
@@ -110,4 +113,3 @@ export const selectError = (state) => state.auth.error;
 export const selectAuthState = (state) => state.auth;
 export const userPreferenceReducer = UserPreference.reducer;
 export default authSlice.reducer;
-export { setupAxiosDefaults };

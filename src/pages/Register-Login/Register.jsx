@@ -129,7 +129,10 @@ function RegisterForm() {
 		const verifyNotif = {
 			type: 'info',
 			duration: 5000,
-			message: 'Verify Mail sent',
+			message:
+				i18n.language === 'en'
+					? 'Verification mail has been sent'
+					: 'mailinizi dogrulamaniz icin gereken mail gonderildi ',
 		};
 		localStorage.setItem('Notifexp', JSON.stringify(verifyNotif));
 		const notificationEvent = new Event('notificationEvent');
@@ -244,6 +247,7 @@ function RegisterForm() {
 
 	return (
 		<div className='authentication-form-container box-shadow'>
+			{/* <button onClick={displayNotif}>testNotif</button> */}
 			<form onSubmit={handleSubmit} className='authentication-form'>
 				<p
 					ref={errRef}

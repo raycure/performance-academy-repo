@@ -50,13 +50,8 @@ function UserInfo() {
 					endpoint: '/userInfo',
 				})
 			);
-			console.log(
-				'response for initUserInfo',
-				response.payload.data.accessToken
-			);
 
 			const user = response.payload.data.foundUser;
-
 			const date = new Date(user.birthDate);
 			const day = String(date.getDate()).padStart(2, '0'); // Get day and add leading zero if needed
 			const month = String(date.getMonth() + 1).padStart(2, '0'); // Get month (0-indexed) and add leading zero
@@ -68,11 +63,7 @@ function UserInfo() {
 			setSurname(user.surname);
 			setBirthDate(day + '/' + month + '/' + year);
 		} catch (error) {
-			// const status = error.payload.status;
-			// if (status === 401) {
-			// 	displayNotif();
-			// 	navigate('/');
-			// }
+			navigate('/');
 			console.log('userinfo fetch error', error);
 		}
 	};

@@ -1,5 +1,6 @@
 import axios from '../pages/api/axios.js';
 import { fetchData } from '../redux/auth/authStateSlice.js';
+import errorHandler from '../components/Notification/errorHandler.js';
 
 export const AuthService =
 	// data can be empty to include api calls like logouts
@@ -40,12 +41,15 @@ export const AuthService =
 
 				return response;
 			} catch (error) {
+				console.log('error in service ', error);
+
 				const isIpBlocked =
 					error.payload?.headers && error.payload?.headers['ip-blocked'];
 				if (isIpBlocked) {
 					const ipBlockedEvent = new Event('ipBlockedEvent');
 					window.dispatchEvent(ipBlockedEvent);
 				}
-				return Promise.reject(error);
+				// return Promise.reject(error);
+				return errorHandler(error);
 			}
 		};

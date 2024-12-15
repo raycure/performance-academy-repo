@@ -13,8 +13,6 @@ import { useNavigate } from 'react-router-dom';
 import { useRef } from 'react';
 import Banner from '../../components/Banner/Banner.jsx';
 import FAQ from '../../components/FAQ/FAQ.jsx';
-//import testortheflamboyantimg from '../../assets/testortheflamboyantimg.png';
-
 import { useTranslation } from 'react-i18next';
 import BecomeInstructorCards from '../../components/BecomeInstructorCards/BecomeInstructorCards.jsx';
 import Button from '../../components/Button/Button.jsx';
@@ -179,12 +177,6 @@ function Main() {
 					/>
 				</motion.div>
 			</section>
-			{/* <div style={{ position: 'relative' }} id='testttt'>
-				<img src={testortheflamboyantimg} style={{ top: testHeight1 }}></img>
-				<span className='testspann' style={{ top: `${testHeight1}px` }}></span>
-			</div> */}
-			{/* //todo vidi gizle butonu */}
-
 			<BecomeInstructorCards />
 			<section>
 				<h2

@@ -37,14 +37,14 @@ const CustomNotification = () => {
 		}
 	};
 
-	// useEffect(() => {
-	// 	if (notification?.duration) {
-	// 		const timer = setTimeout(() => {
-	// 			closeNotification();
-	// 		}, notification.duration);
-	// 		return () => clearTimeout(timer);
-	// 	}
-	// }, [notification]);
+	useEffect(() => {
+		if (notification?.duration) {
+			const timer = setTimeout(() => {
+				closeNotification();
+			}, notification.duration);
+			return () => clearTimeout(timer);
+		}
+	}, [notification]);
 
 	if (!notification) return null;
 
@@ -70,7 +70,7 @@ const CustomNotification = () => {
 	return (
 		<div className={`notification ${notification.type}`}>
 			<div className='notification-content'>
-				<p className='notification-icon'>{renderIcon()}</p>
+				<div className='notification-icon'>{renderIcon()}</div>
 				<div>
 					<h1 style={{ fontWeight: 'bolder' }} className='text-primary-500'>
 						{notification.type === 'info'
