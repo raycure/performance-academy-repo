@@ -1,36 +1,9 @@
-// LES-MILLS-SPRINT
-// LES-MILLS-GRIT
-
-// BORN-TO-MOVE
-
-// BODYPUMP
-// BODYCOMBAT
-// BODYBALANCE
-// LES-MILLS-CORE
-// BODYATTACK
-// RPM
-// SH’BAM
-// BODYJAM
-// BODYSTEP
-// LES-MILLS-TONE
-// THE-TRIP
-// LES-MILLS-BARRE
-// {
-// 	title: 'meowww',
-// 	start: "2024-11-30",
-// 	end: "2024-11-30",
-// 	program: 'BODYSTEP',
-// 	online: true,
-// 	time: iunno,
-//	location: [40.7719881790364,-74.07145598632484],
-//  instructor: ""
-// }
 function assignUniqueIds(events) {
 	return events.map((event, index) => ({
 		...event,
-		id: index,
 		fullStartDate: new Date(event.start),
 		fullEndDate: new Date(event.end),
+		id: `${event.title}_${event.start}_${event.end}_${event.online}`,
 	}));
 }
 

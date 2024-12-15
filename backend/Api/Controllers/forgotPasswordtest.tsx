@@ -12,7 +12,6 @@ import {
   Row,
   Column,
 } from '@react-email/components';
-
 import EmailComponent from './componentTest.js';
 
 // Define interfaces for data structure
@@ -23,6 +22,7 @@ interface EmailLocalization {
     text: string;
     button: string;
   };
+  regards: string[];
   footer: string;
 }
 
@@ -34,24 +34,24 @@ interface StyleObject {
 // Localization data
 const localizationData: Record<string, EmailLocalization> = {
   en: {
-    preview: 'You have successfully opened an account.',
+    preview: 'You have requested to change your password.',
     greeting: 'Hi',
     content: {
-      text: 'Please click the button below to verify your email address.',
-      button: 'Verify Email Address',
+      text: 'To change your password, click the button below.',
+      button: 'Reset Password',
     },
-    footer:
-      "If you're having trouble clicking the 'Verify Email Address' button, copy and paste the URL below into your web browser:",
+    regards: ['Best regards,', 'Team'],
+    footer: "If you're having trouble clicking the 'Reset Password' button, copy and paste the URL below into your web browser: ",
   },
   tr: {
-    preview: 'Başarıyla bir hesap oluşturdunuz.',
+    preview: 'Parolanızı değiştirmeyi talep ettiniz.',
     greeting: 'Merhaba',
     content: {
-      text: 'Lütfen aşağıdaki butona basarak hesabınızı doğrulayın.',
-      button: 'Hesabınızı Doğrulayın',
+      text: 'Parolanızı değiştirmek için aşağıdaki butona basınız.',
+      button: 'Parolamı Değiştir',
     },
-    footer:
-      'Eğer butona basmakta sorun yaşıyorsanız bu linki kopyalayıp tarayıcınıza yapıştırabilirsiniz: ',
+    regards: ['İyi dileklerimizle,', 'Takımı'],
+    footer: 'Eğer butona basmakta sorun yaşıyorsanız bu linki kopyalayıp tarayıcınıza yapıştırabilirsiniz: ',
   },
 };
 
@@ -82,27 +82,25 @@ const AddWbr: React.FC<{ link: string }> = ({ link }) => {
       <wbr />
     </React.Fragment>
   ));
-
   return <Link href={link}>{modifiedText}</Link>;
 };
 
 // Main Email Component
-interface VerificationEmailProps {
+interface ForgotPasswordEmailProps {
   language?: 'en' | 'tr';
   name: string;
   surname: string;
-  verificationLink: string;
+  passwordResetLink: 'dsafa.com';
 }
 
-export default function VerificationEmail({
+export default function ForgotPasswordEmail({
   language = 'en',
   name,
   surname,
-  verificationLink,
-}: VerificationEmailProps): React.ReactElement {
+  passwordResetLink,
+}: ForgotPasswordEmailProps): React.ReactElement {
   // Select localization based on language, default to English
   const local = localizationData[language] || localizationData['en'];
-
 
   return (
     <Html>
@@ -131,16 +129,22 @@ export default function VerificationEmail({
           </Row>
           <Row>
             <Column align="center">
-              <Button href={verificationLink} style={styles.button}>
+              <Button href={passwordResetLink} style={styles.button}>
                 {local.content.button}
               </Button>
             </Column>
+          </Row>
+          <Row>
+            <Text>
+              {local.regards[0]} <br />
+              Performance Fitness Academy {local.regards[1]}
+            </Text>
           </Row>
         </Section>
         <Hr style={styles.line} />
         <Section>
           <Text>
-            {local.footer} <AddWbr link={verificationLink} />
+            {local.footer} <AddWbr link={passwordResetLink} />
           </Text>
         </Section>
       </EmailComponent>

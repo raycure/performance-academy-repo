@@ -11,7 +11,6 @@ import { useState } from 'react';
 import axios from '../api/axios.js';
 import { useNavigate } from 'react-router-dom';
 import { useRef } from 'react';
-
 import Banner from '../../components/Banner/Banner.jsx';
 import FAQ from '../../components/FAQ/FAQ.jsx';
 //import testortheflamboyantimg from '../../assets/testortheflamboyantimg.png';
@@ -19,28 +18,12 @@ import FAQ from '../../components/FAQ/FAQ.jsx';
 import { useTranslation } from 'react-i18next';
 import BecomeInstructorCards from '../../components/BecomeInstructorCards/BecomeInstructorCards.jsx';
 import Button from '../../components/Button/Button.jsx';
-import { AuthService } from '../../auth/auth.service.js';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { setPreferredLanguage } from '../../redux/auth/authStateSlice.js';
 
 function Main() {
 	const dispatch = useDispatch();
 	const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-	//todo delete it later
-
-	async function handleLogout() {
-		console.log({
-			accessToken: localStorage.getItem('accessToken'),
-		});
-		const response = await axios.post('/logout', {
-			withCredentials: true,
-		});
-		console.log(response);
-		localStorage.removeItem('isLoggedIn');
-
-		if (response.status === 200) {
-			localStorage.removeItem('accessToken');
-		}
-	}
 
 	const [navbarHeight, setnavbarHeight] = useState(0);
 	useLayoutEffect(() => {
@@ -49,15 +32,6 @@ function Main() {
 		setnavbarHeight(headerHeight);
 	}, []);
 
-	// const [testHeight1, settestHeight] = useState(0);
-	// useEffect(() => {
-	// 	const test = document.querySelector('#testttt');
-	// 	const testHeight = test.offsetHeight;
-	// 	settestHeight(testHeight - 300);
-	// }, []);
-
-	const [subSuccess, setSubSuccess] = useState(false);
-	const [ipAddress, setIpAddress] = useState();
 	const lesMillsPrograms = LesMillsPrograms();
 	let navigate = useNavigate();
 	function routeChange(category) {
@@ -78,7 +52,7 @@ function Main() {
 				/>
 				{lesMillsPrograms[category].map((program, programIndex) => (
 					<Fragment key={programIndex}>
-						{/* If you want to pass key to a Fragment, you can’t use the <>...</> syntax. You have to explicitly import Fragment from 'react' and render <Fragment key={yourKey}>...</Fragment>. thats why we are using Fragment here */}
+						{/* If you want to pass `key to a Fragment, you can’t use the <>...</> syntax. You have to explicitly import Fragment from 'react' and render <Fragment key={yourKey}>...</Fragment>. thats why we are using Fragment here */}
 						<p>{program.title}</p>
 						<hr />
 						{program.subTitles &&
@@ -122,108 +96,15 @@ function Main() {
 			</motion.div>
 		);
 	});
-	async function handleSub() {
-		try {
-			const accessToken = localStorage.getItem('accessToken');
-			const response = await axios.get('/test', {
-				withCredentials: true,
-				headers: { Authorization: `Bearer ${accessToken}` },
-			});
-			console.log('response login.jsx: ', response);
-			setSubSuccess(true);
-		} catch (err) {
-			console.log(err);
-
-			if (err?.response?.status === 401 || err?.response?.status === 403) {
-				console.log(
-					'Token expired or unauthorized, attempting to refresh token...'
-				);
-				const refreshResponse = await axios.get('/refresh', {
-					withCredentials: true,
-				});
-				const newAccessToken = refreshResponse.data.accessToken;
-				localStorage.setItem('accessToken', newAccessToken);
-				const response = await axios.get('/test', {
-					withCredentials: true,
-					headers: { Authorization: `Bearer ${newAccessToken}` },
-				});
-				setSubSuccess(true);
-			}
-		}
-	}
 
 	const scrollingImgRef = useRef(null);
 	const { scrollYProgress } = useScroll({
 		target: scrollingImgRef,
 		offset: ['start end', ' end start'], // first start is the top of the element and the end is the end of the screen ['',''] first quates are when the animation starts and the second one is when it ends
 	});
-	async function testPayment() {
-		const programId = selectedEvent.title;
-		const response = await dispatch(
-			AuthService({
-				data: { id: programId },
-				method: 'POST',
-				endpoint: '/pay',
-			})
-		);
-		const paymentUrl = response.payload.data.url;
-		if (paymentUrl) {
-			window.location = paymentUrl;
-		}
-		console.log('response');
-	}
-
-	async function handleIpBlockReq(e) {
-		e.preventDefault();
-		try {
-			const response = await dispatch(
-				AuthService({
-					data: { ip: ipAddress },
-					method: 'POST',
-					endpoint: '/blockIp',
-				})
-			);
-		} catch (error) {
-			console.log(error);
-		}
-	}
-
-	async function testpurchases() {
-		const response = await dispatch(
-			AuthService({
-				data: {},
-				method: 'GET',
-				endpoint: '/pay',
-			})
-		);
-		console.log('response for testpurchases ', response);
-	}
-
 	const scrollWith = useTransform(scrollYProgress, [0.3, 0.632], [0, -250]); // [0,0.91] is how much its being scrolled .91 because of the header [0,-250] for the top attribute and it changes based on the 0 to 0.91
 	return (
 		<>
-			<button onClick={testpurchases}> fsajdsa</button>
-
-			<form onSubmit={handleIpBlockReq}>
-				<input
-					onChange={(e) => setIpAddress(e.target.value)}
-					value={ipAddress}
-					required
-					type='text'
-				/>
-				<Button type='submit'>
-					{i18n.language === 'en' ? 'Send' : 'Gönder'}
-				</Button>
-			</form>
-			<button onClick={handleSub}>
-				{subSuccess ? (
-					<p>Request was successful!</p>
-				) : (
-					<p>Click to submit request</p>
-				)}
-			</button>
-			<br></br>
-			<button onClick={handleLogout}>logout</button>
 			<div className='main-welcome-text-outer-con'>
 				<div className='main-welcome-text-inner-con'>
 					<div className='fs-primary-heading'>

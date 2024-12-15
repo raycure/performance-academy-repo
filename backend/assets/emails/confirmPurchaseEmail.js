@@ -11,7 +11,7 @@ import {
 	Link,
 	Row,
 } from '@react-email/components';
-import EmailComponent from './EmailComponent.js';
+import EmailComponent from './emailComponent.js';
 // Localization data
 const localizationData = {
 	en: {
@@ -96,7 +96,8 @@ export default function PurchaseConfirmationEmail({
 }) {
 	// Select localization based on language, default to English
 	console.log('url', url);
-	console.log('url', url.myProgramsUrl);
+	console.log('url myprograms', url.myProgramsUrl);
+	console.log('url contactUrl', url.contactUrl);
 	const local = localizationData[language] || localizationData['en'];
 	// Helper function to replace placeholders in text
 	const formatText = (text) =>

@@ -2,12 +2,19 @@ import axios from '../pages/api/axios.js';
 import { fetchData } from '../redux/auth/authStateSlice.js';
 
 export const AuthService =
-	// data can be empty to include api calls like logout
+	// data can be empty to include api calls like logouts
 
 
 		({ endpoint, data = {}, method }) =>
 		async (dispatch) => {
-			// const navigate = useNavigate();
+			const isBotAttempt = localStorage.getItem('botAttempt');
+			console.log('isBotAttempt', isBotAttempt);
+
+			if (isBotAttempt) {
+				console.log('bot atet');
+
+				return null;
+			}
 			try {
 				const response = await dispatch(
 					fetchData({
@@ -17,11 +24,12 @@ export const AuthService =
 					})
 				);
 
-				const isAccessTokenRefresh =
-					response.payload.headers &&
-					response.payload.headers['x-refreshed-token'];
+				console.log('response in service', response);
 
-				console.log('isAccessTokenRefresh', isAccessTokenRefresh);
+				const isAccessTokenRefresh =
+					response.payload?.headers &&
+					response.payload?.headers['x-refreshed-token'];
+
 				if (isAccessTokenRefresh) {
 					let newAccessToken = response.payload.data.accessToken;
 					localStorage.setItem('accessToken', newAccessToken);
@@ -33,12 +41,11 @@ export const AuthService =
 				return response;
 			} catch (error) {
 				const isIpBlocked =
-					error.payload.headers && error.payload.headers['ip-blocked'];
+					error.payload?.headers && error.payload?.headers['ip-blocked'];
 				if (isIpBlocked) {
 					const ipBlockedEvent = new Event('ipBlockedEvent');
 					window.dispatchEvent(ipBlockedEvent);
 				}
-				// console.log();
 				return Promise.reject(error);
 			}
 		};

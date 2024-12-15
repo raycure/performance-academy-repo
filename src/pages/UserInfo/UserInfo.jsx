@@ -23,6 +23,7 @@ import { AuthService } from '../../auth/auth.service';
 import { useNavigate } from 'react-router-dom';
 import { GrDocumentPdf } from 'react-icons/gr';
 import { Link } from 'react-router-dom';
+import HoneypotInput from '../../components/Forms/HoneypotInput';
 
 function UserInfo() {
 	const dispatch = useDispatch();
@@ -801,6 +802,7 @@ function UserInfo() {
 					</button>
 				</div>
 			</div>
+			<HoneypotInput />
 		</section>
 	);
 }

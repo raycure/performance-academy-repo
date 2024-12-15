@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import { LesMillsEvents } from '../../assets/LesmillsEvents';
 import './EventItem.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { setEventId } from '../../redux/Slices/CalendarEventSlice.js';

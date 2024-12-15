@@ -160,7 +160,9 @@ function Navbar() {
 	}, [isOpen]);
 
 	async function handleLogout() {
-		const response = await dispatch(AuthService({ endpoint: '/logout' }));
+		const response = await dispatch(
+			AuthService({ endpoint: '/logout', method: 'POST' })
+		);
 		localStorage.removeItem('accessToken');
 	}
 
@@ -193,6 +195,13 @@ function Navbar() {
 								}}
 							>
 								{i18n.language === 'en' ? 'My Account' : 'Hesabım'}
+							</h4>
+							<h4
+								onClick={() => {
+									navigate('/programlarım');
+								}}
+							>
+								{i18n.language === 'en' ? 'My Programs' : 'Programlarım'}
 							</h4>
 							<h4 onClick={handleLogout}>
 								{i18n.language === 'en' ? 'Logout' : 'Çıkış Yap'}

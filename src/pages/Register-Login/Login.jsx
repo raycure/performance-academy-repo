@@ -13,6 +13,7 @@ import {
 	selectIsLoggedIn,
 } from '../../redux/auth/authStateSlice.js';
 import { useTranslation } from 'react-i18next';
+import HoneypotInput from '../../components/Forms/HoneypotInput.jsx';
 
 function Login() {
 	const { t, i18n } = useTranslation('translation');
@@ -27,18 +28,19 @@ function Login() {
 	const [errMsg, setErrMsg] = useState('');
 	const [success, setSuccess] = useState(false);
 	const [localLoading, setLocalLoading] = useState(false);
+	const [showForgotPassordForm, setShowForgotPassordForm] = useState(false);
 
-	useEffect(() => {
-		checkIsLoggedIn();
-		userRef.current.focus();
-	}, []);
+	// useEffect(() => {
+	// 	checkIsLoggedIn();
+	// 	userRef.current.focus();
+	// }, []);
 
-	let isLoggedIn = useSelector(selectIsLoggedIn);
-	const checkIsLoggedIn = () => {
-		if (isLoggedIn) {
-			navigate('/');
-		}
-	};
+	// let isLoggedIn = useSelector(selectIsLoggedIn);
+	// const checkIsLoggedIn = () => {
+	// 	if (isLoggedIn) {
+	// 		navigate('/');
+	// 	}
+	// };
 
 	// todo delete it im switching to a redux based approach
 	// useEffect(() => {
@@ -48,19 +50,57 @@ function Login() {
 	// 	}
 	// }, []);
 
-	const handleSubmit = async (e) => {
-		e.preventDefault();
+	const handleForgotPasswordForm = async () => {
+		try {
+			console.log('forgot pasword form triggered');
+
+			let forgotPasswordData;
+			if (mailorNationalID.includes('@')) {
+				console.log('its an email');
+				forgotPasswordData = { email: mailorNationalID };
+			} else {
+				console.log('its an natid');
+				forgotPasswordData = { nationalID: mailorNationalID };
+			}
+			const response = await dispatch(
+				AuthService({
+					data: forgotPasswordData,
+					method: 'POST',
+					endpoint: `/forgotPassword`,
+				})
+			);
+			console.log('response', response);
+
+			if (response.payload.status === 200) {
+				localStorage.setItem(
+					'emailVerificationToken',
+					response.payload.data.emailVerificationToken
+				);
+			}
+			setMailorNationalID('');
+			setSuccess(true);
+			setLocalLoading(true);
+			// todo addnotif to inform the user
+		} catch (error) {
+			console.log('error at forgot password', error);
+		}
+	};
+
+	const handleSubmit = async () => {
 		try {
 			let loginData;
 			if (mailorNationalID.includes('@')) {
-				console.log(mailorNationalID);
-
-				loginData = { email: mailorNationalID, password: pwd };
+				loginData = {
+					email: mailorNationalID,
+					password: pwd,
+				};
 			} else {
-				console.log(mailorNationalID);
-
-				loginData = { nationalID: mailorNationalID, password: pwd };
+				loginData = {
+					nationalID: mailorNationalID,
+					password: pwd,
+				};
 			}
+			setLocalLoading(true);
 
 			const response = await dispatch(
 				AuthService({
@@ -69,17 +109,13 @@ function Login() {
 					endpoint: '/login',
 				})
 			);
-			console.log('response loginde ', response);
 			const accessToken = response.payload.data.accessToken;
-			console.log('accessToken loginde', accessToken);
 			localStorage.setItem('accessToken', accessToken);
 
-			const isLoggedIn = response ? true : false; //todo change it to user roles and stuff
-			localStorage.setItem('isLoggedIn', isLoggedIn);
 			setMailorNationalID('');
 			setPwd('');
 			setSuccess(true);
-			setLocalLoading(true);
+			setLocalLoading(false);
 			// navigate('/');
 
 			// setTimeout(() => {
@@ -124,20 +160,52 @@ function Login() {
 							}
 						/>
 					</div>
-					<div className='centerLineAnimation'>
-						<input
-							type='password'
-							id='password'
-							onChange={(e) => setPwd(e.target.value)}
-							value={pwd}
-							required
-							placeholder={t('Authentication.Password.0')}
-						/>
-					</div>
+					{!showForgotPassordForm && (
+						<div className='centerLineAnimation'>
+							<input
+								type='password'
+								id='password'
+								onChange={(e) => setPwd(e.target.value)}
+								value={pwd}
+								required
+								placeholder={t('Authentication.Password.0')}
+							/>
+						</div>
+					)}
+
+					{!showForgotPassordForm && (
+						<button
+							onClick={() => setShowForgotPassordForm(!showForgotPassordForm)}
+							type='button'
+						>
+							forgot password? Reset it.
+						</button>
+					)}
+
+					{showForgotPassordForm && (
+						<p>
+							Enter your email adress, we gonna send you a link to reset your
+							password.
+						</p>
+					)}
 
 					<div className='authentication-button-container'>
-						<Button isLoading={localLoading || isLoading}>
-							{i18n.language === 'en' ? 'Sign In' : 'Giriş Yap'}
+						<Button
+							isLoading={localLoading || isLoading}
+							onClick={(e) => {
+								e.preventDefault(); // Prevent default form submission
+								showForgotPassordForm
+									? handleForgotPasswordForm()
+									: handleSubmit();
+							}}
+						>
+							{showForgotPassordForm
+								? i18n.language === 'en'
+									? 'forgot password'
+									: 'sifremi unuttum'
+								: i18n.language === 'en'
+								? 'Sign In'
+								: 'Giriş Yap'}
 						</Button>
 						<Link
 							to='/register'
@@ -146,6 +214,8 @@ function Login() {
 							{t('Authentication.Redirect.1')}
 						</Link>
 					</div>
+
+					<HoneypotInput />
 				</form>
 				<AuthenticationGreet />
 			</div>

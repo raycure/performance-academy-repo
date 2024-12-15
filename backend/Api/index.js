@@ -46,13 +46,14 @@ app.use('/blockIp', blockIpRoute);
 app.use(ipBlockChecker);
 app.use(limiter);
 app.use('/register', registerRoute);
-app.use('/login', loginRoute);
+app.use('/', loginRoute);
 app.use('/logout', logoutRoute);
 app.use('/', verifyMailRoute);
 app.use('/pay', authMiddleware, paymentRoute);
 
 app.use('/userInfo', authMiddleware, userInfoRoute);
-app.use('/submitContactForm', authMiddleware, contactFormRoute);
+app.use('/submitContactForm', contactFormRoute);
+// app.use('/submitContactForm', contactFormRoute);
 mongoose
 	.connect(
 		'mongodb+srv://devemresr:IHybYDDzzbfGdcGe@performance-academy.2x7gw.mongodb.net/Performance_Academy?retryWrites=true&w=majority&appName=Performance-Academy'

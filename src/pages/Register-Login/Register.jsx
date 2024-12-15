@@ -16,6 +16,7 @@ import { descending } from '../../components/animations/AnimationValues.jsx';
 import { selectIsLoading } from '../../redux/auth/authStateSlice.js';
 import './formStyle.css';
 import { useTranslation } from 'react-i18next';
+import HoneypotInput from '../../components/Forms/HoneypotInput.jsx';
 
 function RegisterForm() {
 	const { t, i18n } = useTranslation('translation');
@@ -152,16 +153,16 @@ function RegisterForm() {
 					method: 'POST',
 				})
 			);
-			setName('');
-			setSurname('');
-			setLocalLoading(true);
-			setNationalID('');
-			setPwd('');
-			setMatchPwd('');
-			displayNotif();
-			setTimeout(() => {
-				navigate('/');
-			}, 1500);
+			// setName('');
+			// setSurname('');
+			// setLocalLoading(true);
+			// setNationalID('');
+			// setPwd('');
+			// setMatchPwd('');
+			// displayNotif();
+			// setTimeout(() => {
+			// 	navigate('/');
+			// }, 1500);
 		} catch (err) {
 			if (err.response?.status === 429) {
 				setErrMsg('Too many requests, please try again later.');
@@ -502,6 +503,7 @@ function RegisterForm() {
 						{t('Authentication.Redirect.0')}
 					</Link>
 				</div>
+				<HoneypotInput />
 			</form>
 			<AuthenticationGreet />
 		</div>

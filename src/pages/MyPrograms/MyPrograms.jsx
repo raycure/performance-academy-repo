@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import ProgramOverview from '../../components/ProgramOverview/ProgramOverview';
 import '../../components/ProgramOverview/ProgramOverview.css';
 import { selectIsLoggedIn } from '../../redux/auth/authStateSlice';
@@ -7,8 +7,36 @@ import { useNavigate } from 'react-router-dom';
 import { AiOutlineExclamationCircle } from 'react-icons/ai';
 import { useTranslation } from 'react-i18next';
 import LicenceContactRedirect from '../../components/LicenceContactRedirect/LicenceContactRedirect';
+import { useDispatch } from 'react-redux';
+import { AuthService } from '../../auth/auth.service';
 function MyPrograms() {
-	const userEventIDs = ['1', '3'];
+	const dispatch = useDispatch();
+	useEffect(() => {
+		initUserInfo();
+	}, []);
+	const initUserInfo = async () => {
+		try {
+			const response = await dispatch(
+				AuthService({
+					method: 'GET',
+					endpoint: '/userInfo',
+				})
+			);
+			const user = response.payload.data.foundUser;
+			const userPurchases = user.purchases;
+			setUserEventIds(userPurchases);
+		} catch (error) {
+			console.log('userinfo fetch error', error);
+		}
+	};
+
+	const [userEventIds, setUserEventIds] = useState([]);
+
+	useEffect(() => {
+		userEventIds.map((id) => {
+			console.log(id.productId);
+		});
+	}, [userEventIds]);
 	const navigate = useNavigate();
 	const { t, i18n } = useTranslation('');
 	let isLoggedIn = useSelector(selectIsLoggedIn);
@@ -16,7 +44,7 @@ function MyPrograms() {
 		if (!isLoggedIn) {
 			const verifyNotif = {
 				type: 'info',
-				duration: 5000,
+				duration: 3000,
 				message: 'Please login',
 			};
 			localStorage.setItem('Notifexp', JSON.stringify(verifyNotif));
@@ -38,13 +66,19 @@ function MyPrograms() {
 			>
 				{t('MyPrograms.Entry')}
 			</p>
-			{userEventIDs.map((id) => {
-				return (
-					<div key={id} style={{ margin: '4rem 2rem' }}>
-						<ProgramOverview eventID={id} />
+			{userEventIds.length === 0 ? (
+				<section style={{ textAlign: 'center' }}>
+					{i18n.language === 'en'
+						? 'No programs purchased yet.'
+						: 'Henüz hiç program satın alınmadı.'}
+				</section>
+			) : (
+				userEventIds.map((item) => (
+					<div key={item.productId} style={{ margin: '4rem' }}>
+						<ProgramOverview eventID={item.productId} />
 					</div>
-				);
-			})}
+				))
+			)}
 			<div className='my-programs-list-grid'>
 				<ul className='my-programs-list'>
 					<h1>
