@@ -13,8 +13,37 @@ import { FaMoneyCheck } from 'react-icons/fa6';
 import { TbWorld } from 'react-icons/tb';
 import LesmillsPrograms from '../../assets/LesmillsPrograms';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { selectIsLoggedIn } from '../../redux/auth/authStateSlice';
+import { AuthService } from '../../auth/auth.service';
+import { useDispatch } from 'react-redux';
 function EventList({ activeProgram, infoActive, onlineCheck }) {
+	const dispatch = useDispatch();
+	const navigate = useNavigate();
+	let isLoggedIn = useSelector(selectIsLoggedIn);
+
+	async function Payment(e) {
+		e.preventDefault;
+
+		if (!isLoggedIn) {
+			// todo give a notif that they need to login first
+			navigate('/login');
+		}
+		const response = await dispatch(
+			AuthService({
+				data: { id: selectedEvent.id },
+				method: 'POST',
+				endpoint: '/pay',
+			})
+		);
+		const paymentUrl = response.payload.data.url;
+		if (paymentUrl) {
+			window.location = paymentUrl;
+		}
+	}
+
 	const today = new Date();
+
 	const eventFallback = LesMillsEvents.filter((event) => {
 		if (activeProgram === 'all') {
 			return event.fullStartDate >= today;
@@ -76,11 +105,6 @@ function EventList({ activeProgram, infoActive, onlineCheck }) {
 	const pageAmount = Math.ceil(eventItems.length / eventsPerPage);
 	const paginationNumbers = [...Array(pageAmount + 1).keys()].slice(1);
 	const [selectedEvent, setSelectedEvent] = useState(eventFallback);
-	const [fileName, setFileName] = useState(null);
-	const handleFileChange = (event) => {
-		const file = event.target.files[0];
-		setFileName(file ? file.name : null);
-	};
 	const locationClickHandler = () => {
 		window.open(
 			'https://maps.google.com?q=' +
@@ -365,9 +389,9 @@ function EventList({ activeProgram, infoActive, onlineCheck }) {
 						</label>
 					</div>
 					<Button
-						disabled={
-							fileName === null || !acknowledgementChecked ? true : false
-						}
+						// disabled={!acknowledgementChecked ? true : false}
+						// todo add contract verification
+						onClick={(e) => Payment(e)}
 					>
 						{i18n.language === 'en' ? 'Attend Event!' : 'Etkinliğe Katıl!'}
 					</Button>

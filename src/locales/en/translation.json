@@ -102,7 +102,7 @@
 		"Form": {
 			"Title": "Contact Us",
 			"Name": "Name",
-			"Surname": "Surename",
+			"Surname": "Surname",
 			"Topic": "Topic",
 			"Context": "Your Question"
 		}

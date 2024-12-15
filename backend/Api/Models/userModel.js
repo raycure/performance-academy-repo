@@ -26,11 +26,11 @@ const UserSchema = mongoose.Schema(
 			type: String,
 			required: [true, 'Please enter a password'],
 		},
-		removed: {
+		verifiedMail: {
 			type: Boolean,
 			default: false,
 		},
-		verified: {
+		verifiedContract: {
 			type: Boolean,
 			default: false,
 		},

@@ -2,6 +2,7 @@ import verifyJWT from './verifyJWT.js';
 import Users from '../Models/userModel.js';
 import { ObjectId } from 'mongodb';
 import refreshJwt from '../Controllers/refreshJwt.js';
+import Sessions from '../Models/sessionModel.js';
 import jwt from 'jsonwebtoken';
 const authMiddleware = async (req, res, next) => {
 	try {
@@ -12,9 +13,18 @@ const authMiddleware = async (req, res, next) => {
 
 		const decodedToken = jwt.decode(refreshToken);
 		const userIdFromToken = decodedToken.userId;
+
+		const foundActiveSession = await Sessions.findOne({
+			userId: new ObjectId(userIdFromToken),
+		});
+
+		if (!foundActiveSession) {
+			return res.status(404).json({ message: 'no active session' });
+		}
 		const foundUser = await Users.findOne({
 			_id: new ObjectId(userIdFromToken),
 		});
+
 		if (!foundUser) {
 			return res.status(404).json({
 				message: 'no user found',

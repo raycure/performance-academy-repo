@@ -26,6 +26,9 @@ const Suspended = lazy(() =>
 );
 const Admin = lazy(() => import('./pages/Admin/Admin'));
 const Dashboard = lazy(() => import('./pages/Admin/Dashboard'));
+const ForgotPassword = lazy(() =>
+	import('./pages/Register-Login/ForgotPassword')
+);
 
 function App() {
 	return (
@@ -49,6 +52,11 @@ function App() {
 								<Route path='admin' element={<Admin />} />
 								<Route path='süreç' element={<Process />} />
 								<Route path='dashboard' element={<Dashboard />} />
+								<Route
+									path='forgotPassword/:token'
+									element={<ForgotPassword />}
+								/>
+
 								<Route
 									path='kişisel-verilerin-korunması'
 									element={<PrivacyPolicy />}

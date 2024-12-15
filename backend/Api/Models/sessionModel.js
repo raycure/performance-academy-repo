@@ -2,13 +2,8 @@ import mongoose from 'mongoose';
 
 const SessionSchema = mongoose.Schema(
 	{
-		token: {
+		refreshToken: {
 			type: String,
-			required: true,
-		},
-		userId: {
-			type: mongoose.Schema.Types.ObjectId,
-			ref: 'Users',
 			required: true,
 		},
 		ip: {
@@ -16,10 +11,12 @@ const SessionSchema = mongoose.Schema(
 			required: true,
 			trim: true,
 		},
-		// expiresAt: {
-		//   type: Date,
-		//   required: true,
-		// },
+		userId: {
+			type: mongoose.Schema.Types.ObjectId,
+			ref: 'Users',
+			required: true,
+			index: true,
+		},
 	},
 	{
 		timestamps: true,

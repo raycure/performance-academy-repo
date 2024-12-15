@@ -315,9 +315,6 @@ function Events() {
 			/>
 
 			{/* <PaginationContainer /> */}
-			<a href={test} download='test'>
-				test
-			</a>
 			<form onSubmit={handleUpload}>
 				<input
 					type='file'

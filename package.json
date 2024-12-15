@@ -6,7 +6,6 @@
 	"scripts": {
 		"dev": "vite",
 		"build": "vite build",
-		"serve": "nodemon ./Api/index.js",
 		"lint": "eslint .",
 		"preview": "vite preview",
 		"email": "email dev --dir src/emails"

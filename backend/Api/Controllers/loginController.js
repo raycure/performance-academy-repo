@@ -10,6 +10,7 @@ import Sessions from '../Models/sessionModel.js';
 const login = async (req, res) => {
 	try {
 		const { email, nationalID, password } = req.body;
+
 		// only one of the two is required both cant be required
 
 		const loginSchema = Joi.object({
@@ -17,6 +18,7 @@ const login = async (req, res) => {
 			nationalID: Joi.string().optional(),
 			password: Joi.string().required(),
 		}).xor('email', 'nationalID');
+		// The .xor('email', 'nationalID') is crucial - it means EXACTLY ONE of email or nationalID must be present, but not both
 		try {
 			await loginSchema.validateAsync({
 				...(email && { email }),
@@ -32,13 +34,19 @@ const login = async (req, res) => {
 
 		// Build query based on which identifier is provided
 		const query = {
-			removed: false,
+			blocked: false,
 			...(email && { email }),
 			...(nationalID && { nationalID }),
 		};
 
+		console.log('email in login controller', email);
+		console.log('nationalID in login controller', nationalID);
+		console.log('password in login controller', password);
+		console.log('quert', query);
+
 		const user = await Users.findOne(query);
 
+		console.log('quert', user);
 		if (!user) {
 			return res.status(404).json({
 				success: false,
@@ -46,12 +54,8 @@ const login = async (req, res) => {
 				message: 'No account found with provided credentials.',
 			});
 		}
-		let databasePassword = await Users.findOne({
-			_id: user._id,
-			removed: false,
-		});
 
-		const isMatch = await pkg.compare(password, databasePassword.password);
+		const isMatch = await pkg.compare(password, user.password);
 
 		if (!isMatch) {
 			return res.status(403).json({
@@ -78,7 +82,7 @@ const login = async (req, res) => {
 				...(email && { email }),
 			},
 			process.env.REFRESH_TOKEN_SECRET,
-			{ expiresIn: '1d' } //todo change it
+			{ expiresIn: '10d' } //todo change it
 		);
 
 		res.cookie('jwt', refreshToken, {
@@ -98,7 +102,7 @@ const login = async (req, res) => {
 			.split(',')[0]
 			.trim();
 		const addActiveUser = await Sessions.create({
-			token: refreshToken,
+			refreshToken: refreshToken,
 			userId: user._id,
 			ip: clientIp,
 		});
@@ -106,10 +110,11 @@ const login = async (req, res) => {
 		// todo decide if i should retunr the user or nah
 		return res.status(200).json({
 			accessToken: accessToken,
-			user,
 			message: 'Successfully login user',
 		});
 	} catch (error) {
+		console.log('error', error);
+
 		return res.status(500).json({
 			success: false,
 			result: null,
@@ -136,7 +141,6 @@ const admingLogin = async (req, res) => {
 		}
 		let databaseUserCreds = await Users.findOne({
 			_id: user._id,
-			removed: false,
 		});
 
 		const isPasswordMatch = await pkg.compare(

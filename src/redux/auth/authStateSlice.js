@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from '../../pages/api/axios.js';
 
 const initialState = {
-	current: {},
+	deviceId: null,
 	isLoggedIn: false,
 	status: 'idle',
 	isLoading: false,
@@ -10,40 +10,40 @@ const initialState = {
 	error: null,
 };
 
-function test() {
-	const setupAxiosDefaults = (token) => {
-		if (token) {
-			console.log('token does exist');
-			axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-		} else {
-			console.log('token doesnt exist');
-			delete axios.defaults.headers.common['Authorization'];
-		}
-		axios.defaults.withCredentials = true;
-	};
+const initialStateForLang = {
+	preferredLanguage: null,
+};
 
-	const savedToken = localStorage.getItem('accessToken');
-	console.log('localdeki token ', savedToken);
-
-	if (savedToken) {
-		setupAxiosDefaults(savedToken);
+function setupAxiosDefaults() {
+	const accesstoken = localStorage.getItem('accessToken');
+	if (accesstoken) {
+		console.log('token does exist');
+		axios.defaults.headers.common['Authorization'] = `Bearer ${accesstoken}`;
+	} else {
+		console.log('token doesnt exist');
+		delete axios.defaults.headers.common['Authorization'];
 	}
+
+	const preferredLanguages = navigator.languages || [navigator.language];
+	const primaryLanguage = preferredLanguages[0]; // Get the most preferred language
+	axios.defaults.headers.common['Language'] = primaryLanguage;
 }
 
 export const fetchData = createAsyncThunk(
 	'auth/fetchStatus',
 	// data can be empty to include api calls like logout
 	async ({ url, data = {}, method }, { rejectWithValue }) => {
-		test();
+		setupAxiosDefaults();
 		try {
 			const response = await axios({
 				url,
 				data,
 				method: method,
 			});
-			console.log('try respnse in slice', response);
+			console.log('response in slice', response);
 			return {
 				data: response.data,
+				status: response.status,
 				headers: response?.headers,
 				endpoint: url,
 			};
@@ -88,9 +88,26 @@ const authSlice = createSlice({
 	},
 });
 
+const UserPreference = createSlice({
+	name: 'UserPreference',
+	initialState: initialStateForLang,
+	reducers: {
+		setPreferredLanguage: (state, action) => {
+			const language = action.payload;
+			state.preferredLanguage = action.payload;
+			setupAxiosDefaults(language);
+		},
+	},
+});
+
+export const { setPreferredLanguage } = UserPreference.actions;
+export const selectUserPreference = (state) =>
+	state.UserPreference.preferredLanguage;
 export const selectIsLoading = (state) => state.auth.isLoading;
 export const selectIsLoggedIn = (state) => state.auth.isLoggedIn;
 export const selectAuthIsSuccess = (state) => state.auth.isSuccess;
 export const selectError = (state) => state.auth.error;
 export const selectAuthState = (state) => state.auth;
+export const userPreferenceReducer = UserPreference.reducer;
 export default authSlice.reducer;
+export { setupAxiosDefaults };

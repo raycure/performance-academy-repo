@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './ProgramOverview.css';
 import { LesMillsEvents } from '../../assets/LesmillsEvents';
 import LesmillsPrograms from '../../assets/LesmillsPrograms';
@@ -11,14 +11,24 @@ import { TbWorld } from 'react-icons/tb';
 import { IoMdCloudDownload } from 'react-icons/io';
 function ProgramOverview({ eventID }) {
 	const { i18n, t } = useTranslation('translation');
-	const activeEvent = LesMillsEvents[eventID];
+	const activeEvent = LesMillsEvents.find((event) => {
+		return event.id === eventID;
+	});
+	useEffect(() => {
+		console.log('activeEvent', activeEvent);
+	}, []);
+	useEffect(() => {
+		console.log('program', program);
+	}, []);
+
 	const program = Object.keys(LesmillsPrograms())
 		.map((category) => {
 			return LesmillsPrograms()[category].find((program) => {
-				return program.id === activeEvent.program;
+				return program.id === activeEvent.title;
 			});
 		})
 		.filter(Boolean)[0];
+
 	const scrollWithOffset = (el) => {
 		const yCoordinate = el.getBoundingClientRect().top + window.scrollY;
 		const navbar = document.querySelector('#navbar');

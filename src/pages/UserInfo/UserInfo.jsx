@@ -21,6 +21,7 @@ import { descending } from '../../components/animations/AnimationValues';
 import { useDispatch } from 'react-redux';
 import { AuthService } from '../../auth/auth.service';
 import { useNavigate } from 'react-router-dom';
+import HoneypotInput from '../../components/Forms/HoneypotInput';
 
 function UserInfo() {
 	const dispatch = useDispatch();
@@ -774,6 +775,7 @@ function UserInfo() {
 					</button>
 				</div>
 			</div>
+			<HoneypotInput />
 		</section>
 	);
 }

@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import '../../pages/Register-Login/formStyle.css';
 import Button from '../Button/Button';
 import '../../components/Containers/containerStyle.css';
@@ -9,38 +9,66 @@ import { useSelector } from 'react-redux';
 import { selectIsLoggedIn } from '../../redux/auth/authStateSlice';
 import { useDispatch } from 'react-redux';
 import { AuthService } from '../../auth/auth.service';
+import HoneypotInput from './HoneypotInput';
 
 function ContactForm() {
 	const contactForm = useRef();
-	const [Name, setName] = useState('');
-	const [Surname, setSurname] = useState('');
-	const [Mail, setMail] = useState('13garbomail@gmail.com');
-	// todo delete the default value
-	const [Topic, setTopic] = useState('');
-	const [Context, setContext] = useState('');
+	const [name, setName] = useState('');
+	const [surname, setSurname] = useState('');
+	const [email, setEmail] = useState('');
+	const [topic, setTopic] = useState('');
+	const [question, setQuestion] = useState('');
+
 	const { t, i18n } = useTranslation('translation');
 	const dispatch = useDispatch();
 
-	async function handleContactFormSubmission(e) {
-		e.preventDefault();
+	async function handlePublicContactFormSubmission() {
 		try {
-			const accessToken = localStorage.getItem('accessToken');
 			const contactFormData = {
-				name: Name,
-				surname: Surname,
-				email: Mail,
-				topic: Topic,
-				question: Context,
+				name,
+				surname,
+				email,
+				topic,
+				question,
 			};
-
-			console.log('old token', accessToken);
 
 			const response = await dispatch(
 				AuthService({
 					data: contactFormData,
-					endpoint: '/submitContactForm',
+					endpoint: '/submitContactForm/public',
+					method: 'POST',
 				})
 			);
+
+			// setName('');
+			// setSurname('');
+			// setEmail('');
+			// setTopic('');
+			// setQuestion('');
+		} catch (err) {
+			console.log('err', err);
+		}
+	}
+	async function handlePrivateContactFormSubmission() {
+		try {
+			const contactFormData = {
+				topic,
+				question,
+			};
+
+			const response = await dispatch(
+				AuthService({
+					data: contactFormData,
+					endpoint: '/submitContactForm/protected',
+					method: 'POST',
+				})
+			);
+
+			// setName('');
+			// setSurname('');
+			// setEmail('');
+			// setTopic('');
+			// setQuestion('');
 		} catch (err) {
 			console.log('err', err);
 		}
@@ -56,7 +84,12 @@ function ContactForm() {
 			/>
 
 			<form
-				onSubmit={handleContactFormSubmission}
+				onSubmit={(e) => {
+					e.preventDefault();
+					name || surname || email
+						? handlePublicContactFormSubmission()
+						: handlePrivateContactFormSubmission();
+				}}
 				ref={contactForm}
 				className='contact-form-outer-container box-shadow'
 			>
@@ -64,49 +97,50 @@ function ContactForm() {
 					{t('Contact.Form.Title')}
 				</p>
 				{!isLoggedIn && (
-					<div className='contact-name-input-container'>
-						<div className={'hide centerLineAnimation centerLineAnimation'}>
+					<>
+						<div className='contact-name-input-container'>
+							<div className={' centerLineAnimation centerLineAnimation'}>
+								<input
+									onChange={(e) => setName(e.target.value)}
+									value={name}
+									required
+									placeholder={t('Contact.Form.Name')}
+									type='text'
+								/>
+							</div>
+							<div className={' centerLineAnimation centerLineAnimation'}>
+								<input
+									onChange={(e) => setSurname(e.target.value)}
+									value={surname}
+									required
+									placeholder={t('Contact.Form.Surname')}
+									type='text'
+								/>
+							</div>
+						</div>
+						<div className=' centerLineAnimation centerLineAnimation'>
 							<input
-								onChange={(e) => setName(e.target.value)}
-								value={Name}
+								onChange={(e) => setEmail(e.target.value)}
+								value={email}
 								required
-								placeholder={t('Contact.Form.Name')}
-								type='text'
+								placeholder='email'
+								type='email'
 							/>
 						</div>
-						<div className={'hide centerLineAnimation centerLineAnimation'}>
-							<input
-								onChange={(e) => setSurname(e.target.value)}
-								value={Surname}
-								required
-								placeholder={t('Contact.Form.Surname')}
-								type='text'
-							/>
-						</div>
-					</div>
+					</>
 				)}
 
-				{!isLoggedIn && (
-					<div className='hide centerLineAnimation centerLineAnimation'>
-						<input
-							onChange={(e) => setMail(e.target.value)}
-							value={Mail}
-							required
-							placeholder='Mail'
-							type='email'
-						/>
-					</div>
-				)}
 				<div className='centerLineAnimation'>
 					<input
 						onChange={(e) => setTopic(e.target.value)}
-						value={Topic}
+						value={topic}
 						required
 						placeholder={t('Contact.Form.Topic')}
 						type='text'
 					/>
 				</div>
 
+				<HoneypotInput />
 				<div className='divForBorder'>
 					<textarea
 						required
@@ -114,8 +148,8 @@ function ContactForm() {
 						placeholder={t('Contact.Form.Context') + '...'}
 						rows='7'
 						data-role='none'
-						onChange={(e) => setContext(e.target.value)}
-						value={Context}
+						onChange={(e) => setQuestion(e.target.value)}
+						value={question}
 					></textarea>
 					<span className='textarea-bottom-left-line'></span>
 					<span className='textarea-bottom-right-line'></span>
@@ -126,8 +160,13 @@ function ContactForm() {
 					<span className='textarea-top-left-line'></span>
 					<span className='textarea-top-right-line'></span>
 				</div>
+
 				<Button
-					// disabled={!Context || !Name || !Surname || !Mail || !Topic}
+					disabled={
+						isLoggedIn === true
+							? !question || !topic
+							: !question || !name || !surname || !email || !topic
+					}
 					type='submit'
 				>
 					{i18n.language === 'en' ? 'Send' : 'Gönder'}

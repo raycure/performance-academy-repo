@@ -1,7 +1,12 @@
 import express from 'express';
-import contectFormController from '../Controllers/contactFormController.js';
+import {
+	publicContactFormController,
+	protectedContactFormController,
+} from '../Controllers/contactFormController.js';
 const router = express.Router();
+import authMiddleware from '../Middleware/handleAuth.js';
 
-router.post('/', contectFormController);
+router.post('/public', publicContactFormController);
+router.post('/protected', authMiddleware, protectedContactFormController);
 
 export default router;

@@ -11,6 +11,17 @@ const refreshJwt = async (req, res) => {
 		return res.status(401).json({ message: 'Refresh token not found' });
 
 	const refreshToken = cookies.jwt;
+	console.log('refreshToken', refreshToken);
+
+	const isTheTokenActive = await Sessions.findOne({
+		refreshToken: refreshToken,
+	});
+
+	if (!isTheTokenActive)
+		return res.status(401).json({ message: 'Refresh token not active' });
+
+	// console.log('isTheTokenActive', isTheTokenActive);
+
 	const decoded = jwt.decode(refreshToken);
 	const userIdFromToken = decoded.userId;
 	const foundUser = await Users.findOne({
@@ -21,8 +32,11 @@ const refreshJwt = async (req, res) => {
 	try {
 		jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, async (err) => {
 			if (err) {
+				console.log('deleting session');
+
 				res.status(403).json({ message: 'refresh failed', error: err });
 				await Sessions.findOneAndDelete(userIdFromToken);
+				console.log('errr in refreshjwt', err);
 			}
 			const accessToken = jwt.sign(
 				{

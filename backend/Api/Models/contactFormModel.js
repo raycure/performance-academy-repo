@@ -22,7 +22,11 @@ const ContactSchema = mongoose.Schema(
 			type: String,
 			required: [true, 'Please enter your question'],
 		},
-
+		userId: {
+			type: mongoose.Schema.Types.ObjectId,
+			ref: 'Users',
+			index: true,
+		},
 		removed: {
 			type: Boolean,
 			default: false,
