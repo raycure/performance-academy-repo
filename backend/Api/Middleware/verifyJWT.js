@@ -10,8 +10,6 @@ const verifyJWT = async (req, res) => {
 	}
 	const token = authHeader.split(' ')[1];
 
-	console.log('token', token);
-
 	try {
 		jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, async (err) => {
 			if (err) {

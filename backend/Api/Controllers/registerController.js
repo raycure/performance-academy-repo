@@ -8,34 +8,45 @@ import Joi from 'joi';
 import * as dotenv from 'dotenv';
 dotenv.config();
 import Sessions from '../Models/sessionModel.js';
+import { useTranslation } from 'react-i18next';
+import validateInput from '../../Utils/validateInput.js';
+import { registerSchemas } from '../../Utils/schemas/userSchema.js';
 
 const register = async (req, res) => {
 	try {
 		// todo add joi validation for password strength
-		const { email, nationalID, name, surname } = req.body;
+		const { email, nationalID, name, surname, password } = req.body;
 		const language = req.headers['language'];
-		// const schema = Joi.object({
-		// 	email: Joi.string().email().required(),
-		// });
-		// const { error } = await schema.validateAsync({ email });
-		// if (error) {
-		// 	return res.status(409).json({
-		// 		success: false,
-		// 		result: null,
-		// 		error: error,
-		// 		message: 'email format is incorrect',
-		// 	});
-		// }
-		const existingUser = await Users.findOne({ email });
+		const registerData = { name, nationalID, surname, password, email };
+
+		const existingUser = await Users.findOne({
+			$or: [{ email }, { nationalID }],
+		});
+
 		if (existingUser) {
-			return res.status(409).json({
-				success: false,
-				result: null,
-				message: 'Email already in use.',
-			});
+			if (existingUser.email === email) {
+				return res.status(409).json({
+					success: false,
+					result: null,
+					message: 'Email already in use.',
+				});
+			}
+
+			if (existingUser.nationalID === +nationalID) {
+				return res.status(409).json({
+					success: false,
+					result: null,
+					message: 'National ID already in use.',
+				});
+			}
+		}
+		try {
+			validateInput(registerData, registerSchemas);
+		} catch (error) {
+			return res.status(422).json({ message: error.message });
 		}
 
-		const hashedPassword = await hash(req.body.password, 10);
+		const hashedPassword = await hash(password, 10);
 		req.body.password = hashedPassword;
 		const newUser = await Users.create(req.body);
 		const userId = new ObjectId(newUser).toHexString();
@@ -104,8 +115,7 @@ const register = async (req, res) => {
 			message: 'Successfully login user',
 		});
 	} catch (error) {
-		console.log('error', error);
-
+		console.log('error in the last catc', error);
 		res.status(500).json({ message: 'Internal server error.' });
 	}
 };

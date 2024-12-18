@@ -1,6 +1,13 @@
 import Users from '../Models/userModel.js';
 import jwt from 'jsonwebtoken';
 import { ObjectId } from 'mongodb';
+import pkg from 'bcryptjs';
+import validateInput from '../../Utils/validateInput.js';
+import {
+	passwordSchema,
+	userinfoChangeSchemas,
+} from '../../Utils/schemas/userSchema.js';
+const { hash, compare } = pkg;
 
 export const userInfoFetchController = async (req, res) => {
 	if (req.isAuthenticated) {
@@ -25,8 +32,8 @@ export const userInfoPutController = async (req, res) => {
 		if (!req.isAuthenticated) {
 			return res.status(401).json({ message: 'Unauthorized access' });
 		}
-
-		const updateData = req.body.updateData;
+		const { updateData } = req.body;
+		const newPassword = updateData?.newPassword;
 		const decoded = jwt.decode(req.user);
 		const userIDfromRefresh = decoded.userId;
 
@@ -36,6 +43,23 @@ export const userInfoPutController = async (req, res) => {
 
 		if (!foundUser) {
 			return res.status(404).json({ message: 'User not found' });
+		}
+
+		try {
+			validateInput(updateData, userinfoChangeSchemas);
+			if (newPassword) {
+				validateInput({ password: newPassword }, passwordSchema);
+			}
+		} catch (error) {
+			return res.status(422).json({ message: error.message });
+		}
+
+		if (updateData?.password) {
+			const hashedPassword = await hash(newPassword, 10);
+
+			await Users.findByIdAndUpdate(foundUser._id, {
+				password: hashedPassword,
+			});
 		}
 
 		const plainUser = foundUser.toObject();

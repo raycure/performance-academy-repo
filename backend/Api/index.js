@@ -34,7 +34,7 @@ app.use(express.urlencoded({ extended: false }));
 
 const limiter = rateLimit({
 	windowMs: 1000 * 60 * 60,
-	max: 100,
+	max: 200,
 	handler: (req, res, next) => {
 		res.status(429).json({
 			message: 'Too many requests, please try again later.',
@@ -64,7 +64,9 @@ mongoose
 			console.log('port 3001');
 		});
 	})
-	.catch(() => {
+	.catch((error) => {
+		console.log('error', error);
+
 		console.log('didnt connect');
 	});
 

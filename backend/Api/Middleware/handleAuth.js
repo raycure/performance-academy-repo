@@ -25,8 +25,6 @@ const authMiddleware = async (req, res, next) => {
 			userId: new ObjectId(userIdFromToken),
 		});
 
-		console.log('foundActiveSession', foundActiveSession);
-
 		if (!foundActiveSession) {
 			return res.status(404).json({ message: 'no active session' });
 		}

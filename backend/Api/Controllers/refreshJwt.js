@@ -11,7 +11,6 @@ const refreshJwt = async (req, res) => {
 		return res.status(401).json({ message: 'Refresh token not found' });
 
 	const refreshToken = cookies.jwt;
-	console.log('refreshToken', refreshToken);
 
 	const isTheTokenActive = await Sessions.findOne({
 		refreshToken: refreshToken,
@@ -46,7 +45,7 @@ const refreshJwt = async (req, res) => {
 				},
 
 				process.env.ACCESS_TOKEN_SECRET,
-				{ expiresIn: '5s' } //todo change it
+				{ expiresIn: '10m' } //todo change it
 			);
 			res.status(200).json({
 				message: 'successful refresh',
