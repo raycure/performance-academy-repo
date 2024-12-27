@@ -1,13 +1,9 @@
 import './Events.css';
 import React, { useRef, useState } from 'react';
-import Container from '../../components/Containers/Container';
 import CalendarContainer from '../../components/CalendarContainer/CalendarContainer';
 import { useEffect } from 'react';
-
 import LesmillsPrograms from '../../assets/LesmillsPrograms';
-import backgroundText from '../../assets/CHOOSE-HAPPY.png';
 import EventList from '../../components/EventItem/EventList';
-import test from '../../assets/test.png';
 import axios from '../api/axios';
 import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router-dom';
@@ -38,63 +34,7 @@ function Events() {
 
 	const [activeCategory, setActiveCategory] = useState(null);
 	const [activeClass, setActiveClass] = useState(null);
-
-	const [file, setFile] = useState(null);
-	const [message, setMessage] = useState('');
-
 	const [onlineCheck, setOnlineCheck] = useState(undefined);
-	const handleFileChange = (event) => {
-		const selectedFile = event.target.files[0];
-
-		if (selectedFile && selectedFile.type !== 'application/pdf') {
-			setMessage(
-				i18n.language === 'en'
-					? 'Please select a PDF file.'
-					: 'Lütfen bir PDF dosyası seçiniz.'
-			);
-			setFile(null);
-		} else {
-			setMessage('');
-			setFile(selectedFile);
-		}
-	};
-
-	const handleUpload = async (event) => {
-		event.preventDefault();
-		if (!file) {
-			setMessage(
-				i18n.language === 'en'
-					? 'Please select a PDF file.'
-					: 'Lütfen bir PDF dosyası seçiniz.'
-			);
-			return;
-		}
-		const formData = new FormData();
-		formData.append('file', file);
-		setMessage('');
-
-		try {
-			const response = await axios.post('/upload', formData, {
-				headers: {
-					'Content-Type': 'multipart/form-data',
-				},
-			});
-
-			setMessage(
-				i18n.language === 'en'
-					? 'File uploaded successfully!'
-					: 'Dosya başarıyla yüklendi.'
-			);
-		} catch (error) {
-			setMessage(
-				i18n.language === 'en'
-					? 'Error uploading file'
-					: 'Dosya yüklenirken bir sorun oluştu'
-			);
-			console.error('Error:', error);
-		} finally {
-		}
-	};
 	const [isCatMenuOpen, setIsCatMenuOpen] = useState(false);
 	const [isClassMenuOpen, setIsClassMenuOpen] = useState(false);
 
@@ -176,7 +116,6 @@ function Events() {
 	return (
 		<div id='event-page'>
 			<CalendarContainer />
-
 			<CertificationSteps />
 			<h2 className='fs-650 center-item' style={{ padding: '2rem' }}>
 				{i18n.language === 'en' ? 'CHOOSE AN EVENT' : 'ETKİNLİKLERİMİZ'}

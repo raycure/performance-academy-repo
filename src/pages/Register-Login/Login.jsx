@@ -52,14 +52,13 @@ function Login() {
 
 	const handleForgotPasswordForm = async () => {
 		try {
-			console.log('forgot pasword form triggered');
-
 			let forgotPasswordData;
-			if (mailorNationalID.includes('@')) {
-				console.log('its an email');
+			if (
+				typeof mailorNationalID === 'string' ||
+				mailorNationalID.includes('@')
+			) {
 				forgotPasswordData = { email: mailorNationalID };
 			} else {
-				console.log('its an natid');
 				forgotPasswordData = { nationalID: mailorNationalID };
 			}
 			const response = await dispatch(
@@ -69,8 +68,6 @@ function Login() {
 					endpoint: `/forgotPassword`,
 				})
 			);
-			console.log('response', response);
-
 			if (response.payload.status === 200) {
 				localStorage.setItem(
 					'emailVerificationToken',
@@ -79,8 +76,7 @@ function Login() {
 			}
 			setMailorNationalID('');
 			setPwd('');
-			setLocalLoading(true);
-			// todo addnotif to inform the user
+			setShowForgotPassordForm(false);
 		} catch (error) {
 			console.log('error at forgot password', error);
 		}

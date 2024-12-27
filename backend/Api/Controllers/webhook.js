@@ -36,7 +36,6 @@ const webhook = async (req, res) => {
 				// console.log(`Unhandled event type: ${event.type}`);
 				break;
 		}
-		res.sendStatus(200);
 	} catch (error) {
 		console.log('webhook error', error);
 	}

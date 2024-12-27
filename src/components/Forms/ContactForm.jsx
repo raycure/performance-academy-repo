@@ -4,7 +4,6 @@ import Button from '../Button/Button';
 import '../../components/Containers/containerStyle.css';
 import '../../pages/Contact/Contact.css';
 import { useTranslation } from 'react-i18next';
-import axios from '../../pages/api/axios';
 import { useSelector } from 'react-redux';
 import { selectIsLoggedIn } from '../../redux/auth/authStateSlice';
 import { useDispatch } from 'react-redux';
@@ -40,11 +39,11 @@ function ContactForm() {
 				})
 			);
 
-			// setName('');
-			// setSurname('');
-			// setEmail('');
-			// setTopic('');
-			// setQuestion('');
+			setName('');
+			setSurname('');
+			setEmail('');
+			setTopic('');
+			setQuestion('');
 		} catch (err) {
 			console.log('err', err);
 		}
@@ -63,12 +62,8 @@ function ContactForm() {
 					method: 'POST',
 				})
 			);
-
-			// setName('');
-			// setSurname('');
-			// setEmail('');
-			// setTopic('');
-			// setQuestion('');
+			setTopic('');
+			setQuestion('');
 		} catch (err) {
 			console.log('err', err);
 		}
@@ -100,7 +95,7 @@ function ContactForm() {
 				{!isLoggedIn && (
 					<>
 						<div className='contact-name-input-container'>
-							<div className={' centerLineAnimation centerLineAnimation'}>
+							<div className={' centerLineAnimation'}>
 								<input
 									onChange={(e) => setName(e.target.value)}
 									value={name}
@@ -109,7 +104,7 @@ function ContactForm() {
 									type='text'
 								/>
 							</div>
-							<div className={' centerLineAnimation centerLineAnimation'}>
+							<div className={' centerLineAnimation'}>
 								<input
 									onChange={(e) => setSurname(e.target.value)}
 									value={surname}
@@ -119,7 +114,7 @@ function ContactForm() {
 								/>
 							</div>
 						</div>
-						<div className=' centerLineAnimation centerLineAnimation'>
+						<div className=' centerLineAnimation'>
 							<input
 								onChange={(e) => setEmail(e.target.value)}
 								value={email}
@@ -133,10 +128,10 @@ function ContactForm() {
 
 				<div className='centerLineAnimation'>
 					<input
+						placeholder={t('Contact.Form.Topic')}
 						onChange={(e) => setTopic(e.target.value)}
 						value={topic}
 						required
-						placeholder={t('Contact.Form.Topic')}
 						type='text'
 					/>
 				</div>
@@ -163,11 +158,11 @@ function ContactForm() {
 				</div>
 
 				<Button
-					disabled={
-						isLoggedIn === true
-							? !question || !topic
-							: !question || !name || !surname || !email || !topic
-					}
+					// disabled={
+					// 	isLoggedIn === true
+					// 		? !question || !topic
+					// 		: !question || !name || !surname || !email || !topic
+					// }
 					type='submit'
 				>
 					{i18n.language === 'en' ? 'Send' : 'Gönder'}

@@ -7,8 +7,7 @@ import * as dotenv from 'dotenv';
 dotenv.config();
 
 const payment = async (req, res) => {
-	const decoded = jwt.decode(req.user);
-	const userId = decoded.userId;
+	const userId = req.userId;
 	const { purchaseType } = req.body;
 	const itemId = req.body.id;
 
@@ -32,7 +31,9 @@ const payment = async (req, res) => {
 		});
 	} catch (error) {
 		console.error('Payment creation error:', error);
-		res.status(500).json({ error: error.message });
+		res
+			.status(500)
+			.json({ message: res.__(`${error.message}`), duration: 50000 });
 	}
 };
 
@@ -47,24 +48,20 @@ const createProductPurchaseSession = async (itemId, userId, purchaseType) => {
 		purchaseType,
 	};
 	const foundUser = await Users.findById(userId);
-	try {
-		if (!foundUser.verifiedMail) {
-			throw new Error('verify email first');
-		}
-		if (!foundUser.verifiedContract) {
-			throw new Error('verify contract first');
-		}
-		const foundPurchase = foundUser.findPurchase(itemId);
-		if (foundPurchase) {
-			throw new Error('product already bought');
-		}
-	} catch (purchaseError) {
-		return res.status(400).json({
-			success: false,
-			message: purchaseError.message,
-		});
+	if (!foundUser) {
+		throw new Error('paymentResponses.userNotFound');
 	}
-	const productName = 'exam fee';
+	if (!foundUser.verifiedMail) {
+		throw new Error('paymentResponses.emailNotVerified');
+	}
+	if (!foundUser.verifiedContract) {
+		throw new Error('paymentResponses.contractNotVerified');
+	}
+	const foundPurchase = foundUser.findPurchase(itemId);
+	if (foundPurchase) {
+		throw new Error('paymentResponses.duplicatePurchase');
+	}
+	const productName = foundItem.title;
 	const session = await createPaymentSession(
 		metadata,
 		productName,
@@ -83,6 +80,7 @@ const createProductPurchaseSession = async (itemId, userId, purchaseType) => {
 	}
 	return session.url;
 };
+
 const createPayExamFeeSession = async (itemId, userId, purchaseType) => {
 	const foundUser = await Users.findById(userId);
 	await foundUser.addExamAttempt(itemId);
@@ -130,14 +128,15 @@ const createPaymentSession = async (metadata, productName, productPrice) => {
 		success_url:
 			process.env.ENVIRONMENT === 'development'
 				? // todo give proper links
-				  `${process.env.DEV_FRONTEND_BASE_LINK}program`
+				  `${process.env.DEV_FRONTEND_BASE_LINK}${encodeURIComponent(
+						'programlarım'
+				  )}`
 				: `${process.env.PROD_FRONTEND_BASE_LINK}/success?session_id={CHECKOUT_SESSION_ID}`,
 		cancel_url:
 			process.env.ENVIRONMENT === 'development'
 				? `${process.env.DEV_FRONTEND_BASE_LINK}`
 				: `${process.env.PROD_FRONTEND_BASE_LINK}/cancel`,
 	});
-	// stripe.checkout.sessions.expire(session.id); // todo delete it for test purposes expire the session
 	return session;
 };
 

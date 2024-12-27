@@ -24,6 +24,7 @@ function MyPrograms() {
 			);
 			const user = response.payload.data.foundUser;
 			const userPurchases = user.purchases;
+			console.log('userPurchases', userPurchases);
 			setUserEventIds(userPurchases);
 		} catch (error) {
 			console.log('userinfo fetch error', error);
@@ -32,11 +33,6 @@ function MyPrograms() {
 
 	const [userEventIds, setUserEventIds] = useState([]);
 
-	useEffect(() => {
-		userEventIds.map((id) => {
-			console.log(id.productId);
-		});
-	}, [userEventIds]);
 	const navigate = useNavigate();
 	const { t, i18n } = useTranslation('');
 	let isLoggedIn = useSelector(selectIsLoggedIn);
@@ -73,9 +69,16 @@ function MyPrograms() {
 						: 'Henüz hiç program satın alınmadı.'}
 				</section>
 			) : (
+				/* (
 				userEventIds.map((item) => (
 					<div key={item.productId} style={{ margin: '4rem' }}>
 						<ProgramOverview eventID={item.productId} />
+					</div>
+				))
+			)} */
+				userEventIds.map((item) => (
+					<div key={item.productId} style={{ margin: '4rem' }}>
+						<ProgramOverview eventDetails={item} />
 					</div>
 				))
 			)}

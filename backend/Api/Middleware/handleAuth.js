@@ -63,6 +63,7 @@ const authMiddleware = async (req, res, next) => {
 		if (verifyJwtMockResponse.statusCode === 200) {
 			req.user = verifyJwtMockResponse.responseData.returnedValue;
 			req.isAuthenticated = true; // Mark user as authenticated
+			req.userId = verifyJwtMockResponse.responseData.accessToken;
 			return next();
 		}
 
@@ -85,11 +86,13 @@ const authMiddleware = async (req, res, next) => {
 			req.user = refreshMockRes.responseData.returnedValue;
 			res.header('x-refreshed-token', 'true');
 			req.isAuthenticated = true;
+			req.userId = refreshMockRes.responseData.accessToken;
 			return next();
 		}
 
 		req.isAuthenticated = false;
 		req.user = null;
+		req.userId = null;
 		return next();
 	} catch (error) {
 		console.log('error', error);

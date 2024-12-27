@@ -4,17 +4,14 @@ const { hash, compare } = pkg;
 import jwt from 'jsonwebtoken';
 import { ObjectId } from 'mongodb';
 import emailSender from './emailSender.js';
-import Joi from 'joi';
 import * as dotenv from 'dotenv';
 dotenv.config();
 import Sessions from '../Models/sessionModel.js';
-import { useTranslation } from 'react-i18next';
 import validateInput from '../../Utils/validateInput.js';
 import { registerSchemas } from '../../Utils/schemas/userSchema.js';
 
 const register = async (req, res) => {
 	try {
-		// todo add joi validation for password strength
 		const { email, nationalID, name, surname, password } = req.body;
 		const language = req.headers['language'];
 		const registerData = { name, nationalID, surname, password, email };
@@ -28,7 +25,7 @@ const register = async (req, res) => {
 				return res.status(409).json({
 					success: false,
 					result: null,
-					message: 'Email already in use.',
+					message: res.__('registerResponses.duplicateEmail'),
 				});
 			}
 
@@ -36,14 +33,20 @@ const register = async (req, res) => {
 				return res.status(409).json({
 					success: false,
 					result: null,
-					message: 'National ID already in use.',
+					message: res.__('registerResponses.duplicateNationalId'),
 				});
 			}
 		}
 		try {
 			validateInput(registerData, registerSchemas);
 		} catch (error) {
-			return res.status(422).json({ message: error.message });
+			console.log('error in catch ', error);
+			const trasnlatedMessage = res.__(`${error.message.errorMessage}`);
+			const trasnlatedErrorField = res.__(`${error.message.errorField}`);
+
+			return res
+				.status(422)
+				.json({ message: trasnlatedErrorField + ' ' + trasnlatedMessage });
 		}
 
 		const hashedPassword = await hash(password, 10);
@@ -110,13 +113,15 @@ const register = async (req, res) => {
 			userId: userId,
 			ip: clientIp,
 		});
+
 		res.status(200).json({
 			accessToken: accessToken,
-			message: 'Successfully login user',
+			message: res.__('registerResponses.success'),
+			notify: true,
 		});
 	} catch (error) {
 		console.log('error in the last catc', error);
-		res.status(500).json({ message: 'Internal server error.' });
+		res.status(500).json({ message: res.__('serverError') });
 	}
 };
 

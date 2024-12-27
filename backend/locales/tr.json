@@ -1,0 +1,101 @@
+{
+	"registerResponses": {
+		"success": "Kayıt başarılı! Yönlendiriliyorsunuz...",
+		"duplicateEmail": "Bu e-posta başka bir hesap tarafından kullanımda.",
+		"duplicateNationalId": "Bu tc kimlik numarası başka bir hesap tarafından kullanımda."
+	},
+	"loginResponses": {
+		"credentialType": "Lütfen ya e-posta adresi ya da kimlik numarası sağlayın, ikisini birden değil.",
+		"emailOrIdMissing": "Lütfen ya e-posta adresi ya da kimlik numarası giriniz.",
+		"accountNotFound": "Sağlanan bilgilerle eşleşen bir hesap bulunamadı.",
+		"invalidCredentials": "Geçersiz kullanıcı bilgileri.",
+		"success": "Başarıyla giriş yapıldı yönlendiriliyor..."
+	},
+	"contactResponses": {
+		"success": "İletişim formunuz başarıyla gönderildi. Kısa süre içinde sizinle iletişime geçeceğiz.", 
+		"error": "Form gönderiminiz işlenirken bir hata oluştu. Lütfen daha sonra tekrar deneyin."
+	},
+	"forgotPasswordResponses": {
+		"missingToken": "The verification token is missing. Please make sure you've been redirected from the 'forgot password' email.",
+		"expiredToken": "The verification token has expired. Please request a new one using the 'Forgot Password' button on the login page.",
+		"invalidToken": "The verification token is invalid. Please ensure the token hasn't been tampered with.",
+        "success": "Your password has been successfully reset.",
+		"userNotFound": "No user found for the provided token."
+	},
+	"paymentResponses": {
+		"userNotFound": "Hesabınız bulunamadı. Lütfen bilgilerinizi kontrol edip tekrar deneyin.",
+		"emailNotVerified": "Devam etmek için lütfen e-posta adresinizi doğrulayın. Bilgilerim sayfasından işlem yapabilirsiniz.",
+		"contractNotVerified": "Herhangi bir satın alımda bulunabilmeniz için sözleşmeyi onaylamanız gereklidir. Bilgilerim sayfasından işlem yapabilirsiniz.",
+		"duplicatePurchase": "Bu ürün zaten satın alınmış."
+	},
+		"validationErrors": {
+			"name": {
+				"onlyChars": "sadece karakterler ve boşluk geçerlidir.",
+				"minLength": "3 karakterden fazla olmalıdır.",
+				"maxLength": "24 karakterden az olmalıdır."
+			},
+			"password": {
+				"casing": "en az birer küçük ve büyük harf gereklidir.",
+				"digit": "en az bir rakam gereklidir.", 
+				"noWhitespace": "boşluk bırakılmamalıdır.",
+				"latinOnly": "sadece latin karakterler geçerlidir.",
+				"minLength": "8 karakterden fazla olmalıdır.",
+				"maxLength": "24 karakterden az olmalıdır."
+			},
+
+			"email": {
+				"invalid": "adres tipi geçerli formatta olmalıdır.",
+				"invalidForLogin": "Email adressi doğru formatta olmalıdır."
+			},
+			"nationalId": {
+				"numbersOnly": "sadece sayılar geçerlidir.",
+				"length": "11 rakam olmalıdır."
+			},
+			"topic": {
+				"minLength": "3 karakterden fazla olmalıdır.",
+				"maxLength": "250 karakterden az olmalıdır."
+			},
+			"question": {
+				"minLength": "3 karakterden fazla olmalıdır.",
+				"maxLength": "75 karakterden az olmalıdır."
+			}
+		},
+	"validationFields": {
+		"name": "İsim alanında",
+		"surname": "Soyisim alanında",
+		"password": "Şifre alanında",
+		"email": "Email alanında",
+		"nationalId": "Kimlik numarasi alanında",
+		"topic": "Konu alanında",
+		"question": "Soru alanında"
+	},
+	"serverError": "Sunucuda beklenmeyen bir hata oluştu.",
+	"sessionExpired": "Oturumunuzun süresi doldu. Lütfen tarayıcı önbelleğinizi temizleyin ve tekrar giriş yapın.",
+	"refreshJWTResponse": {
+		"refreshTokenNotFound": "Oturum bilgileriniz bulunamadı. Devam etmek için lütfen giriş yapın.",
+		"TokenInactive": "Oturumunuz güvenlik nedeniyle pasif duruma geçti. Devam etmek için lütfen tekrar giriş yapın.",
+		"invalidToken": "Oturum bilgilerinizle ilgili bir sorun tespit ettik. Güvenliğiniz için lütfen tekrar giriş yapın.",
+		"sessionExpired": "Oturumunuz hareketsizlik nedeniyle zaman aşımına uğradı. Çalışmanıza devam etmek için lütfen giriş yapın.",
+		"serverError": "Geçici bir sorun yaşıyoruz. Lütfen birkaç dakika sonra tekrar deneyin veya sorun devam ederse destek ekibiyle iletişime geçin.",
+		"success": "Oturumunuz başarıyla yenilendi.",
+		"userNotFound": "Sağlanan token için kullanıcı bulunamadı."
+	},
+	"verificationEmailResponses": {
+	"success": "Lütfen gelen kutunuzu kontrol edin ve e-posta adresinizi doğrulamak için doğrulama bağlantısına tıklayın.",
+	"error": "Şu anda geçici bir sorun yaşıyoruz ve doğrulama e-postasını gönderemedik. Lütfen kısa bir süre sonra tekrar deneyin. Sorun devam ederse, yardım için destek ekibiyle iletişime geçmekten çekinmeyin."
+},
+	"fileUploadResponses": {
+		"noFileUploaded": "Hiçbir dosya yüklenmedi",
+		"pleaseUploadFile": "Lütfen bir pdf dosyası yükleyin",
+		"fileSizeExceeded": "Dosya boyutu 5MB sınırını aşıyor. Lütfen daha küçük bir dosya yükleyin"
+	},
+	"userInfoResponses": { 
+		"userUpdate": "Kullanıcı başarıyla güncellendi. Değiştirilen alanlar: ",
+		"unauthorized": "Erişim reddedildi. Yetkisiz istek.",
+		"userInfoFetch": "Kullanıcı bilgileri başarıyla alındı.",
+		"noChanges": "Herhangi bir değişiklik tespit edilmedi."
+	},
+	"forgotPasswordForm": {
+		"inputField" : "yeni şifrenizde "
+	}
+}

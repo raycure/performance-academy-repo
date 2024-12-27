@@ -15,10 +15,13 @@ const verifyJWT = async (req, res) => {
 			if (err) {
 				return res.status(403).json({ message: 'Token verification failed' });
 			}
-			res.status(200).json({
-				message: 'successful verify jwt',
-				returnedValue: token,
-			});
+		});
+		const decodedAccessToken = jwt.decode(token);
+		const userIdFromTheToken = decodedAccessToken.userId;
+		res.status(200).json({
+			message: 'successful verify jwt',
+			returnedValue: token,
+			accessToken: userIdFromTheToken,
 		});
 	} catch (error) {
 		console.error('Unexpected error:', error);

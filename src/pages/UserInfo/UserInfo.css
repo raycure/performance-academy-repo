@@ -116,12 +116,12 @@
 	padding-left: 1.6rem;
 }
 
-.user-info-page .form-icon {
+/* .user-info-page .form-icon {
 	position: absolute;
 	height: 16px;
 	top: 0.7rem;
 	left: 0.5rem;
-}
+} */
 .user-info-page div:has(input:read-only) .form-icon {
 	display: none;
 }
@@ -195,4 +195,21 @@
 	.user-info-btn-con .user-info-btn:nth-child(3) {
 		grid-column: 2/4;
 	}
+}
+
+.valid,
+.invalid {
+	height: 1.15rem;
+	width: 1.15rem;
+	position: absolute;
+	margin-top: 0.6rem;
+	margin-left: 0.4rem;
+}
+
+.valid {
+	color: rgb(93, 255, 93);
+}
+
+.invalid {
+	color: rgb(239, 63, 63);
 }

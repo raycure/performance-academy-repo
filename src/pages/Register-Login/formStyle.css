@@ -1,7 +1,7 @@
 #contact-form-grad input,
 .authentication-form-container input:-webkit-autofill {
 	-webkit-background-clip: text;
-	-webkit-text-fill-color: var(--clr-neutral-100) !important;
+	/* -webkit-text-fill-color: var(--clr-neutral-100) !important; */
 } /* autofillde arkaplan olmasın diye */
 .authentication-form-container input:-webkit-autofill,
 #contact-form-grad input:-webkit-autofill,
@@ -60,45 +60,6 @@
 .centerLineAnimation:focus-within::before {
 	width: 100%;
 	left: 0;
-}
-
-.authentication-form-container input::placeholder {
-	color: #adadad;
-}
-
-.authentication-form-container input::-webkit-input-placeholder {
-	color: #adadad;
-}
-
-.authentication-form-container input::-moz-placeholder {
-	color: #adadad;
-}
-
-.authentication-form-container input:-ms-input-placeholder {
-	color: #adadad;
-}
-
-.authentication-form-container input::-ms-input-placeholder {
-	color: #adadad;
-}
-textarea::placeholder {
-	color: #adadad;
-}
-
-textarea::-webkit-textarea-placeholder {
-	color: #adadad;
-}
-
-textarea::-moz-placeholder {
-	color: #adadad;
-}
-
-textarea:-ms-textarea-placeholder {
-	color: #adadad;
-}
-
-textarea::-ms-textarea-placeholder {
-	color: #adadad;
 }
 
 .form-icon {

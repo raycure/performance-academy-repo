@@ -30,7 +30,7 @@ function EventList({ activeProgram, infoActive, onlineCheck }) {
 		}
 		const response = await dispatch(
 			AuthService({
-				data: { id: selectedEvent.id },
+				data: { id: selectedEvent.id, purchaseType: 'productPurchase' },
 				method: 'POST',
 				endpoint: '/pay',
 			})
@@ -399,8 +399,7 @@ function EventList({ activeProgram, infoActive, onlineCheck }) {
 						</label>
 					</div>
 					<Button
-						// disabled={!acknowledgementChecked ? true : false}
-						// todo add contract verification
+						disabled={!acknowledgementChecked ? true : false}
 						styleProp={{ marginInline: 'auto' }}
 						onClick={(e) => Payment(e)}
 					>

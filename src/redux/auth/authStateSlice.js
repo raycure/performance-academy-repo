@@ -15,12 +15,18 @@ const initialStateForLang = {
 };
 
 function setupAxiosDefaults() {
+	const isBotAttempt = localStorage.getItem('botAttempt');
+	if (isBotAttempt) {
+		return null;
+	}
+
 	const accesstoken = localStorage.getItem('accessToken');
+
 	if (accesstoken) {
-		console.log('token does exist');
+		// console.log('token does exist');
 		axios.defaults.headers.common['Authorization'] = `Bearer ${accesstoken}`;
 	} else {
-		console.log('token doesnt exist');
+		// console.log('token doesnt exist');
 		delete axios.defaults.headers.common['Authorization'];
 	}
 
@@ -49,6 +55,7 @@ export const fetchData = createAsyncThunk(
 				endpoint: url,
 			};
 		} catch (error) {
+			console.log('error in slice', error);
 			const responseData = {
 				data: error.response?.data,
 				status: error.response?.status,
@@ -75,7 +82,10 @@ const authSlice = createSlice({
 				state.status = 'succeeded';
 				state.isLoading = false;
 				state.isSuccess = true;
-				if (action.payload.endpoint.includes('/login')) {
+				if (
+					action.payload.endpoint.includes('/login') ||
+					action.payload.endpoint.includes('/register')
+				) {
 					state.isLoggedIn = true;
 				}
 				if (action.payload.endpoint.includes('/logout')) {

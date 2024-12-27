@@ -6,19 +6,12 @@ import jwt from 'jsonwebtoken';
 import * as dotenv from 'dotenv';
 dotenv.config();
 import Sessions from '../Models/sessionModel.js';
+import { loginSchema } from '../../Utils/schemas/userSchema.js';
 
 const login = async (req, res) => {
 	try {
 		const { email, nationalID, password } = req.body;
-
-		// only one of the two is required both cant be required
-
-		const loginSchema = Joi.object({
-			email: Joi.string().email().optional(),
-			nationalID: Joi.string().optional(),
-			password: Joi.string().required(),
-		}).xor('email', 'nationalID');
-		// The .xor('email', 'nationalID') is crucial - it means EXACTLY ONE of email or nationalID must be present, but not both
+		// only one of the two is required
 		try {
 			await loginSchema.validateAsync({
 				...(email && { email }),
@@ -26,9 +19,10 @@ const login = async (req, res) => {
 				password,
 			});
 		} catch (validationError) {
+			console.log('validationError', validationError);
 			return res.status(400).json({
 				success: false,
-				message: validationError.details[0].message,
+				message: res.__(validationError.details[0].message),
 			});
 		}
 
@@ -44,7 +38,7 @@ const login = async (req, res) => {
 			return res.status(404).json({
 				success: false,
 				result: null,
-				message: 'No account found with provided credentials.',
+				message: res.__('loginResponses.accountNotFound'),
 			});
 		}
 
@@ -54,7 +48,7 @@ const login = async (req, res) => {
 			return res.status(403).json({
 				success: false,
 				result: null,
-				message: 'Invalid credentials.',
+				message: res.__('loginResponses.invalidCredentials'),
 			});
 		}
 
@@ -94,7 +88,9 @@ const login = async (req, res) => {
 		)
 			.split(',')[0]
 			.trim();
-		const addActiveUser = await Sessions.create({
+
+		// addActiveUser
+		await Sessions.create({
 			refreshToken: refreshToken,
 			userId: user._id,
 			ip: clientIp,
@@ -103,7 +99,8 @@ const login = async (req, res) => {
 		// todo decide if i should retunr the user or nah
 		return res.status(200).json({
 			accessToken: accessToken,
-			message: 'Successfully login user',
+			message: res.__('loginResponses.success'),
+			notify: true,
 		});
 	} catch (error) {
 		console.log('error', error);
@@ -112,7 +109,7 @@ const login = async (req, res) => {
 			success: false,
 			result: null,
 			error: error,
-			message: 'An error occurred during login',
+			message: res.__('serverError'),
 		});
 	}
 };

@@ -1,10 +1,10 @@
 import Users from '../Models/userModel.js';
 import jwt from 'jsonwebtoken';
-import { ObjectId } from 'mongodb';
 import pkg from 'bcryptjs';
 const { hash, compare } = pkg;
-import Joi from 'joi';
 import * as dotenv from 'dotenv';
+import validateInput from '../../Utils/validateInput.js';
+import { passwordSchema } from '../../Utils/schemas/userSchema.js';
 dotenv.config();
 
 const forgotPasswordController = async (req, res) => {
@@ -13,23 +13,21 @@ const forgotPasswordController = async (req, res) => {
 
 		if (!token) {
 			return res.status(400).json({
-				message: 'Verification token is missing',
+				message: res.__('forgotPasswordResponses.missingToken'),
 			});
 		}
 
-		// todo add joi validation for password strength
-		const loginSchema = Joi.object({
-			newPassword: Joi.string().required(),
-		});
 		try {
-			await loginSchema.validateAsync({
-				newPassword,
-			});
-		} catch (validationError) {
-			return res.status(400).json({
-				success: false,
-				message: validationError.details[0].message,
-			});
+			await validateInput({ password: newPassword }, passwordSchema);
+		} catch (error) {
+			console.log('error in the catch here: ', error);
+
+			const trasnlatedErrorField = res.__(`${forgotPasswordForm.inputField}`);
+			const trasnlatedMessage = res.__(`${error.message.errorMessage}`);
+			console.log('trasnlatedErrorField:', trasnlatedErrorField);
+			return res
+				.status(422)
+				.json({ message: trasnlatedErrorField + ' ' + trasnlatedMessage });
 		}
 
 		// Verify the token using the mail token secret
@@ -41,8 +39,8 @@ const forgotPasswordController = async (req, res) => {
 				success: false,
 				message:
 					verifyError.name === 'TokenExpiredError'
-						? 'Verification token has expired'
-						: 'Invalid verification token',
+						? res.__('forgotPasswordResponses.expiredToken')
+						: res.__('forgotPasswordResponses.invalidToken'),
 			});
 		}
 
@@ -50,7 +48,7 @@ const forgotPasswordController = async (req, res) => {
 		if (!foundUser) {
 			return res.status(404).json({
 				success: false,
-				message: 'User not found',
+				message: res.__('forgotPasswordResponses.userNotFound'),
 			});
 		}
 
@@ -61,15 +59,11 @@ const forgotPasswordController = async (req, res) => {
 
 		res.status(200).json({
 			success: true,
-			message: 'Password successfully reset',
+			message: res.__('forgotPasswordResponses.success'),
 		});
 	} catch (error) {
-		// Log the error for server-side tracking
-		console.error('Email verification error:', error);
-
-		// Send a generic error response
 		res.status(500).json({
-			message: 'An unexpected error occurred during email verification',
+			message: res.__('serverError'),
 		});
 	}
 };

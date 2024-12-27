@@ -6,7 +6,7 @@ import webhook from '../Controllers/webhook.js';
 const router = express.Router();
 
 router.post('/', payment);
-router.get('/', getPaidProducts);
+router.get('/', getPaidProducts); // not used
 router.post('/', webhook);
 
 export default router;

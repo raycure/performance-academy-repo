@@ -15,7 +15,7 @@ const handleLogout = async (req, res) => {
 		decodedToken = jwt.decode(refreshToken);
 	} catch (decodeError) {
 		return res.status(403).json({
-			message: 'Invalid token. Please delete cache and re-login.',
+			message: res.__('sessionExpired'),
 		});
 	}
 	const userIdFromToken = decodedToken.userId;
@@ -35,6 +35,6 @@ const handleLogout = async (req, res) => {
 		secure: process.env.ENVIRONMENT === 'development' ? false : true,
 	});
 
-	res.json({ message: 'deleted' });
+	res.json({ message: 'logged out successfully' });
 };
 export default handleLogout;

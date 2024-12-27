@@ -46,7 +46,6 @@ const sendForgotPasswordEmail = async (req, res) => {
 
 		const name = foundUser.name;
 		const surname = foundUser.surname;
-		const url = 'fskafksa';
 		const userId = foundUser._id;
 		// if the user gave their id pull the email adress from the found user
 		const userEmailAddress = !email ? foundUser.email : email;
@@ -77,6 +76,7 @@ const sendForgotPasswordEmail = async (req, res) => {
 			return res.status(200).json({
 				success: true,
 				message: 'Password reset link sent successfully.',
+				notify: true,
 			});
 		} catch (emailError) {
 			console.error('Email sending error:', emailError);

@@ -9,15 +9,6 @@
 	grid-template-columns: 7fr 3fr;
 }
 
-.progressLine {
-	position: absolute;
-	left: 50%;
-	width: 2px;
-	height: 40px;
-	background-color: #191917;
-	top: 100%;
-}
-
 .backgroundEffect {
 	position: absolute;
 	align-self: center;
@@ -28,8 +19,8 @@
 }
 
 .activeStepNumber {
-	background-color: red;
-	animation: scaleInAnimation 0.5s ease-in-out;
+	animation: scaleInAnimation 0.55s 0.2s ease-in-out forwards;
+	background-color: transparent;
 }
 
 @keyframes scaleInAnimation {
@@ -38,6 +29,7 @@
 	}
 	100% {
 		transform: scale(1);
+		background-color: red;
 	}
 }
 
@@ -53,6 +45,11 @@
 	animation: scaleOutAnimation 0.5s ease-in-out forwards;
 }
 
+.progressLine {
+	background-color: #191917;
+	z-index: -1;
+}
+
 @keyframes scaleOutAnimation {
 	0% {
 		transform: scale(1);
@@ -62,9 +59,18 @@
 	}
 }
 
+.activeLine,
+.progressLine {
+	position: absolute;
+	left: 50%;
+	width: 2px;
+	height: 40px;
+	top: 100%;
+}
+
 .activeLine {
 	background-color: red;
-	animation: lineDown 0.5s forwards;
+	animation: lineDown 0.75s forwards;
 }
 
 @keyframes lineUp {
@@ -78,7 +84,7 @@
 
 .inActiveLine {
 	background-color: red;
-	animation: lineUp 0.5s forwards;
+	animation: lineUp 0.75s forwards;
 }
 
 @keyframes lineDown {

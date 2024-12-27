@@ -1,8 +1,12 @@
 import express from 'express';
-import { upload, uploadFile } from '../Controllers/uploadFile.js';
+import {
+	handleMulterError,
+	upload,
+	uploadFile,
+} from '../Controllers/uploadFile.js';
 
 const router = express.Router();
 
-router.post('/', upload.single('file'), uploadFile);
+router.post('/', upload.single('file'), handleMulterError, uploadFile);
 
 export default router;

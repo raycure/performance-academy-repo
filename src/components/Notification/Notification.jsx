@@ -89,7 +89,14 @@ const CustomNotification = () => {
 							? 'Warning'
 							: 'Uyarı'}
 					</h1>
-					<p className='text-accent-100'>{notification.message}</p>
+					<p className='text-accent-100'>
+						{notification.message}{' '}
+						{notification.link && (
+							<a href={notification.link} className='link'>
+								{i18n.language === 'en' ? 'here' : 'buradan'}
+							</a>
+						)}
+					</p>
 				</div>
 				<button className='close-btn' onClick={closeNotification}>
 					<MdClose

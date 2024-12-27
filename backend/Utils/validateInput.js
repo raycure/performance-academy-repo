@@ -3,17 +3,18 @@ export default function validateInput(values, schemas) {
 		for (const [key, schema] of Object.entries(schemas)) {
 			// Perform validation for each key
 			const { error } = schema.validate(values[key]);
-			console.log('key here', key);
-
 			if (error) {
+				console.log('error in validate inputs', error);
 				const ValidationErrorMessage = error.details[0].message;
-				const errorField = key;
-				const errorMessage = `error in ${errorField} field. The error: ${ValidationErrorMessage}`;
-				throw errorMessage;
+				const errorField = `validationFields.${key}`;
+				const errorMessage = `${ValidationErrorMessage}`;
+				// it returns keys that are required for translation it deosnt return the message itself
+				throw { errorMessage, errorField };
 			}
 		}
 		return { success: true };
 	} catch (error) {
+		console.log('valid inputta err', error);
 		throw {
 			message: error,
 		};

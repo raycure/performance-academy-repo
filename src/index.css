@@ -112,10 +112,10 @@ body {
 	line-height: 1.5;
 	font-family: var(--ff-primary);
 	font-weight: var(--fw-semi-bold);
-	/* color: #f5f5f6; apple white*/
-	/* color: #ffffe3; gr8 binil*/
+	/* color: #ffffe3; gr8 binil */
 	color: white;
-	background-color: #0e100f;
+	/* background-color: #0e100f; */
+	background-color: black;
 	overflow-x: hidden;
 }
 body::-webkit-scrollbar {
@@ -487,6 +487,19 @@ input[type='password'] {
 }
 .fs-900 {
 	font-size: var(--fs-900);
+}
+
+input::placeholder,
+input::-webkit-input-placeholder,
+input::-moz-placeholder,
+input:-ms-input-placeholder,
+input::-ms-input-placeholder,
+textarea::placeholder,
+textarea::-webkit-input-placeholder,
+textarea::-moz-placeholder,
+textarea:-ms-input-placeholder,
+textarea::-ms-input-placeholder {
+	color: #adadad;
 }
 
 /* button */

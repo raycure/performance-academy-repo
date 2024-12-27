@@ -1,23 +1,19 @@
 import React, { act, Fragment, useEffect, useLayoutEffect } from 'react';
 import './Main.css';
 import Container from '../../components/Containers/Container';
-import isim from '/ornek.jpg';
 import Card from '../../components/Cards/Card';
 import LesMillsPrograms from '../../assets/LesmillsPrograms';
 import CardCarousel from '../../components/Carousels/CardCarousel';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { downToUp } from '../../components/animations/AnimationValues.jsx';
 import { useState } from 'react';
-import axios from '../api/axios.js';
 import { useNavigate } from 'react-router-dom';
 import { useRef } from 'react';
 import Banner from '../../components/Banner/Banner.jsx';
 import FAQ from '../../components/FAQ/FAQ.jsx';
 import { useTranslation } from 'react-i18next';
 import BecomeInstructorCards from '../../components/BecomeInstructorCards/BecomeInstructorCards.jsx';
-import Button from '../../components/Button/Button.jsx';
-import { useDispatch, useSelector } from 'react-redux';
-import { setPreferredLanguage } from '../../redux/auth/authStateSlice.js';
+import { useDispatch } from 'react-redux';
 
 function Main() {
 	const dispatch = useDispatch();

@@ -11,17 +11,13 @@ import { IoMdCloudDownload } from 'react-icons/io';
 import { RxQuestionMarkCircled } from 'react-icons/rx';
 import { IoMdArrowRoundForward } from 'react-icons/io';
 import { Link } from 'react-router-dom';
-function ProgramOverview({ eventID }) {
+import { useDispatch } from 'react-redux';
+import { AuthService } from '../../auth/auth.service';
+function ProgramOverview({ eventDetails }) {
 	const { i18n, t } = useTranslation('translation');
 	const activeEvent = LesMillsEvents.find((event) => {
-		return event.id === eventID;
+		return event.id === eventDetails.eventId;
 	});
-	useEffect(() => {
-		console.log('activeEvent', activeEvent);
-	}, []);
-	useEffect(() => {
-		console.log('program', program);
-	}, []);
 
 	const program = Object.keys(LesmillsPrograms())
 		.map((category) => {
@@ -30,6 +26,13 @@ function ProgramOverview({ eventID }) {
 			});
 		})
 		.filter(Boolean)[0];
+	useEffect(() => {
+		console.log('activeEvent', activeEvent);
+		console.log('eventDetails', eventDetails);
+		console.log('program', program);
+		console.log('lastExamResult', eventDetails.examAttempts[0].result);
+		console.log('lastExamResult', eventDetails.examAttempts.length);
+	}, []);
 
 	const scrollWithOffset = (el) => {
 		const yCoordinate = el.getBoundingClientRect().top + window.scrollY;
@@ -57,8 +60,8 @@ function ProgramOverview({ eventID }) {
 	const handleChoreographyDowload = () => {};
 	const handleExamDowload = () => {};
 	const assessmentFormResult = true; //dosya yüklendi mi diye, sadece button disablelamak amacıyla kullandım
-	const leftAssessmentTries = 2;
-	const lastExamResult = false;
+	const leftAssessmentTries = 3 - eventDetails.examAttempts.length;
+	const lastExamResult = eventDetails.examAttempts[0].result;
 	const buttonContent = [
 		{
 			text:
@@ -96,8 +99,31 @@ function ProgramOverview({ eventID }) {
 		return found.length === 1 ? found[0] : ''; // Return the single word or an empty string
 	}
 
+	const dispatch = useDispatch();
+	async function testPayment() {
+		try {
+			const eventId = eventDetails.eventId;
+			const response = await dispatch(
+				AuthService({
+					method: 'POST',
+					endpoint: '/pay',
+					data: { id: eventId, purchaseType: 'payExamFee' },
+				})
+			);
+			const paymentUrl = response.payload.data.url;
+			if (paymentUrl) {
+				window.location = paymentUrl;
+			}
+		} catch (error) {
+			console.log('testPayment error', error);
+		}
+	}
+
 	return (
-		<div className='prog-overview-outer-con text-container' id={eventID}>
+		<div
+			className='prog-overview-outer-con text-container'
+			id={eventDetails.eventId}
+		>
 			<video controls style={{ width: '100%' }}>
 				<source src='' type='video/mp4' />
 				Your browser does not support the video tag.
@@ -155,7 +181,7 @@ function ProgramOverview({ eventID }) {
 					)}
 				</div>
 				<div className='program-overview-assessment-con'>
-					{lastExamResult === false ? (
+					{lastExamResult === 'failed' ? (
 						<div className='fs-400'>
 							<p style={{ color: '#ef3f3f' }}>
 								{i18n.language === 'en'
@@ -191,6 +217,7 @@ function ProgramOverview({ eventID }) {
 												gap: '0.3rem',
 											}}
 											className='addLineAnimation'
+											onClick={testPayment}
 										>
 											{i18n.language === 'en'
 												? 'Pay The Exam Fee'
@@ -215,7 +242,7 @@ function ProgramOverview({ eventID }) {
 								</p>
 							)}
 						</div>
-					) : lastExamResult === true ? (
+					) : lastExamResult === 'passed' ? (
 						<div>
 							<p style={{ color: '#67ef55' }}>
 								{i18n.language === 'en'
