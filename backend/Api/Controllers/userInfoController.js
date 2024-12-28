@@ -1,41 +1,64 @@
 import Users from '../Models/userModel.js';
-import jwt from 'jsonwebtoken';
 import { ObjectId } from 'mongodb';
+import pkg from 'bcryptjs';
+import validateInput from '../../Utils/validateInput.js';
+import {
+	passwordSchema,
+	userinfoChangeSchemas,
+} from '../../Utils/schemas/userSchema.js';
+const { hash, compare } = pkg;
 
 export const userInfoFetchController = async (req, res) => {
-	if (req.isAuthenticated) {
-		const decoded = jwt.decode(req.user);
-		const userIDfromRefresh = decoded.userId;
-		const foundUser = await Users.findOne({
-			_id: new ObjectId(userIDfromRefresh),
-		});
-
-		res.status(200).json({
-			message: 'userinfo fetch successful',
-			foundUser,
-			accessToken: req.user,
-		});
-	} else {
-		res.status(401).json({ message: 'not authed' });
+	if (!req.isAuthenticated) {
+		res.status(401).json({ message: res.__('unauthorized') });
 	}
+	const userId = req.userId;
+	const foundUser = await Users.findOne({
+		_id: new ObjectId(userId),
+	});
+
+	const accessToken = req.user;
+	res.status(200).json({
+		message: res.__('userInfoResponses.userInfoFetch'),
+		foundUser,
+		accessToken: accessToken,
+	});
 };
 
 export const userInfoPutController = async (req, res) => {
 	try {
 		if (!req.isAuthenticated) {
-			return res.status(401).json({ message: 'Unauthorized access' });
+			return res
+				.status(401)
+				.json({ message: res.__('userInfoResponses.unauthorized') });
 		}
-
-		const updateData = req.body.updateData;
-		const decoded = jwt.decode(req.user);
-		const userIDfromRefresh = decoded.userId;
-
+		const { updateData } = req.body;
+		const language = req.headers['language'];
+		const newPassword = updateData?.newPassword;
+		const userId = req.userId;
 		const foundUser = await Users.findOne({
-			_id: new ObjectId(userIDfromRefresh),
+			_id: new ObjectId(userId),
 		});
 
-		if (!foundUser) {
-			return res.status(404).json({ message: 'User not found' });
+		try {
+			validateInput(updateData, userinfoChangeSchemas);
+			if (newPassword) {
+				validateInput({ password: newPassword }, passwordSchema);
+			}
+		} catch (error) {
+			const trasnlatedMessage = res.__(`${error.message.errorMessage}`);
+			const trasnlatedErrorField = res.__(`${error.message.errorField}`);
+			return res
+				.status(422)
+				.json({ message: trasnlatedErrorField + ' ' + trasnlatedMessage });
+		}
+
+		if (updateData?.password) {
+			const hashedPassword = await hash(newPassword, 10);
+
+			await Users.findByIdAndUpdate(foundUser._id, {
+				password: hashedPassword,
+			});
 		}
 
 		const plainUser = foundUser.toObject();
@@ -80,26 +103,49 @@ export const userInfoPutController = async (req, res) => {
 			}
 		});
 
+		console.log('req.body', req.body);
+
+		if (req.body.isContactSent) {
+			await Users.updateOne(
+				{ _id: new ObjectId(userId) },
+				{ verifiedContract: 'pending' }
+			);
+		}
+
 		// Only update if there are changes
 		if (Object.keys(fieldsToUpdate).length > 0) {
 			await Users.updateOne(
-				{ _id: new ObjectId(userIDfromRefresh) },
+				{ _id: new ObjectId(userId) },
 				{ $set: fieldsToUpdate }
 			);
+
+			if (Object.keys(fieldsToUpdate).includes('email')) {
+				console.log('email changed');
+				await Users.updateOne(
+					{ _id: new ObjectId(userId) },
+					{ $set: { verifiedMail: false } }
+				);
+			}
+
 			return res.status(200).json({
-				message: 'User updated successfully',
+				message:
+					res.__('userInfoResponses.userUpdate') +
+					Object.keys(fieldsToUpdate).join(', '),
+				notify: true,
 				updatedFields: fieldsToUpdate,
 			});
 		}
 
 		return res.status(200).json({
-			message: 'No changes detected',
+			message: res.__('userInfoResponses.noChanges'),
 			updatedFields: {},
+			notify: true,
 		});
 	} catch (error) {
-		console.error('Error updating user:', error);
+		console.log('error', error);
+
 		return res.status(500).json({
-			message: 'Internal server error',
+			message: res.__('serverError'),
 			error: error.message,
 		});
 	}

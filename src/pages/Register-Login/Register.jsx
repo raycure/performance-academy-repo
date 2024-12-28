@@ -91,8 +91,6 @@ function RegisterForm() {
 	const [matchPwd, setMatchPwd] = useState('');
 	const [validMatch, setValidMatch] = useState(false);
 
-	const [errMsg, setErrMsg] = useState('');
-
 	useEffect(() => {
 		userRef.current.focus();
 	}, []);
@@ -121,15 +119,14 @@ function RegisterForm() {
 		setValidMatch(pwd === matchPwd);
 	}, [pwd, matchPwd]);
 
-	useEffect(() => {
-		setErrMsg('');
-	}, [name, nationalID, pwd, matchPwd]);
-
 	function displayNotif() {
 		const verifyNotif = {
 			type: 'info',
 			duration: 5000,
-			message: 'Verify Mail sent',
+			message:
+				i18n.language === 'en'
+					? 'Verification successful! A confirmation email has been sent to your inbox.'
+					: 'Doğrulama başarılı! E-posta adresinize bir onay maili gönderildi.',
 		};
 		localStorage.setItem('Notifexp', JSON.stringify(verifyNotif));
 		const notificationEvent = new Event('notificationEvent');
@@ -153,25 +150,21 @@ function RegisterForm() {
 					method: 'POST',
 				})
 			);
+
+			if (response.status === 200) {
+				displayNotif();
+			}
 			// setName('');
 			// setSurname('');
 			// setLocalLoading(true);
 			// setNationalID('');
 			// setPwd('');
 			// setMatchPwd('');
-			// displayNotif();
 			// setTimeout(() => {
 			// 	navigate('/');
 			// }, 1500);
 		} catch (err) {
-			if (err.response?.status === 429) {
-				setErrMsg('Too many requests, please try again later.');
-			}
 			console.log('err', err);
-
-			err.payload?.data === undefined
-				? setErrMsg('int baglanti falan') // todo gercekten kontrol etmiyor server kapatilinca ancak calisiyor ve baglanti yokken calismiyor
-				: setErrMsg(err.payload?.data?.message);
 		}
 	}
 
@@ -245,89 +238,73 @@ function RegisterForm() {
 	return (
 		<div className='authentication-form-container box-shadow'>
 			<form onSubmit={handleSubmit} className='authentication-form'>
-				<p
-					ref={errRef}
-					className={errMsg ? 'errmsg' : 'offscreen'}
-					aria-live='assertive'
-				>
-					{errMsg}
-				</p>
 				<div className='twoInputAreas'>
 					<div className='relative-position centerLineAnimation'>
-						<div>
-							<input
-								type='text'
-								placeholder={t('Authentication.Name')}
-								id='name'
-								className={validName || name ? 'form-icon-active' : ''}
-								ref={userRef}
-								autoComplete='off'
-								onChange={(e) => setName(e.target.value)}
-								value={name}
-								required
-								aria-invalid={validName ? 'false' : 'true'}
-								aria-describedby='uidnote'
-							/>
-							<div htmlFor='name' className='form-icon'>
-								<FontAwesomeIcon
-									icon={faCheck}
-									className={validName ? 'valid' : 'hide'}
-								/>
-								<FontAwesomeIcon
-									icon={faTimes}
-									className={validName || !name ? 'hide' : 'invalid'}
-								/>
-							</div>
-							<motion.p
-								initial='hidden'
-								variants={descending}
-								whileInView='show'
-								id='uidnote'
-								className={name && !validName ? 'instructions' : 'offscreen'}
-							>
-								{nameSurnameRules.find((rule) => rule.test(name))?.message ||
-									''}
-							</motion.p>
-						</div>
+						<FontAwesomeIcon
+							icon={faCheck}
+							className={validName ? 'valid' : 'hide'}
+						/>
+						<FontAwesomeIcon
+							icon={faTimes}
+							className={validName || !name ? 'hide' : 'invalid'}
+						/>
+						<input
+							type='text'
+							placeholder={t('Authentication.Name')}
+							id='name'
+							className={validName || name ? 'form-icon-active' : ''}
+							ref={userRef}
+							autoComplete='off'
+							onChange={(e) => setName(e.target.value)}
+							value={name}
+							// required
+							aria-invalid={validName ? 'false' : 'true'}
+							aria-describedby='uidnote'
+						/>
+						<motion.p
+							initial='hidden'
+							variants={descending}
+							whileInView='show'
+							id='uidnote'
+							className={name && !validName ? 'instructions' : 'offscreen'}
+						>
+							{nameSurnameRules.find((rule) => rule.test(name))?.message || ''}
+						</motion.p>
 					</div>
 
 					<div className='relative-position centerLineAnimation'>
-						<div>
-							<input
-								type='text'
-								placeholder={t('Authentication.Surname')}
-								id='surname'
-								className={validSurename || surname ? 'form-icon-active' : ''}
-								autoComplete='off'
-								onChange={(e) => setSurname(e.target.value)}
-								value={surname}
-								required
-								aria-invalid={validSurename ? 'false' : 'true'}
-								aria-describedby='uidnote'
-							/>
-							<div htmlFor='surname' className='form-icon'>
-								<FontAwesomeIcon
-									icon={faCheck}
-									className={validSurename ? 'valid' : 'hide'}
-								/>
-								<FontAwesomeIcon
-									icon={faTimes}
-									className={validSurename || !surname ? 'hide' : 'invalid'}
-								/>
-							</div>
-							<motion.p
-								initial='hidden'
-								variants={descending}
-								whileInView='show'
-								id='uidnote'
-								className={
-									surname && !validSurename ? 'instructions' : 'offscreen'
-								}
-							>
-								{nameSurnameRules.find((rule) => rule.test(surname))?.message ||
-									''}
-							</motion.p>
-						</div>
+						<FontAwesomeIcon
+							icon={faCheck}
+							className={validSurename ? 'valid' : 'hide'}
+						/>
+						<FontAwesomeIcon
+							icon={faTimes}
+							className={validSurename || !surname ? 'hide' : 'invalid'}
+						/>
+						<input
+							type='text'
+							placeholder={t('Authentication.Surname')}
+							id='surname'
+							className={validSurename || surname ? 'form-icon-active' : ''}
+							autoComplete='off'
+							onChange={(e) => setSurname(e.target.value)}
+							value={surname}
+							required
+							aria-invalid={validSurename ? 'false' : 'true'}
+							aria-describedby='uidnote'
+						/>
+						<motion.p
+							initial='hidden'
+							variants={descending}
+							whileInView='show'
+							id='uidnote'
+							className={
+								surname && !validSurename ? 'instructions' : 'offscreen'
+							}
+						>
+							{nameSurnameRules.find((rule) => rule.test(surname))?.message ||
+								''}
+						</motion.p>
 					</div>
 				</div>
 				<div className='centerLineAnimation'>
@@ -342,9 +319,16 @@ function RegisterForm() {
 					/>
 				</div>
 				<div className='twoInputAreas'>
-					{/* nationalID input */}
 					<div>
 						<div className='centerLineAnimation relative-position'>
+							<FontAwesomeIcon
+								icon={faCheck}
+								className={validNationalID ? 'valid' : 'hide'}
+							/>
+							<FontAwesomeIcon
+								icon={faTimes}
+								className={validNationalID || !nationalID ? 'hide' : 'invalid'}
+							/>
 							<input
 								type='text'
 								placeholder={t('Authentication.UserId')}
@@ -359,18 +343,6 @@ function RegisterForm() {
 								aria-invalid={validNationalID ? 'false' : 'true'}
 								aria-describedby='uidnote'
 							/>
-							<div htmlFor='nationalID' className='form-icon'>
-								<FontAwesomeIcon
-									icon={faCheck}
-									className={validNationalID ? 'valid' : 'hide'}
-								/>
-								<FontAwesomeIcon
-									icon={faTimes}
-									className={
-										validNationalID || !nationalID ? 'hide' : 'invalid'
-									}
-								/>
-							</div>
 							<motion.p
 								initial='hidden'
 								variants={descending}
@@ -405,6 +377,14 @@ function RegisterForm() {
 				</div>
 
 				<div className='relative-position centerLineAnimation'>
+					<FontAwesomeIcon
+						icon={faCheck}
+						className={validPwd ? 'valid' : 'hide'}
+					/>
+					<FontAwesomeIcon
+						icon={faTimes}
+						className={validPwd || !pwd ? 'hide' : 'invalid'}
+					/>
 					<input
 						type='password'
 						id='password'
@@ -412,20 +392,11 @@ function RegisterForm() {
 						className={validPwd || pwd ? 'form-icon-active' : ''}
 						onChange={(e) => setPwd(e.target.value)}
 						value={pwd}
-						required
+						// required
 						aria-invalid={validPwd ? 'false' : 'true'}
 						aria-describedby='pwdnote'
 					/>
-					<div htmlFor='password' className='form-icon'>
-						<FontAwesomeIcon
-							icon={faCheck}
-							className={validPwd ? 'valid' : 'hide'}
-						/>
-						<FontAwesomeIcon
-							icon={faTimes}
-							className={validPwd || !pwd ? 'hide' : 'invalid'}
-						/>
-					</div>
+
 					<motion.p
 						initial='hidden'
 						variants={descending}
@@ -438,6 +409,18 @@ function RegisterForm() {
 					</motion.p>
 				</div>
 				<div className='relative-position centerLineAnimation'>
+					<FontAwesomeIcon
+						icon={faCheck}
+						className={validMatch && matchPwd && validPwd ? 'valid' : 'hide'}
+					/>
+					<FontAwesomeIcon
+						icon={faTimes}
+						className={
+							(!validMatch || !pwd || !validPwd) && matchPwd
+								? 'invalid'
+								: 'hide'
+						}
+					/>
 					<input
 						type='password'
 						id='confirm_pwd'
@@ -445,24 +428,10 @@ function RegisterForm() {
 						className={matchPwd ? 'form-icon-active' : ''}
 						onChange={(e) => setMatchPwd(e.target.value)}
 						value={matchPwd}
-						required
+						// required
 						aria-invalid={validMatch ? 'false' : 'true'}
 						aria-describedby='confirmnote'
 					/>
-					<div htmlFor='confirm_pwd' className='form-icon'>
-						<FontAwesomeIcon
-							icon={faCheck}
-							className={validMatch && matchPwd && validPwd ? 'valid' : 'hide'}
-						/>
-						<FontAwesomeIcon
-							icon={faTimes}
-							className={
-								(!validMatch || !pwd || !validPwd) && matchPwd
-									? 'invalid'
-									: 'hide'
-							}
-						/>
-					</div>
 					<motion.p
 						initial='hidden'
 						variants={descending}
@@ -474,11 +443,7 @@ function RegisterForm() {
 								: 'offscreen'
 						}
 					>
-						{!validPwd
-							? i18n.language === 'en'
-								? 'Not matching.'
-								: 'Eşleştirilemedi.'
-							: 'Must match the first password input field'}
+						{i18n.language === 'en' ? 'Not matching.' : 'Eşleştirilemedi.'}
 					</motion.p>
 				</div>
 

@@ -16,12 +16,14 @@
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "express-rate-limit": "^7.4.0",
+    "i18n": "^0.15.1",
     "joi": "^17.13.3",
     "jsonwebtoken": "^9.0.2",
     "nodemailer": "^6.9.14",
     "nodemon": "^3.1.4",
     "pdf-lib": "^1.17.1",
-    "redux-thunk": "^3.1.0"
+    "redux-thunk": "^3.1.0",
+    "stripe": "^17.5.0"
   },
   "devDependencies": {
     "@types/nodemailer": "^6.4.17",

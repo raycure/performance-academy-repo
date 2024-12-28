@@ -4,38 +4,51 @@ const { hash, compare } = pkg;
 import jwt from 'jsonwebtoken';
 import { ObjectId } from 'mongodb';
 import emailSender from './emailSender.js';
-import Joi from 'joi';
 import * as dotenv from 'dotenv';
 dotenv.config();
 import Sessions from '../Models/sessionModel.js';
+import validateInput from '../../Utils/validateInput.js';
+import { registerSchemas } from '../../Utils/schemas/userSchema.js';
 
 const register = async (req, res) => {
 	try {
-		// todo add joi validation for password strength
-		const { email, nationalID, name, surname } = req.body;
+		const { email, nationalID, name, surname, password } = req.body;
 		const language = req.headers['language'];
-		// const schema = Joi.object({
-		// 	email: Joi.string().email().required(),
-		// });
-		// const { error } = await schema.validateAsync({ email });
-		// if (error) {
-		// 	return res.status(409).json({
-		// 		success: false,
-		// 		result: null,
-		// 		error: error,
-		// 		message: 'email format is incorrect',
-		// 	});
-		// }
-		const existingUser = await Users.findOne({ email });
+		const registerData = { name, nationalID, surname, password, email };
+
+		const existingUser = await Users.findOne({
+			$or: [{ email }, { nationalID }],
+		});
+
 		if (existingUser) {
-			return res.status(409).json({
-				success: false,
-				result: null,
-				message: 'Email already in use.',
-			});
+			if (existingUser.email === email) {
+				return res.status(409).json({
+					success: false,
+					result: null,
+					message: res.__('registerResponses.duplicateEmail'),
+				});
+			}
+
+			if (existingUser.nationalID === +nationalID) {
+				return res.status(409).json({
+					success: false,
+					result: null,
+					message: res.__('registerResponses.duplicateNationalId'),
+				});
+			}
+		}
+		try {
+			validateInput(registerData, registerSchemas);
+		} catch (error) {
+			const trasnlatedMessage = res.__(`${error.message.errorMessage}`);
+			const trasnlatedErrorField = res.__(`${error.message.errorField}`);
+
+			return res
+				.status(422)
+				.json({ message: trasnlatedErrorField + ' ' + trasnlatedMessage });
 		}
 
-		const hashedPassword = await hash(req.body.password, 10);
+		const hashedPassword = await hash(password, 10);
 		req.body.password = hashedPassword;
 		const newUser = await Users.create(req.body);
 		const userId = new ObjectId(newUser).toHexString();
@@ -68,19 +81,18 @@ const register = async (req, res) => {
 				email: email,
 			},
 			process.env.ACCESS_TOKEN_SECRET,
-			{ expiresIn: '3s' } //todo change it
+			{ expiresIn: '15m' }
 		);
 		const refreshToken = jwt.sign(
 			{
 				userId: userId,
 			},
 			process.env.REFRESH_TOKEN_SECRET,
-			{ expiresIn: '5m' } //todo change it
+			{ expiresIn: '365d' }
 		);
 		res.cookie('jwt', refreshToken, {
 			httpOnly: true,
 			maxAge: 1000 * 60 * 60 * 24 * 30,
-			// maxAge: 1000 * 3, //todo delete it
 			sameSite: 'Lax',
 			path: '/',
 			secure: process.env.ENVIRONMENT === 'development' ? 'false' : 'true',
@@ -99,14 +111,15 @@ const register = async (req, res) => {
 			userId: userId,
 			ip: clientIp,
 		});
+
 		res.status(200).json({
 			accessToken: accessToken,
-			message: 'Successfully login user',
+			message: res.__('registerResponses.success'),
+			notify: true,
 		});
 	} catch (error) {
-		console.log('error', error);
-
-		res.status(500).json({ message: 'Internal server error.' });
+		console.log('error in the last catc', error);
+		res.status(500).json({ message: res.__('serverError') });
 	}
 };
 

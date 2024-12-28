@@ -114,7 +114,10 @@ function CertificationSteps() {
 						}}
 						key={index}
 					>
-						<div className='programStepContainers'>
+						<div
+							className='programStepContainers'
+							style={{ boxShadow: 'none', backgroundColor: 'transparent' }}
+						>
 							<span className='programStepNumbers user-select-none'>
 								{index + 1}
 							</span>
@@ -123,11 +126,9 @@ function CertificationSteps() {
 								style={{ backgroundColor: index === 0 ? 'red' : '' }}
 								ref={progressStepContainerRefs.current[index]}
 							></span>
+							{index < 4 && <span className='progressLine'></span>}
 							{index < 4 && (
-								<span
-									className='progressLine'
-									ref={progressStepLineRefs.current[index]}
-								></span>
+								<span ref={progressStepLineRefs.current[index]}></span>
 							)}
 						</div>
 						<h3 className='fs-600'>{step.title}</h3>

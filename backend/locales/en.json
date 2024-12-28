@@ -1,0 +1,119 @@
+{
+	"registerResponses": {
+		"success": "Registration successful! Redirecting...",
+		"duplicateEmail": "This email is already in use.",
+		"duplicateNationalId": "This national ID is already in use."
+	},
+	"loginResponses": {
+		"credentialType": "Please provide either email or national ID, not both.",
+		"emailOrIdMissing": "Please provide either email or national ID.",
+		"accountNotFound": "No account found matching the provided information.",
+		"invalidCredentials": "Invalid user credentials.",
+		"success": "User logged in successfully."
+	},
+	"contactResponses": {
+		"success": "Your contact form has been submitted successfully. We will get back to you shortly.",
+		"error": "An error occurred while processing your form submission. Please try again later."
+	},
+	"forgotPasswordResponses": {
+		"missingToken": "The verification token is missing. Please make sure you've been redirected from the 'forgot password' email.",
+		"expiredToken": "The verification token has expired. Please request a new one using the 'Forgot Password' button on the login page.",
+		"invalidToken": "The verification token is invalid. Please ensure the token hasn't been tampered with.",
+        "success": "Your password has been successfully reset.",
+		"userNotFound": "No user found for the provided token."
+	},
+	"paymentResponses": {
+		"userNotFound": "We couldn't locate your account. Please double-check your credentials and try again.",
+		"emailNotVerified": "Please verify your email address to proceed. Request a verification email on the 'My Account' page.",
+		"contractNotVerified": "Contract verification is required to continue. Please complete the verification on the My Account page.",
+		"duplicatePurchase": "You already own this item."
+	},
+	"validationErrors": {
+		"name": {
+			"onlyChars": "Only characters and spaces are allowed.",
+			"minLength": "Must be more than 3 characters.",
+			"maxLength": "Must be less than 24 characters.",
+			"missing": "The name field is required. Please provide a value."
+		},
+		"password": {
+			"casing": "At least one lowercase and one uppercase letter is required.",
+			"digit": "At least one number is required.",
+			"noWhitespace": "Spaces are not allowed.",
+			"latinOnly": "Only Latin characters are allowed.",
+			"minLength": "Must be more than 8 characters.",
+			"maxLength": "Must be less than 24 characters.",
+			"missing": "The password field is required. Please provide a value."
+		},
+		"email": {
+			"invalid": "the address must be in a valid format.",
+			"invalidForLogin": "The email address must be in a valid format.",
+			"missing": "The email field is required. Please provide a value."
+		},
+		"nationalId": {
+			"numbersOnly": "Only numbers are allowed.",
+			"length": "Must be 11 digits.",
+			"missing": "The national ID field is required. Please provide a value."
+		},
+		"topic": {
+			"minLength": "Must be more than 3 characters.",
+			"maxLength": "Must be less than 250 characters.",
+			"missing": "The topic field is required. Please provide a value."
+		},
+		"question": {
+			"minLength": "Must be more than 3 characters.",
+			"maxLength": "Must be less than 75 characters.",
+			"missing": "The question field is required. Please provide a value."
+		}
+	},
+	"validationFields": {
+		"name": "In name field",
+		"surname": "In surname field",
+		"password": "In password field",
+		"email": "In email field",
+		"nationalId": "In national ID field",
+		"topic": "In topic field",
+		"question": "In question field"
+	},
+	"serverError": "An unexpected error occurred on the server.",
+	"sessionExpired": "Your session has expired. Please clear your browser cache and sign in again.",
+	"refreshJWTResponse":{
+		"refreshTokenNotFound": "Your session credentials were not found. Please sign in to continue.",
+		"TokenInactive": "Your session has become inactive for security reasons. Please sign in again to continue.",
+		"invalidToken": "We detected an issue with your session credentials. For your security, please sign in again.",
+		"sessionExpired": "Your session has timed out due to inactivity. Please sign in to continue your work.",
+		"serverError": "We're experiencing a temporary issue. Please try again in a few moments or contact support if the problem persists.",
+		"success": "Your session has been successfully renewed.",
+		"userNotFound": "No user found for the provided token."
+	},
+	"verificationEmailResponses": {
+		"success": "Please check your inbox and click the verification link to confirm your email address.",
+		"error": "We're currently experiencing a temporary issue and were unable to send the verification email. Please try again shortly. If the problem persists, feel free to contact support for assistance."
+	},
+	"unauthorized": "Access denied. Unauthorized request.",
+	"userInfoResponses": { 
+		"userUpdate": "User updated successfully. The following fields have been modified: ",
+		"userInfoFetch": "User information retrieved successfully.",
+		"noChanges": "No changes detected."
+	},
+	"forgotPasswordForm": {
+		"inputField" : "Your new password can not have",
+		"invalidEmail": "The email adress must be in a valid format",
+		"invalidNationalId": "The national id must be in a valid format"
+	},
+	"sendForgotPasswordEmailResponses": {
+		"success": "We've sent a password reset link to your email address. Please check your inbox and follow the instructions to reset your password.",
+		"error": "We couldn't send the password reset email at this time. Please try again or contact support if the problem continues."
+	},
+	"verifyMailResponses":{ 
+		"missingToken": "The verification token is missing. Please make sure you've been redirected from the 'verification' email.",
+		"expiredToken": "The verification token has expired. Please request a new one using the 'verify mail' button in the userinfo page .",
+		"invalidToken": "The verification token is invalid. Please ensure the token hasn't been tampered with.",
+		"userNotFound": "No user found for the provided token."
+	},
+	"authResponses": {
+	"noSession": "Your session has ended. Please sign in to continue using our services.",
+	"userNotFound": "We couldn't find an account with these credentials. Please check your information and try again.",
+	"expiredSession": "Your session has expired for security reasons. Please sign out and sign back in to continue.",
+	"accountSuspended": "Your account has been temporarily suspended. Please contact our support team for assistance."
+	}
+}

@@ -28,6 +28,16 @@ export const LesMillsEvents = assignUniqueIds([
 		time: '8.00-15.00',
 		program: 'BODYPUMP',
 	},
+	// {
+	// 	title: 'BODYPUMP',
+	// 	start: '2025-04-05',
+	// 	end: '2024-12-02',
+	// 	online: false,
+	// 	location: [40.742551, -74.013149],
+	// 	instructor: 'john doe',
+	// 	time: '8.00-15.00',
+	// 	program: 'BODYPUMP',
+	// },
 	{
 		title: 'BODYCOMBAT',
 		start: '2025-01-06',

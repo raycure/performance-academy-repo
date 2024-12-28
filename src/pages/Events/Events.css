@@ -85,6 +85,7 @@
 }
 .dropDownMenus {
 	display: flex;
+	gap: 2rem;
 }
 .dropDownCategoryMenu {
 	position: relative;

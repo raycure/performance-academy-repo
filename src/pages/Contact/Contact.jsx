@@ -16,6 +16,7 @@ function Contact() {
 			</section>
 			<ValueBar />
 			<FAQ />
+
 			<div id='contact-form-grad'>
 				<ContactForm />
 			</div>

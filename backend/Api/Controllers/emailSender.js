@@ -24,18 +24,6 @@ const emailSender = async (
 		location = null,
 	} = emailProps || {};
 
-	console.log({
-		language,
-		program,
-		name,
-		surname,
-		startDate,
-		endDate,
-		online,
-		location,
-		url,
-	});
-
 	try {
 		const transporter = nodemailer.createTransport({
 			host: 'smtp.ethereal.email',

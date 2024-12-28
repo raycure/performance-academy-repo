@@ -10,17 +10,18 @@ const verifyJWT = async (req, res) => {
 	}
 	const token = authHeader.split(' ')[1];
 
-	console.log('token', token);
-
 	try {
 		jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, async (err) => {
 			if (err) {
 				return res.status(403).json({ message: 'Token verification failed' });
 			}
-			res.status(200).json({
-				message: 'successful verify jwt',
-				returnedValue: token,
-			});
+		});
+		const decodedAccessToken = jwt.decode(token);
+		const userIdFromTheToken = decodedAccessToken.userId;
+		res.status(200).json({
+			message: 'successful verify jwt',
+			returnedValue: token,
+			accessToken: userIdFromTheToken,
 		});
 	} catch (error) {
 		console.error('Unexpected error:', error);

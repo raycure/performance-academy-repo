@@ -18,7 +18,9 @@
 	background-color: #171819;
 	max-width: 430px;
 	text-align: center;
-	/*todo choose a secondary color? */
+	-webkit-box-shadow: 0px 0px 8px 2px rgba(51, 50, 51, 0.5);
+	-moz-box-shadow: 0px 0px 8px 2px rgba(51, 50, 51, 0.5);
+	box-shadow: 0px 0px 8px 2px rgba(51, 50, 51, 0.5);
 }
 .gridCard p {
 	font-size: var(--fs-500);

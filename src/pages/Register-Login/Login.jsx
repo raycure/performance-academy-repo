@@ -18,49 +18,45 @@ import HoneypotInput from '../../components/Forms/HoneypotInput.jsx';
 function Login() {
 	const { t, i18n } = useTranslation('translation');
 	const userRef = useRef();
-	const errRef = useRef();
 	const navigate = useNavigate();
 	let isLoading = useSelector(selectIsLoading);
 	const dispatch = useDispatch();
 
-	const [mailorNationalID, setMailorNationalID] = useState('11111111111');
+	const [mailorNationalID, setMailorNationalID] = useState('');
 	const [pwd, setPwd] = useState('aaA!1aaa');
-	const [errMsg, setErrMsg] = useState('');
-	const [success, setSuccess] = useState(false);
 	const [localLoading, setLocalLoading] = useState(false);
 	const [showForgotPassordForm, setShowForgotPassordForm] = useState(false);
 
-	// useEffect(() => {
-	// 	checkIsLoggedIn();
-	// 	userRef.current.focus();
-	// }, []);
+	useEffect(() => {
+		checkIsLoggedIn();
+		userRef.current.focus();
+	}, []);
 
-	// let isLoggedIn = useSelector(selectIsLoggedIn);
-	// const checkIsLoggedIn = () => {
-	// 	if (isLoggedIn) {
-	// 		navigate('/');
-	// 	}
-	// };
-
-	// todo delete it im switching to a redux based approach
-	// useEffect(() => {
-	// 	const isLoggedIn = localStorage.getItem('isLoggedIn');
-	// 	if (isLoggedIn === 'true') {
-	// 		navigate('/');
-	// 	}
-	// }, []);
+	let isLoggedIn = useSelector(selectIsLoggedIn);
+	const checkIsLoggedIn = () => {
+		if (isLoggedIn) {
+			const verifyNotif = {
+				type: 'error',
+				duration: 2000,
+				message:
+					i18n.language === 'en'
+						? "You're already logged in."
+						: 'Hali hazırda oturumunuz bulunmaktadır.',
+			};
+			localStorage.setItem('Notifexp', JSON.stringify(verifyNotif));
+			const notificationEvent = new Event('notificationEvent');
+			window.dispatchEvent(notificationEvent);
+			navigate('/');
+		}
+	};
 
 	const handleForgotPasswordForm = async () => {
 		try {
-			console.log('forgot pasword form triggered');
-
 			let forgotPasswordData;
-			if (mailorNationalID.includes('@')) {
-				console.log('its an email');
-				forgotPasswordData = { email: mailorNationalID };
-			} else {
-				console.log('its an natid');
+			if (/^\d+$/.test(mailorNationalID)) {
 				forgotPasswordData = { nationalID: mailorNationalID };
+			} else {
+				forgotPasswordData = { email: mailorNationalID };
 			}
 			const response = await dispatch(
 				AuthService({
@@ -69,8 +65,6 @@ function Login() {
 					endpoint: `/forgotPassword`,
 				})
 			);
-			console.log('response', response);
-
 			if (response.payload.status === 200) {
 				localStorage.setItem(
 					'emailVerificationToken',
@@ -78,9 +72,8 @@ function Login() {
 				);
 			}
 			setMailorNationalID('');
-			setSuccess(true);
-			setLocalLoading(true);
-			// todo addnotif to inform the user
+			setPwd('');
+			setShowForgotPassordForm(false);
 		} catch (error) {
 			console.log('error at forgot password', error);
 		}
@@ -89,19 +82,18 @@ function Login() {
 	const handleSubmit = async () => {
 		try {
 			let loginData;
-			if (mailorNationalID.includes('@')) {
-				loginData = {
-					email: mailorNationalID,
-					password: pwd,
-				};
-			} else {
+			if (/^\d+$/.test(mailorNationalID)) {
 				loginData = {
 					nationalID: mailorNationalID,
 					password: pwd,
 				};
+			} else {
+				loginData = {
+					email: mailorNationalID,
+					password: pwd,
+				};
 			}
 			setLocalLoading(true);
-
 			const response = await dispatch(
 				AuthService({
 					data: loginData,
@@ -114,78 +106,78 @@ function Login() {
 
 			setMailorNationalID('');
 			setPwd('');
-			setSuccess(true);
-			setLocalLoading(false);
-			// navigate('/');
-
-			// setTimeout(() => {
-			// 	navigate('/');
-			// }, 2000);
+			setTimeout(() => {
+				navigate('/');
+			}, 1000);
 		} catch (err) {
-			if (err.response?.status === 429) {
-				setErrMsg('Too many requests, please try again later.');
-			}
-			console.log('err', err);
-
-			err.payload.data === undefined // todo find a way to listen for no internet connection
-				? setErrMsg('int baglanti falan')
-				: setErrMsg(err.payload?.data?.message);
+			console.log('an unexpected error happened', err);
 		}
 	};
-
+	//11111111111  aaA!1aaa
 	return (
 		<div className='authentication-form-container box-shadow'>
 			<form onSubmit={handleSubmit} className='authentication-form'>
 				<img alt='logo' className='logo' src={logo}></img>
-				<p
-					ref={errRef}
-					className={errMsg ? 'errmsg' : 'offscreen'}
-					aria-live='assertive'
+				<div
+					style={{
+						display: 'flex',
+						flexDirection: 'column',
+						gap: '2rem',
+						marginBottom: '2rem',
+					}}
 				>
-					{errMsg}
-				</p>
-				<h1>{t('Authentication.Greet.1')}</h1>
-				<div className='centerLineAnimation'>
-					<input
-						type='text'
-						ref={userRef}
-						autoComplete='off'
-						onChange={(e) => setMailorNationalID(e.target.value)}
-						value={mailorNationalID}
-						required
-						placeholder={
-							i18n.language === 'tr' ? 'e-mail ya da TC' : 'email or TC'
-						}
-					/>
-				</div>
-				{!showForgotPassordForm && (
+					{!showForgotPassordForm && <h1>{t('Authentication.Greet.1')}</h1>}
+					{showForgotPassordForm &&
+						(i18n.language === 'en' ? (
+							<p>
+								Enter your email adress in the area below, we will send a link
+								to your provided email address to reset your password.
+							</p>
+						) : (
+							<p>
+								Email adresinizi aşağıda bulunan alana giriniz, girilen adrese
+								şifrenizi yenileyebilmeniz için bir link göndereceğiz.
+							</p>
+						))}
 					<div className='centerLineAnimation'>
 						<input
-							type='password'
-							id='password'
-							onChange={(e) => setPwd(e.target.value)}
-							value={pwd}
+							type='text'
+							ref={userRef}
+							autoComplete='off'
+							onChange={(e) => setMailorNationalID(e.target.value)}
+							value={mailorNationalID}
 							required
-							placeholder={t('Authentication.Password.0')}
+							placeholder={
+								i18n.language === 'tr' ? 'e-mail ya da TC' : 'email or TC'
+							}
 						/>
 					</div>
-				)}
+					{!showForgotPassordForm && (
+						<div className='centerLineAnimation'>
+							<input
+								type='password'
+								id='password'
+								onChange={(e) => setPwd(e.target.value)}
+								value={pwd}
+								required
+								placeholder={t('Authentication.Password.0')}
+							/>
+						</div>
+					)}
 
-				{!showForgotPassordForm && (
-					<button
-						onClick={() => setShowForgotPassordForm(!showForgotPassordForm)}
-						type='button'
-					>
-						forgot password? Reset it.
-					</button>
-				)}
-
-				{showForgotPassordForm && (
-					<p>
-						Enter your email adress, we gonna send you a link to reset your
-						password.
-					</p>
-				)}
+					{!showForgotPassordForm && (
+						<button
+							onClick={() => setShowForgotPassordForm(!showForgotPassordForm)}
+							type='button'
+						>
+							{i18n.language === 'en' ? (
+								<>Forgot your password? Reset it here.</>
+							) : (
+								<>Şifrenizi mi unuttunuz? Buradan yenileyin.</>
+							)}
+						</button>
+					)}
+				</div>
 
 				<div className='authentication-button-container'>
 					<Button
@@ -199,8 +191,8 @@ function Login() {
 					>
 						{showForgotPassordForm
 							? i18n.language === 'en'
-								? 'forgot password'
-								: 'sifremi unuttum'
+								? 'Send Link'
+								: 'Linki Gönder'
 							: i18n.language === 'en'
 							? 'Sign In'
 							: 'Giriş Yap'}

@@ -2,7 +2,6 @@ import './Events.css';
 import React, { useRef, useState } from 'react';
 import CalendarContainer from '../../components/CalendarContainer/CalendarContainer';
 import { useEffect } from 'react';
-
 import LesmillsPrograms from '../../assets/LesmillsPrograms';
 import EventList from '../../components/EventItem/EventList';
 import axios from '../api/axios';
@@ -35,63 +34,7 @@ function Events() {
 
 	const [activeCategory, setActiveCategory] = useState(null);
 	const [activeClass, setActiveClass] = useState(null);
-
-	const [file, setFile] = useState(null);
-	const [message, setMessage] = useState('');
-
 	const [onlineCheck, setOnlineCheck] = useState(undefined);
-	const handleFileChange = (event) => {
-		const selectedFile = event.target.files[0];
-
-		if (selectedFile && selectedFile.type !== 'application/pdf') {
-			setMessage(
-				i18n.language === 'en'
-					? 'Please select a PDF file.'
-					: 'Lütfen bir PDF dosyası seçiniz.'
-			);
-			setFile(null);
-		} else {
-			setMessage('');
-			setFile(selectedFile);
-		}
-	};
-
-	const handleUpload = async (event) => {
-		event.preventDefault();
-		if (!file) {
-			setMessage(
-				i18n.language === 'en'
-					? 'Please select a PDF file.'
-					: 'Lütfen bir PDF dosyası seçiniz.'
-			);
-			return;
-		}
-		const formData = new FormData();
-		formData.append('file', file);
-		setMessage('');
-
-		try {
-			const response = await axios.post('/upload', formData, {
-				headers: {
-					'Content-Type': 'multipart/form-data',
-				},
-			});
-
-			setMessage(
-				i18n.language === 'en'
-					? 'File uploaded successfully!'
-					: 'Dosya başarıyla yüklendi.'
-			);
-		} catch (error) {
-			setMessage(
-				i18n.language === 'en'
-					? 'Error uploading file'
-					: 'Dosya yüklenirken bir sorun oluştu'
-			);
-			console.error('Error:', error);
-		} finally {
-		}
-	};
 	const [isCatMenuOpen, setIsCatMenuOpen] = useState(false);
 	const [isClassMenuOpen, setIsClassMenuOpen] = useState(false);
 
@@ -152,6 +95,7 @@ function Events() {
 			}
 		}
 	}, [location]);
+
 	const classes = Object.keys(lesMillsPrograms).map((category) => {
 		if (category !== activeCategory || activeCategory === 'all') return null;
 		return lesMillsPrograms[category].map((classTitle, index) => {
@@ -173,7 +117,6 @@ function Events() {
 	return (
 		<div id='event-page'>
 			<CalendarContainer />
-
 			<CertificationSteps />
 			<section>
 				<h2 className='fs-650 center-item' style={{ padding: '2rem' }}>
@@ -251,43 +194,43 @@ function Events() {
 							</div>
 						</div>
 					</div>
-					<div class='radio-group'>
-						<div class='radio-option'>
+					<div className='radio-group'>
+						<div className='radio-option'>
 							<input
 								value={onlineCheck}
 								type='radio'
 								name='radio-option'
-								class='radio-btn'
+								className='radio-btn'
 								checked={onlineCheck === true}
 								onChange={() => handleOnlineSelect(true)}
 							/>
-							<label class='radio-label'>
+							<label className='radio-label'>
 								{i18n.language === 'en' ? 'Online' : 'Sanal'}
 							</label>
 						</div>
-						<div class='radio-option'>
+						<div className='radio-option'>
 							<input
 								value={!onlineCheck}
 								type='radio'
 								name='radio-option'
-								class='radio-btn'
+								className='radio-btn'
 								checked={onlineCheck === false}
 								onChange={() => handleOnlineSelect(false)}
 							/>
-							<label class='radio-label'>
+							<label className='radio-label'>
 								{i18n.language === 'en' ? 'In-Person' : 'Canlı'}
 							</label>
 						</div>
-						<div class='radio-option'>
+						<div className='radio-option'>
 							<input
 								value={onlineCheck === null || onlineCheck === undefined}
 								type='radio'
 								name='radio-option'
-								class='radio-btn'
+								className='radio-btn'
 								checked={onlineCheck === null || onlineCheck === undefined}
 								onChange={() => handleOnlineSelect(null)}
 							/>
-							<label class='radio-label'>
+							<label className='radio-label'>
 								{i18n.language === 'en' ? 'All' : 'Tümü'}
 							</label>
 						</div>

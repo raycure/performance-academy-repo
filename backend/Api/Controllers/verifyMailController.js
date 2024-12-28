@@ -8,12 +8,10 @@ dotenv.config();
 const verifyMail = async (req, res) => {
 	try {
 		const { token } = req.params;
-		console.log('verify tokeni', token);
-
 		// Validate token existence
 		if (!token) {
 			return res.status(400).json({
-				message: 'Verification token is missing',
+				message: res.__('verifyMailResponses.missingToken'),
 			});
 		}
 
@@ -24,22 +22,14 @@ const verifyMail = async (req, res) => {
 		} catch (verifyError) {
 			if (verifyError.name === 'TokenExpiredError') {
 				return res.status(401).json({
-					message: 'Verification token has expired',
-				});
-			}
-			if (verifyError.name === 'JsonWebTokenError') {
-				return res.status(401).json({
-					message: 'Invalid verification token',
+					// message: 'Verification token has expired',
+					message:
+						verifyError.name === 'TokenExpiredError'
+							? res.__('verifyMailResponses.expiredToken')
+							: res.__('verifyMailResponses.invalidToken'),
 				});
 			}
 			throw verifyError;
-		}
-
-		// Validate userId in the decoded token
-		if (!decoded.userId) {
-			return res.status(400).json({
-				message: 'Invalid token payload',
-			});
 		}
 
 		// Find and update the user
@@ -51,20 +41,13 @@ const verifyMail = async (req, res) => {
 		// Check if the update was successful
 		if (result.matchedCount === 0) {
 			return res.status(404).json({
-				message: 'User not found',
+				message: res.__('verifyMailResponses.userNotFound'),
 			});
 		}
-
-		// Redirect to login page on successful verification
-		// todo add prod link
 		res.redirect('http://localhost:5173/login');
 	} catch (error) {
-		// Log the error for server-side tracking
-		console.error('Email verification error:', error);
-
-		// Send a generic error response
 		res.status(500).json({
-			message: 'An unexpected error occurred during email verification',
+			message: res.__('serverError'),
 		});
 	}
 };

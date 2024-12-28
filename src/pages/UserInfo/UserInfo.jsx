@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import '../Register-Login/formStyle.css';
 import './UserInfo.css';
 import { FaEdit } from 'react-icons/fa';
@@ -24,6 +24,7 @@ import { useNavigate } from 'react-router-dom';
 import { GrDocumentPdf } from 'react-icons/gr';
 import { Link } from 'react-router-dom';
 import HoneypotInput from '../../components/Forms/HoneypotInput';
+import axios from '../api/axios';
 
 function UserInfo() {
 	const dispatch = useDispatch();
@@ -31,17 +32,7 @@ function UserInfo() {
 		initUserInfo();
 	}, []);
 
-	function displayNotif() {
-		const loginRequiredNotif = {
-			type: 'info',
-			duration: 5000,
-			message: 'login required',
-		};
-		localStorage.setItem('Notifexp', JSON.stringify(loginRequiredNotif));
-		const Notifexp = new Event('notificationEvent');
-		window.dispatchEvent(Notifexp);
-	}
-
+	const editingRef = useRef(null);
 	const initUserInfo = async () => {
 		try {
 			const response = await dispatch(
@@ -50,77 +41,173 @@ function UserInfo() {
 					endpoint: '/userInfo',
 				})
 			);
-			console.log(
-				'response for initUserInfo',
-				response.payload.data.accessToken
-			);
-
 			const user = response.payload.data.foundUser;
-
 			const date = new Date(user.birthDate);
 			const day = String(date.getDate()).padStart(2, '0'); // Get day and add leading zero if needed
 			const month = String(date.getMonth() + 1).padStart(2, '0'); // Get month (0-indexed) and add leading zero
 			const year = date.getFullYear();
 
-			setNationalID(user.nationalID.toString());
 			setMail(user.email);
 			setName(user.name);
 			setSurname(user.surname);
 			setBirthDate(day + '/' + month + '/' + year);
+			setNationalID(user.nationalID);
+			setContractverified(user.verifiedContract);
+			setVerifiedMail(user.verifiedMail);
+			setValidMail(true);
 		} catch (error) {
-			// const status = error.payload.status;
-			// if (status === 401) {
-			// 	displayNotif();
-			// 	navigate('/');
-			// }
+			navigate('/');
 			console.log('userinfo fetch error', error);
 		}
 	};
 
+	// for not allowing the user to send multiple emails
+	let isRequestPending = false;
+	async function sendVerificationMail() {
+		if (isRequestPending) {
+			return;
+		}
+
+		try {
+			isRequestPending = true;
+			const response = await dispatch(
+				AuthService({
+					method: 'POST',
+					endpoint: '/userInfo/sendVerificationMail',
+					data: { name, surname, email: mail },
+				})
+			);
+
+			setTimeout(() => {
+				isRequestPending = false;
+			}, 2000);
+
+			return response;
+		} catch (error) {
+			isRequestPending = false;
+			throw error;
+		}
+	}
+
 	async function handleSubmit(e) {
 		e.preventDefault();
-		const updateData = {
-			name,
-			surname,
-			nationalID,
-			birthDate,
-			email: mail,
-		};
-		const response = await dispatch(
-			AuthService({
-				method: 'POST',
-				endpoint: '/userInfo',
-				data: { updateData },
-			})
-		);
+		try {
+			let isContactSent = false;
+			if (file) {
+				await handleUpload();
+				isContactSent = true;
+				setFile(null);
+			}
+			const updateData = {
+				name,
+				surname,
+				email: mail,
+				...(password && password.trim() !== ''
+					? { newPassword: password }
+					: {}),
+			};
+			const response = await dispatch(
+				AuthService({
+					method: 'POST',
+					endpoint: '/userInfo',
+					data: { updateData, isContactSent },
+				})
+			);
+			await initUserInfo();
+		} catch (error) {}
 	}
+
+	const handleIsEditing = () => {
+		setPassword('');
+		setMatchPassword('');
+		setIsEditing(true);
+	};
 
 	const { t, i18n } = useTranslation('translation');
 	const navigate = useNavigate();
-	const contractverified = false;
 	const [isEditing, setIsEditing] = useState(false);
-	const [passwordOn, setPasswordOn] = useState(true);
-	const [fileName, setFileName] = useState(null);
-	const handleFileChange = (event) => {
-		const file = event.target.files[0];
-		setFileName(file ? file.name : null);
-	};
+	const [contractverified, setContractverified] = useState(null);
+	useEffect(() => {
+		console.log('contractverified', contractverified);
+	}, [contractverified]);
+	const [verifiedMail, setVerifiedMail] = useState(null);
 	const [name, setName] = useState('');
 	const [surname, setSurname] = useState('');
+	const [nationalID, setNationalID] = useState('');
 	const [birthDate, setBirthDate] = useState('');
 	const [mail, setMail] = useState('');
-	const [password, setPassword] = useState('');
-	const [nationalID, setNationalID] = useState('');
-	const [forApiBirthDate, setForApiBirthDate] = useState('');
-
-	const [birthDateError, setBirthDateError] = useState('');
 	const [validName, setValidName] = useState('');
 	const [validSurname, setValidSurname] = useState('');
-	const [validNationalId, setValidNationalId] = useState('');
-	const [validBirthDate, setValidBirthDate] = useState('');
 	const [validMail, setValidMail] = useState('');
+	const [passwordOn, setPasswordOn] = useState(true);
+	const [matchPasswordOn, setMatchPasswordOn] = useState(true);
+	const [password, setPassword] = useState('');
+	const [matchPassword, setMatchPassword] = useState('');
 	const [validPassword, setValidPassword] = useState('');
+	const [validMatch, setValidMatch] = useState(false);
+	const [file, setFile] = useState(null);
+	const [message, setMessage] = useState('');
+	const [fileName, setFileName] = useState(null);
 
+	const handleFileChange = (event) => {
+		const selectedFile = event.target.files[0];
+		setFileName(selectedFile ? selectedFile.name : null);
+
+		if (selectedFile && selectedFile.type !== 'application/pdf') {
+			setMessage(
+				i18n.language === 'en'
+					? 'Please select a PDF file.'
+					: 'Lütfen bir PDF dosyası seçiniz.'
+			);
+			setFile(null);
+		} else {
+			setMessage('');
+			setFile(selectedFile);
+		}
+	};
+
+	const handleUpload = async () => {
+		if (!file) {
+			return null;
+		}
+		const formData = new FormData(); // formdata is a built in browser API it automatically handle the chunking of files
+		formData.append('file', file);
+		try {
+			const response = await axios.post('/upload', formData, {
+				headers: {
+					'Content-Type': 'multipart/form-data',
+				},
+			});
+
+			const verifyNotif = {
+				type: 'success',
+				duration: 2000,
+				message: 'file uploaded successfully',
+			};
+			displayNotif(verifyNotif);
+		} catch (error) {
+			const verifyNotif = {
+				type: 'error',
+				duration: 2000,
+				message: error.response.data.message,
+			};
+			displayNotif(verifyNotif);
+			throw new Error('file upload failed');
+		}
+	};
+
+	const displayInputAreaWarning = () => {
+		const verifyNotif = {
+			type: 'warning',
+			duration: 2000,
+			message:
+				i18n.language === 'en'
+					? 'If you want to change your ID or birth date, please contact our support team.'
+					: 'Eğer kimlik bilgilerinizi veya doğum tarihinizi değiştirmek istiyorsanız, lütfen destek ekibimizle iletişime geçin.',
+			link: 'http://localhost:5173/ileti%C5%9Fim',
+		};
+		displayNotif(verifyNotif);
+	};
 	const nameSurnameRules = [
 		{
 			test: (nameOrSurname) => !/^[a-zA-ZçğıöşüÇĞİÖŞÜ\s]+$/.test(nameOrSurname),
@@ -130,16 +217,6 @@ function UserInfo() {
 			test: (nameOrSurname) =>
 				nameOrSurname.length < 3 || nameOrSurname.length >= 24,
 			message: t('Authentication.Validation.nameOrSurname.1'),
-		},
-	];
-	const idRules = [
-		{
-			test: (nationalID) => !/^\d+$/.test(nationalID),
-			message: t('Authentication.Validation.UserId.0'),
-		},
-		{
-			test: (nationalID) => nationalID.length !== 11,
-			message: t('Authentication.Validation.UserId.1'),
 		},
 	];
 	const mailRules = [
@@ -158,35 +235,28 @@ function UserInfo() {
 					: '50 karakteri geçmemelidir.',
 		},
 	];
-	const birthDateRules = [
+	const passwordValidationRules = [
 		{
-			test: (birthDate) => isNaN(new Date(birthDate).getTime()),
-			message:
-				i18n.language === 'en'
-					? 'Birth date must be a valid date.'
-					: 'İstenen formatta yazılmalıdır.',
-		},
-	];
-	const passwordRules = [
-		{
-			test: (pwd) => !/(?=.*[a-z])(?=.*[A-Z])/.test(pwd),
+			test: (password) => !/(?=.*[a-z])(?=.*[A-Z])/.test(password),
 			message: t('Authentication.Validation.Password.0'),
 		},
 		{
-			test: (pwd) => !/(?=.*\d)/.test(pwd),
+			test: (password) => !/(?=.*\d)/.test(password),
 			message: t('Authentication.Validation.Password.1'),
 		},
 		{
-			test: (pwd) => /\s/.test(pwd),
+			test: (password) => /\s/.test(password),
 			message: t('Authentication.Validation.Password.2'),
 		},
 		{
-			test: (pwd) =>
-				!/^[a-zA-Z\d~!?@#$%^&*_\-\+\(\)\[\]\{\}><\/\\|"'\.,:;]+$/.test(pwd),
+			test: (password) =>
+				!/^[a-zA-Z\d~!?@#$%^&*_\-\+\(\)\[\]\{\}><\/\\|"'\.,:;]+$/.test(
+					password
+				),
 			message: t('Authentication.Validation.Password.3'),
 		},
 		{
-			test: (pwd) => pwd.length < 8 || pwd.length >= 24,
+			test: (password) => password.length < 8 || password.length >= 24,
 			message: t('Authentication.Validation.Password.4'),
 		},
 	];
@@ -201,83 +271,50 @@ function UserInfo() {
 	}, [surname]);
 
 	useEffect(() => {
-		const valid = idRules.every((rule) => !rule.test(nationalID));
-		setValidNationalId(valid);
-	}, [nationalID]);
-
-	useEffect(() => {
-		const valid = birthDateRules.every((rule) => !rule.test(birthDate));
-
-		setValidBirthDate(valid);
-	}, [birthDate]);
-
-	useEffect(() => {
 		const valid = mailRules.every((rule) => !rule.test(mail));
 		setValidMail(valid);
 	}, [mail]);
 
 	useEffect(() => {
-		const valid = passwordRules.every((rule) => !rule.test(password));
+		const valid = passwordValidationRules.every((rule) => !rule.test(password));
 		setValidPassword(valid);
 	}, [password]);
+
+	useEffect(() => {
+		setValidMatch(password === matchPassword);
+	}, [password, matchPassword]);
 
 	const handleEditing = (e) => {
 		if (!isEditing) {
 			e.target.blur();
+			const verifyNotif = {
+				type: 'warning',
+				duration: 2000,
+				message:
+					i18n.language === 'en'
+						? 'Please click the edit button first.'
+						: 'Lütfen önce düzenleme düğmesine tıklayın.',
+			};
+			displayNotif(verifyNotif);
+			if (editingRef.current) {
+				editingRef.current.scrollIntoView({
+					behavior: 'smooth',
+					block: 'center',
+				});
+			}
 		}
 	};
 
-	function handleBirthDate(e) {
-		handleEditing();
-		let formattedDate = '';
-		if (e.target.value.length < 11) {
-			const value = e.target.value.replace(/\D/g, '');
-			let day = value.substring(0, 2);
-			let month = value.substring(2, 4);
-			let year = value.substring(4, 8);
-			const currentYear = new Date().getFullYear();
-			for (let i = 0; i < value.length; i++) {
-				if (
-					(month.length <= 1 && parseInt(month) > 1) ||
-					(day.length <= 1 && parseInt(day) > 3) ||
-					(month.length === 2 && parseInt(month) > 12) ||
-					parseInt(day) > 31 ||
-					(day.length === 2 && parseInt(day) <= 0) ||
-					(month.length === 2 && parseInt(month) <= 0)
-				) {
-					setBirthDateError('invalid date');
-					return;
-				}
-				if (
-					parseInt(year) > currentYear ||
-					(year.length === 4 && parseInt(year) < 1900)
-				) {
-					setBirthDateError('invalid year');
-					return;
-				}
-				setBirthDateError('');
-				if (i === 2 || i === 4) {
-					formattedDate += '/' + value[i];
-				} else {
-					formattedDate += value[i];
-				}
-			}
-			if (formattedDate.length === 10 && year.length === 4) {
-				setValidBirthDate(true);
-				const isoDate = new Date(
-					Date.UTC(parseInt(year), parseInt(month) - 1, parseInt(day)) -
-						new Date().getTimezoneOffset() * 60000
-				);
-				setForApiBirthDate(isoDate);
-				setBirthDateError('');
-			} else {
-				setValidBirthDate(false);
-			}
-		} else {
-			return;
+	const displayNotif = (Notifexp) => {
+		localStorage.setItem('Notifexp', JSON.stringify(Notifexp));
+		const notificationEvent = new Event('notificationEvent');
+		window.dispatchEvent(notificationEvent);
+	};
+	useEffect(() => {
+		if (!isEditing) {
+			initUserInfo();
 		}
-		setBirthDate(formattedDate);
-	}
+	}, [isEditing]);
 
 	return (
 		<section className='user-info-page'>
@@ -294,10 +331,9 @@ function UserInfo() {
 				</div>
 				<button
 					style={{ display: 'flex', width: 'fit-content' }}
-					onClick={() => setIsEditing(true)}
-					className={`${
-						!isEditing ? '' : 'display-hidden'
-					} user-select-none user-info-edit-btn`}
+					onClick={handleIsEditing}
+					className={`${!isEditing ? '' : 'display-hidden'} user-info-edit-btn`}
+					ref={editingRef}
 				>
 					{i18n.language === 'en' ? 'Edit' : 'Düzenle'}
 					<FaEdit
@@ -355,18 +391,18 @@ function UserInfo() {
 								value={name}
 								onChange={(e) => setName(e.target.value)}
 								onClick={handleEditing}
-								className={` ${validName || name ? 'form-icon-active' : ''}`}
+								className={` ${isEditing ? 'form-icon-active' : ''}`}
 							/>
-							<div className='form-icon'>
-								<FontAwesomeIcon
-									icon={faCheck}
-									className={validName ? 'valid' : 'hide'}
-								/>
-								<FontAwesomeIcon
-									icon={faTimes}
-									className={validName || !name ? 'hide' : 'invalid'}
-								/>
-							</div>
+							<FontAwesomeIcon
+								icon={faTimes}
+								className={
+									validName || !name || !isEditing ? 'hide' : 'invalid'
+								}
+							/>
+							<FontAwesomeIcon
+								icon={faCheck}
+								className={validName && isEditing ? 'valid' : 'hide'}
+							/>
 							<motion.p
 								initial='hidden'
 								variants={descending}
@@ -399,19 +435,21 @@ function UserInfo() {
 								onChange={(e) => setSurname(e.target.value)}
 								onClick={handleEditing}
 								className={` ${
-									!validSurname || surname ? 'form-icon-active' : ''
+									!validSurname || (surname && isEditing)
+										? 'form-icon-active'
+										: ''
 								}`}
 							/>
-							<div className='form-icon'>
-								<FontAwesomeIcon
-									icon={faCheck}
-									className={validSurname ? 'valid' : 'hide'}
-								/>
-								<FontAwesomeIcon
-									icon={faTimes}
-									className={validSurname || !surname ? 'hide' : 'invalid'}
-								/>
-							</div>
+							<FontAwesomeIcon
+								icon={faCheck}
+								className={validSurname && isEditing ? 'valid' : 'hide'}
+							/>
+							<FontAwesomeIcon
+								icon={faTimes}
+								className={
+									validSurname || !surname || !isEditing ? 'hide' : 'invalid'
+								}
+							/>
 							<motion.p
 								initial='hidden'
 								variants={descending}
@@ -429,7 +467,7 @@ function UserInfo() {
 						style={{
 							display: 'flex',
 							flexDirection: 'column',
-							cursor: isEditing ? 'pointer' : 'not-allowed',
+							cursor: 'not-allowed',
 						}}
 					>
 						<label htmlFor='nationalID'>
@@ -438,47 +476,21 @@ function UserInfo() {
 
 						<div className='relative-position'>
 							<input
+								onClick={displayInputAreaWarning}
 								autoComplete='off'
-								readOnly={!isEditing}
+								readOnly='true'
 								type='text'
 								id='nationalID'
 								name='nationalID'
-								onChange={(e) => setNationalID(e.target.value)}
-								onClick={handleEditing}
 								value={nationalID}
-								className={` ${
-									validNationalId || nationalID ? 'form-icon-active' : ''
-								}`}
 							/>
-							<div className='form-icon'>
-								<FontAwesomeIcon
-									icon={faCheck}
-									className={validNationalId ? 'valid' : 'hide'}
-								/>
-								<FontAwesomeIcon
-									icon={faTimes}
-									className={
-										validNationalId || !nationalID ? 'hide' : 'invalid'
-									}
-								/>
-							</div>
-							<motion.p
-								initial='hidden'
-								variants={descending}
-								whileInView='show'
-								className={
-									!validNationalId && nationalID ? 'instructions' : 'offscreen'
-								}
-							>
-								{idRules.find((rule) => rule.test(nationalID))?.message || ''}
-							</motion.p>
 						</div>
 					</div>
 					<div
 						style={{
 							display: 'flex',
 							flexDirection: 'column',
-							cursor: isEditing ? 'pointer' : 'not-allowed',
+							cursor: 'not-allowed',
 						}}
 					>
 						<label htmlFor='birthDate'>
@@ -487,35 +499,13 @@ function UserInfo() {
 						<div className='relative-position'>
 							<input
 								autoComplete='off'
+								onClick={displayInputAreaWarning}
 								value={birthDate}
-								readOnly={!isEditing}
+								readOnly={true}
 								placeholder={
 									i18n.language === 'tr' ? 'GG/AA/YYYY' : 'DD/MM/YYYY'
 								}
-								onChange={(e) => handleBirthDate(e)}
-								className={` ${
-									validBirthDate || birthDate ? 'form-icon-active' : ''
-								}`}
 							/>
-							<div className='form-icon'>
-								<FontAwesomeIcon
-									icon={faCheck}
-									className={validBirthDate ? 'valid' : 'hide'}
-								/>
-								<FontAwesomeIcon
-									icon={faTimes}
-									className={validBirthDate || !birthDate ? 'hide' : 'invalid'}
-								/>
-							</div>
-							<motion.p
-								initial='hidden'
-								variants={descending}
-								whileInView='show'
-								id='uidnote'
-								className={birthDateError ? 'instructions' : 'offscreen'}
-							>
-								{birthDateError}
-							</motion.p>
 						</div>
 					</div>
 				</div>
@@ -536,7 +526,15 @@ function UserInfo() {
 					}}
 				>
 					<label htmlFor='mail'>Email</label>
-					<div className='relative-position'>
+					<div className='relative-position' style={{ width: '55%' }}>
+						<FontAwesomeIcon
+							icon={faCheck}
+							className={validMail && isEditing ? 'valid' : 'hide'}
+						/>
+						<FontAwesomeIcon
+							icon={faTimes}
+							className={validMail || (!mail && isEditing) ? 'hide' : 'invalid'}
+						/>
 						<input
 							autoComplete='off'
 							readOnly={!isEditing}
@@ -546,102 +544,204 @@ function UserInfo() {
 							value={mail}
 							onChange={(e) => setMail(e.target.value)}
 							style={{
-								width: '55%',
 								cursor: isEditing ? 'pointer' : 'not-allowed',
 							}}
 							onClick={handleEditing}
-							className={` ${validMail || mail ? 'form-icon-active' : ''}`}
+							className={` ${isEditing ? 'form-icon-active' : ''}`}
 						/>
-						<div style={{ top: '20%' }} className='form-icon'>
-							<FontAwesomeIcon
-								icon={faCheck}
-								className={validMail ? 'valid' : 'hide'}
-							/>
-							<FontAwesomeIcon
-								icon={faTimes}
-								className={validMail || !mail ? 'hide' : 'invalid'}
-							/>
-						</div>
+						{!verifiedMail && (
+							<button onClick={sendVerificationMail}>
+								click to send a verification mail
+							</button>
+						)}
 					</div>
 				</div>
-				<div
-					style={{
-						display: 'flex',
-						flexDirection: 'column',
-						marginTop: '1rem',
-					}}
-				>
-					<label htmlFor='password'>
-						{i18n.language === 'en' ? 'Password' : 'Şifre'}
-					</label>
-					<div
-						style={{
-							alignItems: 'center',
-							display: 'flex',
-						}}
-						className='relative-position'
-					>
-						<input
-							autoComplete='off'
-							readOnly={!isEditing}
-							type={passwordOn ? 'password' : 'text'}
-							id='password'
-							name='password'
-							onChange={(e) => setPassword(e.target.value)}
+				{isEditing && (
+					<>
+						<div
 							style={{
-								width: '55%',
-								cursor: isEditing ? 'pointer' : 'not-allowed',
+								display: 'flex',
+								flexDirection: 'column',
 							}}
-							onClick={handleEditing}
-							className={` ${
-								validPassword || password ? 'form-icon-active' : ''
-							}`}
-						/>
-						<button
-							style={{ margin: 'auto 0.5rem' }}
-							onClick={() => setPasswordOn(!passwordOn)}
 						>
-							{passwordOn ? (
-								<IoEyeOff
-									style={{
-										display: 'inline-block',
-										width: '1.3rem',
-										height: '100%',
-										flexShrink: '0',
-										position: 'relative',
-										top: '4px',
-									}}
+							<label htmlFor='password'>
+								{i18n.language === 'en' ? 'New password' : 'Yeni parola'}
+							</label>
+							<div
+								style={{
+									display: 'flex',
+								}}
+								className='relative-position'
+							>
+								<FontAwesomeIcon
+									icon={faCheck}
+									className={validPassword && isEditing ? 'valid' : 'hide'}
 								/>
-							) : (
-								<IoEye
-									style={{
-										display: 'inline-block',
-										width: '1.3rem',
-										height: '100%',
-										flexShrink: '0',
-										position: 'relative',
-										top: '4px',
-									}}
+								<FontAwesomeIcon
+									icon={faTimes}
+									className={
+										validPassword || (!password && isEditing)
+											? 'hide'
+											: 'invalid'
+									}
 								/>
-							)}
-						</button>
-						<div style={{ top: '20%' }} className='form-icon'>
-							<FontAwesomeIcon
-								icon={faCheck}
-								className={validPassword ? 'valid' : 'hide'}
-							/>
-							<FontAwesomeIcon
-								icon={faTimes}
-								className={validPassword || !password ? 'hide' : 'invalid'}
-							/>
+								<input
+									autoComplete='off'
+									readOnly={!isEditing}
+									type={passwordOn ? 'password' : 'text'}
+									id='password'
+									name='password'
+									onChange={(e) => setPassword(e.target.value)}
+									style={{
+										cursor: isEditing ? 'pointer' : 'not-allowed',
+										width: '55%',
+									}}
+									onClick={handleEditing}
+									className={` ${password ? 'form-icon-active' : ''}`}
+								/>
+								<button
+									style={{ margin: 'auto 0.5rem' }}
+									onClick={() => setPasswordOn(!passwordOn)}
+								>
+									{passwordOn ? (
+										<IoEyeOff
+											style={{
+												display: 'inline-block',
+												width: '1.3rem',
+												height: '100%',
+												flexShrink: '0',
+												position: 'relative',
+												top: '4px',
+											}}
+										/>
+									) : (
+										<IoEye
+											style={{
+												display: 'inline-block',
+												width: '1.3rem',
+												height: '100%',
+												flexShrink: '0',
+												position: 'relative',
+												top: '4px',
+											}}
+										/>
+									)}
+								</button>
+							</div>
+							<motion.p
+								initial='hidden'
+								variants={descending}
+								whileInView='show'
+								className={
+									!validPassword && password ? 'instructions' : 'offscreen'
+								}
+							>
+								{passwordValidationRules.find((rule) => rule.test(password))
+									?.message || ''}
+							</motion.p>
 						</div>
-					</div>
-				</div>
+						<div
+							style={{
+								display: 'flex',
+								flexDirection: 'column',
+							}}
+						>
+							<label htmlFor='matchPassword'>
+								{i18n.language === 'en'
+									? 'Confirm new password'
+									: 'Yeni parolayı onayla'}
+							</label>
+							<div
+								style={{
+									display: 'flex',
+								}}
+								className='relative-position'
+							>
+								<FontAwesomeIcon
+									icon={faCheck}
+									className={
+										validMatch && matchPassword && validPassword
+											? 'valid'
+											: 'hide'
+									}
+								/>
+								<FontAwesomeIcon
+									icon={faTimes}
+									className={
+										(!validMatch || !password || !validPassword) &&
+										matchPassword
+											? 'invalid'
+											: 'hide'
+									}
+								/>
+								<input
+									autoComplete='off'
+									readOnly={!isEditing}
+									type={matchPasswordOn ? 'password' : 'text'}
+									id='matchPassword'
+									name='matchPassword'
+									onChange={(e) => setMatchPassword(e.target.value)}
+									style={{
+										width: '55%',
+										cursor: isEditing ? 'pointer' : 'not-allowed',
+									}}
+									onClick={handleEditing}
+									className={` ${
+										validPassword || password ? 'form-icon-active' : ''
+									}`}
+								/>
+								<button
+									style={{ margin: 'auto 0.5rem' }}
+									onClick={() => setMatchPasswordOn(!matchPasswordOn)}
+								>
+									{matchPasswordOn ? (
+										<IoEyeOff
+											style={{
+												display: 'inline-block',
+												width: '1.3rem',
+												height: '100%',
+												flexShrink: '0',
+												position: 'relative',
+												top: '4px',
+											}}
+										/>
+									) : (
+										<IoEye
+											style={{
+												display: 'inline-block',
+												width: '1.3rem',
+												height: '100%',
+												flexShrink: '0',
+												position: 'relative',
+												top: '4px',
+											}}
+										/>
+									)}
+								</button>
+							</div>
+
+							<motion.p
+								initial='hidden'
+								variants={descending}
+								whileInView='show'
+								className={
+									(!validMatch || !password || !validPassword) && matchPassword
+										? 'instructions'
+										: 'offscreen'
+								}
+							>
+								{!validMatch && i18n.language === 'en'
+									? 'Not matching.'
+									: 'Eşleştirilemedi.'}
+							</motion.p>
+						</div>
+					</>
+				)}
 				<div
 					className='user-select-none'
 					style={{ gap: '0.5rem', display: 'flex', flexDirection: 'column' }}
 				>
-					{contractverified === true ? (
+					{contractverified === 'passed' && (
 						<p style={{ color: 'green', display: 'flex' }}>
 							<RxCheckCircled
 								style={{
@@ -657,7 +757,8 @@ function UserInfo() {
 								? 'Instructor Contract Verified'
 								: 'Antrenör Sözleşmesi Doğrulandı'}
 						</p>
-					) : contractverified === false ? (
+					)}
+					{contractverified === 'failed' && (
 						<p style={{ color: '#ef3f3f', display: 'flex' }}>
 							<BsExclamationLg
 								style={{
@@ -667,12 +768,14 @@ function UserInfo() {
 									marginRight: '0.3rem',
 									flexShrink: '0',
 								}}
-							/>{' '}
+							/>
 							{i18n.language === 'en'
-								? 'Instructor Contract Not Verified, Upload the Contract Again'
-								: 'Antrenör Sözleşmesi Doğrulanamadı, Lütfen Tekrar Yükleyiniz'}
+								? 'Instructor Contract Not Verified, please upload your contract'
+								: 'Antrenör Sözleşmesi Doğrulanamadı, lütfen sözleşmenizi yükleyiniz'}
 						</p>
-					) : (
+					)}
+
+					{contractverified === 'pending' && (
 						<p style={{ color: 'gray', display: 'flex' }}>
 							<FaArrowRotateRight
 								style={{
@@ -689,7 +792,8 @@ function UserInfo() {
 								: 'Antrenör Sözleşmesi Kontrol Ediliyor...'}
 						</p>
 					)}
-					{contractverified === false && (
+
+					{contractverified !== 'passed' && (
 						<div
 							className='center-item'
 							style={{
@@ -717,7 +821,7 @@ function UserInfo() {
 								id='file'
 								className='inputfile'
 								onChange={handleFileChange}
-								required
+								accept='application/pdf'
 							/>
 							<label htmlFor='file'>
 								<p>

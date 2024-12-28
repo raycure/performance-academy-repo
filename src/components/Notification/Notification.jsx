@@ -14,7 +14,6 @@ import { FaCircleExclamation } from 'react-icons/fa6';
 import { FaCircleXmark } from 'react-icons/fa6';
 import { HiMiniXCircle } from 'react-icons/hi2';
 const CustomNotification = () => {
-	//todo color and style properly
 	const [notification, setNotification] = useState(null);
 	const [notificationTitle, setNotificationTitle] = useState('');
 	const { t, i18n } = useTranslation('translation');
@@ -37,14 +36,14 @@ const CustomNotification = () => {
 		}
 	};
 
-	// useEffect(() => {
-	// 	if (notification?.duration) {
-	// 		const timer = setTimeout(() => {
-	// 			closeNotification();
-	// 		}, notification.duration);
-	// 		return () => clearTimeout(timer);
-	// 	}
-	// }, [notification]);
+	useEffect(() => {
+		if (notification?.duration) {
+			const timer = setTimeout(() => {
+				closeNotification();
+			}, notification.duration);
+			return () => clearTimeout(timer);
+		}
+	}, [notification]);
 
 	if (!notification) return null;
 
@@ -70,7 +69,7 @@ const CustomNotification = () => {
 	return (
 		<div className={`notification ${notification.type}`}>
 			<div className='notification-content'>
-				<p className='notification-icon'>{renderIcon()}</p>
+				<div className='notification-icon'>{renderIcon()}</div>
 				<div>
 					<h1 style={{ fontWeight: 'bolder' }} className='text-primary-500'>
 						{notification.type === 'info'
@@ -89,7 +88,14 @@ const CustomNotification = () => {
 							? 'Warning'
 							: 'Uyarı'}
 					</h1>
-					<p className='text-accent-100'>{notification.message}</p>
+					<p className='text-accent-100'>
+						{notification.message}{' '}
+						{notification.link && (
+							<a href={notification.link} className='link'>
+								{i18n.language === 'en' ? 'here' : 'buradan'}
+							</a>
+						)}
+					</p>
 				</div>
 				<button className='close-btn' onClick={closeNotification}>
 					<MdClose

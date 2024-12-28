@@ -14,7 +14,7 @@
 	display: none;
 }
 
-.valid {
+/* .valid {
 	color: rgb(93, 255, 93);
 	margin-left: 0.25rem;
 }
@@ -22,6 +22,14 @@
 .invalid {
 	color: rgb(255, 63, 63);
 	margin-left: 0.25rem;
+} */
+.valid,
+.invalid {
+	height: 1.15rem;
+	width: 1.15rem;
+	position: absolute;
+	margin-top: 1rem;
+	margin-left: 0.4rem;
 }
 
 .errmsg {
@@ -121,7 +129,7 @@
 	.authentication-form {
 		padding: 3rem;
 		width: 100vw;
-		height: 100vh;
+		height: max-content;
 	}
 	.authentication-form-container {
 		max-width: 100%;

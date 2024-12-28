@@ -1,6 +1,5 @@
 import multer from 'multer';
 import path from 'path';
-import sanitizePdf from '../../Utils/sanitize-pdf.js';
 import mongoose from 'mongoose';
 
 const fileSchema = new mongoose.Schema(
@@ -13,24 +12,9 @@ const fileSchema = new mongoose.Schema(
 			type: String,
 			required: true,
 		},
-		path: {
-			type: String,
-			required: true,
-		},
-		mimetype: {
-			type: String,
-			required: true,
-		},
 		size: {
 			type: Number,
 			required: true,
-		},
-		uploadDate: {
-			type: Date,
-			default: Date.now,
-		},
-		hash: {
-			type: String,
 		},
 		uploadedBy: {
 			type: String,
@@ -65,6 +49,9 @@ const upload = multer({
 			cb(null, false);
 			return cb(new Error('Only PDF files are allowed!'));
 		}
+		if (file.size > 5 * 1024 * 1024) {
+			throw new Error('too large file');
+		}
 	},
 	limits: {
 		fileSize: 5 * 1024 * 1024,
@@ -76,9 +63,8 @@ const uploadFile = async (req, res) => {
 		if (!req.file) {
 			return res.status(400).json({ message: 'No file uploaded' });
 		}
-		const sanitizedPdf = await sanitizePdf(req.file);
 
-		//todo while making the request make sure the req contains these infos
+		//todo while making the request make sure the req contains these info
 		const newFile = new File({
 			filename: req.file.filename,
 			originalName: req.file.originalname,
@@ -104,9 +90,33 @@ const uploadFile = async (req, res) => {
 		console.error('Error uploading file:', err);
 		res.status(500).json({
 			message: 'Internal Server Error',
-			error: process.env.NODE_ENV === 'development' ? err.message : undefined,
+			err: err.message,
 		});
 	}
 };
 
-export { upload, uploadFile, File };
+const handleMulterError = (error, req, res, next) => {
+	if (error instanceof multer.MulterError) {
+		if (error.code === 'LIMIT_FILE_SIZE') {
+			return res.status(400).json({
+				success: false,
+				message: res.__('fileUploadResponses.fileSizeExceeded'),
+			});
+		}
+		return res.status(400).json({
+			success: false,
+			message: res.__('fileUploadResponses.pleaseUploadFile'),
+		});
+	}
+
+	if (error.message === 'Only PDF files are allowed!') {
+		return res.status(400).json({
+			success: false,
+			message: res.__('fileUploadResponses.pleaseUploadFile'),
+		});
+	}
+
+	next(error);
+};
+
+export { upload, uploadFile, handleMulterError, File };

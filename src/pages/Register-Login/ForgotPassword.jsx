@@ -122,6 +122,14 @@ const forgotPassword = () => {
 			</div>
 			<form className='forgot-password-form'>
 				<div className='relative-position centerLineAnimation'>
+					<FontAwesomeIcon
+						icon={faCheck}
+						className={validPwd ? 'valid' : 'hide'}
+					/>
+					<FontAwesomeIcon
+						icon={faTimes}
+						className={validPwd || !pwd ? 'hide' : 'invalid'}
+					/>
 					<input
 						type={passwordOnTop ? 'password' : 'text'}
 						id='password'
@@ -166,6 +174,18 @@ const forgotPassword = () => {
 					</button>
 				</div>
 				<div className='relative-position centerLineAnimation'>
+					<FontAwesomeIcon
+						icon={faCheck}
+						className={validMatch && matchPwd && validPwd ? 'valid' : 'hide'}
+					/>
+					<FontAwesomeIcon
+						icon={faTimes}
+						className={
+							(!validMatch || !pwd || !validPwd) && matchPwd
+								? 'invalid'
+								: 'hide'
+						}
+					/>
 					<input
 						type={passwordOnBottom ? 'password' : 'text'}
 						id='confirm_pwd'

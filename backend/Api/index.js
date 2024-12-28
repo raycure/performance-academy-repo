@@ -18,9 +18,10 @@ import blockIpRoute from './Routes/blockIpRoute.js';
 import ipBlockChecker from './Middleware/ipBlockChecker.js';
 import * as dotenv from 'dotenv';
 import webhook from './Controllers/webhook.js';
+import i18n from '../config/i18n.js';
+
 dotenv.config();
 const port = 3001;
-
 // very important note if a controller requires authmiddleware it has to return req.user as accesstoken
 const app = express();
 app.use(credentials);
@@ -28,13 +29,12 @@ app.set('trust proxy', 1);
 app.use(cors(corsOptions));
 app.use(cookieParser());
 app.use('/webhook', express.raw({ type: 'application/json' }), webhook);
-
+app.use(i18n.init);
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-
 const limiter = rateLimit({
 	windowMs: 1000 * 60 * 60,
-	max: 100,
+	max: 200,
 	handler: (req, res, next) => {
 		res.status(429).json({
 			message: 'Too many requests, please try again later.',
@@ -50,10 +50,24 @@ app.use('/', loginRoute);
 app.use('/logout', logoutRoute);
 app.use('/', verifyMailRoute);
 app.use('/pay', authMiddleware, paymentRoute);
-
 app.use('/userInfo', authMiddleware, userInfoRoute);
 app.use('/submitContactForm', contactFormRoute);
-// app.use('/submitContactForm', contactFormRoute);
+app.use('/upload', uploadRoute);
+app.use('/deleteCollections', async function dropAllCollections() {
+	try {
+		const collections = await mongoose.connection.db.collections();
+
+		for (let collection of collections) {
+			await collection.drop();
+			console.log(`Dropped collection: ${collection.collectionName}`);
+		}
+		return { success: true, message: 'All collections dropped successfully' };
+	} catch (error) {
+		console.error('Error dropping collections:', error);
+		return { success: false, error: error.message };
+	}
+});
+
 mongoose
 	.connect(
 		'mongodb+srv://devemresr:IHybYDDzzbfGdcGe@performance-academy.2x7gw.mongodb.net/Performance_Academy?retryWrites=true&w=majority&appName=Performance-Academy'
@@ -64,7 +78,9 @@ mongoose
 			console.log('port 3001');
 		});
 	})
-	.catch(() => {
+	.catch((error) => {
+		console.log('error', error);
+
 		console.log('didnt connect');
 	});
 
