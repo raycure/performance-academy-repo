@@ -13,4 +13,6 @@
 	padding: 1rem 2rem;
 	background-color: red;
 	border-radius: 10px;
+	width: max-content;
+	flex-shrink: 0;
 }

@@ -26,7 +26,6 @@ import { useDispatch } from 'react-redux';
 function Navbar() {
 	const dispatch = useDispatch();
 	let isLoggedIn = useSelector(selectIsLoggedIn);
-
 	const navigate = useNavigate();
 	const [menuOpen, setMenuOpen] = useState(false);
 	const toggleNavMenu = () => {
@@ -90,7 +89,6 @@ function Navbar() {
 			path: '/etkinlikler',
 			label: t('Navbar.Events'),
 		},
-
 		{
 			path: '/iletişim',
 			label: t('Navbar.Contact'),
@@ -186,26 +184,47 @@ function Navbar() {
 						<FaUser id='navbar-dropdown-button' className='nav-item-icon' />
 						<div
 							id='navbar-dropdown'
-							style={{ top: '2rem' }}
+							style={{ ...(isLoggedIn && { transform: 'translateX(-85%)' }) }}
 							className={`dropdown-content ${isOpen ? 'open' : 'closed'}`}
 						>
-							<h4
-								onClick={() => {
-									navigate('/bilgilerim');
-								}}
-							>
-								{i18n.language === 'en' ? 'My Account' : 'Hesabım'}
-							</h4>
-							<h4
-								onClick={() => {
-									navigate('/programlarım');
-								}}
-							>
-								{i18n.language === 'en' ? 'My Programs' : 'Programlarım'}
-							</h4>
-							<h4 onClick={handleLogout}>
-								{i18n.language === 'en' ? 'Logout' : 'Çıkış Yap'}
-							</h4>
+							{isLoggedIn ? (
+								<>
+									<h4
+										onClick={() => {
+											navigate('/bilgilerim');
+										}}
+									>
+										{i18n.language === 'en' ? 'My Account' : 'Hesabım'}
+									</h4>
+									<h4
+										onClick={() => {
+											navigate('/programlarım');
+										}}
+									>
+										{i18n.language === 'en' ? 'My Programs' : 'Programlarım'}
+									</h4>
+									<h4 onClick={handleLogout}>
+										{i18n.language === 'en' ? 'Logout' : 'Çıkış Yap'}
+									</h4>
+								</>
+							) : (
+								<>
+									<h4
+										onClick={() => {
+											navigate('/giriş-yap');
+										}}
+									>
+										{i18n.language === 'en' ? 'Login' : 'Giriş Yap'}
+									</h4>
+									<h4
+										onClick={() => {
+											navigate('/kaydol');
+										}}
+									>
+										{i18n.language === 'en' ? 'Sign Up' : 'Kaydol'}
+									</h4>
+								</>
+							)}
 						</div>
 					</div>
 					<Link
@@ -219,12 +238,14 @@ function Navbar() {
 						aria-label='language'
 						style={{ display: 'contents' }}
 					>
-						<GrLanguage className='nav-item-icon' />
-						{i18n.language === 'en' ? 'EN' : 'TR'}
+						<div style={{ display: 'flex', gap: '3px' }}>
+							<GrLanguage className='nav-item-icon' />
+							{i18n.language === 'en' ? 'EN' : 'TR'}
+						</div>
 					</Link>
 					<Button
 						classProp={`${isLoggedIn ? 'display-hidden' : ''}`}
-						redirect={'/register'}
+						redirect={'/kaydol'}
 					>
 						{i18n.language === 'en' ? 'Sign Up' : 'Kaydol'}
 					</Button>
@@ -241,12 +262,58 @@ function Navbar() {
 						aria-label='language'
 						style={{ display: 'contents' }}
 					>
-						<GrLanguage className='nav-item-icon' />
-						{i18n.language === 'en' ? 'EN' : 'TR'}
+						<div style={{ display: 'flex', gap: '3px' }}>
+							<GrLanguage className='nav-item-icon' />
+							{i18n.language === 'en' ? 'EN' : 'TR'}
+						</div>
 					</Link>
-					<Link aria-label='user' to='/login' style={{ display: 'contents' }}>
-						<FaUser className='nav-item-icon' />
-					</Link>
+					<div className='userDropDown' onClick={toggleDropdown}>
+						<FaUser id='navbar-dropdown-button' className='nav-item-icon' />
+						<div
+							id='navbar-dropdown'
+							style={{ top: '2rem' }}
+							className={`dropdown-content ${isOpen ? 'open' : 'closed'}`}
+						>
+							{isLoggedIn ? (
+								<>
+									<h4
+										onClick={() => {
+											navigate('/bilgilerim');
+										}}
+									>
+										{i18n.language === 'en' ? 'My Account' : 'Hesabım'}
+									</h4>
+									<h4
+										onClick={() => {
+											navigate('/programlarım');
+										}}
+									>
+										{i18n.language === 'en' ? 'My Programs' : 'Programlarım'}
+									</h4>
+									<h4 onClick={handleLogout}>
+										{i18n.language === 'en' ? 'Logout' : 'Çıkış Yap'}
+									</h4>
+								</>
+							) : (
+								<>
+									<h4
+										onClick={() => {
+											navigate('/giriş-yap');
+										}}
+									>
+										{i18n.language === 'en' ? 'Login' : 'Giriş Yap'}
+									</h4>
+									<h4
+										onClick={() => {
+											navigate('/kaydol');
+										}}
+									>
+										{i18n.language === 'en' ? 'Sign Up' : 'Kaydol'}
+									</h4>
+								</>
+							)}
+						</div>
+					</div>
 					<HiOutlineMenuAlt3
 						className='nav-item-icon'
 						id='menu-button'
@@ -329,7 +396,7 @@ function Navbar() {
 				</div>
 				<Button
 					onClick={toggleNavMenu}
-					redirect={'/register'}
+					redirect={'/kaydol'}
 					classProp={`${isLoggedIn} && display-hidden`}
 				>
 					{i18n.language === 'en' ? 'Sign Up' : 'Kaydol'}

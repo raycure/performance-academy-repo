@@ -50,7 +50,7 @@ function MyPrograms() {
 			localStorage.setItem('Notifexp', JSON.stringify(verifyNotif));
 			const notificationEvent = new Event('notificationEvent');
 			window.dispatchEvent(notificationEvent);
-			navigate('/login');
+			navigate('/giriş-yap');
 		}
 	}, []);
 	return (

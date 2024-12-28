@@ -11,7 +11,7 @@ export const LesMillsEvents = assignUniqueIds([
 	{
 		title: 'LES-MILLS-GRIT',
 		start: '2024-12-20',
-		end: '2024-12-26',
+		end: '2024-12-23',
 		online: true,
 		location: [40.7719881790364, -74.07145598632484],
 		instructor: 'cengiz cumur',
@@ -20,8 +20,8 @@ export const LesMillsEvents = assignUniqueIds([
 	},
 	{
 		title: 'BODYPUMP',
-		start: '2024-12-27',
-		end: '2024-12-02',
+		start: '2024-12-24',
+		end: '2024-12-30',
 		online: false,
 		location: [40.742551, -74.013149],
 		instructor: 'john doe',
@@ -41,7 +41,7 @@ export const LesMillsEvents = assignUniqueIds([
 	{
 		title: 'BODYBALANCE',
 		start: '2025-01-09',
-		end: '2025-01-15',
+		end: '2025-01-14',
 		online: false,
 		location: [40.73061, -73.935242],
 		instructor: 'michael johnson',
@@ -50,8 +50,8 @@ export const LesMillsEvents = assignUniqueIds([
 	},
 	{
 		title: 'LES-MILLS-CORE',
-		start: '2025-01-16',
-		end: '2025-01-22',
+		start: '2025-01-15',
+		end: '2025-01-17',
 		online: true,
 		location: [40.755714, -73.981684],
 		instructor: 'emma walker',
@@ -60,8 +60,8 @@ export const LesMillsEvents = assignUniqueIds([
 	},
 	{
 		title: 'BODYATTACK',
-		start: '2025-01-23',
-		end: '2025-01-29',
+		start: '2025-01-24',
+		end: '2025-01-27',
 		online: false,
 		location: [40.748817, -73.985428],
 		instructor: 'david lee',
@@ -71,7 +71,7 @@ export const LesMillsEvents = assignUniqueIds([
 	{
 		title: 'RPM',
 		start: '2025-01-30',
-		end: '2025-02-05',
+		end: '2025-02-03',
 		online: true,
 		location: [40.706192, -74.016144],
 		instructor: 'jennifer brown',
@@ -91,7 +91,7 @@ export const LesMillsEvents = assignUniqueIds([
 	{
 		title: 'BODYJAM',
 		start: '2025-02-13',
-		end: '2025-02-19',
+		end: '2025-02-15',
 		online: true,
 		location: [40.711755, -73.997043],
 		instructor: 'patricia white',
@@ -100,7 +100,7 @@ export const LesMillsEvents = assignUniqueIds([
 	},
 	{
 		title: 'BODYSTEP',
-		start: '2025-02-20',
+		start: '2025-02-23',
 		end: '2025-02-26',
 		online: false,
 		location: [40.735657, -73.998333],
@@ -110,8 +110,8 @@ export const LesMillsEvents = assignUniqueIds([
 	},
 	{
 		title: 'LES-MILLS-TONE',
-		start: '2025-02-27',
-		end: '2025-03-05',
+		start: '2025-02-28',
+		end: '2025-03-02',
 		online: true,
 		location: [40.758896, -73.98513],
 		instructor: 'charlotte evans',
@@ -119,9 +119,19 @@ export const LesMillsEvents = assignUniqueIds([
 		program: 'LES-MILLS-TONE',
 	},
 	{
+		title: 'BORN-TO-MOVE',
+		start: '2025-03-03',
+		end: '2025-03-06',
+		online: true,
+		location: [40.718217, -73.998284],
+		instructor: 'luke martin',
+		time: '10.00-16.00',
+		program: 'BORN-TO-MOVE',
+	},
+	{
 		title: 'THE-TRIP',
-		start: '2025-03-06',
-		end: '2025-03-12',
+		start: '2025-03-07',
+		end: '2025-03-11',
 		online: false,
 		location: [40.755979, -73.992332],
 		instructor: 'matthew harris',
@@ -131,7 +141,7 @@ export const LesMillsEvents = assignUniqueIds([
 	{
 		title: 'LES-MILLS-BARRE',
 		start: '2025-03-13',
-		end: '2025-03-19',
+		end: '2025-03-17',
 		online: true,
 		location: [40.745507, -74.010772],
 		instructor: 'isabella adams',
@@ -140,7 +150,7 @@ export const LesMillsEvents = assignUniqueIds([
 	},
 	{
 		title: 'LES-MILLS-SPRINT',
-		start: '2025-03-20',
+		start: '2025-03-18',
 		end: '2025-03-26',
 		online: false,
 		location: [40.746643, -73.990406],
@@ -158,16 +168,7 @@ export const LesMillsEvents = assignUniqueIds([
 		time: '9.00-15.00',
 		program: 'LES-MILLS-GRIT',
 	},
-	{
-		title: 'BORN-TO-MOVE',
-		start: '2025-04-03',
-		end: '2025-04-09',
-		online: true,
-		location: [40.718217, -73.998284],
-		instructor: 'luke martin',
-		time: '10.00-16.00',
-		program: 'BORN-TO-MOVE',
-	},
+
 	{
 		title: 'BODYCOMBAT',
 		start: '2025-04-10',

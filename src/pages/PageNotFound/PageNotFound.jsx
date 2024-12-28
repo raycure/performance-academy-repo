@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 function PageNotFound() {
 	const { t, i18n } = useTranslation('translation');
 	return (
-		<div>
+		<div className='user-select-none'>
 			<div
 				style={{
 					position: 'relative',

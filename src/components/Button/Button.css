@@ -64,3 +64,7 @@
 .navbar-btn {
 	padding: 0.25rem 0.65rem;
 }
+.forgot-password-con .btn {
+	background-color: #8686ff;
+	border-radius: 8px;
+}

@@ -106,7 +106,7 @@ function Login() {
 				AuthService({
 					data: loginData,
 					method: 'POST',
-					endpoint: '/login',
+					endpoint: '/giriş-yap',
 				})
 			);
 			const accessToken = response.payload.data.accessToken;
@@ -134,92 +134,86 @@ function Login() {
 	};
 
 	return (
-		<>
-			11111111111 <br></br> aaA!1aaa
-			<div className='authentication-form-container box-shadow'>
-				<form onSubmit={handleSubmit} className='authentication-form'>
-					<img alt='logo' className='logo' src={logo}></img>
-					<p
-						ref={errRef}
-						className={errMsg ? 'errmsg' : 'offscreen'}
-						aria-live='assertive'
-					>
-						{errMsg}
-					</p>
-					<h1>{t('Authentication.Greet.1')}</h1>
+		<div className='authentication-form-container box-shadow'>
+			<form onSubmit={handleSubmit} className='authentication-form'>
+				<img alt='logo' className='logo' src={logo}></img>
+				<p
+					ref={errRef}
+					className={errMsg ? 'errmsg' : 'offscreen'}
+					aria-live='assertive'
+				>
+					{errMsg}
+				</p>
+				<h1>{t('Authentication.Greet.1')}</h1>
+				<div className='centerLineAnimation'>
+					<input
+						type='text'
+						ref={userRef}
+						autoComplete='off'
+						onChange={(e) => setMailorNationalID(e.target.value)}
+						value={mailorNationalID}
+						required
+						placeholder={
+							i18n.language === 'tr' ? 'e-mail ya da TC' : 'email or TC'
+						}
+					/>
+				</div>
+				{!showForgotPassordForm && (
 					<div className='centerLineAnimation'>
 						<input
-							type='text'
-							ref={userRef}
-							autoComplete='off'
-							onChange={(e) => setMailorNationalID(e.target.value)}
-							value={mailorNationalID}
+							type='password'
+							id='password'
+							onChange={(e) => setPwd(e.target.value)}
+							value={pwd}
 							required
-							placeholder={
-								i18n.language === 'tr' ? 'e-mail ya da TC' : 'email or TC'
-							}
+							placeholder={t('Authentication.Password.0')}
 						/>
 					</div>
-					{!showForgotPassordForm && (
-						<div className='centerLineAnimation'>
-							<input
-								type='password'
-								id='password'
-								onChange={(e) => setPwd(e.target.value)}
-								value={pwd}
-								required
-								placeholder={t('Authentication.Password.0')}
-							/>
-						</div>
-					)}
+				)}
 
-					{!showForgotPassordForm && (
-						<button
-							onClick={() => setShowForgotPassordForm(!showForgotPassordForm)}
-							type='button'
-						>
-							forgot password? Reset it.
-						</button>
-					)}
+				{!showForgotPassordForm && (
+					<button
+						onClick={() => setShowForgotPassordForm(!showForgotPassordForm)}
+						type='button'
+					>
+						forgot password? Reset it.
+					</button>
+				)}
 
-					{showForgotPassordForm && (
-						<p>
-							Enter your email adress, we gonna send you a link to reset your
-							password.
-						</p>
-					)}
+				{showForgotPassordForm && (
+					<p>
+						Enter your email adress, we gonna send you a link to reset your
+						password.
+					</p>
+				)}
 
-					<div className='authentication-button-container'>
-						<Button
-							isLoading={localLoading || isLoading}
-							onClick={(e) => {
-								e.preventDefault(); // Prevent default form submission
-								showForgotPassordForm
-									? handleForgotPasswordForm()
-									: handleSubmit();
-							}}
-						>
-							{showForgotPassordForm
-								? i18n.language === 'en'
-									? 'forgot password'
-									: 'sifremi unuttum'
-								: i18n.language === 'en'
-								? 'Sign In'
-								: 'Giriş Yap'}
-						</Button>
-						<Link
-							to='/register'
-							className='fs-400 text-align-right text-container'
-						>
-							{t('Authentication.Redirect.1')}
-						</Link>
-					</div>
+				<div className='authentication-button-container'>
+					<Button
+						isLoading={localLoading || isLoading}
+						onClick={(e) => {
+							e.preventDefault(); // Prevent default form submission
+							showForgotPassordForm
+								? handleForgotPasswordForm()
+								: handleSubmit();
+						}}
+					>
+						{showForgotPassordForm
+							? i18n.language === 'en'
+								? 'forgot password'
+								: 'sifremi unuttum'
+							: i18n.language === 'en'
+							? 'Sign In'
+							: 'Giriş Yap'}
+					</Button>
+					<Link to='/kaydol' className='fs-400 text-align-right text-container'>
+						{t('Authentication.Redirect.1')}
+					</Link>
+				</div>
 
-					<HoneypotInput />
-				</form>
-				<AuthenticationGreet />
-			</div>
-		</>
+				<HoneypotInput />
+			</form>
+			<AuthenticationGreet />
+		</div>
 	);
 }
 

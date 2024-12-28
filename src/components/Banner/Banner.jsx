@@ -4,26 +4,6 @@ import Container from '../Containers/Container';
 import { useTranslation } from 'react-i18next';
 
 const Banner = () => {
-	const bannerData = {
-		title: 'MOVE THE WAY YOU WANT TO',
-		features: [
-			{
-				icon: '',
-				description:
-					'Strength, cardio, yoga, martial arts, cycling, wellness + more. Enjoy 2500+ workouts at your fingertips.',
-			},
-			{
-				icon: '',
-				description: 'Choose workouts with or without equipment.',
-			},
-			{
-				icon: '',
-				description:
-					'Workouts for all fitness levels that are scientifically designed to get results',
-			},
-		],
-	};
-
 	const bannerStyle = {
 		backgroundColor: 'transparent',
 		textAlign: 'center',

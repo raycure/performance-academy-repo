@@ -91,7 +91,7 @@
 		],
 		"Value": {
 			"Heading": "Temel Değerlerimiz",
-			"Title": ["CESUR OL", "BİRLEŞMİŞ", "DÜNYAYI DEĞİŞTİR"],
+			"Title": ["CESUR OL", "BİRLİKTE GÜÇLÜYÜZ", "DÜNYAYI DEĞİŞTİR"],
 			"Context": [
 				"Amacımız fitness alanında tartışmasız dünya şampiyonu olmak ve bu hedefi amansızca takip ediyoruz.",
 				"Müşterilerimiz, eğitmenlerimiz ve çalışanlarımız bizim ekibimizdir. Birlikte başarırız.",
@@ -171,6 +171,20 @@
 			"Performansınız uygun bulunursa:",
 			"Resmi sertifikanızı kazanacaksınız.",
 			"Sertifikanız tarafınıza e-posta yoluyla ulaştırılacaktır."
+		]
+	},
+	"Milestones": {
+		"Title": [
+			"Bilime Dayalı",
+			"Global Sertifika",
+			"Tercihinize Göre",
+			"Basit Adımlar"
+		],
+		"Content": [
+			"Her antrenman, üyelerin talep ettiği sonuçları sunmak için uzman bir ekip tarafından araştırılır, tasarlanır ve titizlikle test edilir.",
+			"Dünya çapında tanınan bir sertifika kazanın, sektörler genelinde becerilerinizi ve güvenilirliğinizi artırın.",
+			"Tercihlerinize uygun olarak hem yüz yüze hem de çevrimiçi düzenlenen çeşitli etkinliklerimizi keşfedin!",
+			"Basit üç adımlı süreci takip edin: etkinliğe katılın, sınav videonuzu gönderin ve başarılı olduğunuzda sertifikanızı kazanın."
 		]
 	}
 }

@@ -160,22 +160,6 @@ const backgroundFill = {
 	},
 };
 
-const rightToLeft = {
-	initial: (windowWidth) => {
-		return {
-			opacity: 1,
-			x: windowWidth <= 570 ? '100%' : windowWidth * 0.7,
-		};
-	},
-	animate: {
-		opacity: 1,
-		x: 0,
-		transition: {
-			duration: 0.4,
-		},
-	},
-};
-
 export {
 	downToUp,
 	leftToRight,
@@ -188,5 +172,4 @@ export {
 	socialSlide,
 	backgroundFill,
 	descending,
-	rightToLeft,
 };

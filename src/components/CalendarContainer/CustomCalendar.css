@@ -1,10 +1,49 @@
+/* calendarın kendi borderını kapamak icin */
+.fc-theme-standard td,
+.fc-theme-standard th {
+	border: none !important;
+}
+.fc .fc-scrollgrid {
+	border-width: 0px !important;
+}
 .fc .fc-toolbar.fc-header-toolbar {
-	margin: 0.4rem;
+	padding: 0.4rem;
+	background-color: var(--clr-primary-300);
+	margin: 0;
+	border-top-left-radius: 6px;
+	border-top-right-radius: 6px;
 }
-.fc-header-toolbar .fc-toolbar {
-	margin: 0px, 3rem;
+/* .fc-header-toolbar .fc-toolbar {
+	margin: 0px 3rem;
+} */
+.fc .fc-daygrid {
+	background-color: var(--clr-primary-400);
+	border-bottom-left-radius: 6px;
+	border-bottom-right-radius: 6px;
 }
-
+.fc-scrollgrid-section-header {
+	background-color: var(--clr-primary-350);
+}
+.fc-scrollgrid-section-header th {
+	border-left: 1px solid var(--clr-primary-400) !important;
+	border-right: 1px solid var(--clr-primary-400) !important;
+}
+.fc .fc-button-primary {
+	background-color: var(--clr-primary-350);
+	border-color: var(--clr-primary-350);
+}
+.fc .fc-button-primary:hover {
+	background-color: var(--clr-primary-400);
+	border-color: var(--clr-primary-400);
+}
+.fc .fc-today-button {
+	background-color: var(--fc-button-bg-color);
+	border-color: var(--fc-button-bg-color);
+}
+.fc .fc-today-button:hover {
+	border-color: var(--fc-button-hover-border-color);
+	background-color: var(--fc-button-hover-bg-color);
+}
 .fc .fc-daygrid-day-number {
 	padding: 0;
 	z-index: 0;
@@ -14,15 +53,6 @@
 .fc-header-right {
 	width: 100%;
 	display: block;
-}
-
-/* calendarın kendi borderını kapamak icin */
-.fc-theme-standard td,
-.fc-theme-standard th {
-	border: none !important;
-}
-.fc .fc-scrollgrid {
-	border-width: 0px !important;
 }
 
 .fc .fc-daygrid-day-top {
@@ -45,9 +75,9 @@
 	background: none;
 }
 
-:root {
+/* :root {
 	--fc-today-bg-color: blue;
-}
+} */
 
 .fc .fc-daygrid-day.fc-day-today {
 	background-color: transparent !important;
@@ -59,29 +89,31 @@
 	width: calc(100% - 1.4rem);
 	height: calc(100% - 1.4rem);
 	position: absolute;
-	background-color: red;
+	border: 2px solid red !important;
 	margin: 0.7rem;
 	box-sizing: border-box;
 	border-radius: 8px;
 }
-
 .fc .fc-bg-event {
 	opacity: 100;
 	display: flex;
 	align-items: center;
 	border-radius: 8px;
-	background-color: cadetblue;
-	/* todo give the proper coloring  */
+	background-color: #888888;
+	border: 1px solid #c5c5c5;
 	margin: 0.7rem;
+	padding: 0.8rem;
 }
-
 .fc .fc-event-future {
-	background-color: rgb(76, 5, 21) !important;
-	padding: 1rem;
+	border: 1px solid #363739;
+	padding: 1rem 0.3rem;
 }
 .fc .fc-event-future:hover {
-	background-color: rgb(52, 2, 14) !important;
+	/* background-color: var(--clr-primary-350) !important; */
 	animation: pulse 0.3s linear 1;
+}
+.fc .fc-daygrid-bg-harness {
+	overflow: visible;
 }
 @media (max-width: 1650px) {
 	.fc .fc-toolbar.fc-header-toolbar {
@@ -120,8 +152,4 @@
 		transform: translate(-50%, -50%);
 		margin: 0;
 	}
-}
-
-.fc .fc-daygrid-bg-harness {
-	overflow: visible;
 }

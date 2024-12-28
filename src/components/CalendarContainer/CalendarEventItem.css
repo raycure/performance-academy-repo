@@ -11,9 +11,9 @@
 	width: fit-content;
 	justify-self: center;
 }
-.class-logo {
+.upcoming-events-container .class-logo {
 	width: auto;
-	max-height: 50px;
+	max-height: 40px;
 	height: auto;
 }
 @media (max-width: 1160px) {

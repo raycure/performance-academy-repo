@@ -1,24 +1,29 @@
-#contact-form-grad input,
-.authentication-form-container input:-webkit-autofill {
-	-webkit-background-clip: text;
-	-webkit-text-fill-color: var(--clr-neutral-100) !important;
-} /* autofillde arkaplan olmasın diye */
-.authentication-form-container input:-webkit-autofill,
+/* autofillde arkaplan beyaz olmasın diye */
 #contact-form-grad input:-webkit-autofill,
-.authentication-form-container input:-webkit-autofill:hover,
 #contact-form-grad input:-webkit-autofill:hover,
-.authentication-form-container input:-webkit-autofill:focus,
 #contact-form-grad input:-webkit-autofill:focus,
-.authentication-form-container
-	input:-webkit-autofill:active
-	#contact-form-grad
-	input:-webkit-autofill:active {
+#contact-form-grad input:-webkit-autofill:active {
 	-webkit-box-shadow: 0 0 0 30px var(--clr-primary-500) inset !important;
+	-webkit-background-clip: text;
+}
+.authentication-form-container input:-webkit-autofill,
+.authentication-form-container input:-webkit-autofill:hover,
+.authentication-form-container input:-webkit-autofill:focus,
+.authentication-form-container input:-webkit-autofill:active,
+.forgot-password-con input:-webkit-autofill,
+.forgot-password-con input:-webkit-autofill:hover,
+.forgot-password-con input:-webkit-autofill:focus,
+.forgot-password-con input:-webkit-autofill:active {
+	-webkit-box-shadow: 0 0 0 30px var(--clr-primary-500) inset !important;
+	-webkit-background-clip: text;
+	color: white !important;
+	-webkit-text-fill-color: white !important;
 }
 #contact-form-grad input,
 #contact-form-grad textarea,
 .authentication-form-container textarea,
-.authentication-form-container input {
+.authentication-form-container input,
+.forgot-password-con input {
 	all: unset;
 	margin: 0;
 	padding: 0.8rem;
@@ -26,9 +31,9 @@
 	width: 100%;
 	box-sizing: border-box;
 }
-
 #contact-form-grad input,
-.authentication-form-container input {
+.authentication-form-container input,
+.forgot-password-con input {
 	padding: 0.8rem 0.5rem 0.3rem;
 	border-bottom: 2px solid var(--clr-neutral-100);
 }
@@ -62,23 +67,28 @@
 	left: 0;
 }
 
-.authentication-form-container input::placeholder {
+.authentication-form-container input::placeholder,
+.contact-form input::placeholder {
 	color: #adadad;
 }
 
-.authentication-form-container input::-webkit-input-placeholder {
+.authentication-form-container input::-webkit-input-placeholder,
+.contact-form input::-webkit-input-placeholder {
 	color: #adadad;
 }
 
-.authentication-form-container input::-moz-placeholder {
+.authentication-form-container input::-moz-placeholder,
+.contact-form input::-moz-placeholder {
 	color: #adadad;
 }
 
-.authentication-form-container input:-ms-input-placeholder {
+.authentication-form-container input:-ms-input-placeholder,
+.contact-form input:-ms-input-placeholder {
 	color: #adadad;
 }
 
-.authentication-form-container input::-ms-input-placeholder {
+.authentication-form-container input::-ms-input-placeholder,
+.contact-form input::-ms-input-placeholder {
 	color: #adadad;
 }
 textarea::placeholder {
@@ -223,4 +233,69 @@ textarea::-ms-textarea-placeholder {
 .divForBorder:hover .textarea-left-lower-line,
 .divForBorder:focus-within .textarea-left-lower-line {
 	animation: expand-leftRight-borders 0.5s ease forwards 0.75s;
+}
+.forgot-password-con {
+	max-width: 500px;
+	display: flex;
+	flex-direction: column;
+	border-radius: 30px;
+	padding-top: 3rem;
+	overflow: hidden;
+	margin: 5rem auto 0;
+	background-image: linear-gradient(var(--clr-primary-500), 90%, #121314);
+	-webkit-box-shadow: 0px 0px 17px 0px rgba(36, 36, 36, 0.45);
+	-moz-box-shadow: 0px 0px 17px 0px rgba(36, 36, 36, 0.45);
+	box-shadow: 0px 0px 17px 0px rgba(36, 36, 36, 0.45);
+}
+.forgot-password-con .centerLineAnimation::before {
+	background-color: #8686ff;
+}
+.forgot-password-form {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	flex-grow: 1;
+	padding: 3rem 4rem 4rem;
+	gap: 3rem;
+}
+.forgot-password-con .valid {
+	color: rgb(137, 252, 137);
+}
+.forgot-password-con .invalid {
+	color: rgb(255, 84, 84);
+}
+.forgot-password-con input[type='password'] {
+	font-family: Verdana;
+}
+.forgot-password-icon > * {
+	width: 6.5rem;
+	height: 6.5rem;
+	flex-shrink: 0;
+	z-index: 10;
+}
+.forgot-password-icon {
+	position: relative;
+	width: fit-content;
+	margin-inline: auto;
+}
+@media (max-width: 600px) {
+	.forgot-password-con {
+		max-width: none;
+		border-radius: 0px;
+		margin: 0;
+		padding-top: 10rem;
+		-webkit-box-shadow: none;
+		-moz-box-shadow: none;
+		box-shadow: none;
+		height: 100vh;
+	}
+	.forgot-password-form {
+		max-width: 500px;
+		max-height: 500px;
+		width: 100%;
+		justify-content: center;
+		margin-inline: auto;
+		padding: 3rem 3rem 4rem;
+		gap: 4rem;
+	}
 }

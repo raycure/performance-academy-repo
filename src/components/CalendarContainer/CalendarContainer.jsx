@@ -11,8 +11,41 @@ import LesmillsPrograms from '../../assets/LesmillsPrograms';
 function CalendarContainer() {
 	const [eventClicked, setEventClicked] = useState(false);
 	const [activeEventId, setActiveEventId] = useState(null);
-	const events = LesMillsEvents;
+	const { t, i18n } = useTranslation();
+	const eventColorData = {
+		'LES-MILLS-GRIT': '#2f316b',
+		'BORN-TO-MOVE': '#7ab6c7',
+		'LES-MILLS-CORE': '#e24c35',
+		BODYPUMP: '#f18882',
+		BODYCOMBAT: '#cda653',
+		'LES-MILLS-SPRINT': '#7a552f',
+		'THE-TRIP': '#cb00ad',
+		'SH’BAM': '#c980cb',
+		BODYBALANCE: '#9900ff',
+		BODYATTACK: '#5398c3',
+		RPM: '#082e51',
+		BODYJAM: '#dd8b34',
+		BODYSTEP: '#00565b',
+		'LES-MILLS-TONE': '#abd633',
+		'LES-MILLS-BARRE': '#5d83c5',
+	};
+	const today = new Date();
+	const events = LesMillsEvents.map((event) => {
+		return {
+			...event,
+			end: new Date(
+				new Date(event.end).setDate(new Date(event.end).getDate() + 1)
+			)
+				.toISOString()
+				.split('T')[0],
+			color:
+				today <= event.fullStartDate
+					? eventColorData[event.program]
+					: '#888888',
+		};
+	});
 	const windowWidth = window.innerWidth;
+	const programs = LesmillsPrograms();
 	function handleEventClick(eventInfo) {
 		setEventClicked(true);
 		const clickedEventId = eventInfo.event._def.publicId;
@@ -32,8 +65,7 @@ function CalendarContainer() {
 			});
 		}
 	}
-	const { t, i18n } = useTranslation();
-	const programs = LesmillsPrograms();
+
 	function renderEvents(eventInfo) {
 		const eventProgramId = eventInfo.event._def.extendedProps.program;
 		const eventProgram = Object.keys(programs)
@@ -48,31 +80,28 @@ function CalendarContainer() {
 				eventInfo.event._instance.range.start
 		);
 		const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
-		if (eventProgram && diffDays > 1) {
-			return (
-				<img
-					className='center-item'
-					style={{ maxWidth: '8rem', maxHeight: '100%' }}
-					src={eventProgram.logo}
-					alt={eventProgram.title}
-				/>
-			);
-		} else if (diffDays > 1) {
-			return (
-				<div
-					style={{ maxWidth: '8rem', maxHeight: '100%', fontWeight: 'bolder' }}
-				>
-					{eventInfo.event._def.extendedProps.program}
-				</div>
-			);
-		}
-		return;
+		return eventProgram && diffDays > 1 ? (
+			<img
+				className='center-item'
+				style={{ maxWidth: '6rem', maxHeight: '100%', width: '100%' }}
+				src={eventProgram.logo}
+				alt={eventProgram.title}
+			/>
+		) : diffDays > 1 ? (
+			<div
+				style={{ maxWidth: '8rem', maxHeight: '100%', fontWeight: 'bolder' }}
+			>
+				{eventInfo.event._def.extendedProps.program}
+			</div>
+		) : (
+			<></>
+		);
 	}
 
 	return (
 		<div
 			id='calendar-container'
-			className='calendar-container user-select-none bg-primary-500'
+			className='calendar-container user-select-none'
 		>
 			<CalendarEventItem eventClicked={eventClicked} eventId={activeEventId} />
 			<div style={{ maxWidth: '90vh' }}>
@@ -94,7 +123,7 @@ function CalendarContainer() {
 					events={events}
 					eventClick={handleEventClick}
 					eventContent={renderEvents}
-					validRange={{ start: '2024-11-01', end: '2025-04-01' }} //we're gonna put the range of the events here
+					validRange={{ start: '2024-11-01', end: '2025-08-01' }} //we're gonna put the range of the events here
 				/>
 			</div>
 		</div>

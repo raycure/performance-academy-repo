@@ -42,8 +42,6 @@ function App() {
 								<Route path='etkinlikler' element={<Events />} />
 								<Route path='programlar' element={<Classes />} />
 								<Route path='iletişim' element={<Contact />} />
-								<Route path='register' element={<Register />} />
-								<Route path='login' element={<Login />} />
 								<Route path='program' element={<ClassInfo />} />
 								<Route path='programlarım' element={<MyPrograms />} />
 								<Route path='çerezler' element={<Cookies />} />
@@ -52,16 +50,18 @@ function App() {
 								<Route path='admin' element={<Admin />} />
 								<Route path='süreç' element={<Process />} />
 								<Route path='dashboard' element={<Dashboard />} />
-								<Route
-									path='forgotPassword/:token'
-									element={<ForgotPassword />}
-								/>
-
+								<Route path='kaydol' element={<Register />} />
+								<Route path='giriş-yap' element={<Login />} />
 								<Route
 									path='kişisel-verilerin-korunması'
 									element={<PrivacyPolicy />}
 								/>
 							</Route>
+							<Route
+								//path='/forgotPassword'
+								path='şifremi-unuttum/:token'
+								element={<ForgotPassword />}
+							/>
 							<Route path='/*' element={<PageNotFound />} />
 						</Routes>
 					</BrowserRouter>

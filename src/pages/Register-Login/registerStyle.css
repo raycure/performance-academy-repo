@@ -38,7 +38,7 @@
 	display: grid;
 	grid-template-columns: 1fr 0.4fr;
 	max-width: 1000px;
-	margin-inline: auto;
+	margin: 3rem auto;
 	border-radius: 5px;
 	overflow: hidden;
 	--max-width: 1110px;
@@ -95,20 +95,16 @@
 	right: 0;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1048px) {
 	.authentication-form {
-		padding: 3rem 4rem;
+		padding: 3rem 3rem;
 	}
 	.authentication-form-container {
-		width: fit-content;
+		margin-inline: auto;
+		width: max-content;
+		max-width: 95%;
 	}
 }
-@media (max-width: 920px) {
-	.authentication-form {
-		padding: 3rem;
-	}
-}
-
 @media (max-width: 750px) {
 	.authentication-greeting-container {
 		display: none;
@@ -125,6 +121,11 @@
 	.authentication-form {
 		padding: 3rem;
 		width: 100vw;
+		height: 100vh;
+	}
+	.authentication-form-container {
+		max-width: 100%;
+		margin: 0;
 	}
 }
 @media (max-width: 570px) {

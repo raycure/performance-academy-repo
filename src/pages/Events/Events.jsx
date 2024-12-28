@@ -1,13 +1,10 @@
 import './Events.css';
 import React, { useRef, useState } from 'react';
-import Container from '../../components/Containers/Container';
 import CalendarContainer from '../../components/CalendarContainer/CalendarContainer';
 import { useEffect } from 'react';
 
 import LesmillsPrograms from '../../assets/LesmillsPrograms';
-import backgroundText from '../../assets/CHOOSE-HAPPY.png';
 import EventList from '../../components/EventItem/EventList';
-import test from '../../assets/test.png';
 import axios from '../api/axios';
 import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router-dom';
@@ -109,6 +106,7 @@ function Events() {
 			setActiveClass('all');
 		}
 		setActiveCategory(cat);
+		setActiveClass(null);
 		toggleCategoryDropdown();
 	};
 	const handleOnlineSelect = (value) => {
@@ -177,133 +175,132 @@ function Events() {
 			<CalendarContainer />
 
 			<CertificationSteps />
-			<h2 className='fs-650 center-item' style={{ padding: '2rem' }}>
-				{i18n.language === 'en' ? 'CHOOSE AN EVENT' : 'ETKİNLİKLERİMİZ'}
-			</h2>
+			<section>
+				<h2 className='fs-650 center-item' style={{ padding: '2rem' }}>
+					{i18n.language === 'en' ? 'CHOOSE AN EVENT' : 'ETKİNLİKLERİMİZ'}
+				</h2>
+				<div className='classPick'>
+					<div className='dropDownMenus'>
+						<div className='dropDownCategoryMenu'>
+							<button
+								className='dropDownCategoriesButton'
+								onClick={toggleCategoryDropdown}
+								onMouseEnter={() => setIsCatMenuOpen(true)}
+							>
+								{i18n.language === 'en' ? 'Categories' : 'Kategoriler'}
+							</button>
+							<div
+								className={`dropDownCategories ${
+									isCatMenuOpen && 'dropDownCategoriesActive'
+								}`}
+								ref={catMenuRef}
+								onMouseLeave={() => setIsCatMenuOpen(false)}
+							>
+								{programNames.map((program, index) => (
+									<div
+										key={index}
+										className='dropDownCategoryItem'
+										onClick={() => {
+											handleCategorySelect(program.selector);
+										}}
+										style={
+											activeCategory === program.selector
+												? { backgroundColor: 'gray' }
+												: {}
+										}
+									>
+										{program.label}
+									</div>
+								))}
+							</div>
+						</div>
+						<div className='dropDownCategoryMenu'>
+							<button
+								className='dropDownCategoriesButton'
+								onClick={
+									activeCategory && activeCategory !== 'all'
+										? toggleClassDropdown
+										: null
+								}
+								onMouseEnter={
+									activeCategory && activeCategory !== 'all'
+										? () => setIsClassMenuOpen(true)
+										: null
+								}
+								style={{
+									color:
+										!activeCategory || activeCategory === 'all'
+											? '#6e6e73'
+											: 'white',
+								}}
+							>
+								{i18n.language === 'en' ? 'Programs' : 'Programlar'}
+							</button>
 
-			<div className='classPick'>
-				<div className='dropDownMenus'>
-					<div className='dropDownCategoryMenu'>
-						<button
-							className='dropDownCategoriesButton'
-							onClick={toggleCategoryDropdown}
-							onMouseEnter={() => setIsCatMenuOpen(true)}
-						>
-							{i18n.language === 'en' ? 'Categories' : 'Kategoriler'}
-						</button>
-						<div
-							className={`dropDownCategories ${
-								isCatMenuOpen && 'dropDownCategoriesActive'
-							}`}
-							ref={catMenuRef}
-							onMouseLeave={() => setIsCatMenuOpen(false)}
-						>
-							{programNames.map((program, index) => (
-								<div
-									key={index}
-									className='dropDownCategoryItem'
-									onClick={() => {
-										handleCategorySelect(program.selector);
-									}}
-									style={
-										activeCategory === program.selector
-											? { backgroundColor: 'gray' }
-											: {}
-									}
-								>
-									{program.label}
-								</div>
-							))}
+							<div
+								onMouseLeave={() => setIsClassMenuOpen(false)}
+								ref={classMenuRef}
+								className={`dropDownCategories ${
+									isClassMenuOpen && 'dropDownCategoriesActive'
+								}`}
+								style={{
+									width: 'max-content',
+								}}
+							>
+								{classes}
+							</div>
 						</div>
 					</div>
-					<div className='dropDownCategoryMenu'>
-						<button
-							className='dropDownCategoriesButton'
-							onClick={
-								activeCategory && activeCategory !== 'all'
-									? toggleClassDropdown
-									: null
-							}
-							onMouseEnter={
-								activeCategory && activeCategory !== 'all'
-									? () => setIsClassMenuOpen(true)
-									: null
-							}
-							style={{
-								color:
-									!activeCategory || activeCategory === 'all'
-										? '#6e6e73'
-										: 'white',
-							}}
-						>
-							{i18n.language === 'en' ? 'Programs' : 'Programlar'}
-						</button>
-
-						<div
-							onMouseLeave={() => setIsClassMenuOpen(false)}
-							ref={classMenuRef}
-							className={`dropDownCategories ${
-								isClassMenuOpen && 'dropDownCategoriesActive'
-							}`}
-							style={{
-								width: 'max-content',
-							}}
-						>
-							{classes}
+					<div class='radio-group'>
+						<div class='radio-option'>
+							<input
+								value={onlineCheck}
+								type='radio'
+								name='radio-option'
+								class='radio-btn'
+								checked={onlineCheck === true}
+								onChange={() => handleOnlineSelect(true)}
+							/>
+							<label class='radio-label'>
+								{i18n.language === 'en' ? 'Online' : 'Sanal'}
+							</label>
+						</div>
+						<div class='radio-option'>
+							<input
+								value={!onlineCheck}
+								type='radio'
+								name='radio-option'
+								class='radio-btn'
+								checked={onlineCheck === false}
+								onChange={() => handleOnlineSelect(false)}
+							/>
+							<label class='radio-label'>
+								{i18n.language === 'en' ? 'In-Person' : 'Canlı'}
+							</label>
+						</div>
+						<div class='radio-option'>
+							<input
+								value={onlineCheck === null || onlineCheck === undefined}
+								type='radio'
+								name='radio-option'
+								class='radio-btn'
+								checked={onlineCheck === null || onlineCheck === undefined}
+								onChange={() => handleOnlineSelect(null)}
+							/>
+							<label class='radio-label'>
+								{i18n.language === 'en' ? 'All' : 'Tümü'}
+							</label>
 						</div>
 					</div>
 				</div>
-				<div class='radio-group'>
-					<div class='radio-option'>
-						<input
-							value={onlineCheck}
-							type='radio'
-							name='radio-option'
-							class='radio-btn'
-							checked={onlineCheck === true}
-							onChange={() => handleOnlineSelect(true)}
-						/>
-						<label class='radio-label'>
-							{i18n.language === 'en' ? 'Online' : 'Sanal'}
-						</label>
-					</div>
-					<div class='radio-option'>
-						<input
-							value={!onlineCheck}
-							type='radio'
-							name='radio-option'
-							class='radio-btn'
-							checked={onlineCheck === false}
-							onChange={() => handleOnlineSelect(false)}
-						/>
-						<label class='radio-label'>
-							{i18n.language === 'en' ? 'In-Person' : 'Canlı'}
-						</label>
-					</div>
-					<div class='radio-option'>
-						<input
-							value={onlineCheck === null || onlineCheck === undefined}
-							type='radio'
-							name='radio-option'
-							class='radio-btn'
-							checked={onlineCheck === null || onlineCheck === undefined}
-							onChange={() => handleOnlineSelect(null)}
-						/>
-						<label class='radio-label'>
-							{i18n.language === 'en' ? 'All' : 'Hepsi'}
-						</label>
-					</div>
-				</div>
-			</div>
-
-			<EventList
-				key={activeClass}
-				onlineCheck={onlineCheck}
-				activeProgram={activeClass ? activeClass : 'all'}
-				infoActive={true}
-			/>
-
-			{/* <PaginationContainer /> */}
+				<EventList
+					key={activeClass}
+					onlineCheck={onlineCheck}
+					activeProgram={activeClass ? activeClass : 'all'}
+					activeCategory={activeCategory}
+					infoActive={true}
+				/>
+			</section>
 			{/* <form onSubmit={handleUpload}>
 				<input
 					type='file'

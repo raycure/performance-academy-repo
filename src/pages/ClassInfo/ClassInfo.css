@@ -34,7 +34,8 @@
 	grid-template-columns: 1fr 1fr;
 	margin-inline: auto;
 	max-width: 1260px;
-	gap: 2rem;
+	column-gap: 2rem;
+	row-gap: 7rem;
 	padding-inline: 2rem;
 }
 .class-info-grid img {
@@ -138,11 +139,6 @@
 }
 @media (max-width: 660px) {
 	.class-rec-con {
-		display: none;
-	}
-}
-@media (max-width: 540px) {
-	.page-poster-container .fs-minimal-heading {
 		display: none;
 	}
 }

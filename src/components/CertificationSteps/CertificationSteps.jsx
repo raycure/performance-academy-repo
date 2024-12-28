@@ -90,7 +90,7 @@ function CertificationSteps() {
 	return (
 		<Container
 			className='certftn-prcss-outer-con'
-			styleProp={{ margin: '7rem auto' }}
+			styleProp={{ margin: '30vh auto' }}
 		>
 			<div className='stepText'>
 				<button
@@ -115,7 +115,9 @@ function CertificationSteps() {
 						key={index}
 					>
 						<div className='programStepContainers'>
-							<span className='programStepNumbers'>{index + 1}</span>
+							<span className='programStepNumbers user-select-none'>
+								{index + 1}
+							</span>
 							<span
 								className='stepNumberAnimation'
 								style={{ backgroundColor: index === 0 ? 'red' : '' }}

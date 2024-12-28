@@ -295,7 +295,9 @@ function UserInfo() {
 				<button
 					style={{ display: 'flex', width: 'fit-content' }}
 					onClick={() => setIsEditing(true)}
-					className={`${!isEditing ? '' : 'display-hidden'} user-info-edit-btn`}
+					className={`${
+						!isEditing ? '' : 'display-hidden'
+					} user-select-none user-info-edit-btn`}
 				>
 					{i18n.language === 'en' ? 'Edit' : 'Düzenle'}
 					<FaEdit
@@ -636,6 +638,7 @@ function UserInfo() {
 					</div>
 				</div>
 				<div
+					className='user-select-none'
 					style={{ gap: '0.5rem', display: 'flex', flexDirection: 'column' }}
 				>
 					{contractverified === true ? (

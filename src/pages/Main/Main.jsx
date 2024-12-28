@@ -1,7 +1,6 @@
 import React, { act, Fragment, useEffect, useLayoutEffect } from 'react';
 import './Main.css';
 import Container from '../../components/Containers/Container';
-import isim from '/ornek.jpg';
 import Card from '../../components/Cards/Card';
 import LesMillsPrograms from '../../assets/LesmillsPrograms';
 import CardCarousel from '../../components/Carousels/CardCarousel';
@@ -17,9 +16,9 @@ import FAQ from '../../components/FAQ/FAQ.jsx';
 
 import { useTranslation } from 'react-i18next';
 import BecomeInstructorCards from '../../components/BecomeInstructorCards/BecomeInstructorCards.jsx';
-import Button from '../../components/Button/Button.jsx';
 import { useDispatch, useSelector } from 'react-redux';
 import { setPreferredLanguage } from '../../redux/auth/authStateSlice.js';
+import MilestoneCards from '../../components/Cards/MilestoneCards.jsx';
 
 function Main() {
 	const dispatch = useDispatch();
@@ -125,27 +124,25 @@ function Main() {
 					</div> */}
 				<p style={{ paddingInline: '0.5rem' }}>{t('MainPage.WelcomeText')}</p>
 			</section>
-			<Container className='landingPageContainer'>
-				<div className='landingParagraph'>
-					<h2 className='fs-secondary-heading'>Performance Fitness Academy</h2>
-					<p className='fs-650 paragraph'>{t('MainPage.LandingParagraph.0')}</p>
-					<p className='fs-400 paragraph'>{t('MainPage.LandingParagraph.1')}</p>
-				</div>
-				<div>
-					<ul className='milestones'>
-						<h4>milestones</h4>
-						<li>SCIENCE-BASED APPROACH</li>
-						<li>comprehensive resources</li>
-						<li>globally respected certification</li>
-						<li>in-person and online events</li>
-						<li>vibrant active Lesmills' community</li>
-						<li>for everyone</li>
-						<li>easy process</li>
-						<li>valuable</li>
-					</ul>
-				</div>
-			</Container>
-			<Banner />
+			<section>
+				<Container className='landingPageContainer'>
+					<div className='landingParagraph'>
+						<h2 className='fs-secondary-heading'>
+							Performance Fitness Academy
+						</h2>
+						<p className='fs-650 paragraph'>
+							{t('MainPage.LandingParagraph.0')}
+						</p>
+						<p className='fs-400 paragraph'>
+							{t('MainPage.LandingParagraph.1')}
+						</p>
+					</div>
+					<div>
+						<MilestoneCards />
+					</div>
+				</Container>
+			</section>
+			<BecomeInstructorCards />
 
 			<section>
 				<h2
@@ -165,7 +162,7 @@ function Main() {
 				</Container>
 			</section>
 
-			<section className='bannerLikeImageContainer' ref={scrollingImgRef}>
+			{/* <section className='bannerLikeImageContainer' ref={scrollingImgRef}>
 				<motion.div
 					style={{
 						top: scrollWith,
@@ -178,18 +175,18 @@ function Main() {
 						src='https://d2lsjsqnstxud9.cloudfront.net/media/13959BF0-BCE0-4B85-83FC898FABC86C4C/6DBF26B1-EAD1-41E8-87F578CFA9C6CC13/webimage-DB1F8A58-633C-4C11-98798C96D669CA94.jpg'
 					/>
 				</motion.div>
-			</section>
+			</section> */}
 			{/* <div style={{ position: 'relative' }} id='testttt'>
 				<img src={testortheflamboyantimg} style={{ top: testHeight1 }}></img>
 				<span className='testspann' style={{ top: `${testHeight1}px` }}></span>
 			</div> */}
 			{/* //todo vidi gizle butonu */}
 
-			<BecomeInstructorCards />
-			<section>
+			<Banner />
+			<section className='event-carousel-outer-con'>
 				<h2
 					className='fs-primary-heading center-item'
-					style={{ margin: '2rem auto' }}
+					style={{ margin: '2rem auto', textAlign: 'center' }}
 				>
 					{i18n.language === 'en'
 						? 'Our Upcoming Events'

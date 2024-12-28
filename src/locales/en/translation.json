@@ -173,5 +173,19 @@
 			"You will earn your official certificate.",
 			"Your certificate will be sent to you via email."
 		]
+	},
+	"Milestones": {
+		"Title": [
+			"Science Based Approach",
+			"Globally Respected Certification",
+			"Choose Your Experience",
+			"Easy Process"
+		],
+		"Content": [
+			"Every workout is researched, designed and rigorously tested by a team of experts to deliver the results members demand.",
+			"Earn a certification recognized worldwide, enhancing your skills and credibility across industries.",
+			"Explore our diverse events, available both in-person and online, to suit your preference!",
+			"Follow a simple three-step process: attend the event, submit your examination video, and earn your certificate upon passing."
+		]
 	}
 }

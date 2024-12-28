@@ -10,7 +10,7 @@ import { selectIsLoggedIn } from '../../redux/auth/authStateSlice';
 import { useDispatch } from 'react-redux';
 import { AuthService } from '../../auth/auth.service';
 import HoneypotInput from './HoneypotInput';
-
+import contactImage from '../../assets/contactImage.png';
 function ContactForm() {
 	const contactForm = useRef();
 	const [name, setName] = useState('');
@@ -77,12 +77,7 @@ function ContactForm() {
 	let isLoggedIn = useSelector(selectIsLoggedIn);
 	return (
 		<div className='contact-form relative-position'>
-			<img
-				src='https://d2lsjsqnstxud9.cloudfront.net/media/13959BF0-BCE0-4B85-83FC898FABC86C4C/80F2C62C-1E8E-41FE-B1064BA133CF51A1/webimage-6efa76ad-4720-495f-86d8-60b4b9be85da.png'
-				alt='background'
-				className='background-image'
-				style={{ objectPosition: 'right' }}
-			/>
+			<img src={contactImage} alt='background' className='background-image' />
 
 			<form
 				onSubmit={(e) => {
@@ -92,7 +87,7 @@ function ContactForm() {
 						: handlePrivateContactFormSubmission();
 				}}
 				ref={contactForm}
-				className='contact-form-outer-container box-shadow'
+				className='contact-form-outer-container'
 			>
 				<p className='contact-form-header fs-900 text-container'>
 					{t('Contact.Form.Title')}
@@ -124,7 +119,7 @@ function ContactForm() {
 								onChange={(e) => setEmail(e.target.value)}
 								value={email}
 								required
-								placeholder='email'
+								placeholder='Email'
 								type='email'
 							/>
 						</div>

@@ -305,7 +305,7 @@ function LesmillsPrograms() {
 							'BODYJAM dancers in a lively, synchronized group performance',
 					},
 					{
-						url: 'https://d2lsjsqnstxud9.cloudfront.net/media/13959BF0-BCE0-4B85-83FC898FABC86C4C/A2E13E1F-3B64-42D5-8217C60424DE97E5/webimage-F142161C-3ED2-476B-9F37C38760E93C36.png',
+						url: 'https://d2lsjsqnstxud9.cloudfront.net/media/13959BF0-BCE0-4B85-83FC898FABC86C4C/983E1137-3F51-481B-88432675608B1BDE/webimage-44D12886-97AD-4F68-87FDE1C0933B3161.png',
 						alt: 'BODYJAM image 3',
 						description:
 							'BODYJAM vibrant group session with energetic choreography',
@@ -316,15 +316,10 @@ function LesmillsPrograms() {
 						description:
 							'BODYJAM workout session featuring smooth dance moves and beats',
 					},
-					{
-						url: 'https://d2lsjsqnstxud9.cloudfront.net/media/13959BF0-BCE0-4B85-83FC898FABC86C4C/983E1137-3F51-481B-88432675608B1BDE/webimage-44D12886-97AD-4F68-87FDE1C0933B3161.png',
-						alt: 'BODYJAM image 5',
-						description:
-							'BODYJAM participants dancing in an energetic, rhythmic routine',
-					},
+
 					{
 						url: 'https://d2lsjsqnstxud9.cloudfront.net/media/13959BF0-BCE0-4B85-83FC898FABC86C4C/A3240DB4-8618-485B-8D892DCF87CA73A7/webimage-102E0D2A-079D-420D-851A136452D02B79.jpg',
-						alt: 'BODYJAM image 6',
+						alt: 'BODYJAM image 5',
 						description:
 							'BODYJAM group enjoying a fun and rhythmic dance workout',
 					},

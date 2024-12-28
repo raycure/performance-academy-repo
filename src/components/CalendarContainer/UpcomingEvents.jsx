@@ -38,7 +38,7 @@ function UpcomingEvents() {
 					return event.fullStartDate >= today;
 				})
 				.slice(0, eventAmount)
-				.map((event) => {
+				.map((event, index) => {
 					const daysLeft = Math.floor(
 						(event.fullStartDate.getTime() - today.getTime()) /
 							(1000 * 3600 * 24) +
@@ -52,7 +52,7 @@ function UpcomingEvents() {
 						})
 						.filter(Boolean);
 					return (
-						<div className='border-container'>
+						<div key={index} className='border-container'>
 							<HashLink smooth={true} to={`/programlar#${event.program}`}>
 								<img
 									src={eventProgram[0]?.logo}

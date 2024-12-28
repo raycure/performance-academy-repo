@@ -149,7 +149,7 @@ function RegisterForm() {
 			const response = await dispatch(
 				AuthService({
 					data: registerData,
-					endpoint: '/register',
+					endpoint: '/register', //todo /kaydol
 					method: 'POST',
 				})
 			);
@@ -499,7 +499,10 @@ function RegisterForm() {
 					>
 						{i18n.language === 'en' ? 'Sign Up' : 'Kaydol'}
 					</Button>
-					<Link to='/login' className='fs-400 text-align-right text-container'>
+					<Link
+						to='/giriş-yap'
+						className='fs-400 text-align-right text-container'
+					>
 						{t('Authentication.Redirect.0')}
 					</Link>
 				</div>

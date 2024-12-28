@@ -17,7 +17,7 @@ import { useNavigate } from 'react-router-dom';
 import { selectIsLoggedIn } from '../../redux/auth/authStateSlice';
 import { AuthService } from '../../auth/auth.service';
 import { useDispatch } from 'react-redux';
-function EventList({ activeProgram, infoActive, onlineCheck }) {
+function EventList({ activeProgram, infoActive, onlineCheck, activeCategory }) {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	let isLoggedIn = useSelector(selectIsLoggedIn);
@@ -27,7 +27,7 @@ function EventList({ activeProgram, infoActive, onlineCheck }) {
 
 		if (!isLoggedIn) {
 			// todo give a notif that they need to login first
-			navigate('/login');
+			navigate('/giriş-yap');
 		}
 		const response = await dispatch(
 			AuthService({
@@ -68,12 +68,26 @@ function EventList({ activeProgram, infoActive, onlineCheck }) {
 			});
 		});
 	});
+	const lesmillsPrograms = LesmillsPrograms();
 	const eventItems = LesMillsEvents.filter((event) => {
+		const eventCategory = Object.keys(lesmillsPrograms).find((category) => {
+			return lesmillsPrograms[category].some(
+				(program) => program.id === event.title
+			);
+		});
 		if (
 			activeProgram === 'all' ||
 			activeProgram === null ||
 			activeProgram === undefined
 		) {
+			if (
+				activeCategory !== 'all' &&
+				activeCategory !== null &&
+				activeCategory !== undefined &&
+				activeCategory !== eventCategory
+			) {
+				return false;
+			}
 			if (onlineCheck === true) {
 				return event.fullStartDate >= today && event.online === true;
 			} else if (onlineCheck === false) {
@@ -96,7 +110,6 @@ function EventList({ activeProgram, infoActive, onlineCheck }) {
 		}
 		return event.program === activeProgram && event.fullStartDate >= today;
 	});
-
 	const [paginationPageNumber, setPaginationPageNumber] = useState(1);
 	const eventsPerPage = 6;
 	const lastIndex = paginationPageNumber * eventsPerPage;
@@ -105,7 +118,9 @@ function EventList({ activeProgram, infoActive, onlineCheck }) {
 	const pageAmount = Math.ceil(eventItems.length / eventsPerPage);
 	const paginationNumbers = [...Array(pageAmount + 1).keys()].slice(1);
 	const [selectedEvent, setSelectedEvent] = useState(eventFallback);
-
+	useEffect(() => {
+		setPaginationPageNumber(1);
+	}, [activeCategory]);
 	const locationClickHandler = () => {
 		window.open(
 			'https://maps.google.com?q=' +
@@ -116,8 +131,7 @@ function EventList({ activeProgram, infoActive, onlineCheck }) {
 			'noreferrer'
 		); //biri latitude biri longtitude ama unuttum hangisi hangisi
 	};
-	const programs = Object.values(LesmillsPrograms()).flat();
-
+	const programs = Object.values(lesmillsPrograms).flat();
 	function prePage() {
 		if (paginationPageNumber !== 1) {
 			setPaginationPageNumber(paginationPageNumber - 1);
@@ -166,6 +180,20 @@ function EventList({ activeProgram, infoActive, onlineCheck }) {
 			setSelectedEvent(eventFallback);
 		}
 	}, [selectedEvent]);
+	if (
+		paginatedEvents === null ||
+		paginatedEvents === undefined ||
+		eventItems.length === 0
+	) {
+		return (
+			<p style={{ textAlign: 'center', padding: '4rem' }}>
+				{i18n.language === 'en'
+					? 'Unfortunately theres no event for this program yet.'
+					: 'Üzgünüz yakın zaman içerisinde bu program için bir etkinlik planlanmadı.'}
+			</p>
+		);
+	}
+
 	const daysLeft = Math.floor(
 		(selectedEvent.fullStartDate.getTime() - today.getTime()) /
 			(1000 * 3600 * 24)
@@ -173,24 +201,6 @@ function EventList({ activeProgram, infoActive, onlineCheck }) {
 	const programImg = programs.filter((program) => {
 		return program.id === selectedEvent.program;
 	})[0].additionalPictures[2].url;
-	if (paginatedEvents === null || paginatedEvents === undefined) {
-		return (
-			<p style={{ textAlign: 'center', padding: '4rem' }}>
-				{i18n.language === 'en'
-					? 'Unfortunately theres no event for this program yet.'
-					: 'Üzgünüz yakın zaman içerisinde bu program için bir etkinlik yok.'}
-			</p>
-		);
-	}
-	if (eventItems.length === 0) {
-		return (
-			<p style={{ textAlign: 'center', padding: '4rem' }}>
-				{i18n.language === 'en'
-					? 'Unfortunately theres no event fitting the criteria you picked.'
-					: 'Üzgünüz seçtiğiniz özelliklere uygun bir etkinlik yok.'}
-			</p>
-		);
-	}
 	return (
 		<div className='event-list-grid'>
 			<div className='event-list'>
@@ -199,6 +209,7 @@ function EventList({ activeProgram, infoActive, onlineCheck }) {
 						const programTitle = programs.filter((program) => {
 							return program.id === event.program;
 						})[0].title;
+
 						return (
 							<div className='enroll-event-item' key={index}>
 								<p
@@ -207,7 +218,6 @@ function EventList({ activeProgram, infoActive, onlineCheck }) {
 								>
 									{programTitle}
 								</p>
-
 								<p style={{ alignContent: 'center' }}>
 									{event.fullStartDate.getDate() +
 										' ' +
@@ -268,12 +278,12 @@ function EventList({ activeProgram, infoActive, onlineCheck }) {
 				</div>
 				<div
 					id='eventInfoPagination'
+					className='user-select-none'
 					style={{
 						display: 'flex',
 						flexDirection: 'row',
 						justifyContent: 'center',
 						margin: '0.6rem',
-						width: '100%',
 					}}
 				>
 					<button
@@ -284,7 +294,7 @@ function EventList({ activeProgram, infoActive, onlineCheck }) {
 					>
 						<MdArrowBackIosNew />
 					</button>
-					<div className=''>
+					<div>
 						{paginationNumbers.map((number, index) => (
 							<button
 								onClick={() => changePageNumber(number)}
@@ -355,7 +365,7 @@ function EventList({ activeProgram, infoActive, onlineCheck }) {
 						? 'In Person Lessons'
 						: 'Yüz Yüze Dersler'}
 				</p>
-				{selectedEvent.location && (
+				{selectedEvent.location && !selectedEvent.online && (
 					<p className='card-item'>
 						<FiMapPin />
 						<Link
@@ -409,7 +419,6 @@ function EventList({ activeProgram, infoActive, onlineCheck }) {
 					</Button>
 				</div>
 			</form>
-
 			<img
 				style={{
 					objectFit: 'cover',

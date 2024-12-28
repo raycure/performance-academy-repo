@@ -1,31 +1,43 @@
 .cardIcon {
-	height: 50px;
-	width: 50px;
+	height: 40px;
+	width: 40px;
+	margin: 0.5rem;
 }
 
 .gridCardHeading {
 	display: flex;
+	flex-direction: column;
 	align-items: center;
 }
 .gridCard {
-	padding-inline: 1rem;
-	padding-block: 0.5rem;
+	padding: 1rem 1.5rem 3rem;
 	display: flex;
 	flex-direction: column;
 	gap: 1rem;
 	border-radius: 15px;
-	background-color: #191917;
+	background-color: #171819;
 	max-width: 430px;
+	text-align: center;
 	/*todo choose a secondary color? */
+}
+.gridCard p {
+	font-size: var(--fs-500);
+	opacity: 0.9;
+}
+.gridCard h2 {
+	font-size: 1.6rem;
+	font-weight: 700;
 }
 
 .gridCardContainer {
-	display: flex;
-	gap: 25px;
-	flex-direction: column;
-	margin-inline: auto;
-	align-items: center;
-	margin-top: 2rem;
+	display: grid;
+	gap: 2rem;
+	width: auto;
+	justify-content: space-between;
+	grid-template-columns: repeat(2, 1fr);
+	grid-template-rows: repeat(2, 1fr);
+	align-items: unset;
+	max-width: 900px;
 }
 .bcm-instr-cards-logo {
 	height: 4rem;
@@ -62,15 +74,11 @@
 	.bcm-instr-cards-logo {
 		height: 3.5rem;
 	}
-}
-@media (min-width: 50em) {
 	.gridCardContainer {
-		display: grid;
-		gap: 50px;
-		width: auto;
-		grid-template-columns: repeat(2, 1fr);
-		grid-template-rows: repeat(2, 1fr);
-		align-items: unset;
-		max-width: 900px;
+		display: flex;
+		gap: 1.5rem;
+		flex-direction: column;
+		margin-inline: auto;
+		align-items: center;
 	}
 }

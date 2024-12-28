@@ -18,28 +18,38 @@
 	display: flex;
 	justify-content: space-between;
 	max-width: 1110px;
+	gap: 1.5rem;
 }
 
 .landingPageContainer .paragraph {
 	max-width: 40rem;
 	margin-top: 1.4rem;
 }
-
-.milestones li:nth-child(n) {
-	background-color: #0b0b0b;
+.milestone-cards li {
+	padding: 0.7rem 0.7rem 1.5rem;
+	border-top-right-radius: 0.6rem;
+	border-top-left-radius: 0.6rem;
+	width: 100%;
+	position: relative;
+	background-color: #27262f;
 }
-.milestones li:nth-child(2n) {
+.milestone-cards li:nth-child(2n) {
 	background-color: #f0f0f0;
 	color: #0b0b0b;
 }
-
-.milestones {
-	margin: 1.5rem;
+.milestone-cards li:last-child {
+	border-radius: 0.6rem;
 }
-.milestones li {
-	padding: 0.7rem;
-	border-radius: 0.5rem;
-	width: fit-content;
+.milestone-cards li:nth-child(3n) {
+	background-color: #449669;
+	color: white;
+}
+.milestone-cards li p {
+	opacity: 0.7;
+}
+.milestone-cards {
+	max-width: 450px;
+	margin-inline: auto;
 }
 .main-welcome-text-outer-con {
 	display: flex;
@@ -53,9 +63,9 @@
 }
 .main-welcome-text-outer-con h1 {
 	font-weight: bolder;
-	text-shadow: -7px -7px var(--clr-accent-400);
 	font-size: 4.5rem;
 }
+
 @media (max-width: 1024px) {
 	.landingPageContainer {
 		display: flex;
@@ -68,6 +78,12 @@
 	}
 	.milestones {
 		display: none;
+	}
+	.event-carousel-outer-con h2 {
+		font-size: 2rem;
+	}
+	.milestone-cards {
+		max-width: 600px;
 	}
 }
 @media (max-width: 800px) {
@@ -82,13 +98,13 @@
 		display: none;
 	}
 	.main-welcome-text-outer-con h1 {
-		text-shadow: -4px -4px var(--clr-accent-400);
+		/* text-shadow: -4px -4px var(--clr-accent-400); */
 		font-size: 3rem;
 	}
 }
 @media (max-width: 500px) {
 	.main-welcome-text-outer-con h1 {
-		text-shadow: -3px -3px var(--clr-accent-400);
+		/* text-shadow: -3px -3px var(--clr-accent-400); */
 		font-size: 2.2rem;
 	}
 }

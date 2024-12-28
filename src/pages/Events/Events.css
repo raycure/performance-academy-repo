@@ -2,6 +2,7 @@
 	--max-width: 1050px;
 	--container-padding: 1rem;
 	width: min(var(--max-width), 100% - (var(--container-padding)));
+	gap: 1rem;
 	margin-inline: auto;
 	display: grid;
 	grid-template-columns: 4fr 6fr;

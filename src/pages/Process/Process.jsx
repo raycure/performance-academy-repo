@@ -1,11 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import './Process.css';
 import ProcessSelect from '../../components/ProcessSelect/ProcessSelect';
 import FAQ from '../../components/FAQ/FAQ';
 import { MdOutlineDoubleArrow } from 'react-icons/md';
-import { motion } from 'framer-motion';
-import { leftToRight } from '../../components/animations/AnimationValues.jsx';
 import LicenceContactRedirect from '../../components/LicenceContactRedirect/LicenceContactRedirect.jsx';
 import { IoIosHelpCircleOutline } from 'react-icons/io';
 function Process() {
@@ -35,8 +33,8 @@ function Process() {
 		marginInline: 'auto',
 	};
 	const topBotMargin = {
-		marginTop: '4rem',
-		marginBottom: '4rem',
+		marginTop: '6rem',
+		marginBottom: '6rem',
 	};
 	const licenseListIcon = {
 		width: '1.4rem',

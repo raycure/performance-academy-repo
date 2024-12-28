@@ -10,7 +10,14 @@ import LesmillsPrograms from '../../assets/LesmillsPrograms';
 import { LesMillsEvents } from '../../assets/LesmillsEvents';
 export default () => {
 	const windowWidth = window.innerWidth;
-	const slideAmount = windowWidth > 1020 ? 3 : windowWidth > 580 ? 2 : 1.5;
+	const slideAmount =
+		windowWidth > 1550
+			? 4
+			: windowWidth > 1020
+			? 3
+			: windowWidth > 580
+			? 2
+			: 1.5;
 	const today = new Date();
 	return (
 		<Swiper
@@ -28,8 +35,6 @@ export default () => {
 			coverflowEffect={{
 				rotate: 0,
 				stretch: 0,
-				//depth: 70,
-				//modifier: 3,
 			}}
 			slidesPerView={slideAmount}
 		>

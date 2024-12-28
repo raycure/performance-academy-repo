@@ -1,6 +1,7 @@
 .faq-outer-container {
 	margin-inline: auto;
 	width: 80vw;
+	max-width: 1600px;
 	display: grid;
 	grid-template-columns: 0.6fr 1fr;
 	gap: 2rem;
@@ -29,11 +30,13 @@
 .faq-outer-container .below1100 {
 	display: none;
 }
-@media (max-width: 1100px) {
+@media (max-width: 1200px) {
 	.faq-outer-container {
-		width: 70vw;
+		width: 100%;
+		max-width: 850px;
 		grid-template-columns: 1fr;
 		gap: 2rem;
+		padding-inline: 3rem;
 	}
 	.faq-item-active {
 		background-color: #00000000;

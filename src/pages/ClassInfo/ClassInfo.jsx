@@ -50,8 +50,8 @@ function ClassInfo() {
 	return (
 		<div className='class-info-outer-con'>
 			<div
-				className='page-poster-container'
-				style={{ paddingLeft: '5vw', flexDirection: 'column' }}
+				className='page-poster-container user-select-none'
+				style={{ paddingInline: '5vw', flexDirection: 'column' }}
 			>
 				<img
 					aria-label='program pic'
@@ -222,64 +222,66 @@ function ClassInfo() {
 					<EventList activeProgram={programID} infoActive={false} />
 				</section>
 			</section>
-			<ul className='class-rec-con'>
-				{recPrograms.map((program, index) => {
-					return (
-						<li key={index} className='class-rec-item relative-position'>
-							<img
-								src={program.additionalPictures[0].url}
-								alt={`rec-picture-${program.title}`}
-								className='background-image'
-							/>
-							<div
-								style={{ padding: '0.5rem' }}
-								className='bg-primary-trnsp rec-program-info'
-							>
-								<p className='fw-bold'>{program.title}</p>
-
-								<div className='rec-program-sum'>
-									<p className='fs-300 text-neutral-100'>{program.sum}</p>
-								</div>
-								<Link
-									to={`/program#${program.id}`}
-									state={{ program: program.id }}
-									className='fs-400 text-neutral-100 more-link'
-									style={{
-										display: 'flex',
-										alignItems: 'center',
-										gap: '0.2rem',
-									}}
-									onClick={() => handleSelectId(program.id)}
+			<section>
+				<ul className='class-rec-con'>
+					{recPrograms.map((program, index) => {
+						return (
+							<li key={index} className='class-rec-item relative-position'>
+								<img
+									src={program.additionalPictures[0].url}
+									alt={`rec-picture-${program.title}`}
+									className='background-image'
+								/>
+								<div
+									style={{ padding: '0.5rem' }}
+									className='bg-primary-trnsp rec-program-info'
 								>
-									{i18n.language === 'en' ? 'More' : 'İncele'}
-									<MdDoubleArrow style={{ width: '1rem', height: '100%' }} />
-								</Link>
-							</div>
-						</li>
-					);
-				})}
-				<li
-					className='bg-primary-300 all'
-					style={{
-						display: 'flex',
-						flexDirection: 'column',
-						textAlign: 'center',
-						alignItems: 'center',
-						justifyContent: 'center',
-						padding: '0 1rem',
-					}}
-				>
-					<p>
-						{i18n.language === 'en'
-							? 'Looking for Something Else'
-							: 'Aradığınız başka bir program mı var'}
-						?
-					</p>
-					<Link to='/programlar' className='fs-650'>
-						{i18n.language === 'en' ? 'All Programs' : 'Tüm Programlar'}
-					</Link>
-				</li>
-			</ul>
+									<p className='fw-bold'>{program.title}</p>
+
+									<div className='rec-program-sum'>
+										<p className='fs-300 text-neutral-100'>{program.sum}</p>
+									</div>
+									<Link
+										to={`/program#${program.id}`}
+										state={{ program: program.id }}
+										className='fs-400 text-neutral-100 more-link'
+										style={{
+											display: 'flex',
+											alignItems: 'center',
+											gap: '0.2rem',
+										}}
+										onClick={() => handleSelectId(program.id)}
+									>
+										{i18n.language === 'en' ? 'More' : 'İncele'}
+										<MdDoubleArrow style={{ width: '1rem', height: '100%' }} />
+									</Link>
+								</div>
+							</li>
+						);
+					})}
+					<li
+						className='bg-primary-350 all user-select-none'
+						style={{
+							display: 'flex',
+							flexDirection: 'column',
+							textAlign: 'center',
+							alignItems: 'center',
+							justifyContent: 'center',
+							padding: '0 1rem',
+						}}
+					>
+						<p>
+							{i18n.language === 'en'
+								? 'Looking for Something Else'
+								: 'Aradığınız başka bir program mı var'}
+							?
+						</p>
+						<Link to='/programlar' className='fs-650'>
+							{i18n.language === 'en' ? 'All Programs' : 'Tüm Programlar'}
+						</Link>
+					</li>
+				</ul>
+			</section>
 		</div>
 	);
 }

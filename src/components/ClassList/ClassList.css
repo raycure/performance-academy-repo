@@ -22,7 +22,7 @@
 .class-outer-container {
 	font-size: var(--fs-400);
 }
-.class-logo {
+.class-item-container .class-logo {
 	height: 2.5rem;
 	margin-bottom: 0.6rem;
 	object-fit: contain;

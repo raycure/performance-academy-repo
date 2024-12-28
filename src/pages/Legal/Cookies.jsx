@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import './Cookies.css';
+import { useTranslation } from 'react-i18next';
 const CookieConsent = () => {
 	const [showBanner, setShowBanner] = useState(false);
 	const [isAccepted, setIsAccepted] = useState(false);
-
+	const { i18n } = useTranslation('');
 	useEffect(() => {
 		const consent = localStorage.getItem('cookieConsent');
 		if (consent !== 'accepted') {
@@ -21,14 +22,25 @@ const CookieConsent = () => {
 	if (!showBanner) return null;
 
 	return (
-		<div className='cookiesBanner'>
-			<p>
-				"This website uses only essential cookies. For more information, please
-				see our <a href='/privacy-policy'>Privacy Policy</a>. By clicking
-				'Accept,' you consent to the use of these cookies."
-			</p>
+		<div className='cookiesBanner user-select-none'>
+			{i18n.language === 'en' ? (
+				<p>
+					This website uses only essential cookies. For more information, please
+					see our <a href='/kişisel-verilerin-korunması'>Privacy Policy</a>. By
+					clicking 'Accept,' you consent to the use of these cookies.
+				</p>
+			) : (
+				<p>
+					Bu web sitesi yalnızca gerekli çerezleri kullanmaktadır. Daha fazla
+					bilgi için lütfen
+					<a href='/kişisel-verilerin-korunması'> Gizlilik Politikamızı </a>
+					inceleyin. 'Kabul Et' butonuna tıklayarak bu çerezlerin kullanımını
+					kabul etmiş olursunuz.
+				</p>
+			)}
+
 			<button className='cookiesButton' onClick={handleAccept}>
-				Accept
+				{i18n.language === 'en' ? 'Accept' : 'Kabul Et'}
 			</button>
 		</div>
 	);
