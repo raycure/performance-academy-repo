@@ -5,7 +5,6 @@ dotenv.config();
 const verifyJWT = async (req, res) => {
 	const authHeader = req.headers['authorization'];
 	if (!authHeader) {
-		console.log('header is missing');
 		return res.status(401).json({ message: 'Token is missing or invalid' });
 	}
 	const token = authHeader.split(' ')[1];
@@ -15,16 +14,15 @@ const verifyJWT = async (req, res) => {
 			if (err) {
 				return res.status(403).json({ message: 'Token verification failed' });
 			}
-		});
-		const decodedAccessToken = jwt.decode(token);
-		const userIdFromTheToken = decodedAccessToken.userId;
-		res.status(200).json({
-			message: 'successful verify jwt',
-			returnedValue: token,
-			accessToken: userIdFromTheToken,
+			const decodedAccessToken = jwt.decode(token);
+			const userIdFromTheToken = decodedAccessToken.userId;
+			res.status(200).json({
+				message: 'successful verify jwt',
+				returnedValue: token,
+				accessToken: userIdFromTheToken,
+			});
 		});
 	} catch (error) {
-		console.error('Unexpected error:', error);
 		return res.status(500).json({ message: 'Internal server error' });
 	}
 };

@@ -9,8 +9,13 @@ import {
 const { hash, compare } = pkg;
 
 export const userInfoFetchController = async (req, res) => {
+	// console.log('req.isAuthenticated in fetxh', req.isAuthenticated);
+	// console.log('req.userId in fetxh', req.userId);
+	// console.log('req.user in fetxh', req.user);
 	if (!req.isAuthenticated) {
-		res.status(401).json({ message: res.__('unauthorized') });
+		return res
+			.status(401)
+			.json({ message: res.__('unauthorized'), message2: 'fetchcontroller' });
 	}
 	const userId = req.userId;
 	const foundUser = await Users.findOne({
@@ -18,7 +23,7 @@ export const userInfoFetchController = async (req, res) => {
 	});
 
 	const accessToken = req.user;
-	res.status(200).json({
+	return res.status(200).json({
 		message: res.__('userInfoResponses.userInfoFetch'),
 		foundUser,
 		accessToken: accessToken,

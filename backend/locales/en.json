@@ -76,15 +76,6 @@
 	},
 	"serverError": "An unexpected error occurred on the server.",
 	"sessionExpired": "Your session has expired. Please clear your browser cache and sign in again.",
-	"refreshJWTResponse":{
-		"refreshTokenNotFound": "Your session credentials were not found. Please sign in to continue.",
-		"TokenInactive": "Your session has become inactive for security reasons. Please sign in again to continue.",
-		"invalidToken": "We detected an issue with your session credentials. For your security, please sign in again.",
-		"sessionExpired": "Your session has timed out due to inactivity. Please sign in to continue your work.",
-		"serverError": "We're experiencing a temporary issue. Please try again in a few moments or contact support if the problem persists.",
-		"success": "Your session has been successfully renewed.",
-		"userNotFound": "No user found for the provided token."
-	},
 	"verificationEmailResponses": {
 		"success": "Please check your inbox and click the verification link to confirm your email address.",
 		"error": "We're currently experiencing a temporary issue and were unable to send the verification email. Please try again shortly. If the problem persists, feel free to contact support for assistance."
@@ -114,6 +105,7 @@
 	"noSession": "Your session has ended. Please sign in to continue using our services.",
 	"userNotFound": "We couldn't find an account with these credentials. Please check your information and try again.",
 	"expiredSession": "Your session has expired for security reasons. Please sign out and sign back in to continue.",
-	"accountSuspended": "Your account has been temporarily suspended. Please contact our support team for assistance."
+	"accountSuspended": "Your account has been temporarily suspended. Please contact our support team for assistance.",
+	"invalidToken": "tampered jwt"
 	}
 }

@@ -26,6 +26,7 @@ const authMiddleware = async (req, res, next) => {
 		});
 
 		if (!foundActiveSession) {
+			console.log('no sess found');
 			return res
 				.status(404)
 				.json({ message: res.__('authResponses.expiredSession') });
@@ -81,9 +82,8 @@ const authMiddleware = async (req, res, next) => {
 			},
 		};
 
-		// console.log('gonna refresh');
-
 		await refreshJwt(req, refreshMockRes);
+
 		if (refreshMockRes.statusCode === 200) {
 			req.user = refreshMockRes.responseData.returnedValue;
 			res.header('x-refreshed-token', 'true');
@@ -98,7 +98,6 @@ const authMiddleware = async (req, res, next) => {
 		return next();
 	} catch (error) {
 		console.log('error', error);
-
 		return res.status(500).json({ message: res.__('serverError') });
 	}
 };

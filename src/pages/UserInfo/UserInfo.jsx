@@ -28,9 +28,43 @@ import axios from '../api/axios';
 
 function UserInfo() {
 	const dispatch = useDispatch();
+
 	useEffect(() => {
 		initUserInfo();
 	}, []);
+
+	const [sendEmailCooldown, setSendEmailCooldown] = useState(0);
+	const [isSendEmailDisabled, setIsSendEmailDisabled] = useState(false);
+	useEffect(() => {
+		let timer;
+		if (sendEmailCooldown > 0) {
+			timer = setInterval(() => {
+				setSendEmailCooldown((prev) => prev - 1);
+			}, 1000);
+		} else {
+			setIsSendEmailDisabled(false);
+		}
+		return () => clearInterval(timer);
+	}, [sendEmailCooldown]);
+
+	const formatTime = (seconds) => {
+		const mins = Math.floor(seconds / 60);
+		const secs = seconds % 60;
+		return `${mins}:${secs.toString().padStart(2, '0')}`;
+	};
+
+	async function sendVerificationMail() {
+		setIsSendEmailDisabled(true);
+		setSendEmailCooldown(120); // 2 minutes in seconds
+		const response = await dispatch(
+			AuthService({
+				method: 'POST',
+				endpoint: '/userInfo/sendVerificationMail',
+				data: { name, surname, email: mail },
+			})
+		);
+		return response;
+	}
 
 	const editingRef = useRef(null);
 	const initUserInfo = async () => {
@@ -60,34 +94,6 @@ function UserInfo() {
 			console.log('userinfo fetch error', error);
 		}
 	};
-
-	// for not allowing the user to send multiple emails
-	let isRequestPending = false;
-	async function sendVerificationMail() {
-		if (isRequestPending) {
-			return;
-		}
-
-		try {
-			isRequestPending = true;
-			const response = await dispatch(
-				AuthService({
-					method: 'POST',
-					endpoint: '/userInfo/sendVerificationMail',
-					data: { name, surname, email: mail },
-				})
-			);
-
-			setTimeout(() => {
-				isRequestPending = false;
-			}, 2000);
-
-			return response;
-		} catch (error) {
-			isRequestPending = false;
-			throw error;
-		}
-	}
 
 	async function handleSubmit(e) {
 		e.preventDefault();
@@ -533,7 +539,7 @@ function UserInfo() {
 						/>
 						<FontAwesomeIcon
 							icon={faTimes}
-							className={validMail || (!mail && isEditing) ? 'hide' : 'invalid'}
+							className={validMail || !mail || isEditing ? 'hide' : 'invalid'}
 						/>
 						<input
 							autoComplete='off'
@@ -549,10 +555,21 @@ function UserInfo() {
 							onClick={handleEditing}
 							className={` ${isEditing ? 'form-icon-active' : ''}`}
 						/>
+
 						{!verifiedMail && (
-							<button onClick={sendVerificationMail}>
-								click to send a verification mail
-							</button>
+							<div>
+								<button
+									onClick={sendVerificationMail}
+									disabled={isSendEmailDisabled}
+								>
+									{sendEmailCooldown > 0
+										? 'Resend in                 '
+										: 'Send verification email'}
+								</button>
+								{sendEmailCooldown > 0 && (
+									<span>{formatTime(sendEmailCooldown)}</span>
+								)}
+							</div>
 						)}
 					</div>
 				</div>

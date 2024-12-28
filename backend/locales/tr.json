@@ -76,15 +76,6 @@
 	},
 	"serverError": "Sunucuda beklenmeyen bir hata oluştu.",
 	"sessionExpired": "Oturumunuzun süresi doldu. Lütfen tarayıcı önbelleğini temizleyip tekrar giriş yapın.",
-	"refreshJWTResponse": {
-	  "refreshTokenNotFound": "Oturum bilgileriniz bulunamadı. Lütfen devam etmek için giriş yapın.",
-	  "TokenInactive": "Oturumunuz güvenlik nedeniyle devre dışı bırakıldı. Lütfen devam etmek için tekrar giriş yapın.",
-	  "invalidToken": "Oturum bilgilerinizle ilgili bir sorun tespit edildi. Güvenliğiniz için lütfen tekrar giriş yapın.",
-	  "sessionExpired": "Oturumunuz hareketsizlik nedeniyle sona erdi. Çalışmanıza devam etmek için lütfen giriş yapın.",
-	  "serverError": "Geçici bir sorun yaşıyoruz. Lütfen birkaç dakika içinde tekrar deneyin veya sorun devam ederse destek ekibiyle iletişime geçin.",
-	  "success": "Oturumunuz başarıyla yenilendi.",
-	  "userNotFound": "Sağlanan kod için kullanıcı bulunamadı."
-	},
 	"verificationEmailResponses": {
 	  "success": "Lütfen gelen kutunuzu kontrol edin ve e-posta adresinizi onaylamak için doğrulama bağlantısına tıklayın.",
 	  "error": "Şu anda geçici bir sorun yaşıyoruz ve doğrulama e-postasını gönderemedik. Lütfen kısa bir süre sonra tekrar deneyin. Sorun devam ederse, yardım için destek ekibiyle iletişime geçebilirsiniz."
@@ -114,6 +105,7 @@
 	  "noSession": "Oturumunuz sona erdi. Lütfen hizmetlerimizi kullanmaya devam etmek için giriş yapın.",
 	  "userNotFound": "Bu kimlik bilgileriyle bir hesap bulamadık. Lütfen bilgilerinizi kontrol edip tekrar deneyin.",
 	  "expiredSession": "Oturumunuz güvenlik nedeniyle sona erdi. Lütfen devam etmek için çıkış yapıp tekrar giriş yapın.",
-	  "accountSuspended": "Hesabınız geçici olarak askıya alındı. Lütfen yardım için destek ekibimizle iletişime geçin."
+	  "accountSuspended": "Hesabınız geçici olarak askıya alındı. Lütfen yardım için destek ekibimizle iletişime geçin.",
+	  "invalidToken": "tampered jwt"
 	}
   }

@@ -29,7 +29,7 @@ const register = async (req, res) => {
 				});
 			}
 
-			if (existingUser.nationalID === +nationalID) {
+			if (existingUser.nationalID === nationalID) {
 				return res.status(409).json({
 					success: false,
 					result: null,
@@ -81,7 +81,8 @@ const register = async (req, res) => {
 				email: email,
 			},
 			process.env.ACCESS_TOKEN_SECRET,
-			{ expiresIn: '15m' }
+			{ expiresIn: '10s' }
+			// { expiresIn: '15m' }
 		);
 		const refreshToken = jwt.sign(
 			{
@@ -118,7 +119,6 @@ const register = async (req, res) => {
 			notify: true,
 		});
 	} catch (error) {
-		console.log('error in the last catc', error);
 		res.status(500).json({ message: res.__('serverError') });
 	}
 };
