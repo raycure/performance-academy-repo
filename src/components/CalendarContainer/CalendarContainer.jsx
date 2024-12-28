@@ -83,7 +83,11 @@ function CalendarContainer() {
 		return eventProgram && diffDays > 1 ? (
 			<img
 				className='center-item'
-				style={{ maxWidth: '6rem', maxHeight: '100%', width: '100%' }}
+				style={{
+					maxWidth: '100%',
+					maxHeight: '100%',
+					width: 'auto',
+				}}
 				src={eventProgram.logo}
 				alt={eventProgram.title}
 			/>
