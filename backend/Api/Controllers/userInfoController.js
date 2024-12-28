@@ -144,6 +144,7 @@ export const userInfoPutController = async (req, res) => {
 			message: res.__('userInfoResponses.noChanges'),
 			updatedFields: {},
 			notify: true,
+			accessToken: req.accessToken,
 		});
 	} catch (error) {
 		console.log('error', error);

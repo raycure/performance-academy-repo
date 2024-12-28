@@ -35,6 +35,7 @@ async function sendVerificationEmail(req, res) {
 	}
 	res.status(200).json({
 		notify: true,
+		accessToken: req.accessToken,
 		message: res.__('verificationEmailResponses.success'),
 	});
 }
