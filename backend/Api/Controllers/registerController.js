@@ -81,8 +81,7 @@ const register = async (req, res) => {
 				email: email,
 			},
 			process.env.ACCESS_TOKEN_SECRET,
-			{ expiresIn: '10s' }
-			// { expiresIn: '15m' }
+			{ expiresIn: '15m' }
 		);
 		const refreshToken = jwt.sign(
 			{

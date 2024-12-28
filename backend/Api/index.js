@@ -22,7 +22,7 @@ import i18n from '../config/i18n.js';
 
 dotenv.config();
 const port = 3001;
-// very important note if a controller requires authmiddleware it has to return req.user as accesstoken
+// very important note if a controller requires authmiddleware it has to return accesstoken by accessing req.accessToken
 const app = express();
 app.use(credentials);
 app.set('trust proxy', 1);

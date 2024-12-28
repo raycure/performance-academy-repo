@@ -27,7 +27,9 @@ export const AuthService =
 					response.payload?.headers['x-refreshed-token'];
 
 				if (isAccessTokenRefresh) {
+					console.log('token refreshed');
 					let newAccessToken = response.payload.data.accessToken;
+					console.log('newAccessToken', newAccessToken);
 					localStorage.setItem('accessToken', newAccessToken);
 				}
 				if (fetchData.rejected.match(response)) {
@@ -39,7 +41,6 @@ export const AuthService =
 				return response;
 			} catch (error) {
 				console.log('error in service', error);
-
 				const isIpBlocked =
 					error.payload?.headers && error.payload?.headers['ip-blocked'];
 				if (isIpBlocked) {

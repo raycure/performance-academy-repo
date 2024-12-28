@@ -3,27 +3,14 @@ import * as dotenv from 'dotenv';
 dotenv.config();
 
 const verifyJWT = async (req, res) => {
-	const authHeader = req.headers['authorization'];
-	if (!authHeader) {
-		return res.status(401).json({ message: 'Token is missing or invalid' });
-	}
-	const token = authHeader.split(' ')[1];
-
+	const accessToken = req.accessToken;
 	try {
-		jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, async (err) => {
-			if (err) {
-				return res.status(403).json({ message: 'Token verification failed' });
-			}
-			const decodedAccessToken = jwt.decode(token);
-			const userIdFromTheToken = decodedAccessToken.userId;
-			res.status(200).json({
-				message: 'successful verify jwt',
-				returnedValue: token,
-				accessToken: userIdFromTheToken,
-			});
+		jwt.verify(accessToken, process.env.ACCESS_TOKEN_SECRET);
+		res.status(200).json({
+			message: 'successful verify jwt',
 		});
 	} catch (error) {
-		return res.status(500).json({ message: 'Internal server error' });
+		return res.status(403).json({ message: 'Token verification failed' });
 	}
 };
 

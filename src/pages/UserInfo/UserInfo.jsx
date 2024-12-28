@@ -119,7 +119,7 @@ function UserInfo() {
 					data: { updateData, isContactSent },
 				})
 			);
-			await initUserInfo();
+			// await initUserInfo();
 		} catch (error) {}
 	}
 
@@ -316,11 +316,11 @@ function UserInfo() {
 		const notificationEvent = new Event('notificationEvent');
 		window.dispatchEvent(notificationEvent);
 	};
-	useEffect(() => {
-		if (!isEditing) {
-			initUserInfo();
-		}
-	}, [isEditing]);
+	// useEffect(() => {
+	// 	if (!isEditing) {
+	// 		initUserInfo();
+	// 	}
+	// }, [isEditing]);
 
 	return (
 		<section className='user-info-page'>

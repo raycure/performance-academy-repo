@@ -27,7 +27,7 @@ const payment = async (req, res) => {
 		res.json({
 			url: url,
 			message: 'Payment session created',
-			accessToken: req.user,
+			accessToken: req.accessToken,
 		});
 	} catch (error) {
 		console.error('Payment creation error:', error);

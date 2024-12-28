@@ -14,32 +14,24 @@ const refreshJwt = async (req, res) => {
 		_id: new ObjectId(userIdFromToken),
 	});
 	try {
-		jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, async (err) => {
-			if (err) {
-				await Sessions.findOneAndDelete(userIdFromToken);
-				res.status(403).json({ message: 'expiredSession' });
-			}
-			const accessToken = jwt.sign(
-				{
-					userId: userIdFromToken,
-					email: foundUser.email,
-					nationalID: foundUser.nationalID,
-				},
+		jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET);
+		const newAccessToken = jwt.sign(
+			{
+				userId: userIdFromToken,
+				email: foundUser.email,
+				nationalID: foundUser.nationalID,
+			},
 
-				process.env.ACCESS_TOKEN_SECRET,
-				{ expiresIn: '3s' }
-			);
-
-			const decodedAccessToken = jwt.decode(refreshToken);
-			const userIdFromTheToken = decodedAccessToken.userId;
-			res.status(200).json({
-				returnedValue: accessToken,
-				accessToken: userIdFromTheToken,
-			});
+			process.env.ACCESS_TOKEN_SECRET,
+			{ expiresIn: '15m' }
+		);
+		res.status(200).json({
+			newAccessToken,
 		});
 	} catch (error) {
-		return res.status(403).json({
-			returnedValue: null,
+		await Sessions.findOneAndDelete(userIdFromToken);
+		res.status(403).json({
+			message: 'authResponses.invalidToken',
 		});
 	}
 };

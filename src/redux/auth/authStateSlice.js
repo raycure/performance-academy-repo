@@ -19,14 +19,12 @@ function setupAxiosDefaults() {
 	if (isBotAttempt) {
 		return null;
 	}
-
 	const accesstoken = localStorage.getItem('accessToken');
-
 	if (accesstoken) {
-		// console.log('token does exist');
+		console.log('token does exist');
 		axios.defaults.headers.common['Authorization'] = `Bearer ${accesstoken}`;
 	} else {
-		// console.log('token doesnt exist');
+		console.log('token doesnt exist');
 		delete axios.defaults.headers.common['Authorization'];
 	}
 

@@ -102,10 +102,10 @@
 		"userNotFound": "No user found for the provided token."
 	},
 	"authResponses": {
-	"noSession": "Your session has ended. Please sign in to continue using our services.",
-	"userNotFound": "We couldn't find an account with these credentials. Please check your information and try again.",
-	"expiredSession": "Your session has expired for security reasons. Please sign out and sign back in to continue.",
-	"accountSuspended": "Your account has been temporarily suspended. Please contact our support team for assistance.",
-	"invalidToken": "tampered jwt"
+		"noSession": "Your session has ended. Please sign in to continue using our services.",
+		"userNotFound": "We couldn't find an account with these credentials. Please check your information and try again.",
+		"expiredSession": "Your session has expired for security reasons. Please sign out and sign back in to continue.",
+		"accountSuspended": "Your account has been temporarily suspended. Please contact our support team for assistance.",
+		"invalidToken": "tampered jwt"
 	}
 }

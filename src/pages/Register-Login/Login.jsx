@@ -80,38 +80,34 @@ function Login() {
 	};
 
 	const handleSubmit = async () => {
-		try {
-			let loginData;
-			if (/^\d+$/.test(mailorNationalID)) {
-				loginData = {
-					nationalID: mailorNationalID,
-					password: pwd,
-				};
-			} else {
-				loginData = {
-					email: mailorNationalID,
-					password: pwd,
-				};
-			}
-			setLocalLoading(true);
-			const response = await dispatch(
-				AuthService({
-					data: loginData,
-					method: 'POST',
-					endpoint: '/giriş-yap',
-				})
-			);
-			const accessToken = response.payload.data.accessToken;
-			localStorage.setItem('accessToken', accessToken);
-
-			setMailorNationalID('');
-			setPwd('');
-			setTimeout(() => {
-				navigate('/');
-			}, 1000);
-		} catch (err) {
-			console.log('an unexpected error happened', err);
+		let loginData;
+		if (/^\d+$/.test(mailorNationalID)) {
+			loginData = {
+				nationalID: mailorNationalID,
+				password: pwd,
+			};
+		} else {
+			loginData = {
+				email: mailorNationalID,
+				password: pwd,
+			};
 		}
+		setLocalLoading(true);
+		const response = await dispatch(
+			AuthService({
+				data: loginData,
+				method: 'POST',
+				endpoint: '/login',
+			})
+		);
+		const accessToken = response.payload.data.accessToken;
+		localStorage.setItem('accessToken', accessToken);
+
+		setMailorNationalID('');
+		setPwd('');
+		setTimeout(() => {
+			navigate('/');
+		}, 1000);
 	};
 	//11111111111  aaA!1aaa
 	return (

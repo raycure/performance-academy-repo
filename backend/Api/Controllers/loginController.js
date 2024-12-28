@@ -57,9 +57,8 @@ const login = async (req, res) => {
 				email: user.email,
 				nationalID: user.nationalID,
 			},
-			process.env.ACCESS_TOKEN_SECRET
-			// { expiresIn: '3s' }
-			// { expiresIn: '15m' }
+			process.env.ACCESS_TOKEN_SECRET,
+			{ expiresIn: '15m' }
 		);
 
 		const refreshToken = jwt.sign(
@@ -70,7 +69,6 @@ const login = async (req, res) => {
 			},
 			process.env.REFRESH_TOKEN_SECRET,
 			{ expiresIn: '365d' }
-			// { expiresIn: '10s' }
 		);
 
 		res.cookie('jwt', refreshToken, {

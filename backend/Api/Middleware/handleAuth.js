@@ -26,7 +26,6 @@ const authMiddleware = async (req, res, next) => {
 		});
 
 		if (!foundActiveSession) {
-			console.log('no sess found');
 			return res
 				.status(404)
 				.json({ message: res.__('authResponses.expiredSession') });
@@ -60,13 +59,19 @@ const authMiddleware = async (req, res, next) => {
 		};
 
 		// Call verifyJWT with req and mock response
-		await verifyJWT(req, verifyJwtMockResponse);
+		const authHeader = req.headers['authorization'];
+		if (!authHeader) {
+			return res.status(401).json({ message: 'Token is missing or invalid' });
+		}
+		const accessToken = authHeader.split(' ')[1];
+		req.accessToken = accessToken;
 
+		console.log('gonna verify');
+		await verifyJWT(req, verifyJwtMockResponse);
 		// Check the response from verifyJWT
 		if (verifyJwtMockResponse.statusCode === 200) {
-			req.user = verifyJwtMockResponse.responseData.returnedValue;
+			req.userId = userIdFromToken;
 			req.isAuthenticated = true; // Mark user as authenticated
-			req.userId = verifyJwtMockResponse.responseData.accessToken;
 			return next();
 		}
 
@@ -82,22 +87,28 @@ const authMiddleware = async (req, res, next) => {
 			},
 		};
 
+		console.log('gonna refresh');
+
 		await refreshJwt(req, refreshMockRes);
 
 		if (refreshMockRes.statusCode === 200) {
-			req.user = refreshMockRes.responseData.returnedValue;
 			res.header('x-refreshed-token', 'true');
 			req.isAuthenticated = true;
-			req.userId = refreshMockRes.responseData.accessToken;
+			req.accessToken = refreshMockRes.responseData.newAccessToken;
+			req.userId = userIdFromToken;
 			return next();
 		}
 
+		if (refreshMockRes.statusCode === 403) {
+			const errorMsg = refreshMockRes.responseData.message;
+			return res.status(403).json({ message: res.__(`${errorMsg}`) });
+		}
+
 		req.isAuthenticated = false;
-		req.user = null;
+		req.accessToken = null;
 		req.userId = null;
 		return next();
 	} catch (error) {
-		console.log('error', error);
 		return res.status(500).json({ message: res.__('serverError') });
 	}
 };

@@ -86,7 +86,7 @@ const protectedContactFormController = async (req, res) => {
 		);
 		res.status(201).json({
 			message: res.__('contactResponses.success'),
-			accessToken: req.user,
+			accessToken: req.accessToken,
 			questionId: newQuestion._id,
 			notify: true,
 			duration: 5000,
