@@ -45,9 +45,9 @@ function EventList({ activeProgram, infoActive, onlineCheck }) {
 
 	const eventFallback = LesMillsEvents.filter((event) => {
 		if (activeProgram === 'all') {
-			return event.fullStartDate >= today;
+			return event?.fullStartDate >= today;
 		}
-		return event.program === activeProgram && event.fullStartDate >= today;
+		return event?.program === activeProgram && event?.fullStartDate >= today;
 	}).slice(0, 1)[0];
 	const [acknowledgementChecked, setAcknowledgementChecked] = useState(false);
 	const checkHandler = () => {
@@ -74,26 +74,26 @@ function EventList({ activeProgram, infoActive, onlineCheck }) {
 			activeProgram === undefined
 		) {
 			if (onlineCheck === true) {
-				return event.fullStartDate >= today && event.online === true;
+				return event?.fullStartDate >= today && event.online === true;
 			} else if (onlineCheck === false) {
-				return event.fullStartDate >= today && event.online === false;
+				return event?.fullStartDate >= today && event.online === false;
 			}
-			return event.fullStartDate >= today;
+			return event?.fullStartDate >= today;
 		}
 		if (onlineCheck === true) {
 			return (
-				event.program === activeProgram &&
-				event.fullStartDate >= today &&
+				event?.program === activeProgram &&
+				event?.fullStartDate >= today &&
 				event.online === true
 			);
 		} else if (onlineCheck === false) {
 			return (
-				event.program === activeProgram &&
-				event.fullStartDate >= today &&
+				event?.program === activeProgram &&
+				event?.fullStartDate >= today &&
 				event.online === false
 			);
 		}
-		return event.program === activeProgram && event.fullStartDate >= today;
+		return event?.program === activeProgram && event?.fullStartDate >= today;
 	});
 
 	const [paginationPageNumber, setPaginationPageNumber] = useState(1);
@@ -166,12 +166,19 @@ function EventList({ activeProgram, infoActive, onlineCheck }) {
 		}
 	}, [selectedEvent]);
 	const daysLeft = Math.floor(
-		(selectedEvent.fullStartDate.getTime() - today.getTime()) /
+		(selectedEvent?.fullStartDate.getTime() - today.getTime()) /
 			(1000 * 3600 * 24)
 	);
+
+	programs.map((itme) => {
+		console.log('items', itme);
+	});
+
 	const programImg = programs.filter((program) => {
-		return program.id === selectedEvent.program;
+		return program.id === selectedEvent?.program;
 	})[0].additionalPictures[2].url;
+	console.log(programImg, 'programImg');
+
 	if (paginatedEvents === null || paginatedEvents === undefined) {
 		return (
 			<p style={{ textAlign: 'center', padding: '4rem' }}>
@@ -196,7 +203,7 @@ function EventList({ activeProgram, infoActive, onlineCheck }) {
 				<div>
 					{paginatedEvents.map((event, index) => {
 						const programTitle = programs.filter((program) => {
-							return program.id === event.program;
+							return program.id === event?.program;
 						})[0].title;
 						return (
 							<div className='enroll-event-item' key={index}>
@@ -208,9 +215,9 @@ function EventList({ activeProgram, infoActive, onlineCheck }) {
 								</p>
 
 								<p style={{ alignContent: 'center' }}>
-									{event.fullStartDate.getDate() +
+									{event?.fullStartDate.getDate() +
 										' ' +
-										event.fullStartDate.toLocaleString(i18n.language, {
+										event?.fullStartDate.toLocaleString(i18n.language, {
 											month: 'short',
 										}) +
 										' - ' +
@@ -242,8 +249,8 @@ function EventList({ activeProgram, infoActive, onlineCheck }) {
 										}}
 									>
 										<Link
-											to={'/program#' + event.program}
-											state={{ program: event.program }}
+											to={'/program#' + event?.program}
+											state={{ program: event?.program }}
 											style={{
 												alignItems: 'center',
 												height: 'fit-content',
@@ -311,16 +318,16 @@ function EventList({ activeProgram, infoActive, onlineCheck }) {
 					{i18n.language === 'en' ? 'Event Details' : 'Etkinlik Bilgileri'}
 				</p>
 				<p style={{ textAlign: 'center' }} className='fs-700'>
-					{selectedEvent.program}
+					{selectedEvent?.program}
 				</p>
 				<hr style={{ borderWidth: '2px', marginBottom: '1rem' }} />
 				<div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr' }}>
 					<p className='card-item'>
 						<FaCalendarDays />
 						{' ' +
-							selectedEvent.fullStartDate.getDate() +
+							selectedEvent?.fullStartDate.getDate() +
 							' ' +
-							selectedEvent.fullStartDate.toLocaleString(i18n.language, {
+							selectedEvent?.fullStartDate.toLocaleString(i18n.language, {
 								month: 'short',
 							}) +
 							' - ' +
@@ -407,7 +414,6 @@ function EventList({ activeProgram, infoActive, onlineCheck }) {
 					</Button>
 				</div>
 			</form>
-
 			<img
 				style={{
 					objectFit: 'cover',

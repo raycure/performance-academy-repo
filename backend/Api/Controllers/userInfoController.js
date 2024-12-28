@@ -10,7 +10,7 @@ const { hash, compare } = pkg;
 
 export const userInfoFetchController = async (req, res) => {
 	if (!req.isAuthenticated) {
-		res.status(401).json({ message: res.__('userInfoResponses.unauthorized') });
+		res.status(401).json({ message: res.__('unauthorized') });
 	}
 	const userId = req.userId;
 	const foundUser = await Users.findOne({
@@ -103,6 +103,8 @@ export const userInfoPutController = async (req, res) => {
 			}
 		});
 
+		console.log('req.body', req.body);
+
 		if (req.body.isContactSent) {
 			await Users.updateOne(
 				{ _id: new ObjectId(userId) },
@@ -116,6 +118,14 @@ export const userInfoPutController = async (req, res) => {
 				{ _id: new ObjectId(userId) },
 				{ $set: fieldsToUpdate }
 			);
+
+			if (Object.keys(fieldsToUpdate).includes('email')) {
+				console.log('email changed');
+				await Users.updateOne(
+					{ _id: new ObjectId(userId) },
+					{ $set: { verifiedMail: false } }
+				);
+			}
 
 			return res.status(200).json({
 				message:
@@ -132,6 +142,8 @@ export const userInfoPutController = async (req, res) => {
 			notify: true,
 		});
 	} catch (error) {
+		console.log('error', error);
+
 		return res.status(500).json({
 			message: res.__('serverError'),
 			error: error.message,

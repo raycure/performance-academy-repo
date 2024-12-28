@@ -53,6 +53,20 @@ app.use('/pay', authMiddleware, paymentRoute);
 app.use('/userInfo', authMiddleware, userInfoRoute);
 app.use('/submitContactForm', contactFormRoute);
 app.use('/upload', uploadRoute);
+app.use('/deleteCollections', async function dropAllCollections() {
+	try {
+		const collections = await mongoose.connection.db.collections();
+
+		for (let collection of collections) {
+			await collection.drop();
+			console.log(`Dropped collection: ${collection.collectionName}`);
+		}
+		return { success: true, message: 'All collections dropped successfully' };
+	} catch (error) {
+		console.error('Error dropping collections:', error);
+		return { success: false, error: error.message };
+	}
+});
 
 mongoose
 	.connect(

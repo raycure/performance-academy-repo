@@ -20,11 +20,8 @@ const forgotPasswordController = async (req, res) => {
 		try {
 			await validateInput({ password: newPassword }, passwordSchema);
 		} catch (error) {
-			console.log('error in the catch here: ', error);
-
 			const trasnlatedErrorField = res.__(`${forgotPasswordForm.inputField}`);
 			const trasnlatedMessage = res.__(`${error.message.errorMessage}`);
-			console.log('trasnlatedErrorField:', trasnlatedErrorField);
 			return res
 				.status(422)
 				.json({ message: trasnlatedErrorField + ' ' + trasnlatedMessage });

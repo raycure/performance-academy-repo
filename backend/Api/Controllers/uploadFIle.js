@@ -64,7 +64,7 @@ const uploadFile = async (req, res) => {
 			return res.status(400).json({ message: 'No file uploaded' });
 		}
 
-		//todo while making the request make sure the req contains these infos
+		//todo while making the request make sure the req contains these info
 		const newFile = new File({
 			filename: req.file.filename,
 			originalName: req.file.originalname,

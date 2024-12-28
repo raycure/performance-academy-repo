@@ -22,7 +22,7 @@ function Login() {
 	let isLoading = useSelector(selectIsLoading);
 	const dispatch = useDispatch();
 
-	const [mailorNationalID, setMailorNationalID] = useState('11111111111');
+	const [mailorNationalID, setMailorNationalID] = useState('');
 	const [pwd, setPwd] = useState('aaA!1aaa');
 	const [localLoading, setLocalLoading] = useState(false);
 	const [showForgotPassordForm, setShowForgotPassordForm] = useState(false);
@@ -53,13 +53,10 @@ function Login() {
 	const handleForgotPasswordForm = async () => {
 		try {
 			let forgotPasswordData;
-			if (
-				typeof mailorNationalID === 'string' ||
-				mailorNationalID.includes('@')
-			) {
-				forgotPasswordData = { email: mailorNationalID };
-			} else {
+			if (/^\d+$/.test(mailorNationalID)) {
 				forgotPasswordData = { nationalID: mailorNationalID };
+			} else {
+				forgotPasswordData = { email: mailorNationalID };
 			}
 			const response = await dispatch(
 				AuthService({
@@ -85,14 +82,14 @@ function Login() {
 	const handleSubmit = async () => {
 		try {
 			let loginData;
-			if (mailorNationalID.includes('@')) {
+			if (/^\d+$/.test(mailorNationalID)) {
 				loginData = {
-					email: mailorNationalID,
+					nationalID: mailorNationalID,
 					password: pwd,
 				};
 			} else {
 				loginData = {
-					nationalID: mailorNationalID,
+					email: mailorNationalID,
 					password: pwd,
 				};
 			}

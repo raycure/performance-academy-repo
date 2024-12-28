@@ -43,28 +43,28 @@ const UserSchema = mongoose.Schema(
 	{
 		name: {
 			type: String,
-			required: [true, 'Please enter your name'],
+			required: true,
 		},
 		surname: {
 			type: String,
-			required: [true, 'Please enter your surname'],
+			required: true,
 		},
 		nationalID: {
-			type: Number,
-			required: [true, 'Please enter TC id'],
-			// unique: true,
+			type: String,
+			required: true,
+			unique: true,
 		},
 		birthDate: {
 			type: Date,
 		},
 		email: {
 			type: String,
-			required: [true, 'Please enter your email'],
-			// unique: true,
+			required: true,
+			unique: true,
 		},
 		password: {
 			type: String,
-			required: [true, 'Please enter a password'],
+			required: true,
 		},
 		verifiedMail: {
 			type: Boolean,
@@ -73,7 +73,7 @@ const UserSchema = mongoose.Schema(
 		verifiedContract: {
 			type: String,
 			enum: ['pending', 'passed', 'failed'],
-			default: 'failed',
+			default: null,
 		},
 		blocked: {
 			type: Boolean,
@@ -86,16 +86,10 @@ const UserSchema = mongoose.Schema(
 	}
 );
 
-// todo add a userfinder function
-
 UserSchema.methods.findPurchase = function (eventId) {
 	const purchase = this.purchases.find(
 		(purchase) => purchase.eventId === eventId
 	);
-
-	// if (!purchase) {
-	// 	throw new Error('Purchase not found');
-	// }
 	return purchase;
 };
 

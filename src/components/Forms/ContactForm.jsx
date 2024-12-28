@@ -158,11 +158,11 @@ function ContactForm() {
 				</div>
 
 				<Button
-					// disabled={
-					// 	isLoggedIn === true
-					// 		? !question || !topic
-					// 		: !question || !name || !surname || !email || !topic
-					// }
+					disabled={
+						isLoggedIn === true
+							? !question || !topic
+							: !question || !name || !surname || !email || !topic
+					}
 					type='submit'
 				>
 					{i18n.language === 'en' ? 'Send' : 'Gönder'}

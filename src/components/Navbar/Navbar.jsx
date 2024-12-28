@@ -168,21 +168,6 @@ function Navbar() {
 	return (
 		<div className='navigation-outer-container user-select-none' id='navbar'>
 			<nav className='nav-container nav-inner-container'>
-				<button onClick={handleLogout}>logout</button>
-				<button
-					onClick={() => {
-						navigate('/login');
-					}}
-				>
-					login
-				</button>
-				<button
-					onClick={() => {
-						navigate('/programlarım');
-					}}
-				>
-					programlarım
-				</button>
 				<Link to='/' aria-label='logo' style={{ display: 'contents' }}>
 					<img alt='LessMills logo' className='pfa-logo' src={logo}></img>
 				</Link>

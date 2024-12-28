@@ -104,6 +104,14 @@ const forgotPassword = () => {
 			<div className='authentication-form-container box-shadow'>
 				<form className='authentication-form'>
 					<div className='relative-position centerLineAnimation'>
+						<FontAwesomeIcon
+							icon={faCheck}
+							className={validPwd ? 'valid' : 'hide'}
+						/>
+						<FontAwesomeIcon
+							icon={faTimes}
+							className={validPwd || !pwd ? 'hide' : 'invalid'}
+						/>
 						<input
 							type='password'
 							id='password'
@@ -115,16 +123,6 @@ const forgotPassword = () => {
 							aria-invalid={validPwd ? 'false' : 'true'}
 							aria-describedby='pwdnote'
 						/>
-						<div htmlFor='password' className='form-icon'>
-							<FontAwesomeIcon
-								icon={faCheck}
-								className={validPwd ? 'valid' : 'hide'}
-							/>
-							<FontAwesomeIcon
-								icon={faTimes}
-								className={validPwd || !pwd ? 'hide' : 'invalid'}
-							/>
-						</div>
 						<motion.p
 							initial='hidden'
 							variants={descending}
@@ -137,6 +135,18 @@ const forgotPassword = () => {
 						</motion.p>
 					</div>
 					<div className='relative-position centerLineAnimation'>
+						<FontAwesomeIcon
+							icon={faCheck}
+							className={validMatch && matchPwd && validPwd ? 'valid' : 'hide'}
+						/>
+						<FontAwesomeIcon
+							icon={faTimes}
+							className={
+								(!validMatch || !pwd || !validPwd) && matchPwd
+									? 'invalid'
+									: 'hide'
+							}
+						/>
 						<input
 							type='password'
 							id='confirm_pwd'
@@ -148,22 +158,6 @@ const forgotPassword = () => {
 							aria-invalid={validMatch ? 'false' : 'true'}
 							aria-describedby='confirmnote'
 						/>
-						<div htmlFor='confirm_pwd' className='form-icon'>
-							<FontAwesomeIcon
-								icon={faCheck}
-								className={
-									validMatch && matchPwd && validPwd ? 'valid' : 'hide'
-								}
-							/>
-							<FontAwesomeIcon
-								icon={faTimes}
-								className={
-									(!validMatch || !pwd || !validPwd) && matchPwd
-										? 'invalid'
-										: 'hide'
-								}
-							/>
-						</div>
 						<motion.p
 							initial='hidden'
 							variants={descending}

@@ -49,7 +49,7 @@ const refreshJwt = async (req, res) => {
 				},
 
 				process.env.ACCESS_TOKEN_SECRET,
-				{ expiresIn: '10m' } //todo change it
+				{ expiresIn: '15m' }
 			);
 		});
 		const decodedAccessToken = jwt.decode(refreshToken);

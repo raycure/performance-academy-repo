@@ -59,7 +59,8 @@
 	width: calc(100% - 1.4rem);
 	height: calc(100% - 1.4rem);
 	position: absolute;
-	background-color: red;
+	/* background-color: red; */
+	background-color: #ee3f3e;
 	margin: 0.7rem;
 	box-sizing: border-box;
 	border-radius: 8px;
@@ -70,8 +71,7 @@
 	display: flex;
 	align-items: center;
 	border-radius: 8px;
-	background-color: cadetblue;
-	/* todo give the proper coloring  */
+	background-color: #1c1c1c;
 	margin: 0.7rem;
 }
 

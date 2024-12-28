@@ -8,7 +8,7 @@ const authMiddleware = async (req, res, next) => {
 	try {
 		const refreshToken = req.cookies.jwt;
 		if (!refreshToken) {
-			return res.status(401).json({ message: 'Login Required' });
+			return res.status(401).json({ message: res.__('unauthorized') });
 		}
 
 		let decodedToken;
@@ -16,7 +16,7 @@ const authMiddleware = async (req, res, next) => {
 			decodedToken = jwt.decode(refreshToken);
 		} catch (decodeError) {
 			return res.status(403).json({
-				message: 'Invalid token. Please log out and log back in.',
+				message: res.__('authResponses.noSession'),
 			});
 		}
 		const userIdFromToken = decodedToken.userId;
@@ -26,7 +26,9 @@ const authMiddleware = async (req, res, next) => {
 		});
 
 		if (!foundActiveSession) {
-			return res.status(404).json({ message: 'no active session' });
+			return res
+				.status(404)
+				.json({ message: res.__('authResponses.expiredSession') });
 		}
 		const foundUser = await Users.findOne({
 			_id: new ObjectId(userIdFromToken),
@@ -34,14 +36,14 @@ const authMiddleware = async (req, res, next) => {
 
 		if (!foundUser) {
 			return res.status(404).json({
-				message: 'no user found',
+				message: res.__('authResponses.userNotFound'),
 			});
 		}
 
 		if (foundUser.blocked) {
 			return res
 				.status(403)
-				.json({ message: 'your account has been suspended' });
+				.json({ message: res.__('authResponses.accountSuspended') });
 		}
 
 		// Create a mock response object to capture verifyJWT's response
@@ -79,7 +81,7 @@ const authMiddleware = async (req, res, next) => {
 			},
 		};
 
-		console.log('gonna refresh');
+		// console.log('gonna refresh');
 
 		await refreshJwt(req, refreshMockRes);
 		if (refreshMockRes.statusCode === 200) {
@@ -97,7 +99,7 @@ const authMiddleware = async (req, res, next) => {
 	} catch (error) {
 		console.log('error', error);
 
-		return res.status(500).json({ message: 'Internal server error' });
+		return res.status(500).json({ message: res.__('serverError') });
 	}
 };
 

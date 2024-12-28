@@ -7,7 +7,10 @@ const nameOrSurnameRules = Joi.string()
 	.message('validationErrors.name.minLength')
 	.max(23)
 	.message('validationErrors.name.maxLength')
-	.required();
+	.required()
+	.messages({
+		'string.empty': 'validationErrors.name.missing',
+	});
 
 const passwordRules = Joi.string()
 	// Require at least one lowercase and one uppercase letter
@@ -31,16 +34,18 @@ const passwordRules = Joi.string()
 	.message('validationErrors.password.minLength')
 	.max(24)
 	.message('validationErrors.password.maxLength')
-	.required();
-// .messages({
-// 	'any.required': 'required password test',
-// 	// 'string.empty': 'required password test',
-// });
+	.required()
+	.messages({
+		'string.empty': 'validationErrors.password.name',
+	});
 
 const emailRules = Joi.string()
 	.email()
 	.message('validationErrors.email.invalid')
-	.required();
+	.required()
+	.messages({
+		'string.empty': 'validationErrors.name.missing',
+	});
 
 const nationalIDRules = Joi.string()
 	.pattern(/^[0-9]+$/)
@@ -48,6 +53,7 @@ const nationalIDRules = Joi.string()
 	.messages({
 		'string.pattern.base': 'validationErrors.nationalId.numbersOnly',
 		'string.length': 'validationErrors.nationalId.length',
+		'string.empty': 'validationErrors.nationalId.missing',
 	});
 
 const topicRules = Joi.string()
@@ -55,14 +61,21 @@ const topicRules = Joi.string()
 	.message('validationErrors.topic.minLength')
 	.max(250)
 	.message('validationErrors.topic.maxLength')
-	.required();
+	.required()
+	.messages({
+		'string.empty': 'validationErrors.topic.missing',
+	});
 
 const questionRules = Joi.string()
 	.min(3)
 	.message('validationErrors.question.minLength')
 	.max(75)
 	.message('validationErrors.question.maxLength')
-	.required();
+	.required()
+	.messages({
+		'string.empty': 'validationErrors.question.missing',
+	});
+// all of the schemas reuire the same key when theyre being used exp newpassword, passwordSchema wouldn work but password: newpassword, passwordSchema would
 
 const loginSchema = Joi.object({
 	email: Joi.string().email().optional(),
@@ -74,9 +87,18 @@ const loginSchema = Joi.object({
 		'object.xor': 'loginResponses.credentialType',
 		'object.missing': 'loginResponses.emailOrIdMissing',
 		'string.email': 'validationErrors.email.invalidForLogin',
+		'string.empty': 'forgotPasswordForm.inputField',
 	});
 
-// all of the schemas reuire the same key when theyre being used exp newpassword, passwordSchema wouldn work but password: newpassword, passwordSchema would
+const requestNewMailSchema = Joi.object({
+	email: emailRules.optional(),
+	nationalID: nationalIDRules.optional(),
+})
+	.xor('email', 'nationalID')
+	.messages({
+		'object.missing': 'loginResponses.emailOrIdMissing',
+		'string.email': 'validationErrors.email.invalidForLogin',
+	});
 
 const registerSchemas = {
 	email: emailRules,
@@ -115,4 +137,5 @@ export {
 	publicContactSchema,
 	loginSchema,
 	privateContactSchema,
+	requestNewMailSchema,
 };

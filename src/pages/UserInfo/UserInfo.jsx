@@ -41,7 +41,6 @@ function UserInfo() {
 					endpoint: '/userInfo',
 				})
 			);
-
 			const user = response.payload.data.foundUser;
 			const date = new Date(user.birthDate);
 			const day = String(date.getDate()).padStart(2, '0'); // Get day and add leading zero if needed
@@ -62,8 +61,8 @@ function UserInfo() {
 		}
 	};
 
+	// for not allowing the user to send multiple emails
 	let isRequestPending = false;
-
 	async function sendVerificationMail() {
 		if (isRequestPending) {
 			return;
@@ -128,6 +127,9 @@ function UserInfo() {
 	const navigate = useNavigate();
 	const [isEditing, setIsEditing] = useState(false);
 	const [contractverified, setContractverified] = useState(null);
+	useEffect(() => {
+		console.log('contractverified', contractverified);
+	}, [contractverified]);
 	const [verifiedMail, setVerifiedMail] = useState(null);
 	const [name, setName] = useState('');
 	const [surname, setSurname] = useState('');
@@ -738,7 +740,7 @@ function UserInfo() {
 				<div
 					style={{ gap: '0.5rem', display: 'flex', flexDirection: 'column' }}
 				>
-					{contractverified === true ? (
+					{contractverified === 'passed' && (
 						<p style={{ color: 'green', display: 'flex' }}>
 							<RxCheckCircled
 								style={{
@@ -754,7 +756,8 @@ function UserInfo() {
 								? 'Instructor Contract Verified'
 								: 'Antrenör Sözleşmesi Doğrulandı'}
 						</p>
-					) : contractverified === false ? (
+					)}
+					{contractverified === 'failed' && (
 						<p style={{ color: '#ef3f3f', display: 'flex' }}>
 							<BsExclamationLg
 								style={{
@@ -766,10 +769,12 @@ function UserInfo() {
 								}}
 							/>
 							{i18n.language === 'en'
-								? 'Instructor Contract Not Verified, Upload the Contract Again'
-								: 'Antrenör Sözleşmesi Doğrulanamadı, Lütfen Tekrar Yükleyiniz'}
+								? 'Instructor Contract Not Verified, please upload your contract'
+								: 'Antrenör Sözleşmesi Doğrulanamadı, lütfen sözleşmenizi yükleyiniz'}
 						</p>
-					) : (
+					)}
+
+					{contractverified === 'pending' && (
 						<p style={{ color: 'gray', display: 'flex' }}>
 							<FaArrowRotateRight
 								style={{
@@ -786,7 +791,8 @@ function UserInfo() {
 								: 'Antrenör Sözleşmesi Kontrol Ediliyor...'}
 						</p>
 					)}
-					{contractverified === false && (
+
+					{contractverified !== 'passed' && (
 						<div
 							className='center-item'
 							style={{

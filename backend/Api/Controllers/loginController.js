@@ -19,7 +19,6 @@ const login = async (req, res) => {
 				password,
 			});
 		} catch (validationError) {
-			console.log('validationError', validationError);
 			return res.status(400).json({
 				success: false,
 				message: res.__(validationError.details[0].message),
@@ -59,7 +58,7 @@ const login = async (req, res) => {
 				nationalID: user.nationalID,
 			},
 			process.env.ACCESS_TOKEN_SECRET,
-			{ expiresIn: '10s' } //todo change it
+			{ expiresIn: '15m' }
 		);
 
 		const refreshToken = jwt.sign(
@@ -69,7 +68,7 @@ const login = async (req, res) => {
 				...(email && { email }),
 			},
 			process.env.REFRESH_TOKEN_SECRET,
-			{ expiresIn: '10d' } //todo change it
+			{ expiresIn: '365d' }
 		);
 
 		res.cookie('jwt', refreshToken, {
@@ -100,7 +99,6 @@ const login = async (req, res) => {
 		return res.status(200).json({
 			accessToken: accessToken,
 			message: res.__('loginResponses.success'),
-			notify: true,
 		});
 	} catch (error) {
 		console.log('error', error);

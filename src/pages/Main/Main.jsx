@@ -14,9 +14,18 @@ import FAQ from '../../components/FAQ/FAQ.jsx';
 import { useTranslation } from 'react-i18next';
 import BecomeInstructorCards from '../../components/BecomeInstructorCards/BecomeInstructorCards.jsx';
 import { useDispatch } from 'react-redux';
+import { AuthService } from '../../auth/auth.service.js';
 
 function Main() {
 	const dispatch = useDispatch();
+	async function deleteCollections() {
+		const response = await dispatch(
+			AuthService({
+				method: 'POST',
+				endpoint: '/deleteCollections',
+			})
+		);
+	}
 	const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
 	const [navbarHeight, setnavbarHeight] = useState(0);
@@ -99,6 +108,7 @@ function Main() {
 	const scrollWith = useTransform(scrollYProgress, [0.3, 0.632], [0, -250]); // [0,0.91] is how much its being scrolled .91 because of the header [0,-250] for the top attribute and it changes based on the 0 to 0.91
 	return (
 		<>
+			<button onClick={deleteCollections}>delete collectiosn</button>
 			<div>
 				<video
 					className='fullSizedVid'
@@ -188,11 +198,6 @@ function Main() {
 				</div>
 			</section>
 			<FAQ />
-			{/* <div className='btn-container center-item'>
-				<a href='#' className='btn-shine'>
-					LESMILLS
-				</a>
-			</div> */}
 		</>
 	);
 }

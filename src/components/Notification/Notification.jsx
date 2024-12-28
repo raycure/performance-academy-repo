@@ -14,7 +14,6 @@ import { FaCircleExclamation } from 'react-icons/fa6';
 import { FaCircleXmark } from 'react-icons/fa6';
 import { HiMiniXCircle } from 'react-icons/hi2';
 const CustomNotification = () => {
-	//todo color and style properly
 	const [notification, setNotification] = useState(null);
 	const [notificationTitle, setNotificationTitle] = useState('');
 	const { t, i18n } = useTranslation('translation');

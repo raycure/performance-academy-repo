@@ -40,7 +40,6 @@ const register = async (req, res) => {
 		try {
 			validateInput(registerData, registerSchemas);
 		} catch (error) {
-			console.log('error in catch ', error);
 			const trasnlatedMessage = res.__(`${error.message.errorMessage}`);
 			const trasnlatedErrorField = res.__(`${error.message.errorField}`);
 
@@ -82,19 +81,18 @@ const register = async (req, res) => {
 				email: email,
 			},
 			process.env.ACCESS_TOKEN_SECRET,
-			{ expiresIn: '3s' } //todo change it
+			{ expiresIn: '15m' }
 		);
 		const refreshToken = jwt.sign(
 			{
 				userId: userId,
 			},
 			process.env.REFRESH_TOKEN_SECRET,
-			{ expiresIn: '5m' } //todo change it
+			{ expiresIn: '365d' }
 		);
 		res.cookie('jwt', refreshToken, {
 			httpOnly: true,
 			maxAge: 1000 * 60 * 60 * 24 * 30,
-			// maxAge: 1000 * 3, //todo delete it
 			sameSite: 'Lax',
 			path: '/',
 			secure: process.env.ENVIRONMENT === 'development' ? 'false' : 'true',

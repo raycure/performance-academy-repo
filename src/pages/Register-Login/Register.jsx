@@ -257,7 +257,7 @@ function RegisterForm() {
 							autoComplete='off'
 							onChange={(e) => setName(e.target.value)}
 							value={name}
-							required
+							// required
 							aria-invalid={validName ? 'false' : 'true'}
 							aria-describedby='uidnote'
 						/>
@@ -392,7 +392,7 @@ function RegisterForm() {
 						className={validPwd || pwd ? 'form-icon-active' : ''}
 						onChange={(e) => setPwd(e.target.value)}
 						value={pwd}
-						required
+						// required
 						aria-invalid={validPwd ? 'false' : 'true'}
 						aria-describedby='pwdnote'
 					/>
@@ -409,6 +409,18 @@ function RegisterForm() {
 					</motion.p>
 				</div>
 				<div className='relative-position centerLineAnimation'>
+					<FontAwesomeIcon
+						icon={faCheck}
+						className={validMatch && matchPwd && validPwd ? 'valid' : 'hide'}
+					/>
+					<FontAwesomeIcon
+						icon={faTimes}
+						className={
+							(!validMatch || !pwd || !validPwd) && matchPwd
+								? 'invalid'
+								: 'hide'
+						}
+					/>
 					<input
 						type='password'
 						id='confirm_pwd'
@@ -416,24 +428,10 @@ function RegisterForm() {
 						className={matchPwd ? 'form-icon-active' : ''}
 						onChange={(e) => setMatchPwd(e.target.value)}
 						value={matchPwd}
-						required
+						// required
 						aria-invalid={validMatch ? 'false' : 'true'}
 						aria-describedby='confirmnote'
 					/>
-					<div htmlFor='confirm_pwd' className='form-icon'>
-						<FontAwesomeIcon
-							icon={faCheck}
-							className={validMatch && matchPwd && validPwd ? 'valid' : 'hide'}
-						/>
-						<FontAwesomeIcon
-							icon={faTimes}
-							className={
-								(!validMatch || !pwd || !validPwd) && matchPwd
-									? 'invalid'
-									: 'hide'
-							}
-						/>
-					</div>
 					<motion.p
 						initial='hidden'
 						variants={descending}
@@ -451,17 +449,16 @@ function RegisterForm() {
 
 				<div className='authentication-button-container'>
 					<Button
-						// todo uncomment it
-						// disabled={
-						// 	!validName ||
-						// 	!validPwd ||
-						// 	!validMatch ||
-						// 	!validName ||
-						// 	!validBirthDate ||
-						// 	!validNationalID
-						// 		? true
-						// 		: false
-						// }
+						disabled={
+							!validName ||
+							!validPwd ||
+							!validMatch ||
+							!validName ||
+							!validBirthDate ||
+							!validNationalID
+								? true
+								: false
+						}
 						type='submit'
 						isLoading={isLoading || localLoading}
 					>
