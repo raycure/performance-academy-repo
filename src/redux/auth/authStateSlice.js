@@ -14,7 +14,7 @@ const initialStateForLang = {
 	preferredLanguage: null,
 };
 
-function setupAxiosDefaults() {
+async function setupAxiosDefaults() {
 	const isBotAttempt = localStorage.getItem('botAttempt');
 	if (isBotAttempt) {
 		return null;
@@ -37,7 +37,7 @@ export const fetchData = createAsyncThunk(
 	'auth/fetchStatus',
 	// data can be empty to include api calls like logout
 	async ({ url, data = {}, method }, { rejectWithValue }) => {
-		setupAxiosDefaults();
+		await setupAxiosDefaults();
 		try {
 			const response = await axios({
 				url,
