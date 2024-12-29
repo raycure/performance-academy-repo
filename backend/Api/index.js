@@ -88,9 +88,7 @@ app.get('*', (req, res) => {
 });
 
 mongoose
-	.connect(
-		'mongodb+srv://devemresr:IHybYDDzzbfGdcGe@performance-academy.2x7gw.mongodb.net/Performance_Academy?retryWrites=true&w=majority&appName=Performance-Academy'
-	)
+	.connect(process.env.MONGODB_URI)
 	.then(() => {
 		console.log('connected');
 		app.listen(PORT, () => {
@@ -99,7 +97,6 @@ mongoose
 	})
 	.catch((error) => {
 		console.log('error', error);
-
 		console.log('didnt connect');
 	});
 
