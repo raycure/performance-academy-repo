@@ -21,9 +21,24 @@ function EventList({ activeProgram, infoActive, onlineCheck, activeCategory }) {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	let isLoggedIn = useSelector(selectIsLoggedIn);
+	const [initPaymentCooldown, setInitPaymentCooldown] = useState(0);
+	const [isPaymentDisabled, setIsPaymentDisabled] = useState(false);
+	useEffect(() => {
+		let timer;
+		if (initPaymentCooldown > 0) {
+			timer = setInterval(() => {
+				setInitPaymentCooldown((prev) => prev - 1);
+			}, 1000);
+		} else {
+			setIsPaymentDisabled(false);
+		}
+		return () => clearInterval(timer);
+	}, [initPaymentCooldown]);
 
 	async function Payment(e) {
 		e.preventDefault();
+		setIsPaymentDisabled(true);
+		setInitPaymentCooldown(60);
 		if (!isLoggedIn) {
 			// todo give a notif that they need to login first
 			navigate('/giriş-yap');
@@ -197,10 +212,6 @@ function EventList({ activeProgram, infoActive, onlineCheck, activeCategory }) {
 		(selectedEvent?.fullStartDate.getTime() - today.getTime()) /
 			(1000 * 3600 * 24)
 	);
-
-	programs.map((itme) => {
-		console.log('items', itme);
-	});
 
 	const programImg = programs.filter((program) => {
 		return program.id === selectedEvent?.program;
@@ -414,7 +425,9 @@ function EventList({ activeProgram, infoActive, onlineCheck, activeCategory }) {
 						</label>
 					</div>
 					<Button
-						disabled={!acknowledgementChecked ? true : false}
+						disabled={
+							!acknowledgementChecked && isPaymentDisabled ? true : false
+						}
 						styleProp={{ marginInline: 'auto' }}
 						onClick={(e) => Payment(e)}
 					>

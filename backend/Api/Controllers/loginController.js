@@ -8,8 +8,6 @@ import { loginSchema } from '../../Utils/schemas/userSchema.js';
 
 const login = async (req, res) => {
 	try {
-  console.log(
-        'url', req.originalUrl);
 		const { email, nationalID, password } = req.body;
 		// only one of the two is required
 		try {

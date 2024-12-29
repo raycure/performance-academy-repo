@@ -57,6 +57,7 @@ const forgotPasswordController = async (req, res) => {
 		res.status(200).json({
 			success: true,
 			message: res.__('forgotPasswordResponses.success'),
+			notify: true,
 		});
 	} catch (error) {
 		res.status(500).json({

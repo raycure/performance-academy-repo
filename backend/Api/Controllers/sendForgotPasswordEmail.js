@@ -42,22 +42,24 @@ const sendForgotPasswordEmail = async (req, res) => {
 			});
 		}
 
-		const name = foundUser.name;
-		const surname = foundUser.surname;
 		const userId = foundUser._id;
 		// if the user gave their id pull the email adress from the found user
 		const userEmailAddress = !email ? foundUser.email : email;
 
-		const emailVerificationToken = jwt.sign(
+		const emailToken = jwt.sign(
 			{
 				userId: userId,
 			},
 			process.env.MAIL_TOKEN_SECRET,
 			{ expiresIn: '4h' }
 		);
-		const forgotPasswordLink = process.env.ENVIRO;
-		process.env.DEV_RESET_PASSWORD_LINK + '/' + emailVerificationToken;
-		console.log('forgotPasswordVerificationLink', forgotPasswordLink);
+
+		const envBasedForgotPasswordLink =
+			process.env.ENVIRONMENT === 'development'
+				? process.env.DEV_RESET_PASSWORD_LINK
+				: process.env.PROD_RESET_PASSWORD_LINK;
+
+		const forgotPasswordLink = envBasedForgotPasswordLink + '/' + emailToken;
 
 		try {
 			// Send password reset email

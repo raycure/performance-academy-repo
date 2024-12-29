@@ -9,6 +9,8 @@ import { useLayoutEffect } from 'react';
 import CookieConsent from '../Legal/Cookies.jsx';
 import CustomNotification from '../../components/Notification/Notification.jsx';
 import IsIpBlocked from '../../components/IpBlocked/IsIpBlocked.jsx';
+import { useSearchParams } from 'react-router-dom';
+import { useEffect } from 'react';
 
 //import SmoothScrollContainer from '../../components/Containers/SmoothScrollContainer';
 function Layout() {
@@ -24,6 +26,33 @@ function Layout() {
 		}, [location.pathname]);
 		return children;
 	};
+	const displayNotif = (Notifexp) => {
+		localStorage.setItem('Notifexp', JSON.stringify(Notifexp));
+		const notificationEvent = new Event('notificationEvent');
+		window.dispatchEvent(notificationEvent);
+	};
+
+	const [searchParams] = useSearchParams();
+	useEffect(() => {
+		const status = searchParams.get('status');
+		const message = searchParams.get('message');
+		if (status === 'success') {
+			const successNotification = {
+				type: 'success',
+				duration: 3000,
+				message: message,
+			};
+			displayNotif(successNotification);
+		} else if (status === 'error') {
+			const errorNotification = {
+				type: 'error',
+				duration: 3000,
+				message: message,
+			};
+			displayNotif(errorNotification);
+		}
+	}, [searchParams]);
+
 	return (
 		//<SmoothScrollContainer>
 		<Wrapper>
