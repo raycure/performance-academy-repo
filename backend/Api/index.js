@@ -37,15 +37,7 @@ app.use('/webhook', express.raw({ type: 'application/json' }), webhook);
 app.use(i18n.init);
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use((req, res, next) => {
-	if (req.headers['x-forwarded-proto'] !== 'https') {
-		console.log('Redirecting to HTTPS...');
-		console.log('Original URL:', req.url);
-		console.log('Headers:', req.headers);
-		return res.redirect(`https://${req.hostname}${req.url}`);
-	}
-	next();
-});
+
 const limiter = rateLimit({
 	windowMs: 1000 * 60 * 60,
 	max: 200,
@@ -100,10 +92,4 @@ mongoose
 		console.log('didnt connect');
 	});
 
-console.log(
-	'process.env.MONGODB_URI',
-	process.env.MONGODB_URI,
-	'type',
-	typeof process.env.MONGODB_URI
-);
 export default app;

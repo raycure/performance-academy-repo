@@ -44,11 +44,12 @@ const verifyMail = async (req, res) => {
 				message: res.__('verifyMailResponses.userNotFound'),
 			});
 		}
-		res.redirect('http://localhost:5173/login');
+
+		const message = res.__('VerificationEmailResponses.success');
+		res.redirect(`http://localhost:5173?status=success&message=${message}`);
 	} catch (error) {
-		res.status(500).json({
-			message: res.__('serverError'),
-		});
+		const message = res.__('VerificationEmailResponses.error');
+		res.redirect(`http://localhost:5173?status=error&message=${message}`);
 	}
 };
 

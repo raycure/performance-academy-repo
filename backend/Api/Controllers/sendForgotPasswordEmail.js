@@ -55,8 +55,8 @@ const sendForgotPasswordEmail = async (req, res) => {
 			process.env.MAIL_TOKEN_SECRET,
 			{ expiresIn: '4h' }
 		);
-		const forgotPasswordLink =
-			process.env.EMAIL_FORGOTPASSWORD_LINK + '/' + emailVerificationToken;
+		const forgotPasswordLink = process.env.ENVIRO;
+		process.env.DEV_RESET_PASSWORD_LINK + '/' + emailVerificationToken;
 		console.log('forgotPasswordVerificationLink', forgotPasswordLink);
 
 		try {
