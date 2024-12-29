@@ -26,7 +26,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 dotenv.config();
-const port = 3001;
+const PORT = 3001;
 // very important note if a controller requires authmiddleware it has to return accesstoken by accessing req.accessToken
 const app = express();
 app.use(credentials);
@@ -38,13 +38,13 @@ app.use(i18n.init);
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use((req, res, next) => {
-    if (req.headers['x-forwarded-proto'] !== 'https') {
-        console.log('Redirecting to HTTPS...');
-        console.log('Original URL:', req.url);
-        console.log('Headers:', req.headers);
-        return res.redirect(`https://${req.hostname}${req.url}`);
-    }
-    next();
+	if (req.headers['x-forwarded-proto'] !== 'https') {
+		console.log('Redirecting to HTTPS...');
+		console.log('Original URL:', req.url);
+		console.log('Headers:', req.headers);
+		return res.redirect(`https://${req.hostname}${req.url}`);
+	}
+	next();
 });
 const limiter = rateLimit({
 	windowMs: 1000 * 60 * 60,
@@ -81,26 +81,19 @@ app.use('/deleteCollections', async function dropAllCollections() {
 		return { success: false, error: error.message };
 	}
 });
-
-console.log(
-	'process.env.MONGODB_URI',
-	process.env.MONGODB_URI,
-	'type',
-	typeof process.env.MONGODB_URI
-);
 app.use(express.static(path.join(__dirname, '../../dist')));
-
 // This should be the LAST route
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../../dist/index.html'));
+	res.sendFile(path.join(__dirname, '../../dist/index.html'));
 });
 
-
 mongoose
-	.connect(process.env.MONGODB_URI)
+	.connect(
+		'mongodb+srv://devemresr:IHybYDDzzbfGdcGe@performance-academy.2x7gw.mongodb.net/Performance_Academy?retryWrites=true&w=majority&appName=Performance-Academy'
+	)
 	.then(() => {
 		console.log('connected');
-		app.listen(3001, () => {
+		app.listen(PORT, () => {
 			console.log('port 3001');
 		});
 	})
@@ -111,9 +104,9 @@ mongoose
 	});
 
 console.log(
-        'process.env.MONGODB_URI',
-        process.env.MONGODB_URI,
-        'type',
-        typeof process.env.MONGODB_URI
+	'process.env.MONGODB_URI',
+	process.env.MONGODB_URI,
+	'type',
+	typeof process.env.MONGODB_URI
 );
 export default app;
