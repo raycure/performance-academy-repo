@@ -22,7 +22,7 @@ module.exports = {
 				DEV_RESET_PASSWORD_LINK: 'http://localhost:5173/forgotPassword',
 				PROD_EMAIL_ACTIVATION_LINK: 'https://infopfa/verifyMail',
 				PROD_RESET_PASSWORD_LINK: 'https://infopfa/şifremi-unuttum',
-				PROD_FRONTEND_BASE_LIN: 'https://infopfa/',
+				PROD_FRONTEND_BASE_LINK: 'https://infopfa/',
 			},
 		},
 	],
