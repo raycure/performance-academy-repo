@@ -37,6 +37,7 @@ app.use('/webhook', express.raw({ type: 'application/json' }), webhook);
 app.use(i18n.init);
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use('/pay', authMiddleware, paymentRoute);
 
 const limiter = rateLimit({
 	windowMs: 1000 * 60 * 60,
@@ -55,7 +56,6 @@ app.use('/register', registerRoute);
 app.use('/', loginRoute);
 app.use('/logout', logoutRoute);
 app.use('/', verifyMailRoute);
-app.use('/pay', authMiddleware, paymentRoute);
 app.use('/userInfo', authMiddleware, userInfoRoute);
 app.use('/submitContactForm', contactFormRoute);
 app.use('/upload', uploadRoute);
