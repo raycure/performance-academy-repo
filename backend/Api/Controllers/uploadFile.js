@@ -128,7 +128,6 @@
 
 // export { upload, uploadFile, handleMulterError, File };
 import multer from 'multer';
-import path from 'path';
 import fs from 'fs';
 import mongoose from 'mongoose';
 import { fileURLToPath } from 'url';
