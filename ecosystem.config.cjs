@@ -21,6 +21,8 @@ module.exports = {
 					'sk_test_51QKJhSLSaORsmOrr4nxk5luBrQ4db5MeieVpOV9QnQc0BOhsee2ecovlPhbdpp2UaEs4iMRIyJQVUbNCBqFlCouq00ERZkHEcp',
 				DEV_RESET_PASSWORD_LINK: 'http://localhost:5173/forgotPassword',
 				PROD_EMAIL_ACTIVATION_LINK: 'https://infopfa/verifyMail',
+				PROD_RESET_PASSWORD_LINK: 'https://infopfa/şifremi-unuttum',
+				PROD_FRONTEND_BASE_LIN: 'https://infopfa/',
 			},
 		},
 	],
