@@ -1,6 +1,8 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
+import { fileURLToPath } from 'url';
+import path from 'path';
 import registerRoute from './Routes/registerRoute.js';
 import loginRoute from './Routes/loginRoute.js';
 import logoutRoute from './Routes/logoutRoute.js';
@@ -19,8 +21,6 @@ import ipBlockChecker from './Middleware/ipBlockChecker.js';
 import * as dotenv from 'dotenv';
 import webhook from './Controllers/webhook.js';
 import i18n from '../config/i18n.js';
-import { fileURLToPath } from 'url';
-import path from 'path';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
