@@ -13,16 +13,17 @@ module.exports = {
 				DEV_EMAIL_CONFIRMATION_LINK: 'http://localhost:3001/verifyMail',
 				MONGODB_URI:
 					'mongodb+srv://devemresr:IHybYDDzzbfGdcGe@performance-academy.2x7gw.mongodb.net/Performance_Academy?retryWrites=true&w=majority&appName=Performance-Academy',
-				ENVIRONMENT: 'development',
+				ENVIRONMENT: 'production',
 				DEV_FRONTEND_BASE_LINK: 'http://localhost:5173/',
 				STRIPE_WEBHOOK_SECRET:
-					'whsec_e009f0c3fd35365a4ed4e60f77573fea6c8da6c0504eec5861bdb24511e8596d',
+					'whsec_cdPbSEV7pMsAhhibKs7SE6euTvMdI2pE',
 				STRIPE_SECRET_KEY:
-					'sk_test_51QKJhSLSaORsmOrr4nxk5luBrQ4db5MeieVpOV9QnQc0BOhsee2ecovlPhbdpp2UaEs4iMRIyJQVUbNCBqFlCouq00ERZkHEcp',
+					'sk_test_51QKJhSLSaORsmOrrswTs7ZbhMdDVyyW3aVfi7yPBYgFYUyLGky2ph2d7iKLYeWCK2UeC4YnaT5xZfxviNHZHj0u700llQmurbP',
+
 				DEV_RESET_PASSWORD_LINK: 'http://localhost:5173/forgotPassword',
 				PROD_EMAIL_ACTIVATION_LINK: 'https://infopfa/verifyMail',
 				PROD_RESET_PASSWORD_LINK: 'https://infopfa/şifremi-unuttum',
-				PROD_FRONTEND_BASE_LINK: 'https://infopfa/',
+				PROD_FRONTEND_BASE_LINK: 'https://infopfa.com/'
 			},
 		},
 	],

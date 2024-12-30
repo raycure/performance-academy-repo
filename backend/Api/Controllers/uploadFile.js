@@ -66,6 +66,7 @@ const upload = multer({
 
 const uploadFile = async (req, res) => {
 	try {
+  console.log('Received file:', req.file);
 		if (!req.file) {
 			return res.status(400).json({ message: 'No file uploaded' });
 		}

@@ -131,7 +131,7 @@ const createPaymentSession = async (metadata, productName, productPrice) => {
 				  `${process.env.DEV_FRONTEND_BASE_LINK}${encodeURIComponent(
 						'programlarım'
 				  )}`
-				: `${process.env.PROD_FRONTEND_BASE_LIN}${encodeURIComponent(
+				: `${process.env.PROD_FRONTEND_BASE_LINK}${encodeURIComponent(
 						'programlarım'
 				  )}`,
 		cancel_url:
