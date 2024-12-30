@@ -131,13 +131,13 @@ const createPaymentSession = async (metadata, productName, productPrice) => {
 				  `${process.env.DEV_FRONTEND_BASE_LINK}${encodeURIComponent(
 						'programlarım'
 				  )}`
-				: `${process.env.PROD_FRONTEND_BASE_LINK}${encodeURIComponent(
+				: `${process.env.PROD_FRONTEND_BASE_LIN}${encodeURIComponent(
 						'programlarım'
 				  )}`,
 		cancel_url:
 			process.env.ENVIRONMENT === 'development'
 				? `${process.env.DEV_FRONTEND_BASE_LINK}`
-				: `${process.env.PROD_FRONTEND_BASE_LINK}/cancel`,
+				: `${process.env.PROD_FRONTEND_BASE_LINK}`,
 	});
 	return session;
 };
