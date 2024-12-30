@@ -162,7 +162,7 @@ const fileSchema = new mongoose.Schema(
 const File = mongoose.model('File', fileSchema);
 
 // Setup upload directory
-const uploadDir = path.join(__dirname, '..', 'uploads');
+const uploadDir = '/var/www/uploads';
 if (!fs.existsSync(uploadDir)) {
 	fs.mkdirSync(uploadDir, { recursive: true });
 }
@@ -212,6 +212,16 @@ const uploadFile = async (req, res) => {
 			return res.status(400).json({ message: 'No file uploaded' });
 		}
 
+		const files = await fs.promises.readdir(uploadDir);
+		console.log('Files in upload directory:', files);
+
+		const fileContent = await fs.promises.readFile(req.file.path);
+		console.log('File size from read:', fileContent.length);
+
+		// Try to create a copy to verify write permissions
+		const testPath = path.join(uploadDir, 'test-' + Date.now() + '.txt');
+		await fs.promises.writeFile(testPath, 'test');
+		await fs.promises.unlink(testPath);
 		// Verify file was written to disk
 		try {
 			const stats = await fs.promises.stat(req.file.path);
