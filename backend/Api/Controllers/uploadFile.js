@@ -162,7 +162,7 @@ const fileSchema = new mongoose.Schema(
 const File = mongoose.model('File', fileSchema);
 
 // Setup upload directory
-const uploadDir = '/var/www/uploads';
+const uploadDir = 'uploads';
 if (!fs.existsSync(uploadDir)) {
 	fs.mkdirSync(uploadDir, { recursive: true });
 }
