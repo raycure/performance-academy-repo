@@ -17,7 +17,11 @@ async function sendVerificationEmail(req, res) {
 		process.env.MAIL_TOKEN_SECRET,
 		{ expiresIn: '4h' }
 	);
-	const verifyLink = process.env.EMAIL_ACTIVATION_LINK + '/' + emailVerifyToken;
+	const activationLink =
+		process.env.ENVIRONMENT === 'development'
+			? process.env.DEV_EMAIL_CONFIRMATION_LINK
+			: process.env.PROD_EMAIL_CONFIRMATION_LINK;
+	const verifyLink = activationLink + '/' + emailVerifyToken;
 	try {
 		await emailSender(
 			'verificationEmail',

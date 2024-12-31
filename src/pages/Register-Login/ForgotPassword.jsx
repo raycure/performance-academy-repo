@@ -75,7 +75,6 @@ const forgotPassword = () => {
 
 	async function handleResetPassword(e) {
 		e.preventDefault();
-		console.log('token', token);
 
 		try {
 			const resetPasswordData = {
@@ -93,8 +92,6 @@ const forgotPassword = () => {
 			if (err.response?.status === 429) {
 				setErrMsg('Too many requests, please try again later.');
 			}
-			console.log('err', err);
-
 			err.payload?.data === undefined
 				? setErrMsg('int baglanti falan') // todo gercekten kontrol etmiyor server kapatilinca ancak calisiyor ve baglanti yokken calismiyor
 				: setErrMsg(err.payload?.data?.message);

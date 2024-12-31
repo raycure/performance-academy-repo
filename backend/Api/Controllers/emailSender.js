@@ -15,7 +15,6 @@ const emailSender = async (
 	url,
 	emailProps
 ) => {
-	// const { program, startDate, endDate, online, location } = emailProps;
 	const {
 		program = null,
 		startDate = null,

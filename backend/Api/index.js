@@ -1,6 +1,8 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
+import { fileURLToPath } from 'url';
+import path from 'path';
 import registerRoute from './Routes/registerRoute.js';
 import loginRoute from './Routes/loginRoute.js';
 import logoutRoute from './Routes/logoutRoute.js';
@@ -20,8 +22,11 @@ import * as dotenv from 'dotenv';
 import webhook from './Controllers/webhook.js';
 import i18n from '../config/i18n.js';
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 dotenv.config();
-const port = 3001;
+const PORT = 3001;
 // very important note if a controller requires authmiddleware it has to return accesstoken by accessing req.accessToken
 const app = express();
 app.use(credentials);
@@ -32,6 +37,8 @@ app.use('/webhook', express.raw({ type: 'application/json' }), webhook);
 app.use(i18n.init);
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use('/pay', authMiddleware, paymentRoute);
+
 const limiter = rateLimit({
 	windowMs: 1000 * 60 * 60,
 	max: 200,
@@ -49,7 +56,6 @@ app.use('/register', registerRoute);
 app.use('/', loginRoute);
 app.use('/logout', logoutRoute);
 app.use('/', verifyMailRoute);
-app.use('/pay', authMiddleware, paymentRoute);
 app.use('/userInfo', authMiddleware, userInfoRoute);
 app.use('/submitContactForm', contactFormRoute);
 app.use('/upload', uploadRoute);
@@ -67,20 +73,22 @@ app.use('/deleteCollections', async function dropAllCollections() {
 		return { success: false, error: error.message };
 	}
 });
+app.use(express.static(path.join(__dirname, '../../dist')));
+// This should be the LAST route
+app.get('*', (req, res) => {
+	res.sendFile(path.join(__dirname, '../../dist/index.html'));
+});
 
 mongoose
-	.connect(
-		'mongodb+srv://devemresr:IHybYDDzzbfGdcGe@performance-academy.2x7gw.mongodb.net/Performance_Academy?retryWrites=true&w=majority&appName=Performance-Academy'
-	)
+	.connect(process.env.MONGODB_URI)
 	.then(() => {
 		console.log('connected');
-		app.listen(3001, () => {
+		app.listen(PORT, () => {
 			console.log('port 3001');
 		});
 	})
 	.catch((error) => {
 		console.log('error', error);
-
 		console.log('didnt connect');
 	});
 

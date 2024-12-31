@@ -72,8 +72,8 @@ const UserSchema = mongoose.Schema(
 		},
 		verifiedContract: {
 			type: String,
-			enum: ['pending', 'passed', 'failed'],
-			default: null,
+			enum: ['pending', 'passed', 'failed', 'null'],
+			default: 'null',
 		},
 		blocked: {
 			type: Boolean,

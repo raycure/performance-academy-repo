@@ -107,5 +107,9 @@
 		"expiredSession": "Your session has expired for security reasons. Please sign out and sign back in to continue.",
 		"accountSuspended": "Your account has been temporarily suspended. Please contact our support team for assistance.",
 		"invalidToken": "tampered jwt"
+	},
+	"VerificationEmailResponses": {
+		"success": "Your email has been successfully verified.",
+		"error": "An internal error occurred while verifying your email. Please try again or contact support if the problem continues."
 	}
 }

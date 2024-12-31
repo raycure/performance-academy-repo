@@ -190,7 +190,7 @@ function Navbar() {
 
 				<button
 					onClick={() => {
-						navigate('/login');
+						navigate('/giriş-yap');
 					}}
 				>
 					login{' '}

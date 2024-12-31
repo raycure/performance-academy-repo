@@ -95,9 +95,6 @@ export default function PurchaseConfirmationEmail({
 	location,
 }) {
 	// Select localization based on language, default to English
-	console.log('url', url);
-	console.log('url myprograms', url.myProgramsUrl);
-	console.log('url contactUrl', url.contactUrl);
 	const local = localizationData[language] || localizationData['en'];
 	// Helper function to replace placeholders in text
 	const formatText = (text) =>

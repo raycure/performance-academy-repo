@@ -9,9 +9,6 @@ import {
 const { hash, compare } = pkg;
 
 export const userInfoFetchController = async (req, res) => {
-	console.log('req.isAuthenticated in fetxh', req.isAuthenticated);
-	console.log('req.userId in fetxh', req.userId);
-	console.log('req.accessToken in fetxh', req.accessToken);
 	if (!req.isAuthenticated) {
 		return res
 			.status(401)

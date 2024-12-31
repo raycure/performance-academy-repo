@@ -9,24 +9,9 @@ import { MdDoubleArrow } from 'react-icons/md';
 import { useDispatch, useSelector } from 'react-redux';
 import { setId } from '../../redux/Slices/ProgramIdSlice.js';
 import BynderEmbed from '../../components/BynderEmbed/BynderEmbed.jsx';
-import { LesMillsEvents } from '../../assets/LesmillsEvents.jsx';
 function ClassInfo() {
 	const { t, i18n } = useTranslation('translation');
 	const programID = useSelector((state) => state.selectedProgramId.id);
-	let test;
-	const today = new Date();
-	useEffect(() => {
-		console.log('programID', programID);
-		const LessMillsevents = LesMillsEvents;
-		test = LessMillsevents.filter((event) => {
-			return event.program === programID && event.fullStartDate >= today;
-		});
-	}, []);
-
-	useEffect(() => {
-		console.log('test,', test);
-	}, [test]);
-
 	const program = Object.keys(LesmillsPrograms())
 		.map((category) => {
 			return LesmillsPrograms()[category].find((program) => {

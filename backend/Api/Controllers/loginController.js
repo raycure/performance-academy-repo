@@ -1,7 +1,5 @@
 import Users from '../Models/userModel.js';
 import pkg from 'bcryptjs';
-const { hash, compare } = pkg;
-import Joi from 'joi';
 import jwt from 'jsonwebtoken';
 import * as dotenv from 'dotenv';
 dotenv.config();
