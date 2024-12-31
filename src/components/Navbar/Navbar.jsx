@@ -288,7 +288,7 @@ function Navbar() {
 						<FaUser id='navbar-dropdown-button' className='nav-item-icon' />
 						<div
 							id='navbar-dropdown'
-							style={{ top: '2rem' }}
+							style={{ top: '1rem', transform: 'translateX(-85%)' }}
 							className={`dropdown-content ${isOpen ? 'open' : 'closed'}`}
 						>
 							{isLoggedIn ? (
