@@ -54,7 +54,7 @@ const createProductPurchaseSession = async (itemId, userId, purchaseType) => {
 	if (!foundUser.verifiedMail) {
 		throw new Error('paymentResponses.emailNotVerified');
 	}
-	if (!foundUser.verifiedContract) {
+	if (foundUser.verifiedContract === 'null') {
 		throw new Error('paymentResponses.contractNotVerified');
 	}
 	const foundPurchase = foundUser.findPurchase(itemId);

@@ -83,8 +83,14 @@ const handleProductPurchase = async (session, language) => {
 	await foundUser.addExamAttempt(eventId); // so the first attempt is already define and its gonna be stated as paid
 
 	try {
-		const myProgramsUrl = 'http://localhost:5173/programlar%C4%B1m';
-		const contactUrl = 'http://localhost:5173/ileti%C5%9Fim';
+		const myProgramsUrl =
+			process.env.ENVIRONMENT === 'development'
+				? process.env.DEV_MYPROGRAMS_LINK
+				: process.env.PROD_MYPROGRAMS_LINK;
+		const contactUrl =
+			process.env.ENVIRONMENT === 'development'
+				? process.env.DEV_CONTACT_LINK
+				: process.env.PROD_CONTACT_LINK;
 		const emailResponse = await emailSender(
 			'PurchaseConfirmationEmail',
 			language,
