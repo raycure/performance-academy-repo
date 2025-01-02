@@ -85,6 +85,28 @@
 .inputfile + label {
 	cursor: pointer; /* "hand" cursor */
 }
+.input-outer-container button {
+	padding: 0.5rem 1rem;
+	border: 1px solid var(--clr-primary-100);
+	background-color: var(--clr-primary-500);
+	border-radius: 8px;
+	margin: 0.5rem;
+}
+.input-outer-container button:disabled {
+	background-color: gray;
+	color: darkgray;
+	border-color: darkgary;
+}
+.input-outer-container button:not(:disabled):hover {
+	background-color: white;
+	border-color: white;
+	color: var(--clr-primary-500);
+	transition: all 0.3s;
+}
+.input-outer-container button:not(:disabled):active {
+	transform: scale(0.95);
+	transition: transform 0.3s;
+}
 .user-info-page {
 	max-width: 750px;
 	margin-inline: auto;

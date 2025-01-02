@@ -187,14 +187,14 @@ function UserInfo() {
 
 			const verifyNotif = {
 				type: 'success',
-				duration: 2000,
+				duration: 3000,
 				message: 'file uploaded successfully',
 			};
 			displayNotif(verifyNotif);
 		} catch (error) {
 			const verifyNotif = {
 				type: 'error',
-				duration: 2000,
+				duration: 3000,
 				message: error.response.data.message,
 			};
 			displayNotif(verifyNotif);
@@ -205,7 +205,7 @@ function UserInfo() {
 	const displayInputAreaWarning = () => {
 		const verifyNotif = {
 			type: 'warning',
-			duration: 2000,
+			duration: 3000,
 			message:
 				i18n.language === 'en'
 					? 'If you want to change your ID or birth date, please contact our support team.'
@@ -310,7 +310,7 @@ function UserInfo() {
 			}
 		}
 	};
-
+	const handleFileSend = () => {};
 	const displayNotif = (Notifexp) => {
 		localStorage.setItem('Notifexp', JSON.stringify(Notifexp));
 		const notificationEvent = new Event('notificationEvent');
@@ -321,9 +321,8 @@ function UserInfo() {
 	// 		initUserInfo();
 	// 	}
 	// }, [isEditing]);
-
 	return (
-		<section className='user-info-page'>
+		<div className='user-info-page'>
 			<div className='user-info-inner-con user-info-title-con'>
 				<div>
 					<p className='fs-minimal-heading' style={{ fontWeight: 'bolder' }}>
@@ -558,16 +557,22 @@ function UserInfo() {
 
 						{!verifiedMail && (
 							<div>
-								<button
-									onClick={sendVerificationMail}
-									disabled={isSendEmailDisabled}
-								>
-									{sendEmailCooldown > 0
-										? 'Resend in                 '
-										: 'Send verification email'}
-								</button>
-								{sendEmailCooldown > 0 && (
-									<span>{formatTime(sendEmailCooldown)}</span>
+								{sendEmailCooldown > 0 ? (
+									<p>
+										{i18n.language === 'en'
+											? 'Resend in:'
+											: 'Tekrar yollamak için kalan:'}{' '}
+										{formatTime(sendEmailCooldown)}
+									</p>
+								) : (
+									<button
+										onClick={sendVerificationMail}
+										disabled={isSendEmailDisabled}
+									>
+										{i18n.language === 'en'
+											? 'Send verification email'
+											: "Doğrulama email'i yollayın"}
+									</button>
 								)}
 							</div>
 						)}
@@ -754,84 +759,78 @@ function UserInfo() {
 						</div>
 					</>
 				)}
-				<div
-					className='user-select-none'
-					style={{ gap: '0.5rem', display: 'flex', flexDirection: 'column' }}
-				>
-					{contractverified === 'passed' && (
-						<p style={{ color: 'green', display: 'flex' }}>
-							<RxCheckCircled
-								style={{
-									position: 'relative',
-									top: '4px',
-									height: '100%',
-									width: '1rem',
-									marginRight: '0.3rem',
-									flexShrink: '0',
-								}}
-							/>{' '}
-							{i18n.language === 'en'
-								? 'Instructor Contract Verified'
-								: 'Antrenör Sözleşmesi Doğrulandı'}
-						</p>
-					)}
-					{contractverified === 'failed' && (
-						<p style={{ color: '#ef3f3f', display: 'flex' }}>
-							<BsExclamationLg
-								style={{
-									position: 'relative',
-									top: '3px',
-									width: '1rem',
-									marginRight: '0.3rem',
-									flexShrink: '0',
-								}}
-							/>
-							{i18n.language === 'en'
-								? 'Instructor Contract Not Verified, please upload your contract'
-								: 'Antrenör Sözleşmesi Doğrulanamadı, lütfen sözleşmenizi yükleyiniz'}
-						</p>
-					)}
-
-					{contractverified === 'pending' && (
-						<p style={{ color: 'gray', display: 'flex' }}>
-							<FaArrowRotateRight
-								style={{
-									position: 'relative',
-									top: '4px',
-									height: '100%',
-									width: '1rem',
-									marginRight: '0.3rem',
-									flexShrink: '0',
-								}}
-							/>{' '}
-							{i18n.language === 'en'
-								? 'Instructor Contract Under Review...'
-								: 'Antrenör Sözleşmesi Kontrol Ediliyor...'}
-						</p>
-					)}
-
-					{contractverified !== 'passed' && (
-						<div
-							className='center-item'
+			</div>
+			<div
+				className='user-select-none user-info-inner-con'
+				style={{ gap: '0.5rem', display: 'flex', flexDirection: 'column' }}
+			>
+				<p className='fs-650' style={{ fontWeight: 'bolder' }}>
+					{i18n.language === 'en' ? 'Instructor Contract' : 'Eğitmen Sözlemesi'}
+				</p>
+				<p>
+					{i18n.language === 'en'
+						? 'To participate in our training events, you must first complete and upload the instructor agreement. You cannot receive a certificate until your agreement is verified. Additionally, you cannot re-upload the agreement while it is under review.'
+						: 'Eğitim etkinliklerimize katılabilmeniz için öncelikle eğitmen sözleşmemizi doldurup yüklemeniz gerekmektedir. Sözleşmeniz doğrulanmadan sertifika alamazsınız. Ayrıca, sözleşmeniz inceleme aşamasındayken tekrar yükleme yapamazsınız.'}
+				</p>
+				{contractverified === 'passed' && (
+					<p style={{ color: 'green', display: 'flex' }}>
+						<RxCheckCircled
 							style={{
-								display: 'flex',
-								flexDirection: 'column',
-								alignItems: 'center',
-								marginTop: 'auto',
+								position: 'relative',
+								top: '4px',
+								height: '100%',
+								width: '1rem',
+								marginRight: '0.3rem',
+								flexShrink: '0',
 							}}
-						>
-							<Link style={{ textDecoration: 'underline' }}>
-								{i18n.language === 'en'
-									? 'Click For The Instructor Contract '
-									: 'Eğitmen Sözleşmesi İçin Tıklayınız '}
-								<GrDocumentPdf
-									style={{
-										display: 'inline-block',
-										position: 'relative',
-										top: '2px',
-									}}
-								/>
-							</Link>
+						/>{' '}
+						{i18n.language === 'en'
+							? 'We have verified your instructor contract.'
+							: 'Antrenör sözleşmeniz doğrulanmıştır.'}
+					</p>
+				)}
+				{contractverified === 'failed' && (
+					<p style={{ color: '#ef3f3f', display: 'flex' }}>
+						<BsExclamationLg
+							style={{
+								position: 'relative',
+								top: '3px',
+								width: '1rem',
+								marginRight: '0.3rem',
+								flexShrink: '0',
+							}}
+						/>
+						{i18n.language === 'en'
+							? "We couldn't verify your instructor contract, please fill and upload your contract once more."
+							: 'Antrenör sözleşmenizi doğrulayamadık, lütfen sözleşmenizi tekrardan doldurup yükleyiniz.'}
+					</p>
+				)}
+				{contractverified === 'pending' && (
+					<p style={{ color: 'gray', display: 'flex' }}>
+						<FaArrowRotateRight
+							style={{
+								position: 'relative',
+								top: '4px',
+								height: '100%',
+								width: '1rem',
+								marginRight: '0.3rem',
+								flexShrink: '0',
+							}}
+						/>{' '}
+						{i18n.language === 'en'
+							? 'Instructor Contract Under Review...'
+							: 'Antrenör Sözleşmesi Kontrol Ediliyor...'}
+					</p>
+				)}
+				{contractverified === 'failed' || contractverified === 'null' ? (
+					<div
+						style={{
+							display: 'flex',
+							flexDirection: 'column',
+							justifyContent: 'center',
+						}}
+					>
+						<span className='input-outer-container'>
 							<input
 								type='file'
 								name='file'
@@ -872,19 +871,30 @@ function UserInfo() {
 										: fileName}
 								</p>
 							</label>
-						</div>
-					)}
-				</div>
+							<button onClick={handleFileSend} disabled={fileName === null}>
+								{i18n.language === 'en' ? 'Save' : 'Kaydet'}
+							</button>
+						</span>
+						{fileName === null && (
+							<Link
+								style={{ textDecoration: 'underline', width: 'max-content' }}
+							>
+								{i18n.language === 'en'
+									? 'Click For The Instructor Contract '
+									: 'Eğitmen Sözleşmesi İçin Tıklayınız '}
+								<GrDocumentPdf
+									style={{
+										display: 'inline-block',
+										position: 'relative',
+										top: '2px',
+									}}
+								/>
+							</Link>
+						)}
+					</div>
+				) : null}
 			</div>
 			<div style={{ margin: '1rem 0' }}>
-				<p className='fs-650' style={{ fontWeight: 'bolder' }}>
-					{i18n.language === 'en' ? 'Account Security' : 'Hesap Güvenliği'}
-				</p>
-				<p>
-					{i18n.language === 'en'
-						? 'Manage your account security.'
-						: 'Hesap güvenliğinizi düzenleyin.'}
-				</p>
 				<div className='user-info-btn-con'>
 					<button className='user-info-btn'>
 						<IoLogOutOutline
@@ -927,7 +937,7 @@ function UserInfo() {
 				</div>
 			</div>
 			<HoneypotInput />
-		</section>
+		</div>
 	);
 }
 export default UserInfo;
