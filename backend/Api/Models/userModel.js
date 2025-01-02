@@ -15,8 +15,8 @@ const ExamAttemptSchema = new mongoose.Schema({
 	},
 	result: {
 		type: String,
-		enum: ['pending', 'passed', 'failed'],
-		default: 'pending',
+		enum: ['pending', 'passed', 'failed', 'null'],
+		default: 'addExamAttempt',
 	},
 });
 
@@ -68,12 +68,14 @@ const UserSchema = mongoose.Schema(
 		},
 		verifiedMail: {
 			type: Boolean,
-			default: false,
+			// default: false,
+			default: true,
 		},
 		verifiedContract: {
 			type: String,
 			enum: ['pending', 'passed', 'failed', 'null'],
-			default: 'null',
+			// default: 'null',
+			default: 'passed',
 		},
 		blocked: {
 			type: Boolean,
@@ -160,12 +162,18 @@ UserSchema.methods.addExamAttempt = function (eventId, isPaid = false) {
 	try {
 		if (purchase.examAttempts.length === 0) {
 			isPaid = true;
+			purchase.examAttempts.push({
+				attemptNumber: purchase.examAttempts.length + 1,
+				isPaid,
+				result: 'null',
+			});
+		} else {
+			purchase.examAttempts.push({
+				attemptNumber: purchase.examAttempts.length + 1,
+				isPaid,
+				result: 'pending',
+			});
 		}
-		purchase.examAttempts.push({
-			attemptNumber: purchase.examAttempts.length + 1,
-			isPaid,
-			result: 'pending',
-		});
 	} catch (error) {
 		console.log('error in creating an attempt', error);
 	}

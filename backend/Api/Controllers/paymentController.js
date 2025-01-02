@@ -52,6 +52,8 @@ const createProductPurchaseSession = async (itemId, userId, purchaseType) => {
 		throw new Error('paymentResponses.userNotFound');
 	}
 	if (!foundUser.verifiedMail) {
+		console.log('email not verified', foundUser.verifiedMail);
+
 		throw new Error('paymentResponses.emailNotVerified');
 	}
 	if (foundUser.verifiedContract === 'null') {
@@ -92,6 +94,8 @@ const createPayExamFeeSession = async (itemId, userId, purchaseType) => {
 		productName,
 		productPrice
 	);
+	console.log('eventid in payexamfee', itemId);
+
 	try {
 		await ExamFeeModel.create({
 			userId: userId,
@@ -108,6 +112,7 @@ const createPayExamFeeSession = async (itemId, userId, purchaseType) => {
 
 const createPaymentSession = async (metadata, productName, productPrice) => {
 	const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+	let message = 'suc'; // todo give proper message
 	const session = await stripe.checkout.sessions.create({
 		payment_method_types: ['card'],
 		mode: 'payment',
@@ -125,12 +130,13 @@ const createPaymentSession = async (metadata, productName, productPrice) => {
 		],
 		metadata,
 		expires_at: Math.floor(Date.now() / 1000) + 30 * 60, // 30 minutes from now
+
 		success_url:
 			process.env.ENVIRONMENT === 'development'
 				? // todo give proper links
 				  `${process.env.DEV_FRONTEND_BASE_LINK}${encodeURIComponent(
 						'programlarım'
-				  )}`
+				  )}?status=success&message=${message}`
 				: `${process.env.PROD_FRONTEND_BASE_LINK}${encodeURIComponent(
 						'programlarım'
 				  )}`,

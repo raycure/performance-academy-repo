@@ -46,10 +46,14 @@ const verifyMail = async (req, res) => {
 		}
 
 		const message = res.__('VerificationEmailResponses.success');
-		res.redirect(`http://localhost:5173?status=success&message=${message}`);
+		const url =
+			process.env.ENVIRONMENT === 'development'
+				? `${process.env.DEV_FRONTEND_BASE_LINK}?status=success&message=${message}`
+				: `${process.env.PROD_FRONTEND_BASE_LINK}?status=success&message=${message}`;
+		res.redirect(url);
 	} catch (error) {
 		const message = res.__('VerificationEmailResponses.error');
-		res.redirect(`http://localhost:5173?status=error&message=${message}`);
+		res.redirect(`?status=error&message=${message}`);
 	}
 };
 

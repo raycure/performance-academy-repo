@@ -21,6 +21,7 @@ import ipBlockChecker from './Middleware/ipBlockChecker.js';
 import * as dotenv from 'dotenv';
 import webhook from './Controllers/webhook.js';
 import i18n from '../config/i18n.js';
+import Users from './Models/userModel.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);

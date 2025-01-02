@@ -93,7 +93,6 @@ const login = async (req, res) => {
 			ip: clientIp,
 		});
 
-		// todo decide if i should retunr the user or nah
 		return res.status(200).json({
 			accessToken: accessToken,
 			message: res.__('loginResponses.success'),

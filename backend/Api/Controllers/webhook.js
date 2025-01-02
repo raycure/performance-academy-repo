@@ -80,7 +80,7 @@ const handleProductPurchase = async (session, language) => {
 	});
 
 	const foundUser = await Users.findById(userId);
-	await foundUser.addExamAttempt(eventId); // so the first attempt is already define and its gonna be stated as paid
+	await foundUser.addExamAttempt(eventId);
 
 	try {
 		const myProgramsUrl =

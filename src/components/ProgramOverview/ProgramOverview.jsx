@@ -26,13 +26,6 @@ function ProgramOverview({ eventDetails }) {
 			});
 		})
 		.filter(Boolean)[0];
-	useEffect(() => {
-		console.log('activeEvent', activeEvent);
-		console.log('eventDetails', eventDetails);
-		console.log('program', program);
-		console.log('lastExamResult', eventDetails.examAttempts[0].result);
-		console.log('lastExamResult', eventDetails.examAttempts.length);
-	}, []);
 
 	const scrollWithOffset = (el) => {
 		const yCoordinate = el.getBoundingClientRect().top + window.scrollY;
@@ -54,13 +47,19 @@ function ProgramOverview({ eventDetails }) {
 			});
 		});
 	});
+
+	console.log('eventDetails', eventDetails);
+
 	const lessonLength = extractNumbersFromString(program.lessons);
 	const handlePlaylistDowload = () => {};
 	const handleBookletDowload = () => {};
 	const handleChoreographyDowload = () => {};
 	const handleExamDowload = () => {};
 	const assessmentFormResult = true; //dosya yüklendi mi diye, sadece button disablelamak amacıyla kullandım
-	const leftAssessmentTries = 3 - eventDetails.examAttempts.length;
+	const leftAssessmentTries =
+		eventDetails.examAttempts.length === 0
+			? 3
+			: 3 - eventDetails.examAttempts.length;
 	const lastExamResult = eventDetails.examAttempts[0].result;
 	const buttonContent = [
 		{
@@ -101,21 +100,17 @@ function ProgramOverview({ eventDetails }) {
 
 	const dispatch = useDispatch();
 	async function testPayment() {
-		try {
-			const eventId = eventDetails.eventId;
-			const response = await dispatch(
-				AuthService({
-					method: 'POST',
-					endpoint: '/pay',
-					data: { id: eventId, purchaseType: 'payExamFee' },
-				})
-			);
-			const paymentUrl = response.payload.data.url;
-			if (paymentUrl) {
-				window.location = paymentUrl;
-			}
-		} catch (error) {
-			console.log('testPayment error', error);
+		const eventId = eventDetails.eventId;
+		const response = await dispatch(
+			AuthService({
+				method: 'POST',
+				endpoint: '/pay',
+				data: { id: eventId, purchaseType: 'payExamFee' },
+			})
+		);
+		const paymentUrl = response.payload.data.url;
+		if (paymentUrl) {
+			window.location = paymentUrl;
 		}
 	}
 
@@ -255,7 +250,7 @@ function ProgramOverview({ eventDetails }) {
 									: 'Sertifikanız e-posta yoluyla en yakın zamanda size ulaştırılacaktır.'}
 							</p>
 						</div>
-					) : (
+					) : lastExamResult === 'pending' ? (
 						<div>
 							<p style={{ color: '#aaaaaa' }}>
 								{i18n.language === 'en'
@@ -270,6 +265,8 @@ function ProgramOverview({ eventDetails }) {
 								: {leftAssessmentTries}
 							</p>
 						</div>
+					) : (
+						<div> Youll need to submit your exam in 3 months??? </div>
 					)}
 				</div>
 				<hr

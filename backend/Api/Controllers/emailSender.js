@@ -5,6 +5,8 @@ import ForgotEmail from '../../assets/emails/forgotPasswordEmail.js';
 import contactConfirmationEmail from '../../assets/emails/contactConfirmationEmail.js';
 import PurchaseConfirmationEmail from '../../assets/emails/confirmPurchaseEmail.js';
 import React from 'react';
+import * as dotenv from 'dotenv';
+dotenv.config();
 
 const emailSender = async (
 	emailType,
@@ -27,12 +29,15 @@ const emailSender = async (
 		const transporter = nodemailer.createTransport({
 			host: 'smtp.ethereal.email',
 			port: 587,
-			secure: false,
 			auth: {
-				user: 'mae1@ethereal.email',
-				pass: 'Ay1VH761Dr6AKQgSf5',
+				user: 'joseph.raynor99@ethereal.email',
+				pass: 'h3VMnkJHEHFqDBDd1D',
 			},
 		});
+		// host: 'smtp.hostinger.com',
+		// user: 'customerservice@infopfa.com',
+		// port: 465,
+		// pass: process.env.HOSTINGER_SMTP_PASSWORD,
 
 		let emailHtml;
 		let options;
@@ -48,7 +53,7 @@ const emailSender = async (
 					})
 				);
 				options = {
-					from: 'you@example.com',
+					from: 'customerservice@infopfa.com',
 					to: `${userEmailAdress}`,
 					subject:
 						language === 'tr' ? 'Doğrulama E-postası' : 'Verification Email',

@@ -66,6 +66,7 @@ const register = async (req, res) => {
 				? process.env.DEV_EMAIL_CONFIRMATION_LINK
 				: process.env.PROD_EMAIL_CONFIRMATION_LINK;
 		const verifyLink = activationLink + '/' + emailVerifyToken;
+		console.log('activationLink', activationLink);
 
 		try {
 			await emailSender(
