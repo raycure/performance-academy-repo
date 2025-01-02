@@ -105,9 +105,9 @@ function Login() {
 
 		setMailorNationalID('');
 		setPwd('');
-		// setTimeout(() => {
-		// 	navigate('/');
-		// }, 1000);
+		setTimeout(() => {
+			navigate('/');
+		}, 1000);
 	};
 	//11111111111  aaA!1aaa
 	return (

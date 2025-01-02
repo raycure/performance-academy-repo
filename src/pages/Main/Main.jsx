@@ -16,6 +16,7 @@ import BecomeInstructorCards from '../../components/BecomeInstructorCards/Become
 import { useDispatch } from 'react-redux';
 import { AuthService } from '../../auth/auth.service.js';
 import MilestoneCards from '../../components/Cards/MilestoneCards.jsx';
+import landingVideo from '../../assets/videos/landing.mp4';
 
 function Main() {
 	const dispatch = useDispatch();
@@ -110,24 +111,22 @@ function Main() {
 	return (
 		<>
 			<button onClick={deleteCollections}>delete collectiosn</button>
-			<div>
-				<video
-					className='fullSizedVid'
-					controls
-					style={{ height: `calc(100dvh - ${navbarHeight}px)` }}
-				>
-					<source src='path-to-your-video.mp4' type='video/mp4' />
-					Your browser does not support the video tag.
-				</video>
-			</div>
+			<video
+				className='fullSizedVid'
+				controls
+				muted
+				autoPlay
+				loop
+				controlsList='nodownload,noremoteplayback'
+				ö
+				style={{ height: `calc(100dvh - ${navbarHeight}px)` }}
+			>
+				<source src={landingVideo} type='video/mp4' />
+			</video>
 			<section className='main-welcome-text-outer-con'>
 				<h1>
 					{i18n.language === 'en' ? "What's Les Mills?" : 'Les Mills Nedir?'}
 				</h1>
-				{/* <div className='fs-primary-heading' style={{ color: '#edfb06' }}>
-						{i18n.language === 'en' ? 'Become a' : 'Lesmills'} <wbr />
-						{i18n.language === 'en' ? 'Lesmills Instructor' : 'Eğitmeni Olun'}
-					</div> */}
 				<p style={{ paddingInline: '0.5rem' }}>{t('MainPage.WelcomeText')}</p>
 			</section>
 			<section>
@@ -149,7 +148,6 @@ function Main() {
 				</Container>
 			</section>
 			<BecomeInstructorCards />
-
 			<section>
 				<h2
 					className='fs-primary-heading center-item'
@@ -167,7 +165,6 @@ function Main() {
 					{cards}
 				</Container>
 			</section>
-
 			{/* <section className='bannerLikeImageContainer' ref={scrollingImgRef}>
 				<motion.div
 					style={{
@@ -187,7 +184,6 @@ function Main() {
 				<span className='testspann' style={{ top: `${testHeight1}px` }}></span>
 			</div> */}
 			{/* //todo vidi gizle butonu */}
-
 			<Banner />
 			<section className='event-carousel-outer-con'>
 				<h2
