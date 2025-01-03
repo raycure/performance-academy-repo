@@ -12,8 +12,6 @@ const handleLogout = async (req, res) => {
 		return res.json({ message: 'logged out successfully' });
 	}
 
-	console.log('reacehd here');
-
 	let decodedToken;
 	try {
 		decodedToken = jwt.decode(refreshToken);
