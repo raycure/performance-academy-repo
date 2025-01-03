@@ -17,6 +17,7 @@ import { useDispatch } from 'react-redux';
 import { AuthService } from '../../auth/auth.service.js';
 import MilestoneCards from '../../components/Cards/MilestoneCards.jsx';
 import landingVideo from '../../assets/videos/landing.mp4';
+import PopupDialog from '../../components/Notification/Popup.jsx';
 
 function Main() {
 	const dispatch = useDispatch();

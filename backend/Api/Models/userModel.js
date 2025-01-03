@@ -16,7 +16,7 @@ const ExamAttemptSchema = new mongoose.Schema({
 	result: {
 		type: String,
 		enum: ['pending', 'passed', 'failed', 'null'],
-		default: 'addExamAttempt',
+		default: 'null',
 	},
 });
 
@@ -114,12 +114,7 @@ UserSchema.methods.findExamAttempt = function (eventId) {
 
 UserSchema.methods.updateExamPayment = function (isPaid, eventId) {
 	const attempt = this.findExamAttempt(eventId);
-	console.log('attempt in updateExamPayment', attempt);
 	attempt.isPaid = isPaid;
-
-	if (!attempt) {
-		console.log('couldnt find the attempt');
-	}
 	return this.save();
 };
 
@@ -163,13 +158,11 @@ UserSchema.methods.addExamAttempt = function (eventId, isPaid = false) {
 			purchase.examAttempts.push({
 				attemptNumber: purchase.examAttempts.length + 1,
 				isPaid,
-				result: 'null',
 			});
 		} else {
 			purchase.examAttempts.push({
 				attemptNumber: purchase.examAttempts.length + 1,
 				isPaid,
-				result: 'pending',
 			});
 		}
 	} catch (error) {

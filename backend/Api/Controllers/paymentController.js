@@ -159,12 +159,16 @@ const createPaymentSession = async (
 				  )}?status=success&message=${encodeURIComponent(message)}`
 				: `${process.env.PROD_FRONTEND_BASE_LINK}${encodeURIComponent(
 						'programlarım'
-				  )}?status=error&message=${encodeURIComponent(errMessage)}`,
+				  )}?status=success&message=${encodeURIComponent(message)}`,
 
 		cancel_url:
 			process.env.ENVIRONMENT === 'development'
-				? `${process.env.DEV_FRONTEND_BASE_LINK}`
-				: `${process.env.PROD_FRONTEND_BASE_LINK}`,
+				? `${process.env.DEV_FRONTEND_BASE_LINK}${encodeURIComponent(
+						'programlarım'
+				  )}?status=error&message=${encodeURIComponent(errMessage)}`
+				: `${process.env.PROD_FRONTEND_BASE_LINK}${encodeURIComponent(
+						'programlarım'
+				  )}?status=error&message=${encodeURIComponent(errMessage)}`,
 	});
 	return session;
 };

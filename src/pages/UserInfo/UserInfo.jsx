@@ -25,7 +25,7 @@ import { GrDocumentPdf } from 'react-icons/gr';
 import { Link } from 'react-router-dom';
 import HoneypotInput from '../../components/Forms/HoneypotInput';
 import axios from '../api/axios';
-
+import PopupDialog from '../../components/Notification/Popup';
 function UserInfo() {
 	const dispatch = useDispatch();
 
@@ -329,6 +329,15 @@ function UserInfo() {
 		localStorage.setItem('Notifexp', JSON.stringify(Notifexp));
 		const notificationEvent = new Event('notificationEvent');
 		window.dispatchEvent(notificationEvent);
+	};
+
+	const [isPopupOpen, setIsPopupOpen] = useState(false);
+	const handleProceed = () => {
+		setIsPopupOpen(false);
+		deleteAccount();
+	};
+	const handleCancel = () => {
+		setIsPopupOpen(false);
 	};
 	return (
 		<div className='user-info-page'>
@@ -907,6 +916,7 @@ function UserInfo() {
 					</div>
 				) : null}
 			</div>
+			;
 			<div style={{ margin: '1rem 0' }}>
 				<div className='user-info-btn-con'>
 					<button className='user-info-btn' onClick={handleLogout}>
@@ -922,7 +932,7 @@ function UserInfo() {
 					</button>
 					<button
 						className='user-info-btn user-delete-btn'
-						onClick={deleteAccount}
+						onClick={() => setIsPopupOpen(true)}
 					>
 						<MdDeleteForever
 							style={{
@@ -934,6 +944,12 @@ function UserInfo() {
 						/>
 						{i18n.language === 'en' ? 'Delete Account' : 'Hesabınızı Silin'}
 					</button>
+					<PopupDialog
+						isOpen={isPopupOpen}
+						onCancel={handleCancel}
+						onProceed={handleProceed}
+						message='Are you sure you want to continue?'
+					/>
 					<button
 						className={`user-info-btn ${isEditing ? '' : 'display-hidden'}`}
 						onClick={handleSubmit}
