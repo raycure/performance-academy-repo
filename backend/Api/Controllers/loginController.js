@@ -68,8 +68,6 @@ const login = async (req, res) => {
 			process.env.REFRESH_TOKEN_SECRET,
 			{ expiresIn: '365d' }
 		);
-		console.log('refreshToken', refreshToken);
-		console.log('process.env.ENVIRONMENT', process.env.ENVIRONMENT);
 		try {
 			res.cookie('jwt', refreshToken, {
 				httpOnly: true,
@@ -104,7 +102,6 @@ const login = async (req, res) => {
 		});
 	} catch (error) {
 		console.log('error', error);
-
 		return res.status(500).json({
 			success: false,
 			result: null,

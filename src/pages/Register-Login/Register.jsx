@@ -8,7 +8,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import AuthenticationGreet from './AuthenticationGreet.jsx';
 import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import logo from '../../assets/LesmillsLogo.png';
 import { useNavigate } from 'react-router-dom';
 import { selectError } from '../../redux/auth/authStateSlice.js';
 import { motion } from 'framer-motion';
@@ -154,15 +153,17 @@ function RegisterForm() {
 			if (response?.status === 200) {
 				displayNotif();
 			}
-			// setName('');
-			// setSurname('');
-			// setLocalLoading(true);
-			// setNationalID('');
-			// setPwd('');
-			// setMatchPwd('');
-			// setTimeout(() => {
-			// 	navigate('/');
-			// }, 1500);
+			const accessToken = response.payload.data.accessToken;
+			localStorage.setItem('accessToken', accessToken);
+			setName('');
+			setSurname('');
+			setLocalLoading(true);
+			setNationalID('');
+			setPwd('');
+			setMatchPwd('');
+			setTimeout(() => {
+				navigate('/');
+			}, 1500);
 		} catch (err) {
 			console.log('err', err);
 		}

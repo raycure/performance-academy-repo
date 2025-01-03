@@ -21,15 +21,12 @@ export const AuthService =
 				);
 
 				console.log('response in service', response);
-
 				const isAccessTokenRefresh =
 					response.payload?.headers &&
 					response.payload?.headers['x-refreshed-token'];
 
 				if (isAccessTokenRefresh) {
-					console.log('token refreshed');
 					let newAccessToken = response.payload.data.accessToken;
-					console.log('newAccessToken', newAccessToken);
 					localStorage.setItem('accessToken', newAccessToken);
 				}
 				if (fetchData.rejected.match(response)) {

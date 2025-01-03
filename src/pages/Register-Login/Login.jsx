@@ -4,7 +4,7 @@ import axios from '../api/axios.js';
 import { AuthService } from '../../auth/auth.service.js';
 
 import AuthenticationGreet from './AuthenticationGreet.jsx';
-import { Link, Navigate, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './formStyle.css';
 import Button from '../../components/Button/Button.jsx';
 import logo from '../../assets/LesmillsLogo.png';
@@ -113,7 +113,6 @@ function Login() {
 			setLocalLoading(false);
 		}
 	};
-	//11111111111  aaA!1aaa
 	return (
 		<div className='authentication-form-container box-shadow'>
 			<form onSubmit={handleSubmit} className='authentication-form'>
