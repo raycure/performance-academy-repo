@@ -13,7 +13,7 @@ dist
 dist-ssr
 *.local
 backend/upload/
-ecosystem.config.cjs
+src/pages/api/axios.js
 .env
 todo.txt
 
