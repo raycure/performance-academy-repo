@@ -9,6 +9,7 @@ const authMiddleware = async (req, res, next) => {
 	try {
 		const refreshToken = req.cookies.jwt;
 		if (!refreshToken) {
+			console.log('no refresh token');
 			return res.status(401).json({ message: res.__('unauthorized') });
 		}
 

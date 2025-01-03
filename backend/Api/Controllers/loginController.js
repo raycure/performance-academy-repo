@@ -69,13 +69,17 @@ const login = async (req, res) => {
 			{ expiresIn: '365d' }
 		);
 
-		res.cookie('jwt', refreshToken, {
-			httpOnly: true,
-			maxAge: 1000 * 60 * 60 * 24 * 30,
-			sameSite: 'Lax',
-			path: '/',
-			secure: process.env.ENVIRONMENT === 'development' ? false : true,
-		});
+		try {
+			res.cookie('jwt', refreshToken, {
+				httpOnly: true,
+				maxAge: 1000 * 60 * 60 * 24 * 30,
+				sameSite: 'Lax',
+				path: '/',
+				secure: process.env.ENVIRONMENT === 'development' ? false : true,
+			});
+		} catch (error) {
+			console.log('error setting cookie', error);
+		}
 
 		const clientIp = (
 			req.headers['x-forwarded-for'] ||

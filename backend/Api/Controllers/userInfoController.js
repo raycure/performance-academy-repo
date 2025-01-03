@@ -11,6 +11,7 @@ const { hash, compare } = pkg;
 export const userInfoFetchController = async (req, res) => {
 	try {
 		if (!req.isAuthenticated) {
+			console.log('no is authenticated ');
 			return res.status(401).json({ message: res.__('unauthorized') });
 		}
 		const userId = req.userId;
