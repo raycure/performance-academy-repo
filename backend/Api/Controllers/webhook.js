@@ -142,11 +142,7 @@ const handleCheckoutInvalidSession = async (event) => {
 					{ $set: { status } }
 				);
 				break;
-
 			default:
-				console.log(
-					`Unhandled purchase type for invalid session: ${purchaseType}`
-				);
 				break;
 		}
 	} catch (error) {
