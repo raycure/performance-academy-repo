@@ -156,6 +156,7 @@
 	},
 	"MyPrograms": {
 		"Entry": "On this page, you can access the contents of the events you have signed up for. These include a playlist of choreographies, a booklet specific to the event, and a general booklet for the program.\n\nYou can also view your exam results here. If you did not pass, you will be provided with a link to make the payment required to retake the exam.\n\nYou are allowed three attempts to pass the exam. After the first attempt, a fee of $50 will be required for each subsequent attempt. If you exhaust all three attempts without passing, you will need to register for a new event to try again.",
+		"AboutProcess": "After the event concludes, you will have one week to submit your exam video. Your results will be shared with you as soon as possible.",
 		"item1": "After participating in the event, you can access your training video through this platform.",
 		"item4": "If you joined a license program, you can access the updated content every 3 months via our Les Mills Releases App mobile application.",
 		"item5": [
@@ -172,6 +173,9 @@
 			"If your performance meets the required standards:",
 			"You will earn your official certificate.",
 			"Your certificate will be sent to you via email."
+		],
+		"EventTimeline":[
+			"Etkinliğimiz tamamlandıktan sonra sınav videonuzu göndermek için bir haftalık süreniz olacaktır. Sınav sonucunuz en kısa sürede size iletilecektir. Etkinliğimize kalan gün: "
 		]
 	},
 	"Milestones": {
@@ -189,3 +193,11 @@
 		]
 	}
 }
+
+
+
+
+
+
+
+

@@ -43,6 +43,8 @@ function Layout() {
 				message: message,
 			};
 			displayNotif(successNotification);
+			const newUrl = window.location.pathname;
+			window.history.replaceState({}, '', newUrl);
 		} else if (status === 'error') {
 			const errorNotification = {
 				type: 'error',
@@ -50,6 +52,8 @@ function Layout() {
 				message: message,
 			};
 			displayNotif(errorNotification);
+			const newUrl = window.location.pathname;
+			window.history.replaceState({}, '', newUrl);
 		}
 	}, [searchParams]);
 

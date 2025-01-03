@@ -10,15 +10,26 @@ const payment = async (req, res) => {
 	const userId = req.userId;
 	const { purchaseType } = req.body;
 	const itemId = req.body.id;
+	const language = req.language;
 
 	try {
 		let url;
 		switch (purchaseType) {
 			case 'productPurchase':
-				url = await createProductPurchaseSession(itemId, userId, purchaseType);
+				url = await createProductPurchaseSession(
+					itemId,
+					userId,
+					purchaseType,
+					language
+				);
 				break;
 			case 'payExamFee':
-				url = await createPayExamFeeSession(itemId, userId, purchaseType);
+				url = await createPayExamFeeSession(
+					itemId,
+					userId,
+					purchaseType,
+					language
+				);
 				break;
 			default:
 				break;
@@ -37,7 +48,12 @@ const payment = async (req, res) => {
 	}
 };
 
-const createProductPurchaseSession = async (itemId, userId, purchaseType) => {
+const createProductPurchaseSession = async (
+	itemId,
+	userId,
+	purchaseType,
+	language
+) => {
 	const foundItem = LesMillsEvents.find((event) => event.id === itemId);
 	const productPrice = foundItem.price * 100;
 	const metadata = {
@@ -67,7 +83,8 @@ const createProductPurchaseSession = async (itemId, userId, purchaseType) => {
 	const session = await createPaymentSession(
 		metadata,
 		productName,
-		productPrice
+		productPrice,
+		language
 	);
 	try {
 		await EventPurchaseModel.create({
@@ -94,8 +111,6 @@ const createPayExamFeeSession = async (itemId, userId, purchaseType) => {
 		productName,
 		productPrice
 	);
-	console.log('eventid in payexamfee', itemId);
-
 	try {
 		await ExamFeeModel.create({
 			userId: userId,
@@ -110,9 +125,15 @@ const createPayExamFeeSession = async (itemId, userId, purchaseType) => {
 	return session.url;
 };
 
-const createPaymentSession = async (metadata, productName, productPrice) => {
+const createPaymentSession = async (
+	metadata,
+	productName,
+	productPrice,
+	language
+) => {
 	const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
-	let message = 'suc'; // todo give proper message
+	let message = language === 'tr' ? 'Ödeme başarılı' : 'Payment successful';
+	let errMessage = language === 'tr' ? 'Ödeme başarısız' : 'Payment failed';
 	const session = await stripe.checkout.sessions.create({
 		payment_method_types: ['card'],
 		mode: 'payment',
@@ -133,13 +154,13 @@ const createPaymentSession = async (metadata, productName, productPrice) => {
 
 		success_url:
 			process.env.ENVIRONMENT === 'development'
-				? // todo give proper links
-				  `${process.env.DEV_FRONTEND_BASE_LINK}${encodeURIComponent(
+				? `${process.env.DEV_FRONTEND_BASE_LINK}${encodeURIComponent(
 						'programlarım'
-				  )}?status=success&message=${message}`
+				  )}?status=success&message=${encodeURIComponent(message)}`
 				: `${process.env.PROD_FRONTEND_BASE_LINK}${encodeURIComponent(
 						'programlarım'
-				  )}`,
+				  )}?status=error&message=${encodeURIComponent(errMessage)}`,
+
 		cancel_url:
 			process.env.ENVIRONMENT === 'development'
 				? `${process.env.DEV_FRONTEND_BASE_LINK}`

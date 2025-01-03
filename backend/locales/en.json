@@ -11,6 +11,9 @@
 		"invalidCredentials": "Invalid user credentials.",
 		"success": "User logged in successfully."
 	},
+	"logoutResponses":{
+		"success": "Logged out successfully."
+	},
 	"contactResponses": {
 		"success": "Your contact form has been submitted successfully. We will get back to you shortly.",
 		"error": "An error occurred while processing your form submission. Please try again later."
@@ -75,7 +78,7 @@
 		"question": "In question field"
 	},
 	"serverError": "An unexpected error occurred on the server.",
-	"sessionExpired": "Your session has expired. Please clear your browser cache and sign in again.",
+	"sessionExpired": "Your session has expired. Please sign in again.",
 	"verificationEmailResponses": {
 		"success": "Please check your inbox and click the verification link to confirm your email address.",
 		"error": "We're currently experiencing a temporary issue and were unable to send the verification email. Please try again shortly. If the problem persists, feel free to contact support for assistance."
@@ -84,7 +87,8 @@
 	"userInfoResponses": { 
 		"userUpdate": "User updated successfully. The following fields have been modified: ",
 		"userInfoFetch": "User information retrieved successfully.",
-		"noChanges": "No changes detected."
+		"noChanges": "No changes detected.",
+		"accountDeleted": "Your account has been successfully deleted."
 	},
 	"forgotPasswordForm": {
 		"inputField" : "Your new password can not have",
@@ -111,5 +115,9 @@
 	"VerificationEmailResponses": {
 		"success": "Your email has been successfully verified.",
 		"error": "An internal error occurred while verifying your email. Please try again or contact support if the problem continues."
+	},
+	"paymentResponses": {
+		"success": "Payment successful! Redirecting...",
+		"error": "An error occurred while processing your payment. Please try again later."
 	}
 }

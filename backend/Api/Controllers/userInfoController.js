@@ -6,23 +6,46 @@ import {
 	passwordSchema,
 	userinfoChangeSchemas,
 } from '../../Utils/schemas/userSchema.js';
+import Sessions from '../Models/sessionModel.js';
 const { hash, compare } = pkg;
 
 export const userInfoFetchController = async (req, res) => {
-	if (!req.isAuthenticated) {
-		return res
-			.status(401)
-			.json({ message: res.__('unauthorized'), message2: 'fetchcontroller' });
+	try {
+		if (!req.isAuthenticated) {
+			return res.status(401).json({ message: res.__('unauthorized') });
+		}
+		const userId = req.userId;
+		const foundUser = await Users.findOne({
+			_id: new ObjectId(userId),
+		});
+
+		return res.status(200).json({
+			message: res.__('userInfoResponses.userInfoFetch'),
+			foundUser,
+			accessToken: req.accessToken,
+		});
+	} catch (error) {
+		console.log('error', error);
 	}
-	const userId = req.userId;
-	const foundUser = await Users.findOne({
-		_id: new ObjectId(userId),
+};
+
+export const deleteAccount = async (req, res) => {
+	if (!req.isAuthenticated) {
+		return res.status(401).json({ message: res.__('unauthorized') });
+	}
+
+	await Users.deleteOne({
+		nationalId: req.body.nationalId,
+		email: req.body.email,
+	});
+	await Sessions.deleteOne({
+		nationalId: req.body.nationalId,
+		email: req.body.email,
 	});
 
 	return res.status(200).json({
-		message: res.__('userInfoResponses.userInfoFetch'),
-		foundUser,
-		accessToken: req.accessToken,
+		message: res.__('userInfoResponses.accountDeleted'),
+		notify: true,
 	});
 };
 

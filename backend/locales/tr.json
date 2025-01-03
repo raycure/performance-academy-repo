@@ -11,6 +11,9 @@
 	  "invalidCredentials": "Geçersiz kullanıcı bilgileri.",
 	  "success": "Başarıyla giriş yapıldı."
 	},
+	"logoutResponses":{
+		"success": "Başarıyla çıkış yapıldı."
+	},
 	"contactResponses": {
 	  "success": "İletişim formunuz başarıyla gönderildi. En kısa sürede size geri dönüş yapacağız.",
 	  "error": "Form gönderimi sırasında bir hata oluştu. Lütfen daha sonra tekrar deneyiniz."
@@ -75,7 +78,7 @@
 	  "question": "Soru alanında"
 	},
 	"serverError": "Sunucuda beklenmeyen bir hata oluştu.",
-	"sessionExpired": "Oturumunuzun süresi doldu. Lütfen tarayıcı önbelleğini temizleyip tekrar giriş yapın.",
+	"sessionExpired": "Oturumunuzun süresi doldu. Lütfen tekrar giriş yapın.",
 	"verificationEmailResponses": {
 	  "success": "Lütfen gelen kutunuzu kontrol edin ve e-posta adresinizi onaylamak için doğrulama bağlantısına tıklayın.",
 	  "error": "Şu anda geçici bir sorun yaşıyoruz ve doğrulama e-postasını gönderemedik. Lütfen kısa bir süre sonra tekrar deneyin. Sorun devam ederse, yardım için destek ekibiyle iletişime geçebilirsiniz."
@@ -84,7 +87,8 @@
 	"userInfoResponses": {
 	  "userUpdate": "Kullanıcı başarıyla güncellendi. Aşağıdaki alanlar değiştirildi: ",
 	  "userInfoFetch": "Kullanıcı bilgileri başarıyla alındı.",
-	  "noChanges": "Değişiklik tespit edilmedi."
+	  "noChanges": "Değişiklik tespit edilmedi.",
+		"accountDeleted": "Hesabınız başarıyla silindi."
 	},
 	"forgotPasswordForm": {
 	  "inputField": "Yeni şifreniz şunları içeremez",

@@ -60,7 +60,8 @@ function MyPrograms() {
 					paddingInline: '1rem',
 				}}
 			>
-				{t('MyPrograms.Entry')}
+				{t('MyPrograms.Entry')} <br /> <br />
+				{t('MyPrograms.AboutProcess')}
 			</p>
 			{userEventIds.length === 0 ? (
 				<section style={{ textAlign: 'center' }}>
@@ -69,13 +70,6 @@ function MyPrograms() {
 						: 'Henüz hiç program satın alınmadı.'}
 				</section>
 			) : (
-				/* (
-				userEventIds.map((item) => (
-					<div key={item.productId} style={{ margin: '4rem' }}>
-						<ProgramOverview eventID={item.productId} />
-					</div>
-				))
-			)} */
 				userEventIds.map((item) => (
 					<div key={item.productId} style={{ margin: '4rem' }}>
 						<ProgramOverview eventDetails={item} />

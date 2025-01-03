@@ -6,6 +6,7 @@ const BynderEmbed = ({
 	accountUrl,
 	language,
 	autoplay = 'false',
+	styleProp,
 }) => {
 	useEffect(() => {
 		// Check if the script loaded
@@ -21,15 +22,13 @@ const BynderEmbed = ({
 	}, [mediaId, accountUrl, language]);
 
 	return (
-		<section>
-			<div
-				style={{ margin: '0 auto', maxWidth: '1200px', padding: '2rem' }}
-				data-bynder-widget='video-item'
-				data-media-id={mediaId}
-				data-width={width}
-				data-autoplay={autoplay}
-			></div>
-		</section>
+		<div
+			style={{ ...styleProp }}
+			data-bynder-widget='video-item'
+			data-media-id={mediaId}
+			data-width={width}
+			data-autoplay={autoplay}
+		></div>
 	);
 };
 

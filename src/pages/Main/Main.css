@@ -39,7 +39,8 @@
 	border-radius: 0.6rem;
 }
 .milestone-cards li:nth-child(3n) {
-	background-color: #449669;
+	/* background-color: #449669; */
+	background-color: #27262f;
 	color: white;
 }
 .milestone-cards li p {

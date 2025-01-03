@@ -80,34 +80,38 @@ function Login() {
 	};
 
 	const handleSubmit = async () => {
-		let loginData;
-		if (/^\d+$/.test(mailorNationalID)) {
-			loginData = {
-				nationalID: mailorNationalID,
-				password: pwd,
-			};
-		} else {
-			loginData = {
-				email: mailorNationalID,
-				password: pwd,
-			};
-		}
-		setLocalLoading(true);
-		const response = await dispatch(
-			AuthService({
-				data: loginData,
-				method: 'POST',
-				endpoint: '/login',
-			})
-		);
-		const accessToken = response.payload.data.accessToken;
-		localStorage.setItem('accessToken', accessToken);
+		try {
+			let loginData;
+			if (/^\d+$/.test(mailorNationalID)) {
+				loginData = {
+					nationalID: mailorNationalID,
+					password: pwd,
+				};
+			} else {
+				loginData = {
+					email: mailorNationalID,
+					password: pwd,
+				};
+			}
+			setLocalLoading(true);
+			const response = await dispatch(
+				AuthService({
+					data: loginData,
+					method: 'POST',
+					endpoint: '/login',
+				})
+			);
+			const accessToken = response.payload.data.accessToken;
+			localStorage.setItem('accessToken', accessToken);
 
-		setMailorNationalID('');
-		setPwd('');
-		setTimeout(() => {
-			navigate('/');
-		}, 1000);
+			setMailorNationalID('');
+			setPwd('');
+			setTimeout(() => {
+				navigate('/');
+			}, 1000);
+		} catch (error) {
+			setLocalLoading(false);
+		}
 	};
 	//11111111111  aaA!1aaa
 	return (

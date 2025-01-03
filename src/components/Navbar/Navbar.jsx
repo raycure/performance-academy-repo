@@ -162,6 +162,7 @@ function Navbar() {
 			AuthService({ endpoint: '/logout', method: 'POST' })
 		);
 		localStorage.removeItem('accessToken');
+		navigate('/');
 	}
 
 	return (

@@ -4,6 +4,7 @@ import { ObjectId } from 'mongodb';
 import refreshJwt from '../Controllers/refreshJwt.js';
 import Sessions from '../Models/sessionModel.js';
 import jwt from 'jsonwebtoken';
+import handleLogout from '../Controllers/logoutController.js';
 const authMiddleware = async (req, res, next) => {
 	try {
 		const refreshToken = req.cookies.jwt;
@@ -19,6 +20,15 @@ const authMiddleware = async (req, res, next) => {
 				message: res.__('authResponses.noSession'),
 			});
 		}
+
+		try {
+			jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET);
+		} catch (decodeError) {
+			return res.status(403).json({
+				message: res.__('authResponses.noSession'),
+			});
+		}
+
 		const userIdFromToken = decodedToken.userId;
 
 		const foundActiveSession = await Sessions.findOne({
@@ -26,6 +36,7 @@ const authMiddleware = async (req, res, next) => {
 		});
 
 		if (!foundActiveSession) {
+			await handleLogout(req, res);
 			return res
 				.status(404)
 				.json({ message: res.__('authResponses.expiredSession') });

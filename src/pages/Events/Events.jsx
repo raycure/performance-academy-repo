@@ -244,15 +244,6 @@ function Events() {
 					infoActive={true}
 				/>
 			</section>
-			{/* <form onSubmit={handleUpload}>
-				<input
-					type='file'
-					onChange={handleFileChange}
-					accept='application/pdf'
-				/>
-				<button type='submit'>submit</button>
-			</form>
-			{message && <p>{message}</p>} */}
 		</div>
 	);
 }

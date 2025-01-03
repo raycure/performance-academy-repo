@@ -190,6 +190,7 @@ function ClassInfo() {
 					<img src={program.additionalPictures[3].url} alt='name' />
 				</section>
 				<BynderEmbed
+					styleProp={{ margin: '0 auto', maxWidth: '1200px', padding: '2rem' }}
 					mediaId={program.mediaId}
 					accountUrl='https://marketing.lesmills.com'
 					language={i18n.language}

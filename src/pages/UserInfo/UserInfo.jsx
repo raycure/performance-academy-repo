@@ -99,11 +99,6 @@ function UserInfo() {
 		e.preventDefault();
 		try {
 			let isContactSent = false;
-			if (file) {
-				await handleUpload();
-				isContactSent = true;
-				setFile(null);
-			}
 			const updateData = {
 				name,
 				surname,
@@ -122,6 +117,16 @@ function UserInfo() {
 			// await initUserInfo();
 		} catch (error) {}
 	}
+	async function deleteAccount() {
+		await dispatch(
+			AuthService({
+				method: 'POST',
+				endpoint: '/userInfo/deleteAccount',
+				data: { nationalID, email: mail },
+			})
+		);
+		localStorage.removeItem('accessToken');
+	}
 
 	const handleIsEditing = () => {
 		setPassword('');
@@ -129,6 +134,13 @@ function UserInfo() {
 		setIsEditing(true);
 	};
 
+	async function handleLogout() {
+		const response = await dispatch(
+			AuthService({ endpoint: '/logout', method: 'POST' })
+		);
+		localStorage.removeItem('accessToken');
+		navigate('/');
+	}
 	const { t, i18n } = useTranslation('translation');
 	const navigate = useNavigate();
 	const [isEditing, setIsEditing] = useState(false);
@@ -172,36 +184,6 @@ function UserInfo() {
 		}
 	};
 
-	const handleUpload = async () => {
-		if (!file) {
-			return null;
-		}
-		const formData = new FormData(); // formdata is a built in browser API it automatically handle the chunking of files
-		formData.append('file', file);
-		try {
-			const response = await axios.post('/upload', formData, {
-				headers: {
-					'Content-Type': 'multipart/form-data',
-				},
-			});
-
-			const verifyNotif = {
-				type: 'success',
-				duration: 3000,
-				message: 'file uploaded successfully',
-			};
-			displayNotif(verifyNotif);
-		} catch (error) {
-			const verifyNotif = {
-				type: 'error',
-				duration: 3000,
-				message: error.response.data.message,
-			};
-			displayNotif(verifyNotif);
-			throw new Error('file upload failed');
-		}
-	};
-
 	const displayInputAreaWarning = () => {
 		const verifyNotif = {
 			type: 'warning',
@@ -210,7 +192,7 @@ function UserInfo() {
 				i18n.language === 'en'
 					? 'If you want to change your ID or birth date, please contact our support team.'
 					: 'Eğer kimlik bilgilerinizi veya doğum tarihinizi değiştirmek istiyorsanız, lütfen destek ekibimizle iletişime geçin.',
-			link: 'http://localhost:5173/ileti%C5%9Fim',
+			link: 'http://localhost:5173/ileti%C5%9Fim', //todo: change this link
 		};
 		displayNotif(verifyNotif);
 	};
@@ -310,7 +292,35 @@ function UserInfo() {
 			}
 		}
 	};
-	const handleFileSend = () => {};
+	async function handleFileSend() {
+		try {
+			if (!file) {
+				return null;
+			}
+			const formData = new FormData(); // formdata is a built in browser API it automatically handle the chunking of files
+			formData.append('file', file);
+			const response = await axios.post('/upload', formData, {
+				headers: {
+					'Content-Type': 'multipart/form-data',
+				},
+			});
+			console.log('response', response);
+
+			const verifyNotif = {
+				type: 'success',
+				duration: 3000,
+				message: 'file uploaded successfully',
+			};
+			displayNotif(verifyNotif);
+		} catch (error) {
+			const verifyNotif = {
+				type: 'error',
+				duration: 3000,
+				message: error.response.data.message,
+			};
+			displayNotif(verifyNotif);
+		}
+	}
 	const displayNotif = (Notifexp) => {
 		localStorage.setItem('Notifexp', JSON.stringify(Notifexp));
 		const notificationEvent = new Event('notificationEvent');
@@ -896,7 +906,7 @@ function UserInfo() {
 			</div>
 			<div style={{ margin: '1rem 0' }}>
 				<div className='user-info-btn-con'>
-					<button className='user-info-btn'>
+					<button className='user-info-btn' onClick={handleLogout}>
 						<IoLogOutOutline
 							style={{
 								position: 'relative',
@@ -907,7 +917,10 @@ function UserInfo() {
 						/>
 						{i18n.language === 'en' ? 'Log out' : 'Çıkış Yapın'}
 					</button>
-					<button className='user-info-btn user-delete-btn'>
+					<button
+						className='user-info-btn user-delete-btn'
+						onClick={deleteAccount}
+					>
 						<MdDeleteForever
 							style={{
 								position: 'relative',

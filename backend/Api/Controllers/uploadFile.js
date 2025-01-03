@@ -89,11 +89,6 @@ const uploadFile = async (req, res) => {
 		const fileContent = await fs.promises.readFile(req.file.path);
 		// console.log('File size from read:', fileContent.length);
 
-		// Try to create a copy to verify write permissions
-		const testPath = path.join(uploadDir, 'test-' + Date.now() + '.txt');
-		await fs.promises.writeFile(testPath, 'test');
-		await fs.promises.unlink(testPath);
-		// Verify file was written to disk
 		try {
 			const stats = await fs.promises.stat(req.file.path);
 			// console.log('File stats:', stats);

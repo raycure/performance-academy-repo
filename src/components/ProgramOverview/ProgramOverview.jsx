@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { act, useEffect } from 'react';
 import './ProgramOverview.css';
 import { LesMillsEvents } from '../../assets/LesmillsEvents';
 import LesmillsPrograms from '../../assets/LesmillsPrograms';
@@ -13,11 +13,23 @@ import { IoMdArrowRoundForward } from 'react-icons/io';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { AuthService } from '../../auth/auth.service';
+import BynderEmbed from '../BynderEmbed/BynderEmbed';
 function ProgramOverview({ eventDetails }) {
 	const { i18n, t } = useTranslation('translation');
 	const activeEvent = LesMillsEvents.find((event) => {
 		return event.id === eventDetails.eventId;
 	});
+	function getTimeLine() {
+		const eventDate = activeEvent.fullStartDate;
+		const isFuture = eventDate > new Date();
+		const date = eventDate.toLocaleDateString('en-GB');
+		const attemptDeadline = new Date(activeEvent.fullEndDate);
+		attemptDeadline.setDate(attemptDeadline.getDate() + 7);
+		return isFuture
+			? { status: 'future', date }
+			: { status: 'past', date: attemptDeadline.toLocaleDateString('en-GB') };
+	}
+	const daysLeftOrBeen = getTimeLine();
 
 	const program = Object.keys(LesmillsPrograms())
 		.map((category) => {
@@ -47,8 +59,6 @@ function ProgramOverview({ eventDetails }) {
 			});
 		});
 	});
-
-	console.log('eventDetails', eventDetails);
 
 	const lessonLength = extractNumbersFromString(program.lessons);
 	const handlePlaylistDowload = () => {};
@@ -119,10 +129,20 @@ function ProgramOverview({ eventDetails }) {
 			className='prog-overview-outer-con text-container'
 			id={eventDetails.eventId}
 		>
-			<video controls style={{ width: '100%' }}>
-				<source src='' type='video/mp4' />
-				Your browser does not support the video tag.
-			</video>
+			<BynderEmbed
+				styleProp={{
+					padding: '0px',
+					maxWidth: '680px',
+					display: 'flex',
+					justifyContent: 'center',
+					margin: 'auto',
+				}}
+				className='program-overview-video'
+				mediaId={program.mediaId}
+				accountUrl='https://marketing.lesmills.com'
+				language={i18n.language}
+				autoplay={false}
+			/>
 			<div className='relative-position bg-primary-400 prog-overview-info-con'>
 				<p
 					className='fs-650'
@@ -266,7 +286,17 @@ function ProgramOverview({ eventDetails }) {
 							</p>
 						</div>
 					) : (
-						<div> Youll need to submit your exam in 3 months??? </div>
+						<div>
+							{' '}
+							{/* todo add 2 lang */}
+							{daysLeftOrBeen.status === 'future' ? (
+								<p>Etkinliğimizin başlangıç tarihi: {daysLeftOrBeen.date}</p>
+							) : (
+								<p>
+									Sınav teslimi yapmanız gereken tarih: {daysLeftOrBeen.date}
+								</p>
+							)}
+						</div>
 					)}
 				</div>
 				<hr

@@ -90,7 +90,7 @@ function CertificationSteps() {
 	return (
 		<Container
 			className='certftn-prcss-outer-con'
-			styleProp={{ margin: '30vh auto' }}
+			styleProp={{ margin: '15vh auto' }}
 		>
 			<div className='stepText'>
 				<button
