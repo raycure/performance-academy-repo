@@ -27,17 +27,19 @@ const emailSender = async (
 
 	try {
 		const transporter = nodemailer.createTransport({
-			host: 'smtp.ethereal.email',
-			port: 587,
+			host: 'smtp.hostinger.com',
+			port: 465,
 			auth: {
-				user: 'joseph.raynor99@ethereal.email',
-				pass: 'h3VMnkJHEHFqDBDd1D',
+				user: 'customerservice@infopfa.com',
+				pass: process.env.HOSTINGER_SMTP_PASSWORD,
 			},
+			// host: 'smtp.ethereal.email',
+			// port: 587,
+			// auth: {
+			// 	user: 'joseph.raynor99@ethereal.email',
+			// 	pass: 'h3VMnkJHEHFqDBDd1D',
+			// },
 		});
-		// host: 'smtp.hostinger.com',
-		// user: 'customerservice@infopfa.com',
-		// port: 465,
-		// pass: process.env.HOSTINGER_SMTP_PASSWORD,
 
 		let emailHtml;
 		let options;

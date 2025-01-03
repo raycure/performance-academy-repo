@@ -181,22 +181,6 @@ function Navbar() {
 					})}
 				</ul>
 
-				<button
-					onClick={() => {
-						navigate('/bilgilerim');
-					}}
-				>
-					bilgilerim{' '}
-				</button>
-
-				<button
-					onClick={() => {
-						navigate('/giriş-yap');
-					}}
-				>
-					login{' '}
-				</button>
-				<button onClick={handleLogout}>logout </button>
 				<div className='nav-btn-container nav-container'>
 					<div className='userDropDown' onClick={toggleDropdown}>
 						<FaUser id='navbar-dropdown-button' className='nav-item-icon' />

@@ -68,14 +68,12 @@ const UserSchema = mongoose.Schema(
 		},
 		verifiedMail: {
 			type: Boolean,
-			// default: false,
-			default: true,
+			default: false,
 		},
 		verifiedContract: {
 			type: String,
 			enum: ['pending', 'passed', 'failed', 'null'],
-			// default: 'null',
-			default: 'passed',
+			default: 'null',
 		},
 		blocked: {
 			type: Boolean,
@@ -152,11 +150,11 @@ UserSchema.methods.updateExamAttemptResult = function (
 	return this.save();
 };
 
-// Method to add a new exam attempt
 UserSchema.methods.addExamAttempt = function (eventId, isPaid = false) {
 	const purchase = this.findPurchase(eventId);
 
 	if (purchase.examAttempts.length === purchase.maxAttempts) {
+		// todo translate it too
 		throw new Error('Maximum exam attempts reached');
 	}
 	try {
