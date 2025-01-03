@@ -40,19 +40,19 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use('/pay', authMiddleware, paymentRoute);
 
-const limiter = rateLimit({
-	windowMs: 1000 * 60 * 60,
-	max: 200,
-	handler: (req, res, next) => {
-		res.status(429).json({
-			message: 'Too many requests, please try again later.',
-		});
-	},
-});
+// const limiter = rateLimit({
+// 	windowMs: 1000 * 60 * 60,
+// 	max: 200,
+// 	handler: (req, res, next) => {
+// 		res.status(429).json({
+// 			message: 'Too many requests, please try again later.',
+// 		});
+// 	},
+// });
 
 app.use('/blockIp', blockIpRoute);
 app.use(ipBlockChecker);
-app.use(limiter);
+// app.use(limiter);
 app.use('/register', registerRoute);
 app.use('/', loginRoute);
 app.use('/logout', logoutRoute);
