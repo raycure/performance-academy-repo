@@ -63,7 +63,7 @@
 		"Validation": {
 			"nameOrSurname": [
 				"Sadece karakterler ve boşluk geçerlidir.",
-				"4 ila 24 karakter aralığında olmalıdır."
+				"3 ila 24 karakter aralığında olmalıdır."
 			],
 			"UserId": ["Sadece sayılar geçerlidir.", "11 rakam olmalıdır."],
 			"Password": [

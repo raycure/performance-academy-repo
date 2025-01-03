@@ -64,7 +64,7 @@
 		"Validation": {
 			"nameOrSurname": [
 				"Only letters and whitespace character is allowed",
-				"Between 4 to 24 characters."
+				"Between 3 to 24 characters."
 			],
 			"UserId": ["Only numbers can be used.", "Has to be 11 numbers."],
 			"Password": [

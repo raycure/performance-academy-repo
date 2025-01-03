@@ -1,6 +1,8 @@
 import multer from 'multer';
 import fs from 'fs';
 import mongoose from 'mongoose';
+import Users from '../Models/userModel.js';
+import { ObjectId } from 'mongodb';
 import { fileURLToPath } from 'url';
 import path from 'path';
 const __filename = fileURLToPath(import.meta.url);
@@ -71,8 +73,6 @@ const upload = multer({
 });
 const uploadFile = async (req, res) => {
 	try {
-		// console.log('Starting file upload...');
-		// console.log('Request file:', req.file);
 		if (!req.file) {
 			return res.status(400).json({ message: 'No file uploaded' });
 		}
@@ -97,7 +97,10 @@ const uploadFile = async (req, res) => {
 			uploadedBy: req.user?.id || 'anonymous',
 		});
 		await newFile.save();
-		// console.log('File saved to database:', newFile);
+		await Users.updateOne(
+			{ _id: new ObjectId(req.body.userId) },
+			{ verifiedContract: 'pending' }
+		);
 		res.status(200).json({
 			message: 'File uploaded successfully',
 			file: {

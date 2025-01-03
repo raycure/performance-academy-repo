@@ -85,6 +85,7 @@ function UserInfo() {
 			setName(user.name);
 			setSurname(user.surname);
 			setBirthDate(day + '/' + month + '/' + year);
+			setUserId(user._id);
 			setNationalID(user.nationalID);
 			setContractverified(user.verifiedContract);
 			setVerifiedMail(user.verifiedMail);
@@ -98,7 +99,6 @@ function UserInfo() {
 	async function handleSubmit(e) {
 		e.preventDefault();
 		try {
-			let isContactSent = false;
 			const updateData = {
 				name,
 				surname,
@@ -111,10 +111,11 @@ function UserInfo() {
 				AuthService({
 					method: 'POST',
 					endpoint: '/userInfo',
-					data: { updateData, isContactSent },
+					data: { updateData },
 				})
 			);
-			// await initUserInfo();
+			await initUserInfo();
+			setIsEditing(false);
 		} catch (error) {}
 	}
 	async function deleteAccount() {
@@ -145,14 +146,12 @@ function UserInfo() {
 	const navigate = useNavigate();
 	const [isEditing, setIsEditing] = useState(false);
 	const [contractverified, setContractverified] = useState(null);
-	useEffect(() => {
-		console.log('contractverified', contractverified);
-	}, [contractverified]);
 	const [verifiedMail, setVerifiedMail] = useState(null);
 	const [name, setName] = useState('');
 	const [surname, setSurname] = useState('');
 	const [nationalID, setNationalID] = useState('');
 	const [birthDate, setBirthDate] = useState('');
+	const [userId, setUserId] = useState('');
 	const [mail, setMail] = useState('');
 	const [validName, setValidName] = useState('');
 	const [validSurname, setValidSurname] = useState('');
@@ -299,19 +298,19 @@ function UserInfo() {
 			}
 			const formData = new FormData(); // formdata is a built in browser API it automatically handle the chunking of files
 			formData.append('file', file);
+			formData.append('userId', userId);
 			const response = await axios.post('/upload', formData, {
 				headers: {
 					'Content-Type': 'multipart/form-data',
 				},
 			});
-			console.log('response', response);
-
 			const verifyNotif = {
 				type: 'success',
 				duration: 3000,
 				message: 'file uploaded successfully',
 			};
 			displayNotif(verifyNotif);
+			setContractverified('pending');
 		} catch (error) {
 			const verifyNotif = {
 				type: 'error',
@@ -326,11 +325,6 @@ function UserInfo() {
 		const notificationEvent = new Event('notificationEvent');
 		window.dispatchEvent(notificationEvent);
 	};
-	// useEffect(() => {
-	// 	if (!isEditing) {
-	// 		initUserInfo();
-	// 	}
-	// }, [isEditing]);
 	return (
 		<div className='user-info-page'>
 			<div className='user-info-inner-con user-info-title-con'>
@@ -881,7 +875,11 @@ function UserInfo() {
 										: fileName}
 								</p>
 							</label>
-							<button onClick={handleFileSend} disabled={fileName === null}>
+							<button
+								onClick={handleFileSend}
+								disabled={fileName === null}
+								type='button'
+							>
 								{i18n.language === 'en' ? 'Save' : 'Kaydet'}
 							</button>
 						</span>

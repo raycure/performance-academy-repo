@@ -70,7 +70,7 @@ export const userInfoPutController = async (req, res) => {
 				.status(422)
 				.json({ message: trasnlatedErrorField + ' ' + trasnlatedMessage });
 		}
-		if (updateData?.password) {
+		if (updateData?.newPassword) {
 			const hashedPassword = await hash(newPassword, 10);
 			await Users.findByIdAndUpdate(foundUser._id, {
 				password: hashedPassword,
@@ -110,13 +110,6 @@ export const userInfoPutController = async (req, res) => {
 				fieldsToUpdate[key] = newValue;
 			}
 		});
-		console.log('req.body', req.body);
-		if (req.body.isContactSent) {
-			await Users.updateOne(
-				{ _id: new ObjectId(userId) },
-				{ verifiedContract: 'pending' }
-			);
-		}
 		// Only update if there are changes
 		if (Object.keys(fieldsToUpdate).length > 0) {
 			await Users.updateOne(
@@ -124,7 +117,6 @@ export const userInfoPutController = async (req, res) => {
 				{ $set: fieldsToUpdate }
 			);
 			if (Object.keys(fieldsToUpdate).includes('email')) {
-				console.log('email changed');
 				await Users.updateOne(
 					{ _id: new ObjectId(userId) },
 					{ $set: { verifiedMail: false } }
