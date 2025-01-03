@@ -162,7 +162,20 @@ function Main() {
 					{cards}
 				</Container>
 			</section>
-			{/* //todo vidi gizle butonu */}
+			<section className='bannerLikeImageContainer' ref={scrollingImgRef}>
+				<motion.div
+					style={{
+						top: scrollWith,
+						position: 'absolute',
+						width: '100%',
+					}}
+				>
+					<img
+						style={{ width: '100%' }}
+						src='https://d2lsjsqnstxud9.cloudfront.net/media/13959BF0-BCE0-4B85-83FC898FABC86C4C/6DBF26B1-EAD1-41E8-87F578CFA9C6CC13/webimage-DB1F8A58-633C-4C11-98798C96D669CA94.jpg'
+					/>
+				</motion.div>
+			</section>
 			<Banner />
 			<section className='event-carousel-outer-con'>
 				<h2

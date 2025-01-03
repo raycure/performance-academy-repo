@@ -9,7 +9,7 @@ import { selectIsLoggedIn } from '../../redux/auth/authStateSlice';
 import { useDispatch } from 'react-redux';
 import { AuthService } from '../../auth/auth.service';
 import HoneypotInput from './HoneypotInput';
-import contactImage from '../../assets/contactImage.png';
+import contactImage from '../../assets/contactImage.jpg';
 function ContactForm() {
 	const contactForm = useRef();
 	const [name, setName] = useState('');

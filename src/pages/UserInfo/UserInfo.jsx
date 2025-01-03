@@ -196,7 +196,7 @@ function UserInfo() {
 				i18n.language === 'en'
 					? 'If you want to change your ID or birth date, please contact our support team.'
 					: 'Eğer kimlik bilgilerinizi veya doğum tarihinizi değiştirmek istiyorsanız, lütfen destek ekibimizle iletişime geçin.',
-			link: 'http://localhost:5173/ileti%C5%9Fim', //todo: change this link
+			link: 'https://infopfa.com/ileti%C5%9Fim',
 		};
 		displayNotif(verifyNotif);
 	};
@@ -916,7 +916,6 @@ function UserInfo() {
 					</div>
 				) : null}
 			</div>
-			;
 			<div style={{ margin: '1rem 0' }}>
 				<div className='user-info-btn-con'>
 					<button className='user-info-btn' onClick={handleLogout}>

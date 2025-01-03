@@ -66,11 +66,10 @@ function ProgramOverview({ eventDetails }) {
 	const handleChoreographyDowload = () => {};
 	const handleExamDowload = () => {};
 	const assessmentFormResult = true; //dosya yüklendi mi diye, sadece button disablelamak amacıyla kullandım
+	const examAttempts = eventDetails.examAttempts;
+	const lastExamResult = examAttempts[examAttempts.length - 1].result;
 	const leftAssessmentTries =
-		eventDetails.examAttempts.length === 0
-			? 3
-			: 3 - eventDetails.examAttempts.length;
-	const lastExamResult = eventDetails.examAttempts[0].result;
+		examAttempts.length === 0 ? 3 : 3 - examAttempts.length;
 	const buttonContent = [
 		{
 			text:
@@ -213,7 +212,7 @@ function ProgramOverview({ eventDetails }) {
 								<>
 									<hr
 										style={{
-											width: '20%',
+											width: '35%',
 											margin: '0.5rem auto',
 											borderTopWidth: '3px',
 										}}
@@ -288,12 +287,18 @@ function ProgramOverview({ eventDetails }) {
 					) : (
 						<div>
 							{' '}
-							{/* todo add 2 lang */}
 							{daysLeftOrBeen.status === 'future' ? (
-								<p>Etkinliğimizin başlangıç tarihi: {daysLeftOrBeen.date}</p>
+								<p>
+									{i18n.language === 'en'
+										? `We are thrilled to have you join us at the start of our event!
+									Event begins: ${daysLeftOrBeen.date}`
+										: `Sizi aramızda görmek için sabırsızlanıyoruz! Etkinlik başlangıcı: ${daysLeftOrBeen.date}`}
+								</p>
 							) : (
 								<p>
-									Sınav teslimi yapmanız gereken tarih: {daysLeftOrBeen.date}
+									{i18n.language === 'en'
+										? `Exam submission deadline: ${daysLeftOrBeen.date}`
+										: `Sınav teslimi yapmanız gereken tarih: ${daysLeftOrBeen.date}`}
 								</p>
 							)}
 						</div>
@@ -301,7 +306,7 @@ function ProgramOverview({ eventDetails }) {
 				</div>
 				<hr
 					style={{
-						width: '20%',
+						width: '35%',
 						alignSelf: 'center',
 						margin: '0rem',
 						borderTopWidth: '3px',

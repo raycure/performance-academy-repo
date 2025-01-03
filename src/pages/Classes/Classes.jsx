@@ -12,10 +12,10 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/effect-coverflow';
-import classesCarousel1 from '../../assets/classesCarousel1.png';
+import classesCarousel1 from '../../assets/classesCarousel1.jpg';
 import classesCarousel2 from '../../assets/classesCarousel2.jpg';
-import classesCarousel3 from '../../assets/classesCarousel3.png';
-import classesCarousel4 from '../../assets/classesCarousel4.png';
+import classesCarousel3 from '../../assets/classesCarousel3.jpg';
+import classesCarousel4 from '../../assets/classesCarousel4.jpg';
 
 function Classes() {
 	const location = useLocation();

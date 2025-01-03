@@ -6,7 +6,7 @@ import { FaInstagram } from 'react-icons/fa6';
 import { FaYoutube } from 'react-icons/fa6';
 import { FaTiktok } from 'react-icons/fa6';
 import { FaFacebookF } from 'react-icons/fa6';
-import background from '../../assets/BODYBALANCE-WALLPAPER.png';
+import background from '../../assets/BODYBALANCE-WALLPAPER.jpg';
 import { motion } from 'framer-motion';
 import {
 	socialSlide,

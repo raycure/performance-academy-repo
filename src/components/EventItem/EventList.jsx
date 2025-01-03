@@ -21,28 +21,32 @@ function EventList({ activeProgram, infoActive, onlineCheck, activeCategory }) {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 	let isLoggedIn = useSelector(selectIsLoggedIn);
-	const [initPaymentCooldown, setInitPaymentCooldown] = useState(0);
 	const [isPaymentDisabled, setIsPaymentDisabled] = useState(false);
-	useEffect(() => {
-		let timer;
-		if (initPaymentCooldown > 0) {
-			timer = setInterval(() => {
-				setInitPaymentCooldown((prev) => prev - 1);
-			}, 1000);
-		} else {
-			setIsPaymentDisabled(false);
-		}
-		return () => clearInterval(timer);
-	}, [initPaymentCooldown]);
+
+	const displayNotif = (Notifexp) => {
+		localStorage.setItem('Notifexp', JSON.stringify(Notifexp));
+		const notificationEvent = new Event('notificationEvent');
+		window.dispatchEvent(notificationEvent);
+	};
 
 	async function Payment(e) {
 		e.preventDefault();
 		setIsPaymentDisabled(true);
-		setInitPaymentCooldown(60);
 		if (!isLoggedIn) {
-			// todo give a notif that they need to login first
+			const message =
+				i18n.language === 'en'
+					? 'You need to sign-in to proceed to payment.'
+					: 'Ödeme işlemine devam etmek için giriş yapmalısınız.';
+			const successNotification = {
+				type: 'warning',
+				duration: 3000,
+				message: message,
+			};
+			displayNotif(successNotification);
 			navigate('/giriş-yap');
+			return null;
 		}
+
 		const response = await dispatch(
 			AuthService({
 				data: { id: selectedEvent.id, purchaseType: 'productPurchase' },
@@ -426,7 +430,7 @@ function EventList({ activeProgram, infoActive, onlineCheck, activeCategory }) {
 					</div>
 					<Button
 						disabled={
-							!acknowledgementChecked && isPaymentDisabled ? true : false
+							!acknowledgementChecked || isPaymentDisabled ? true : false
 						}
 						styleProp={{ marginInline: 'auto' }}
 						onClick={(e) => Payment(e)}

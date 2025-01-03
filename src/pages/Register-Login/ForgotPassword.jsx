@@ -75,27 +75,17 @@ const forgotPassword = () => {
 
 	async function handleResetPassword(e) {
 		e.preventDefault();
-
-		try {
-			const resetPasswordData = {
-				newPassword: pwd,
-				token: token,
-			};
-			const response = await dispatch(
-				AuthService({
-					data: resetPasswordData,
-					endpoint: '/forgotPassword/${token}',
-					method: 'POST',
-				})
-			);
-		} catch (err) {
-			if (err.response?.status === 429) {
-				setErrMsg('Too many requests, please try again later.');
-			}
-			err.payload?.data === undefined
-				? setErrMsg('int baglanti falan') // todo gercekten kontrol etmiyor server kapatilinca ancak calisiyor ve baglanti yokken calismiyor
-				: setErrMsg(err.payload?.data?.message);
-		}
+		const resetPasswordData = {
+			newPassword: pwd,
+			token: token,
+		};
+		await dispatch(
+			AuthService({
+				data: resetPasswordData,
+				endpoint: '/forgotPassword/${token}',
+				method: 'POST',
+			})
+		);
 	}
 	const eyeButtonCon = {
 		margin: 'auto 0.5rem',
