@@ -55,13 +55,13 @@ const CustomNotification = () => {
 	const renderIcon = () => {
 		switch (notification.type) {
 			case 'info':
-				return <FaInfoCircle style={{ width: '87%', height: '87%' }} />;
+				return <FaInfoCircle style={{ width: '80%', height: '80%' }} />;
 			case 'success':
-				return <FaCheckCircle style={{ width: '90%', height: '90%' }} />;
+				return <FaCheckCircle style={{ width: '80%', height: '80%' }} />;
 			case 'error':
-				return <HiMiniXCircle style={{ width: '100%', height: '100%' }} />;
+				return <HiMiniXCircle style={{ width: '95%', height: '95%' }} />;
 			case 'warning':
-				return <FaCircleExclamation style={{ width: '85%', height: '85%' }} />;
+				return <FaCircleExclamation style={{ width: '75%', height: '75%' }} />;
 			default:
 				return null;
 		}
