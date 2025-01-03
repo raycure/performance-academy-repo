@@ -14,10 +14,8 @@ import FAQ from '../../components/FAQ/FAQ.jsx';
 import { useTranslation } from 'react-i18next';
 import BecomeInstructorCards from '../../components/BecomeInstructorCards/BecomeInstructorCards.jsx';
 import { useDispatch } from 'react-redux';
-import { AuthService } from '../../auth/auth.service.js';
 import MilestoneCards from '../../components/Cards/MilestoneCards.jsx';
 import landingVideo from '../../assets/videos/landing.mp4';
-import PopupDialog from '../../components/Notification/Popup.jsx';
 
 function Main() {
 	const dispatch = useDispatch();
@@ -103,12 +101,12 @@ function Main() {
 		);
 	});
 
-	const scrollingImgRef = useRef(null);
-	const { scrollYProgress } = useScroll({
-		target: scrollingImgRef,
-		offset: ['start end', ' end start'], // first start is the top of the element and the end is the end of the screen ['',''] first quates are when the animation starts and the second one is when it ends
-	});
-	const scrollWith = useTransform(scrollYProgress, [0.3, 0.632], [0, -250]); // [0,0.91] is how much its being scrolled .91 because of the header [0,-250] for the top attribute and it changes based on the 0 to 0.91
+	// const scrollingImgRef = useRef(null);
+	// const { scrollYProgress } = useScroll({
+	// 	target: scrollingImgRef,
+	// 	offset: ['start end', ' end start'], // first start is the top of the element and the end is the end of the screen ['',''] first quates are when the animation starts and the second one is when it ends
+	// });
+	// const scrollWith = useTransform(scrollYProgress, [0.3, 0.632], [0, -250]); // [0,0.91] is how much its being scrolled .91 because of the header [0,-250] for the top attribute and it changes based on the 0 to 0.91
 	return (
 		<>
 			{/* <button onClick={deleteCollections}>delete collectiosn</button> */}
@@ -121,6 +119,7 @@ function Main() {
 				controlsList='nodownload,noremoteplayback'
 			>
 				<source src={landingVideo} type='video/mp4' />
+				Your browser does not support the video tag.
 			</video>
 			<section className='main-welcome-text-outer-con'>
 				<h1>Les Mills</h1>
@@ -162,7 +161,7 @@ function Main() {
 					{cards}
 				</Container>
 			</section>
-			<section className='bannerLikeImageContainer' ref={scrollingImgRef}>
+			{/* <section className='bannerLikeImageContainer' ref={scrollingImgRef}>
 				<motion.div
 					style={{
 						top: scrollWith,
@@ -175,7 +174,7 @@ function Main() {
 						src='https://d2lsjsqnstxud9.cloudfront.net/media/13959BF0-BCE0-4B85-83FC898FABC86C4C/6DBF26B1-EAD1-41E8-87F578CFA9C6CC13/webimage-DB1F8A58-633C-4C11-98798C96D669CA94.jpg'
 					/>
 				</motion.div>
-			</section>
+			</section> */}
 			<Banner />
 			<section className='event-carousel-outer-con'>
 				<h2
