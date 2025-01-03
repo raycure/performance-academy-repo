@@ -122,6 +122,8 @@ export const userInfoPutController = async (req, res) => {
 					{ $set: { verifiedMail: false } }
 				);
 			}
+			console.log('fieldsToUpdate', fieldsToUpdate);
+
 			return res.status(200).json({
 				message:
 					res.__('userInfoResponses.userUpdate') +

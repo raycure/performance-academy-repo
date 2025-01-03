@@ -119,14 +119,19 @@ function UserInfo() {
 		} catch (error) {}
 	}
 	async function deleteAccount() {
-		await dispatch(
-			AuthService({
-				method: 'POST',
-				endpoint: '/userInfo/deleteAccount',
-				data: { nationalID, email: mail },
-			})
-		);
-		localStorage.removeItem('accessToken');
+		try {
+			await dispatch(
+				AuthService({
+					method: 'POST',
+					endpoint: '/userInfo/deleteAccount',
+					data: { nationalID, email: mail },
+				})
+			);
+			localStorage.removeItem('accessToken');
+			navigate('/');
+		} catch (error) {
+			console.log("Couldn't delete account", error);
+		}
 	}
 
 	const handleIsEditing = () => {
