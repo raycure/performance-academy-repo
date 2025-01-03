@@ -21,12 +21,6 @@ function Process() {
 			});
 		});
 	});
-	const listItemStyle = {
-		float: 'left',
-		width: '1.4rem',
-		height: '100%',
-		margin: '1px 0.6rem 0px 1.3rem',
-	};
 	const headerStyle = {
 		width: 'fit-content',
 		padding: '1rem',
@@ -35,14 +29,6 @@ function Process() {
 	const topBotMargin = {
 		marginTop: '6rem',
 		marginBottom: '6rem',
-	};
-	const licenseListIcon = {
-		width: '1.4rem',
-		height: '1.4rem',
-		marginLeft: '1rem',
-		marginRight: '0.6rem',
-		display: 'float',
-		float: 'left',
 	};
 	const listItem = [
 		<>{t('Process.Overview.0')}</>,
@@ -92,7 +78,7 @@ function Process() {
 							{listItem.map((item) => {
 								return (
 									<li>
-										<MdOutlineDoubleArrow style={listItemStyle} />
+										<MdOutlineDoubleArrow className='listItemStyle' />
 										{item}
 									</li>
 								);
@@ -124,15 +110,15 @@ function Process() {
 					</h2>
 					<ul className='process-license-list'>
 						<li>
-							<IoIosHelpCircleOutline style={licenseListIcon} />
+							<IoIosHelpCircleOutline className='licenseListIcon' />
 							{t('Process.Comparison.License.Feature.0')}
 						</li>
 						<li>
-							<IoIosHelpCircleOutline style={licenseListIcon} />
+							<IoIosHelpCircleOutline className='licenseListIcon' />
 							{t('Process.Comparison.License.Feature.1')}
 						</li>
 						<li>
-							<IoIosHelpCircleOutline style={licenseListIcon} />
+							<IoIosHelpCircleOutline className='licenseListIcon' />
 							{t('Process.Comparison.License.Feature.2')}
 						</li>
 					</ul>

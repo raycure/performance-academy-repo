@@ -5,7 +5,7 @@
 	background-color: var(--clr-accent-400);
 	border-radius: 4px;
 	border: none;
-	font-size: 20px;
+	font-size: var(--fs-650);
 	font-weight: bold;
 	cursor: pointer;
 	position: relative;

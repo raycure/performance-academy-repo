@@ -1,27 +1,19 @@
-.bannerLikeImageContainer {
-	width: 100%;
-	position: relative;
-	height: 300px;
-	overflow: hidden;
-	background-color: transparent;
-}
-
 .landingParagraph {
 	display: flex;
 	flex-direction: column;
 	gap: 0.6rem;
+	max-width: 800px;
 }
 
 .landingPageContainer {
 	display: flex;
 	justify-content: space-between;
-	max-width: 1110px;
 	gap: 1.5rem;
 }
 
 .landingPageContainer .paragraph {
 	max-width: 40rem;
-	margin-top: 1.4rem;
+	margin-top: 1.2rem;
 }
 .milestone-cards li {
 	padding: 0.7rem 0.7rem 1.5rem;
@@ -71,7 +63,9 @@
 		flex-direction: column;
 		max-width: 750px;
 		padding-inline: 1.5rem;
+		align-items: center;
 	}
+
 	.landingPageContainer .paragraph {
 		max-width: unset;
 	}
@@ -79,17 +73,13 @@
 		display: none;
 	}
 	.event-carousel-outer-con h2 {
-		font-size: 2rem;
+		font-size: var(--fs-750);
 	}
 	.milestone-cards {
 		max-width: 600px;
 	}
 }
 @media (max-width: 800px) {
-	.landingPageContainer .fs-650 {
-		font-size: var(--fs-600);
-		font-weight: bolder;
-	}
 	.cardContent {
 		display: none !important;
 	}

@@ -130,9 +130,6 @@
 	.poster-heading {
 		font-size: 3.5rem;
 	}
-	.page-poster-container .fs-minimal-heading {
-		font-size: 1.5rem;
-	}
 	.class-rec-con .class-rec-item:nth-child(3) {
 		display: flex;
 	}

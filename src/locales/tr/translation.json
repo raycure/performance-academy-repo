@@ -10,8 +10,8 @@
 	"MainPage": {
 		"WelcomeText": "İnsanlara hayatlarını değiştirmeleri için ilham vermeye ve motive etmeye hazır mısınız? İster yıllardır Eğitmenlik yapıyor olun, ister yolculuğunuza yeni başlıyor olun, Les Mills Eğitmeni olarak başarılı bir kariyer için ihtiyacınız olan her şeyi size vereceğiz. Programlarımızdan herhangi birinde Eğitmen olarak eğitim alın - seçim sizin! \nLesmills farklı tarzlarda Grup Fitness Programları yapan dünyaca ünlü bir Eğitim Firmasıdır. Lesmills Programları 130 ülkede çoşkulu bir şekilde yapılmaktadır. Bir çok Eğitmen bu programlardan ilham alıp kendilerini dünya standarlarında star bir Eğitmen haline getirmişlerdir. Eğitimlere katıldığınız ve Sertifikanızı aldığınız taktirde Dünyanın her ülkesinde geçerli olan bu sertifika ile ders verebilirsiniz. O zaman bu eğitimlere nasıl katılabilir ve bu Sertifikayı nasıl alabilirsiniz? Sorusunu genel olarak bir gözden geçirelim.",
 		"LandingParagraph": [
-			"Dünya çapında bir Les Mills Eğitmeni olun ve fitness ile hayatları dönüştürün. Uluslararası alanda tanınan sertifikasyon programımız, 130'dan fazla ülkede öğretim yapabilmeniz için gerekli her şeyi sağlar.",
-			"Hareket yoluyla hayatları dönüştürün ve başkalarına potansiyellerine ulaşmaları için ilham verin. Dünyanın dört bir yanında insanların egzersiz deneyimlerini değiştiren, tutkulu fitness liderleri topluluğumuza katılın. İster deneyimli bir eğitmen olun, ister yolculuğunuza yeni başlayın, dünya çapında grup fitness eğitimi vererek ödüllendirici bir kariyer inşa etmeniz için size gereken araçlar, bilgi ve desteği sağlıyoruz. Kapsamlı eğitim programımız, program tekniklerini ustalıkla kullanmaktan koçluk becerilerinizi geliştirmeye kadar başarılı olmanız için ihtiyacınız olan her şeyi sunar. Yolculuğunuza bugün başlayın ve fitness dünyasında devrim yaratan, bir sınıfta birer birey olarak dönüşüm gerçekleştiren bu küresel hareketin bir parçası olun."
+			"Performance Fitness Academy, 2020 yılında Amerika’da kurulan ve fitness ile performans alanında uluslararası eğitimler sunan bir platformdur.",
+			"Geleceğin fitness liderlerini yetiştirmek için ilham verici bir eğitim deneyimi sunuyoruz. Yenilikçi yaklaşımlarımızla spor ve sağlık alanında donanımlı, yaratıcı ve vizyoner profesyoneller yetiştiriyoruz. Hedefimiz, fitness sektöründe global standartlara uygun eğitimler sunarak profesyonellerin dünyada fark yaratmalarını sağlamaktır. Sağlıklı bir dünya için çıktığımız bu yolda, uzmanlık kazandıran eğitimlerimizle liderlik kapasitenizi geliştirmeye hazırız. Performance Fitness Academy olarak, performansın ötesine geçmenize ve bir ilham kaynağı olmanıza destek oluyoruz. Geleceğinize yatırım yapın ve global bir fitness lideri olun!"
 		],
 		"CardsTitle": "Kategorilerimize Bir Göz Atın!",
 		"GridCard": {
@@ -99,7 +99,7 @@
 			]
 		},
 		"Form": {
-			"Title": "Bize Erişin!",
+			"Title": "Bize Ulaşın!",
 			"Name": "İsim",
 			"Surname": "Soyisim",
 			"Topic": "Konu",
@@ -144,7 +144,7 @@
 		"Contact": "Les Mills Eğitim Lisansı ile kulüplerinizde sertifikalı eğitmenler ile Lesmills dersleri verin! Lisans almak için bizimle iletişime geçmeniz gerekmektedir.",
 		"Overview": [
 			"İnsanlara hayatlarını değiştirmeleri için ilham vermeye ve motive etmeye hazır mısınız? İster yıllardır eğitmenlik yapıyor olun, ister yolculuğunuza yeni başlıyor olun, Les Mills Eğitmeni olarak başarılı bir kariyer için ihtiyacınız olan her şeyi size vereceğiz.",
-			"Programlarımızdan herhangi birinde Eğitmen olarak eğitim alın - seçim sizin!",
+			"Programlarımızın herhangi birinin Eğitimine katılıp eğitmen olabilirsiniz, seçim sizin!",
 			"2 günlük kurs açıklanan eğitim saatleri boyunca yürütülür. Yüz yüze eğitim etkinliğine veya çevrimiçi bir eğitim etkinliğine katılmayı seçebilirsiniz.",
 			"Müzik ve koreografi dahil olmak üzere kapsamlı eğitim materyalleri alacaksınız.",
 			"Birinci sınıf eğitmenler sizi eğitim boyunca adım adım yönlendirir",
@@ -185,7 +185,7 @@
 			"Her antrenman, üyelerin talep ettiği sonuçları sunmak için uzman bir ekip tarafından araştırılır, tasarlanır ve titizlikle test edilir.",
 			"Dünya çapında tanınan bir sertifika kazanın, sektörler genelinde becerilerinizi ve güvenilirliğinizi artırın.",
 			"Tercihlerinize uygun olarak hem yüz yüze hem de çevrimiçi düzenlenen çeşitli etkinliklerimizi keşfedin!",
-			"Basit üç adımlı süreci takip edin: etkinliğe katılın, sınav videonuzu gönderin ve başarılı olduğunuzda sertifikanızı kazanın."
+			"Basit üç adımlı süreci takip edin: Eğitime kaydol, Eğitime katıl, Videonu gönder, Sertifikanı al!"
 		]
 	}
 }

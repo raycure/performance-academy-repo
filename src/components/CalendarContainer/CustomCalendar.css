@@ -134,7 +134,7 @@
 @media (max-width: 350px) {
 	.fc-toolbar-title {
 		padding-left: 1rem;
-		font-size: 1em;
+		font-size: var(--fs-600);
 	}
 	.fc .fc-bg-event {
 		width: 25px;

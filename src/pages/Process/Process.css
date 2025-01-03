@@ -58,10 +58,10 @@
 	width: 40%;
 	text-align: center;
 	max-width: 580px;
-	font-size: 1.3rem;
+	font-size: var(--fs-650);
 }
 .process-initial-list {
-	font-size: 1.1rem;
+	font-size: var(--fs-600);
 	display: flex;
 	flex-direction: column;
 	margin-inline: auto;
@@ -69,10 +69,11 @@
 	gap: 1.5rem;
 }
 .process-contact-con p {
-	width: 50%;
-	max-width: 650px;
+	max-width: 450px;
 	text-align: center;
 	margin-inline: auto;
+	padding-inline: 1rem;
+	font-size: 1.1rem;
 }
 .process-contact-con {
 	padding: 2rem;
@@ -91,14 +92,19 @@
 .process-license-list li {
 	margin-top: 0.5rem;
 }
-.process-contact-con p {
-	font-size: 1.3rem;
+.licenseListIcon {
+	width: 1.4rem;
+	height: 1.4rem;
+	margin-left: 1rem;
+	margin-right: 0.6rem;
+	display: float;
+	float: left;
 }
-@media (max-width: 800px) {
-	.process-contact-con p {
-		font-size: 1.2rem;
-		width: 70%;
-	}
+.listItemStyle {
+	float: left;
+	width: var(--fs-650);
+	height: var(--fs-650);
+	margin: 0px 0.6rem 0px 1.3rem;
 }
 @media (max-width: 550px) {
 	.process-comparison-con {
@@ -106,10 +112,6 @@
 	}
 	.process-text-con {
 		padding: 1.5rem 1rem 2.5rem;
-	}
-	.process-contact-con p {
-		font-size: 1.2rem;
-		width: 90%;
 	}
 	.process-outer-con .page-poster-container {
 		display: none;

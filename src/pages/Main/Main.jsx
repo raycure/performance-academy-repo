@@ -118,15 +118,11 @@ function Main() {
 				autoPlay
 				loop
 				controlsList='nodownload,noremoteplayback'
-				ö
-				style={{ height: `calc(100dvh - ${navbarHeight}px)` }}
 			>
 				<source src={landingVideo} type='video/mp4' />
 			</video>
 			<section className='main-welcome-text-outer-con'>
-				<h1>
-					{i18n.language === 'en' ? "What's Les Mills?" : 'Les Mills Nedir?'}
-				</h1>
+				<h1>Les Mills</h1>
 				<p style={{ paddingInline: '0.5rem' }}>{t('MainPage.WelcomeText')}</p>
 			</section>
 			<section>
@@ -142,7 +138,7 @@ function Main() {
 							{t('MainPage.LandingParagraph.1')}
 						</p>
 					</div>
-					<div>
+					<div style={{ display: 'flex', alignItems: 'center' }}>
 						<MilestoneCards />
 					</div>
 				</Container>
@@ -165,24 +161,6 @@ function Main() {
 					{cards}
 				</Container>
 			</section>
-			{/* <section className='bannerLikeImageContainer' ref={scrollingImgRef}>
-				<motion.div
-					style={{
-						top: scrollWith,
-						position: 'absolute',
-						width: '100%',
-					}}
-				>
-					<img
-						style={{ width: '100%' }}
-						src='https://d2lsjsqnstxud9.cloudfront.net/media/13959BF0-BCE0-4B85-83FC898FABC86C4C/6DBF26B1-EAD1-41E8-87F578CFA9C6CC13/webimage-DB1F8A58-633C-4C11-98798C96D669CA94.jpg'
-					/>
-				</motion.div>
-			</section> */}
-			{/* <div style={{ position: 'relative' }} id='testttt'>
-				<img src={testortheflamboyantimg} style={{ top: testHeight1 }}></img>
-				<span className='testspann' style={{ top: `${testHeight1}px` }}></span>
-			</div> */}
 			{/* //todo vidi gizle butonu */}
 			<Banner />
 			<section className='event-carousel-outer-con'>

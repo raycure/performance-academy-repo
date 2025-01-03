@@ -27,7 +27,7 @@
 	opacity: 0.9;
 }
 .gridCard h2 {
-	font-size: 1.6rem;
+	font-size: var(--fs-650);
 	font-weight: 700;
 }
 
@@ -56,18 +56,10 @@
 .bcm-instr-cards-outer-con .fs-primary-heading {
 	gap: 1rem;
 }
+
 @media (max-width: 1045px) {
 	.bcm-instr-cards-outer-con .fs-primary-heading {
-		font-size: 2rem;
-	}
-	.bcm-instr-cards-logo {
-		height: 3rem;
-		bottom: 7px;
-	}
-}
-@media (max-width: 1045px) {
-	.bcm-instr-cards-outer-con .fs-primary-heading {
-		font-size: 2rem;
+		font-size: var(--fs-750);
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
@@ -75,6 +67,7 @@
 	}
 	.bcm-instr-cards-logo {
 		height: 3.5rem;
+		bottom: 7px;
 	}
 	.gridCardContainer {
 		display: flex;

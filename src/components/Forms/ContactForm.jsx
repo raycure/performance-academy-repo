@@ -84,9 +84,7 @@ function ContactForm() {
 				ref={contactForm}
 				className='contact-form-outer-container'
 			>
-				<p className='contact-form-header fs-900 text-container'>
-					{t('Contact.Form.Title')}
-				</p>
+				<p className='fs-800 text-container'>{t('Contact.Form.Title')}</p>
 				{!isLoggedIn && (
 					<>
 						<div className='contact-name-input-container'>
