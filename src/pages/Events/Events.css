@@ -223,9 +223,6 @@
 	}
 }
 @media (max-width: 530px) {
-	#event-page .fc img {
-		display: none;
-	}
 	.radio-group {
 		flex-direction: column;
 		gap: 0.2rem;
