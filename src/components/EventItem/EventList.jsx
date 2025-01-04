@@ -30,33 +30,37 @@ function EventList({ activeProgram, infoActive, onlineCheck, activeCategory }) {
 	};
 
 	async function Payment(e) {
-		e.preventDefault();
-		setIsPaymentDisabled(true);
-		if (!isLoggedIn) {
-			const message =
-				i18n.language === 'en'
-					? 'You need to sign-in to proceed to payment.'
-					: 'Ödeme işlemine devam etmek için giriş yapmalısınız.';
-			const successNotification = {
-				type: 'warning',
-				duration: 3000,
-				message: message,
-			};
-			displayNotif(successNotification);
-			navigate('/giriş-yap');
-			return null;
-		}
+		try {
+			e.preventDefault();
+			setIsPaymentDisabled(true);
+			if (!isLoggedIn) {
+				const message =
+					i18n.language === 'en'
+						? 'You need to sign-in to proceed to payment.'
+						: 'Ödeme işlemine devam etmek için giriş yapmalısınız.';
+				const successNotification = {
+					type: 'warning',
+					duration: 3000,
+					message: message,
+				};
+				displayNotif(successNotification);
+				navigate('/giriş-yap');
+				return null;
+			}
 
-		const response = await dispatch(
-			AuthService({
-				data: { id: selectedEvent.id, purchaseType: 'productPurchase' },
-				method: 'POST',
-				endpoint: '/pay',
-			})
-		);
-		const paymentUrl = response.payload.data.url;
-		if (paymentUrl) {
-			window.location = paymentUrl;
+			const response = await dispatch(
+				AuthService({
+					data: { id: selectedEvent.id, purchaseType: 'productPurchase' },
+					method: 'POST',
+					endpoint: '/pay',
+				})
+			);
+			const paymentUrl = response.payload.data.url;
+			if (paymentUrl) {
+				window.location = paymentUrl;
+			}
+		} catch (error) {
+			setIsPaymentDisabled(false);
 		}
 	}
 

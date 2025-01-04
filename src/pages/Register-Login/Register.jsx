@@ -145,7 +145,7 @@ function RegisterForm() {
 			const response = await dispatch(
 				AuthService({
 					data: registerData,
-					endpoint: '/register', //todo /kaydol
+					endpoint: '/register',
 					method: 'POST',
 				})
 			);

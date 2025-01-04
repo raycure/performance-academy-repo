@@ -115,5 +115,8 @@
 	"VerificationEmailResponses": {
 		"success": "E-postanız başarıyla doğrulandı.",
 		"error": "E-postanızı doğrularken bir iç hata oluştu. Lütfen tekrar deneyin veya sorun devam ederse destek ekibiyle iletişime geçin."
+	},
+	"WebhookResponses": {
+		"ExhaustedAttempts": "Maksimum sınav deneme hakkına ulaştınız."
 	}
   }

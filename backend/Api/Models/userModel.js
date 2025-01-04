@@ -68,12 +68,16 @@ const UserSchema = mongoose.Schema(
 		},
 		verifiedMail: {
 			type: Boolean,
-			default: false,
+			// default: false,
+			default: true,
+			// todo change it
 		},
 		verifiedContract: {
 			type: String,
 			enum: ['pending', 'passed', 'failed', 'null'],
-			default: 'null',
+			// default: 'null',
+			default: 'passed',
+			// todo change it
 		},
 		blocked: {
 			type: Boolean,
@@ -94,17 +98,12 @@ UserSchema.methods.findPurchase = function (eventId) {
 };
 
 UserSchema.methods.findExamAttempt = function (eventId) {
-	console.log('item id type in find attmept', typeof eventId);
-
 	const purchase = this.findPurchase(eventId);
 
 	const testAttemptNumber = purchase.examAttempts.length;
-	console.log(testAttemptNumber, 'testAttemptNumber');
 	const attempt = purchase.examAttempts.find(
 		(attempt) => attempt.attemptNumber === testAttemptNumber
 	);
-
-	console.log('found attempt in findExamAttempt', attempt);
 
 	if (!attempt) {
 		throw new Error('Exam attempt not found');
@@ -148,9 +147,10 @@ UserSchema.methods.updateExamAttemptResult = function (
 UserSchema.methods.addExamAttempt = function (eventId, isPaid = false) {
 	const purchase = this.findPurchase(eventId);
 
+	console.log('purchase in addexamattempt', purchase);
+
 	if (purchase.examAttempts.length === purchase.maxAttempts) {
-		// todo translate it too
-		throw new Error('Maximum exam attempts reached');
+		throw new Error('WebhookResponses.ExhaustedAttempts');
 	}
 	try {
 		if (purchase.examAttempts.length === 0) {
@@ -169,6 +169,7 @@ UserSchema.methods.addExamAttempt = function (eventId, isPaid = false) {
 		console.log('error in creating an attempt', error);
 	}
 
+	console.log('examattemtpts in addexamattempt', purchase.examAttempts);
 	return this.save();
 };
 

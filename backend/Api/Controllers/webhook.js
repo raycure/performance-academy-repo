@@ -80,7 +80,11 @@ const handleProductPurchase = async (session, language) => {
 	});
 
 	const foundUser = await Users.findById(userId);
-	await foundUser.addExamAttempt(eventId);
+	try {
+		await foundUser.addExamAttempt(eventId);
+	} catch (error) {
+		res.status(400).json({ message: res.__(`${error}`) });
+	}
 
 	try {
 		const myProgramsUrl =

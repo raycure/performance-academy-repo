@@ -1,21 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import './notificationStyle.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { IoInformationCircleOutline } from 'react-icons/io5';
-import { FaRegCircleCheck } from 'react-icons/fa6';
-import { TbExclamationCircle } from 'react-icons/tb';
 import { MdClose } from 'react-icons/md';
 import { useTranslation } from 'react-i18next';
-import { AiFillExclamationCircle } from 'react-icons/ai';
 import { FaInfoCircle } from 'react-icons/fa';
 import { FaCheckCircle } from 'react-icons/fa';
-import { FaTimesCircle } from 'react-icons/fa';
 import { FaCircleExclamation } from 'react-icons/fa6';
-import { FaCircleXmark } from 'react-icons/fa6';
 import { HiMiniXCircle } from 'react-icons/hi2';
 const CustomNotification = () => {
 	const [notification, setNotification] = useState(null);
-	const [notificationTitle, setNotificationTitle] = useState('');
 	const { t, i18n } = useTranslation('translation');
 	useEffect(() => {
 		window.addEventListener('notificationEvent', handleStorageChange);

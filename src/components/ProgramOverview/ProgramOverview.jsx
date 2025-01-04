@@ -14,6 +14,7 @@ import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { AuthService } from '../../auth/auth.service';
 import BynderEmbed from '../BynderEmbed/BynderEmbed';
+import { useState } from 'react';
 function ProgramOverview({ eventDetails }) {
 	const { i18n, t } = useTranslation('translation');
 	const activeEvent = LesMillsEvents.find((event) => {
@@ -108,7 +109,7 @@ function ProgramOverview({ eventDetails }) {
 	}
 
 	const dispatch = useDispatch();
-	async function testPayment() {
+	async function payExamFee() {
 		const eventId = eventDetails.eventId;
 		const response = await dispatch(
 			AuthService({
@@ -231,7 +232,7 @@ function ProgramOverview({ eventDetails }) {
 												gap: '0.3rem',
 											}}
 											className='addLineAnimation'
-											onClick={testPayment}
+											onClick={payExamFee}
 										>
 											{i18n.language === 'en'
 												? 'Pay The Exam Fee'
