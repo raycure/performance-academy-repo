@@ -106,7 +106,7 @@
 }
 .fc .fc-event-future {
 	border: 1px solid #363739;
-	padding: 1rem 0.3rem;
+	padding: 0.8rem 0.3rem;
 }
 .fc .fc-event-future:hover {
 	/* background-color: var(--clr-primary-350) !important; */

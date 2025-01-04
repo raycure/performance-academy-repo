@@ -108,7 +108,7 @@ function CalendarContainer() {
 			className='calendar-container user-select-none'
 		>
 			<CalendarEventItem eventClicked={eventClicked} eventId={activeEventId} />
-			<div style={{ maxWidth: '90vh' }}>
+			<div style={{ maxWidth: '80vh', margin: '1rem' }}>
 				<FullCalendar
 					plugins={[dayGridPlugin]}
 					initialView='dayGridMonth'
