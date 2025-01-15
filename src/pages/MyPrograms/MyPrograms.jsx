@@ -56,12 +56,10 @@ function MyPrograms() {
 					maxWidth: '700px',
 					marginInline: 'auto',
 					textAlign: 'center',
-					fontSize: '1.2rem',
 					paddingInline: '1rem',
 				}}
 			>
-				{t('MyPrograms.Entry')} <br /> <br />
-				{t('MyPrograms.AboutProcess')}
+				{t('MyPrograms.Entry')}
 			</p>
 			{userEventIds.length === 0 ? (
 				<section style={{ textAlign: 'center' }}>
@@ -71,7 +69,7 @@ function MyPrograms() {
 				</section>
 			) : (
 				userEventIds.map((item) => (
-					<div key={item.productId} style={{ margin: '4rem' }}>
+					<div key={item.productId} style={{ margin: '2rem' }}>
 						<ProgramOverview eventDetails={item} />
 					</div>
 				))

@@ -62,33 +62,20 @@ function ProgramOverview({ eventDetails }) {
 	});
 
 	const lessonLength = extractNumbersFromString(program.lessons);
-	const handlePlaylistDowload = () => {};
 	const handleBookletDowload = () => {};
-	const handleChoreographyDowload = () => {};
 	const handleExamDowload = () => {};
-	const assessmentFormResult = true; //dosya yüklendi mi diye, sadece button disablelamak amacıyla kullandım
 	const examAttempts = eventDetails.examAttempts;
 	const lastExamResult = examAttempts[examAttempts.length - 1].result;
 	const leftAssessmentTries =
 		examAttempts.length === 0 ? 3 : 3 - examAttempts.length;
 	const buttonContent = [
 		{
-			text:
-				i18n.language === 'en'
-					? 'Choreography Booklet'
-					: 'Koreografi Kitapçığı',
-			function: handleChoreographyDowload,
-		},
-		{
 			text: i18n.language === 'en' ? 'Program Booklet' : 'Program Kitapçığı',
 			function: handleBookletDowload,
 		},
 		{
-			text:
-				i18n.language === 'en'
-					? 'Choreography Playlist'
-					: 'Koreografi Şarkıları',
-			function: handlePlaylistDowload,
+			text: i18n.language === 'en' ? 'Empty Exam Form' : 'Boş Sınav Formu',
+			function: handleExamDowload,
 		},
 	];
 	function extractNumbersFromString(text) {
@@ -205,13 +192,13 @@ function ProgramOverview({ eventDetails }) {
 							</p>
 							<p>
 								{i18n.language === 'en'
-									? 'Amount of assessment tries left'
-									: 'Kalan sınav deneme hakkı'}
+									? 'Amount of training assessment tries left'
+									: 'Kalan eğitim sınavı deneme hakkı'}
 								: {leftAssessmentTries}
 							</p>
 							{leftAssessmentTries >= 1 ? (
 								<>
-									<hr
+									{/* <hr
 										style={{
 											width: '35%',
 											margin: '0.5rem auto',
@@ -247,7 +234,7 @@ function ProgramOverview({ eventDetails }) {
 												className='process-contact-icon'
 											/>
 										</Link>
-									</div>
+									</div> */}
 								</>
 							) : (
 								<p>
@@ -261,21 +248,21 @@ function ProgramOverview({ eventDetails }) {
 						<div>
 							<p style={{ color: '#67ef55' }}>
 								{i18n.language === 'en'
-									? 'Exam Result: Passed'
-									: 'Sınav Sonucu: Başarılı'}
+									? 'Training Result: Passed'
+									: 'Eğitim Sonucu: Başarılı'}
 							</p>
 							<p>
 								{i18n.language === 'en'
-									? 'Your certificate will be provided to you through email.'
-									: 'Sertifikanız e-posta yoluyla en yakın zamanda size ulaştırılacaktır.'}
+									? 'Good luck on your International Certificate Exam!'
+									: 'Uluslararası sertifika sınavınızda başarılar!'}
 							</p>
 						</div>
 					) : lastExamResult === 'pending' ? (
 						<div>
 							<p style={{ color: '#aaaaaa' }}>
 								{i18n.language === 'en'
-									? 'Exam Result: Under Review'
-									: 'Sınav Sonucu: İnceleme Altında'}
+									? 'Training Result: Under Review'
+									: 'Eğitim Sonucu: İnceleme Altında'}
 								...
 							</p>
 							<p>
@@ -315,13 +302,13 @@ function ProgramOverview({ eventDetails }) {
 				/>
 				<label className='fs-400' style={{ textAlign: 'center' }}>
 					{i18n.language === 'en'
-						? 'Click the buttons to download the the contents'
-						: 'İçerikleri indirmek için butonlara tıklayınız'}
+						? 'Choreography, instructor booklet and '
+						: 'Koreografi, eğitim kitapçığı ve müzik içerikleriniz size mail yoluyla ulaştırılacaktır.'}
 				</label>
 				<div className='program-overview-button-con'>
-					{buttonContent.map((content) => {
+					{buttonContent.map((content, index) => {
 						return (
-							<button onClick={() => content.function()}>
+							<button key={index} onClick={() => content.function()}>
 								<IoMdCloudDownload
 									style={{
 										width: '1.2rem',
@@ -335,21 +322,6 @@ function ProgramOverview({ eventDetails }) {
 							</button>
 						);
 					})}
-					<button
-						disabled={assessmentFormResult === false}
-						onClick={() => handleExamDowload()}
-					>
-						<IoMdCloudDownload
-							style={{
-								width: '1.2rem',
-								height: '100%',
-								marginRight: '0.4rem',
-								flexShrink: '0',
-							}}
-							className='overview-icon'
-						/>
-						{i18n.language === 'en' ? 'Assessment Form' : 'Değerlendirme Formu'}
-					</button>
 				</div>
 				<HashLink
 					to={'/programlar#' + program.id}

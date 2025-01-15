@@ -116,6 +116,7 @@ function CalendarContainer() {
 					buttonText={
 						i18n.language === 'tr' ? { today: 'Bugün' } : { today: 'Today' }
 					}
+					firstDay={1}
 					editable={false}
 					aspectRatio={1.1}
 					headerToolbar={{
@@ -127,7 +128,7 @@ function CalendarContainer() {
 					events={events}
 					eventClick={handleEventClick}
 					eventContent={renderEvents}
-					validRange={{ start: '2024-11-01', end: '2025-08-01' }} //we're gonna put the range of the events here
+					validRange={{ start: '2025-01-01', end: '2025-07-01' }} //we're gonna put the range of the events here
 				/>
 			</div>
 		</div>

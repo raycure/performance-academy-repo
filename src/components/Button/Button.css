@@ -3,9 +3,9 @@
 	text-align: center;
 	color: white;
 	background-color: var(--clr-accent-400);
-	border-radius: 4px;
+	border-radius: 6px;
 	border: none;
-	font-size: var(--fs-650);
+	font-size: var(--fs-625);
 	font-weight: bold;
 	cursor: pointer;
 	position: relative;

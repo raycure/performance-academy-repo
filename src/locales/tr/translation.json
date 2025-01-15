@@ -10,7 +10,7 @@
 	"MainPage": {
 		"WelcomeText": "İnsanlara hayatlarını değiştirmeleri için ilham vermeye ve motive etmeye hazır mısınız? İster yıllardır Eğitmenlik yapıyor olun, ister yolculuğunuza yeni başlıyor olun, Les Mills Eğitmeni olarak başarılı bir kariyer için ihtiyacınız olan her şeyi size vereceğiz. Programlarımızdan herhangi birinde Eğitmen olarak eğitim alın - seçim sizin! \nLesmills farklı tarzlarda Grup Fitness Programları yapan dünyaca ünlü bir Eğitim Firmasıdır. Lesmills Programları 130 ülkede çoşkulu bir şekilde yapılmaktadır. Bir çok Eğitmen bu programlardan ilham alıp kendilerini dünya standarlarında star bir Eğitmen haline getirmişlerdir. Eğitimlere katıldığınız ve Sertifikanızı aldığınız taktirde Dünyanın her ülkesinde geçerli olan bu sertifika ile ders verebilirsiniz. O zaman bu eğitimlere nasıl katılabilir ve bu Sertifikayı nasıl alabilirsiniz? Sorusunu genel olarak bir gözden geçirelim.",
 		"LandingParagraph": [
-			"Performance Fitness Academy, 2020 yılında Amerika’da kurulan ve fitness ile performans alanında uluslararası eğitimler sunan bir platformdur.",
+			"Performance Fitness Academy, Fitness ve Grup Fitness alanında uluslararası eğitimler sunan bir platformdur. Lesmills Türkiye’nin eğitim programlarına bu platform üzerinden ulaşabilirsiniz...",
 			"Geleceğin fitness liderlerini yetiştirmek için ilham verici bir eğitim deneyimi sunuyoruz. Yenilikçi yaklaşımlarımızla spor ve sağlık alanında donanımlı, yaratıcı ve vizyoner profesyoneller yetiştiriyoruz. Hedefimiz, fitness sektöründe global standartlara uygun eğitimler sunarak profesyonellerin dünyada fark yaratmalarını sağlamaktır. Sağlıklı bir dünya için çıktığımız bu yolda, uzmanlık kazandıran eğitimlerimizle liderlik kapasitenizi geliştirmeye hazırız. Performance Fitness Academy olarak, performansın ötesine geçmenize ve bir ilham kaynağı olmanıza destek oluyoruz. Geleceğinize yatırım yapın ve global bir fitness lideri olun!"
 		],
 		"CardsTitle": "Kategorilerimize Bir Göz Atın!",
@@ -154,8 +154,7 @@
 		]
 	},
 	"MyPrograms": {
-		"Entry": "Bu sayfada, katıldığınız etkinliklerin içeriklerine erişebilirsiniz. Bu içerikler arasında koreografi listesi, etkinliğe özel bir kitapçık ve programa genel bir kitapçık bulunmaktadır.\n\nAyrıca sınav sonuçlarınızı da burada görüntüleyebilirsiniz. Eğer sınavı geçemezseniz, sınava tekrar girmek için gerekli ödemeyi yapabileceğiniz bir bağlantı sağlanacaktır.\n\nSınavı geçmek için üç hakkınız bulunmaktadır. İlk denemenin ardından, her bir sonraki deneme için 50 dolar bir ücret ödemeniz gerekecektir. Eğer üç hakkınızı da kullanır ve sınavı geçemezseniz, tekrar denemek için yeni bir etkinliğe kayıt yaptırmanız gerekecektir.",
-		"AboutProcess": "Etkinlik tamamlandıktan sonra, sınav videonuzu göndermek için bir haftalık süreniz olacaktır. Sonuçlarınız en kısa sürede sizinle paylaşılacaktır.",
+		"Entry": "Bu sayfada, katıldığınız etkinliklerin içeriklerine erişebilirsiniz. Bu içerikler arasında katılmış olduğunuz programın Eğitim Modül Kitabı ve Uygulama Sınavında  başarılı olabilmeniz için beklentileri görsteren Sınav Formu bulunmaktadır. Ayrıca sınav sonuçlarınızı da burada görüntüleyebilirsiniz. Eğer sınavı geçemezseniz, sınava tekrar girmek için gerekli ödemeyi yapabileceğiniz bir bağlantı sağlanacaktır.  \n\n Katılmış olduğunuz etkinlik tamamlandıktan sonra sınav videonuzu göndermek için 1 haftalık bir süreniz olacaktır. Eğitim Programından “Geçti” sonucunu almak için 3 hakkınız bulunmaktadır. Bunun için Eğitim süresince size tanımlanan Sunum Parçasının videosunu sınıfa öğretiyor gibi çekip göndermelisiniz. Sınavınız sonucunda  “Geçti” sonucunu alırsanız uluslararası Sertifika sınavına girmeye hak kazanırsınız. Eğer “Sorumlu Geçti“ sonucunu alırsanız 2 sınav hakkınız daha bulunmaktadır ve bu sınavlar ücretsizdir. Toplamda 3 sınav hakkınızda “Sorumlu Geçti” sonucunu alırsanız hakkınızı kaybetmiş olup, tekrar bir deneme yapabilmek için yeni bir etkinliğe katılmanız gerekmektedir.\n\n Eğitim sınavınızda “Geçti” sonucunu aldığınız taktirde, Uluslararası Sertifika sınavına girmeye hak kazanırsınız. Sınavı geçmek için üç hakkınız bulunmaktadır, sınav için iki aylık bir süre içerisinde 30 dakikalık veya 45 dakikalık programın sürümünü en az 5 kişiden oluşan bir sınıfa öğretirken videonuzu çekmelisiniz. Size gönderdiğimiz sınav formundaki standartları gözeterek öğretmeye dikkat ediniz. İlk sınavınız ücretsizdir, “Geçti“ sonucunuzu alırsanız Sertifikanızı kazanmış olursunuz, fakat “Sorumlu Geçti” sonucunu alırsanız sonraki her bir sınav denemesi için 50 dolar bir ücret ödemeniz gerekecektir. Tüm süreç altı ay içerisinde tamamlanmalıdır. Eğer üç hakkınızı da kullanır ve sınavı geçemezseniz, tekrar denemek için yeni bir Eğitim etkinliğe kayıt yaptırmanız gerekecektir. Sınav değerlendirme sonuçlarınız sınav ardından 10 gün içerisinde sizlerle paylaşılacaktır.",
 		"item1": "Etkinliğe katıldıktan sonra, eğitim videonuza bu platform üzerinden erişebilirsiniz.",
 		"item4": "Lisans programına katıldıysanız, 3 ayda bir yenilenen içeriklere Les Mills Releases App mobil uygulamamız üzerinden ulaşabilirsiniz.",
 		"item5": [
@@ -170,8 +169,8 @@
 		],
 		"item3": [
 			"Performansınız uygun bulunursa:",
-			"Resmi sertifikanızı kazanacaksınız.",
-			"Sertifikanız tarafınıza e-posta yoluyla ulaştırılacaktır."
+			"Uluslararası Resmi Sertifika sınavına girmeye hak kazanacaksınız.",
+			"Sertifikanız, Uluslararası Sınavı geçmeniz koşuluyla tarafınıza e-posta yoluyla ulaştırılacaktır."
 		]
 	},
 	"Milestones": {
@@ -185,7 +184,7 @@
 			"Her antrenman, üyelerin talep ettiği sonuçları sunmak için uzman bir ekip tarafından araştırılır, tasarlanır ve titizlikle test edilir.",
 			"Dünya çapında tanınan bir sertifika kazanın, sektörler genelinde becerilerinizi ve güvenilirliğinizi artırın.",
 			"Tercihlerinize uygun olarak hem yüz yüze hem de çevrimiçi düzenlenen çeşitli etkinliklerimizi keşfedin!",
-			"Basit üç adımlı süreci takip edin: Eğitime kaydol, Eğitime katıl, Videonu gönder, Sertifikanı al!"
+			"Basit dört adımlı süreci takip edin: Eğitime kaydol, Eğitime katıl, Videonu gönder, Sertifikanı al!"
 		]
 	}
 }

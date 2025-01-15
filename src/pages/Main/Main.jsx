@@ -117,14 +117,11 @@ function Main() {
 				autoPlay
 				loop
 				controlsList='nodownload,noremoteplayback'
+				style={{ maxHeight: `calc(100dvh - ${navbarHeight}px)` }}
 			>
 				<source src={landingVideo} type='video/mp4' />
 				Your browser does not support the video tag.
 			</video>
-			<section className='main-welcome-text-outer-con'>
-				<h1>Les Mills</h1>
-				<p style={{ paddingInline: '0.5rem' }}>{t('MainPage.WelcomeText')}</p>
-			</section>
 			<section>
 				<Container className='landingPageContainer'>
 					<div className='landingParagraph'>
@@ -142,6 +139,10 @@ function Main() {
 						<MilestoneCards />
 					</div>
 				</Container>
+			</section>
+			<section className='main-welcome-text-outer-con'>
+				<h1>Les Mills</h1>
+				<p style={{ paddingInline: '0.5rem' }}>{t('MainPage.WelcomeText')}</p>
 			</section>
 			<BecomeInstructorCards />
 			<section>

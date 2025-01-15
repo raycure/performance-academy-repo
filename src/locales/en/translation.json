@@ -10,7 +10,7 @@
 	"MainPage": {
 		"WelcomeText": "Are you ready to inspire and motivate people to change their lives? Whether you've been coaching for years or are just beginning your journey, we’ll provide everything you need to build a successful career as a Les Mills Instructor. Train to become an instructor in any of our programs – the choice is yours! Les Mills is a world-renowned training organization that offers a variety of group fitness programs. These programs are enthusiastically practiced in 130 countries worldwide. Many instructors have drawn inspiration from these programs and transformed themselves into world-class stars. When you attend the training and receive your certification, you'll hold a credential recognized globally, allowing you to teach anywhere in the world. So, how can you participate in these trainings and obtain this certification? Let's take a closer look at that.",
 		"LandingParagraph": [
-			"Performance Fitness Academy, founded in 2020 in the United States, provides international standard training in fitness and performance.",
+			"Performance Fitness Academy is a platform that offers international training in Fitness and Group Fitness. You can access Lesmills Turkey's training programs through this platform...",
 			"We offer an inspiring educational experience to cultivate the fitness leaders of the future. Through innovative approaches in sports and health, we nurture well-equipped, creative, and visionary professionals. Our goal is to deliver globally aligned training programs that empower professionals to make a difference worldwide. Embark on this journey with us, where our expert-led education helps you refine your leadership skills. At Performance Fitness Academy, we support you in going beyond performance and becoming an inspiration. Invest in your future and become a global fitness leader!"
 		],
 		"CardsTitle": "Get a Peek Into Our Categories!",
@@ -155,8 +155,7 @@
 		]
 	},
 	"MyPrograms": {
-		"Entry": "On this page, you can access the contents of the events you have signed up for. These include a playlist of choreographies, a booklet specific to the event, and a general booklet for the program.\n\nYou can also view your exam results here. If you did not pass, you will be provided with a link to make the payment required to retake the exam.\n\nYou are allowed three attempts to pass the exam. After the first attempt, a fee of $50 will be required for each subsequent attempt. If you exhaust all three attempts without passing, you will need to register for a new event to try again.",
-		"AboutProcess": "After the event concludes, you will have one week to submit your exam video. Your results will be shared with you as soon as possible.",
+		"Entry": "On this page, you can access the content for the events you participated in. This content includes the Training Module Book for the program you attended and the Exam Form, which outlines the expectations to succeed in the Practical Exam. Additionally, you can view your exam results here. If you do not pass the exam, a link will be provided to make the necessary payment to retake the exam. \n\n After the event you participated in is completed, you will have one week to submit your exam video. You have three attempts to achieve a “Passed” result in the Training Program. To do so, you must record and submit a video of yourself teaching the assigned Presentation Piece to a class, as if you were instructing them. If you achieve a “Passed” result in your exam, you will qualify to take the International Certificate exam. If you receive a “Conditionally Passed” result, you will have two more exam attempts, both of which are free. If you receive a “Conditionally Passed” result in all three exam attempts, you will lose your eligibility and need to register for a new event to try again. \n\n If you achieve a “Passed” result in your training exam, you will qualify to take the International Certificate exam. You have three attempts to pass this exam. For the first attempt, within two months, you must record a video of yourself teaching either a 30-minute or 45-minute program version to a class of at least five participants. Be sure to follow the standards outlined in the exam form provided to you. The first exam is free. If you receive a “Passed” result, you will earn your Certificate. However, if you receive a “Conditionally Passed” result, you will need to pay $50 for each subsequent exam attempt. The entire process must be completed within six months. If you use all three attempts and do not pass, you will need to register for a new Training event to try again. Your exam evaluation results will be shared with you within 10 days of your exam. After the event is completed, you will have one week to submit your exam video. Your results will be shared with you as soon as possible.",
 		"item1": "After participating in the event, you can access your training video through this platform.",
 		"item4": "If you joined a license program, you can access the updated content every 3 months via our Les Mills Releases App mobile application.",
 		"item5": [
@@ -171,8 +170,8 @@
 		],
 		"item3": [
 			"If your performance meets the required standards:",
-			"You will earn your official certificate.",
-			"Your certificate will be sent to you via email."
+			"You will get the chance to enter the International Certificate exam.",
+			"After passing the International Certificate Exam, your certificate will be sent to you via email."
 		],
 		"EventTimeline": [
 			"Etkinliğimiz tamamlandıktan sonra sınav videonuzu göndermek için bir haftalık süreniz olacaktır. Sınav sonucunuz en kısa sürede size iletilecektir. Etkinliğimize kalan gün: "
@@ -189,7 +188,7 @@
 			"Every workout is researched, designed and rigorously tested by a team of experts to deliver the results members demand.",
 			"Earn a certification recognized worldwide, enhancing your skills and credibility across industries.",
 			"Explore our diverse events, available both in-person and online, to suit your preference!",
-			"Follow a simple three-step process: Enroll in an event, Attend the event, Aubmit your examination video, and Earn your certificate!"
+			"Follow a simple four-step process: Enroll in an event, Attend the event, Aubmit your examination video, and Earn your certificate!"
 		]
 	}
 }

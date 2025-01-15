@@ -1,7 +1,7 @@
 .prog-overview-outer-con {
 	display: flex;
 	margin: 2rem auto;
-	max-width: 1200px;
+	max-width: 1000px;
 	border-image: linear-gradient(
 			to bottom,
 			var(--clr-primary-400) 0%,
@@ -39,7 +39,7 @@
 }
 .program-overview-button-con {
 	display: grid;
-	grid-template-areas: 'a b' 'c d';
+	grid-template-columns: auto auto;
 	gap: 0.7rem;
 }
 .program-overview-redirect-icon {
@@ -56,10 +56,10 @@
 	padding: 0.5rem;
 	border-radius: 6px;
 	border: 1px solid white;
-	grid-area: auto;
 	font-size: var(--fs-300);
 	display: flex;
 	align-items: center;
+	justify-content: center;
 }
 .program-overview-button-con button:not(:disabled):hover {
 	background-color: var(--clr-primary-300);
@@ -141,9 +141,10 @@
 	padding-inline: 3rem;
 	max-width: 1000px;
 }
-@media (max-width: 850px) {
+@media (max-width: 1100px) {
 	.prog-overview-outer-con {
 		flex-direction: column;
+		max-width: 700px;
 	}
 	.prog-overview-info-con {
 		width: 100%;

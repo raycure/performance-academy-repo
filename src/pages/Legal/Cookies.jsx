@@ -22,7 +22,7 @@ const CookieConsent = () => {
 	if (!showBanner) return null;
 
 	return (
-		<div className='cookiesBanner user-select-none'>
+		<div className='cookiesBanner user-select-none bg-primary-300'>
 			{i18n.language === 'en' ? (
 				<p>
 					This website uses only essential cookies. For more information, please
@@ -39,7 +39,7 @@ const CookieConsent = () => {
 				</p>
 			)}
 
-			<button className='cookiesButton' onClick={handleAccept}>
+			<button className='cookiesButton bg-accent-400' onClick={handleAccept}>
 				{i18n.language === 'en' ? 'Accept' : 'Kabul Et'}
 			</button>
 		</div>

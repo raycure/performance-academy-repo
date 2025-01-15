@@ -11,7 +11,7 @@ import {
 	Link,
 	Row,
 } from '@react-email/components';
-import EmailComponent from './EmailComponent.js';
+import EmailComponent from './EmailComponent';
 // Localization data
 const localizationData = {
 	en: {
@@ -20,9 +20,7 @@ const localizationData = {
 		content: {
 			text: [
 				'We have confirmed that you have bought our {program} program event. ',
-				'Thank you for joining us on this journey, we are thrilled to have you here with us! Now that we have confirmed the transaction you can acquire the initial content we have provided through the ',
-				' my courses page',
-				'.',
+				'Thank you for joining us on this journey, we are thrilled to have you here with us! You can acquire the initial content through an email we will send you 10 days before the event starts. ',
 				"Don't forget that the event you have purchased will start on {startDate} and end on {endDate} dates.",
 			],
 			ternary: [
@@ -39,9 +37,7 @@ const localizationData = {
 		content: {
 			text: [
 				'{program} programı etkinliğimize katıldığınızı başarıyla doğruladık! ',
-				'Bize bu yolculukta katıldığınız için çok heyecanlıyız, sizi aramızda görmek çok hoş! Ödeme doğrulamasının ardından ön içeriklere ',
-				'kurslarım',
-				' sayfasından ulaşabilirsiniz',
+				'Bize bu yolculukta katıldığınız için çok heyecanlıyız, sizi aramızda görmek çok hoş! Ödeme doğrulamasının ardından ön içeriklere size etkinlikten 10 gün önce yollayacağımız mail üzerinden ulaşabileceksiniz. ',
 				'Satın almış olduğunuz etkinliğin {startDate} ila {endDate} tarihleri arasında gerçekleştirileceğini unutmayınız.',
 			],
 			ternary: [
@@ -97,7 +93,7 @@ export default function PurchaseConfirmationEmail({
 	// Select localization based on language, default to English
 	console.log('url', url);
 	console.log('url', url.myProgramsUrl);
-	const local = localizationData[language] || localizationData['en'];
+	const local = localizationData[language] || localizationData['tr'];
 	// Helper function to replace placeholders in text
 	const formatText = (text) =>
 		text
@@ -133,13 +129,7 @@ export default function PurchaseConfirmationEmail({
 								children: [
 									formatText(local.content.text[0]),
 									formatText(local.content.text[1]),
-									_jsx(Link, {
-										href: url.myProgramsUrl,
-										children: local.content.text[2],
-									}),
-									local.content.text[3],
-									' ',
-									formatText(local.content.text[4]),
+									formatText(local.content.text[2]),
 								],
 							}),
 						}),
