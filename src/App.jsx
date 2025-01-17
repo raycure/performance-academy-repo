@@ -10,8 +10,8 @@ import './index.css';
 import Main from './pages/Main/Main';
 import Process from './pages/Process/Process';
 import UserInfo from './pages/UserInfo/UserInfo';
-const Layout = lazy(() => import('./pages/Layout/Layout')); //todo choose what to lazily load and what not to
-const Events = lazy(() => import('./pages/Events/Events'));
+import Layout from './pages/Layout/Layout';
+import Events from './pages/Events/Events';
 const Contact = lazy(() => import('./pages/Contact/Contact'));
 const PageNotFound = lazy(() => import('./pages/PageNotFound/PageNotFound'));
 const Register = lazy(() => import('./pages/Register-Login/Register'));

@@ -46,17 +46,9 @@ function ProgramOverview({ eventDetails }) {
 
 	// we use the timeline function and in it we need the examtype to set the deadline so examtype is declared earlier
 	function getTimeLine() {
-		console.log('eventDetails', eventDetails);
 		const eventDate = activeEvent.fullStartDate;
-		// const isFuture = eventDate > new Date();
-		const isFuture = false; //todo revert back to the normal way
+		const isFuture = eventDate > new Date();
 		const date = eventDate.toLocaleDateString('en-GB');
-		console.log(
-			'examtYpe for the program: ',
-			program,
-			'HERE',
-			examAttempts[examAttempts.length - 2].resultUpdatedAt
-		);
 		let attemptDeadline;
 		if (examType.length === 1) {
 			attemptDeadline = new Date(activeEvent.fullEndDate);
@@ -65,10 +57,6 @@ function ProgramOverview({ eventDetails }) {
 			switch (examType) {
 				case 'examAttempts':
 					attemptDeadline = new Date(
-						examAttempts[examAttempts.length - 2].resultUpdatedAt
-					);
-					console.log(
-						'examAttempts[examAttempts.length - 2].resultUpdatedAt',
 						examAttempts[examAttempts.length - 2].resultUpdatedAt
 					);
 
@@ -110,7 +98,7 @@ function ProgramOverview({ eventDetails }) {
 		});
 	});
 
-	async function handleBookletDowload() {
+	function handleBookletDowload() {
 		try {
 			const link = document.createElement('a');
 			link.href = pdfUrls.handbook;
@@ -122,7 +110,7 @@ function ProgramOverview({ eventDetails }) {
 			console.error('Error downloading PDF:', error);
 		}
 	}
-	async function handleExamDowload() {
+	function handleExamDowload() {
 		try {
 			const link = document.createElement('a');
 			link.href = pdfUrls.examForm;
@@ -157,7 +145,6 @@ function ProgramOverview({ eventDetails }) {
 			}
 			return pdf.default;
 		} catch (err) {
-			console.error(`Error loading ${documentType} PDF:`, err);
 			return null;
 		}
 	};
@@ -358,8 +345,8 @@ function ProgramOverview({ eventDetails }) {
 													style={{ marginBottom: '0.3rem' }}
 												>
 													{i18n.language === 'en'
-														? 'If you want to retake the exam.' // todo find what to write
-														: 'Tekrar sınava girmek istiyorsanız.'}
+														? 'If you want to retake the exam, you’ll need to send in your evaluation video again.'
+														: 'Sınavı yeniden almak istiyorsanız, değerlendirme videonuzu tekrar göndermeniz gerekiyor.'}
 												</p>
 											)}
 										</div>
@@ -423,7 +410,7 @@ function ProgramOverview({ eventDetails }) {
 						<div>
 							<p>
 								{i18n.language === 'en'
-									? `Unfortunately, your exam attempts have been exhausted. To obtain the certificate, you will need to participate in one of our events again and retake the training from the beginning.` // todo ask what to write here
+									? `Unfortunately, your exam attempts have been exhausted. To obtain the certificate, you will need to participate in one of our events again and retake the training from the beginning.`
 									: `Maalesef sınav haklarınız bitmiştir. Sertifika alabilmek için tekrardan bir etkinliğimize katılıp, eğitimi baştan almanız gerekmektedir.`}
 							</p>
 						</div>

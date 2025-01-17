@@ -26,6 +26,7 @@ import { Link } from 'react-router-dom';
 import HoneypotInput from '../../components/Forms/HoneypotInput';
 import axios from '../api/axios';
 import PopupDialog from '../../components/Notification/Popup';
+import contractPdf from '../../assets/LesmillsEğitmenSözleşmesi.pdf';
 function UserInfo() {
 	const dispatch = useDispatch();
 
@@ -339,6 +340,22 @@ function UserInfo() {
 	const handleCancel = () => {
 		setIsPopupOpen(false);
 	};
+
+	async function handleContractDownload() {
+		try {
+			const link = document.createElement('a');
+			link.href = contractPdf;
+			link.download =
+				i18n.language === 'en'
+					? 'Lesmills Trainer Agreement.pdf'
+					: 'Lesmills Eğitmen Sözleşmesi.pdf'; // changes how the user sees the file
+			document.body.appendChild(link);
+			link.click();
+			document.body.removeChild(link);
+		} catch (error) {
+			console.error('Error downloading PDF:', error);
+		}
+	}
 	return (
 		<div className='user-info-page'>
 			<div className='user-info-inner-con user-info-title-con'>
@@ -900,6 +917,7 @@ function UserInfo() {
 						{fileName === null && (
 							<Link
 								style={{ textDecoration: 'underline', width: 'max-content' }}
+								onClick={handleContractDownload}
 							>
 								{i18n.language === 'en'
 									? 'Click For The Instructor Contract '

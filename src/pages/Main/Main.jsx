@@ -13,33 +13,11 @@ import Banner from '../../components/Banner/Banner.jsx';
 import FAQ from '../../components/FAQ/FAQ.jsx';
 import { useTranslation } from 'react-i18next';
 import BecomeInstructorCards from '../../components/BecomeInstructorCards/BecomeInstructorCards.jsx';
-import { useDispatch } from 'react-redux';
 import MilestoneCards from '../../components/Cards/MilestoneCards.jsx';
-import { AuthService } from '../../auth/auth.service.js';
 import landingVideo from '../../assets/videos/landing.mp4';
 
 function Main() {
-	const dispatch = useDispatch();
-	async function deleteCollections() {
-		const response = await dispatch(
-			AuthService({
-				method: 'POST',
-				endpoint: '/deleteCollections',
-			})
-		);
-		console.log('response', response);
-	}
-	async function testFunction() {
-		const response = await dispatch(
-			AuthService({
-				method: 'POST',
-				endpoint: '/testRoute2',
-			})
-		);
-		console.log('response', response);
-	}
 	const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-
 	const [navbarHeight, setnavbarHeight] = useState(0);
 	useLayoutEffect(() => {
 		const header = document.querySelector('#navbar');
@@ -120,10 +98,6 @@ function Main() {
 	// const scrollWith = useTransform(scrollYProgress, [0.3, 0.632], [0, -250]); // [0,0.91] is how much its being scrolled .91 because of the header [0,-250] for the top attribute and it changes based on the 0 to 0.91
 	return (
 		<>
-			<button onClick={deleteCollections}>delete collections</button>
-			<br></br>
-			<button onClick={testFunction}>test exams</button>
-			{/* <button onClick={deleteCollections}>delete collectiosn</button> */}
 			<video
 				className='fullSizedVid'
 				controls

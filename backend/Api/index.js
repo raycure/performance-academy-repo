@@ -70,49 +70,6 @@ app.use('/testRoute', async function test() {
 		console.log('err', error);
 	}
 });
-app.use('/testRoute2', async function test2() {
-	try {
-		const purchaseId = '678a7625621f15de4ffe3c01';
-		const attemptNumber = 1;
-		const userId = '678a760b621f15de4ffe3bf3';
-		const newDate = '2025-01-17T16:00:02.162+00:00';
-		await Users.updateOne(
-			{
-				_id: userId,
-				'purchases._id': purchaseId,
-				'purchases.examAttempts.attemptNumber': attemptNumber,
-			},
-			{
-				$set: {
-					'purchases.$[purchase].examAttempts.$[attempt].resultUpdatedAt':
-						newDate,
-				},
-			},
-			{
-				arrayFilters: [
-					{ 'purchase._id': purchaseId },
-					{ 'attempt.attemptNumber': attemptNumber },
-				],
-			}
-		);
-	} catch (error) {
-		console.log('err', error);
-	}
-});
-app.use('/deleteCollections', async function dropAllCollections() {
-	try {
-		const collections = await mongoose.connection.db.collections();
-
-		for (let collection of collections) {
-			await collection.drop();
-			console.log(`Dropped collection: ${collection.collectionName}`);
-		}
-		return { success: true, message: 'All collections dropped successfully' };
-	} catch (error) {
-		console.error('Error dropping collections:', error);
-		return { success: false, error: error.message };
-	}
-});
 app.use(express.static(path.join(__dirname, '../../dist')));
 // This should be the LAST route
 app.get('*', (req, res) => {

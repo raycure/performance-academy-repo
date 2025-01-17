@@ -93,16 +93,12 @@ const UserSchema = mongoose.Schema(
 		},
 		verifiedMail: {
 			type: Boolean,
-			// default: false,
-			default: true,
-			// todo change it
+			default: false,
 		},
 		verifiedContract: {
 			type: String,
 			enum: ['pending', 'passed', 'failed', 'null'],
-			// default: 'null',
-			default: 'passed',
-			// todo change it
+			default: 'null',
 		},
 		blocked: {
 			type: Boolean,
