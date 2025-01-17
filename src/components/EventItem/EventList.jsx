@@ -17,6 +17,7 @@ import { useNavigate } from 'react-router-dom';
 import { selectIsLoggedIn } from '../../redux/auth/authStateSlice';
 import { AuthService } from '../../auth/auth.service';
 import { useDispatch } from 'react-redux';
+import { setId } from '../../redux/Slices/ProgramIdSlice.js';
 function EventList({ activeProgram, infoActive, onlineCheck, activeCategory }) {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
@@ -184,7 +185,10 @@ function EventList({ activeProgram, infoActive, onlineCheck, activeCategory }) {
 			});
 		}
 	}
-
+	const handleSelectId = (id) => {
+		dispatch(setId(id));
+		navigate('/program');
+	};
 	let calendarSelectId = useSelector(
 		(state) => state.calendarSelectedEventId.id
 	);
@@ -283,6 +287,7 @@ function EventList({ activeProgram, infoActive, onlineCheck, activeCategory }) {
 												height: 'fit-content',
 											}}
 											className='addLineAnimation'
+											onClick={() => handleSelectId(event?.program)}
 										>
 											{i18n.language === 'en' ? 'View' : 'İncele'}
 										</Link>

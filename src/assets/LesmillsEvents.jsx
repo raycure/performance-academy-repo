@@ -31,8 +31,8 @@ function assignUniqueIds(events) {
 export const LesMillsEvents = assignUniqueIds([
 	{
 		title: 'BODYPUMP',
-		start: '2025-02-01',
-		end: '2025-02-02',
+		start: '2025-02-08',
+		end: '2025-02-09',
 		online: true,
 		instructor: 'Cengiz Cumhur',
 		time: '12.00-18.00',
