@@ -41,6 +41,7 @@ const payment = async (req, res) => {
 		});
 	} catch (error) {
 		console.error('Payment creation error:', error);
+		console.error('test:', error.message);
 		res
 			.status(500)
 			.json({ message: res.__(`${error.message}`), duration: 50000 });

@@ -116,10 +116,6 @@
 		"success": "Your email has been successfully verified.",
 		"error": "An internal error occurred while verifying your email. Please try again or contact support if the problem continues."
 	},
-	"paymentResponses": {
-		"success": "Payment successful! Redirecting...",
-		"error": "An error occurred while processing your payment. Please try again later."
-	},
 	"WebhookResponses": {
 		"ExhaustedAttempts": "You have reached the maximum number of allowed exam attempts."
 	}

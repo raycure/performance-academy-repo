@@ -11,7 +11,6 @@ const webhook = async (req, res) => {
 		const language = req.headers['language'];
 
 		let event;
-
 		try {
 			event = stripe.webhooks.constructEvent(
 				req.body,
