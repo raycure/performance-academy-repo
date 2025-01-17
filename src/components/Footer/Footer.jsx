@@ -20,7 +20,7 @@ function Footer() {
 
 	const icons = [
 		{
-			href: 'https://www.instagram.com/lesmills/',
+			href: 'https://www.instagram.com/performancefitnessacademy/',
 			Icon: FaInstagram,
 			label: 'Instagram',
 			backgroundImage: instagramBackground,
@@ -33,7 +33,7 @@ function Footer() {
 		},
 
 		{
-			href: 'https://www.linkedin.com/company/les-mills-international/',
+			href: 'https://www.linkedin.com/company/performance-fitness-academy/',
 			Icon: FaLinkedinIn,
 			label: 'LinkedIn',
 			backgroundColor: '#0a78b5',

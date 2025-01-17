@@ -18,7 +18,7 @@ function AuthenticationGreet() {
 	const { t, i18n } = useTranslation('translation');
 	const icons = [
 		{
-			href: 'https://www.instagram.com/lesmills/',
+			href: 'https://www.instagram.com/performancefitnessacademy/',
 			Icon: FaInstagram,
 			label: 'Instagram',
 			backgroundImage: instagramBackground,
