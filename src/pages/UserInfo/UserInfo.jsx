@@ -26,7 +26,7 @@ import { Link } from 'react-router-dom';
 import HoneypotInput from '../../components/Forms/HoneypotInput';
 import axios from '../api/axios';
 import PopupDialog from '../../components/Notification/Popup';
-import contractPdf from '../../assets/LesmillsEğitmenSözleşmesi.pdf';
+import contractPdf from '../../assets/LesmillsEgitmenSozlesmesi.pdf';
 function UserInfo() {
 	const dispatch = useDispatch();
 
