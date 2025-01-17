@@ -22,8 +22,8 @@ function Login() {
 	let isLoading = useSelector(selectIsLoading);
 	const dispatch = useDispatch();
 
-	const [mailorNationalID, setMailorNationalID] = useState('11111111111');
-	const [pwd, setPwd] = useState('aaA!1aaa');
+	const [mailorNationalID, setMailorNationalID] = useState('');
+	const [pwd, setPwd] = useState('');
 	const [localLoading, setLocalLoading] = useState(false);
 	const [showForgotPassordForm, setShowForgotPassordForm] = useState(false);
 
