@@ -58,7 +58,6 @@ function App() {
 								/>
 							</Route>
 							<Route
-								//path='/forgotPassword'
 								path='şifremi-unuttum/:token'
 								element={<ForgotPassword />}
 							/>

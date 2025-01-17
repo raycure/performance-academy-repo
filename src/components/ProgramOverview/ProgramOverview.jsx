@@ -20,17 +20,6 @@ function ProgramOverview({ eventDetails }) {
 	const activeEvent = LesMillsEvents.find((event) => {
 		return event.id === eventDetails.eventId;
 	});
-	function getTimeLine() {
-		const eventDate = activeEvent.fullStartDate;
-		const isFuture = eventDate > new Date();
-		const date = eventDate.toLocaleDateString('en-GB');
-		const attemptDeadline = new Date(activeEvent.fullEndDate);
-		attemptDeadline.setDate(attemptDeadline.getDate() + 7);
-		return isFuture
-			? { status: 'future', date }
-			: { status: 'past', date: attemptDeadline.toLocaleDateString('en-GB') };
-	}
-	const daysLeftOrBeen = getTimeLine();
 
 	const program = Object.keys(LesmillsPrograms())
 		.map((category) => {
@@ -39,6 +28,66 @@ function ProgramOverview({ eventDetails }) {
 			});
 		})
 		.filter(Boolean)[0];
+
+	const isLastEntranceExamFailed =
+		eventDetails.entranceExamAttempts.length == 3 &&
+		eventDetails.entranceExamAttempts[2]?.result == 'failed';
+
+	// if the user passed the entrance exam at any point in their trials than it sets the the examtpye as the examAttempts
+	const examType =
+		eventDetails.entranceExamAttempts.at(-1)?.result === 'passed'
+			? 'examAttempts'
+			: 'entranceExamAttempts';
+
+	const examAttempts = eventDetails[examType];
+	const lastExamResult = examAttempts[examAttempts.length - 1]?.result;
+	const leftAssessmentTries =
+		examAttempts.length === 0 ? 3 : 3 - examAttempts.length;
+
+	// we use the timeline function and in it we need the examtype to set the deadline so examtype is declared earlier
+	function getTimeLine() {
+		console.log('eventDetails', eventDetails);
+		const eventDate = activeEvent.fullStartDate;
+		// const isFuture = eventDate > new Date();
+		const isFuture = false; //todo revert back to the normal way
+		const date = eventDate.toLocaleDateString('en-GB');
+		console.log(
+			'examtYpe for the program: ',
+			program,
+			'HERE',
+			examAttempts[examAttempts.length - 2].resultUpdatedAt
+		);
+		let attemptDeadline;
+		if (examType.length === 1) {
+			attemptDeadline = new Date(activeEvent.fullEndDate);
+			attemptDeadline.setDate(attemptDeadline.getDate() + 7);
+		} else {
+			switch (examType) {
+				case 'examAttempts':
+					attemptDeadline = new Date(
+						examAttempts[examAttempts.length - 2].resultUpdatedAt
+					);
+					console.log(
+						'examAttempts[examAttempts.length - 2].resultUpdatedAt',
+						examAttempts[examAttempts.length - 2].resultUpdatedAt
+					);
+
+					attemptDeadline.setDate(attemptDeadline.getDate() + 60);
+					break;
+				case 'entranceExamAttempts':
+					attemptDeadline = new Date(
+						examAttempts[examAttempts.length - 2].resultUpdatedAt
+					);
+					attemptDeadline.setDate(attemptDeadline.getDate() + 14);
+					break;
+			}
+		}
+
+		return isFuture
+			? { status: 'future', date }
+			: { status: 'past', date: attemptDeadline.toLocaleDateString('en-GB') };
+	}
+	const daysLeftOrBeen = getTimeLine();
 
 	const scrollWithOffset = (el) => {
 		const yCoordinate = el.getBoundingClientRect().top + window.scrollY;
@@ -61,13 +110,73 @@ function ProgramOverview({ eventDetails }) {
 		});
 	});
 
+	async function handleBookletDowload() {
+		try {
+			const link = document.createElement('a');
+			link.href = pdfUrls.handbook;
+			link.download = `${program.title}-handbook.pdf`; // changes how the user sees the file
+			document.body.appendChild(link);
+			link.click();
+			document.body.removeChild(link);
+		} catch (error) {
+			console.error('Error downloading PDF:', error);
+		}
+	}
+	async function handleExamDowload() {
+		try {
+			const link = document.createElement('a');
+			link.href = pdfUrls.examForm;
+			link.download = `${program.title}_Form.pdf`;
+			document.body.appendChild(link);
+			link.click();
+			document.body.removeChild(link);
+		} catch (error) {
+			console.error('Error downloading PDF:', error);
+		}
+	}
+	const [pdfUrls, setPdfUrls] = useState({
+		handbook: null,
+		examForm: null,
+	});
+	const loadPdf = async (programTitle, documentType) => {
+		try {
+			let pdf;
+			switch (documentType) {
+				case 'handbook':
+					pdf = await import(
+						`../../assets/programHandbooks/${programTitle}_Handbook.pdf`
+					);
+					break;
+				case 'Form':
+					pdf = await import(
+						`../../assets/programAssessmentForms/${programTitle}_Form.pdf`
+					);
+					break;
+				default:
+					throw new Error('Invalid document type');
+			}
+			return pdf.default;
+		} catch (err) {
+			console.error(`Error loading ${documentType} PDF:`, err);
+			return null;
+		}
+	};
+	useEffect(() => {
+		const loadAllPdfs = async () => {
+			const [handbookUrl, examFormUrl] = await Promise.all([
+				loadPdf(program.title, 'handbook'),
+				loadPdf(program.title, 'Form'),
+			]);
+
+			setPdfUrls({
+				handbook: handbookUrl,
+				examForm: examFormUrl,
+			});
+		};
+		loadAllPdfs();
+	}, [program.title]);
+
 	const lessonLength = extractNumbersFromString(program.lessons);
-	const handleBookletDowload = () => {};
-	const handleExamDowload = () => {};
-	const examAttempts = eventDetails.examAttempts;
-	const lastExamResult = examAttempts[examAttempts.length - 1].result;
-	const leftAssessmentTries =
-		examAttempts.length === 0 ? 3 : 3 - examAttempts.length;
 	const buttonContent = [
 		{
 			text: i18n.language === 'en' ? 'Program Booklet' : 'Program Kitapçığı',
@@ -110,7 +219,6 @@ function ProgramOverview({ eventDetails }) {
 			window.location = paymentUrl;
 		}
 	}
-
 	return (
 		<div
 			className='prog-overview-outer-con text-container'
@@ -131,6 +239,9 @@ function ProgramOverview({ eventDetails }) {
 				autoplay={false}
 			/>
 			<div className='relative-position bg-primary-400 prog-overview-info-con'>
+				{/* <a href={pdfUrl} download={`${program.title}_Handbook.pdf`}>
+					Download Program Handbook
+				</a> */}
 				<p
 					className='fs-650'
 					style={{ textAlign: 'center', fontWeight: 'bolder' }}
@@ -183,112 +294,138 @@ function ProgramOverview({ eventDetails }) {
 					)}
 				</div>
 				<div className='program-overview-assessment-con'>
-					{lastExamResult === 'failed' ? (
-						<div className='fs-400'>
-							<p style={{ color: '#ef3f3f' }}>
-								{i18n.language === 'en'
-									? 'Exam Result: Failed'
-									: 'Sınav Sonucu: Başarısız'}
-							</p>
-							<p>
-								{i18n.language === 'en'
-									? 'Amount of training assessment tries left'
-									: 'Kalan eğitim sınavı deneme hakkı'}
-								: {leftAssessmentTries}
-							</p>
-							{leftAssessmentTries >= 1 ? (
-								<>
-									{/* <hr
-										style={{
-											width: '35%',
-											margin: '0.5rem auto',
-											borderTopWidth: '3px',
-										}}
-									/>
-									<div style={{ textAlign: 'center', marginTop: '0.5rem' }}>
-										<p className='fs-300' style={{ marginBottom: '0.3rem' }}>
-											{i18n.language === 'en'
-												? 'If you want to retake the exam click the link below to pay the exam fee.'
-												: 'Tekrar sınava girmek istiyorsanız aşağıdaki link üzerinden sınav ücretini ödeyebilirsiniz.'}
-										</p>
-										<Link
-											style={{
-												display: 'flex',
-												width: 'fit-content',
-												marginInline: 'auto',
-												gap: '0.3rem',
-											}}
-											className='addLineAnimation'
-											onClick={payExamFee}
-										>
-											{i18n.language === 'en'
-												? 'Pay The Exam Fee'
-												: 'Sınav Ücretini Öde'}
-											<IoMdArrowRoundForward
-												style={{
-													position: 'relative',
-													top: '1px',
-													width: '1.2rem',
-													height: '100%',
-												}}
-												className='process-contact-icon'
-											/>
-										</Link>
-									</div> */}
-								</>
-							) : (
+					{!isLastEntranceExamFailed ? (
+						lastExamResult === 'failed' ? (
+							<div className='fs-400'>
+								<p style={{ color: '#ef3f3f' }}>
+									{i18n.language === 'en'
+										? 'Exam Result: Failed'
+										: 'Sınav Sonucu: Başarısız'}
+								</p>
 								<p>
 									{i18n.language === 'en'
-										? 'Unfortunately, your exam attempts have been exhausted. To obtain the certificate, you will need to participate in one of our events again and retake the training from the beginning.'
-										: 'Maalesef sınav haklarınız bitmiştir. Sertifika alabilmek için tekrardan bir etkinliğimize katılıp, eğitimi baştan almanız gerekmektedir.'}
+										? 'Amount of training assessment tries left'
+										: 'Kalan eğitim sınavı deneme hakkı'}
+									: {leftAssessmentTries}
 								</p>
-							)}
-						</div>
-					) : lastExamResult === 'passed' ? (
-						<div>
-							<p style={{ color: '#67ef55' }}>
-								{i18n.language === 'en'
-									? 'Training Result: Passed'
-									: 'Eğitim Sonucu: Başarılı'}
-							</p>
-							<p>
-								{i18n.language === 'en'
-									? 'Good luck on your International Certificate Exam!'
-									: 'Uluslararası sertifika sınavınızda başarılar!'}
-							</p>
-						</div>
-					) : lastExamResult === 'pending' ? (
-						<div>
-							<p style={{ color: '#aaaaaa' }}>
-								{i18n.language === 'en'
-									? 'Training Result: Under Review'
-									: 'Eğitim Sonucu: İnceleme Altında'}
-								...
-							</p>
-							<p>
-								{i18n.language === 'en'
-									? 'Amount of assessment tries left'
-									: 'Kalan sınav deneme hakkı'}
-								: {leftAssessmentTries}
-							</p>
-						</div>
+								{leftAssessmentTries >= 1 ? (
+									<>
+										<hr
+											style={{
+												width: '35%',
+												margin: '0.5rem auto',
+												borderTopWidth: '3px',
+											}}
+										/>
+										<div style={{ textAlign: 'center', marginTop: '0.5rem' }}>
+											{examType === 'examAttempts' ? (
+												<>
+													<p
+														className='fs-300'
+														style={{ marginBottom: '0.3rem' }}
+													>
+														{i18n.language === 'en'
+															? 'If you want to retake the exam click the link below to pay the exam fee.'
+															: 'Tekrar sınava girmek istiyorsanız aşağıdaki link üzerinden sınav ücretini ödeyebilirsiniz.'}
+													</p>
+													<Link
+														style={{
+															display: 'flex',
+															width: 'fit-content',
+															marginInline: 'auto',
+															gap: '0.3rem',
+														}}
+														className='addLineAnimation'
+														onClick={payExamFee}
+													>
+														{i18n.language === 'en'
+															? 'Pay The Exam Fee'
+															: 'Sınav Ücretini Öde'}
+														<IoMdArrowRoundForward
+															style={{
+																position: 'relative',
+																top: '1px',
+																width: '1.2rem',
+																height: '100%',
+															}}
+															className='process-contact-icon'
+														/>
+													</Link>
+												</>
+											) : (
+												<p
+													className='fs-300'
+													style={{ marginBottom: '0.3rem' }}
+												>
+													{i18n.language === 'en'
+														? 'If you want to retake the exam.' // todo find what to write
+														: 'Tekrar sınava girmek istiyorsanız.'}
+												</p>
+											)}
+										</div>
+									</>
+								) : (
+									<p>
+										{i18n.language === 'en'
+											? 'Unfortunately, your exam attempts have been exhausted. To obtain the certificate, you will need to participate in one of our events again and retake the training from the beginning.'
+											: 'Maalesef sınav haklarınız bitmiştir. Sertifika alabilmek için tekrardan bir etkinliğimize katılıp, eğitimi baştan almanız gerekmektedir.'}
+									</p>
+								)}
+							</div>
+						) : lastExamResult === 'passed' ? (
+							<div>
+								<p style={{ color: '#67ef55' }}>
+									{i18n.language === 'en'
+										? 'Training Result: Passed'
+										: 'Eğitim Sonucu: Başarılı'}
+								</p>
+								<p>
+									{i18n.language === 'en'
+										? 'Good luck on your International Certificate Exam!'
+										: 'Uluslararası sertifika sınavınızda başarılar!'}
+								</p>
+							</div>
+						) : lastExamResult === 'pending' ? (
+							<div>
+								<p style={{ color: '#aaaaaa' }}>
+									{i18n.language === 'en'
+										? 'Training Result: Under Review'
+										: 'Eğitim Sonucu: İnceleme Altında'}
+									...
+								</p>
+								<p>
+									{i18n.language === 'en'
+										? 'Amount of assessment tries left'
+										: 'Kalan sınav deneme hakkı'}
+									: {leftAssessmentTries}
+								</p>
+							</div>
+						) : (
+							<div>
+								{' '}
+								{daysLeftOrBeen.status === 'future' ? (
+									<p>
+										{i18n.language === 'en'
+											? `We are thrilled to have you join us at the start of our event!
+									Event begins: ${daysLeftOrBeen.date}`
+											: `Sizi aramızda görmek için sabırsızlanıyoruz! Etkinlik başlangıcı: ${daysLeftOrBeen.date}`}
+									</p>
+								) : (
+									<p>
+										{i18n.language === 'en'
+											? `Exam submission deadline: ${daysLeftOrBeen.date}`
+											: `Sınav teslimi yapmanız gereken tarih: ${daysLeftOrBeen.date}`}
+									</p>
+								)}
+							</div>
+						)
 					) : (
 						<div>
-							{' '}
-							{daysLeftOrBeen.status === 'future' ? (
-								<p>
-									{i18n.language === 'en'
-										? `We are thrilled to have you join us at the start of our event!
-									Event begins: ${daysLeftOrBeen.date}`
-										: `Sizi aramızda görmek için sabırsızlanıyoruz! Etkinlik başlangıcı: ${daysLeftOrBeen.date}`}
-								</p>
-							) : (
-								<p>
-									{i18n.language === 'en'
-										? `Exam submission deadline: ${daysLeftOrBeen.date}`
-										: `Sınav teslimi yapmanız gereken tarih: ${daysLeftOrBeen.date}`}
-								</p>
-							)}
+							<p>
+								{i18n.language === 'en'
+									? `Unfortunately, your exam attempts have been exhausted. To obtain the certificate, you will need to participate in one of our events again and retake the training from the beginning.` // todo ask what to write here
+									: `Maalesef sınav haklarınız bitmiştir. Sertifika alabilmek için tekrardan bir etkinliğimize katılıp, eğitimi baştan almanız gerekmektedir.`}
+							</p>
 						</div>
 					)}
 				</div>

@@ -1,10 +1,31 @@
+function isEarlyBirdDiscount(eventDate) {
+	const currentDate = new Date();
+	const eventStart = new Date(eventDate);
+	const timeDifference = eventStart - currentDate;
+	const weeksDifference = timeDifference / (1000 * 60 * 60 * 24 * 7);
+	return weeksDifference >= 4;
+}
+
 function assignUniqueIds(events) {
-	return events.map((event, index) => ({
-		...event,
-		fullStartDate: new Date(event.start),
-		fullEndDate: new Date(event.end),
-		id: `${event.title}_${event.start}_${event.end}_${event.online}`,
-	}));
+	return events.map((event, index) => {
+		const fullStartDate = new Date(event.start);
+		const fullEndDate = new Date(event.end);
+
+		const basePrice = event.price;
+		const discountedPrice = isEarlyBirdDiscount(event.start) // 400 to 350
+			? basePrice * 0.875
+			: basePrice;
+
+		return {
+			...event,
+			fullStartDate,
+			fullEndDate,
+			id: `${event.title}_${event.start}_${event.end}_${event.online}`,
+			originalPrice: basePrice,
+			price: discountedPrice,
+			isEarlyBird: isEarlyBirdDiscount(event.start),
+		};
+	});
 }
 
 export const LesMillsEvents = assignUniqueIds([

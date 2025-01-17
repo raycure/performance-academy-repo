@@ -115,7 +115,7 @@ const emailSender = async (
 					})
 				);
 				options = {
-					from: 'you@example.com',
+					from: 'customerservice@infopfa.com',
 					to: `${userEmailAdress}`,
 					subject:
 						language === 'tr' ? 'İletinizi aldık' : 'We received your querry',

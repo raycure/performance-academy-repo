@@ -74,6 +74,7 @@ const handleProductPurchase = async (session, language) => {
 		eventId,
 		boughtPrice,
 	};
+	console.log('eventId here', eventId);
 
 	await Users.findByIdAndUpdate(userId, {
 		$push: { purchases: purchaseData },
@@ -81,9 +82,12 @@ const handleProductPurchase = async (session, language) => {
 
 	const foundUser = await Users.findById(userId);
 	try {
-		await foundUser.addExamAttempt(eventId);
+		const examType = 'entranceExamAttempts';
+		await foundUser.addExamAttempt(eventId, examType);
 	} catch (error) {
-		res.status(400).json({ message: res.__(`${error}`) });
+		console.log('error in adding attempt', error);
+
+		throw error;
 	}
 
 	try {
@@ -114,6 +118,7 @@ const handleProductPurchase = async (session, language) => {
 		console.log('email sending error', error);
 	}
 };
+
 const handlepayExamFee = async (session) => {
 	const metadata = session.metadata;
 	const { userId, itemId } = metadata;

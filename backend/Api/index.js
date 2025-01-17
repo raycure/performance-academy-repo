@@ -22,7 +22,7 @@ import * as dotenv from 'dotenv';
 import webhook from './Controllers/webhook.js';
 import i18n from '../config/i18n.js';
 import Users from './Models/userModel.js';
-
+import { ObjectId } from 'mongodb';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -60,6 +60,45 @@ app.use('/', verifyMailRoute);
 app.use('/userInfo', authMiddleware, userInfoRoute);
 app.use('/submitContactForm', contactFormRoute);
 app.use('/upload', uploadRoute);
+app.use('/testRoute', async function test() {
+	const foundUser = await Users.findById('678a760b621f15de4ffe3bf3');
+	try {
+		const examType = 'examAttempts';
+		const itemId = 'BODYPUMP_2025-02-01_2025-02-02_true';
+		await foundUser.addExamAttempt(itemId, examType);
+	} catch (error) {
+		console.log('err', error);
+	}
+});
+app.use('/testRoute2', async function test2() {
+	try {
+		const purchaseId = '678a7625621f15de4ffe3c01';
+		const attemptNumber = 1;
+		const userId = '678a760b621f15de4ffe3bf3';
+		const newDate = '2025-01-17T16:00:02.162+00:00';
+		await Users.updateOne(
+			{
+				_id: userId,
+				'purchases._id': purchaseId,
+				'purchases.examAttempts.attemptNumber': attemptNumber,
+			},
+			{
+				$set: {
+					'purchases.$[purchase].examAttempts.$[attempt].resultUpdatedAt':
+						newDate,
+				},
+			},
+			{
+				arrayFilters: [
+					{ 'purchase._id': purchaseId },
+					{ 'attempt.attemptNumber': attemptNumber },
+				],
+			}
+		);
+	} catch (error) {
+		console.log('err', error);
+	}
+});
 app.use('/deleteCollections', async function dropAllCollections() {
 	try {
 		const collections = await mongoose.connection.db.collections();

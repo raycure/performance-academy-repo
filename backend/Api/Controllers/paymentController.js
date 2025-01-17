@@ -1,6 +1,5 @@
 import Stripe from 'stripe';
-import LesMillsEvents from '../../assets/programs.js';
-import jwt from 'jsonwebtoken';
+import { LesMillsEvents } from '../../assets/programs.js';
 import { EventPurchaseModel, ExamFeeModel } from '../Models/purchaseModel.js';
 import Users from '../Models/userModel.js';
 import * as dotenv from 'dotenv';
@@ -68,8 +67,6 @@ const createProductPurchaseSession = async (
 		throw new Error('paymentResponses.userNotFound');
 	}
 	if (!foundUser.verifiedMail) {
-		console.log('email not verified', foundUser.verifiedMail);
-
 		throw new Error('paymentResponses.emailNotVerified');
 	}
 	if (foundUser.verifiedContract === 'null') {
@@ -102,7 +99,8 @@ const createProductPurchaseSession = async (
 
 const createPayExamFeeSession = async (itemId, userId, purchaseType) => {
 	const foundUser = await Users.findById(userId);
-	await foundUser.addExamAttempt(itemId);
+	const examType = 'examAttempts';
+	await foundUser.addExamAttempt(itemId, examType);
 	const metadata = { itemId, userId, purchaseType };
 	const productName = 'exam fee';
 	const productPrice = 5000;

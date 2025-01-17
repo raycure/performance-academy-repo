@@ -18,6 +18,30 @@ const ExamAttemptSchema = new mongoose.Schema({
 		enum: ['pending', 'passed', 'failed', 'null'],
 		default: 'null',
 	},
+	resultUpdatedAt: {
+		type: Date,
+		default: null,
+	},
+});
+
+const entranceExamAttemptsSchema = new mongoose.Schema({
+	attemptNumber: {
+		type: Number,
+		required: true,
+	},
+	attemptDate: {
+		type: Date,
+		default: Date.now,
+	},
+	result: {
+		type: String,
+		enum: ['pending', 'passed', 'failed', 'null'],
+		default: 'null',
+	},
+	resultUpdatedAt: {
+		type: Date,
+		default: null,
+	},
 });
 
 const PurchasesSchema = new mongoose.Schema({
@@ -26,6 +50,7 @@ const PurchasesSchema = new mongoose.Schema({
 		required: true,
 	},
 	examAttempts: [ExamAttemptSchema],
+	entranceExamAttempts: [entranceExamAttemptsSchema],
 	purchaseDate: {
 		type: Date,
 		default: Date.now,
@@ -68,15 +93,15 @@ const UserSchema = mongoose.Schema(
 		},
 		verifiedMail: {
 			type: Boolean,
-			default: false,
-			// default: true,
+			// default: false,
+			default: true,
 			// todo change it
 		},
 		verifiedContract: {
 			type: String,
 			enum: ['pending', 'passed', 'failed', 'null'],
-			default: 'null',
-			// default: 'passed',
+			// default: 'null',
+			default: 'passed',
 			// todo change it
 		},
 		blocked: {
@@ -144,32 +169,47 @@ UserSchema.methods.updateExamAttemptResult = function (
 	return this.save();
 };
 
-UserSchema.methods.addExamAttempt = function (eventId, isPaid = false) {
+UserSchema.methods.addExamAttempt = function (
+	eventId,
+	examType,
+	isPaid = false
+) {
+	console.log('adding attempt');
+
 	const purchase = this.findPurchase(eventId);
-
-	console.log('purchase in addexamattempt', purchase);
-
-	if (purchase.examAttempts.length === purchase.maxAttempts) {
+	if (purchase[examType].length === purchase.maxAttempts) {
 		throw new Error('WebhookResponses.ExhaustedAttempts');
 	}
 	try {
-		if (purchase.examAttempts.length === 0) {
+		if (purchase[examType].length === 0) {
 			isPaid = true;
-			purchase.examAttempts.push({
-				attemptNumber: purchase.examAttempts.length + 1,
-				isPaid,
-			});
+			purchase[examType].push(
+				examType === 'examAttempts'
+					? {
+							attemptNumber: purchase[examType].length + 1,
+							isPaid,
+					  }
+					: {
+							attemptNumber: purchase[examType].length + 1,
+					  }
+			);
 		} else {
-			purchase.examAttempts.push({
-				attemptNumber: purchase.examAttempts.length + 1,
-				isPaid,
-			});
+			purchase[examType].push(
+				examType === 'examAttempts'
+					? {
+							attemptNumber: purchase[examType].length + 1,
+							isPaid,
+					  }
+					: {
+							attemptNumber: purchase[examType].length + 1,
+					  }
+			);
 		}
 	} catch (error) {
 		console.log('error in creating an attempt', error);
 	}
 
-	console.log('examattemtpts in addexamattempt', purchase.examAttempts);
+	console.log('examattemtpts in addexamattempt', purchase[examType]);
 	return this.save();
 };
 

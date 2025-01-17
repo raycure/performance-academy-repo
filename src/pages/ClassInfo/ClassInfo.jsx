@@ -39,6 +39,7 @@ function ClassInfo() {
 			behavior: 'instant',
 		});
 	};
+
 	if (!program) {
 		return (
 			<p>

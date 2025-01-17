@@ -24,7 +24,6 @@ function MyPrograms() {
 			);
 			const user = response.payload.data.foundUser;
 			const userPurchases = user.purchases;
-			console.log('userPurchases', userPurchases);
 			setUserEventIds(userPurchases);
 		} catch (error) {
 			console.log('userinfo fetch error', error);
