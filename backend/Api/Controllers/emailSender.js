@@ -33,12 +33,6 @@ const emailSender = async (
 				user: 'customerservice@infopfa.com',
 				pass: process.env.HOSTINGER_SMTP_PASSWORD,
 			},
-			// host: 'smtp.ethereal.email',
-			// port: 587,
-			// auth: {
-			// 	user: 'joseph.raynor99@ethereal.email',
-			// 	pass: 'h3VMnkJHEHFqDBDd1D',
-			// },
 		});
 
 		let emailHtml;
