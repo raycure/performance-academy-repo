@@ -17,12 +17,14 @@ import { motion } from 'framer-motion';
 import { socialSlide, backgroundFill } from '../animations/AnimationValues';
 import instagramBackground from '../../assets/instagram-background.jpg';
 import { useTranslation } from 'react-i18next';
-import { Navigate } from 'react-router-dom';
-import axios from '../../pages/api/axios';
 import { useSelector } from 'react-redux';
-import { selectIsLoggedIn } from '../../redux/auth/authStateSlice';
+import {
+	selectIsLoggedIn,
+	setPreferredLanguage,
+} from '../../redux/auth/authStateSlice';
 import { AuthService } from '../../auth/auth.service';
 import { useDispatch } from 'react-redux';
+
 function Navbar() {
 	const dispatch = useDispatch();
 	let isLoggedIn = useSelector(selectIsLoggedIn);
@@ -95,9 +97,10 @@ function Navbar() {
 		},
 	];
 
-	const changeLanguage = (lng) => {
+	async function changeLanguage(lng) {
+		await dispatch(setPreferredLanguage(lng)).unwrap();
 		i18n.changeLanguage(lng);
-	};
+	}
 	const handleLanguageChange = (lng) => {
 		changeLanguage(lng);
 	};

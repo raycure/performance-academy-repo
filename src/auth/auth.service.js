@@ -1,4 +1,3 @@
-import axios from '../pages/api/axios.js';
 import { fetchData } from '../redux/auth/authStateSlice.js';
 import {
 	successHandler,
@@ -12,6 +11,8 @@ export const AuthService =
 		({ endpoint, data = {}, method }) =>
 		async (dispatch) => {
 			try {
+				console.log('');
+
 				const response = await dispatch(
 					fetchData({
 						method: method,

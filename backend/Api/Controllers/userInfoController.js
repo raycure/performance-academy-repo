@@ -7,6 +7,7 @@ import {
 	userinfoChangeSchemas,
 } from '../../Utils/schemas/userSchema.js';
 import Sessions from '../Models/sessionModel.js';
+import handleLogout from './logoutController.js';
 const { hash, compare } = pkg;
 export const userInfoFetchController = async (req, res) => {
 	try {
@@ -39,10 +40,8 @@ export const deleteAccount = async (req, res) => {
 		nationalId: req.body.nationalId,
 		email: req.body.email,
 	});
-	return res.status(200).json({
-		message: res.__('userInfoResponses.accountDeleted'),
-		notify: true,
-	});
+	req.isFromDeleteAccount = true;
+	await handleLogout(req, res);
 };
 export const userInfoPutController = async (req, res) => {
 	try {

@@ -23,7 +23,7 @@ const webhook = async (req, res) => {
 		}
 		switch (event.type) {
 			case 'checkout.session.completed':
-				await handleCheckoutCompleted(event, language);
+				await handleCheckoutCompleted(event, language, res);
 				break;
 
 			case 'checkout.session.expired':
@@ -40,12 +40,12 @@ const webhook = async (req, res) => {
 	}
 };
 
-const handleCheckoutCompleted = async (event, language) => {
+const handleCheckoutCompleted = async (event, language, res) => {
 	const session = event.data.object;
 	const purchaseType = session.metadata.purchaseType;
 	switch (purchaseType) {
 		case 'productPurchase':
-			handleProductPurchase(session, language);
+			handleProductPurchase(session, language, res);
 			break;
 		case 'payExamFee':
 			handlepayExamFee(session, language);
@@ -56,7 +56,7 @@ const handleCheckoutCompleted = async (event, language) => {
 	}
 };
 
-const handleProductPurchase = async (session, language) => {
+const handleProductPurchase = async (session, language, res) => {
 	const eventId = session.metadata.eventId;
 	const boughtPrice = session.metadata.boughtPrice;
 	const foundItem = session.metadata.foundItem;
@@ -115,6 +115,10 @@ const handleProductPurchase = async (session, language) => {
 		);
 	} catch (error) {
 		console.log('email sending error', error);
+	}
+	if (foundUser.verifiedContract === 'null') {
+		console.log('foundUser', foundUser);
+		res.redirect('/contact');
 	}
 };
 

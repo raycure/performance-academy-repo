@@ -7,7 +7,6 @@ dotenv.config();
 const handleLogout = async (req, res) => {
 	const cookies = req.cookies;
 	const refreshToken = cookies.jwt;
-
 	if (!refreshToken) {
 		return res.json({ message: 'logged out successfully' });
 	}
@@ -54,8 +53,14 @@ const handleLogout = async (req, res) => {
 			path: '/',
 			secure: process.env.ENVIRONMENT === 'development' ? false : true,
 		});
-
-		res.json({ message: res.__('logoutResponses.success'), notify: true });
+		if (req.isFromDeleteAccount) {
+			res.json({
+				message: res.__('userInfoResponses.accountDeleted'),
+				notify: true,
+			});
+		} else {
+			res.json({ message: res.__('logoutResponses.success'), notify: true });
+		}
 	} catch (error) {
 		res.status(500).json({ message: res.__('serverError') });
 	}

@@ -70,9 +70,6 @@ const createProductPurchaseSession = async (
 	if (!foundUser.verifiedMail) {
 		throw new Error('paymentResponses.emailNotVerified');
 	}
-	if (foundUser.verifiedContract === 'null') {
-		throw new Error('paymentResponses.contractNotVerified');
-	}
 	const foundPurchase = foundUser.findPurchase(itemId);
 	if (foundPurchase) {
 		throw new Error('paymentResponses.duplicatePurchase');
