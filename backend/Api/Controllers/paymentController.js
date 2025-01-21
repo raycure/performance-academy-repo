@@ -2,6 +2,7 @@ import Stripe from 'stripe';
 import { LesMillsEvents } from '../../assets/programs.js';
 import { EventPurchaseModel, ExamFeeModel } from '../Models/purchaseModel.js';
 import Users from '../Models/userModel.js';
+import { ObjectId } from 'mongodb';
 import * as dotenv from 'dotenv';
 dotenv.config();
 
@@ -13,6 +14,11 @@ const payment = async (req, res) => {
 
 	try {
 		let url;
+
+		await Users.updateOne(
+			{ _id: new ObjectId(userId) },
+			{ userAgreement: true }
+		);
 		switch (purchaseType) {
 			case 'productPurchase':
 				url = await createProductPurchaseSession(

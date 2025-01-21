@@ -8,7 +8,7 @@ import { loginSchema } from '../../Utils/schemas/userSchema.js';
 
 const login = async (req, res) => {
 	try {
-		const { email, nationalID, password } = req.body;
+		const { email, nationalID, password, cookieConsent } = req.body;
 		// only one of the two is required
 		try {
 			await loginSchema.validateAsync({
@@ -95,6 +95,10 @@ const login = async (req, res) => {
 			userId: user._id,
 			ip: clientIp,
 		});
+
+		if (!user.cookieConsent && cookieConsent) {
+			await Users.updateOne({ _id: user._id }, { cookieConsent: true });
+		}
 
 		return res.status(200).json({
 			accessToken: accessToken,

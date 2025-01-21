@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import { type } from 'os';
 
 const ExamAttemptSchema = new mongoose.Schema({
 	attemptNumber: {
@@ -105,6 +106,8 @@ const UserSchema = mongoose.Schema(
 			default: false,
 		},
 		purchases: [PurchasesSchema],
+		cookieConsent: { default: false, type: Boolean },
+		userAgreement: { default: false, type: Boolean },
 	},
 	{
 		timestamps: true,
