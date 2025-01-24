@@ -1,6 +1,6 @@
 {
 	"registerResponses": {
-		"success": "Registration successful! Redirecting...",
+		"success": "Registration successful! Please verify your account with the verification e-mail sent to your inbox.",
 		"duplicateEmail": "This email is already in use.",
 		"duplicateNationalId": "This national ID is already in use."
 	},
@@ -11,7 +11,7 @@
 		"invalidCredentials": "Invalid user credentials.",
 		"success": "User logged in successfully."
 	},
-	"logoutResponses":{
+	"logoutResponses": {
 		"success": "Logged out successfully."
 	},
 	"contactResponses": {
@@ -22,13 +22,12 @@
 		"missingToken": "The verification token is missing. Please make sure you've been redirected from the 'forgot password' email.",
 		"expiredToken": "The verification token has expired. Please request a new one using the 'Forgot Password' button on the login page.",
 		"invalidToken": "The verification token is invalid. Please ensure the token hasn't been tampered with.",
-        "success": "Your password has been successfully reset.",
+		"success": "Your password has been successfully reset.",
 		"userNotFound": "No user found for the provided token."
 	},
 	"paymentResponses": {
 		"userNotFound": "We couldn't locate your account. Please double-check your credentials and try again.",
 		"emailNotVerified": "Please verify your email address to proceed. Request a verification email on the 'My Account' page.",
-		"contractNotVerified": "Contract verification is required to continue. Please complete the verification on the My Account page.",
 		"duplicatePurchase": "You already own this item."
 	},
 	"validationErrors": {
@@ -48,7 +47,7 @@
 			"missing": "The password field is required. Please provide a value."
 		},
 		"email": {
-			"invalid": "the address must be in a valid format.",
+			"invalid": "The email address must be in a valid format.",
 			"invalidForLogin": "The email address must be in a valid format.",
 			"missing": "The email field is required. Please provide a value."
 		},
@@ -81,17 +80,17 @@
 	"sessionExpired": "Your session has expired. Please sign in again.",
 	"verificationEmailResponses": {
 		"success": "Please check your inbox and click the verification link to confirm your email address.",
-		"error": "We're currently experiencing a temporary issue and were unable to send the verification email. Please try again shortly. If the problem persists, feel free to contact support for assistance."
+		"error": "We're currently experiencing a temporary issue and we’re unable to send the verification email. Please try again shortly. If the problem persists, feel free to contact support for assistance."
 	},
 	"unauthorized": "Access denied. Unauthorized request.",
-	"userInfoResponses": { 
+	"userInfoResponses": {
 		"userUpdate": "User updated successfully. The following fields have been modified: ",
 		"userInfoFetch": "User information retrieved successfully.",
 		"noChanges": "No changes detected.",
 		"accountDeleted": "Your account has been successfully deleted."
 	},
 	"forgotPasswordForm": {
-		"inputField" : "Your new password can not have",
+		"inputField": "Your new password can not have",
 		"invalidEmail": "The email adress must be in a valid format",
 		"invalidNationalId": "The national id must be in a valid format"
 	},
@@ -99,7 +98,7 @@
 		"success": "We've sent a password reset link to your email address. Please check your inbox and follow the instructions to reset your password.",
 		"error": "We couldn't send the password reset email at this time. Please try again or contact support if the problem continues."
 	},
-	"verifyMailResponses":{ 
+	"verifyMailResponses": {
 		"missingToken": "The verification token is missing. Please make sure you've been redirected from the 'verification' email.",
 		"expiredToken": "The verification token has expired. Please request a new one using the 'verify mail' button in the userinfo page .",
 		"invalidToken": "The verification token is invalid. Please ensure the token hasn't been tampered with.",
@@ -108,9 +107,9 @@
 	"authResponses": {
 		"noSession": "Your session has ended. Please sign in to continue using our services.",
 		"userNotFound": "We couldn't find an account with these credentials. Please check your information and try again.",
-		"expiredSession": "Your session has expired for security reasons. Please sign out and sign back in to continue.",
+		"expiredSession": "Your session has expired for security reasons.",
 		"accountSuspended": "Your account has been temporarily suspended. Please contact our support team for assistance.",
-		"invalidToken": "tampered jwt"
+		"invalidToken": "We couldn’t verify your JWT token. Please contact our support team for assistance."
 	},
 	"VerificationEmailResponses": {
 		"success": "Your email has been successfully verified.",

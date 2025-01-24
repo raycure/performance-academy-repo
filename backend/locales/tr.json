@@ -1,122 +1,121 @@
 {
 	"registerResponses": {
-	  "success": "Kayıt başarılı! Yönlendiriliyorsunuz...",
-	  "duplicateEmail": "Bu e-posta adresi zaten kullanımda.",
-	  "duplicateNationalId": "Bu TC kimlik numarası zaten kullanımda."
+		"success": "Hesap kaydınız başarılı! Lütfen gelen e-posta ile hesabınızı doğrulayınız.",
+		"duplicateEmail": "Bu e-posta adresi zaten kullanımda.",
+		"duplicateNationalId": "Bu TC kimlik numarası zaten kullanımda."
 	},
 	"loginResponses": {
-	  "credentialType": "Lütfen e-posta veya TC kimlik numarasından sadece birini giriniz.",
-	  "emailOrIdMissing": "Lütfen e-posta veya TC kimlik numarası giriniz.",
-	  "accountNotFound": "Girilen bilgilerle eşleşen hesap bulunamadı.",
-	  "invalidCredentials": "Geçersiz kullanıcı bilgileri.",
-	  "success": "Başarıyla giriş yapıldı."
+		"credentialType": "Lütfen e-posta veya TC kimlik numarasından sadece birini giriniz.",
+		"emailOrIdMissing": "Lütfen e-posta veya TC kimlik numarası giriniz.",
+		"accountNotFound": "Girilen bilgilerle eşleşen bir hesap bulunamadı.",
+		"invalidCredentials": "Geçersiz kullanıcı bilgileri.",
+		"success": "Başarıyla giriş yapıldı."
 	},
-	"logoutResponses":{
+	"logoutResponses": {
 		"success": "Başarıyla çıkış yapıldı."
 	},
 	"contactResponses": {
-	  "success": "İletişim formunuz başarıyla gönderildi. En kısa sürede size geri dönüş yapacağız.",
-	  "error": "Form gönderimi sırasında bir hata oluştu. Lütfen daha sonra tekrar deneyiniz."
+		"success": "Mesajınız başarıyla gönderildi, en kısa sürede size geri dönüş yapacağız.",
+		"error": "Form gönderimi sırasında bir hata oluştu. Lütfen daha sonra tekrar deneyiniz."
 	},
 	"forgotPasswordResponses": {
-	  "missingToken": "Doğrulama kodu eksik. Lütfen 'şifremi unuttum' e-postasından yönlendirildiğinizden emin olun.",
-	  "expiredToken": "Doğrulama kodunun süresi dolmuş. Lütfen giriş sayfasındaki 'Şifremi Unuttum' butonunu kullanarak yeni bir kod talep edin.",
-	  "invalidToken": "Geçersiz doğrulama kodu. Lütfen kodun değiştirilmediğinden emin olun.",
-	  "success": "Şifreniz başarıyla sıfırlandı.",
-	  "userNotFound": "Sağlanan kod için kullanıcı bulunamadı."
+		"missingToken": "Doğrulama kodu eksik. Lütfen 'şifremi unuttum' e-postasından yönlendirildiğinizden emin olun.",
+		"expiredToken": "Doğrulama kodunun süresi dolmuş. Lütfen giriş sayfasındaki 'Şifremi Unuttum' butonunu kullanarak yeni bir kod talep edin.",
+		"invalidToken": "Geçersiz doğrulama kodu. Lütfen kodun değiştirilmediğinden emin olun.",
+		"success": "Şifreniz başarıyla sıfırlandı.",
+		"userNotFound": "Sağlanan kod için kullanıcı bulunamadı."
 	},
 	"paymentResponses": {
-	  "userNotFound": "Hesabınız bulunamadı. Lütfen bilgilerinizi kontrol edip tekrar deneyiniz.",
-	  "emailNotVerified": "Devam etmek için lütfen e-posta adresinizi doğrulayın. 'Hesabım' sayfasından doğrulama e-postası talep edebilirsiniz.",
-	  "contractNotVerified": "Devam etmek için sözleşme doğrulaması gerekli. Lütfen Hesabım sayfasından doğrulamayı tamamlayın.",
-	  "duplicatePurchase": "Bu ürüne zaten sahipsiniz."
+		"userNotFound": "Hesabınız bulunamadı. Lütfen bilgilerinizi kontrol edip tekrar deneyiniz.",
+		"emailNotVerified": "Devam etmek için lütfen e-posta adresinizi doğrulayın. 'Hesabım' sayfasından doğrulama maili talep edebilirsiniz.",
+		"duplicatePurchase": "Bu ürüne zaten sahipsiniz."
 	},
 	"validationErrors": {
-	  "name": {
-		"onlyChars": "Sadece harf ve boşluk kullanılabilir.",
-		"minLength": "3 karakterden uzun olmalıdır.",
-		"maxLength": "24 karakterden kısa olmalıdır.",
-		"missing": "İsim alanı zorunludur. Lütfen bir değer giriniz."
-	  },
-	  "password": {
-		"casing": "En az bir küçük ve bir büyük harf gereklidir.",
-		"digit": "En az bir rakam gereklidir.",
-		"noWhitespace": "Boşluk kullanılamaz.",
-		"latinOnly": "Sadece Latin karakterleri kullanılabilir.",
-		"minLength": "8 karakterden uzun olmalıdır.",
-		"maxLength": "24 karakterden kısa olmalıdır.",
-		"missing": "Şifre alanı zorunludur. Lütfen bir değer giriniz."
-	  },
-	  "email": {
-		"invalid": "E-posta adresi geçerli bir formatta olmalıdır.",
-		"invalidForLogin": "E-posta adresi geçerli bir formatta olmalıdır.",
-		"missing": "E-posta alanı zorunludur. Lütfen bir değer giriniz."
-	  },
-	  "nationalId": {
-		"numbersOnly": "Sadece rakam kullanılabilir.",
-		"length": "11 haneli olmalıdır.",
-		"missing": "TC kimlik numarası alanı zorunludur. Lütfen bir değer giriniz."
-	  },
-	  "topic": {
-		"minLength": "3 karakterden uzun olmalıdır.",
-		"maxLength": "250 karakterden kısa olmalıdır.",
-		"missing": "Konu alanı zorunludur. Lütfen bir değer giriniz."
-	  },
-	  "question": {
-		"minLength": "3 karakterden uzun olmalıdır.",
-		"maxLength": "75 karakterden kısa olmalıdır.",
-		"missing": "Soru alanı zorunludur. Lütfen bir değer giriniz."
-	  }
+		"name": {
+			"onlyChars": "Sadece harf ve boşluk kullanılabilir.",
+			"minLength": "3 karakterden uzun olmalıdır.",
+			"maxLength": "24 karakterden kısa olmalıdır.",
+			"missing": "İsim alanı zorunludur. Lütfen bir değer giriniz."
+		},
+		"password": {
+			"casing": "En az bir küçük ve bir büyük harf gereklidir.",
+			"digit": "En az bir rakam gereklidir.",
+			"noWhitespace": "Boşluk kullanılamaz.",
+			"latinOnly": "Sadece Latin karakterleri kullanılabilir.",
+			"minLength": "8 karakterden uzun olmalıdır.",
+			"maxLength": "24 karakterden kısa olmalıdır.",
+			"missing": "Şifre alanı zorunludur. Lütfen bir değer giriniz."
+		},
+		"email": {
+			"invalid": "E-posta adresi geçerli bir formatta olmalıdır.",
+			"invalidForLogin": "E-posta adresi geçerli bir formatta olmalıdır.",
+			"missing": "E-posta alanı zorunludur. Lütfen bir değer giriniz."
+		},
+		"nationalId": {
+			"numbersOnly": "Sadece rakam kullanılabilir.",
+			"length": "11 haneli olmalıdır.",
+			"missing": "TC kimlik numarası alanı zorunludur. Lütfen bir değer giriniz."
+		},
+		"topic": {
+			"minLength": "3 karakterden uzun olmalıdır.",
+			"maxLength": "250 karakterden kısa olmalıdır.",
+			"missing": "Konu alanı zorunludur. Lütfen bir değer giriniz."
+		},
+		"question": {
+			"minLength": "3 karakterden uzun olmalıdır.",
+			"maxLength": "75 karakterden kısa olmalıdır.",
+			"missing": "Soru alanı zorunludur. Lütfen bir değer giriniz."
+		}
 	},
 	"validationFields": {
-	  "name": "İsim alanında",
-	  "surname": "Soyisim alanında",
-	  "password": "Şifre alanında",
-	  "email": "E-posta alanında",
-	  "nationalId": "TC kimlik numarası alanında",
-	  "topic": "Konu alanında",
-	  "question": "Soru alanında"
+		"name": "İsim alanında",
+		"surname": "Soyisim alanında",
+		"password": "Şifre alanında",
+		"email": "E-posta alanında",
+		"nationalId": "TC kimlik numarası alanında",
+		"topic": "Konu alanında",
+		"question": "Soru alanında"
 	},
 	"serverError": "Sunucuda beklenmeyen bir hata oluştu.",
 	"sessionExpired": "Oturumunuzun süresi doldu. Lütfen tekrar giriş yapın.",
 	"verificationEmailResponses": {
-	  "success": "Lütfen gelen kutunuzu kontrol edin ve e-posta adresinizi onaylamak için doğrulama bağlantısına tıklayın.",
-	  "error": "Şu anda geçici bir sorun yaşıyoruz ve doğrulama e-postasını gönderemedik. Lütfen kısa bir süre sonra tekrar deneyin. Sorun devam ederse, yardım için destek ekibiyle iletişime geçebilirsiniz."
+		"success": "Lütfen gelen kutunuzu kontrol edin ve e-posta adresinizi onaylamak için doğrulama bağlantısına tıklayın.",
+		"error": "Şu anda geçici bir sorun yaşıyoruz ve doğrulama e-postasını gönderemedik. Lütfen kısa bir süre sonra tekrar deneyin. Sorun devam ederse, yardım için destek ekibiyle iletişime geçebilirsiniz."
 	},
 	"unauthorized": "Erişim reddedildi. Yetkisiz istek.",
 	"userInfoResponses": {
-	  "userUpdate": "Kullanıcı başarıyla güncellendi. Aşağıdaki alanlar değiştirildi: ",
-	  "userInfoFetch": "Kullanıcı bilgileri başarıyla alındı.",
-	  "noChanges": "Değişiklik tespit edilmedi.",
+		"userUpdate": "Kullanıcı başarıyla güncellendi. Aşağıdaki alanlar değiştirildi: ",
+		"userInfoFetch": "Kullanıcı bilgileri başarıyla alındı.",
+		"noChanges": "Değişiklik tespit edilmedi.",
 		"accountDeleted": "Hesabınız başarıyla silindi."
 	},
 	"forgotPasswordForm": {
-	  "inputField": "Yeni şifreniz şunları içeremez",
-	  "invalidEmail": "E-posta adresi geçerli bir formatta olmalıdır",
-	  "invalidNationalId": "TC kimlik numarası geçerli bir formatta olmalıdır"
+		"inputField": "Yeni şifreniz şunları içeremez",
+		"invalidEmail": "E-posta adresi geçerli bir formatta olmalıdır",
+		"invalidNationalId": "TC kimlik numarası geçerli bir formatta olmalıdır"
 	},
 	"sendForgotPasswordEmailResponses": {
-	  "success": "Şifre sıfırlama bağlantısını e-posta adresinize gönderdik. Lütfen gelen kutunuzu kontrol edin ve şifrenizi sıfırlamak için talimatları takip edin.",
-	  "error": "Şu anda şifre sıfırlama e-postasını gönderemiyoruz. Lütfen tekrar deneyin veya sorun devam ederse destek ekibiyle iletişime geçin."
+		"success": "Şifre sıfırlama bağlantısını e-posta adresinize gönderdik. Lütfen gelen kutunuzu kontrol edin ve şifrenizi sıfırlamak için talimatları takip edin.",
+		"error": "Şu anda şifre sıfırlama e-postasını gönderemiyoruz. Lütfen tekrar deneyin veya sorun devam ederse destek ekibiyle iletişime geçin."
 	},
 	"verifyMailResponses": {
-	  "missingToken": "Doğrulama kodu eksik. Lütfen 'doğrulama' e-postasından yönlendirildiğinizden emin olun.",
-	  "expiredToken": "Doğrulama kodunun süresi dolmuş. Lütfen kullanıcı bilgileri sayfasındaki 'e-posta doğrula' butonunu kullanarak yeni bir kod talep edin.",
-	  "invalidToken": "Geçersiz doğrulama kodu. Lütfen kodun değiştirilmediğinden emin olun.",
-	  "userNotFound": "Sağlanan kod için kullanıcı bulunamadı."
+		"missingToken": "Doğrulama kodu eksik. Lütfen 'doğrulama' e-postasından yönlendirildiğinizden emin olun.",
+		"expiredToken": "Doğrulama kodunun süresi dolmuş. Lütfen kullanıcı bilgileri sayfasındaki 'e-posta doğrula' butonunu kullanarak yeni bir kod talep edin.",
+		"invalidToken": "Geçersiz doğrulama kodu. Lütfen kodun değiştirilmediğinden emin olun.",
+		"userNotFound": "Sağlanan kod için kullanıcı bulunamadı."
 	},
 	"authResponses": {
-	  "noSession": "Oturumunuz sona erdi. Lütfen hizmetlerimizi kullanmaya devam etmek için giriş yapın.",
-	  "userNotFound": "Bu kimlik bilgileriyle bir hesap bulamadık. Lütfen bilgilerinizi kontrol edip tekrar deneyin.",
-	  "expiredSession": "Oturumunuz güvenlik nedeniyle sona erdi. Lütfen devam etmek için çıkış yapıp tekrar giriş yapın.",
-	  "accountSuspended": "Hesabınız geçici olarak askıya alındı. Lütfen yardım için destek ekibimizle iletişime geçin.",
-	  "invalidToken": "tampered jwt"
+		"noSession": "Oturumunuz sona erdi. Lütfen hizmetlerimizi kullanmaya devam etmek için giriş yapın.",
+		"userNotFound": "Bu kimlik bilgileriyle bir hesap bulamadık. Lütfen bilgilerinizi kontrol edip tekrar deneyin.",
+		"expiredSession": "Oturumunuz güvenlik nedeniyle sona erdi.",
+		"accountSuspended": "Hesabınız geçici olarak askıya alındı. Lütfen yardım için destek ekibimizle iletişime geçin.",
+		"invalidToken": "JWT jetonunuz doğrulanamadı. Lütfen yardım için destek ekibimizle iletişime geçin."
 	},
 	"VerificationEmailResponses": {
 		"success": "E-postanız başarıyla doğrulandı.",
-		"error": "E-postanızı doğrularken bir iç hata oluştu. Lütfen tekrar deneyin veya sorun devam ederse destek ekibiyle iletişime geçin."
+		"error": "E-postanızı doğrularken bir hata oluştu. Lütfen tekrar deneyin veya sorun devam ederse destek ekibiyle iletişime geçin."
 	},
 	"WebhookResponses": {
-		"ExhaustedAttempts": "Maksimum sınav deneme hakkına ulaştınız."
+		"ExhaustedAttempts": "Maksimum sınav deneme hakkınıza ulaştınız."
 	}
-  }
+}

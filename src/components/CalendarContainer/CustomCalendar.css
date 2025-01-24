@@ -83,11 +83,13 @@
 	background-color: transparent !important;
 	position: relative;
 }
-
+.fc .fc-daygrid-day-events {
+	display: none;
+}
 .fc .fc-daygrid-day.fc-day-today::before {
 	content: '';
-	width: calc(100% - 1.4rem);
-	height: calc(100% - 1.4rem);
+	width: calc(100% - 1.3rem);
+	height: calc(100% - 1.3rem);
 	position: absolute;
 	border: 2px solid red !important;
 	margin: 0.7rem;
