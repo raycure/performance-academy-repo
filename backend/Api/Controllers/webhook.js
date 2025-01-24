@@ -25,7 +25,6 @@ const webhook = async (req, res) => {
 			case 'checkout.session.completed':
 				await handleCheckoutCompleted(event, language);
 				break;
-
 			case 'checkout.session.expired':
 			case 'checkout.session.rejected':
 				await handleCheckoutInvalidSession(event);

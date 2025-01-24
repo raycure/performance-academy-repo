@@ -80,7 +80,7 @@
 	"sessionExpired": "Your session has expired. Please sign in again.",
 	"verificationEmailResponses": {
 		"success": "Please check your inbox and click the verification link to confirm your email address.",
-		"error": "We're currently experiencing a temporary issue and we’re unable to send the verification email. Please try again shortly. If the problem persists, feel free to contact support for assistance."
+		"error": "We're currently experiencing a temporary issue and we're unable to send the verification email. Please try again shortly. If the problem persists, feel free to contact support for assistance."
 	},
 	"unauthorized": "Access denied. Unauthorized request.",
 	"userInfoResponses": {
@@ -109,7 +109,7 @@
 		"userNotFound": "We couldn't find an account with these credentials. Please check your information and try again.",
 		"expiredSession": "Your session has expired for security reasons.",
 		"accountSuspended": "Your account has been temporarily suspended. Please contact our support team for assistance.",
-		"invalidToken": "We couldn’t verify your JWT token. Please contact our support team for assistance."
+		"invalidToken": "We couldn't verify your JWT token. Please contact our support team for assistance."
 	},
 	"VerificationEmailResponses": {
 		"success": "Your email has been successfully verified.",

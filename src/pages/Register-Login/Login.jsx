@@ -78,21 +78,27 @@ function Login() {
 			console.log('error at forgot password', error);
 		}
 	};
+	const cookieConsent = localStorage.getItem('cookieConsent');
 
 	const handleSubmit = async () => {
+		console.log('cookieConsent', cookieConsent);
+
 		try {
 			let loginData;
 			if (/^\d+$/.test(mailorNationalID)) {
 				loginData = {
 					nationalID: mailorNationalID,
 					password: pwd,
+					cookieConsent,
 				};
 			} else {
 				loginData = {
+					cookieConsent,
 					email: mailorNationalID,
 					password: pwd,
 				};
 			}
+
 			setLocalLoading(true);
 			const response = await dispatch(
 				AuthService({

@@ -19,16 +19,17 @@ async function setupAxiosDefaults() {
 	if (isBotAttempt) {
 		return null;
 	}
+
+	if (!axios.defaults.headers.common['Accept-Language']) {
+		axios.defaults.headers.common['Accept-Language'] = 'tr';
+	}
+
 	const accesstoken = localStorage.getItem('accessToken');
 	if (accesstoken) {
 		axios.defaults.headers.common['Authorization'] = `Bearer ${accesstoken}`;
 	} else {
 		delete axios.defaults.headers.common['Authorization'];
 	}
-
-	const preferredLanguages = navigator.languages || [navigator.language];
-	const primaryLanguage = preferredLanguages[0]; // Get the most preferred language
-	axios.defaults.headers.common['Language'] = primaryLanguage;
 }
 
 export const fetchData = createAsyncThunk(
@@ -84,7 +85,10 @@ const authSlice = createSlice({
 				) {
 					state.isLoggedIn = true;
 				}
-				if (action.payload.endpoint.includes('/logout')) {
+				if (
+					action.payload.endpoint.includes('/logout') ||
+					action.payload.endpoint.includes('/userInfo/deleteAccount')
+				) {
 					state.isLoggedIn = false;
 				}
 			})
@@ -101,15 +105,23 @@ const UserPreference = createSlice({
 	name: 'UserPreference',
 	initialState: initialStateForLang,
 	reducers: {
-		setPreferredLanguage: (state, action) => {
-			const language = action.payload;
-			state.preferredLanguage = action.payload;
-			setupAxiosDefaults(language);
-		},
+		// setPreferredLanguage: (state, action) => {
+		// 	state.preferredLanguage = action.payload;
+		// 	const language = action.payload;
+		// 	axios.defaults.headers.common['Accept-Language'] = action.payload;
+		// },
 	},
 });
 
-export const { setPreferredLanguage } = UserPreference.actions;
+export const setPreferredLanguage = createAsyncThunk(
+	'language/setPreferredLanguage',
+	async (language) => {
+		axios.defaults.headers.common['Accept-Language'] = language;
+		return language;
+	}
+);
+
+// export const { setPreferredLanguage } = UserPreference.actions;
 export const selectUserPreference = (state) =>
 	state.UserPreference.preferredLanguage;
 export const selectIsLoading = (state) => state.auth.isLoading;

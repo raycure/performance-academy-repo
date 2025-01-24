@@ -13,7 +13,7 @@ function assignUniqueIds(events) {
 
 		const basePrice = event.price;
 		const discountedPrice = isEarlyBirdDiscount(event.start)
-			? basePrice * 0.85
+			? basePrice * 0.875
 			: basePrice;
 
 		return {

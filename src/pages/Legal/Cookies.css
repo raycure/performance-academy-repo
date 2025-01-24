@@ -6,10 +6,12 @@
 	bottom: 0;
 	display: flex;
 	align-items: center;
+	justify-content: center;
 	gap: 0.5rem;
 }
 
 .cookiesButton {
+	margin-left: 2rem;
 	padding: 0.7rem 1.7rem;
 	border-radius: 8px;
 	width: max-content;

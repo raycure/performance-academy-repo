@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import './Cookies.css';
 import { useTranslation } from 'react-i18next';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectIsLoggedIn } from '../../redux/auth/authStateSlice';
+import { AuthService } from '../../auth/auth.service';
 const CookieConsent = () => {
 	const [showBanner, setShowBanner] = useState(false);
 	const [isAccepted, setIsAccepted] = useState(false);
@@ -13,10 +16,15 @@ const CookieConsent = () => {
 			setIsAccepted(true);
 		}
 	}, []);
+	let isLoggedIn = useSelector(selectIsLoggedIn);
+	const dispatch = useDispatch();
 	const handleAccept = () => {
 		setIsAccepted(true);
 		setShowBanner(false);
 		localStorage.setItem('cookieConsent', 'accepted');
+		if (isLoggedIn) {
+			dispatch(AuthService({ endpoint: '/updateConsent', method: 'POST' }));
+		}
 	};
 
 	if (!showBanner) return null;
