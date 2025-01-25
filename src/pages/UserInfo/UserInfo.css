@@ -187,15 +187,14 @@
 	justify-content: center;
 }
 
-.valid,
-.invalid {
+.svg-inline--fa.valid,
+.svg-inline--fa.invalid {
 	height: 1.15rem;
 	width: 1.15rem;
 	position: absolute;
-	margin-top: 0.6rem;
+	margin-block: 0.6rem;
 	margin-left: 0.4rem;
 }
-
 .valid {
 	color: rgb(93, 255, 93);
 }

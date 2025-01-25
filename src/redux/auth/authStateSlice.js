@@ -57,10 +57,9 @@ export const fetchData = createAsyncThunk(
 				data: error.response?.data,
 				status: error.response?.status,
 				headers: error.response?.headers,
+				endpoint: url,
 			};
-
 			console.log('error in slice', error);
-
 			return rejectWithValue(responseData);
 		}
 	}
@@ -96,6 +95,9 @@ const authSlice = createSlice({
 				state.status = 'failed';
 				state.isLoading = false;
 				state.isSuccess = false;
+				if (action.payload.data.authFailure) {
+					state.isLoggedIn = false;
+				}
 				state.error = action.payload || 'An unknown error occurred';
 			});
 	},

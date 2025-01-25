@@ -3,12 +3,13 @@ import { EventPurchaseModel, ExamFeeModel } from '../Models/purchaseModel.js';
 import { ObjectId } from 'mongodb';
 import Users from '../Models/userModel.js';
 import emailSender from './emailSender.js';
+import i18n from '../../config/i18n.js';
 
 const webhook = async (req, res) => {
 	try {
 		const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 		const sig = req.headers['stripe-signature'];
-		const language = req.headers['language'];
+		const language = req.getLocale();
 
 		let event;
 		try {
@@ -89,10 +90,6 @@ const handleProductPurchase = async (session, language) => {
 	}
 
 	try {
-		const myProgramsUrl =
-			process.env.ENVIRONMENT === 'development'
-				? process.env.DEV_MYPROGRAMS_LINK
-				: process.env.PROD_MYPROGRAMS_LINK;
 		const contactUrl =
 			process.env.ENVIRONMENT === 'development'
 				? process.env.DEV_CONTACT_LINK
@@ -103,7 +100,7 @@ const handleProductPurchase = async (session, language) => {
 			foundUser.email,
 			foundUser.name,
 			foundUser.surname,
-			{ myProgramsUrl, contactUrl },
+			{ contactUrl },
 			{
 				program: foundItemObject.program,
 				startDate: foundItemObject.start,

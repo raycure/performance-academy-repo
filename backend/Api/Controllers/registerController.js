@@ -68,6 +68,8 @@ const register = async (req, res) => {
 		const verifyLink = activationLink + '/' + emailVerifyToken;
 
 		try {
+			console.log('sending ver email');
+
 			await emailSender(
 				'verificationEmail',
 				language,

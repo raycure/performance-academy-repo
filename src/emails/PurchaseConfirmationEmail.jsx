@@ -86,13 +86,11 @@ export default function PurchaseConfirmationEmail({
 	program,
 	startDate,
 	endDate,
-	url = { myProgramsUrl: '', contactUrl: '' },
+	url = { contactUrl: '' },
 	online,
 	location,
 }) {
 	// Select localization based on language, default to English
-	console.log('url', url);
-	console.log('url', url.myProgramsUrl);
 	const local = localizationData[language] || localizationData['tr'];
 	// Helper function to replace placeholders in text
 	const formatText = (text) =>

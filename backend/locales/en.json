@@ -105,7 +105,7 @@
 		"userNotFound": "No user found for the provided token."
 	},
 	"authResponses": {
-		"noSession": "Your session has ended. Please sign in to continue using our services.",
+		"noSession": "It looks like you're not signed in. Please log in to access our services.",
 		"userNotFound": "We couldn't find an account with these credentials. Please check your information and try again.",
 		"expiredSession": "Your session has expired for security reasons.",
 		"accountSuspended": "Your account has been temporarily suspended. Please contact our support team for assistance.",

@@ -23,6 +23,7 @@ const localizationData = {
 			text: 'Please click the button below to verify your email address.',
 			button: 'Verify Email Address',
 		},
+		regards: ['Best regards,', 'Team'],
 		footer:
 			"If you're having trouble clicking the 'Verify Email Address' button, copy and paste the URL below into your web browser:",
 	},
@@ -33,6 +34,7 @@ const localizationData = {
 			text: 'Lütfen aşağıdaki butona basarak hesabınızı doğrulayın.',
 			button: 'Hesabınızı Doğrulayın',
 		},
+		regards: ['İyi dileklerimizle,', 'Takımı'],
 		footer:
 			'Eğer butona basmakta sorun yaşıyorsanız bu linki kopyalayıp tarayıcınıza yapıştırabilirsiniz: ',
 	},
@@ -110,6 +112,14 @@ export default function VerificationEmail({
 									}),
 								}),
 							}),
+						],
+					}),
+					_jsxs(Text, {
+						children: [
+							local.regards[0],
+							_jsx('br', {}),
+							'Performance Fitness Academy ',
+							local.regards[1],
 						],
 					}),
 					_jsx(Hr, { style: styles.line }),

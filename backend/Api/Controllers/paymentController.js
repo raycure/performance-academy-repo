@@ -10,7 +10,7 @@ const payment = async (req, res) => {
 	const userId = req.userId;
 	const { purchaseType } = req.body;
 	const itemId = req.body.id;
-	const language = req.language;
+	const language = req.getLocale();
 
 	try {
 		let url;
@@ -47,7 +47,6 @@ const payment = async (req, res) => {
 		});
 	} catch (error) {
 		console.error('Payment creation error:', error);
-		console.error('test:', error.message);
 		res
 			.status(500)
 			.json({ message: res.__(`${error.message}`), duration: 50000 });

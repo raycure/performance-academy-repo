@@ -8,37 +8,13 @@ const handleLogout = async (req, res) => {
 	const cookies = req.cookies;
 	const refreshToken = cookies.jwt;
 	if (!refreshToken) {
-		return res.json({ message: 'logged out successfully' });
+		res.json({ message: res.__('logoutResponses.success'), notify: true });
 	}
 
-	let decodedToken;
 	try {
+		let decodedToken;
 		decodedToken = jwt.decode(refreshToken);
 		jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET);
-	} catch (error) {
-		if (decodedToken?.userId) {
-			await Sessions.deleteOne({
-				identifiers: {
-					$elemMatch: {
-						userId: new ObjectId(decodedToken.userId),
-					},
-				},
-			});
-		}
-
-		res.clearCookie('jwt', {
-			httpOnly: true,
-			sameSite: 'Lax',
-			path: '/',
-			secure: process.env.ENVIRONMENT === 'development' ? false : true,
-		});
-
-		return res.status(403).json({
-			message: res.__('sessionExpired'),
-		});
-	}
-
-	try {
 		await Sessions.deleteOne({
 			identifiers: {
 				$elemMatch: {
@@ -53,11 +29,14 @@ const handleLogout = async (req, res) => {
 			path: '/',
 			secure: process.env.ENVIRONMENT === 'development' ? false : true,
 		});
+
 		if (req.isFromDeleteAccount) {
 			res.json({
 				message: res.__('userInfoResponses.accountDeleted'),
 				notify: true,
 			});
+		} else if (req.sentFromAuthHandle) {
+			return res.end();
 		} else {
 			res.json({ message: res.__('logoutResponses.success'), notify: true });
 		}

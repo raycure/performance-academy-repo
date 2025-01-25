@@ -356,6 +356,8 @@ function UserInfo() {
 			console.error('Error downloading PDF:', error);
 		}
 	}
+	console.log(validName && isEditing ? 'valid' : 'hide');
+
 	return (
 		<div className='user-info-page'>
 			<div className='user-info-inner-con user-info-title-con'>

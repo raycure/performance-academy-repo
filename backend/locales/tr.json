@@ -105,7 +105,7 @@
 		"userNotFound": "Sağlanan kod için kullanıcı bulunamadı."
 	},
 	"authResponses": {
-		"noSession": "Oturumunuz sona erdi. Lütfen hizmetlerimizi kullanmaya devam etmek için giriş yapın.",
+		"noSession": "Görünüşe göre giriş yapmamışsınız. Hizmetlerimize erişmek için lütfen giriş yapın.",
 		"userNotFound": "Bu kimlik bilgileriyle bir hesap bulamadık. Lütfen bilgilerinizi kontrol edip tekrar deneyin.",
 		"expiredSession": "Oturumunuz güvenlik nedeniyle sona erdi.",
 		"accountSuspended": "Hesabınız geçici olarak askıya alındı. Lütfen yardım için destek ekibimizle iletişime geçin.",

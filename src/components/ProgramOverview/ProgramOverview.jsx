@@ -28,7 +28,6 @@ function ProgramOverview({ eventDetails }) {
 			});
 		})
 		.filter(Boolean)[0];
-
 	const isLastEntranceExamFailed =
 		eventDetails.entranceExamAttempts.length == 3 &&
 		eventDetails.entranceExamAttempts[2]?.result == 'failed';
@@ -50,7 +49,11 @@ function ProgramOverview({ eventDetails }) {
 		const isFuture = eventDate > new Date();
 		const date = eventDate.toLocaleDateString('en-GB');
 		let attemptDeadline;
-		if (examType.length === 1) {
+
+		if (
+			eventDetails.entranceExamAttempts.length === 1 ||
+			eventDetails.examAttempts.length === 1
+		) {
 			attemptDeadline = new Date(activeEvent.fullEndDate);
 			attemptDeadline.setDate(attemptDeadline.getDate() + 7);
 		} else {

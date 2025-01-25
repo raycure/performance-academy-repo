@@ -11,8 +11,6 @@ export const AuthService =
 		({ endpoint, data = {}, method }) =>
 		async (dispatch) => {
 			try {
-				console.log('');
-
 				const response = await dispatch(
 					fetchData({
 						method: method,
