@@ -105,11 +105,11 @@
 		"userNotFound": "Sağlanan kod için kullanıcı bulunamadı."
 	},
 	"authResponses": {
-		"noSession": "Görünüşe göre giriş yapmamışsınız. Hizmetlerimize erişmek için lütfen giriş yapın.",
-		"userNotFound": "Bu kimlik bilgileriyle bir hesap bulamadık. Lütfen bilgilerinizi kontrol edip tekrar deneyin.",
-		"expiredSession": "Oturumunuz güvenlik nedeniyle sona erdi.",
-		"accountSuspended": "Hesabınız geçici olarak askıya alındı. Lütfen yardım için destek ekibimizle iletişime geçin.",
-		"invalidToken": "JWT jetonunuz doğrulanamadı. Lütfen yardım için destek ekibimizle iletişime geçin."
+	  "noSession": "Görünüşe göre giriş yapmamışsınız. Hizmetlerimize erişmek için lütfen giriş yapın.",
+	  "userNotFound": "Bu kimlik bilgileriyle bir hesap bulamadık. Lütfen bilgilerinizi kontrol edip tekrar deneyin.",
+	  "expiredSession": "Oturumunuz güvenlik nedeniyle sona erdi. Lütfen devam etmek için çıkış yapıp tekrar giriş yapın.",
+	  "accountSuspended": "Hesabınız geçici olarak askıya alındı. Lütfen yardım için destek ekibimizle iletişime geçin.",
+	  "invalidToken": "tampered jwt"
 	},
 	"VerificationEmailResponses": {
 		"success": "E-postanız başarıyla doğrulandı.",
