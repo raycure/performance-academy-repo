@@ -99,13 +99,6 @@ function Main() {
 	// const scrollWith = useTransform(scrollYProgress, [0.3, 0.632], [0, -250]); // [0,0.91] is how much its being scrolled .91 because of the header [0,-250] for the top attribute and it changes based on the 0 to 0.91
 	return (
 		<>
-			<button
-				onClick={() => {
-					axios.post('/testRoute');
-				}}
-			>
-				test
-			</button>
 			<video
 				className='fullSizedVid'
 				controls

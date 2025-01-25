@@ -3,7 +3,7 @@ function isEarlyBirdDiscount(eventDate) {
 	const eventStart = new Date(eventDate);
 	const timeDifference = eventStart - currentDate;
 	const weeksDifference = timeDifference / (1000 * 60 * 60 * 24 * 7);
-	return weeksDifference <= 4;
+	return weeksDifference >= 4;
 }
 
 function assignUniqueIds(events) {
@@ -13,7 +13,7 @@ function assignUniqueIds(events) {
 
 		const basePrice = event.price;
 		const discountedPrice = isEarlyBirdDiscount(event.start)
-			? basePrice * 0.878
+			? Math.ceil(basePrice * 0.878)
 			: basePrice;
 
 		return {
@@ -37,7 +37,7 @@ export const LesMillsEvents = assignUniqueIds([
 		instructor: 'Cengiz Cumhur',
 		time: '12.00-18.00',
 		program: 'BODYPUMP',
-		price: 410,
+		price: 1,
 	},
 	{
 		title: 'LES-MILLS-CORE',

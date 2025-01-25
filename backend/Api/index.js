@@ -63,12 +63,6 @@ app.use('/', verifyMailRoute);
 app.use('/userInfo', authMiddleware, userInfoRoute);
 app.use('/submitContactForm', contactFormRoute);
 app.use('/upload', uploadRoute);
-app.use('/testRoute', async function test() {
-	const collections = await mongoose.connection.db.collections();
-	for (let collection of collections) {
-		await collection.drop();
-	}
-});
 app.use(express.static(path.join(__dirname, '../../dist')));
 // This should be the LAST route
 app.get('*', (req, res) => {
