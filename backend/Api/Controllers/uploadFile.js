@@ -74,7 +74,9 @@ const upload = multer({
 const uploadFile = async (req, res) => {
 	try {
 		if (!req.file) {
-			return res.status(400).json({ message: 'No file uploaded' });
+			return res
+				.status(400)
+				.json({ message: res.__('uplodadFileResponses.noFileSelected') });
 		}
 		const files = await fs.promises.readdir(uploadDir);
 		// console.log('Files in upload directory:', files);
@@ -86,7 +88,7 @@ const uploadFile = async (req, res) => {
 		} catch (err) {
 			console.error('File does not exist after upload:', err);
 			return res.status(500).json({
-				message: 'File upload failed - file not saved to disk',
+				message: res.__('serverError'),
 				error: err.message,
 			});
 		}
@@ -102,7 +104,7 @@ const uploadFile = async (req, res) => {
 			{ verifiedContract: 'pending' }
 		);
 		res.status(200).json({
-			message: 'File uploaded successfully',
+			message: res.__('uplodadFileResponses.success'),
 			file: {
 				id: newFile._id,
 				filename: newFile.filename,
@@ -115,7 +117,7 @@ const uploadFile = async (req, res) => {
 		console.error('Error uploading file:', err);
 		console.error('Error stack:', err.stack);
 		res.status(500).json({
-			message: 'Internal Server Error',
+			message: res.__('serverError'),
 			error: err.message,
 		});
 	}
@@ -125,18 +127,18 @@ const handleMulterError = (error, req, res, next) => {
 		if (error.code === 'LIMIT_FILE_SIZE') {
 			return res.status(400).json({
 				success: false,
-				message: 'File size exceeds limit',
+				message: res.__('uploadFileResponses.fileSizeExceeded'),
 			});
 		}
 		return res.status(400).json({
 			success: false,
-			message: 'Please upload a valid file',
+			message: res.__('uploadFileResponses.generalUploadError'),
 		});
 	}
 	if (error.message === 'Only PDF files are allowed!') {
 		return res.status(400).json({
 			success: false,
-			message: 'Please upload a PDF file',
+			message: res.__('uploadFileResponses.invalidFileType'),
 		});
 	}
 	next(error);

@@ -3,17 +3,17 @@ function isEarlyBirdDiscount(eventDate) {
 	const eventStart = new Date(eventDate);
 	const timeDifference = eventStart - currentDate;
 	const weeksDifference = timeDifference / (1000 * 60 * 60 * 24 * 7);
-	return weeksDifference >= 4;
+	return weeksDifference <= 4;
 }
 
 function assignUniqueIds(events) {
-	return events.map((event, index) => {
+	return events.map((event) => {
 		const fullStartDate = new Date(event.start);
 		const fullEndDate = new Date(event.end);
 
 		const basePrice = event.price;
-		const discountedPrice = isEarlyBirdDiscount(event.start) // 400 to 350
-			? basePrice * 0.875
+		const discountedPrice = isEarlyBirdDiscount(event.start)
+			? basePrice * 0.878
 			: basePrice;
 
 		return {
@@ -37,7 +37,7 @@ export const LesMillsEvents = assignUniqueIds([
 		instructor: 'Cengiz Cumhur',
 		time: '12.00-18.00',
 		program: 'BODYPUMP',
-		price: 400,
+		price: 410,
 	},
 	{
 		title: 'LES-MILLS-CORE',
@@ -47,7 +47,7 @@ export const LesMillsEvents = assignUniqueIds([
 		instructor: 'Cengiz Cumhur',
 		time: '12.00-18.00',
 		program: 'LES-MILLS-CORE',
-		price: 400,
+		price: 410,
 	},
 	{
 		title: 'BODYATTACK',
@@ -57,7 +57,7 @@ export const LesMillsEvents = assignUniqueIds([
 		instructor: 'Cengiz Cumhur',
 		time: '12.00-18.00',
 		program: 'BODYATTACK',
-		price: 400,
+		price: 410,
 	},
 	{
 		title: 'RPM',
@@ -67,7 +67,7 @@ export const LesMillsEvents = assignUniqueIds([
 		instructor: 'Cengiz Cumhur',
 		time: '12.00-18.00',
 		program: 'RPM',
-		price: 400,
+		price: 410,
 	},
 	{
 		title: 'BODYBALANCE',
@@ -77,7 +77,7 @@ export const LesMillsEvents = assignUniqueIds([
 		instructor: 'Cengiz Cumhur',
 		time: '12.00-18.00',
 		program: 'BODYBALANCE',
-		price: 400,
+		price: 410,
 	},
 	{
 		title: 'BODYCOMBAT',
@@ -87,7 +87,7 @@ export const LesMillsEvents = assignUniqueIds([
 		instructor: 'Cengiz Cumhur',
 		time: '12.00-18.00',
 		program: 'BODYCOMBAT',
-		price: 400,
+		price: 410,
 	},
 	{
 		title: 'LES-MILLS-SPRINT',
@@ -97,6 +97,6 @@ export const LesMillsEvents = assignUniqueIds([
 		instructor: 'Cengiz Cumhur',
 		time: '12.00-18.00',
 		program: 'LES-MILLS-SPRINT',
-		price: 400,
+		price: 410,
 	},
 ]);

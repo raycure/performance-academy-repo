@@ -3,7 +3,6 @@ import { EventPurchaseModel, ExamFeeModel } from '../Models/purchaseModel.js';
 import { ObjectId } from 'mongodb';
 import Users from '../Models/userModel.js';
 import emailSender from './emailSender.js';
-import i18n from '../../config/i18n.js';
 
 const webhook = async (req, res) => {
 	try {

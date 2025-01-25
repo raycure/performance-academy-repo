@@ -87,7 +87,12 @@
 		"userUpdate": "Kullanıcı başarıyla güncellendi. Aşağıdaki alanlar değiştirildi: ",
 		"userInfoFetch": "Kullanıcı bilgileri başarıyla alındı.",
 		"noChanges": "Değişiklik tespit edilmedi.",
-		"accountDeleted": "Hesabınız başarıyla silindi."
+		"accountDeleted": "Hesabınız başarıyla silindi.",
+		"name":"isim",
+		"surname": "soyisim",
+		"newPassword": "şifre",
+		"email": "e-posta",
+		"unchangedPassword": "Yeni şifreniz eski şifrenizle aynı olamaz."
 	},
 	"forgotPasswordForm": {
 		"inputField": "Yeni şifreniz şunları içeremez",
@@ -117,5 +122,12 @@
 	},
 	"WebhookResponses": {
 		"ExhaustedAttempts": "Maksimum sınav deneme hakkınıza ulaştınız."
+	},
+	"uploadFileResponses": {
+		"noFileSelected": "Herhangi bir dosya seçilmedi. Lütfen bir dosya seçin.",
+		"success": "Dosya başarıyla yüklendi.",
+		"fileSizeExceeded": "Dosya boyutu izin verilen maksimum limiti aşıyor.",
+		"invalidFileType": "Geçersiz dosya türü. Lütfen bir PDF dosyası yükleyin.",
+		"generalUploadError": "Dosya yüklenemedi. Lütfen tekrar deneyin."
 	}
 }

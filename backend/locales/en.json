@@ -87,7 +87,12 @@
 		"userUpdate": "User updated successfully. The following fields have been modified: ",
 		"userInfoFetch": "User information retrieved successfully.",
 		"noChanges": "No changes detected.",
-		"accountDeleted": "Your account has been successfully deleted."
+		"accountDeleted": "Your account has been successfully deleted.",
+		"name":"name",
+		"surname": "surname",
+		"newPassword": "password",
+		"email": "email",
+		"unchangedPassword": "Your new password cannot be the same as your old password."
 	},
 	"forgotPasswordForm": {
 		"inputField": "Your new password can not have",
@@ -117,5 +122,12 @@
 	},
 	"WebhookResponses": {
 		"ExhaustedAttempts": "You have reached the maximum number of allowed exam attempts."
-	}
+	},
+    "uploadFileResponses": {
+        "noFileSelected": "No file selected. Please choose a file to upload.",
+        "success": "File uploaded successfully.",
+        "fileSizeExceeded": "File size exceeds the maximum allowed limit.",
+        "invalidFileType": "Invalid file type. Please upload a PDF file.",
+        "generalUploadError": "Unable to upload file. Please try again."
+    }
 }

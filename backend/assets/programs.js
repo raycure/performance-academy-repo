@@ -37,7 +37,7 @@ export const LesMillsEvents = assignUniqueIds([
 		instructor: 'Cengiz Cumhur',
 		time: '12.00-18.00',
 		program: 'BODYPUMP',
-		price: 410,
+		price: 0.5,
 	},
 	{
 		title: 'LES-MILLS-CORE',

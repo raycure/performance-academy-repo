@@ -108,6 +108,8 @@ function UserInfo() {
 					? { newPassword: password }
 					: {}),
 			};
+			console.log('updateData', updateData);
+
 			const response = await dispatch(
 				AuthService({
 					method: 'POST',
@@ -356,7 +358,6 @@ function UserInfo() {
 			console.error('Error downloading PDF:', error);
 		}
 	}
-	console.log(validName && isEditing ? 'valid' : 'hide');
 
 	return (
 		<div className='user-info-page'>

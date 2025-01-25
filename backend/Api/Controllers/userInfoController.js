@@ -57,6 +57,12 @@ export const userInfoPutController = async (req, res) => {
 		const foundUser = await Users.findOne({
 			_id: new ObjectId(userId),
 		});
+		const isMatch = await pkg.compare(newPassword, foundUser.password);
+		if (isMatch) {
+			return res
+				.status(422)
+				.json({ message: res.__('userInfoResponses.unchangedPassword') });
+		}
 		try {
 			validateInput(updateData, userinfoChangeSchemas);
 			if (newPassword) {
@@ -121,12 +127,12 @@ export const userInfoPutController = async (req, res) => {
 					{ $set: { verifiedMail: false } }
 				);
 			}
-			console.log('fieldsToUpdate', fieldsToUpdate);
-
 			return res.status(200).json({
 				message:
 					res.__('userInfoResponses.userUpdate') +
-					Object.keys(fieldsToUpdate).join(', '),
+					Object.keys(fieldsToUpdate)
+						.map((field) => res.__(`userInfoResponses.${field}`))
+						.join(', '),
 				notify: true,
 				updatedFields: fieldsToUpdate,
 			});
