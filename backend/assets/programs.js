@@ -30,16 +30,6 @@ function assignUniqueIds(events) {
 
 export const LesMillsEvents = assignUniqueIds([
 	{
-		title: 'BODYPUMP',
-		start: '2025-05-17',
-		end: '2025-05-18',
-		online: true,
-		instructor: 'Cengiz Cumhur',
-		time: '12.00-18.00',
-		program: 'BODYPUMP',
-		price: 410,
-	},
-	{
 		title: 'LES-MILLS-CORE',
 		start: '2025-02-15',
 		end: '2025-02-16',
@@ -97,6 +87,16 @@ export const LesMillsEvents = assignUniqueIds([
 		instructor: 'Cengiz Cumhur',
 		time: '12.00-18.00',
 		program: 'LES-MILLS-SPRINT',
+		price: 410,
+	},
+	{
+		title: 'BODYPUMP',
+		start: '2025-05-17',
+		end: '2025-05-18',
+		online: true,
+		instructor: 'Cengiz Cumhur',
+		time: '12.00-18.00',
+		program: 'BODYPUMP',
 		price: 410,
 	},
 ]);
