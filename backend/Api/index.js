@@ -64,13 +64,9 @@ app.use('/userInfo', authMiddleware, userInfoRoute);
 app.use('/submitContactForm', contactFormRoute);
 app.use('/upload', uploadRoute);
 app.use('/testRoute', async function test() {
-	const foundUser = await Users.findById('678a760b621f15de4ffe3bf3');
-	try {
-		const examType = 'examAttempts';
-		const itemId = 'BODYPUMP_2025-02-01_2025-02-02_true';
-		await foundUser.addExamAttempt(itemId, examType);
-	} catch (error) {
-		console.log('err', error);
+	const collections = await mongoose.connection.db.collections();
+	for (let collection of collections) {
+		await collection.drop();
 	}
 });
 app.use(express.static(path.join(__dirname, '../../dist')));

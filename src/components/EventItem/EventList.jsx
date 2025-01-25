@@ -406,7 +406,7 @@ function EventList({ activeProgram, infoActive, onlineCheck, activeCategory }) {
 				)}
 				<p className='card-item'>
 					<FaMoneyCheck /> {i18n.language === 'en' ? 'Only' : 'Sadece'} $
-					{daysLeft <= 28 ? 400 : 350}!
+					{daysLeft <= 28 ? 410 : 360}!
 					{/* 4 hafta içinde mi diye checkleyip ona göre fiyat */}
 				</p>
 				<div
