@@ -89,11 +89,19 @@ export default function SendEventContent({
 	console.log('url', url);
 	const local = localizationData[language] || localizationData['tr'];
 	// Helper function to replace placeholders in text
+	const stringEndDate = endDate ? new Date(endDate) : null;
+	const stringStartDate = startDate ? new Date(startDate) : null;
 	const formatText = (text) =>
 		text
 			.replace('{program}', program)
-			.replace('{startDate}', startDate)
-			.replace('{endDate}', endDate);
+			.replace(
+				'{startDate}',
+				stringStartDate ? stringStartDate.toLocaleDateString(language) : 'N/A'
+			)
+			.replace(
+				'{endDate}',
+				stringEndDate ? stringEndDate.toLocaleDateString(language) : 'N/A'
+			);
 	return _jsxs(Html, {
 		children: [
 			_jsx(Head, {

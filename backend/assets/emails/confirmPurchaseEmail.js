@@ -93,11 +93,19 @@ export default function PurchaseConfirmationEmail({
 	// Select localization based on language, default to English
 	const local = localizationData[language] || localizationData['en'];
 	// Helper function to replace placeholders in text
+	const stringStartDate = startDate ? new Date(startDate) : null;
+	const stringEndDate = endDate ? new Date(endDate) : null;
 	const formatText = (text) =>
 		text
 			.replace('{program}', program)
-			.replace('{startDate}', startDate)
-			.replace('{endDate}', endDate);
+			.replace(
+				'{startDate}',
+				stringStartDate ? stringStartDate.toLocaleDateString(language) : 'N/A'
+			)
+			.replace(
+				'{endDate}',
+				stringEndDate ? stringEndDate.toLocaleDateString(language) : 'N/A'
+			);
 	return _jsxs(Html, {
 		children: [
 			_jsx(Head, {
