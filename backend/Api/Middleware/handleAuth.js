@@ -20,7 +20,8 @@ const authMiddleware = async (req, res, next) => {
 			decodedToken = jwt.decode(refreshToken);
 			jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET);
 		} catch (decodeError) {
-			res.status(403).json({
+			await handleLogout(req, res, true);
+			return res.status(403).json({
 				message: res.__('authResponses.noSession'),
 				authFailure: true,
 			});
@@ -33,24 +34,33 @@ const authMiddleware = async (req, res, next) => {
 		});
 
 		if (!foundActiveSession) {
-			return res
-				.status(404)
-				.json({ message: res.__(error2), authFailure: true });
+			await handleLogout(req, res, true);
+
+			return res.status(404).json({
+				message: res.__('authResponses.noSession'),
+				authFailure: true,
+			});
 		}
 		const foundUser = await Users.findOne({
 			_id: new ObjectId(userIdFromToken),
 		});
 
 		if (!foundUser) {
-			return res
-				.status(404)
-				.json({ message: res.__(error2), authFailure: true });
+			await handleLogout(req, res, true);
+
+			return res.status(404).json({
+				message: res.__('authResponses.userNotFound'),
+				authFailure: true,
+			});
 		}
 
 		if (foundUser.blocked) {
-			return res
-				.status(403)
-				.json({ message: res.__(error2), authFailure: true });
+			await handleLogout(req, res, true);
+
+			return res.status(403).json({
+				message: res.__('authResponses.accountSuspended'),
+				authFailure: true,
+			});
 		}
 
 		// Create a mock response object to capture verifyJWT's response
@@ -116,8 +126,8 @@ const authMiddleware = async (req, res, next) => {
 		req.userId = null;
 		return next();
 	} catch (error) {
-		req.sentFromAuthHandle = true;
-		await handleLogout(req);
+		console.log('error at authMiddleware', error);
+		await handleLogout(req, res, true);
 		return res.status(500).json({ message: res.__('serverError') });
 	}
 };

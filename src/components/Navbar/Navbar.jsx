@@ -168,10 +168,6 @@ function Navbar() {
 		navigate('/');
 	}
 
-	useEffect(() => {
-		console.log('isloggedin', isLoggedIn);
-	}, [isLoggedIn]);
-
 	return (
 		<div className='navigation-outer-container user-select-none' id='navbar'>
 			<nav className='nav-container nav-inner-container'>

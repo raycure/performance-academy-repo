@@ -29,7 +29,6 @@ import PopupDialog from '../../components/Notification/Popup';
 import contractPdf from '../../assets/LesmillsEgitmenSozlesmesi.pdf';
 function UserInfo() {
 	const dispatch = useDispatch();
-
 	useEffect(() => {
 		initUserInfo();
 	}, []);
@@ -521,7 +520,7 @@ function UserInfo() {
 							<input
 								onClick={displayInputAreaWarning}
 								autoComplete='off'
-								readOnly='true'
+								readOnly={true}
 								type='text'
 								id='nationalID'
 								name='nationalID'
