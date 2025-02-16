@@ -19,7 +19,7 @@ import HoneypotInput from '../../components/Forms/HoneypotInput.jsx';
 
 function RegisterForm() {
 	const { t, i18n } = useTranslation('translation');
-	let isLoading = useSelector(selectIsLoading); //for button to be in the loading state
+	let isLoading = useSelector(selectIsLoading); //for button to be in the loading state based on the api request's status
 	const [localLoading, setLocalLoading] = useState(false); // the button needs to be in isLoading stage before the api request is pending so the user sees loading state as soon as submitting
 	const nationalIDrules = [
 		{

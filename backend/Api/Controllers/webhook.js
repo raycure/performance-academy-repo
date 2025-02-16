@@ -23,19 +23,40 @@ const webhook = async (req, res) => {
 		}
 		switch (event.type) {
 			case 'checkout.session.completed':
-				await handleCheckoutCompleted(event, language);
-				break;
+				try {
+					await handleCheckoutCompleted(event, language);
+					return res.status(200).json({ received: true });
+				} catch (error) {
+					console.error('Error processing completed checkout:', error);
+					return res.status(500).json({
+						message: 'Error processing completed checkout',
+						error: error.message,
+					});
+				}
+
 			case 'checkout.session.expired':
 			case 'checkout.session.rejected':
-				await handleCheckoutInvalidSession(event);
-				break;
+				try {
+					await handleCheckoutInvalidSession(event);
+					// return 200 for expired/rejected because server successfully processed the fact that the payment was expired/rejected
+					return res.status(200).json({ received: true });
+				} catch (error) {
+					console.error('Error processing invalid session:', error);
+					return res.status(500).json({
+						message: 'Error processing invalid session',
+						error: error.message,
+					});
+				}
 
 			default:
-				// console.log(`Unhandled event type: ${event.type}`);
-				break;
+				console.log(`Unhandled event type: ${event.type}`);
+				return res.status(200).json({
+					received: true,
+					warning: `Unhandled event type: ${event.type}`,
+				});
 		}
 	} catch (error) {
-		console.log('webhook error', error);
+		return res.status(500).send(`Webhook Error: ${error.message}`);
 	}
 };
 
@@ -72,8 +93,6 @@ const handleProductPurchase = async (session, language) => {
 		eventId,
 		boughtPrice,
 	};
-	console.log('eventId here', eventId);
-
 	await Users.findByIdAndUpdate(userId, {
 		$push: { purchases: purchaseData },
 	});
@@ -84,7 +103,6 @@ const handleProductPurchase = async (session, language) => {
 		await foundUser.addExamAttempt(eventId, examType);
 	} catch (error) {
 		console.log('error in adding attempt', error);
-
 		throw error;
 	}
 
