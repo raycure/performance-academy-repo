@@ -8,11 +8,13 @@ import axios from '../api/axios';
 import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router-dom';
 import CertificationSteps from '../../components/CertificationSteps/CertificationSteps';
+import SpecialEvent from '../../components/SpecialEvent/SpecialEvent';
 
 function Events() {
 	const { t, i18n } = useTranslation('programs');
 	const lesMillsPrograms = LesmillsPrograms();
 	const location = useLocation();
+	const today = new Date();
 	const programNames = [
 		{
 			label: t('cat4'),
@@ -117,6 +119,7 @@ function Events() {
 	return (
 		<div id='event-page'>
 			<CalendarContainer />
+			{today < new Date('2025-05-12') ? <SpecialEvent /> : ''}
 			<CertificationSteps />
 			<section>
 				<h2 className='fs-650 center-item' style={{ padding: '2rem' }}>

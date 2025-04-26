@@ -12,7 +12,9 @@ function assignUniqueIds(events) {
 		const fullEndDate = new Date(event.end);
 
 		const basePrice = event.price;
-		const discountedPrice = isEarlyBirdDiscount(event.start)
+		const discountedPrice = event.specialPrice
+			? basePrice
+			: isEarlyBirdDiscount(event.start)
 			? Math.ceil(basePrice * 0.878)
 			: basePrice;
 
@@ -88,6 +90,28 @@ export const LesMillsEvents = assignUniqueIds([
 		time: '12.00-18.00',
 		program: 'LES-MILLS-SPRINT',
 		price: 410,
+	},
+	{
+		title: 'BODYCOMBAT',
+		start: '2025-05-09',
+		end: '2025-05-09',
+		online: false,
+		instructor: 'Cengiz Cumhur',
+		time: '09.30-17.00',
+		program: 'BODYCOMBAT',
+		price: 350,
+		specialPrice: true,
+	},
+	{
+		title: 'LES-MILLS-CORE',
+		start: '2025-05-10',
+		end: '2025-05-10',
+		online: false,
+		instructor: 'Cengiz Cumhur',
+		time: '09.30-17.00',
+		program: 'LES-MILLS-CORE',
+		price: 350,
+		specialPrice: true,
 	},
 	{
 		title: 'BODYPUMP',
