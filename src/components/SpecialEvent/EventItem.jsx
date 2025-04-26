@@ -5,6 +5,7 @@ import { IoMdArrowRoundForward } from 'react-icons/io';
 import Button from '../Button/Button';
 import { useDispatch } from 'react-redux';
 import { setEventId } from '../../redux/Slices/CalendarEventSlice.js';
+import { setId } from '../../redux/Slices/ProgramIdSlice.js';
 import { LesMillsEvents } from '../../assets/LesmillsEvents.jsx';
 function EventItem({ poster, program, flexDirection, text, eventId }) {
 	const programs = LesmillsPrograms();
@@ -27,6 +28,10 @@ function EventItem({ poster, program, flexDirection, text, eventId }) {
 		});
 	});
 	const dispatch = useDispatch();
+	const handleSelectId = (id) => {
+		dispatch(setId(id));
+		navigate('/program');
+	};
 	const activeEvent = LesMillsEvents.find((program) => {
 		return eventId === program.id.toString();
 	});
@@ -67,7 +72,9 @@ function EventItem({ poster, program, flexDirection, text, eventId }) {
 				/>
 				<p>{text}</p>
 				<HashLink
-					to=''
+					to={'/program#' + program}
+					state={{ program: program }}
+					onClick={() => handleSelectId(program)}
 					smooth
 					style={{
 						display: 'flex',
