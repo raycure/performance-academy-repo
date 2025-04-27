@@ -5,49 +5,58 @@ import { ObjectId } from 'mongodb';
 dotenv.config();
 
 const handleLogout = async (req, res, sentFromAuthHandle = false) => {
-	const cookies = req.cookies;
-	const refreshToken = cookies?.jwt;
-
-	if (!refreshToken && !sentFromAuthHandle) {
-		return res.status(200).json({
-			message: res.__('logoutResponses.success'),
-			notify: true,
-		});
-	}
-
 	try {
-		let decodedToken = jwt.decode(refreshToken);
-		jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET);
+		const cookies = req.cookies;
+		const refreshToken = cookies?.jwt;
 
-		await Sessions.deleteOne({
-			identifiers: {
-				$elemMatch: {
-					userId: new ObjectId(decodedToken.userId),
+		if (!refreshToken && !sentFromAuthHandle) {
+			return res.status(200).json({
+				message: res.__('logoutResponses.success'),
+				notify: true,
+			});
+		}
+
+		try {
+			const decodedToken = jwt.verify(
+				refreshToken,
+				process.env.REFRESH_TOKEN_SECRET
+			);
+			await Sessions.deleteOne({
+				identifiers: {
+					$elemMatch: {
+						userId: new ObjectId(decodedToken.userId),
+					},
 				},
-			},
-		});
-	} catch (error) {}
+			});
+		} catch (error) {
+			// Continue with logout even if session deletion fails
+		}
 
-	res.clearCookie('jwt', {
-		httpOnly: true,
-		sameSite: 'Lax',
-		path: '/',
-		secure: process.env.ENVIRONMENT === 'development' ? false : true,
-	});
-
-	if (req.isFromDeleteAccount) {
-		return res.json({
-			message: res.__('userInfoResponses.accountDeleted'),
-			notify: true,
+		res.clearCookie('jwt', {
+			httpOnly: true,
+			sameSite: 'Lax',
+			path: '/',
+			secure: process.env.ENVIRONMENT === 'development' ? false : true,
 		});
-	} else if (sentFromAuthHandle) {
-		return null;
-	} else {
-		return res.json({
-			message: res.__('logoutResponses.success'),
-			notify: true,
+
+		if (req.isFromDeleteAccount) {
+			return res.status(200).json({
+				message: res.__('userInfoResponses.accountDeleted'),
+				notify: true,
+			});
+		} else if (sentFromAuthHandle === true) {
+			return null;
+		} else {
+			return res.status(200).json({
+				message: res.__('logoutResponses.success'),
+				notify: true,
+			});
+		}
+	} catch (error) {
+		console.log('error in logout:', error);
+		return res.status(500).json({
+			message: 'Error during logout process',
 		});
 	}
 };
-
 export default handleLogout;

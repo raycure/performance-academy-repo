@@ -5,6 +5,7 @@ dotenv.config();
 const verifyJWT = async (req, res) => {
 	const accessToken = req.accessToken;
 	try {
+		console.log('accessToken in verifyJWT:', accessToken);
 		jwt.verify(accessToken, process.env.ACCESS_TOKEN_SECRET);
 		res.status(200).json({
 			message: 'successful verify jwt',

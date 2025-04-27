@@ -86,6 +86,10 @@ const authMiddleware = async (req, res, next) => {
 		console.log('gonna verify');
 		await verifyJWT(req, verifyJwtMockResponse);
 		// Check the response from verifyJWT
+		console.log(
+			'verify successful, verifyJwtMockResponse:',
+			verifyJwtMockResponse
+		);
 		if (verifyJwtMockResponse.statusCode === 200) {
 			req.userId = userIdFromToken;
 			req.isAuthenticated = true; // Mark user as authenticated
@@ -109,6 +113,8 @@ const authMiddleware = async (req, res, next) => {
 		await refreshJwt(req, refreshMockRes);
 
 		if (refreshMockRes.statusCode === 200) {
+			console.log('refresh successful, refreshMockRes:', refreshMockRes);
+
 			res.header('x-refreshed-token', 'true');
 			req.isAuthenticated = true;
 			req.accessToken = refreshMockRes.responseData.newAccessToken;

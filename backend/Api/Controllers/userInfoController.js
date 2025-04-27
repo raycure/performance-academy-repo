@@ -57,7 +57,9 @@ export const userInfoPutController = async (req, res) => {
 		const foundUser = await Users.findOne({
 			_id: new ObjectId(userId),
 		});
-		const isMatch = await pkg.compare(newPassword, foundUser.password);
+		const isMatch = newPassword
+			? await pkg.compare(newPassword, foundUser.password)
+			: false;
 		if (isMatch) {
 			return res
 				.status(422)
@@ -75,7 +77,7 @@ export const userInfoPutController = async (req, res) => {
 				.status(422)
 				.json({ message: trasnlatedErrorField + ' ' + trasnlatedMessage });
 		}
-		if (updateData?.newPassword) {
+		if (newPassword) {
 			const hashedPassword = await hash(newPassword, 10);
 			await Users.findByIdAndUpdate(foundUser._id, {
 				password: hashedPassword,
