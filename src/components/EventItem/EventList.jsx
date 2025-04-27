@@ -346,77 +346,87 @@ function EventList({ activeProgram, infoActive, onlineCheck, activeCategory }) {
 				</div>
 			</div>
 			<form className='bg-primary-300 event-list-card' id='event-select-form'>
-				<p className='fs-300 text-primary-200'>
-					{i18n.language === 'en' ? 'Event Details' : 'Etkinlik Bilgileri'}
-				</p>
-				<p style={{ textAlign: 'center' }} className='fs-700'>
-					{selectedEvent?.program}
-				</p>
-				<hr style={{ borderWidth: '2px', marginBottom: '1rem' }} />
-				<div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr' }}>
-					<p className='card-item'>
-						<FaCalendarDays />
-						{' ' +
-							selectedEvent?.fullStartDate.getDate() +
-							' ' +
-							selectedEvent?.fullStartDate.toLocaleString(i18n.language, {
-								month: 'short',
-							}) +
-							' - ' +
-							selectedEvent.fullEndDate.getDate() +
-							' ' +
-							selectedEvent.fullEndDate.toLocaleString(i18n.language, {
-								month: 'short',
-							})}
+				<div>
+					<p className='fs-300 text-primary-200'>
+						{i18n.language === 'en' ? 'Event Details' : 'Etkinlik Bilgileri'}
 					</p>
-					{selectedEvent.time && (
+					<p style={{ textAlign: 'center' }} className='fs-650'>
+						{selectedEvent?.program}
+					</p>
+					<hr style={{ borderWidth: '2px', marginBottom: '1rem' }} />
+					<div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr' }}>
 						<p className='card-item'>
-							<FaRegClock /> {selectedEvent.time}
+							<FaCalendarDays />
+							{' ' +
+								selectedEvent?.fullStartDate.getDate() +
+								' ' +
+								selectedEvent?.fullStartDate.toLocaleString(i18n.language, {
+									month: 'short',
+								}) +
+								' - ' +
+								selectedEvent.fullEndDate.getDate() +
+								' ' +
+								selectedEvent.fullEndDate.toLocaleString(i18n.language, {
+									month: 'short',
+								})}
+						</p>
+						{selectedEvent.time && (
+							<p className='card-item'>
+								<FaRegClock /> {selectedEvent.time}
+							</p>
+						)}
+					</div>
+					{selectedEvent.instructor && (
+						<p className='card-item'>
+							<FaRegUser />{' '}
+							{i18n.language === 'en'
+								? `With ${selectedEvent.instructor}!`
+								: `${selectedEvent.instructor} İle!`}
 						</p>
 					)}
+					<p className='card-item'>
+						<TbWorld />
+						{selectedEvent.online
+							? i18n.language === 'en'
+								? 'Online Lessons'
+								: 'Çevrim İçi Dersler'
+							: i18n.language === 'en'
+							? 'In Person Lessons'
+							: 'Yüz Yüze Dersler'}
+					</p>
+					<p className='card-item'>
+						<FaMoneyCheck /> {i18n.language === 'en' ? 'Only' : 'Sadece'} $
+						{selectedEvent.price}!{' '}
+						{selectedEvent.isEarlyBird && !selectedEvent.specialPrice ? (
+							<span className='text-primary-150'>
+								<span className='discount-text'>
+									${selectedEvent.originalPrice}
+								</span>
+								{i18n.language === 'en' ? ' Discounted' : "'dan İndirim"}
+							</span>
+						) : (
+							''
+						)}
+					</p>
+					{selectedEvent.location && !selectedEvent.online && (
+						// <p className='card-item'>
+						// 	<FiMapPin />
+						// 	<Link
+						// 		style={{ textDecoration: 'underline' }}
+						// 		onClick={() => locationClickHandler()}
+						// 	>
+						// 		{i18n.language === 'en' ? 'See on Map' : 'Haritada Görüntüleyin'}
+						// 	</Link>
+						// </p>
+						<div>{selectedEvent.location}</div>
+					)}
 				</div>
-				{selectedEvent.instructor && (
-					<p className='card-item'>
-						<FaRegUser />{' '}
-						{i18n.language === 'en'
-							? `With ${selectedEvent.instructor}!`
-							: `${selectedEvent.instructor} İle!`}
-					</p>
-				)}
-				<p className='card-item'>
-					<TbWorld />
-					{selectedEvent.online
-						? i18n.language === 'en'
-							? 'Online Lessons'
-							: 'Çevrim İçi Dersler'
-						: i18n.language === 'en'
-						? 'In Person Lessons'
-						: 'Yüz Yüze Dersler'}
-				</p>
-				{selectedEvent.location && !selectedEvent.online && (
-					<p className='card-item'>
-						<FiMapPin />
-						<Link
-							style={{ textDecoration: 'underline' }}
-							onClick={() => locationClickHandler()}
-						>
-							{i18n.language === 'en' ? 'See on Map' : 'Haritada Görüntüleyin'}
-						</Link>
-					</p>
-				)}
-				<p className='card-item'>
-					<FaMoneyCheck /> {i18n.language === 'en' ? 'Only' : 'Sadece'} $
-					{daysLeft <= 28 ? 410 : 360}!
-					{/* 4 hafta içinde mi diye checkleyip ona göre fiyat */}
-				</p>
 				<div
 					style={{
 						justifyContent: 'end',
 						display: 'flex',
 						flexDirection: 'column',
-						height: '100%',
 						gap: '1rem',
-						marginBottom: '1.5rem',
 					}}
 				>
 					<div>

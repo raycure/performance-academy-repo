@@ -99,6 +99,17 @@ export const LesMillsEvents = assignUniqueIds([
 		instructor: 'Cengiz Cumhur',
 		time: '09.30-17.00',
 		program: 'BODYCOMBAT',
+		location: (
+			<iframe
+				src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3011.17133419099!2d28.945147076075994!3d40.999622971351705!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14cabbd409dd47b3%3A0x50aaad5453409288!2sYenikap%C4%B1%20Etkinlik%20Alan%C4%B1!5e0!3m2!1sen!2str!4v1745770108711!5m2!1sen!2str'
+				width='600'
+				height='450'
+				style='border:0;'
+				allowfullscreen=''
+				loading='lazy'
+				referrerpolicy='no-referrer-when-downgrade'
+			></iframe>
+		),
 		price: 350,
 		specialPrice: true,
 	},
@@ -110,6 +121,17 @@ export const LesMillsEvents = assignUniqueIds([
 		instructor: 'Cengiz Cumhur',
 		time: '09.30-17.00',
 		program: 'LES-MILLS-CORE',
+		location: (
+			<iframe
+				src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3011.17133419099!2d28.945147076075994!3d40.999622971351705!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14cabbd409dd47b3%3A0x50aaad5453409288!2sYenikap%C4%B1%20Etkinlik%20Alan%C4%B1!5e0!3m2!1sen!2str!4v1745770108711!5m2!1sen!2str'
+				width='100%'
+				height='200'
+				style={{ border: 0, marginBlock: 10 }}
+				allowfullscreen=''
+				loading='lazy'
+				referrerPolicy='no-referrer-when-downgrade'
+			></iframe>
+		),
 		price: 350,
 		specialPrice: true,
 	},

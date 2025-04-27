@@ -12,6 +12,7 @@
 	--clr-primary-300: #292d35;
 	--clr-primary-200: #565a67;
 	/* --clr-primary-100: #d6d4c2; */
+	--clr-primary-150: #969696;
 	--clr-primary-100: #b3b3b5;
 
 	--clr-primary-trnsp: #0a0a0ae3;
@@ -374,6 +375,9 @@ input[type='password'] {
 
 .text-primary-100 {
 	color: var(--clr-primary-100);
+}
+.text-primary-150 {
+	color: var(--clr-primary-150);
 }
 .text-primary-200 {
 	color: var(--clr-primary-200);
