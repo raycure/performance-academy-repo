@@ -52,14 +52,15 @@ export const userInfoPutController = async (req, res) => {
 		}
 		const { updateData } = req.body;
 		const language = req.headers['language'];
-		const newPassword = updateData?.newPassword;
+		const newPassword = updateData?.newPassword || '';
 		const userId = req.userId;
 		const foundUser = await Users.findOne({
 			_id: new ObjectId(userId),
 		});
-		const isMatch = newPassword
-			? await pkg.compare(newPassword, foundUser.password)
+		const isMatch = (await pkg.compare(newPassword, foundUser.password))
+			? true
 			: false;
+
 		if (isMatch) {
 			return res
 				.status(422)

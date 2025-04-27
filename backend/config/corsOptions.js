@@ -9,7 +9,6 @@ const corsOptions = {
 		} else {
 			console.log('CORS error at', timestamp, 'for origin:', origin);
 			callback(null, true);
-			// callback(new Error('Not allowed by CORS'));
 		}
 	},
 	exposedHeaders: ['ip-blocked', 'x-refreshed-token'],
