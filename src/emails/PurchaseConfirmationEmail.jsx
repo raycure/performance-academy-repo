@@ -24,7 +24,7 @@ const localizationData = {
 				"Don't forget that the event you have purchased will start on {startDate} and end on {endDate} dates.",
 			],
 			ternary: [
-				'You can view the location of the event with this link.',
+				'Event will be held at: ',
 				'The event will be held on Zoom, the meeting link will be sent to you between 1-3 days before the event starts through e-mail.',
 			],
 		},
@@ -41,7 +41,7 @@ const localizationData = {
 				'Satın almış olduğunuz etkinliğin {startDate} ila {endDate} tarihleri arasında gerçekleştirileceğini unutmayınız.',
 			],
 			ternary: [
-				'Lokasyonu görüntülemek için tıklayınız.',
+				'Etkinlik gerleştirilecek lokasyon: ',
 				'Etkinlik Zoom üzerinden gerçekleştirilecek, toplantı linki etkinliğin başlama tarihinden 1 ila 3 gün önce e-mail yoluyla gönderilecektir.',
 			],
 		},
@@ -143,10 +143,7 @@ export default function PurchaseConfirmationEmail({
 							children: online
 								? _jsx(Text, { children: local.content.ternary[1] })
 								: location
-								? _jsx(Link, {
-										href: `https://maps.google.com/maps?q=${location[0]},${location[1]}`,
-										children: local.content.ternary[0],
-								  })
+								? _jsx(Text, { children: [local.content.ternary[0], location] })
 								: null,
 						}),
 						_jsx(Hr, { style: styles.line }),
